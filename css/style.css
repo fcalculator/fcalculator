@@ -1,5 +1,4 @@
 /* Root variables for easy customization and performance - Autor: Ivan Brkić */
-echo "
 :root {
     --primary-color: #007BFF; /* Blue for accents and buttons */
     --secondary-color: #5A6268; /* Darker gray for secondary text and better contrast */
@@ -95,7 +94,7 @@ label {
     font-weight: 600; /* Bolder for clarity */
     color: var(--secondary-color);
 }
-input[type=\"number\"] {
+input[type="number"] {
     padding: calc(var(--spacing-unit) / 2);
     border: 1px solid var(--border-color);
     border-radius: 0.375rem; /* Softer input borders */
@@ -103,7 +102,7 @@ input[type=\"number\"] {
     min-width: 120px; /* Slightly wider for usability */
     transition: border-color 0.3s ease; /* Focus effect */
 }
-input[type=\"number\"]:focus {
+input[type="number"]:focus {
     border-color: var(--primary-color);
     outline: none;
 }
@@ -123,7 +122,7 @@ button:hover {
 }
 
 /* Results: Highlighted for visibility */
-span[id$=\"-result\"] {
+span[id$="-result"] {
     font-weight: 600;
     color: var(--success-color);
     margin-left: calc(var(--spacing-unit) / 2);
@@ -207,7 +206,7 @@ footer {
         flex-direction: column;
         align-items: stretch;
     }
-    input[type=\"number\"] {
+    input[type="number"] {
         width: 100%;
     }
     table {
@@ -217,4 +216,3 @@ footer {
         border-radius: 0.5rem; /* Adjust for smaller screens */
     }
 }
-";
