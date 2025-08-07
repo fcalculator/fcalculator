@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator - Free Online Age Tool | FCalculator.com</title>
+    <meta name="description" content="Calculate your age in years, months, and days with our free online tool. Enter birthdate for precise results, with examples and tips. Perfect for birthdays and milestones.">
+    <meta name="keywords" content="age calculator, calculate age, online age tool, birthdate calculator, how to calculate age, age in days">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Age Calculator - FCalculator.com | Date Tool">
+    <meta property="og:description" content="Free tool to compute age from birthdate with educational content.">
+    <meta property="og:url" content="https://fcalculator.com/age.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://fcalculator.com/images/age-thumbnail.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Age Calculator",
+      "description": "Free online tool to calculate age.",
+      "url": "https://fcalculator.com/age.html"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Age Calculator - Free Online Tool to Calculate Age Easily</h1>
+        <p>Welcome to FCalculator.com's ultimate age calculator, your go-to free online resource for determining age from birthdate. Get years, months, days, and total days lived. With formulas and examples, it's great for birthdays or legal needs. Bookmark for fun facts!</p>
+    </header>
+    
+    <main>
+        <!-- Izračuni pri vrhu -->
+        <section id="basic-age">
+            <h2>Basic Age Calculator</h2>
+            <p>Enter birthdate to see age. Formula: Subtract birth from today.</p>
+            <form>
+                <label>Birthdate:</label> <input type="date" id="birthdate">
+                <span id="age-result"></span>
+                <button type="button" onclick="calculateAge()">Calculate</button>
+            </form>
+            <p>Example: Born 1990-01-01 = ~34 years (depending on today).</p>
+        </section>
+        
+        <!-- Tekst dolje -->
+        <section id="introduction">
+            <h2>What is an Age Calculator and Why Use One?</h2>
+            <p>An age calculator computes exact age from birthdate to current date. For 'how to calculate age', this tool handles leap years and details.</p>
+            <p>Used for milestones, eligibility, or curiosity. Our free tool is accurate and simple.</p>
+        </section>
+        
+        <section id="explanations">
+            <h2>What is Age Calculation? Definition</h2>
+            <p>Age is time since birth, calculated in years/months/days. History: Calendars evolved for precise tracking.</p>
+            <h3>Formula Breakdown</h3>
+            <p>Use date differences, accounting for months/days.</p>
+            <h3>Applications</h3>
+            <ul>
+                <li>Personal: Birthday planning.</li>
+                <li>Legal: Age verification.</li>
+                <li>Health: Life stage assessments.</li>
+            </ul>
+            <p>Share: <button onclick="sharePage()">Share</button></p>
+        </section>
+        
+        <section id="tips-and-examples">
+            <h2>Tips and Examples</h2>
+            <p>Tip: Use for pet ages or events.</p>
+            <table>
+                <thead>
+                    <tr><th>Birthdate</th><th>Age Today</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>2000-05-15</td><td>~24 years</td></tr>
+                    <tr><td>1980-12-31</td><td>~43 years</td></tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="faq">
+            <h2>Age Calculator FAQ</h2>
+            <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How to calculate age in days?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Subtract birthdate from today in milliseconds, divide by 86400000."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Does it account for leap years?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, using Date objects."
+                  }
+                }
+              ]
+            }
+            </script>
+        </section>
+        
+        <section id="related-tools">
+            <h2>Related Calculators</h2>
+            <ul>
+                <li><a href="/date.html">Date Calculator</a></li>
+                <li><a href="/time.html">Time Calculator</a></li>
+            </ul>
+        </section>
+        
+        <section id="conclusion">
+            <h2>Conclusion</h2>
+            <p>Our age tool is fun and useful. Check your age today!</p>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Project created by Ivan Brkic</p>
+        <p>Project launched in 2020</p>
+        <p>Version 1.02</p>
+    </footer>
+    
+    <script>
+        function calculateAge() {
+            var birthdate = new Date(document.getElementById('birthdate').value);
+            var today = new Date();
+            var ageYear = today.getFullYear() - birthdate.getFullYear();
+            var ageMonth = today.getMonth() - birthdate.getMonth();
+            if (ageMonth < 0 || (ageMonth === 0 && today.getDate() < birthdate.getDate())) ageYear--;
+            var ageDay = Math.floor((today - birthdate) / (1000 * 60 * 60 * 24));
+            document.getElementById('age-result').innerText = ageYear + ' years, ' + (ageMonth + 12 * (ageMonth < 0 ? 1 : 0)) + ' months, Total days: ' + ageDay;
+        }
+        
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Age Calculator - FCalculator.com',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page: ' + window.location.href);
+            }
+        }
+    </script>
+</body>
+</html>
