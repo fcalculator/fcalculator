@@ -51,7 +51,26 @@
                 <text x="50" y="190">b</text>
                 <text x="30" y="130">c</text>
             </svg>
-            <p>This SVG diagram illustrates a basic right triangle structure, emphasizing side labeling for computational accuracy.</p>
+            <p>This SVG diagram illustrates a basic right triangle structure, emphasizing side labeling for computational accuracy. For more on the historical context, refer to the <a href="https://en.wikipedia.org/wiki/Pythagorean_theorem">Wikipedia page on Pythagorean theorem</a>.</p>
+            <!-- Share button -->
+            <div class="share-button">
+                <p>Share this explanation:</p>
+                <button onclick="navigator.share({title: 'Pythagorean Theorem Calculator', text: 'Explore detailed math on right triangles!', url: window.location.href})">Share</button>
+            </div>
+        </section>
+        <section id="mathematical-explanation">
+            <h2>Mathematical Derivation of the Pythagorean Theorem</h2>
+            <p>The Pythagorean theorem states that in a right-angled triangle with legs a and b, and hypotenuse c, the equation a² + b² = c² holds true. To arrive at this solution mathematically, consider the following step-by-step process:</p>
+            <ol>
+                <li>Define the right triangle: One angle is exactly 90 degrees, with sides a and b forming the right angle, and c opposite it.</li>
+                <li>Construct squares on each side: The area of the square on c equals the sum of areas on a and b, leading to the equation through area equivalence.</li>
+                <li>Algebraic derivation: Start from geometric rearrangement. For example, arrange four right triangles around a square of side c, forming a larger square of side (a + b). The area equality gives (a + b)² = c² + 4*(ab/2), simplifying to a² + 2ab + b² = c² + 2ab, thus a² + b² = c².</li>
+                <li>To solve for a missing side: If a and b are known, c = √(a² + b²). For a given c and b, a = √(c² - b²), ensuring c > b to avoid imaginary results.</li>
+                <li>Example solution: Given a=3, b=4. Compute c = √(9 + 16) = √25 = 5. Verification: 3² + 4² = 9 + 16 = 25 = 5².</li>
+            </ol>
+            <p>This derivation is fundamental in vector algebra, where the magnitude of the resultant vector in orthogonal directions follows the same principle. For non-Euclidean geometries, modifications apply, but in standard plane geometry, this holds universally.</p>
+            <canvas id="proofAreaChart" width="400" height="200"></canvas>
+            <p>The chart above visualizes area comparisons in the algebraic proof, showing equality of (a + b)² - 2ab = a² + b² = c².</p>
         </section>
         <section id="proofs">
             <h2>Algebraic and Geometric Proofs</h2>
@@ -85,18 +104,21 @@
                 result = `Hypotenuse c = ${hyp.toFixed(2)}`;
                 drawTriangle(a, b, hyp);
                 drawSquareChart(a, b, hyp);
+                drawProofAreaChart(a, b, hyp); // Added for new section
             } else if (a && c) {
                 if (c <= a) { result = 'Invalid: c must be greater than a'; return; }
                 const leg = Math.sqrt(c*c - a*a);
                 result = `Leg b = ${leg.toFixed(2)}`;
                 drawTriangle(a, leg, c);
                 drawSquareChart(a, leg, c);
+                drawProofAreaChart(a, leg, c);
             } else if (b && c) {
                 if (c <= b) { result = 'Invalid: c must be greater than b'; return; }
                 const leg = Math.sqrt(c*c - b*b);
                 result = `Leg a = ${leg.toFixed(2)}`;
                 drawTriangle(leg, b, c);
                 drawSquareChart(leg, b, c);
+                drawProofAreaChart(leg, b, c);
             } else {
                 result = 'Please enter exactly two values.';
             }
@@ -107,16 +129,20 @@
             const canvas = document.getElementById('triangleCanvas');
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            const scale = Math.min(200 / Math.max(a, b, c), 1) * 10;
+            // Improved scaling to fit within canvas bounds
+            const maxSide = Math.max(a, b, c);
+            const scale = Math.min((canvas.width - 100) / maxSide, (canvas.height - 100) / maxSide) * 0.9; // Adjusted for better fit
+            const startX = (canvas.width - (a + b) * scale / 2) / 2 + 50; // Center better
+            const startY = canvas.height - 50;
             ctx.beginPath();
-            ctx.moveTo(50, 250);
-            ctx.lineTo(50 + a * scale, 250);
-            ctx.lineTo(50, 250 - b * scale);
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(startX + a * scale, startY);
+            ctx.lineTo(startX, startY - b * scale);
             ctx.closePath();
             ctx.stroke();
-            ctx.fillText('a = ' + a.toFixed(2), 50 + (a * scale)/2, 260);
-            ctx.fillText('b = ' + b.toFixed(2), 30, 250 - (b * scale)/2);
-            ctx.fillText('c = ' + c.toFixed(2), 50 + (a * scale)/2 - 20, 250 - (b * scale)/2);
+            ctx.fillText('a = ' + a.toFixed(2), startX + (a * scale)/2, startY + 10);
+            ctx.fillText('b = ' + b.toFixed(2), startX - 20, startY - (b * scale)/2);
+            ctx.fillText('c = ' + c.toFixed(2), startX + (a * scale)/2 - 20, startY - (b * scale)/2 - 10);
         }
 
         function drawSquareChart(a, b, c) {
@@ -134,6 +160,23 @@
                     }]
                 },
                 options: { scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        function drawProofAreaChart(a, b, c) {
+            const ctx = document.getElementById('proofAreaChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['a² + b²', 'c²'],
+                    datasets: [{
+                        data: [a*a + b*b, c*c],
+                        backgroundColor: ['rgba(153, 102, 255, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                        borderColor: ['rgba(153, 102, 255, 1)', 'rgba(255, 206, 86, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'top' } } }
             });
         }
 
