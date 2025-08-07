@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Password Generator</title>
+    <!-- CSS from https://fcalculator.com/css/style.css -->
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <!-- Chart.js for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Author: Ivan Brkic bacc.ing.el -->
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/percentage.html">Percentage (Math)</a></li>
+                <li><a href="/bmi.html">BMI (Health)</a></li>
+                <li><a href="/calorie.html">Calorie (Health)</a></li>
+                <li><a href="/worldpopulation.html">World Population (Statistic)</a></li>
+                <li><a href="/age.html">Age (Other)</a></li>
+                <li><a href="/time.html">Time (Other)</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h1>Safe Password Generator</h1>
+        <p>Generate a secure password with customizable options. Use the sliders to adjust length and complexity.</p>
+        
+        <section>
+            <label for="length">Password Length: <span id="lengthValue">12</span></label>
+            <input type="range" id="length" min="8" max="32" value="12" oninput="updateLengthValue(this.value)">
+            
+            <label><input type="checkbox" id="includeUpper" checked> Include Uppercase Letters</label>
+            <label><input type="checkbox" id="includeLower" checked> Include Lowercase Letters</label>
+            <label><input type="checkbox" id="includeNumbers" checked> Include Numbers</label>
+            <label><input type="checkbox" id="includeSymbols" checked> Include Symbols</label>
+            
+            <button onclick="generatePassword()">Generate Password</button>
+            <p>Generated Password: <strong id="password"></strong></p>
+            <button onclick="copyPassword()">Copy to Clipboard</button>
+        </section>
+        
+        <section>
+            <h2>Password Strength Chart</h2>
+            <canvas id="strengthChart" width="400" height="200"></canvas>
+            <p>This chart shows the strength score based on length and character types.</p>
+        </section>
+        
+        <section>
+            <h2>Character Distribution Chart</h2>
+            <canvas id="distChart" width="400" height="200"></canvas>
+            <p>This chart displays the distribution of character types in the generated password.</p>
+        </section>
+    </main>
+    
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    </footer>
+    
+    <script>
+        // JavaScript code by Ivan Brkic bacc.ing.el
+        
+        function updateLengthValue(value) {
+            document.getElementById('lengthValue').textContent = value;
+        }
+        
+        function generatePassword() {
+            const length = parseInt(document.getElementById('length').value);
+            const includeUpper = document.getElementById('includeUpper').checked;
+            const includeLower = document.getElementById('includeLower').checked;
+            const includeNumbers = document.getElementById('includeNumbers').checked;
+            const includeSymbols = document.getElementById('includeSymbols').checked;
+            
+            let charset = '';
+            if (includeUpper) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (includeLower) charset += 'abcdefghijklmnopqrstuvwxyz';
+            if (includeNumbers) charset += '0123456789';
+            if (includeSymbols) charset += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+            
+            if (charset === '') {
+                alert('Please select at least one character type.');
+                return;
+            }
+            
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset[randomIndex];
+            }
+            
+            document.getElementById('password').textContent = password;
+            
+            // Update charts
+            updateStrengthChart(length, [includeUpper, includeLower, includeNumbers, includeSymbols]);
+            updateDistChart(password);
+        }
+        
+        function copyPassword() {
+            const password = document.getElementById('password').textContent;
+            navigator.clipboard.writeText(password).then(() => {
+                alert('Password copied to clipboard!');
+            });
+        }
+        
+        // Chart for password strength
+        let strengthCtx = document.getElementById('strengthChart').getContext('2d');
+        let strengthChart = new Chart(strengthCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Strength Score'],
+                datasets: [{
+                    label: 'Score (0-100)',
+                    data: [0],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true, max: 100 }
+                }
+            }
+        });
+        
+        function updateStrengthChart(length, types) {
+            const typeCount = types.filter(Boolean).length;
+            const score = Math.min(100, (length * 2) + (typeCount * 20));
+            strengthChart.data.datasets[0].data = [score];
+            strengthChart.update();
+        }
+        
+        // Chart for character distribution
+        let distCtx = document.getElementById('distChart').getContext('2d');
+        let distChart = new Chart(distCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Uppercase', 'Lowercase', 'Numbers', 'Symbols'],
+                datasets: [{
+                    data: [0, 0, 0, 0],
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+                }]
+            }
+        });
+        
+        function updateDistChart(password) {
+            let upper = 0, lower = 0, num = 0, sym = 0;
+            for (let char of password) {
+                if (/[A-Z]/.test(char)) upper++;
+                else if (/[a-z]/.test(char)) lower++;
+                else if (/[0-9]/.test(char)) num++;
+                else sym++;
+            }
+            distChart.data.datasets[0].data = [upper, lower, num, sym];
+            distChart.update();
+        }
+    </script>
+</body>
+</html>
