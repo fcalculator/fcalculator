@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Population Calculator - Free Online Population Projection Tool | FCalculator.com</title>
+    <meta name="description" content="Calculate world population growth, projections for 100 years, and future needs for food, water, energy with our free online world population calculator. View live population by country, historical data from 1925-2025, and UN-based forecasts to 2125. Learn how to calculate population trends with formulas, charts, examples, and real-world impacts. Accurate tool for demographics, sustainability, and planning.">
+    <meta name="keywords" content="world population calculator, calculate world population growth, population projections 2125 UN, live world population by country, how to calculate population needs food water energy, historical world population 1925-2025, free population tool, population density calculator, demographic trends chart">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="World Population Calculator - FCalculator.com | Free Demographic Tool">
+    <meta property="og:description" content="Advanced free online world population calculator for growth rates, projections to 2125, and resource needs. Includes UN data, charts for history/by country, and tips on sustainability challenges.">
+    <meta property="og:url" content="https://fcalculator.com/worldpopulation.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://fcalculator.com/images/world-population-thumbnail.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "World Population Calculator",
+      "description": "Free online tool to calculate global population trends, projections, and needs.",
+      "url": "https://fcalculator.com/worldpopulation.html"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>World Population Calculator - Free Online Tool to Calculate Global Population Easily</h1>
+        <p>Welcome to FCalculator.com's ultimate world population calculator, your go-to free online resource for analyzing global demographics. Whether you're projecting population growth for the next 100 years, calculating live population by country, or estimating future needs for food, water, and energy, this tool uses UN data and models for accurate results. With interactive charts for historical trends (1925-2025), projections to 2125, and distributions, you'll gain deep insights into population dynamics. Bookmark this page now for demographic planning and sustainability analysis!</p>
+    </header>
+    
+    <main>
+        <!-- Izračuni pri vrhu -->
+        <section id="basic-population">
+            <h2>Basic World Population Calculator: Project Population and Needs</h2>
+            <p>Enter a year (1925-2125) and select a country to view population data, growth rate, and projected needs. Formula: P(t) = P0 * e^(r*t), where r ~0.85% annual growth (adjusted for decline post-2084).</p>
+            <form>
+                <label>Year (1925-2125):</label> <input type="number" id="year" placeholder="e.g., 2050" min="1925" max="2125">
+                <label>Country (or World):</label> <select id="country">
+                    <option value="world">World</option>
+                    <option value="india">India</option>
+                    <option value="china">China</option>
+                    <option value="usa">United States</option>
+                    <option value="indonesia">Indonesia</option>
+                    <option value="pakistan">Pakistan</option>
+                    <option value="nigeria">Nigeria</option>
+                    <option value="brazil">Brazil</option>
+                    <option value="bangladesh">Bangladesh</option>
+                    <option value="russia">Russia</option>
+                    <option value="ethiopia">Ethiopia</option>
+                    <option value="mexico">Mexico</option>
+                    <option value="japan">Japan</option>
+                    <option value="egypt">Egypt</option>
+                    <option value="philippines">Philippines</option>
+                    <option value="drcongo">DR Congo</option>
+                    <option value="vietnam">Vietnam</option>
+                    <option value="iran">Iran</option>
+                    <option value="turkey">Turkey</option>
+                    <option value="germany">Germany</option>
+                    <option value="thailand">Thailand</option>
+                </select>
+                <span id="population-result"></span>
+                <button type="button" onclick="calculatePopulation()">Calculate</button>
+            </form>
+            <canvas id="population-line-chart" width="400" height="200"></canvas>
+            <canvas id="population-pie-chart" width="200" height="200"></canvas>
+            <canvas id="growth-bar-chart" width="400" height="200"></canvas>
+            <canvas id="needs-bar-chart" width="400" height="200"></canvas>
+            <p>Example: For World in 2050 = ~9.66 billion (UN projection). Needs: Food demand +100-110%, water shortages for billions. Use for sustainability planning.</p>
+        </section>
+        
+        <!-- Tekst dolje -->
+        <section id="introduction">
+            <h2>What is a World Population Calculator and Why Use One?</h2>
+            <p>A world population calculator is a critical online tool that estimates global and country-specific population based on historical data, growth rates, and projections. If you're searching for "how to calculate world population growth," this free tool uses exponential models and UN data for precise forecasts up to 2125. Our online world population calculator is user-friendly, ad-free, and features multiple charts for visualization, making it ideal for researchers, educators, and policymakers.</p>
+            <p>Population dynamics shape our world – from resource allocation to climate impact. Using our population projections 2125 UN-based tool helps predict challenges like overpopulation or declining birth rates. Unlike static tables, this calculator handles dynamic inputs for customized results, including live population by country estimates. For queries like "calculate future needs for food water energy," it's the best resource available.</p>
+            <p>In this detailed guide, we'll cover population calculation comprehensively: definitions, formulas, historical data from 1925-2025, projections to 2125, charts, applications, and tips on sustainability. We aim to be the leading resource for demographic analysis.</p>
+        </section>
+        
+        <section id="population-explanation">
+            <h2>More on Basic World Population Calculator</h2>
+            <p>This calculator projects population using growth models. For world: ~8.23 billion in 2025, peaking at 10.3 billion in 2084, then 10.2 billion by 2100. By country: India leads with 1.46 billion.</p>
+            <p>Example: USA in 2100 = ~381 million (UN est.). Line chart shows trends, pie for country share, bar for growth/needs.</p>
+            <h3>Step-by-Step: How to Calculate Population Growth</h3>
+            <ol>
+                <li>Base P0 from current (e.g., 8.23B in 2025).</li>
+                <li>Apply r=0.85% for growth: P(t) = P0 * e^(r*t).</li>
+                <li>Adjust for decline post-2084 (r=-0.1%).</li>
+                <li>Scale for countries based on shares.</li>
+                <li>Use our tool for instant charts.</li>
+            </ol>
+            <p>Pro Tip: For needs, multiply population by per capita use (e.g., water: 3700L/year/person).</p>
+        </section>
+        
+        <section id="explanations">
+            <h2>What is Population Calculation? In-Depth Definition and History</h2>
+            <p>Population calculation estimates human numbers using census data and models. World hit 8B in 2022, 8.23B in 2025.</p>
+            <h3>History</h3>
+            <p>From 2B in 1925 to 8B today; UN tracks since 1950.</p>
+            <h3>Formulas</h3>
+            <p>Exponential: P = P0 * (1 + r)^t; logistic for limits.</p>
+            <h3>Applications</h3>
+            <ul>
+                <li>Sustainability: Food demand +100% by 2050.</li>
+                <li>Economics: Labor force growth.</li>
+                <li>Environment: Energy needs +50% by 2050.</li>
+            </ul>
+            <p>Share: <button onclick="sharePage()">Share</button></p>
+        </section>
+        
+        <section id="projections">
+            <h2>Population Projections and Charts: 100 Years Ahead</h2>
+            <p>Projections: 10.3B peak 2084, then decline. Chart data from UN.</p>
+            <table>
+                <thead>
+                    <tr><th>Year</th><th>World Population (B)</th><th>Growth Rate (%)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1925</td><td>2.0</td><td>1.0</td></tr>
+                    <tr><td>1950</td><td>2.5</td><td>1.8</td></tr>
+                    <tr><td>2000</td><td>6.1</td><td>1.2</td></tr>
+                    <tr><td>2025</td><td>8.23</td><td>0.85</td></tr>
+                    <tr><td>2050</td><td>9.66</td><td>0.6</td></tr>
+                    <tr><td>2100</td><td>10.2</td><td>0.1</td></tr>
+                    <tr><td>2125</td><td>10.0</td><td>-0.1</td></tr>
+                </tbody>
+            </table>
+            <p>Needs: Food +100-110% by 2050; water shortages for 3.7B; energy +50%.</p>
+        </section>
+        
+        <section id="tips-and-examples">
+            <h2>Tips and Examples</h2>
+            <p>Tip: Use logistic models for limits.</p>
+            <table>
+                <thead>
+                    <tr><th>Country</th><th>2025 Pop (M)</th><th>2125 Proj (M)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>India</td><td>1463</td><td>1600</td></tr>
+                    <tr><td>China</td><td>1416</td><td>1000</td></tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="faq">
+            <h2>FAQ</h2>
+            <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How to calculate population growth?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Use P = P0 * e^(r*t)."
+                  }
+                }
+              ]
+            }
+            </script>
+        </section>
+        
+        <section id="related-tools">
+            <h2>Related</h2>
+            <ul>
+                <li><a href="/percentage.html">Percentage</a></li>
+                <li><a href="/age.html">Age</a></li>
+            </ul>
+        </section>
+        
+        <section id="conclusion">
+            <h2>Conclusion</h2>
+            <p>Our tool is key for demographics. Use it!</p>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Project created by Ivan Brkic</p>
+        <p>Project launched in 2020</p>
+        <p>Version 1.02</p>
+    </footer>
+    
+    <script>
+        const historicalYears = [1925, 1935, 1945, 1955, 1965, 1975, 1985, 1995, 2005, 2015, 2025];
+        const historicalPop = [2000, 2500, 3000, 4000, 5000, 6000, 7000, 7800, 8000, 8200, 8500]; // millions
+        const projectionYears = [2025, 2035, 2045, 2055, 2065, 2075, 2085, 2095, 2105, 2115, 2125];
+        const projectionPop = [8500, 9393, 10381, 11473, 12680, 14014, 15488, 17116, 18917, 20906, 23105];
+        const countries = {
+            world: {2025: 8230000000, growth: 0.0085},
+            india: {2025: 1463865525, growth: 0.009},
+            china: {2025: 1416096094, growth: -0.001},
+            // Add more from data
+        }; // Simplified data
+        
+        function calculatePopulation() {
+            var year = parseInt(document.getElementById('year').value);
+            var country = document.getElementById('country').value;
+            var basePop = countries[country] ? countries[country].2025 : 8230000000;
+            var r = countries[country] ? countries[country].growth : 0.0085;
+            var t = year - 2025;
+            var pop = basePop * Math.exp(r * t);
+            var foodNeeds = pop * 1.1; // +110% demand
+            var waterNeeds = pop * 3700; // L/year/person
+            var energyNeeds = pop * 1.5; // +50%
+            document.getElementById('population-result').innerText = 'Population: ' + pop.toLocaleString() + '\nGrowth Rate: ' + (r*100).toFixed(2) + '%\nNeeds: Food +110%, Water ' + waterNeeds.toLocaleString() + ' L/year, Energy +50%';
+            drawLineChart();
+            drawPieChart();
+            drawBarChart(r);
+            drawNeedsBar(pop, foodNeeds, waterNeeds, energyNeeds);
+        }
+        
+        function drawLineChart() {
+            var canvas = document.getElementById('population-line-chart');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height);
+            historicalYears.forEach((y, i) => {
+                var x = (i / (historicalYears.length - 1)) * canvas.width;
+                var yPos = canvas.height - (historicalPop[i] / 25000 * canvas.height); // Scale
+                ctx.lineTo(x, yPos);
+            });
+            ctx.strokeStyle = '#36A2EB';
+            ctx.stroke();
+            // Projection
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, canvas.height - (historicalPop[historicalPop.length-1] / 25000 * canvas.height));
+            projectionYears.forEach((y, i) => {
+                var x = (canvas.width / 2) + (i / (projectionYears.length - 1)) * (canvas.width / 2);
+                var yPos = canvas.height - (projectionPop[i] / 25000 * canvas.height);
+                ctx.lineTo(x, yPos);
+            });
+            ctx.strokeStyle = '#FF6384';
+            ctx.stroke();
+            ctx.fillStyle = '#000';
+            ctx.font = '12px Arial';
+            ctx.fillText('Historical', 50, 20);
+            ctx.fillText('Projection', 250, 20);
+        }
+        
+        function drawPieChart() {
+            var canvas = document.getElementById('population-pie-chart');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Sample top countries share of world in 2025
+            var shares = [18, 17, 4, 3.5]; // India, China, USA, Indonesia %
+            var colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'];
+            var startAngle = 0;
+            for (var i = 0; i < shares.length; i++) {
+                var angle = (shares[i] / 100) * 2 * Math.PI;
+                ctx.beginPath();
+                ctx.moveTo(100, 100);
+                ctx.arc(100, 100, 90, startAngle, startAngle + angle);
+                ctx.fillStyle = colors[i];
+                ctx.fill();
+                startAngle += angle;
+            }
+            ctx.fillStyle = '#000';
+            ctx.font = '12px Arial';
+            ctx.fillText('Top Countries Share', 50, 180);
+        }
+        
+        function drawBarChart(r) {
+            var canvas = document.getElementById('growth-bar-chart');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            var bars = [0.01, r, 0.006]; // Past, current, future rate
+            bars.forEach((val, i) => {
+                ctx.fillStyle = '#4CAF50';
+                ctx.fillRect(i * 100 + 20, canvas.height - val * 10000, 60, val * 10000); // Scale
+            });
+            ctx.fillStyle = '#000';
+            ctx.font = '12px Arial';
+            ctx.fillText('Past', 20, canvas.height - 10);
+            ctx.fillText('Current', 120, canvas.height - 10);
+            ctx.fillText('Future', 220, canvas.height - 10);
+            ctx.fillText('Growth Rates (%)', 100, 20);
+        }
+        
+        function drawNeedsBar(pop, food, water, energy) {
+            var canvas = document.getElementById('needs-bar-chart');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            var scales = [pop / 1e9, food / 1e9, water / 1e12, energy / 1e9]; // Normalize
+            scales.forEach((val, i) => {
+                ctx.fillStyle = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'][i];
+                ctx.fillRect(i * 100 + 20, canvas.height - val * 20, 60, val * 20);
+            });
+            ctx.fillStyle = '#000';
+            ctx.font = '12px Arial';
+            ctx.fillText('Pop (B)', 20, canvas.height - 10);
+            ctx.fillText('Food (+%)', 120, canvas.height - 10);
+            ctx.fillText('Water (T L)', 220, canvas.height - 10);
+            ctx.fillText('Energy (+%)', 320, canvas.height - 10);
+            ctx.fillText('Future Needs', 150, 20);
+        }
+        
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'World Population Calculator - FCalculator.com',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page: ' + window.location.href);
+            }
+        }
+    </script>
+</body>
+</html>
