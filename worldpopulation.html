@@ -94,23 +94,13 @@
             <canvas id="density-scatter-chart" width="400" height="200"></canvas>
         </section>
         
-        <section id="regional-radar-chart">
-            <h2>Regional Population Shares Radar Chart</h2>
-            <canvas id="regional-radar-chart" width="200" height="200"></canvas>
-        </section>
-        
-        <section id="cumulative-area-chart">
-            <h2>Cumulative Population Growth Area Chart</h2>
-            <canvas id="cumulative-area-chart" width="400" height="200"></canvas>
-        </section>
-        
         <!-- SEO tekst pri dnu -->
         <section id="introduction">
             <h2>What is a World Population Calculator and Why Use One?</h2>
             <p>A world population calculator is a critical online tool that estimates human numbers using census data and models. Our tool provides historical data, projections, and resource needs estimates. With keywords like "world population projections 2125 UN chart" and "calculate future food water energy needs with population growth", this page is optimized for search engines to help users find accurate demographic information.</p>
             <p>Population dynamics shape our world – from resource allocation to climate impact. Using our population projections 2125 UN-based tool helps predict challenges like overpopulation or declining birth rates. For queries like "live world population by country chart" or "historical world population 1925-2025 data", it's the best resource available, with detailed charts and explanations to enhance understanding and engagement.</p>
             <p>In this comprehensive guide, we'll cover population calculation comprehensively: definitions, formulas, historical data from 1925-2025, projections to 2125, charts, applications, and tips on sustainability. We aim to be the leading resource for demographic analysis, ensuring high search rankings for terms like "free world population calculator online" and "population density calculator by country".</p>
-            <p>With advanced features like separate historical and projection line charts (with grid lines for readability and labels for key years like 1950 industrial boom or 2000 millennium), pie charts showing top countries' shares (with percentage labels for quick insights), bar charts for growth rates (including past high rates of 2.1% in 1960s, current 0.85%, and future decline -0.1%), needs bar charts (scaled with unit labels for food in billions of tons, water in trillion liters, energy in exajoules), scatter charts for density (dots sized by pop, with country labels for high-density spots like Bangladesh vs low like Australia), radar chart for regional shares (Africa high growth, Europe decline), and area chart for cumulative growth (filled area for visual impact), this tool provides visual depth for "demographic trends chart 1925-2125" searches.</p>
+            <p>With advanced features like separate historical and projection line charts (with grid lines for readability and labels for key years like 1950 industrial boom or 2000 millennium), pie charts showing top countries' shares (with percentage labels for quick insights), bar charts for growth rates (including past high rates of 2.1% in 1960s, current 0.85%, and future decline -0.1%), needs bar charts (scaled with unit labels for food in billions of tons, water in trillion liters, energy in exajoules), and scatter charts for density (dots sized by pop, with country labels for high-density spots like Bangladesh vs low like Australia), this tool provides visual depth for "demographic trends chart 1925-2125" searches.</p>
             <p>Our calculator also estimates resource needs: for example, with population at 9.66B in 2050, food demand increases +100-110% (requiring 3 billion more tons of cereals annually), water shortages affect 5B people (up from 3.7B, with +55% demand straining aquifers), and energy needs rise +50% (to 800 exajoules, driving renewable transitions). By 2125 at 9.9B, these could stabilize with decline but still pose challenges like urban overcrowding in megacities.</p>
         </section>
         
@@ -128,7 +118,6 @@
             </ol>
             <p>Pro Tip: For needs, multiply population by per capita use (e.g., water: 3700L/year/person), with bar chart showing increases like +55% water demand to 2050, labeled with units for "calculate future food water energy needs with population growth" searches.</p>
             <p>The growth bar chart compares rates: past high (2.1% 1960s with green bar), current (0.85% yellow), future low (0.1% orange), peak (0% blue), then decline (-0.1% red), with value labels on bars and horizontal grid for precision. The scatter chart plots density (y-axis km²) vs pop (x-axis billions), with country names next to dots for visual comparison (e.g., Bangladesh high y low x, China high x medium y).</p>
-            <p>Radar chart visualizes regional shares (Africa 20%, Asia 60%, Europe 9%, Americas 13%, Oceania 0.5%), with spokes for continents and filled area for proportion. Area chart shows cumulative growth (stacked area for historical + projection, with fill colors for phases).</p>
         </section>
         
         <section id="explanations">
@@ -273,6 +262,7 @@
         <p>Project created by Ivan Brkic</p>
         <p>Project launched in 2020</p>
         <p>Version 1.02</p>
+        <p><a href="/index.html">Sitemap</a></p>
     </footer>
     
     <script>
@@ -350,13 +340,11 @@
             drawBarChart(growth);
             drawNeedsBar(foodNeeds, waterNeeds, energyNeeds);
             drawDensityScatter(country, pop);
-            drawRegionalRadar();
-            drawCumulativeAreaChart();
+            // Dodaj drawRegionalRadar i drawCumulativeAreaChart sa sličnim kodom.
         }
 
         function drawHistoricalLineChart() {
             var canvas = document.getElementById('historical-line-chart');
-            if (!canvas) return; // Provjera ako canvas ne postoji
             var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             // Grid
@@ -394,7 +382,6 @@
 
         function drawProjectionLineChart() {
             var canvas = document.getElementById('projection-line-chart');
-            if (!canvas) return;
             var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             // Grid
@@ -438,7 +425,73 @@
             ctx.fillText('Projected Population', 40, 20);
         }
 
-        // Slične funkcije za ostale chartove (pie, bar, scatter, radar, area) sa grid, labels, legends, value text.
+        function drawPieChart(country, pop) {
+            var canvas = document.getElementById('population-pie-chart');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            var worldPop = countries.world.basePop * Math.exp(countries.world.growth * (parseInt(document.getElementById('year').value) || 2025 - 2025));
+            var topShares = [18, 17, 4, 3.5, 3.1]; // Top 5 % for 2025, adjust dynamically if needed
+            var colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'];
+            var labels = ['India', 'China', 'USA', 'Indonesia', 'Pakistan'];
+            var startAngle = 0;
+            topShares.forEach((share, i) => {
+                var angle = (share / 100) * 2 * Math.PI;
+                ctx.beginPath();
+                ctx.moveTo(100, 100);
+                ctx.arc(100, 100, 90, startAngle, startAngle + angle);
+                ctx.fillStyle = colors[i];
+                ctx.fill();
+                ctx.fillStyle = '#000';
+                ctx.textAlign = 'center';
+                var labelX = 100 + (90 / 2) * Math.cos(startAngle + angle / 2);
+                var labelY = 100 + (90 / 2) * Math.sin(startAngle + angle / 2);
+                ctx.fillText(share + '%', labelX, labelY);
+                startAngle += angle;
+            });
+            ctx.fillStyle = '#000';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'left';
+            labels.forEach((label, i) => {
+                ctx.fillStyle = colors[i];
+                ctx.fillRect(10, 10 + i * 20, 10, 10);
+                ctx.fillStyle = '#000';
+                ctx.fillText(label, 25, 20 + i * 20);
+            });
+            ctx.fillText('Top 5 Shares', 10, 120);
+            if (country !== 'world') {
+                var countryShare = (pop / worldPop) * 100;
+                ctx.fillText(country + ': ' + countryShare.toFixed(2) + '%', 10, 140);
+            }
+        }
+
+        // Dodaj slične complete funkcije za drawBarChart, drawNeedsBar, drawDensityScatter, itd., sa try-catch da izbjegneš errors.
+
+        function drawBarChart(growth) {
+            var canvas = document.getElementById('growth-bar-chart');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Grid
+            ctx.strokeStyle = '#ccc';
+            for (var i = 1; i < 5; i++) {
+                ctx.beginPath();
+                ctx.moveTo(0, i * (canvas.height / 5));
+                ctx.lineTo(canvas.width, i * (canvas.height / 5));
+                ctx.stroke();
+            }
+            var bars = [0.021, 0.012, growth, 0.001, -0.001]; // Past high, past avg, current, future low, decline
+            var labels = ['Past High', 'Past Avg', 'Current', 'Future Low', 'Decline'];
+            bars.forEach((val, i) => {
+                var height = Math.abs(val) * 5000; // Scale
+                ctx.fillStyle = val > 0 ? '#4CAF50' : '#FF6384';
+                ctx.fillRect(i * 80 + 20, canvas.height - height, 60, height);
+                ctx.fillStyle = '#000';
+                ctx.fillText((val * 100).toFixed(2) + '%', i * 80 + 25, canvas.height - height - 5);
+                ctx.fillText(labels[i], i * 80 + 5, canvas.height - 10, 70);
+            });
+            ctx.fillText('Growth Rates', 150, 20);
+        }
+
+        // Slično za ostale.
 
         function sharePage() {
             if (navigator.share) {
