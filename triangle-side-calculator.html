@@ -85,13 +85,14 @@
             // Draw right triangle with results embedded
             drawRightTriangle(sideA, sideB, sideC, angleA, angleB, angleC, area);
 
-            // Draw charts (use for everything: sides, angles, scaling, properties, trig, medians)
+            // Draw charts (use for everything: sides, angles, scaling, properties, trig, medians, polar for trig ratios)
             drawSideChart(sideA, sideB, sideC);
             drawAnglePie(angleA, angleB, angleC);
             drawScalingLine(sideA, sideB, sideC);
             drawPropertiesRadar(medianA, medianB, medianC, inradius, circumradius, area);
             drawTrigDoughnut(sinA, cosA, tanA);
             drawMedianBar(medianA, medianB, medianC);
+            drawTrigPolar(sinA, cosA, tanA);
         }
 
         function drawRightTriangle(a, b, c, angA, angB, angC, area) {
@@ -179,6 +180,11 @@
             let ctx = document.getElementById('medianChart').getContext('2d');
             new Chart(ctx, { type: 'bar', data: { labels: ['Median A', 'Median B', 'Median C'], datasets: [{ label: 'Medians', data: [ma, mb, mc], backgroundColor: ['#4BC0C0', '#FF6384', '#36A2EB'] }] }, options: { scales: { y: { beginAtZero: true } } } });
         }
+
+        function drawTrigPolar(sinA, cosA, tanA) {
+            let ctx = document.getElementById('trigPolarChart').getContext('2d');
+            new Chart(ctx, { type: 'polarArea', data: { labels: ['sin(α)', 'cos(α)', 'tan(α)'], datasets: [{ label: 'Trig Ratios', data: [sinA, cosA, tanA], backgroundColor: ['rgba(255,99,132,0.2)', 'rgba(54,162,235,0.2)', 'rgba(255,206,86,0.2)'] }] } });
+        }
     </script>
 </head>
 <body>
@@ -188,28 +194,19 @@
     </header>
 
     <section id="calculator">
-        <fieldset>
-            <legend>Enter Legs (for calculating hypotenuse and angles in right triangle)</legend>
-            <label>Leg A (opposite α): <input type="number" id="sideA" placeholder="e.g., 3 for 3-4-5 triangle"></label>
-            <label>Leg B (opposite β): <input type="number" id="sideB" placeholder="e.g., 4"></label>
-        </fieldset>
-        <fieldset>
-            <legend>Enter Hypotenuse (for finding legs and angles)</legend>
-            <label>Hypotenuse C: <input type="number" id="sideC" placeholder="e.g., 5"></label>
-        </fieldset>
-        <fieldset>
-            <legend>Enter Angles (α or β, γ is fixed at 90°)</legend>
-            <label>Angle α: <input type="number" id="angleA" placeholder="e.g., 30 for 30-60-90"></label>
-            <label>Angle β: <input type="number" id="angleB" placeholder="e.g., 60"></label>
-            <label>Angle Unit: <select id="angleUnit"><option value="degrees">Degrees</option><option value="radians">Radians</option></select></label>
-        </fieldset>
+        <label>Leg A (opposite α): <input type="number" id="sideA" placeholder="e.g., 3 for 3-4-5 triangle"></label><br><br>
+        <label>Leg B (opposite β): <input type="number" id="sideB" placeholder="e.g., 4"></label><br><br>
+        <label>Hypotenuse C: <input type="number" id="sideC" placeholder="e.g., 5"></label><br><br>
+        <label>Angle α: <input type="number" id="angleA" placeholder="e.g., 30 for 30-60-90"></label><br><br>
+        <label>Angle β: <input type="number" id="angleB" placeholder="e.g., 60"></label><br><br>
+        <label>Angle Unit: <select id="angleUnit"><option value="degrees">Degrees</option><option value="radians">Radians</option></select></label><br><br>
         <button onclick="calculateRightTriangle()">Calculate Right Triangle</button>
         <div id="result"></div>
     </section>
 
     <section id="visualization">
         <h2>Dynamic Right Triangle Visualization and Charts</h2>
-        <p>After calculation, see a custom drawing of your right triangle with embedded results (sides, angles, area), plus charts visualizing every aspect: bar for sides, pie for angles, line for scaling, radar for properties, doughnut for trig functions, and bar for medians.</p>
+        <p>After calculation, see a custom drawing of your right triangle with embedded results (sides, angles, area), plus charts visualizing every aspect: bar for sides, pie for angles, line for scaling, radar for properties, doughnut for trig functions, bar for medians, and polar for trig ratios.</p>
         <canvas id="triangleCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
         <canvas id="sideChart" width="400" height="200"></canvas>
         <canvas id="angleChart" width="400" height="200"></canvas>
@@ -217,6 +214,7 @@
         <canvas id="propertiesChart" width="400" height="200"></canvas>
         <canvas id="trigChart" width="400" height="200"></canvas>
         <canvas id="medianChart" width="400" height="200"></canvas>
+        <canvas id="trigPolarChart" width="400" height="200"></canvas>
     </section>
 
     <section id="explanation">
