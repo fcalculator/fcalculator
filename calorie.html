@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Calculator - Free Online Daily Calorie Intake Tool | FCalculator.com</title>
+    <meta name="description" content="Calculate your daily calorie needs with our free online calorie calculator using the Harris-Benedict equation for BMR and TDEE. Determine calories for weight loss, maintenance, or gain based on age, weight, height, gender, and activity level. Learn how to calculate calories needed per day with formulas, examples, charts, and health tips. Perfect for fitness, dieting, and nutrition planning.">
+    <meta name="keywords" content="calorie calculator, daily calorie intake calculator, calculate calories needed, BMR calorie calculator, TDEE calculator, how to calculate calories per day, Harris-Benedict equation, calorie needs for weight loss, free calorie tool, calorie burn calculator, calorie deficit calculator, calorie surplus for muscle gain">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Calorie Calculator - FCalculator.com | Free Daily Calorie Needs Tool">
+    <meta property="og:description" content="Advanced free online calorie calculator to estimate BMR, TDEE, and personalized calorie intake. Includes Harris-Benedict formula explanations, activity level charts, macro distributions, and tips for weight management.">
+    <meta property="og:url" content="https://fcalculator.com/calorie.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://fcalculator.com/images/calorie-calculator-thumbnail.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Calorie Calculator",
+      "description": "Free online tool to calculate daily calorie needs with BMR and TDEE.",
+      "url": "https://fcalculator.com/calorie.html"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Calorie Calculator - Free Online Tool to Calculate Daily Calorie Intake Easily</h1>
+        <p>Welcome to FCalculator.com's ultimate calorie calculator, your go-to free online resource for estimating daily calorie needs. Whether you're aiming for weight loss, muscle gain, or maintenance, this tool uses the Harris-Benedict equation to compute your Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE) based on weight, height, age, gender, and activity level. Learn how to calculate calories needed per day with precise formulas, real-world examples, and interactive features like macro distribution charts. Bookmark this page now for accurate calorie tracking and never guess your intake again!</p>
+    </header>
+    
+    <main>
+        <!-- Izračuni pri vrhu -->
+        <section id="basic-calorie">
+            <h2>Basic Calorie Calculator: Calculate Your Daily Calorie Needs</h2>
+            <p>Enter details to compute BMR and TDEE. Formula: BMR (Harris-Benedict revised) × Activity Multiplier = TDEE (daily calories).</p>
+            <form>
+                <label>Weight (kg):</label> <input type="number" id="weight" placeholder="e.g., 70">
+                <label>Height (cm):</label> <input type="number" id="height" placeholder="e.g., 175">
+                <label>Age (years):</label> <input type="number" id="age" placeholder="e.g., 30">
+                <label>Gender:</label> <select id="gender"><option value="male">Male</option><option value="female">Female</option></select>
+                <label>Activity Level:</label> <select id="activity">
+                    <option value="1.2">Sedentary (little exercise)</option>
+                    <option value="1.375">Lightly Active (light exercise 1-3 days/week)</option>
+                    <option value="1.55">Moderately Active (moderate exercise 3-5 days/week)</option>
+                    <option value="1.725">Very Active (hard exercise 6-7 days/week)</option>
+                    <option value="1.9">Super Active (very hard exercise & physical job)</option>
+                </select>
+                <span id="calorie-result"></span>
+                <button type="button" onclick="calculateCalories()">Calculate</button>
+            </form>
+            <canvas id="calorie-chart" width="200" height="200"></canvas>
+            <p>Example: Male, 70kg, 175cm, 30 years, moderately active = ~2600 calories/day. Use for weight loss (deficit) or gain (surplus). This daily calorie intake calculator is ideal for nutrition planning.</p>
+        </section>
+        
+        <!-- Tekst dolje -->
+        <section id="introduction">
+            <h2>What is a Calorie Calculator and Why Use One?</h2>
+            <p>A calorie calculator is an indispensable online tool that estimates your daily calorie needs based on personal factors like weight, height, age, gender, and activity level. If you're searching for "how to calculate calories needed per day," this free calorie tool uses proven formulas like the Harris-Benedict equation to deliver accurate BMR and TDEE results. Our calorie calculator online stands out as it's user-friendly, ad-free, and enriched with educational content to teach manual computations.</p>
+            <p>Calories represent energy units from food, essential for bodily functions and activities. Using our daily calorie intake calculator helps prevent overeating or undereating, supporting goals like weight loss (calorie deficit), maintenance, or muscle gain (calorie surplus). Unlike generic charts, this BMR calorie calculator personalizes results, making it the best choice for fitness enthusiasts, dieters, and health professionals. Whether you're calculating calorie burn or needs for weight loss, this tool provides precision.</p>
+            <p>In this extensive guide, we'll cover calorie calculation in depth: definitions, formulas, step-by-step methods, activity levels, charts, real-world uses, and advanced tips. Our objective is to create the ultimate resource for calorie-related queries, ensuring you return for all your nutrition needs.</p>
+        </section>
+        
+        <section id="calorie-explanation">
+            <h2>More on Basic Calorie Calculator</h2>
+            <p>The basic calorie calculator is the cornerstone of nutrition math. It answers "how many calories do I need a day?" by first computing BMR (energy at rest) then multiplying by activity factor for TDEE. For example, a sedentary woman might need 1800 calories, while an active man could require 3000. The Harris-Benedict equation automates this, but knowing it aids manual checks.</p>
+            <p>Example: Female, 60kg, 165cm, 25 years, lightly active = BMR ~1400, TDEE ~1900 calories. Perfect for dieting – subtract 500 for weight loss. Our free calorie tool visualizes macro breakdown with a pie chart for balanced meals.</p>
+            <h3>Step-by-Step Guide: How to Calculate Calories Needed Per Day</h3>
+            <ol>
+                <li>Compute BMR: For men = 88.362 + (13.397 × kg) + (4.799 × cm) - (5.677 × age); women = 447.593 + (9.247 × kg) + (3.098 × cm) - (4.330 × age).</li>
+                <li>Select activity multiplier: Sedentary 1.2, etc.</li>
+                <li>Multiply BMR by multiplier for TDEE.</li>
+                <li>Adjust for goals: -500 for loss, +500 for gain.</li>
+                <li>Use our calorie calculator for instant verification.</li>
+            </ol>
+            <p>Pro Tip: Track with apps; our TDEE calculator scales for all lifestyles.</p>
+        </section>
+        
+        <section id="explanations">
+            <h2>What is Calorie Calculation? In-Depth Definition and History</h2>
+            <p>Calorie calculation estimates energy expenditure to balance intake with needs. A calorie (kcal) is heat to raise 1kg water by 1°C. BMR is resting energy; TDEE includes activity.</p>
+            <h3>The History of Calorie Calculation</h3>
+            <p>Calories discovered in 1820s by Nicolas Clément. Harris-Benedict equation from 1919 (revised 1984) revolutionized it. Today, tools like our calorie burn calculator use it for modern nutrition.</p>
+            <h3>Calorie Formula Breakdown</h3>
+            <p>BMR via Harris-Benedict, TDEE = BMR × factor. Macros: Carbs 4kcal/g, proteins 4, fats 9.</p>
+            <h3>Real-World Applications</h3>
+            <ul>
+                <li><strong>Weight Management:</strong> Calorie deficit for loss (e.g., 500 less than TDEE).</li>
+                <li><strong>Fitness:</strong> Surplus for muscle gain.</li>
+                <li><strong>Health:</strong> Manage conditions like diabetes.</li>
+                <li><strong>Sports:</strong> Optimize for athletes.</li>
+                <li><strong>Daily Life:</strong> Meal planning.</li>
+            </ul>
+            <p>Tip: Share: <button onclick="sharePage()">Share Now</button></p>
+        </section>
+        
+        <section id="activity-levels">
+            <h2>Activity Levels and Charts: Personalizing Your Calorie Needs</h2>
+            <p>Activity multipliers adjust BMR for lifestyle. Chart:</p>
+            <table>
+                <thead>
+                    <tr><th>Level</th><th>Multiplier</th><th>Description</th><th>Example TDEE (BMR 1500)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Sedentary</td><td>1.2</td><td>Desk job, no exercise</td><td>1800</td></tr>
+                    <tr><td>Lightly Active</td><td>1.375</td><td>Light exercise 1-3 days</td><td>2062</td></tr>
+                    <tr><td>Moderately Active</td><td>1.55</td><td>Moderate 3-5 days</td><td>2325</td></tr>
+                    <tr><td>Very Active</td><td>1.725</td><td>Hard 6-7 days</td><td>2587</td></tr>
+                    <tr><td>Super Active</td><td>1.9</td><td>Intense job + training</td><td>2850</td></tr>
+                </tbody>
+            </table>
+            <p>For weight loss, reduce by 20%; for gain, add 10-20%.</p>
+        </section>
+        
+        <section id="tips-and-examples">
+            <h2>Tips, Tricks, and Advanced Examples for Calorie Calculations</h2>
+            <p>Tip: Track intake with apps; adjust weekly based on progress.</p>
+            <h3>Advanced Examples</h3>
+            <table>
+                <thead>
+                    <tr><th>Profile</th><th>BMR</th><th>TDEE</th><th>Goal Calories</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Male, 80kg, 180cm, 35, Moderate</td><td>~1750</td><td>~2712</td><td>2212 (loss)</td></tr>
+                    <tr><td>Female, 55kg, 160cm, 28, Light</td><td>~1300</td><td>~1787</td><td>2287 (gain)</td></tr>
+                </tbody>
+            </table>
+            <p>Feature: Pie chart shows macro split. Common Mistake: Ignoring NEAT; use our calorie burn calculator.</p>
+        </section>
+        
+        <section id="faq">
+            <h2>Calorie Calculator FAQ</h2>
+            <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How do I calculate calories needed per day?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Use BMR × activity multiplier. Try our tool."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What is the Harris-Benedict equation?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Formula for BMR based on personal factors."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How many calories for weight loss?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Create 500-1000 deficit from TDEE."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Is this calorie calculator free?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, unlimited and ad-free."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What are real-life uses?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Dieting, fitness, health management."
+                  }
+                }
+              ]
+            }
+            </script>
+        </section>
+        
+        <section id="related-tools">
+            <h2>Related Calculators</h2>
+            <ul>
+                <li><a href="/bmi.html">BMI Calculator</a></li>
+                <li><a href="/percentage.html">Percentage Calculator</a></li>
+                <li><a href="/age.html">Age Calculator</a></li>
+                <li><a href="/body-fat.html">Body Fat Calculator</a></li>
+                <li><a href="/ideal-weight.html">Ideal Weight Calculator</a></li>
+            </ul>
+        </section>
+        
+        <section id="conclusion">
+            <h2>Conclusion</h2>
+            <p>Our calorie calculator is the top tool for daily intake. Accurate, educational – bookmark it!</p>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Project created by Ivan Brkic</p>
+        <p>Project launched in 2020</p>
+        <p>Version 1.02</p>
+    </footer>
+    
+    <script>
+        function calculateCalories() {
+            var weight = parseFloat(document.getElementById('weight').value);
+            var height = parseFloat(document.getElementById('height').value);
+            var age = parseFloat(document.getElementById('age').value);
+            var gender = document.getElementById('gender').value;
+            var activity = parseFloat(document.getElementById('activity').value);
+            var bmr;
+            if (gender === 'male') {
+                bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+            } else {
+                bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+            }
+            var tdee = bmr * activity;
+            document.getElementById('calorie-result').innerText = 'BMR: ' + bmr.toFixed(0) + ' calories/day\nTDEE (Daily Needs): ' + tdee.toFixed(0) + ' calories/day';
+            drawCalorieChart(tdee);
+        }
+        
+        function drawCalorieChart(tdee) {
+            var canvas = document.getElementById('calorie-chart');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Pie for macros: 50% carbs, 30% fat, 20% protein
+            var carbs = tdee * 0.5 / 4; // g
+            var fats = tdee * 0.3 / 9;
+            var proteins = tdee * 0.2 / 4;
+            var angles = [0.5 * 2 * Math.PI, 0.3 * 2 * Math.PI, 0.2 * 2 * Math.PI];
+            var colors = ['#36A2EB', '#FFCE56', '#FF6384'];
+            var startAngle = 0;
+            for (var i = 0; i < 3; i++) {
+                ctx.beginPath();
+                ctx.moveTo(100, 100);
+                ctx.arc(100, 100, 90, startAngle, startAngle + angles[i]);
+                ctx.fillStyle = colors[i];
+                ctx.fill();
+                startAngle += angles[i];
+            }
+            ctx.fillStyle = '#000';
+            ctx.font = '12px Arial';
+            ctx.fillText('Carbs 50%', 10, 20);
+            ctx.fillText('Fats 30%', 10, 40);
+            ctx.fillText('Proteins 20%', 10, 60);
+        }
+        
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Calorie Calculator - FCalculator.com',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page: ' + window.location.href);
+            }
+        }
+    </script>
+</body>
+</html>
