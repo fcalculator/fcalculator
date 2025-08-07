@@ -3,95 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Triangle Side Calculator: Calculate sides, angles, area, medians, inradius, circumradius for equilateral, isosceles, scalene, right, obtuse, acute triangles. Draw and visualize triangle with results embedded on the image, plus interactive charts for sides, angles, scaling, and properties. Free online tool with formulas, examples, dynamic drawings, and charts for educational and practical use.">
-    <meta name="keywords" content="triangle side calculator, calculate triangle sides online, triangle angles calculator, triangle area formula, draw triangle with results, visualize triangle drawing charts, equilateral triangle calculator, isosceles triangle properties, scalene triangle formulas, right triangle hypotenuse, obtuse acute triangle visualization, law of sines cosines, Herons formula, median inradius circumradius charts">
-    <title>Triangle Side Calculator - Free Online Tool to Calculate, Draw, and Chart Triangle Properties</title>
+    <meta name="description" content="Right Triangle Calculator: Calculate missing sides, angles, area, medians, inradius, circumradius for right-angled triangles using Pythagorean theorem and trigonometric functions. Visualize with dynamic drawings embedding results on the image, plus interactive charts for sides, angles, scaling, properties, and trig values. Free online tool with formulas, examples, SEO-optimized explanations for finding hypotenuse, legs, and angles in right triangles.">
+    <meta name="keywords" content="right triangle calculator, find missing side of right triangle, calculate angles in right triangle, Pythagorean theorem calculator, trigonometric functions in right triangles, visualize right triangle with charts, hypotenuse calculator, right triangle area formula, right triangle properties charts, law of sines cosines in right triangles, Herons formula for right triangles">
+    <title>Right Triangle Calculator - Free Online Tool to Calculate and Visualize Right Triangle Properties</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Author: Ivan Brkic
-        // JavaScript for Triangle Side Calculator with Dynamic Drawing and Charts
-        function calculateTriangle() {
-            // Get input values
-            let sideA = parseFloat(document.getElementById('sideA').value) || 0;
-            let sideB = parseFloat(document.getElementById('sideB').value) || 0;
-            let sideC = parseFloat(document.getElementById('sideC').value) || 0;
-            let angleA = parseFloat(document.getElementById('angleA').value) || 0;
-            let angleB = parseFloat(document.getElementById('angleB').value) || 0;
-            let angleC = parseFloat(document.getElementById('angleC').value) || 0;
+        // JavaScript for Right Triangle Calculator with Dynamic Drawing and Multiple Charts
+        function calculateRightTriangle() {
+            // Get input values (γ = 90° fixed)
+            let sideA = parseFloat(document.getElementById('sideA').value) || 0; // Leg a
+            let sideB = parseFloat(document.getElementById('sideB').value) || 0; // Leg b
+            let sideC = parseFloat(document.getElementById('sideC').value) || 0; // Hypotenuse c
+            let angleA = parseFloat(document.getElementById('angleA').value) || 0; // Angle α opposite a
+            let angleB = parseFloat(document.getElementById('angleB').value) || 0; // Angle β opposite b
             let unit = document.getElementById('angleUnit').value;
             if (unit === 'radians') {
                 angleA = angleA * (180 / Math.PI);
                 angleB = angleB * (180 / Math.PI);
-                angleC = angleC * (180 / Math.PI);
             }
+            let angleC = 90; // Fixed right angle
 
-            // Validate
-            let provided = [sideA, sideB, sideC, angleA, angleB, angleC].filter(v => v > 0).length;
-            if (provided < 3 || [sideA, sideB, sideC].filter(v => v > 0).length < 1) {
-                document.getElementById('result').innerHTML = 'Please provide at least 3 values, including one side.';
+            // Validate: At least 2 values (since right angle fixed, need one side + one other)
+            let provided = [sideA, sideB, sideC, angleA, angleB].filter(v => v > 0).length;
+            if (provided < 2) {
+                document.getElementById('result').innerHTML = 'Please provide at least 2 values for a right triangle.';
                 return;
             }
 
-            // More cases for calculations
-            if (sideA > 0 && sideB > 0 && sideC > 0) { // SSS
-                angleA = Math.acos((sideB**2 + sideC**2 - sideA**2) / (2*sideB*sideC)) * (180 / Math.PI);
-                angleB = Math.acos((sideA**2 + sideC**2 - sideB**2) / (2*sideA*sideC)) * (180 / Math.PI);
-                angleC = Math.acos((sideA**2 + sideB**2 - sideC**2) / (2*sideA*sideB)) * (180 / Math.PI);
-            } else if (sideA > 0 && sideB > 0 && angleC > 0) { // SAS
-                angleC = angleC * (Math.PI / 180);
-                sideC = Math.sqrt(sideA**2 + sideB**2 - 2*sideA*sideB*Math.cos(angleC));
-                angleA = Math.acos((sideB**2 + sideC**2 - sideA**2) / (2*sideB*sideC)) * (180 / Math.PI);
-                angleB = 180 - angleA - (angleC * 180 / Math.PI);
-            } else if (sideA > 0 && angleA > 0 && angleB > 0) { // ASA
-                angleC = 180 - angleA - angleB;
-                sideB = (sideA * Math.sin(angleB * Math.PI/180)) / Math.sin(angleA * Math.PI/180);
-                sideC = (sideA * Math.sin(angleC * Math.PI/180)) / Math.sin(angleA * Math.PI/180);
-            } // Additional cases can be expanded
+            // Calculations using Pythagorean and trig
+            if (sideA > 0 && sideB > 0) { // Two legs -> hypotenuse and angles
+                sideC = Math.sqrt(sideA**2 + sideB**2);
+                angleA = Math.atan(sideA / sideB) * (180 / Math.PI);
+                angleB = 90 - angleA;
+            } else if (sideA > 0 && sideC > 0) { // Leg a and hypotenuse -> leg b and angles
+                sideB = Math.sqrt(sideC**2 - sideA**2);
+                angleA = Math.asin(sideA / sideC) * (180 / Math.PI);
+                angleB = 90 - angleA;
+            } else if (sideB > 0 && sideC > 0) { // Leg b and hypotenuse
+                sideA = Math.sqrt(sideC**2 - sideB**2);
+                angleB = Math.asin(sideB / sideC) * (180 / Math.PI);
+                angleA = 90 - angleB;
+            } else if (sideA > 0 && angleA > 0) { // Leg a and angle α -> others
+                sideC = sideA / Math.sin(angleA * Math.PI / 180);
+                sideB = sideA / Math.tan(angleA * Math.PI / 180);
+                angleB = 90 - angleA;
+            } else if (sideA > 0 && angleB > 0) { // Leg a (adjacent to β)
+                angleA = 90 - angleB;
+                sideC = sideA / Math.cos(angleB * Math.PI / 180);
+                sideB = sideA * Math.tan(angleB * Math.PI / 180);
+            } // Add more combinations as needed
 
             // Area
-            let s = (sideA + sideB + sideC) / 2;
-            let area = Math.sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
-            if (isNaN(area)) area = 0.5 * sideA * sideB * Math.sin(angleC * Math.PI / 180);
+            let area = 0.5 * sideA * sideB;
 
-            // Medians (all three for charts)
+            // Medians (for right triangle)
             let medianA = 0.5 * Math.sqrt(2*sideB**2 + 2*sideC**2 - sideA**2);
             let medianB = 0.5 * Math.sqrt(2*sideA**2 + 2*sideC**2 - sideB**2);
             let medianC = 0.5 * Math.sqrt(2*sideA**2 + 2*sideB**2 - sideC**2);
 
-            // Inradius and Circumradius
-            let inradius = area / s;
-            let circumradius = (sideA * sideB * sideC) / (4 * area);
+            // Inradius and Circumradius (for right: inr = (a+b-c)/2, circ = c/2)
+            let s = (sideA + sideB + sideC) / 2;
+            let inradius = (sideA + sideB - sideC) / 2;
+            let circumradius = sideC / 2;
 
-            // Type
-            let type = 'Scalene';
-            if (Math.abs(sideA - sideB) < 0.01 && Math.abs(sideB - sideC) < 0.01) type = 'Equilateral';
-            else if (Math.abs(sideA - sideB) < 0.01 || Math.abs(sideB - sideC) < 0.01 || Math.abs(sideA - sideC) < 0.01) type = 'Isosceles';
-            if (Math.abs(angleA - 90) < 0.01 || Math.abs(angleB - 90) < 0.01 || Math.abs(angleC - 90) < 0.01) type += ' Right';
-            else if (Math.max(angleA, angleB, angleC) > 90) type += ' Obtuse';
-            else if (Math.max(angleA, angleB, angleC) < 90) type += ' Acute';
+            // Trig values for charts
+            let sinA = Math.sin(angleA * Math.PI / 180);
+            let cosA = Math.cos(angleA * Math.PI / 180);
+            let tanA = Math.tan(angleA * Math.PI / 180);
 
-            // Results
+            // Display results
             document.getElementById('result').innerHTML = `
-                <p>Side A: ${sideA.toFixed(2)}</p><p>Side B: ${sideB.toFixed(2)}</p><p>Side C: ${sideC.toFixed(2)}</p>
-                <p>Angle A: ${angleA.toFixed(2)}°</p><p>Angle B: ${angleB.toFixed(2)}°</p><p>Angle C: ${angleC.toFixed(2)}°</p>
+                <p>Leg A: ${sideA.toFixed(2)}</p><p>Leg B: ${sideB.toFixed(2)}</p><p>Hypotenuse C: ${sideC.toFixed(2)}</p>
+                <p>Angle α: ${angleA.toFixed(2)}°</p><p>Angle β: ${angleB.toFixed(2)}°</p><p>Angle γ: 90°</p>
                 <p>Area: ${area.toFixed(2)}</p>
-                <p>Medians: A=${medianA.toFixed(2)}, B=${medianB.toFixed(2)}, C=${medianC.toFixed(2)}</p>
+                <p>Medians: To A=${medianA.toFixed(2)}, To B=${medianB.toFixed(2)}, To C=${medianC.toFixed(2)}</p>
                 <p>Inradius: ${inradius.toFixed(2)}</p><p>Circumradius: ${circumradius.toFixed(2)}</p>
-                <p>Triangle Type: ${type}</p>
             `;
 
-            // Draw triangle with results on it
-            drawTriangle(sideA, sideB, sideC, angleA, angleB, angleC, type, area);
+            // Draw right triangle with results embedded
+            drawRightTriangle(sideA, sideB, sideC, angleA, angleB, angleC, area);
 
-            // Draw charts
+            // Draw charts (use for everything: sides, angles, scaling, properties, trig)
             drawSideChart(sideA, sideB, sideC);
             drawAnglePie(angleA, angleB, angleC);
             drawScalingLine(sideA, sideB, sideC);
             drawPropertiesRadar(medianA, medianB, medianC, inradius, circumradius, area);
+            drawTrigDoughnut(sinA, cosA, tanA);
         }
 
-        function drawTriangle(a, b, c, angA, angB, angC, type, area) {
+        function drawRightTriangle(a, b, c, angA, angB, angC, area) {
             let canvas = document.getElementById('triangleCanvas');
             let ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -99,54 +101,44 @@
             let scale = Math.min(400 / Math.max(a, b, c), 300 / Math.max(a, b, c)) * 0.8;
             a *= scale; b *= scale; c *= scale;
 
-            let x = (b**2 + c**2 - a**2) / (2 * c);
-            let y = Math.sqrt(b**2 - x**2);
-            if (isNaN(y)) y = 0;
-
-            let offsetX = (400 - c) / 2;
-            let offsetY = 250 - y / 2;
-
-            // Draw sides
+            // Right angle at C (bottom left)
+            let offsetX = 50;
+            let offsetY = 250;
             ctx.beginPath();
-            ctx.moveTo(offsetX, offsetY);
-            ctx.lineTo(offsetX + c, offsetY);
-            ctx.lineTo(offsetX + x, offsetY - y);
+            ctx.moveTo(offsetX, offsetY); // Vertex C (right angle)
+            ctx.lineTo(offsetX + b, offsetY); // Vertex B
+            ctx.lineTo(offsetX, offsetY - a); // Vertex A
             ctx.closePath();
             ctx.stroke();
 
-            // Side labels
+            // Right angle mark
+            ctx.beginPath();
+            ctx.moveTo(offsetX, offsetY);
+            ctx.lineTo(offsetX + 15, offsetY);
+            ctx.lineTo(offsetX + 15, offsetY - 15);
+            ctx.lineTo(offsetX, offsetY - 15);
+            ctx.stroke();
+
+            // Labels on drawing
             ctx.font = '12px Arial';
             ctx.fillStyle = '#FF0000';
-            ctx.fillText(`a=${a.toFixed(2)}`, offsetX + c/2, offsetY + 20);
-            ctx.fillText(`b=${b.toFixed(2)}`, offsetX + x + 10, offsetY - y/2);
-            ctx.fillText(`c=${c.toFixed(2)}`, offsetX + x/2 - 20, offsetY - y/2);
+            ctx.fillText(`a=${a.toFixed(2)} (opp α)`, offsetX + 5, offsetY - a/2); // Side a vertical
+            ctx.fillText(`b=${b.toFixed(2)} (opp β)`, offsetX + b/2, offsetY + 20); // Side b horizontal
+            ctx.fillText(`c=${c.toFixed(2)} (hyp)`, offsetX + b/2 - 20, offsetY - a/2 - 10); // Hypotenuse
 
-            // Angle labels
             ctx.fillStyle = '#0000FF';
-            ctx.fillText(`A=${angA.toFixed(0)}°`, offsetX - 10, offsetY + 20);
-            ctx.fillText(`B=${angB.toFixed(0)}°`, offsetX + c - 10, offsetY + 20);
-            ctx.fillText(`C=${angC.toFixed(0)}°`, offsetX + x, offsetY - y - 10);
+            ctx.fillText(`α=${angA.toFixed(0)}°`, offsetX - 20, offsetY - a + 20); // Near A
+            ctx.fillText(`β=${angB.toFixed(0)}°`, offsetX + b - 20, offsetY + 20); // Near B
+            ctx.fillText(`γ=90°`, offsetX + 20, offsetY - 20); // Near C
 
-            // Tick marks for equals
-            if (type.includes('Equilateral') || type.includes('Isosceles')) {
-                ctx.strokeStyle = '#00FF00';
-                ctx.beginPath();
-                ctx.moveTo(offsetX + c/2 - 10, offsetY + 5);
-                ctx.lineTo(offsetX + c/2 + 10, offsetY + 5);
-                ctx.stroke();
-                // Add more ticks based on equals
-            }
+            // Arcs for angles
+            drawArc(ctx, offsetX, offsetY - a, 20, Math.PI / 2, Math.PI / 2 + (angA * Math.PI / 180), '#000'); // At A
+            drawArc(ctx, offsetX + b, offsetY, 20, Math.PI, Math.PI + (angB * Math.PI / 180), '#000'); // At B
 
-            // Arcs for angles (improved)
-            drawArc(ctx, offsetX, offsetY, 25, Math.PI, Math.PI + (angA * Math.PI / 180), '#000');
-            drawArc(ctx, offsetX + c, offsetY, 25, Math.PI - (angB * Math.PI / 180), Math.PI, '#000');
-            drawArc(ctx, offsetX + x, offsetY - y, 25, (angC * Math.PI / 180) / 2, Math.PI - (angC * Math.PI / 180) / 2, '#000');
-
-            // Type and area on drawing
+            // Area on drawing
             ctx.fillStyle = '#000';
             ctx.font = '14px Arial';
-            ctx.fillText(`Type: ${type}`, 10, 280);
-            ctx.fillText(`Area: ${area.toFixed(2)}`, 10, 300);
+            ctx.fillText(`Area: ${area.toFixed(2)}`, 10, 280);
         }
 
         function drawArc(ctx, x, y, r, start, end, color) {
@@ -158,12 +150,12 @@
 
         function drawSideChart(a, b, c) {
             let ctx = document.getElementById('sideChart').getContext('2d');
-            new Chart(ctx, { type: 'bar', data: { labels: ['A', 'B', 'C'], datasets: [{ label: 'Sides', data: [a, b, c], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] }] }, options: { scales: { y: { beginAtZero: true } } } });
+            new Chart(ctx, { type: 'bar', data: { labels: ['Leg A', 'Leg B', 'Hyp C'], datasets: [{ label: 'Sides', data: [a, b, c], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] }] }, options: { scales: { y: { beginAtZero: true } } } });
         }
 
         function drawAnglePie(a, b, c) {
             let ctx = document.getElementById('angleChart').getContext('2d');
-            new Chart(ctx, { type: 'pie', data: { labels: ['A', 'B', 'C'], datasets: [{ data: [a, b, c], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] }] } });
+            new Chart(ctx, { type: 'pie', data: { labels: ['α', 'β', 'γ'], datasets: [{ data: [a, b, c], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] }] } });
         }
 
         function drawScalingLine(a, b, c) {
@@ -176,57 +168,80 @@
             let ctx = document.getElementById('propertiesChart').getContext('2d');
             new Chart(ctx, { type: 'radar', data: { labels: ['Median A', 'Median B', 'Median C', 'Inradius', 'Circumradius', 'Area'], datasets: [{ label: 'Properties', data: [ma, mb, mc, ir, cr, area], backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgba(255, 99, 132, 1)' }] } });
         }
+
+        function drawTrigDoughnut(sinA, cosA, tanA) {
+            let ctx = document.getElementById('trigChart').getContext('2d');
+            new Chart(ctx, { type: 'doughnut', data: { labels: ['sin(α)', 'cos(α)', 'tan(α)'], datasets: [{ data: [sinA, cosA, tanA], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] }] } });
+        }
     </script>
 </head>
 <body>
     <header>
-        <h1>Triangle Side Calculator</h1>
-        <p>Calculate triangle sides, angles, area, and properties online. Draw your triangle with embedded results (sides, angles, type, area) directly on the image, plus charts for visualization of sides, angles, scaling, medians, radii, and more. Supports equilateral, isosceles, scalene, right, obtuse, acute triangles in degrees or radians.</p>
+        <h1>Right Triangle Calculator</h1>
+        <p>Professional right triangle calculator for calculating missing sides, angles, area, and properties using Pythagorean theorem and trigonometry. Enter at least 2 values (legs, hypotenuse, or angles) to find unknowns in right-angled triangles. Visualize with dynamic drawings showing results on the triangle image, plus multiple charts for sides, angles, scaling, properties, and trigonometric functions. Free online tool optimized for SEO with detailed formulas, examples, and explanations on how to find the hypotenuse, legs, or angles in right triangles.</p>
     </header>
 
     <section id="calculator">
-        <label>Side A: <input type="number" id="sideA"></label>
-        <label>Side B: <input type="number" id="sideB"></label>
-        <label>Side C: <input type="number" id="sideC"></label>
-        <label>Angle A: <input type="number" id="angleA"></label>
-        <label>Angle B: <input type="number" id="angleB"></label>
-        <label>Angle C: <input type="number" id="angleC"></label>
+        <label>Leg A (opposite α): <input type="number" id="sideA"></label>
+        <label>Leg B (opposite β): <input type="number" id="sideB"></label>
+        <label>Hypotenuse C: <input type="number" id="sideC"></label>
+        <label>Angle α: <input type="number" id="angleA"></label>
+        <label>Angle β: <input type="number" id="angleB"></label>
         <label>Angle Unit: <select id="angleUnit"><option value="degrees">Degrees</option><option value="radians">Radians</option></select></label>
-        <button onclick="calculateTriangle()">Calculate</button>
+        <button onclick="calculateRightTriangle()">Calculate</button>
         <div id="result"></div>
     </section>
 
     <section id="visualization">
-        <h2>Dynamic Triangle Drawing and Charts</h2>
-        <p>View a custom-drawn triangle with results shown on it, plus charts for in-depth analysis: bar for sides, pie for angles, line for scaling, radar for properties.</p>
+        <h2>Dynamic Right Triangle Visualization and Charts</h2>
+        <p>After calculation, see a professional drawing of your right triangle with embedded results (sides, angles, area), plus charts visualizing every aspect: bar for sides, pie for angles, line for scaling, radar for properties, doughnut for trig functions like sin, cos, tan.</p>
         <canvas id="triangleCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
         <canvas id="sideChart" width="400" height="200"></canvas>
         <canvas id="angleChart" width="400" height="200"></canvas>
         <canvas id="scalingChart" width="400" height="200"></canvas>
         <canvas id="propertiesChart" width="400" height="200"></canvas>
+        <canvas id="trigChart" width="400" height="200"></canvas>
     </section>
 
     <section id="explanation">
-        <h2>How Does the Triangle Side Calculator Work?</h2>
-        <p>This tool uses Law of Sines, Cosines, Heron's formula, and more to compute everything. Draw and chart your triangle for visual insights. Example: Side A=3, B=4, C=5 – draws right triangle with labels, charts showing distributions.</p>
-        <h3>Triangle Types, Formulas, and Visuals</h3>
-        <p>Explore equilateral, isosceles, etc., with dynamic drawings and charts. SEO: 'draw triangle online with calculations and charts'.</p>
+        <h2>How Does the Right Triangle Calculator Work?</h2>
+        <p>This professional right triangle calculator uses Pythagorean theorem (a² + b² = c²) and trigonometric functions (sin, cos, tan) to compute missing sides and angles in right-angled triangles. Ideal for finding the hypotenuse from two legs, or angles from sides. SEO-optimized for queries like 'right triangle calculator find missing side' or 'calculate angles in right triangle online'. Enter values, and get instant results with visualizations.</p>
+        <p>Example: For legs A=3, B=4 – hypotenuse C=5, angles α=36.87°, β=53.13°, area=6. Charts show side distributions, angle pie, and more for better understanding.</p>
+        <h3>Formulas for Right Triangles</h3>
+        <p>Key formulas include:</p>
         <ul>
-            <li><strong>Formulas:</strong> Pythagorean, sines/cosines, area methods.</li>
-            <li><strong>Charts:</strong> Used for all aspects to enhance understanding.</li>
+            <li><strong>Pythagorean Theorem:</strong> c = √(a² + b²) – find hypotenuse from legs.</li>
+            <li><strong>Trigonometric Functions:</strong> sin(α) = a/c, cos(α) = b/c, tan(α) = a/b – calculate angles or sides.</li>
+            <li><strong>Area:</strong> (1/2) * a * b – simple for right triangles.</li>
+            <li><strong>Inradius:</strong> (a + b - c)/2 – fits inside the triangle.</li>
+            <li><strong>Circumradius:</strong> c/2 – circle through vertices.</li>
+            <li><strong>Medians:</strong> From vertices to midpoints, visualized in radar chart.</li>
         </ul>
-        <p>Static examples: <img src="equilateral-example.png" alt="Equilateral triangle drawing with charts"> etc.</p>
+        <p>Our tool handles cases with only one side and an angle, using trig to solve. For example, if only hypotenuse and one angle known, find legs with sin/cos. Professional visualizations include charts for trig values (doughnut) and scaling (line) to see how changes affect the triangle.</p>
+        <h3>Right Triangle Properties and Applications</h3>
+        <p>Right triangles are fundamental in geometry, engineering, physics, and architecture. Use this calculator to solve problems like finding the height of a ladder (hypotenuse) or roof pitch (angles). SEO: 'Pythagorean theorem examples', 'trigonometry in right triangles formulas'. All calculations are accurate, with dynamic drawings showing labels directly on the triangle for educational purposes.</p>
+        <p>Static examples for reference:</p>
+        <p><img src="right-triangle-example.png" alt="Right triangle with legs 3-4, hypotenuse 5, angles 37-53-90"> 3-4-5 right triangle: Classic Pythagorean triple.</p>
+        <p><img src="30-60-90-triangle.png" alt="30-60-90 right triangle with sides 1-√3-2"> 30-60-90: Sides in ratio 1:√3:2.</p>
+        <p><img src="45-45-90-triangle.png" alt="45-45-90 isosceles right triangle with sides 1-1-√2"> 45-45-90: Isosceles right triangle.</p>
     </section>
 
     <section id="faq">
         <h2>Frequently Asked Questions</h2>
-        <p>How to draw results on triangle? Automatically after calculate.</p>
-        <p>Why charts? For better SEO and visualization of triangle data.</p>
+        <p>How to find missing side with one side and angle? Use trig: opposite = hypotenuse * sin(angle). Our calculator automates it with charts.</p>
+        <p>Supports radians? Yes, select unit and input pi/6 for 30°.</p>
+        <p>Why multiple charts? For professional analysis – visualize sides, angles, properties, trig in one place for better SEO and user experience.</p>
+        <p>Is it accurate for large values? Yes, handles floating-point precision for engineering applications.</p>
     </section>
 
     <section id="related">
         <h2>Related Calculators</h2>
-        <ul><li><a href="/percentage.html">Percentage Calculator</a></li><li><a href="/bmi.html">BMI Calculator</a></li><li><a href="/age.html">Age Calculator</a></li></ul>
+        <ul>
+            <li><a href="/percentage.html">Percentage Calculator</a></li>
+            <li><a href="/bmi.html">BMI Calculator</a></li>
+            <li><a href="/age.html">Age Calculator</a></li>
+            <li><a href="/triangle-side-calculator.html">General Triangle Calculator</a></li>
+        </ul>
     </section>
 
     <footer>
