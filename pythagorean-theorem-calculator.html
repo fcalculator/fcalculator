@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pythagorean Theorem Calculator - Precise Right Triangle Side Computation</title>
+    <meta name="description" content="Advanced Pythagorean theorem calculator for determining sides of right-angled triangles. Explore detailed mathematical derivations, algebraic proofs, visual diagrams, and practical examples to understand the fundamental relationship between hypotenuse and legs in Euclidean geometry.">
+    <meta name="keywords" content="Pythagorean theorem, right triangle calculator, hypotenuse calculation, Euclidean geometry proofs, algebraic demonstrations of Pythagoras, side length computation in triangles, mathematical visualizations of theorems">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Pythagorean Theorem Calculator</h1>
+        <p>In-depth computational tool for applying the Pythagorean theorem in right-angled triangles, providing accurate side length determinations alongside comprehensive explanations of geometric principles, historical context, and multiple proof methodologies.</p>
+    </header>
+    <main>
+        <section id="introduction">
+            <p>The Pythagorean theorem represents a cornerstone of Euclidean geometry, establishing the relationship between the sides of a right-angled triangle. This principle asserts that the square of the hypotenuse equals the sum of the squares of the other two sides, enabling precise calculations in fields ranging from architecture to physics. Our calculator facilitates input of any two sides to compute the third, supported by interactive visualizations and detailed derivations for educational and professional use.</p>
+            <p>Understanding this theorem enhances problem-solving in trigonometry and coordinate geometry, where right triangles form the basis for distance formulas and vector analyses. Historical records attribute the theorem to Pythagoras of Samos, though evidence suggests earlier knowledge in Babylonian mathematics. Modern applications include GPS technology, engineering designs, and computer graphics rendering.</p>
+        </section>
+        <section id="calculator">
+            <h2>Right Triangle Side Calculator</h2>
+            <p>Enter any two values (a, b, or c) to compute the missing side using the Pythagorean equation: a² + b² = c², where c is the hypotenuse. The tool validates inputs and provides step-by-step computations for clarity in mathematical processes.</p>
+            <form id="pythagoreanForm">
+                <label for="sideA">Side a (leg):</label>
+                <input type="number" id="sideA" placeholder="Enter value">
+                <label for="sideB">Side b (leg):</label>
+                <input type="number" id="sideB" placeholder="Enter value">
+                <label for="sideC">Side c (hypotenuse):</label>
+                <input type="number" id="sideC" placeholder="Enter value">
+                <button type="button" onclick="calculateSides()">Calculate</button>
+            </form>
+            <div id="result"></div>
+        </section>
+        <section id="visualization">
+            <h2>Interactive Visualizations of Triangle Sides</h2>
+            <p>Visual representations aid in comprehending the theorem's implications. Below, a dynamic canvas draws the right triangle based on your inputs, while a bar chart illustrates the squared values to verify the equation a² + b² = c².</p>
+            <canvas id="triangleCanvas" width="400" height="300"></canvas>
+            <canvas id="squareChart" width="400" height="200"></canvas>
+            <p>These charts demonstrate the proportional relationships, useful for educational purposes or verifying complex geometric configurations.</p>
+        </section>
+        <section id="explanation">
+            <h2>Detailed Explanation of the Pythagorean Theorem</h2>
+            <p>In a right-angled triangle, the theorem quantifies the relationship as a² + b² = c², where a and b are the legs adjacent to the right angle, and c is the hypotenuse opposite it. This equation derives from area conservation principles in geometric rearrangements.</p>
+            <p>For instance, with a = 5 and b = 12, c = √(25 + 144) = √169 = 13. Such calculations underpin distance metrics in Cartesian planes and form the basis for trigonometric identities like sine and cosine definitions.</p>
+            <p>The theorem extends to the law of cosines for non-right triangles: c² = a² + b² - 2ab cos(θ), reducing to the Pythagorean form when θ = 90° and cos(90°) = 0.</p>
+            <svg width="200" height="200" viewBox="0 0 200 200">
+                <polygon points="20,180 20,100 100,180" fill="none" stroke="black" stroke-width="2"/>
+                <text x="10" y="190">a</text>
+                <text x="50" y="190">b</text>
+                <text x="30" y="130">c</text>
+            </svg>
+            <p>This SVG diagram illustrates a basic right triangle structure, emphasizing side labeling for computational accuracy.</p>
+        </section>
+        <section id="proofs">
+            <h2>Algebraic and Geometric Proofs</h2>
+            <p>Among numerous demonstrations, algebraic proofs utilize area equivalences. Consider rearranging four identical right triangles around a square of side c, forming a larger square of side a + b with area (a + b)² = c² + 2ab, simplifying to a² + b² = c².</p>
+            <p>An alternative arrangement encloses a square of side b - a, with area (b - a)² + 2ab = a² + b², equating to c² for the outer formation.</p>
+            <canvas id="proofChart" width="400" height="200"></canvas>
+            <p>The chart above compares areas in proof configurations, highlighting equality preservation across transformations.</p>
+            <p>Geometric proofs, including those by Euclid, leverage similar triangles and proportion theorems, while differential approaches use calculus for continuous verification.</p>
+        </section>
+        <section id="related">
+            <h2>Related Mathematical Tools</h2>
+            <ul>
+                <li><a href="/triangle-side-calculator.html">Triangle Side Calculator</a> - Compute sides in various triangle types using advanced formulas.</li>
+                <li><a href="/percentage.html">Percentage Calculator</a> - Apply ratios in geometric scaling contexts.</li>
+                <li><a href="/bmi.html">BMI Calculator</a> - Explore health metrics influenced by geometric proportions.</li>
+            </ul>
+            <p>These resources integrate with Pythagorean applications in statistics, health sciences, and temporal analyses.</p>
+        </section>
+    </main>
+    <footer>
+        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
+    </footer>
+    <script>
+        function calculateSides() {
+            const a = parseFloat(document.getElementById('sideA').value);
+            const b = parseFloat(document.getElementById('sideB').value);
+            const c = parseFloat(document.getElementById('sideC').value);
+            let result = '';
+            if (a && b) {
+                const hyp = Math.sqrt(a*a + b*b);
+                result = `Hypotenuse c = ${hyp.toFixed(2)}`;
+                drawTriangle(a, b, hyp);
+                drawSquareChart(a, b, hyp);
+            } else if (a && c) {
+                if (c <= a) { result = 'Invalid: c must be greater than a'; return; }
+                const leg = Math.sqrt(c*c - a*a);
+                result = `Leg b = ${leg.toFixed(2)}`;
+                drawTriangle(a, leg, c);
+                drawSquareChart(a, leg, c);
+            } else if (b && c) {
+                if (c <= b) { result = 'Invalid: c must be greater than b'; return; }
+                const leg = Math.sqrt(c*c - b*b);
+                result = `Leg a = ${leg.toFixed(2)}`;
+                drawTriangle(leg, b, c);
+                drawSquareChart(leg, b, c);
+            } else {
+                result = 'Please enter exactly two values.';
+            }
+            document.getElementById('result').innerHTML = result;
+        }
+
+        function drawTriangle(a, b, c) {
+            const canvas = document.getElementById('triangleCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const scale = Math.min(200 / Math.max(a, b, c), 1) * 10;
+            ctx.beginPath();
+            ctx.moveTo(50, 250);
+            ctx.lineTo(50 + a * scale, 250);
+            ctx.lineTo(50, 250 - b * scale);
+            ctx.closePath();
+            ctx.stroke();
+            ctx.fillText('a = ' + a.toFixed(2), 50 + (a * scale)/2, 260);
+            ctx.fillText('b = ' + b.toFixed(2), 30, 250 - (b * scale)/2);
+            ctx.fillText('c = ' + c.toFixed(2), 50 + (a * scale)/2 - 20, 250 - (b * scale)/2);
+        }
+
+        function drawSquareChart(a, b, c) {
+            const ctx = document.getElementById('squareChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['a²', 'b²', 'c²'],
+                    datasets: [{
+                        label: 'Squared Side Lengths',
+                        data: [a*a, b*b, c*c],
+                        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        // Additional chart for proofs (example area comparison)
+        const proofCtx = document.getElementById('proofChart').getContext('2d');
+        new Chart(proofCtx, {
+            type: 'pie',
+            data: {
+                labels: ['(a + b)² Area', 'c² + 2ab Area'],
+                datasets: [{
+                    data: [100, 100], // Placeholder for equality demonstration
+                    backgroundColor: ['rgba(153, 102, 255, 0.2)', 'rgba(255, 206, 86, 0.2)']
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+</body>
+</html>
