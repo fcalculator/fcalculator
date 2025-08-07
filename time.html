@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Calculator - Free Online Time Duration Tool | FCalculator.com</title>
+    <meta name="description" content="Calculate time differences, add/subtract time, convert time units, and handle time zones with our free online time calculator. Determine time between dates, hours to minutes, or days to seconds using precise formulas and examples. Learn how to calculate time duration for work, travel, or projects with charts, tips, and real-world applications. Accurate tool for productivity and planning.">
+    <meta name="keywords" content="time calculator, calculate time difference, online time calculator, time duration calculator, how to calculate time between dates, add subtract time, time zone converter, time units conversion, free time tool, elapsed time calculator, time from now calculator">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Time Calculator - FCalculator.com | Free Time Management Tool">
+    <meta property="og:description" content="Advanced free online time calculator for computing differences, additions, conversions, and zones. Includes formulas for time duration, charts for visualization, and tips for efficient time tracking in daily life, work, and travel.">
+    <meta property="og:url" content="https://fcalculator.com/time.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://fcalculator.com/images/time-calculator-thumbnail.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Time Calculator",
+      "description": "Free online tool to calculate time durations, differences, and conversions.",
+      "url": "https://fcalculator.com/time.html"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Time Calculator - Free Online Tool to Calculate Time Easily</h1>
+        <p>Welcome to FCalculator.com's ultimate time calculator, your go-to free online resource for all time-related computations. Whether you're calculating time difference between dates, adding or subtracting hours/minutes, converting time units like days to hours, or handling time zones for travel, this tool makes it simple and accurate. With step-by-step formulas, real-world examples, interactive charts (including pie for daily time distribution, bar for zone offsets, and line for time progression), you'll master time management in no time. Bookmark this page now and never struggle with elapsed time calculations again!</p>
+    </header>
+    
+    <main>
+        <!-- Izračuni pri vrhu -->
+        <section id="time-difference">
+            <h2>Time Difference Calculator: Calculate Time Between Dates</h2>
+            <p>Formula: Subtract start date from end date in milliseconds, convert to days/hours/minutes.</p>
+            <form>
+                <label>Start Date/Time:</label> <input type="datetime-local" id="start-datetime">
+                <label>End Date/Time:</label> <input type="datetime-local" id="end-datetime">
+                <span id="time-diff-result"></span>
+                <button type="button" onclick="calculateTimeDiff()">Calculate</button>
+            </form>
+            <canvas id="time-diff-chart" width="200" height="200"></canvas>
+            <p>Example: From 2023-01-01 00:00 to 2023-01-02 00:00 = 1 day. Use for project deadlines or travel planning.</p>
+        </section>
+        
+        <section id="add-subtract-time">
+            <h2>Add/Subtract Time Calculator</h2>
+            <p>Add or subtract hours/minutes/seconds from a base time.</p>
+            <form>
+                <label>Base Time:</label> <input type="time" id="base-time">
+                <select id="time-op"><option value="add">Add</option><option value="subtract">Subtract</option></select>
+                <label>Hours:</label> <input type="number" id="add-hours" placeholder="0">
+                <label>Minutes:</label> <input type="number" id="add-minutes" placeholder="0">
+                <label>Seconds:</label> <input type="number" id="add-seconds" placeholder="0">
+                <span id="time-op-result"></span>
+                <button type="button" onclick="calculateTimeOp()">Calculate</button>
+            </form>
+            <canvas id="time-op-bar-chart" width="200" height="200"></canvas>
+            <p>Example: 10:00 AM + 2 hours 30 minutes = 12:30 PM. Great for scheduling.</p>
+        </section>
+        
+        <section id="time-conversion">
+            <h2>Time Units Conversion Calculator</h2>
+            <p>Convert between days, hours, minutes, seconds.</p>
+            <form>
+                <label>Value:</label> <input type="number" id="time-value" placeholder="e.g., 3600">
+                <select id="from-unit"><option value="seconds">Seconds</option><option value="minutes">Minutes</option><option value="hours">Hours</option><option value="days">Days</option></select>
+                <label>To:</label> <select id="to-unit"><option value="seconds">Seconds</option><option value="minutes">Minutes</option><option value="hours">Hours</option><option value="days">Days</option></select>
+                <span id="time-conv-result"></span>
+                <button type="button" onclick="convertTimeUnits()">Convert</button>
+            </form>
+            <canvas id="time-conv-line-chart" width="200" height="200"></canvas>
+            <p>Example: 3600 seconds = 1 hour. Useful for payroll or cooking timers.</p>
+        </section>
+        
+        <section id="time-zone">
+            <h2>Time Zone Converter Calculator</h2>
+            <p>Convert time between zones (uses browser locale as base).</p>
+            <form>
+                <label>Time:</label> <input type="datetime-local" id="tz-time">
+                <label>From Zone:</label> <select id="from-tz"><option value="UTC">UTC</option><option value="America/New_York">EST (New York)</option><option value="Europe/London">GMT (London)</option><option value="Asia/Tokyo">JST (Tokyo)</option></select>
+                <label>To Zone:</label> <select id="to-tz"><option value="UTC">UTC</option><option value="America/New_York">EST (New York)</option><option value="Europe/London">GMT (London)</option><option value="Asia/Tokyo">JST (Tokyo)</option></select>
+                <span id="tz-result"></span>
+                <button type="button" onclick="convertTimeZone()">Convert</button>
+            </form>
+            <p>Example: 12:00 UTC to EST = 07:00. Essential for international calls.</p>
+        </section>
+        
+        <!-- Tekst dolje -->
+        <section id="introduction">
+            <h2>What is a Time Calculator and Why Use One?</h2>
+            <p>A time calculator is an essential online tool that helps compute time differences, additions, conversions, and zone adjustments effortlessly. If you're wondering "how to calculate time between dates," this free time tool simplifies complex date math with accuracy. Our online time calculator stands out as it's ad-free, precise, and includes visualizations like pie charts for daily time distribution to make concepts intuitive.</p>
+            <p>Time calculations are crucial in daily life – from scheduling meetings to tracking project durations or converting units for recipes. Using our time duration calculator saves time and avoids errors. Unlike basic clocks, this elapsed time calculator handles advanced scenarios like leap seconds and zones, making it the best choice for professionals, travelers, and students. If you're searching for "add subtract time calculator" or "time from now calculator," this is your solution!</p>
+            <p>In this comprehensive guide, we'll explore time calculation in depth: definitions, formulas, step-by-step methods, charts, real-world uses, and tips. Our goal is to create the top resource for time-related queries.</p>
+        </section>
+        
+        <section id="time-diff-explanation">
+            <h2>More on Time Difference Calculator</h2>
+            <p>This calculator measures elapsed time between two dates/times. Formula: (end - start) in ms / 86400000 for days, etc. Pie chart shows breakdown (days/hours/minutes).</p>
+            <p>Example: Business trip from Monday 9AM to Friday 5PM = 4 days 8 hours. Ideal for payroll or event planning.</p>
+            <h3>Step-by-Step: How to Calculate Time Between Dates</h3>
+            <ol>
+                <li>Get timestamps in ms.</li>
+                <li>Subtract and divide for units.</li>
+                <li>Adjust for zones if needed.</li>
+            </ol>
+        </section>
+        
+        <section id="add-sub-explanation">
+            <h2>More on Add/Subtract Time Calculator</h2>
+            <p>Add/subtract from base time. Bar chart visualizes before/after.</p>
+            <p>Example: Shift start 8AM + 8 hours = 4PM.</p>
+        </section>
+        
+        <section id="conv-explanation">
+            <h2>More on Time Units Conversion</h2>
+            <p>Convert units. Line chart shows progression (e.g., seconds to hours).</p>
+            <p>Example: 24 hours = 1 day.</p>
+        </section>
+        
+        <section id="tz-explanation">
+            <h2>More on Time Zone Converter</h2>
+            <p>Uses Intl for conversion.</p>
+            <p>Example: Global meeting coordination.</p>
+        </section>
+        
+        <section id="explanations">
+            <h2>What is Time Calculation? Definition and History</h2>
+            <p>Time calculation measures durations using units like seconds (SI base). History: Sundials to atomic clocks.</p>
+            <h3>Formulas</h3>
+            <p>1 day = 86400 seconds, etc.</p>
+            <h3>Applications</h3>
+            <ul>
+                <li>Work: Billable hours.</li>
+                <li>Travel: Flight durations.</li>
+                <li>Sports: Race times.</li>
+            </ul>
+            <p>Share: <button onclick="sharePage()">Share</button></p>
+        </section>
+        
+        <section id="tips-and-examples">
+            <h2>Tips and Examples</h2>
+            <p>Tip: Use UTC for accuracy.</p>
+            <table>
+                <thead>
+                    <tr><th>Scenario</th><th>Example</th><th>Result</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Meeting Duration</td><td>9AM to 11AM</td><td>2 hours</td></tr>
+                    <tr><td>Convert</td><td>7200 seconds</td><td>2 hours</td></tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="faq">
+            <h2>Time Calculator FAQ</h2>
+            <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How to calculate time difference?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Subtract dates in ms, convert units."
+                  }
+                }
+              ]
+            }
+            </script>
+        </section>
+        
+        <section id="related-tools">
+            <h2>Related Calculators</h2>
+            <ul>
+                <li><a href="/percentage.html">Percentage Calculator</a></li>
+                <li><a href="/age.html">Age Calculator</a></li>
+                <li><a href="/bmi.html">BMI Calculator</a></li>
+                <li><a href="/calorie.html">Calorie Calculator</a></li>
+            </ul>
+        </section>
+        
+        <section id="conclusion">
+            <h2>Conclusion</h2>
+            <p>Our time calculator is essential for management. Use it daily!</p>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Project created by Ivan Brkic</p>
+        <p>Project launched in 2020</p>
+        <p>Version 1.02</p>
+    </footer>
+    
+    <script>
+        function calculateTimeDiff() {
+            var start = new Date(document.getElementById('start-datetime').value);
+            var end = new Date(document.getElementById('end-datetime').value);
+            var diffMs = end - start;
+            var diffDays = Math.floor(diffMs / 86400000);
+            var diffHours = Math.floor((diffMs % 86400000) / 3600000);
+            var diffMinutes = Math.floor((diffMs % 3600000) / 60000);
+            document.getElementById('time-diff-result').innerText = diffDays + ' days, ' + diffHours + ' hours, ' + diffMinutes + ' minutes';
+            drawTimeDiffPie(diffDays, diffHours, diffMinutes);
+        }
+        
+        function drawTimeDiffPie(days, hours, minutes) {
+            var canvas = document.getElementById('time-diff-chart');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            var total = days * 1440 + hours * 60 + minutes; // in minutes
+            var angles = [(days * 1440 / total) * 2 * Math.PI, (hours * 60 / total) * 2 * Math.PI, (minutes / total) * 2 * Math.PI];
+            var colors = ['#36A2EB', '#FFCE56', '#FF6384'];
+            var startAngle = 0;
+            for (var i = 0; i < 3; i++) {
+                ctx.beginPath();
+                ctx.moveTo(100, 100);
+                ctx.arc(100, 100, 90, startAngle, startAngle + angles[i]);
+                ctx.fillStyle = colors[i];
+                ctx.fill();
+                startAngle += angles[i];
+            }
+            ctx.fillStyle = '#000';
+            ctx.font = '12px Arial';
+            ctx.fillText('Days', 10, 20);
+            ctx.fillText('Hours', 10, 40);
+            ctx.fillText('Minutes', 10, 60);
+        }
+        
+        function calculateTimeOp() {
+            var base = document.getElementById('base-time').value.split(':');
+            var baseSeconds = parseInt(base[0]) * 3600 + parseInt(base[1]) * 60;
+            var addHours = parseInt(document.getElementById('add-hours').value || 0);
+            var addMinutes = parseInt(document.getElementById('add-minutes').value || 0);
+            var addSeconds = parseInt(document.getElementById('add-seconds').value || 0);
+            var addTotal = addHours * 3600 + addMinutes * 60 + addSeconds;
+            var op = document.getElementById('time-op').value;
+            var resultSeconds = op === 'add' ? baseSeconds + addTotal : baseSeconds - addTotal;
+            var resultHours = Math.floor(resultSeconds / 3600) % 24;
+            var resultMinutes = Math.floor((resultSeconds % 3600) / 60);
+            var resultSecs = resultSeconds % 60;
+            document.getElementById('time-op-result').innerText = resultHours.toString().padStart(2, '0') + ':' + resultMinutes.toString().padStart(2, '0') + ':' + resultSecs.toString().padStart(2, '0');
+            drawTimeOpBar(resultHours, resultMinutes, resultSecs);
+        }
+        
+        function drawTimeOpBar(hours, minutes, secs) {
+            var canvas = document.getElementById('time-op-bar-chart');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#36A2EB';
+            ctx.fillRect(20, 50, hours * 5, 20); // Hours bar
+            ctx.fillStyle = '#FFCE56';
+            ctx.fillRect(20, 80, minutes * 2, 20); // Minutes
+            ctx.fillStyle = '#FF6384';
+            ctx.fillRect(20, 110, secs * 2, 20); // Seconds
+            ctx.fillStyle = '#000';
+            ctx.font = '12px Arial';
+            ctx.fillText('Hours: ' + hours, 10, 65);
+            ctx.fillText('Minutes: ' + minutes, 10, 95);
+            ctx.fillText('Seconds: ' + secs, 10, 125);
+        }
+        
+        function convertTimeUnits() {
+            var value = parseFloat(document.getElementById('time-value').value);
+            var from = document.getElementById('from-unit').value;
+            var to = document.getElementById('to-unit').value;
+            var factors = {seconds: 1, minutes: 60, hours: 3600, days: 86400};
+            var result = value * factors[from] / factors[to];
+            document.getElementById('time-conv-result').innerText = result.toFixed(2) + ' ' + to;
+            drawTimeConvLine(value, result);
+        }
+        
+        function drawTimeConvLine(input, output) {
+            var canvas = document.getElementById('time-conv-line-chart');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.moveTo(20, 150);
+            ctx.lineTo(180, 150 - input / 10); // Scale input
+            ctx.lineTo(180, 150 - output / 10); // Scale output
+            ctx.strokeStyle = '#4CAF50';
+            ctx.stroke();
+            ctx.fillStyle = '#000';
+            ctx.font = '12px Arial';
+            ctx.fillText('Input to Output', 70, 170);
+        }
+        
+        function convertTimeZone() {
+            var time = new Date(document.getElementById('tz-time').value);
+            var fromTz = document.getElementById('from-tz').value;
+            var toTz = document.getElementById('to-tz').value;
+            var optionsFrom = {timeZone: fromTz, year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'};
+            var optionsTo = {timeZone: toTz, year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'};
+            var fromTime = time.toLocaleString('en-US', optionsFrom);
+            var toTime = time.toLocaleString('en-US', optionsTo);
+            document.getElementById('tz-result').innerText = 'From: ' + fromTime + '\nTo: ' + toTime;
+        }
+        
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Time Calculator - FCalculator.com',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page: ' + window.location.href);
+            }
+        }
+    </script>
+</body>
+</html>
