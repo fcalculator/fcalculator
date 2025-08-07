@@ -41,7 +41,7 @@ A records:@ 185.199.108.153
 @ 185.199.111.153
 
 
-CNAME record (for www.fcalculator.com):www your-username.github.io
+CNAME record (for https://fcalculator.com) :www your-username.github.io
 
 
 
