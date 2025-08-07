@@ -285,7 +285,7 @@
             drcongo: {baseYear: 2025, basePop: 105000000, growth: 0.032, peakYear: 2100, peakPop: 378000000, declineRate: 0, area: 2344858},
             vietnam: {baseYear: 2025, basePop: 100000000, growth: 0.006, peakYear: 2050, peakPop: 110000000, declineRate: -0.001, area: 331212},
             iran: {baseYear: 2025, basePop: 90000000, growth: 0.007, peakYear: 2050, peakPop: 100000000, declineRate: -0.002, area: 1648195},
-            turkey: {baseYear: 2025, basePop: 86000000, growth: 0.005, peakYear: 2050, peakPop: 95000000, declineRate: -0.001, area: 783562},
+            turkey: {baseYear: 2025, basePop: 86000000, growth: 0.005, peakYear: 2050, peakPop: 950000000, declineRate: -0.001, area: 783562},
             germany: {baseYear: 2025, basePop: 83000000, growth: -0.001, peakYear: 2018, peakPop: 83000000, declineRate: -0.002, area: 357022},
             thailand: {baseYear: 2025, basePop: 72000000, growth: 0.002, peakYear: 2020, peakPop: 71000000, declineRate: -0.003, area: 513120}
         };
@@ -379,14 +379,65 @@
             ctx.fillText('Historical Population', 40, 20);
         }
 
-        // Slično za drawProjectionLineChart, drawPieChart, drawBarChart, drawNeedsBar, drawDensityScatter.
+        function drawProjectionLineChart() {
+            var canvas = document.getElementById('projection-line-chart');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Grid
+            ctx.strokeStyle = '#ccc';
+            for (var i = 1; i < 5; i++) {
+                ctx.beginPath();
+                ctx.moveTo(0, i * (canvas.height / 5));
+                ctx.lineTo(canvas.width, i * (canvas.height / 5));
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(i * (canvas.width / 5), 0);
+                ctx.lineTo(i * (canvas.width / 5), canvas.height);
+                ctx.stroke();
+            }
+            // Line
+            ctx.beginPath();
+            var maxPop = Math.max(...projectionData.pop);
+            var minPop = Math.min(...projectionData.pop);
+            projectionData.years.forEach((y, i) => {
+                var x = i * (canvas.width / (projectionData.years.length - 1));
+                var yPos = canvas.height - ((projectionData.pop[i] - minPop) / (maxPop - minPop) * (canvas.height - 40)) - 20;
+                if (i === 0) ctx.moveTo(x, yPos);
+                else ctx.lineTo(x, yPos);
+                ctx.fillStyle = '#000';
+                ctx.font = '10px Arial';
+                if (i % 5 === 0) {
+                    ctx.save();
+                    ctx.translate(x, canvas.height - 10);
+                    ctx.rotate(-Math.PI / 4);
+                    ctx.fillText(y, 0, 0);
+                    ctx.restore();
+                }
+                ctx.fillText((projectionData.pop[i] / 1000000000).toFixed(1) + 'B', x - 10, yPos - 5);
+                if (y === 2084) {
+                    ctx.fillStyle = '#FF0000';
+                    ctx.beginPath();
+                    ctx.arc(x, yPos, 5, 0, 2 * Math.PI);
+                    ctx.fill();
+                    ctx.fillStyle = '#000';
+                    ctx.fillText('Peak', x + 10, yPos - 10);
+                }
+            });
+            ctx.strokeStyle = '#FF6384';
+            ctx.stroke();
+            // Legend
+            ctx.fillStyle = '#FF6384';
+            ctx.fillRect(10, 10, 20, 10);
+            ctx.fillStyle = '#000';
+            ctx.fillText('Projected Population', 40, 20);
+        }
 
         function drawPieChart(country, pop) {
             var canvas = document.getElementById('population-pie-chart');
             var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            var worldPop = countries.world.basePop * Math.exp(countries.world.growth * (year - 2025));
-            var topShares = [18, 17, 4, 3.5, 3.1]; // Top 5 % for 2025
+            var worldPop = countries.world.basePop * Math.exp(countries.world.growth * (parseInt(document.getElementById('year').value) || 2025 - 2025));
+            var topShares = [18, 17, 4, 3.5, 3.1]; // Top 5 %
             var colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'];
             var labels = ['India', 'China', 'USA', 'Indonesia', 'Pakistan'];
             var startAngle = 0;
@@ -398,9 +449,10 @@
                 ctx.fillStyle = colors[i];
                 ctx.fill();
                 ctx.fillStyle = '#000';
+                ctx.font = '10px Arial';
                 var labelX = 100 + (90 / 2) * Math.cos(startAngle + angle / 2);
                 var labelY = 100 + (90 / 2) * Math.sin(startAngle + angle / 2);
-                ctx.fillText(share + '%', labelX, labelY);
+                ctx.fillText(share + '%', labelX - 10, labelY);
                 startAngle += angle;
             });
             ctx.fillStyle = '#000';
@@ -418,8 +470,6 @@
                 ctx.fillText(country + ': ' + countryShare.toFixed(2) + '%', 10, 140);
             }
         }
-
-        // Dodaj complete funkcije za drawBarChart, drawNeedsBar, drawDensityScatter sa try-catch, scaling, grid, labels.
 
         function drawBarChart(growth) {
             var canvas = document.getElementById('growth-bar-chart');
@@ -441,13 +491,16 @@
                 ctx.fillStyle = val > 0 ? '#4CAF50' : '#FF6384';
                 ctx.fillRect(i * 80 + 20, canvas.height - height - 20, 60, height);
                 ctx.fillStyle = '#000';
+                ctx.font = '10px Arial';
                 ctx.fillText((val * 100).toFixed(2) + '%', i * 80 + 25, canvas.height - height - 25);
-                ctx.fillText(labels[i], i * 80 + 5, canvas.height - 5, 70);
+                ctx.save();
+                ctx.translate(i * 80 + 30, canvas.height - 5);
+                ctx.rotate(-Math.PI / 4);
+                ctx.fillText(labels[i], 0, 0);
+                ctx.restore();
             });
             ctx.fillText('Growth Rates', 150, 20);
         }
-
-        // Slično za ostale chartove, osiguravajući da canvasi postoje i scaling spriječava cut off.
 
         function drawNeedsBar(foodNeeds, waterNeeds, energyNeeds) {
             var canvas = document.getElementById('needs-bar-chart');
@@ -470,8 +523,13 @@
                 ctx.fillStyle = ['#FFCE56', '#36A2EB', '#FF6384'][i];
                 ctx.fillRect(i * 100 + 20, canvas.height - height - 20, 60, height);
                 ctx.fillStyle = '#000';
+                ctx.font = '10px Arial';
                 ctx.fillText(val.toFixed(1) + ' ' + units[i], i * 100 + 5, canvas.height - height - 25);
-                ctx.fillText(labels[i], i * 100 + 5, canvas.height - 5);
+                ctx.save();
+                ctx.translate(i * 100 + 30, canvas.height - 5);
+                ctx.rotate(-Math.PI / 4);
+                ctx.fillText(labels[i], 0, 0);
+                ctx.restore();
             });
             ctx.fillText('Future Needs', 150, 20);
         }
@@ -496,13 +554,14 @@
             var maxDensity = Math.max(...densityData.map(d => d.density));
             densityData.forEach((d, i) => {
                 var x = (d.pop / maxPop) * (canvas.width - 40) + 20;
-                var y = canvas.height - (d.density / maxDensity * (canvas.height - 40)) - 20;
+                var y = (canvas.height - 40) - (d.density / maxDensity * (canvas.height - 40)) + 20;
                 ctx.fillStyle = '#4CAF50';
                 var size = (d.pop / maxPop) * 10 + 5; // Size by pop
                 ctx.beginPath();
                 ctx.arc(x, y, size, 0, 2 * Math.PI);
                 ctx.fill();
                 ctx.fillStyle = '#000';
+                ctx.font = '10px Arial';
                 ctx.fillText(d.name, x + 10, y + 5);
                 if (d.name.toLowerCase() === country) {
                     ctx.strokeStyle = '#FF0000';
