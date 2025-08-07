@@ -85,12 +85,13 @@
             // Draw right triangle with results embedded
             drawRightTriangle(sideA, sideB, sideC, angleA, angleB, angleC, area);
 
-            // Draw charts (use for everything: sides, angles, scaling, properties, trig)
+            // Draw charts (use for everything: sides, angles, scaling, properties, trig, medians)
             drawSideChart(sideA, sideB, sideC);
             drawAnglePie(angleA, angleB, angleC);
             drawScalingLine(sideA, sideB, sideC);
             drawPropertiesRadar(medianA, medianB, medianC, inradius, circumradius, area);
             drawTrigDoughnut(sinA, cosA, tanA);
+            drawMedianBar(medianA, medianB, medianC);
         }
 
         function drawRightTriangle(a, b, c, angA, angB, angC, area) {
@@ -173,6 +174,11 @@
             let ctx = document.getElementById('trigChart').getContext('2d');
             new Chart(ctx, { type: 'doughnut', data: { labels: ['sin(α)', 'cos(α)', 'tan(α)'], datasets: [{ data: [sinA, cosA, tanA], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] }] } });
         }
+
+        function drawMedianBar(ma, mb, mc) {
+            let ctx = document.getElementById('medianChart').getContext('2d');
+            new Chart(ctx, { type: 'bar', data: { labels: ['Median A', 'Median B', 'Median C'], datasets: [{ label: 'Medians', data: [ma, mb, mc], backgroundColor: ['#4BC0C0', '#FF6384', '#36A2EB'] }] }, options: { scales: { y: { beginAtZero: true } } } });
+        }
     </script>
 </head>
 <body>
@@ -182,25 +188,35 @@
     </header>
 
     <section id="calculator">
-        <label>Leg A (opposite α): <input type="number" id="sideA"></label>
-        <label>Leg B (opposite β): <input type="number" id="sideB"></label>
-        <label>Hypotenuse C: <input type="number" id="sideC"></label>
-        <label>Angle α: <input type="number" id="angleA"></label>
-        <label>Angle β: <input type="number" id="angleB"></label>
-        <label>Angle Unit: <select id="angleUnit"><option value="degrees">Degrees</option><option value="radians">Radians</option></select></label>
-        <button onclick="calculateRightTriangle()">Calculate</button>
+        <fieldset>
+            <legend>Enter Legs (for calculating hypotenuse and angles in right triangle)</legend>
+            <label>Leg A (opposite α): <input type="number" id="sideA" placeholder="e.g., 3 for 3-4-5 triangle"></label>
+            <label>Leg B (opposite β): <input type="number" id="sideB" placeholder="e.g., 4"></label>
+        </fieldset>
+        <fieldset>
+            <legend>Enter Hypotenuse (for finding legs and angles)</legend>
+            <label>Hypotenuse C: <input type="number" id="sideC" placeholder="e.g., 5"></label>
+        </fieldset>
+        <fieldset>
+            <legend>Enter Angles (α or β, γ is fixed at 90°)</legend>
+            <label>Angle α: <input type="number" id="angleA" placeholder="e.g., 30 for 30-60-90"></label>
+            <label>Angle β: <input type="number" id="angleB" placeholder="e.g., 60"></label>
+            <label>Angle Unit: <select id="angleUnit"><option value="degrees">Degrees</option><option value="radians">Radians</option></select></label>
+        </fieldset>
+        <button onclick="calculateRightTriangle()">Calculate Right Triangle</button>
         <div id="result"></div>
     </section>
 
     <section id="visualization">
         <h2>Dynamic Right Triangle Visualization and Charts</h2>
-        <p>After calculation, see a professional drawing of your right triangle with embedded results (sides, angles, area), plus charts visualizing every aspect: bar for sides, pie for angles, line for scaling, radar for properties, doughnut for trig functions like sin, cos, tan.</p>
+        <p>After calculation, see a custom drawing of your right triangle with embedded results (sides, angles, area), plus charts visualizing every aspect: bar for sides, pie for angles, line for scaling, radar for properties, doughnut for trig functions, and bar for medians.</p>
         <canvas id="triangleCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
         <canvas id="sideChart" width="400" height="200"></canvas>
         <canvas id="angleChart" width="400" height="200"></canvas>
         <canvas id="scalingChart" width="400" height="200"></canvas>
         <canvas id="propertiesChart" width="400" height="200"></canvas>
         <canvas id="trigChart" width="400" height="200"></canvas>
+        <canvas id="medianChart" width="400" height="200"></canvas>
     </section>
 
     <section id="explanation">
@@ -220,10 +236,31 @@
         <p>Our tool handles cases with only one side and an angle, using trig to solve. For example, if only hypotenuse and one angle known, find legs with sin/cos. Professional visualizations include charts for trig values (doughnut) and scaling (line) to see how changes affect the triangle.</p>
         <h3>Right Triangle Properties and Applications</h3>
         <p>Right triangles are fundamental in geometry, engineering, physics, and architecture. Use this calculator to solve problems like finding the height of a ladder (hypotenuse) or roof pitch (angles). SEO: 'Pythagorean theorem examples', 'trigonometry in right triangles formulas'. All calculations are accurate, with dynamic drawings showing labels directly on the triangle for educational purposes.</p>
-        <p>Static examples for reference:</p>
-        <p><img src="right-triangle-example.png" alt="Right triangle with legs 3-4, hypotenuse 5, angles 37-53-90"> 3-4-5 right triangle: Classic Pythagorean triple.</p>
-        <p><img src="30-60-90-triangle.png" alt="30-60-90 right triangle with sides 1-√3-2"> 30-60-90: Sides in ratio 1:√3:2.</p>
-        <p><img src="45-45-90-triangle.png" alt="45-45-90 isosceles right triangle with sides 1-1-√2"> 45-45-90: Isosceles right triangle.</p>
+        <p>Static examples for reference (drawn directly in HTML with SVG):</p>
+        <svg width="200" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="20" font-size="12">3-4-5 Right Triangle</text>
+            <path d="M10 140 L110 140 L10 40 Z" stroke="black" fill="none"/>
+            <rect x="10" y="125" width="15" height="15" fill="none" stroke="black"/>
+            <text x="15" y="100">3</text>
+            <text x="50" y="145">4</text>
+            <text x="40" y="90">5</text>
+        </svg>
+        <svg width="200" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="20" font-size="12">30-60-90 Right Triangle</text>
+            <path d="M10 140 L110 140 L10 40 Z" stroke="black" fill="none"/>
+            <rect x="10" y="125" width="15" height="15" fill="none" stroke="black"/>
+            <text x="15" y="100">√3</text>
+            <text x="50" y="145">1</text>
+            <text x="40" y="90">2</text>
+        </svg>
+        <svg width="200" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="20" font-size="12">45-45-90 Right Triangle</text>
+            <path d="M10 140 L110 140 L10 40 Z" stroke="black" fill="none"/>
+            <rect x="10" y="125" width="15" height="15" fill="none" stroke="black"/>
+            <text x="15" y="100">1</text>
+            <text x="50" y="145">1</text>
+            <text x="40" y="90">√2</text>
+        </svg>
     </section>
 
     <section id="faq">
