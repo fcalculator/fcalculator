@@ -3,18 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMI Calculator - fcalculator.com</title>
+    <meta name="description" content="Free online BMI calculator to assess your body mass index based on height and weight. Health tools at FCalculator.">
+    <title>BMI Calculator - Free Online Health Tool | FCalculator</title>
+    <link rel="canonical" href="https://fcalculator.com/bmi.html">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>BMI Calculator</h1>
-    <p>Enter your weight and height to calculate your Body Mass Index.</p>
-    <input type="number" id="weight" placeholder="Weight (kg)" step="any">
-    <input type="number" id="height" placeholder="Height (m)" step="any">
-    <button onclick="calculateBMI()">Calculate BMI</button>
-    <div id="bmiResult" class="result"></div>
+    <header>
+        <h1>BMI Calculator</h1>
+        <p>Check your body mass index with this accurate health tool.</p>
+        <a href="index.html">Back to Home</a>
+    </header>
+    <main>
+        <section>
+            <input type="number" id="weight" placeholder="Weight (kg)">
+            <input type="number" id="height" placeholder="Height (m)">
+            <button onclick="calculateBMI()">Calculate</button>
+            <div id="bmiResult" class="result"></div>
+        </section>
+    </main>
     <script src="js/bmi_calculator.js"></script>
     <footer>
+        <p>How to use our calculators: Enter your values in the fields provided, select options if needed, and click 'Calculate' for instant results. All tools are free and accurate.</p>
         Project created by Ivan Brkic. Project launched in 2020. Version 1.
     </footer>
 </body>
