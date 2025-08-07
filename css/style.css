@@ -1,4 +1,4 @@
-/* css/style.css */
+/* Shared styles for all pages */
 body {
     font-family: Arial, sans-serif;
     max-width: 600px;
@@ -30,6 +30,18 @@ button:hover {
     font-weight: bold;
     font-size: 18px;
     color: #28a745;
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+nav ul li {
+    margin: 10px 0;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
 }
 footer {
     margin-top: 40px;
