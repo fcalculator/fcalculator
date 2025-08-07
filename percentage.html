@@ -30,16 +30,9 @@
     </header>
     
     <main>
-        <section id="introduction">
-            <h2>What is a Percentage Calculator and Why Use One?</h2>
-            <p>A percentage calculator is an essential online tool that helps you compute percentages effortlessly. In mathematics, a percentage represents a number or ratio expressed as a fraction of 100. For instance, if you want to calculate percentage of marks in an exam or determine the percentage increase in your salary, this tool simplifies the process. Our free percentage calculator stands out because it's user-friendly, ad-free, and packed with educational content to teach you how to calculate percentage manually as well.</p>
-            <p>Percentages are everywhere in daily life – from calculating discounts during shopping sales to analyzing stock market changes or even determining body fat percentage in health metrics. By using our online percentage calculator, you save time and avoid errors. Unlike basic calculators, our percent calc tool handles complex scenarios like percentage difference calculator and percentage change calculator, making it the best choice for precise results. If you're searching for "how to calculate percentage," you've come to the right place!</p>
-            <p>In this guide, we'll cover everything you need to know about percentages: definitions, formulas, step-by-step calculations, common uses, and advanced tips. Our goal is to make this the most comprehensive resource on the web for percentage calculations, ensuring you return whenever you need to calculate percentage online.</p>
-        </section>
-        
+        <!-- Izračuni pri vrhu -->
         <section id="basic-percentage">
             <h2>Basic Percentage Calculator: Calculate Percentage of a Number</h2>
-            <p>The basic percentage calculator is the foundation of all percent-related math. It answers questions like "What is X% of Y?" For example, if you're buying a product with 20% off, this tool quickly tells you the discount amount. The formula is simple: (Percentage / 100) × Value = Result. Our online percentage calculator automates this, but understanding the formula helps you calculate percentage manually when needed.</p>
             <form>
                 <label for="percent">Percentage:</label>
                 <input type="number" id="basic-percent" placeholder="e.g., 25"> % of 
@@ -48,6 +41,52 @@
                 <button type="button" onclick="calculateBasic()">Calculate</button>
             </form>
             <canvas id="basic-chart" width="200" height="200"></canvas>
+        </section>
+        
+        <section id="common-phrases">
+            <h2>Percentage Calculator in Common Phrases: Everyday Percent Calc Solutions</h2>
+            <select id="phrase-select">
+                <option value="what-is">What is % of</option>
+                <option value="is-what">is what % of</option>
+                <option value="is-percent-of-what">is % of what</option>
+            </select>
+            <input type="number" id="phrase-value1" placeholder="Value 1">
+            <input type="number" id="phrase-value2" placeholder="Value 2">
+            <span id="phrase-result"></span>
+            <button type="button" onclick="calculatePhrase()">Calculate</button>
+        </section>
+        
+        <section id="percentage-difference">
+            <h2>Percentage Difference Calculator: Compare Two Values Accurately</h2>
+            <form>
+                <label>Value 1:</label> <input type="number" id="diff-value1" placeholder="e.g., 100">
+                <label>Value 2:</label> <input type="number" id="diff-value2" placeholder="e.g., 80">
+                <span id="diff-result"></span>%
+                <button type="button" onclick="calculateDifference()">Calculate</button>
+            </form>
+        </section>
+        
+        <section id="percentage-change">
+            <h2>Percentage Change Calculator: Track Increases and Decreases</h2>
+            <form>
+                <label>Old Value:</label> <input type="number" id="change-old" placeholder="e.g., 500">
+                <label>New Value:</label> <input type="number" id="change-new" placeholder="e.g., 550">
+                <span id="change-result"></span>%
+                <button type="button" onclick="calculateChange()">Calculate</button>
+            </form>
+        </section>
+        
+        <!-- Tekst dolje -->
+        <section id="introduction">
+            <h2>What is a Percentage Calculator and Why Use One?</h2>
+            <p>A percentage calculator is an essential online tool that helps you compute percentages effortlessly. In mathematics, a percentage represents a number or ratio expressed as a fraction of 100. For instance, if you want to calculate percentage of marks in an exam or determine the percentage increase in your salary, this tool simplifies the process. Our free percentage calculator stands out because it's user-friendly, ad-free, and packed with educational content to teach you how to calculate percentage manually as well.</p>
+            <p>Percentages are everywhere in daily life – from calculating discounts during shopping sales to analyzing stock market changes or even determining body fat percentage in health metrics. By using our online percentage calculator, you save time and avoid errors. Unlike basic calculators, our percent calc tool handles complex scenarios like percentage difference calculator and percentage change calculator, making it the best choice for precise results. If you're searching for "how to calculate percentage," you've come to the right place!</p>
+            <p>In this guide, we'll cover everything you need to know about percentages: definitions, formulas, step-by-step calculations, common uses, and advanced tips. Our goal is to make this the most comprehensive resource on the web for percentage calculations, ensuring you return whenever you need to calculate percentage online.</p>
+        </section>
+        
+        <section id="basic-explanation">
+            <h2>More on Basic Percentage Calculator</h2>
+            <p>The basic percentage calculator is the foundation of all percent-related math. It answers questions like "What is X% of Y?" For example, if you're buying a product with 20% off, this tool quickly tells you the discount amount. The formula is simple: (Percentage / 100) × Value = Result. Our online percentage calculator automates this, but understanding the formula helps you calculate percentage manually when needed.</p>
             <p>Example: Let's say you want to calculate 25% of 200. The result is 50. This is perfect for real-world scenarios like tipping at a restaurant (15% of the bill) or calculating sales tax (8% on purchases). Our percent calculator free tool visualizes the result with a pie chart, making it easier to understand the proportion.</p>
             <h3>Step-by-Step Guide: How to Calculate Percentage of a Number</h3>
             <ol>
@@ -58,18 +97,9 @@
             <p>Pro Tip: If you're dealing with large numbers, like calculating percentage of population growth, this method scales perfectly. For more advanced calculations, check our percentage increase calculator section below.</p>
         </section>
         
-        <section id="common-phrases">
-            <h2>Percentage Calculator in Common Phrases: Everyday Percent Calc Solutions</h2>
+        <section id="common-phrases-explanation">
+            <h2>More on Percentage Calculator in Common Phrases</h2>
             <p>Life throws various percentage questions at us, such as "What percentage is X of Y?" or "X is what percent of Y?" Our tool handles these common phrases seamlessly, making it the ideal online percentage calculator for quick answers. This feature is especially useful for students learning how to calculate percentage in math class or professionals analyzing data.</p>
-            <select id="phrase-select">
-                <option value="what-is">What is % of</option>
-                <option value="is-what">is what % of</option>
-                <option value="is-percent-of-what">is % of what</option>
-            </select>
-            <input type="number" id="phrase-value1" placeholder="Value 1">
-            <input type="number" id="phrase-value2" placeholder="Value 2">
-            <span id="phrase-result"></span>
-            <button type="button" onclick="calculatePhrase()">Calculate</button>
             <p>Example: What is 15% of 80? The answer is 12, which could represent a 15% tip on an $80 meal. Alternatively, if 12 is what percent of 80? It's 15%. These calculations are crucial in fields like finance, where you might need to calculate percentage of total revenue contributed by a department.</p>
             <h3>More Examples of Common Percentage Calculations</h3>
             <ul>
@@ -80,15 +110,9 @@
             <p>By mastering these, you'll never need to search "how to calculate percentage" again. Our percent calculator integrates these phrases to provide versatile solutions.</p>
         </section>
         
-        <section id="percentage-difference">
-            <h2>Percentage Difference Calculator: Compare Two Values Accurately</h2>
+        <section id="percentage-difference-explanation">
+            <h2>More on Percentage Difference Calculator</h2>
             <p>The percentage difference calculator measures the relative difference between two numbers, often used in science, economics, and comparisons. Unlike simple subtraction, it provides a normalized percentage, making it fair for different scales. Formula: |Value1 - Value2| / ((Value1 + Value2)/2) × 100. This is a key tool for anyone needing to calculate percentage difference in data analysis.</p>
-            <form>
-                <label>Value 1:</label> <input type="number" id="diff-value1" placeholder="e.g., 100">
-                <label>Value 2:</label> <input type="number" id="diff-value2" placeholder="e.g., 80">
-                <span id="diff-result"></span>%
-                <button type="button" onclick="calculateDifference()">Calculate</button>
-            </form>
             <p>Example: The percentage difference between 100 and 80 is 22.22%. This could represent comparing two product prices or experimental results. In business, use it to calculate percentage difference in quarterly sales figures.</p>
             <h3>Detailed Explanation: When to Use Percentage Difference</h3>
             <p>Percentage difference is symmetric, meaning it treats both values equally, unlike percentage change which has a direction. For instance, if you're comparing heights: 160cm vs 180cm, the difference is 11.76%. This calculator is invaluable for statistical analysis, error margins in measurements, or even in sports stats like win percentages.</p>
@@ -105,15 +129,9 @@
             <p>Integrate this with our other tools for comprehensive analysis, like linking to our <a href="/statistics-calculator.html">statistics calculator</a>.</p>
         </section>
         
-        <section id="percentage-change">
-            <h2>Percentage Change Calculator: Track Increases and Decreases</h2>
+        <section id="percentage-change-explanation">
+            <h2>More on Percentage Change Calculator</h2>
             <p>The percentage change calculator shows how much a value has increased or decreased relative to its original amount. This is essential for tracking trends, such as percentage increase in stock prices or percentage decrease in expenses. Formula: ((New Value - Old Value) / Old Value) × 100. Positive results indicate growth, negative ones show decline.</p>
-            <form>
-                <label>Old Value:</label> <input type="number" id="change-old" placeholder="e.g., 500">
-                <label>New Value:</label> <input type="number" id="change-new" placeholder="e.g., 550">
-                <span id="change-result"></span>%
-                <button type="button" onclick="calculateChange()">Calculate</button>
-            </form>
             <p>Example: From 500 to 550 is a 10% increase, useful for salary raises. From 500 to 450 is a -10% decrease, applicable to weight loss tracking. In finance, calculate percentage change in investment returns to make informed decisions.</p>
             <h3>Advanced Insights: Percentage Increase and Decrease</h3>
             <p>Percentage increase calculator: Add the change percentage to the original for the new value. For decrease, subtract. Common pitfalls: Don't confuse with percentage difference – change is directional. In economics, year-over-year percentage change helps predict inflation or GDP growth.</p>
@@ -238,9 +256,9 @@
     </main>
     
     <footer>
-        <p>Projekt napravio Ivan Brkic</p>
-        <p>Projekt pokrenut 2020 godine</p>
-        <p>Verzija 1</p>
+        <p>Project created by Ivan Brkic</p>
+        <p>Project launched in 2020</p>
+        <p>Version 1.02</p>
     </footer>
     
     <script>
