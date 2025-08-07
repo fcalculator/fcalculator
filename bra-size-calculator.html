@@ -62,23 +62,24 @@
         }
 
         function getEUCupSize(diff) {
-            if (diff < 11.5) return 'AA';
-            else if (diff < 13.5) return 'A';
-            else if (diff < 15.5) return 'B';
-            else if (diff < 17.5) return 'C';
-            else if (diff < 19.5) return 'D';
-            else if (diff < 21.5) return 'E';
-            else if (diff < 23.5) return 'F';
-            else if (diff < 25.5) return 'G';
-            else if (diff < 27.5) return 'H';
-            else if (diff < 29.5) return 'I';
-            else if (diff < 31.5) return 'J';
+            if (diff < 11.5 / 2.54) return 'AA'; // Converted to inches for consistency
+            else if (diff < 13.5 / 2.54) return 'A';
+            else if (diff < 15.5 / 2.54) return 'B';
+            else if (diff < 17.5 / 2.54) return 'C';
+            else if (diff < 19.5 / 2.54) return 'D';
+            else if (diff < 21.5 / 2.54) return 'E';
+            else if (diff < 23.5 / 2.54) return 'F';
+            else if (diff < 25.5 / 2.54) return 'G';
+            else if (diff < 27.5 / 2.54) return 'H';
+            else if (diff < 29.5 / 2.54) return 'I';
+            else if (diff < 31.5 / 2.54) return 'J';
             else return 'K';
         }
 
         function updateCharts(diff) {
             var ctx1 = document.getElementById('cupChart').getContext('2d');
-            new Chart(ctx1, {
+            if (window.cupChart) window.cupChart.destroy();
+            window.cupChart = new Chart(ctx1, {
                 type: 'bar',
                 data: {
                     labels: ['US Cup', 'UK Cup', 'EU Cup'],
@@ -92,7 +93,8 @@
             });
 
             var ctx2 = document.getElementById('fitErrorChart').getContext('2d');
-            new Chart(ctx2, {
+            if (window.fitErrorChart) window.fitErrorChart.destroy();
+            window.fitErrorChart = new Chart(ctx2, {
                 type: 'pie',
                 data: {
                     labels: ['Correct Fit', 'Too Large Band', 'Too Small Cup', 'Other Issues'],
@@ -105,7 +107,8 @@
             });
 
             var ctx3 = document.getElementById('bandSizeChart').getContext('2d');
-            new Chart(ctx3, {
+            if (window.bandSizeChart) window.bandSizeChart.destroy();
+            window.bandSizeChart = new Chart(ctx3, {
                 type: 'line',
                 data: {
                     labels: ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'],
@@ -122,6 +125,10 @@
                 options: { scales: { y: { beginAtZero: true } } }
             });
         }
+
+        window.onload = function() {
+            updateCharts(4); // Default difference of 4 inches for initial load
+        };
 
         function convertBraSize() {
             var location = document.getElementById('location').value;
@@ -158,7 +165,7 @@
             <canvas id="fitErrorChart" width="400" height="200"></canvas>
             <canvas id="bandSizeChart" width="400" height="200"></canvas>
             <!-- Placeholder for generated image -->
-            <img src="placeholder-measurement-diagram.png" alt="Diagram of bust and band measurement techniques" style="max-width:100%;">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==" alt="Diagram of bust and band measurement techniques" style="max-width:100%;"> <!-- Base64 placeholder; replace with generated -->
             <p>Share this calculator: <button onclick="alert('Shared!')">Share</button></p>
         </section>
 
@@ -187,7 +194,14 @@
             <table>
                 <tr><th>Band Size</th><th>FR/BE/ES</th><th>EU</th><th>US/UK</th><th>AU/NZ</th></tr>
                 <tr><td>XXS</td><td>75</td><td>60</td><td>28</td><td>6</td></tr>
-                <!-- Add all rows from document -->
+                <tr><td>XS</td><td>80</td><td>65</td><td>30</td><td>8</td></tr>
+                <tr><td>S</td><td>85</td><td>70</td><td>32</td><td>10</td></tr>
+                <tr><td>M</td><td>90</td><td>75</td><td>34</td><td>12</td></tr>
+                <tr><td>L</td><td>95</td><td>80</td><td>36</td><td>14</td></tr>
+                <tr><td>XL</td><td>100</td><td>85</td><td>38</td><td>16</td></tr>
+                <tr><td>XXL</td><td>105</td><td>90</td><td>40</td><td>18</td></tr>
+                <tr><td>3XL</td><td>110</td><td>95</td><td>42</td><td>20</td></tr>
+                <tr><td>4XL</td><td>115</td><td>100</td><td>44</td><td>22</td></tr>
                 <tr><td>5XL</td><td>120</td><td>105</td><td>46</td><td>24</td></tr>
             </table>
             <h3>Cup Size Differential Tables</h3>
@@ -195,12 +209,35 @@
             <table>
                 <tr><th>Inches Difference</th><th>US Cup</th><th>UK/AU Cup</th></tr>
                 <tr><td>&lt;1</td><td>AA</td><td>AA</td></tr>
-                <!-- Add all -->
+                <tr><td>1</td><td>A</td><td>A</td></tr>
+                <tr><td>2</td><td>B</td><td>B</td></tr>
+                <tr><td>3</td><td>C</td><td>C</td></tr>
+                <tr><td>4</td><td>D</td><td>D</td></tr>
+                <tr><td>5</td><td>E or DD</td><td>DD</td></tr>
+                <tr><td>6</td><td>F or DDD</td><td>E</td></tr>
+                <tr><td>7</td><td>G or DDDD</td><td>F</td></tr>
+                <tr><td>8</td><td>H</td><td>FF</td></tr>
+                <tr><td>9</td><td>I</td><td>G</td></tr>
+                <tr><td>10</td><td>J</td><td>GG</td></tr>
+                <tr><td>11</td><td>K</td><td>H</td></tr>
+                <tr><td>12</td><td>L</td><td>HH</td></tr>
+                <tr><td>13</td><td>M</td><td>J</td></tr>
+                <tr><td>14</td><td>N</td><td>JJ</td></tr>
             </table>
             <table>
                 <tr><th>CM Difference</th><th>EU Cup</th></tr>
                 <tr><td>10-11</td><td>AA</td></tr>
-                <!-- Add all -->
+                <tr><td>12-13</td><td>A</td></tr>
+                <tr><td>14-15</td><td>B</td></tr>
+                <tr><td>16-17</td><td>C</td></tr>
+                <tr><td>18-19</td><td>D</td></tr>
+                <tr><td>20-21</td><td>E</td></tr>
+                <tr><td>22-23</td><td>F</td></tr>
+                <tr><td>24-25</td><td>G</td></tr>
+                <tr><td>26-27</td><td>H</td></tr>
+                <tr><td>28-29</td><td>I</td></tr>
+                <tr><td>30-31</td><td>J</td></tr>
+                <tr><td>32-33</td><td>K</td></tr>
             </table>
             <p>Indicators of poor fit include band migration or cup overflow, potentially exacerbating health concerns. Professional fittings are recommended for accuracy.</p>
         </section>
