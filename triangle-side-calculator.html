@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Triangle Side Calculator: Calculate sides, angles, area, medians, inradius, circumradius for equilateral, isosceles, scalene, right, obtuse, acute triangles. Visualize with dynamic triangle drawing showing calculated values inside the image. Free online tool with formulas, examples, and detailed explanations for better understanding triangle properties.">
-    <meta name="keywords" content="triangle side calculator, calculate triangle sides online, triangle angles calculator, triangle area formula, visualize triangle drawing, equilateral triangle calculator, isosceles triangle properties, scalene triangle formulas, right triangle hypotenuse, obtuse acute triangle visualization, law of sines cosines, Herons formula, median inradius circumradius">
-    <title>Triangle Side Calculator - Free Online Tool to Calculate and Visualize Triangle Properties</title>
+    <meta name="description" content="Triangle Side Calculator: Calculate sides, angles, area, medians, inradius, circumradius for equilateral, isosceles, scalene, right, obtuse, acute triangles. Draw and visualize triangle with results embedded on the image, plus interactive charts for sides, angles, scaling, and properties. Free online tool with formulas, examples, dynamic drawings, and charts for educational and practical use.">
+    <meta name="keywords" content="triangle side calculator, calculate triangle sides online, triangle angles calculator, triangle area formula, draw triangle with results, visualize triangle drawing charts, equilateral triangle calculator, isosceles triangle properties, scalene triangle formulas, right triangle hypotenuse, obtuse acute triangle visualization, law of sines cosines, Herons formula, median inradius circumradius charts">
+    <title>Triangle Side Calculator - Free Online Tool to Calculate, Draw, and Chart Triangle Properties</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Author: Ivan Brkic
-        // JavaScript for Triangle Side Calculator with Dynamic Triangle Drawing
+        // JavaScript for Triangle Side Calculator with Dynamic Drawing and Charts
         function calculateTriangle() {
             // Get input values
             let sideA = parseFloat(document.getElementById('sideA').value) || 0;
@@ -25,47 +26,44 @@
                 angleC = angleC * (180 / Math.PI);
             }
 
-            // Validate: At least 3 values provided, including one side
+            // Validate
             let provided = [sideA, sideB, sideC, angleA, angleB, angleC].filter(v => v > 0).length;
             if (provided < 3 || [sideA, sideB, sideC].filter(v => v > 0).length < 1) {
                 document.getElementById('result').innerHTML = 'Please provide at least 3 values, including one side.';
                 return;
             }
 
-            // Calculate missing values (example cases: SAS, ASA, etc.)
-            // SAS case
-            if (sideA > 0 && sideB > 0 && angleC > 0) {
+            // More cases for calculations
+            if (sideA > 0 && sideB > 0 && sideC > 0) { // SSS
+                angleA = Math.acos((sideB**2 + sideC**2 - sideA**2) / (2*sideB*sideC)) * (180 / Math.PI);
+                angleB = Math.acos((sideA**2 + sideC**2 - sideB**2) / (2*sideA*sideC)) * (180 / Math.PI);
+                angleC = Math.acos((sideA**2 + sideB**2 - sideC**2) / (2*sideA*sideB)) * (180 / Math.PI);
+            } else if (sideA > 0 && sideB > 0 && angleC > 0) { // SAS
                 angleC = angleC * (Math.PI / 180);
                 sideC = Math.sqrt(sideA**2 + sideB**2 - 2*sideA*sideB*Math.cos(angleC));
                 angleA = Math.acos((sideB**2 + sideC**2 - sideA**2) / (2*sideB*sideC)) * (180 / Math.PI);
                 angleB = 180 - angleA - (angleC * 180 / Math.PI);
-            // ASA case
-            } else if (sideA > 0 && angleB > 0 && angleC > 0) {
-                angleA = 180 - angleB - angleC;
+            } else if (sideA > 0 && angleA > 0 && angleB > 0) { // ASA
+                angleC = 180 - angleA - angleB;
                 sideB = (sideA * Math.sin(angleB * Math.PI/180)) / Math.sin(angleA * Math.PI/180);
                 sideC = (sideA * Math.sin(angleC * Math.PI/180)) / Math.sin(angleA * Math.PI/180);
-            // SSS case using Law of Cosines
-            } else if (sideA > 0 && sideB > 0 && sideC > 0) {
-                angleA = Math.acos((sideB**2 + sideC**2 - sideA**2) / (2*sideB*sideC)) * (180 / Math.PI);
-                angleB = Math.acos((sideA**2 + sideC**2 - sideB**2) / (2*sideA*sideC)) * (180 / Math.PI);
-                angleC = Math.acos((sideA**2 + sideB**2 - sideC**2) / (2*sideA*sideB)) * (180 / Math.PI);
-            } // Add more cases if needed (e.g., SSA with ambiguity check)
+            } // Additional cases can be expanded
 
-            // Area using Heron's or sin formula
+            // Area
             let s = (sideA + sideB + sideC) / 2;
             let area = Math.sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
-            if (isNaN(area) || area === 0) {
-                area = 0.5 * sideA * sideB * Math.sin(angleC * Math.PI / 180);
-            }
+            if (isNaN(area)) area = 0.5 * sideA * sideB * Math.sin(angleC * Math.PI / 180);
 
-            // Median to side A
+            // Medians (all three for charts)
             let medianA = 0.5 * Math.sqrt(2*sideB**2 + 2*sideC**2 - sideA**2);
+            let medianB = 0.5 * Math.sqrt(2*sideA**2 + 2*sideC**2 - sideB**2);
+            let medianC = 0.5 * Math.sqrt(2*sideA**2 + 2*sideB**2 - sideC**2);
 
             // Inradius and Circumradius
             let inradius = area / s;
             let circumradius = (sideA * sideB * sideC) / (4 * area);
 
-            // Determine type
+            // Type
             let type = 'Scalene';
             if (Math.abs(sideA - sideB) < 0.01 && Math.abs(sideB - sideC) < 0.01) type = 'Equilateral';
             else if (Math.abs(sideA - sideB) < 0.01 || Math.abs(sideB - sideC) < 0.01 || Math.abs(sideA - sideC) < 0.01) type = 'Isosceles';
@@ -73,23 +71,24 @@
             else if (Math.max(angleA, angleB, angleC) > 90) type += ' Obtuse';
             else if (Math.max(angleA, angleB, angleC) < 90) type += ' Acute';
 
-            // Display results
+            // Results
             document.getElementById('result').innerHTML = `
-                <p>Side A: ${sideA.toFixed(2)}</p>
-                <p>Side B: ${sideB.toFixed(2)}</p>
-                <p>Side C: ${sideC.toFixed(2)}</p>
-                <p>Angle A: ${angleA.toFixed(2)}°</p>
-                <p>Angle B: ${angleB.toFixed(2)}°</p>
-                <p>Angle C: ${angleC.toFixed(2)}°</p>
+                <p>Side A: ${sideA.toFixed(2)}</p><p>Side B: ${sideB.toFixed(2)}</p><p>Side C: ${sideC.toFixed(2)}</p>
+                <p>Angle A: ${angleA.toFixed(2)}°</p><p>Angle B: ${angleB.toFixed(2)}°</p><p>Angle C: ${angleC.toFixed(2)}°</p>
                 <p>Area: ${area.toFixed(2)}</p>
-                <p>Median to Side A: ${medianA.toFixed(2)}</p>
-                <p>Inradius: ${inradius.toFixed(2)}</p>
-                <p>Circumradius: ${circumradius.toFixed(2)}</p>
+                <p>Medians: A=${medianA.toFixed(2)}, B=${medianB.toFixed(2)}, C=${medianC.toFixed(2)}</p>
+                <p>Inradius: ${inradius.toFixed(2)}</p><p>Circumradius: ${circumradius.toFixed(2)}</p>
                 <p>Triangle Type: ${type}</p>
             `;
 
-            // Draw dynamic triangle with labels inside
+            // Draw triangle with results on it
             drawTriangle(sideA, sideB, sideC, angleA, angleB, angleC, type, area);
+
+            // Draw charts
+            drawSideChart(sideA, sideB, sideC);
+            drawAnglePie(angleA, angleB, angleC);
+            drawScalingLine(sideA, sideB, sideC);
+            drawPropertiesRadar(medianA, medianB, medianC, inradius, circumradius, area);
         }
 
         function drawTriangle(a, b, c, angA, angB, angC, type, area) {
@@ -97,85 +96,92 @@
             let ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Scale to fit canvas (400x300)
             let scale = Math.min(400 / Math.max(a, b, c), 300 / Math.max(a, b, c)) * 0.8;
             a *= scale; b *= scale; c *= scale;
 
-            // Calculate coordinates: Vertex A at (0,0), B at (c,0), C at (x,y)
             let x = (b**2 + c**2 - a**2) / (2 * c);
             let y = Math.sqrt(b**2 - x**2);
-            if (isNaN(y)) y = 0; // Flat case
+            if (isNaN(y)) y = 0;
 
-            // Shift to center
             let offsetX = (400 - c) / 2;
             let offsetY = 250 - y / 2;
 
             // Draw sides
             ctx.beginPath();
-            ctx.moveTo(offsetX, offsetY); // Vertex A
-            ctx.lineTo(offsetX + c, offsetY); // Vertex B
-            ctx.lineTo(offsetX + x, offsetY - y); // Vertex C
+            ctx.moveTo(offsetX, offsetY);
+            ctx.lineTo(offsetX + c, offsetY);
+            ctx.lineTo(offsetX + x, offsetY - y);
             ctx.closePath();
-            ctx.strokeStyle = '#000';
-            ctx.lineWidth = 2;
             ctx.stroke();
 
-            // Labels for sides (midpoints)
+            // Side labels
             ctx.font = '12px Arial';
             ctx.fillStyle = '#FF0000';
-            // Side a (opposite A, between B and C)
-            let midAB = {x: offsetX + c/2, y: offsetY + 10};
-            ctx.fillText(`a = ${a.toFixed(2)}`, midAB.x, midAB.y + 20);
-            // Side b (opposite B, between A and C)
-            let midBC = {x: offsetX + x + (c - x)/2, y: offsetY - y/2};
-            ctx.fillText(`b = ${b.toFixed(2)}`, midBC.x + 10, midBC.y);
-            // Side c (opposite C, between A and B)
-            let midCA = {x: offsetX + x/2, y: offsetY - y/2};
-            ctx.fillText(`c = ${c.toFixed(2)}`, midCA.x - 20, midCA.y);
+            ctx.fillText(`a=${a.toFixed(2)}`, offsetX + c/2, offsetY + 20);
+            ctx.fillText(`b=${b.toFixed(2)}`, offsetX + x + 10, offsetY - y/2);
+            ctx.fillText(`c=${c.toFixed(2)}`, offsetX + x/2 - 20, offsetY - y/2);
 
-            // Labels for angles at vertices
+            // Angle labels
             ctx.fillStyle = '#0000FF';
-            ctx.fillText(`A (${angA.toFixed(0)}°)`, offsetX - 10, offsetY + 20); // Near A
-            ctx.fillText(`B (${angB.toFixed(0)}°)`, offsetX + c - 10, offsetY + 20); // Near B
-            ctx.fillText(`C (${angC.toFixed(0)}°)`, offsetX + x, offsetY - y - 10); // Near C
+            ctx.fillText(`A=${angA.toFixed(0)}°`, offsetX - 10, offsetY + 20);
+            ctx.fillText(`B=${angB.toFixed(0)}°`, offsetX + c - 10, offsetY + 20);
+            ctx.fillText(`C=${angC.toFixed(0)}°`, offsetX + x, offsetY - y - 10);
 
-            // Add tick marks for equal sides (like calculator.net)
+            // Tick marks for equals
             if (type.includes('Equilateral') || type.includes('Isosceles')) {
-                // Simple ticks on equal sides
                 ctx.strokeStyle = '#00FF00';
-                ctx.lineWidth = 1;
-                // Example tick on side AB if equal
-                if (Math.abs(a - b) < 0.01) {
-                    ctx.beginPath();
-                    ctx.moveTo(midAB.x - 10, midAB.y + 5);
-                    ctx.lineTo(midAB.x + 10, midAB.y + 5);
-                    ctx.stroke();
-                }
-                // Add more for other equals
+                ctx.beginPath();
+                ctx.moveTo(offsetX + c/2 - 10, offsetY + 5);
+                ctx.lineTo(offsetX + c/2 + 10, offsetY + 5);
+                ctx.stroke();
+                // Add more ticks based on equals
             }
 
-            // Arcs for angles (simple arcs like calculator.net)
-            drawArc(ctx, offsetX, offsetY, 20, Math.PI, Math.PI + (angA * Math.PI / 180)); // Arc at A
-            drawArc(ctx, offsetX + c, offsetY, 20, Math.PI + (angA * Math.PI / 180), Math.PI + (angA + angB) * Math.PI / 180); // Simplified
+            // Arcs for angles (improved)
+            drawArc(ctx, offsetX, offsetY, 25, Math.PI, Math.PI + (angA * Math.PI / 180), '#000');
+            drawArc(ctx, offsetX + c, offsetY, 25, Math.PI - (angB * Math.PI / 180), Math.PI, '#000');
+            drawArc(ctx, offsetX + x, offsetY - y, 25, (angC * Math.PI / 180) / 2, Math.PI - (angC * Math.PI / 180) / 2, '#000');
 
-            // Type and area label below
+            // Type and area on drawing
             ctx.fillStyle = '#000';
             ctx.font = '14px Arial';
             ctx.fillText(`Type: ${type}`, 10, 280);
             ctx.fillText(`Area: ${area.toFixed(2)}`, 10, 300);
         }
 
-        function drawArc(ctx, x, y, radius, startAngle, endAngle) {
+        function drawArc(ctx, x, y, r, start, end, color) {
             ctx.beginPath();
-            ctx.arc(x, y, radius, startAngle, endAngle);
+            ctx.arc(x, y, r, start, end);
+            ctx.strokeStyle = color;
             ctx.stroke();
+        }
+
+        function drawSideChart(a, b, c) {
+            let ctx = document.getElementById('sideChart').getContext('2d');
+            new Chart(ctx, { type: 'bar', data: { labels: ['A', 'B', 'C'], datasets: [{ label: 'Sides', data: [a, b, c], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] }] }, options: { scales: { y: { beginAtZero: true } } } });
+        }
+
+        function drawAnglePie(a, b, c) {
+            let ctx = document.getElementById('angleChart').getContext('2d');
+            new Chart(ctx, { type: 'pie', data: { labels: ['A', 'B', 'C'], datasets: [{ data: [a, b, c], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] }] } });
+        }
+
+        function drawScalingLine(a, b, c) {
+            let scales = [1, 1.5, 2];
+            let ctx = document.getElementById('scalingChart').getContext('2d');
+            new Chart(ctx, { type: 'line', data: { labels: scales, datasets: [{ label: 'A', data: scales.map(s => a*s), borderColor: '#FF6384' }, { label: 'B', data: scales.map(s => b*s), borderColor: '#36A2EB' }, { label: 'C', data: scales.map(s => c*s), borderColor: '#FFCE56' }] }, options: { scales: { y: { beginAtZero: true } } } });
+        }
+
+        function drawPropertiesRadar(ma, mb, mc, ir, cr, area) {
+            let ctx = document.getElementById('propertiesChart').getContext('2d');
+            new Chart(ctx, { type: 'radar', data: { labels: ['Median A', 'Median B', 'Median C', 'Inradius', 'Circumradius', 'Area'], datasets: [{ label: 'Properties', data: [ma, mb, mc, ir, cr, area], backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgba(255, 99, 132, 1)' }] } });
         }
     </script>
 </head>
 <body>
     <header>
         <h1>Triangle Side Calculator</h1>
-        <p>Calculate triangle sides, angles, area, and properties online. Visualize your triangle with a dynamic drawing that includes calculated values directly inside the image, showing sides, angles, tick marks for equal lengths, and arcs for angles. Supports equilateral, isosceles, scalene, right, obtuse, and acute triangles. Enter at least 3 values (including one side) for precise results in degrees or radians.</p>
+        <p>Calculate triangle sides, angles, area, and properties online. Draw your triangle with embedded results (sides, angles, type, area) directly on the image, plus charts for visualization of sides, angles, scaling, medians, radii, and more. Supports equilateral, isosceles, scalene, right, obtuse, acute triangles in degrees or radians.</p>
     </header>
 
     <section id="calculator">
@@ -185,60 +191,42 @@
         <label>Angle A: <input type="number" id="angleA"></label>
         <label>Angle B: <input type="number" id="angleB"></label>
         <label>Angle C: <input type="number" id="angleC"></label>
-        <label>Angle Unit: 
-            <select id="angleUnit">
-                <option value="degrees">Degrees</option>
-                <option value="radians">Radians</option>
-            </select>
-        </label>
+        <label>Angle Unit: <select id="angleUnit"><option value="degrees">Degrees</option><option value="radians">Radians</option></select></label>
         <button onclick="calculateTriangle()">Calculate</button>
         <div id="result"></div>
     </section>
 
     <section id="visualization">
-        <h2>Dynamic Triangle Visualization</h2>
-        <p>After calculation, view a custom-drawn triangle image with your input and calculated values embedded: sides labeled with lengths, angles with degrees, tick marks for equal sides, arcs for angle measures, and properties like type and area. This unique visualization helps understand triangle shapes better than static images.</p>
+        <h2>Dynamic Triangle Drawing and Charts</h2>
+        <p>View a custom-drawn triangle with results shown on it, plus charts for in-depth analysis: bar for sides, pie for angles, line for scaling, radar for properties.</p>
         <canvas id="triangleCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+        <canvas id="sideChart" width="400" height="200"></canvas>
+        <canvas id="angleChart" width="400" height="200"></canvas>
+        <canvas id="scalingChart" width="400" height="200"></canvas>
+        <canvas id="propertiesChart" width="400" height="200"></canvas>
     </section>
 
     <section id="explanation">
         <h2>How Does the Triangle Side Calculator Work?</h2>
-        <p>This free online triangle calculator uses advanced formulas like the Law of Sines (a/sin(A) = b/sin(B) = c/sin(C)) and Law of Cosines (c² = a² + b² - 2ab*cos(C)) to compute missing sides and angles. Area is calculated via Heron's formula (√[s(s-a)(s-b)(s-c)], where s = (a+b+c)/2) or base-height/2 methods. Medians, inradius (area/s), and circumradius ((abc)/(4*area)) are derived accurately. The tool classifies triangles as equilateral (all sides equal), isosceles (two sides equal), scalene (no sides equal), right (one 90° angle), obtuse (one angle >90°), or acute (all angles <90°).</p>
-        <p>Example: For a right triangle with sides 3, 4, hypotenuse 5 – enter Side A=3, Side B=4, Side C=5. Results show angles 36.87°, 53.13°, 90°, area 6, with a drawn image labeling everything inside.</p>
-        <h3>Triangle Types and Properties</h3>
-        <p>Triangles are three-sided polygons classified by sides or angles. Equilateral triangles have equal sides and 60° angles; isosceles have two equal sides; scalene have unequal sides. Right triangles follow Pythagorean theorem (a² + b² = c²); obtuse have one angle over 90°; acute under 90°. Our visualization draws tick marks on equal sides and concentric arcs on angles, similar to standard notations, but dynamically with your data.</p>
-        <p>SEO-focused: Searching for 'calculate triangle sides and angles online' or 'visualize triangle properties with formulas'? This tool provides comprehensive calculations and unique drawings for educational and practical use.</p>
+        <p>This tool uses Law of Sines, Cosines, Heron's formula, and more to compute everything. Draw and chart your triangle for visual insights. Example: Side A=3, B=4, C=5 – draws right triangle with labels, charts showing distributions.</p>
+        <h3>Triangle Types, Formulas, and Visuals</h3>
+        <p>Explore equilateral, isosceles, etc., with dynamic drawings and charts. SEO: 'draw triangle online with calculations and charts'.</p>
         <ul>
-            <li><strong>Pythagorean Theorem:</strong> For right triangles, hypotenuse c = √(a² + b²).</li>
-            <li><strong>Law of Sines and Cosines:</strong> Solve any triangle type.</li>
-            <li><strong>Area Formulas:</strong> Base × height / 2, (1/2)ab sin(C), or Heron's.</li>
-            <li><strong>Medians and Radii:</strong> Intersect at centroid; inradius fits inside, circumradius around.</li>
+            <li><strong>Formulas:</strong> Pythagorean, sines/cosines, area methods.</li>
+            <li><strong>Charts:</strong> Used for all aspects to enhance understanding.</li>
         </ul>
-        <h3>Static Examples of Triangle Types</h3>
-        <p>For reference, here are illustrations of common types (note: dynamic drawing above adapts to your inputs):</p>
-        <!-- Placeholder for static images; in real site, add actual img tags with alt for SEO -->
-        <p><img src="equilateral-triangle-example.png" alt="Equilateral triangle with equal sides and angles, tick marks on all sides"> Equilateral: All sides equal, angles 60°.</p>
-        <p><img src="isosceles-triangle-example.png" alt="Isosceles triangle with two equal sides, base angles equal, tick marks on equal sides"> Isosceles: Two equal sides.</p>
-        <p><img src="scalene-triangle-example.png" alt="Scalene triangle with unequal sides and angles, no tick marks"> Scalene: All unequal.</p>
-        <p><img src="right-triangle-example.png" alt="Right triangle with 90° angle marked by square, hypotenuse opposite"> Right: One 90° angle.</p>
-        <p><img src="obtuse-triangle-example.png" alt="Obtuse triangle with one angle >90°, arcs showing measures"> Obtuse: One angle >90°.</p>
-        <p><img src="acute-triangle-example.png" alt="Acute triangle with all angles <90°, arcs on vertices"> Acute: All angles <90°.</p>
+        <p>Static examples: <img src="equilateral-example.png" alt="Equilateral triangle drawing with charts"> etc.</p>
     </section>
 
     <section id="faq">
         <h2>Frequently Asked Questions</h2>
-        <p>How accurate is the drawing? It scales based on sides for realistic shape, with labels inside for clarity.</p>
-        <p>Supports radians? Yes, input like pi/3 for 60°, select unit.</p>
-        <p>Why dynamic image? It embeds calculations directly, making it unique for visualizing custom triangles.</p>
+        <p>How to draw results on triangle? Automatically after calculate.</p>
+        <p>Why charts? For better SEO and visualization of triangle data.</p>
     </section>
 
     <section id="related">
         <h2>Related Calculators</h2>
-        <ul>
-            <li><a href="/percentage.html">Percentage Calculator</a></li>
-            <li><a href="/bmi.html">BMI Calculator</a></li>
-            <li><a href="/age.html">Age Calculator</a></li>
-        </ul>
+        <ul><li><a href="/percentage.html">Percentage Calculator</a></li><li><a href="/bmi.html">BMI Calculator</a></li><li><a href="/age.html">Age Calculator</a></li></ul>
     </section>
 
     <footer>
