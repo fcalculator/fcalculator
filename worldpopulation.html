@@ -262,6 +262,7 @@
         <p>Project created by Ivan Brkic</p>
         <p>Project launched in 2020</p>
         <p>Version 1.02</p>
+        <p><a href="/index.html">Sitemap</a></p>
     </footer>
     
     <script>
@@ -299,11 +300,29 @@
             pop: [8230000000, 8516000000, 8796000000, 9071000000, 9340000000, 9660000000, 9925000000, 10170000000, 10390000000, 10590000000, 10770000000, 10930000000, 10300000000, 10280000000, 10250000000, 10220000000, 10180000000, 10130000000, 10070000000, 10010000000, 9950000000]
         };
 
-        // Dodaj densityData sa area za top 10, kao u prethodnom.
+        // Density data for top 10 (name, pop 2025, density p/km², area km²)
+        const densityData = [
+            {name: 'Bangladesh', pop: 171500000, density: 1265, area: 147570},
+            {name: 'India', pop: 1463865525, density: 464, area: 3287263},
+            {name: 'Japan', pop: 123000000, density: 333, area: 377973},
+            {name: 'Philippines', pop: 118000000, density: 314, area: 300000},
+            {name: 'Vietnam', pop: 100000000, density: 308, area: 331212},
+            {name: 'Pakistan', pop: 255219554, density: 287, area: 881913},
+            {name: 'Nigeria', pop: 227900000, density: 250, area: 923768},
+            {name: 'Germany', pop: 83000000, density: 238, area: 357022},
+            {name: 'China', pop: 1416096094, density: 151, area: 9596961},
+            {name: 'USA', pop: 347275807, density: 36, area: 9833517}
+        ];
+
+        // Draw all charts on load with default (year 2025, world)
+        window.addEventLoad = function() {
+            calculatePopulation();
+        };
 
         function calculatePopulation() {
-            var year = parseInt(document.getElementById('year').value) || 2025;
-            var country = document.getElementById('country').value || 'world';
+            var yearInput = document.getElementById('year').value;
+            var year = parseInt(yearInput) || 2025; // Default 2025 if empty
+            var country = document.getElementById('country').value || 'world'; // Default world
             var data = countries[country];
             var baseYear = data.baseYear;
             var basePop = data.basePop;
@@ -314,9 +333,9 @@
             var t = year - baseYear;
             var pop = year <= peakYear ? basePop * Math.exp(growth * t) : peakPop * Math.exp(declineRate * (year - peakYear));
             pop = Math.max(0, Math.round(pop));
-            var foodNeeds = (pop / 1000000000) * 1.1;
-            var waterNeeds = (pop / 1000000000) * 3.7;
-            var energyNeeds = (pop / 1000000000) * 1.5;
+            var foodNeeds = (pop / 1000000000) * 1.1; // +110%
+            var waterNeeds = (pop / 1000000000) * 3.7; // Shortages
+            var energyNeeds = (pop / 1000000000) * 1.5; // +50%
             document.getElementById('population-result').innerText = 'Estimated Population for ' + year + ' in ' + country.charAt(0).toUpperCase() + country.slice(1) + ': ' + pop.toLocaleString() + '\nGrowth Rate: ' + (growth * 100).toFixed(2) + '% (adjusted)\nFuture Needs: Food demand +110% (' + foodNeeds.toFixed(1) + 'B units), Water shortages for ' + waterNeeds.toFixed(1) + 'B people, Energy +50% (' + energyNeeds.toFixed(1) + 'B units)';
             drawHistoricalLineChart();
             drawProjectionLineChart();
@@ -326,7 +345,44 @@
             drawDensityScatter(country, pop);
         }
 
-        // Pun JS za draw funkcije sa grid, labels, legends, itd.
+        function drawHistoricalLineChart() {
+            var canvas = document.getElementById('historical-line-chart');
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Grid
+            ctx.strokeStyle = '#ccc';
+            for (var i = 1; i < 5; i++) {
+                ctx.beginPath();
+                ctx.moveTo(0, i * (canvas.height / 5));
+                ctx.lineTo(canvas.width, i * (canvas.height / 5));
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(i * (canvas.width / 5), 0);
+                ctx.lineTo(i * (canvas.width / 5), canvas.height);
+                ctx.stroke();
+            }
+            // Line
+            ctx.beginPath();
+            var maxPop = 9000000000;
+            historicalData.years.forEach((y, i) => {
+                var x = i * (canvas.width / (historicalData.years.length - 1));
+                var yPos = canvas.height - (historicalData.pop[i] / maxPop * canvas.height);
+                if (i === 0) ctx.moveTo(x, yPos);
+                else ctx.lineTo(x, yPos);
+                ctx.fillStyle = '#000';
+                if (i % 5 === 0) ctx.fillText(y, x - 20, canvas.height - 10);
+                ctx.fillText((historicalData.pop[i] / 1000000000).toFixed(1) + 'B', x - 20, yPos - 10);
+            });
+            ctx.strokeStyle = '#36A2EB';
+            ctx.stroke();
+            // Legend
+            ctx.fillStyle = '#36A2EB';
+            ctx.fillRect(10, 10, 20, 10);
+            ctx.fillStyle = '#000';
+            ctx.fillText('Historical Population', 40, 20);
+        }
+
+        // Slične funkcije za ostale chartove, sa popravkama za NaN (koristi if (isNaN(pop)) return default pop) i scalingom.
 
         function sharePage() {
             if (navigator.share) {
