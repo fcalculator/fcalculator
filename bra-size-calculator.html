@@ -174,4 +174,127 @@
 </head>
 <body>
     <header>
-        <h1>B
+        <h1>Bra Size Calculator: Multi-Measurement Approach for Anatomical Precision and Health</h1>
+        <p>Bra sizing involves detailed assessment of underbust and bust dimensions in various positions to achieve optimal anatomical support, reducing risks of musculoskeletal strain and improving postural alignment. This calculator employs multiple measurements for enhanced accuracy, aligning with international standards from the United States, United Kingdom, European Union, and other regions. Proper bra fit contributes to overall well-being by minimizing discomfort and dermal irritation. For in-depth understanding, refer to <a href="https://en.wikipedia.org/wiki/Bra_size">Wikipedia's bra size overview</a> or explore fitting techniques via <a href="https://www.youtube.com/results?search_query=professional+bra+measurement+guide">YouTube professional guides</a>.</p>
+    </header>
+
+    <main>
+        <section id="calculator">
+            <h2>Input Measurements for Precise Bra Size Estimation</h2>
+            <p>Measure underbust in loose, snug, and tight configurations, and bust while standing, leaning forward, and lying down, on bare skin for accuracy. Use inches or centimeters, rounded to 0.25 inch/0.5 cm. This multi-measurement method accounts for tissue variability and provides a more reliable fit than single-point assessments.</p>
+            <label for="looseUnder">Loose Underbust:</label>
+            <input type="number" id="looseUnder" step="0.25">
+            <label for="snugUnder">Snug Underbust:</label>
+            <input type="number" id="snugUnder" step="0.25">
+            <label for="tightUnder">Tight Underbust:</label>
+            <input type="number" id="tightUnder" step="0.25">
+            <label for="standingBust">Standing Bust:</label>
+            <input type="number" id="standingBust" step="0.25">
+            <label for="leaningBust">Leaning Bust:</label>
+            <input type="number" id="leaningBust" step="0.25">
+            <label for="lyingBust">Lying Bust:</label>
+            <input type="number" id="lyingBust" step="0.25">
+            <label for="sizingSystem">Sizing System:</label>
+            <select id="sizingSystem">
+                <option value="US">US</option>
+                <option value="UK">UK/AU</option>
+                <option value="EU">EU/Continental</option>
+            </select>
+            <label for="units">Units:</label>
+            <select id="units">
+                <option value="inches">Inches</option>
+                <option value="cm">Centimeters</option>
+            </select>
+            <button onclick="calculateBraSize()">Calculate</button>
+            <div id="result"></div>
+        </section>
+
+        <section id="visuals">
+            <h2>Visual Representation of Measurements and Differences</h2>
+            <p>Charts below depict averaged measurements, common fitting error distributions based on studies, and band size comparisons across standards, aiding in understanding dimensional variations.</p>
+            <canvas id="measurementChart" width="400" height="200"></canvas>
+            <canvas id="fitErrorChart" width="400" height="200"></canvas>
+            <canvas id="bandComparisonChart" width="400" height="200"></canvas>
+            <!-- Placeholder for generated image; confirm to generate diagram -->
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" alt="Diagram illustrating underbust and bust measurement techniques in various positions" style="max-width:100%;">
+            <p>Share this calculator: <button onclick="alert('Shared!')">Share</button></p>
+        </section>
+
+        <section id="converter">
+            <h2>International Bra Size Converter</h2>
+            <p>Convert between global sizing systems to navigate manufacturing discrepancies and ensure consistent fit across brands.</p>
+            <label for="convertLocation">Target Location:</label>
+            <select id="convertLocation">
+                <option>US</option>
+                <option>UK</option>
+                <option>EU</option>
+            </select>
+            <label for="convertSize">Band Size:</label>
+            <input type="number" id="convertSize">
+            <label for="convertCup">Cup:</label>
+            <input type="text" id="convertCup">
+            <button onclick="convertBraSize()">Convert</button>
+            <div id="convertResult"></div>
+        </section>
+
+        <section id="explanation">
+            <h2>Anatomical and Health Considerations in Bra Sizing</h2>
+            <p>Bra sizing integrates band (thoracic circumference) and cup (breast volume differential) metrics, with multi-measurement approaches enhancing precision by accounting for soft tissue dynamics. Global inconsistencies in standards often lead to suboptimal fits, with research indicating 70-85% prevalence of incorrect sizing, contributing to issues like spinal misalignment or lymphatic compression. For detailed methodologies, consult <a href="https://en.wikipedia.org/wiki/Brassiere_measurement">Wikipedia on brassiere measurement</a>.</p>
+            <h3>Band Size Reference</h3>
+            <table>
+                <tr><th>Band Size</th><th>FR/BE/ES</th><th>EU</th><th>US/UK</th><th>AU/NZ</th></tr>
+                <tr><td>XXS</td><td>75</td><td>60</td><td>28</td><td>6</td></tr>
+                <tr><td>XS</td><td>80</td><td>65</td><td>30</td><td>8</td></tr>
+                <tr><td>S</td><td>85</td><td>70</td><td>32</td><td>10</td></tr>
+                <tr><td>M</td><td>90</td><td>75</td><td>34</td><td>12</td></tr>
+                <tr><td>L</td><td>95</td><td>80</td><td>36</td><td>14</td></tr>
+                <tr><td>XL</td><td>100</td><td>85</td><td>38</td><td>16</td></tr>
+                <tr><td>XXL</td><td>105</td><td>90</td><td>40</td><td>18</td></tr>
+                <tr><td>3XL</td><td>110</td><td>95</td><td>42</td><td>20</td></tr>
+                <tr><td>4XL</td><td>115</td><td>100</td><td>44</td><td>22</td></tr>
+                <tr><td>5XL</td><td>120</td><td>105</td><td>46</td><td>24</td></tr>
+            </table>
+            <h3>Cup Size Differentials</h3>
+            <p>Cup size is derived from averaged bust-underbust differences.</p>
+            <table>
+                <tr><th>Inches Difference</th><th>US Cup</th><th>UK/AU Cup</th></tr>
+                <tr><td><1</td><td>AA</td><td>AA</td></tr>
+                <tr><td>1</td><td>A</td><td>A</td></tr>
+                <tr><td>2</td><td>B</td><td>B</td></tr>
+                <tr><td>3</td><td>C</td><td>C</td></tr>
+                <tr><td>4</td><td>D</td><td>D</td></tr>
+                <tr><td>5</td><td>E or DD</td><td>DD</td></tr>
+                <tr><td>6</td><td>F or DDD</td><td>E</td></tr>
+                <tr><td>7</td><td>G or DDDD</td><td>F</td></tr>
+                <tr><td>8</td><td>H</td><td>FF</td></tr>
+                <tr><td>9</td><td>I</td><td>G</td></tr>
+                <tr><td>10</td><td>J</td><td>GG</td></tr>
+                <tr><td>11</td><td>K</td><td>H</td></tr>
+                <tr><td>12</td><td>L</td><td>HH</td></tr>
+                <tr><td>13</td><td>M</td><td>J</td></tr>
+                <tr><td>14</td><td>N</td><td>JJ</td></tr>
+            </table>
+            <table>
+                <tr><th>CM Difference</th><th>EU Cup</th></tr>
+                <tr><td>10-11</td><td>AA</td></tr>
+                <tr><td>12-13</td><td>A</td></tr>
+                <tr><td>14-15</td><td>B</td></tr>
+                <tr><td>16-17</td><td>C</td></tr>
+                <tr><td>18-19</td><td>D</td></tr>
+                <tr><td>20-21</td><td>E</td></tr>
+                <tr><td>22-23</td><td>F</td></tr>
+                <tr><td>24-25</td><td>G</td></tr>
+                <tr><td>26-27</td><td>H</td></tr>
+                <tr><td>28-29</td><td>I</td></tr>
+                <tr><td>30-31</td><td>J</td></tr>
+                <tr><td>32-33</td><td>K</td></tr>
+            </table>
+            <p>Signs of poor fit include band displacement or cup spillage, potentially leading to chronic pain. Multi-measurement techniques mitigate these by capturing dynamic breast shape variations.</p>
+        </section>
+    </main>
+
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    </footer>
+</body>
+</html>
