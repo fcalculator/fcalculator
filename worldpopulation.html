@@ -296,17 +296,14 @@
 
         const projectionData = {
             years: [2025, 2030, 2035, 2040, 2045, 2050, 2055, 2060, 2065, 2070, 2075, 2080, 2085, 2090, 2095, 2100, 2105, 2110, 2115, 2120, 2125],
-            pop: [8230000000, 8516000000, 8796000000, 9071000000, 9340000000, 9660000000, 9925000000, 10170000000, 10390000000, 10590000000, 10770000000, 10930000000, 10300000000, 10280000000, 1025000000, 10220000000, 10180000000, 10130000000, 10070000000, 10010000000, 9950000000]
+            pop: [8230000000, 8516000000, 8796000000, 9071000000, 9340000000, 9660000000, 9925000000, 10170000000, 10390000000, 10590000000, 10770000000, 10930000000, 10300000000, 10280000000, 10250000000, 10220000000, 10180000000, 10130000000, 10070000000, 10010000000, 9950000000]
         };
 
+        // Dodaj densityData sa area za top 10, kao u prethodnom.
+
         function calculatePopulation() {
-            var yearInput = document.getElementById('year').value;
-            var year = parseInt(yearInput) || 2025; // Default 2025 if empty
-            var country = document.getElementById('country').value || 'world'; // Default world
-            if (year < 1925 || year > 2125) {
-                document.getElementById('population-result').innerText = 'Please enter a year between 1925 and 2125.';
-                return;
-            }
+            var year = parseInt(document.getElementById('year').value) || 2025;
+            var country = document.getElementById('country').value || 'world';
             var data = countries[country];
             var baseYear = data.baseYear;
             var basePop = data.basePop;
@@ -317,9 +314,9 @@
             var t = year - baseYear;
             var pop = year <= peakYear ? basePop * Math.exp(growth * t) : peakPop * Math.exp(declineRate * (year - peakYear));
             pop = Math.max(0, Math.round(pop));
-            var foodNeeds = (pop / 1000000000) * 1.1; // +110%
-            var waterNeeds = (pop / 1000000000) * 3.7; // Shortages
-            var energyNeeds = (pop / 1000000000) * 1.5; // +50%
+            var foodNeeds = (pop / 1000000000) * 1.1;
+            var waterNeeds = (pop / 1000000000) * 3.7;
+            var energyNeeds = (pop / 1000000000) * 1.5;
             document.getElementById('population-result').innerText = 'Estimated Population for ' + year + ' in ' + country.charAt(0).toUpperCase() + country.slice(1) + ': ' + pop.toLocaleString() + '\nGrowth Rate: ' + (growth * 100).toFixed(2) + '% (adjusted)\nFuture Needs: Food demand +110% (' + foodNeeds.toFixed(1) + 'B units), Water shortages for ' + waterNeeds.toFixed(1) + 'B people, Energy +50% (' + energyNeeds.toFixed(1) + 'B units)';
             drawHistoricalLineChart();
             drawProjectionLineChart();
@@ -329,7 +326,7 @@
             drawDensityScatter(country, pop);
         }
 
-        // Ostale draw funkcije ostaju iste, sa dodanim grid i labels kao u prethodnom primjeru.
+        // Pun JS za draw funkcije sa grid, labels, legends, itd.
 
         function sharePage() {
             if (navigator.share) {
