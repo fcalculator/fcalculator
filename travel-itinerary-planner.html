@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A comprehensive travel itinerary planner tool designed to help users organize daily activities, dates, and plans for efficient trip management. Optimize your vacation with structured scheduling and visual timelines.">
+    <meta name="keywords" content="travel itinerary planner, trip planning tool, vacation schedule calculator, daily travel activities organizer, customized trip itinerary">
+    <title>Travel Itinerary Planner - FCalculator.com</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Travel Itinerary Planner</h1>
+        <p>This advanced travel itinerary planner enables users to create detailed daily schedules for their trips, ensuring optimal use of time and resources. By inputting start and end dates along with planned activities, users can generate a structured plan that includes timelines, activity breakdowns, and visual representations. Effective trip planning involves considering factors such as travel duration, daily objectives, and potential adjustments for unforeseen events, leading to more enjoyable and productive vacations.</p>
+    </header>
+    
+    <main>
+        <section id="introduction">
+            <h2>Understanding Travel Itinerary Planning</h2>
+            <p>Travel itinerary planning is a systematic approach to organizing trips by breaking down the journey into manageable daily segments. This method helps in allocating time for sightseeing, meals, transportation, and rest, minimizing stress and maximizing experiences. According to travel management principles, a well-structured itinerary can reduce travel costs by up to 20% through efficient scheduling and avoidance of last-minute decisions.</p>
+            <p>In this tool, users specify the trip's start and end dates, then add activities for each day. The output provides a tabular overview and a timeline chart for better visualization. For instance, planning a 7-day European tour might include museum visits on day 1, hiking on day 3, and relaxation on day 6.</p>
+            <button id="shareButton" onclick="sharePage()">Share this Planner</button>
+            <script>
+                function sharePage() {
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'Travel Itinerary Planner',
+                            text: 'Plan your trip efficiently with this free tool!',
+                            url: window.location.href
+                        });
+                    } else {
+                        alert('Sharing not supported on this browser.');
+                    }
+                }
+            </script>
+        </section>
+        
+        <section id="calculator">
+            <h2>Plan Your Trip</h2>
+            <form id="itineraryForm">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" required>
+                
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" required>
+                
+                <label for="activities">Daily Activities (comma-separated for each day, e.g., Day1: Activity1; Day2: Activity2):</label>
+                <textarea id="activities" rows="5" placeholder="Enter activities here..." required></textarea>
+                
+                <button type="button" onclick="generateItinerary()">Generate Itinerary</button>
+            </form>
+            
+            <div id="result" style="display:none;">
+                <h3>Your Travel Itinerary</h3>
+                <table id="itineraryTable">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Date</th>
+                            <th>Activities</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                
+                <canvas id="timelineChart" width="400" height="200"></canvas>
+                
+                <p class="result-green">Total Days: <span id="totalDays"></span></p>
+                <button onclick="saveAsPDF()">Save as PDF</button>
+            </div>
+        </section>
+        
+        <section id="how-to-use">
+            <h2>How to Use the Travel Itinerary Planner</h2>
+            <ol>
+                <li>Select the start and end dates for your trip.</li>
+                <li>Enter activities in the format 'DayX: Activity1, Activity2;' for each day.</li>
+                <li>Click 'Generate Itinerary' to view the plan in table and chart format.</li>
+                <li>Use the timeline chart to visualize activity distribution across days.</li>
+            </ol>
+            <p>For related time management tools, check our <a href="/time.html">Time Calculator</a> or <a href="/age.html">Age Calculator</a>.</p>
+        </section>
+        
+        <section id="benefits">
+            <h2>Benefits of Structured Trip Planning</h2>
+            <p>Structured itineraries enhance travel efficiency by providing clear daily goals. Studies from travel organizations indicate that planned trips lead to higher satisfaction rates. This tool incorporates elements like date calculations and activity logging to support professional-level planning.</p>
+            <p>Data sources: For more on travel statistics, refer to <a href="https://en.wikipedia.org/wiki/Tourism" target="_blank" rel="noopener noreferrer">Wikipedia on Tourism</a> or official reports from <a href="https://www.unwto.org/" target="_blank" rel="noopener noreferrer">UN World Tourism Organization</a>.</p>
+        </section>
+        
+        <section id="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Travel_planning" target="_blank" rel="noopener noreferrer">Wikipedia: Travel Planning</a> - Detailed overview of trip organization strategies.</li>
+                <li><a href="https://travel.state.gov/" target="_blank" rel="noopener noreferrer">U.S. Department of State Travel Resources</a> - Government advice on international travel planning.</li>
+                <li><a href="https://www.tripadvisor.com/" target="_blank" rel="noopener noreferrer">TripAdvisor</a> - User-generated itineraries and reviews (high DA site).</li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
+    </footer>
+    
+    <script>
+        function generateItinerary() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            const activitiesText = document.getElementById('activities').value;
+            
+            if (startDate > endDate) {
+                alert('Start date must be before end date.');
+                return;
+            }
+            
+            const days = [];
+            const dates = [];
+            const activities = activitiesText.split(';').map(a => a.trim()).filter(a => a);
+            const activityMap = {};
+            activities.forEach(act => {
+                const [day, acts] = act.split(':');
+                if (day && acts) activityMap[day.trim()] = acts.split(',').map(a => a.trim());
+            });
+            
+            let currentDate = new Date(startDate);
+            let dayCount = 1;
+            while (currentDate <= endDate) {
+                const dayKey = `Day${dayCount}`;
+                days.push(dayKey);
+                dates.push(currentDate.toDateString());
+                dayCount++;
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+            
+            const tableBody = document.querySelector('#itineraryTable tbody');
+            tableBody.innerHTML = '';
+            days.forEach((day, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${day}</td>
+                    <td>${dates[index]}</td>
+                    <td>${(activityMap[day] || ['Rest/Free Time']).join(', ')}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            document.getElementById('totalDays').textContent = days.length;
+            document.getElementById('result').style.display = 'block';
+            
+            // Timeline Chart
+            const ctx = document.getElementById('timelineChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: days,
+                    datasets: [{
+                        label: 'Activities per Day',
+                        data: days.map(day => activityMap[day] ? activityMap[day].length : 1),
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+        
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(12);
+            
+            doc.text('Travel Itinerary Planner', 105, 10, { align: 'center' });
+            
+            const table = document.getElementById('itineraryTable');
+            let y = 20;
+            for (let row of table.rows) {
+                let rowText = '';
+                for (let cell of row.cells) {
+                    rowText += cell.textContent + ' | ';
+                }
+                doc.text(rowText, 10, y);
+                y += 10;
+            }
+            
+            doc.text(`Total Days: ${document.getElementById('totalDays').textContent}`, 105, y + 10, { align: 'center' });
+            
+            doc.setFontSize(10);
+            doc.text('File created on Fcalculator.com', 105, doc.internal.pageSize.height - 10, { align: 'center' });
+            
+            doc.save('travel-itinerary.pdf');
+        }
+    </script>
+</body>
+</html>
