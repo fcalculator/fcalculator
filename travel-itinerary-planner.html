@@ -9,6 +9,46 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        /* Responsive styles for mobile friendliness */
+        table {
+            width: 100%;
+            overflow-x: auto;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            table thead {
+                display: none;
+            }
+            table tr {
+                display: block;
+                margin-bottom: 10px;
+            }
+            table td {
+                display: block;
+                text-align: right;
+                border: none;
+                position: relative;
+                padding-left: 50%;
+            }
+            table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 15px;
+                font-weight: bold;
+                text-align: left;
+            }
+        }
+        h4.day-title {
+            text-align: center;
+        }
+        .center-button {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -56,7 +96,9 @@
                 <h3>Step 2: Enter Daily Activities and Budgets</h3>
                 <p>For each day of your trip, use the tables below to add activities with time slots and costs. Click 'Add Row' to include multiple entries per day, such as morning coffee at $20 or afternoon dinner at $40. This allows for comprehensive daily planning with flexible expense tracking.</p>
                 <div id="dailyInputs"></div>
-                <button type="button" onclick="proceedToStep3()">Proceed to Step 3</button>
+                <div class="center-button">
+                    <button type="button" onclick="proceedToStep3()">Proceed to Step 3</button>
+                </div>
             </div>
             
             <div id="result" style="display:none;">
@@ -67,8 +109,7 @@
                         <tr>
                             <th>Day</th>
                             <th>Date</th>
-                            <th>Time</th>
-                            <th>Activity</th>
+                            <th>Activity & Time</th>
                             <th>Cost ($)</th>
                         </tr>
                     </thead>
@@ -88,7 +129,7 @@
             <p>This planner's phased design facilitates intuitive navigation, from foundational date setup to intricate daily entries and automated summaries, making it suitable for diverse travel scenarios like family vacations or solo adventures. Detailed guidance ensures users can leverage its full potential for optimized outcomes.</p>
             <ol>
                 <li>Complete Step 1 by selecting dates; this calculates the trip length and reveals Step 2.</li>
-                <li>In Step 2, for each generated day, add rows to the table for time, activity, and cost details, enabling multiple custom entries.</li>
+                <li>In Step 2, for each generated day, add rows to the table for time (using hour selection), activity, and cost details, enabling multiple custom entries.</li>
                 <li>Advance to Step 3 to automatically view the compiled itinerary, budget totals, and visual chart for review and adjustments.</li>
                 <li>Export the plan via PDF for offline access or sharing, preserving all financial and scheduling data.</li>
             </ol>
@@ -145,14 +186,14 @@
             days.forEach((day, index) => {
                 const daySection = document.createElement('div');
                 daySection.innerHTML = `
-                    <h4>${day} - ${dates[index]}</h4>
+                    <h4 class="day-title">${day} - ${dates[index]}</h4>
                     <table id="${day}Table">
                         <thead>
                             <tr>
-                                <th>Time</th>
-                                <th>Activity</th>
-                                <th>Cost ($)</th>
-                                <th>Actions</th>
+                                <th data-label="Time">Time</th>
+                                <th data-label="Activity">Activity</th>
+                                <th data-label="Cost ($)">Cost ($)</th>
+                                <th data-label="Actions">Actions</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -170,10 +211,10 @@
             const tableBody = document.getElementById(`${day}Table`).querySelector('tbody');
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td><input type="text" placeholder="e.g. Morning"></td>
-                <td><input type="text" placeholder="e.g. Coffee"></td>
-                <td><input type="number" placeholder="e.g. 20" step="0.01"></td>
-                <td><button onclick="removeRow(this)">Remove</button></td>
+                <td data-label="Time"><input type="time" placeholder="e.g. 09:00"></td>
+                <td data-label="Activity"><input type="text" placeholder="e.g. Coffee"></td>
+                <td data-label="Cost ($)"><input type="number" placeholder="e.g. 20" step="0.01"></td>
+                <td data-label="Actions"><button onclick="removeRow(this)">Remove</button></td>
             `;
             tableBody.appendChild(row);
         }
@@ -211,17 +252,16 @@
                 acts.forEach(act => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${day}</td>
-                        <td>${dates[index]}</td>
-                        <td>${act.time}</td>
-                        <td>${act.activity}</td>
-                        <td>${act.cost.toFixed(2)}</td>
+                        <td data-label="Day">${day}</td>
+                        <td data-label="Date">${dates[index]}</td>
+                        <td data-label="Activity & Time">${act.time} - ${act.activity}</td>
+                        <td data-label="Cost ($)">${act.cost.toFixed(2)}</td>
                     `;
                     tableBody.appendChild(row);
                 });
                 // Add subtotal row
                 const subtotalRow = document.createElement('tr');
-                subtotalRow.innerHTML = `<td colspan="4"><strong>${day} Subtotal</strong></td><td><strong>${dailyCosts[index].toFixed(2)}</strong></td>`;
+                subtotalRow.innerHTML = `<td colspan="3" data-label="Subtotal"><strong>${day} Subtotal</strong></td><td data-label="Cost ($)"><strong>${dailyCosts[index].toFixed(2)}</strong></td>`;
                 tableBody.appendChild(subtotalRow);
             });
             
@@ -254,24 +294,46 @@
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
+            
             doc.setFont('helvetica', 'normal');
-            doc.setFontSize(12);
+            doc.setFontSize(16);
+            doc.text('Travel Itinerary Planner with Budget', 105, 15, { align: 'center' });
             
-            doc.text('Travel Itinerary Planner with Budget', 105, 10, { align: 'center' });
-            
-            const table = document.getElementById('itineraryTable');
-            let y = 20;
-            for (let row of table.rows) {
-                let rowText = '';
-                for (let cell of row.cells) {
-                    rowText += cell.textContent + ' | ';
+            const tableData = [];
+            const headers = [['Day', 'Date', 'Activity & Time', 'Cost ($)']];
+            const tableRows = document.querySelectorAll('#itineraryTable tbody tr');
+            tableRows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                if (cells.length === 4) {
+                    tableData.push([
+                        cells[0].textContent,
+                        cells[1].textContent,
+                        cells[2].textContent,
+                        cells[3].textContent
+                    ]);
+                } else if (cells.length === 2) { // Subtotal row
+                    tableData.push([
+                        { content: cells[0].textContent, colSpan: 3, styles: { fontStyle: 'bold' } },
+                        { content: cells[1].textContent, styles: { fontStyle: 'bold' } }
+                    ]);
                 }
-                doc.text(rowText, 10, y);
-                y += 10;
-            }
+            });
             
-            doc.text(`Total Days: ${document.getElementById('totalDays').textContent}`, 105, y + 10, { align: 'center' });
-            doc.text(`Total Budget Required: $${document.getElementById('totalBudget').textContent}`, 105, y + 20, { align: 'center' });
+            doc.autoTable({
+                head: headers,
+                body: tableData,
+                startY: 25,
+                theme: 'grid',
+                headStyles: { fillColor: [75, 192, 192] }, // Green header like result-green
+                alternateRowStyles: { fillColor: [240, 240, 240] }, // Light gray alternating rows
+                styles: { cellPadding: 3, fontSize: 10, overflow: 'linebreak' },
+                columnStyles: { 0: { cellWidth: 20 }, 1: { cellWidth: 30 }, 2: { cellWidth: 'auto' }, 3: { cellWidth: 25 } }
+            });
+            
+            const finalY = doc.lastAutoTable.finalY + 10;
+            doc.setFontSize(12);
+            doc.text(`Total Days: ${document.getElementById('totalDays').textContent}`, 105, finalY, { align: 'center' });
+            doc.text(`Total Budget Required: $${document.getElementById('totalBudget').textContent}`, 105, finalY + 10, { align: 'center' });
             
             doc.setFontSize(10);
             doc.text('File created on Fcalculator.com', 105, doc.internal.pageSize.height - 10, { align: 'center' });
