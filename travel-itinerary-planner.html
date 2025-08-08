@@ -94,7 +94,7 @@
             
             <div id="step2" style="display:none;">
                 <h3>Step 2: Enter Daily Activities and Budgets</h3>
-                <p>For each day of your trip, use the tables below to add activities with time slots and costs. Click 'Add Row' to include multiple entries per day, such as morning coffee at $20 or afternoon dinner at $40. This allows for comprehensive daily planning with flexible expense tracking.</p>
+                <p>For each day of your trip, use the tables below to add activities with time slots and costs. Click 'Add Row' to include multiple entries per day, such as '09:00 - Coffee' at $20 or 'Afternoon - Dinner' at $40. This allows for comprehensive daily planning with flexible expense tracking.</p>
                 <div id="dailyInputs"></div>
                 <div class="center-button">
                     <button type="button" onclick="proceedToStep3()">Proceed to Step 3</button>
@@ -129,7 +129,7 @@
             <p>This planner's phased design facilitates intuitive navigation, from foundational date setup to intricate daily entries and automated summaries, making it suitable for diverse travel scenarios like family vacations or solo adventures. Detailed guidance ensures users can leverage its full potential for optimized outcomes.</p>
             <ol>
                 <li>Complete Step 1 by selecting dates; this calculates the trip length and reveals Step 2.</li>
-                <li>In Step 2, for each generated day, add rows to the table for time (using hour selection), activity, and cost details, enabling multiple custom entries.</li>
+                <li>In Step 2, for each generated day, add rows to the table for combined activity and time details (e.g., '09:00 - Coffee'), and cost, enabling multiple custom entries.</li>
                 <li>Advance to Step 3 to automatically view the compiled itinerary, budget totals, and visual chart for review and adjustments.</li>
                 <li>Export the plan via PDF for offline access or sharing, preserving all financial and scheduling data.</li>
             </ol>
@@ -190,8 +190,7 @@
                     <table id="${day}Table">
                         <thead>
                             <tr>
-                                <th data-label="Time">Time</th>
-                                <th data-label="Activity">Activity</th>
+                                <th data-label="Activity & Time">Activity & Time</th>
                                 <th data-label="Cost ($)">Cost ($)</th>
                                 <th data-label="Actions">Actions</th>
                             </tr>
@@ -211,8 +210,7 @@
             const tableBody = document.getElementById(`${day}Table`).querySelector('tbody');
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td data-label="Time"><input type="time" placeholder="e.g. 09:00"></td>
-                <td data-label="Activity"><input type="text" placeholder="e.g. Coffee"></td>
+                <td data-label="Activity & Time"><input type="text" placeholder="e.g. 09:00 - Coffee"></td>
                 <td data-label="Cost ($)"><input type="number" placeholder="e.g. 20" step="0.01"></td>
                 <td data-label="Actions"><button onclick="removeRow(this)">Remove</button></td>
             `;
@@ -234,10 +232,9 @@
                 const acts = [];
                 let dayCost = 0;
                 rows.forEach(row => {
-                    const time = row.querySelector('td:nth-child(1) input').value || 'All Day';
-                    const activity = row.querySelector('td:nth-child(2) input').value || 'Rest/Free Time';
-                    const cost = parseFloat(row.querySelector('td:nth-child(3) input').value) || 0;
-                    acts.push({ time, activity, cost });
+                    const actTime = row.querySelector('td:nth-child(1) input').value || 'All Day - Rest/Free Time';
+                    const cost = parseFloat(row.querySelector('td:nth-child(2) input').value) || 0;
+                    acts.push({ actTime, cost });
                     dayCost += cost;
                 });
                 activityMap[day] = acts;
@@ -254,7 +251,7 @@
                     row.innerHTML = `
                         <td data-label="Day">${day}</td>
                         <td data-label="Date">${dates[index]}</td>
-                        <td data-label="Activity & Time">${act.time} - ${act.activity}</td>
+                        <td data-label="Activity & Time">${act.actTime}</td>
                         <td data-label="Cost ($)">${act.cost.toFixed(2)}</td>
                     `;
                     tableBody.appendChild(row);
