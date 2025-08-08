@@ -90,7 +90,7 @@
         <ul>
             <li><a href="https://en.wikipedia.org/wiki/Car_finance" target="_blank" rel="noopener noreferrer">Wikipedia: Car Finance - Detailed overview of automotive lending practices</a></li>
             <li><a href="https://www.consumerfinance.gov/consumer-tools/auto-loans/" target="_blank" rel="noopener noreferrer">Consumer Financial Protection Bureau: Auto Loans Guide</a></li>
-            <li><a href="https://www.ftc.gov/business-guidance/resources/buying-selling-vehicles-what-consumers-should-know" target="_blank" rel="noopener noreferrer">Federal Trade Commission: Vehicle Buying and Financing Tips</a></li>
+            <li><a href="https://consumer.ftc.gov/articles/buying-used-car-dealer" target="_blank" rel="noopener noreferrer">Federal Trade Commission: Buying a Used Car From a Dealer</a></li>
         </ul>
     </section>
 
@@ -165,14 +165,56 @@
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            doc.setFont("helvetica");
+            doc.setFont("helvetica", "normal");
             doc.setFontSize(12);
+
+            // Naslov - plavi i bold
+            doc.setTextColor(0, 0, 255);
+            doc.setFont("helvetica", "bold");
             doc.text("Auto Loan Calculation Results", 105, 20, { align: "center" });
-            doc.text(`Monthly Payment: ${document.getElementById('monthly-payment').textContent}`, 105, 40, { align: "center" });
-            doc.text(`Total Loan Amount: ${document.getElementById('total-loan').textContent}`, 105, 50, { align: "center" });
-            doc.text(`Total Interest Paid: ${document.getElementById('total-interest').textContent}`, 105, 60, { align: "center" });
-            doc.text(`Total Cost: ${document.getElementById('total-cost').textContent}`, 105, 70, { align: "center" });
+
+            // Input vrijednosti - normalni tekst
+            doc.setTextColor(0, 0, 0);
+            doc.setFont("helvetica", "bold");
+            doc.text("Input Details:", 105, 35, { align: "center" });
+            doc.setFont("helvetica", "normal");
+            doc.text(`Auto Price: $${document.getElementById('auto-price').value}`, 105, 45, { align: "center" });
+            doc.text(`Down Payment: $${document.getElementById('down-payment').value}`, 105, 50, { align: "center" });
+            doc.text(`Trade-in Value: $${document.getElementById('trade-in').value}`, 105, 55, { align: "center" });
+            doc.text(`Interest Rate: ${document.getElementById('interest-rate').value}%`, 105, 60, { align: "center" });
+            doc.text(`Loan Term: ${document.getElementById('loan-term').value} months`, 105, 65, { align: "center" });
+            doc.text(`Sales Tax Rate: ${document.getElementById('sales-tax').value}%`, 105, 70, { align: "center" });
+
+            // Rezultati - zeleni
+            doc.setTextColor(0, 128, 0);
+            doc.setFont("helvetica", "bold");
+            doc.text("Loan Results:", 105, 85, { align: "center" });
+            doc.setFont("helvetica", "normal");
+            doc.text(`Monthly Payment: ${document.getElementById('monthly-payment').textContent}`, 105, 95, { align: "center" });
+            doc.text(`Total Loan Amount: ${document.getElementById('total-loan').textContent}`, 105, 100, { align: "center" });
+            doc.text(`Total Interest Paid: ${document.getElementById('total-interest').textContent}`, 105, 105, { align: "center" });
+            doc.text(`Total Cost: ${document.getElementById('total-cost').textContent}`, 105, 110, { align: "center" });
+
+            // Amortizacija - crni tekst, formatirano kao tablica u tekstu
+            doc.setTextColor(0, 0, 0);
+            doc.setFont("helvetica", "bold");
+            doc.text("Amortization Schedule:", 105, 125, { align: "center" });
+            doc.setFont("helvetica", "normal");
+            let yPos = 135;
+            const rows = document.querySelectorAll('#amortization-table tbody tr');
+            doc.text("Year | Interest | Principal | Ending Balance", 105, yPos, { align: "center" });
+            yPos += 5;
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowText = `${cells[0].textContent} | $${cells[1].textContent} | $${cells[2].textContent} | $${cells[3].textContent}`;
+                doc.text(rowText, 105, yPos, { align: "center" });
+                yPos += 5;
+            });
+
+            // Footer
+            doc.setTextColor(0, 0, 0);
             doc.text("File created on Fcalculator.com", 105, 280, { align: "center" });
+
             doc.save('auto-loan-results.pdf');
         }
 
