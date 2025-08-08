@@ -48,14 +48,24 @@
         .center-button {
             text-align: center;
         }
-        /* Dodano za centriranje Step 2, Step 3 i rezultata */
-        #step2, #result {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+        /* Dodano za raširenost rezultata u Step 3 */
+        .wide-section {
+            width: 100%;
+            max-width: none;
+            padding: 0 10px;
+            box-sizing: border-box;
         }
-        #step2 table, #result table, #timelineChart {
+        .wide-section table, .wide-section canvas {
+            width: 100%;
             margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            .wide-section {
+                padding: 0;
+            }
+            .wide-section canvas {
+                height: 200px !important;
+            }
         }
     </style>
 </head>
@@ -110,7 +120,7 @@
                 </div>
             </div>
            
-            <div id="result" style="display:none;">
+            <div id="result" class="wide-section" style="display:none;">
                 <h3>Step 3: Your Generated Travel Itinerary with Budget (Automated)</h3>
                 <p>The following output automatically compiles your inputs into a detailed table with daily subtotals and an overall budget, visualized through a chart for easy analysis.</p>
                 <table id="itineraryTable">
