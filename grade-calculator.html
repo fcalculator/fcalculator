@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced grade calculator for precise academic performance evaluation, including weighted averages, final exam requirements, and visual grade breakdowns using mathematical formulas.">
+    <meta name="keywords" content="grade calculator, weighted grade calculation, final grade needed, academic grading systems, percentage to letter grade conversion">
+    <title>Grade Calculator - Comprehensive Tool for Academic Performance Evaluation</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Grade Calculator - Comprehensive Tool for Academic Performance Evaluation</h1>
+        <p>This grade calculator provides an in-depth analysis of academic performance by computing weighted averages, determining required scores for desired outcomes, and visualizing grade distributions. It supports multiple grading formats, including percentages, points, and letter grades, ensuring accurate evaluations based on established mathematical principles.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Understanding Grading Systems and Their Components</h2>
+            <p>Grading systems are fundamental to academic assessment, quantifying student performance through numerical, percentage, or letter-based metrics. Common components include assignments, quizzes, midterms, and finals, each weighted according to their contribution to the overall grade. This calculator employs weighted average formulas to reflect these contributions precisely.</p>
+            <p>For instance, in a percentage-based system, the weighted grade is calculated as the sum of (weight × grade) for each component, divided by the total weight if not normalized to 100%. Explore related mathematical tools like our <a href="/percentage.html">percentage calculator</a> for foundational computations or the <a href="/pythagorean-theorem-calculator.html">Pythagorean theorem calculator</a> for geometry applications in education.</p>
+            <button onclick="shareTool()">Share this tool with fellow students</button>
+        </section>
+
+        <section>
+            <h2>Weighted Grade Calculator</h2>
+            <p>Enter your assignments, grades, and weights below to compute your current weighted grade.</p>
+            <table id="gradeTable">
+                <thead>
+                    <tr>
+                        <th>Assignment</th>
+                        <th>Grade (% or Letter)</th>
+                        <th>Weight (% or Points)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" placeholder="e.g., Midterm"></td>
+                        <td><input type="text" placeholder="e.g., 85 or B"></td>
+                        <td><input type="number" placeholder="e.g., 30"></td>
+                        <td><button onclick="removeRow(this)">Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button onclick="addRow()">Add Assignment</button>
+            <button onclick="calculateWeightedGrade()">Calculate Weighted Grade</button>
+            <p id="weightedResult"></p>
+
+            <h3>Grade Distribution Visualization</h3>
+            <canvas id="pieChart" width="400" height="200"></canvas>
+            <canvas id="barChart" width="400" height="200"></canvas>
+        </section>
+
+        <section>
+            <h2>Final Grade Calculator</h2>
+            <p>Determine the score needed on your final exam to achieve a target overall grade.</p>
+            <label>Current Grade (%):</label><input type="number" id="currentGrade"><br>
+            <label>Desired Grade (%):</label><input type="number" id="desiredGrade"><br>
+            <label>Final Weight (%):</label><input type="number" id="finalWeight"><br>
+            <button onclick="calculateFinalNeeded()">Calculate Required Final Score</button>
+            <p id="finalResult"></p>
+
+            <h3>Cumulative Progress Visualization</h3>
+            <canvas id="lineChart" width="400" height="200"></canvas>
+        </section>
+
+        <section>
+            <h2>Formulas and Examples in Grade Calculation</h2>
+            <p>The weighted grade formula is: Weighted Grade = Σ (weight_i × grade_i) / Σ weight_i</p>
+            <p>Example: Assignments with grades 80% (weight 30), 90% (weight 50), 72% (weight 20) yield (80*30 + 90*50 + 72*20) / 100 = 83.4%.</p>
+            <p>For final grade needed: Required = (Desired - Current × (1 - Final Weight/100)) / (Final Weight/100)</p>
+            <p>Example: Current 75%, Desired 85%, Final Weight 30% yields (85 - 75*0.7) / 0.3 ≈ 109% (indicating a challenge).</p>
+            <table>
+                <thead>
+                    <tr><th>Letter Grade</th><th>Percentage Range</th><th>GPA Equivalent</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>A</td><td>90-100%</td><td>4.0</td></tr>
+                    <tr><td>B</td><td>80-89%</td><td>3.0</td></tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Strategies to Optimize Your Academic Performance</h2>
+            <p>Focus on high-weight assignments, track progress regularly, and use visualizations to identify weaknesses. Incorporate study techniques aligned with mathematical principles for better retention.</p>
+        </section>
+
+        <section>
+            <h2>Frequently Asked Questions</h2>
+            <ul>
+                <li><strong>How do I convert letter grades?</strong> Use the provided table for standard conversions.</li>
+                <li><strong>Can this handle point-based systems?</strong> Yes, treat points as weights in the formula.</li>
+                <li><strong>What if weights don't sum to 100%?</strong> The calculator normalizes them automatically.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>References and Further Reading</h2>
+            <p>For more on academic grading systems, visit <a href="https://en.wikipedia.org/wiki/Academic_grading_in_the_United_States" target="_blank">Wikipedia on Academic Grading in the United States</a> or official resources from <a href="https://www.ed.gov/" target="_blank">U.S. Department of Education</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    </footer>
+
+    <script>
+        // Author: Ivan Brkic
+        function addRow() {
+            const table = document.getElementById('gradeTable').getElementsByTagName('tbody')[0];
+            const row = table.insertRow();
+            row.innerHTML = `<td><input type="text" placeholder="e.g., Midterm"></td>
+                             <td><input type="text" placeholder="e.g., 85 or B"></td>
+                             <td><input type="number" placeholder="e.g., 30"></td>
+                             <td><button onclick="removeRow(this)">Remove</button></td>`;
+        }
+
+        function removeRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
+        function convertLetterToPercent(grade) {
+            if (!isNaN(grade)) return parseFloat(grade);
+            const conversions = { 'A+': 97, 'A': 95, 'A-': 92, 'B+': 87, 'B': 85, 'B-': 82, /* Add more */ };
+            return conversions[grade.toUpperCase()] || 0;
+        }
+
+        function calculateWeightedGrade() {
+            const rows = document.getElementById('gradeTable').getElementsByTagName('tbody')[0].rows;
+            let total = 0, totalWeight = 0;
+            const labels = [], weights = [], grades = [];
+            for (let row of rows) {
+                const assignment = row.cells[0].children[0].value;
+                const grade = convertLetterToPercent(row.cells[1].children[0].value);
+                const weight = parseFloat(row.cells[2].children[0].value);
+                if (!isNaN(grade) && !isNaN(weight)) {
+                    total += grade * weight;
+                    totalWeight += weight;
+                    labels.push(assignment || 'Unnamed');
+                    weights.push(weight);
+                    grades.push(grade);
+                }
+            }
+            const weighted = totalWeight > 0 ? (total / totalWeight).toFixed(2) : 0;
+            document.getElementById('weightedResult').innerText = `Weighted Grade: ${weighted}%`;
+
+            // Pie Chart for Weights
+            new Chart(document.getElementById('pieChart'), {
+                type: 'pie',
+                data: { labels, datasets: [{ data: weights, backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] }] },
+                options: { title: { display: true, text: 'Weight Distribution' } }
+            });
+
+            // Bar Chart for Grades
+            new Chart(document.getElementById('barChart'), {
+                type: 'bar',
+                data: { labels, datasets: [{ label: 'Grades', data: grades, backgroundColor: '#36A2EB' }] },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        function calculateFinalNeeded() {
+            const current = parseFloat(document.getElementById('currentGrade').value);
+            const desired = parseFloat(document.getElementById('desiredGrade').value);
+            const weight = parseFloat(document.getElementById('finalWeight').value) / 100;
+            if (isNaN(current) || isNaN(desired) || isNaN(weight)) return;
+            const required = ((desired - current * (1 - weight)) / weight).toFixed(2);
+            document.getElementById('finalResult').innerText = `Required Final Score: ${required}%`;
+
+            // Line Chart for Cumulative (simplified example)
+            new Chart(document.getElementById('lineChart'), {
+                type: 'line',
+                data: { labels: ['Current', 'Desired'], datasets: [{ label: 'Grade Path', data: [current, desired], borderColor: '#FF6384' }] },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        function shareTool() {
+            alert('Share this page via your preferred platform!');
+            // Add actual share logic if needed
+        }
+    </script>
+</body>
+</html>
