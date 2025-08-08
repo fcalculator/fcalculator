@@ -8,10 +8,12 @@
     <meta name="keywords" content="loan calculator, amortized loan, interest rate calculation, monthly payment formula, loan amortization schedule, extra payments impact, personal loan analysis, auto loan estimator, mortgage repayment tool">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         /* Dodatni inline CSS ako treba za chartove, ali glavni je external */
         canvas { max-width: 100%; height: auto; }
         .share-button { display: inline-block; padding: 5px 10px; background: #007bff; color: white; cursor: pointer; border-radius: 5px; }
+        .result { color: green; } /* Fallback ako CSS nema, ali koristi external */
     </style>
 </head>
 <body>
@@ -41,10 +43,11 @@
             
             <div id="results">
                 <h2>Loan Calculation Results</h2>
-                <p>Monthly Payment: <span id="monthly-payment"></span></p>
-                <p>Total Payments: <span id="total-payments"></span></p>
-                <p>Total Interest: <span id="total-interest"></span></p>
-                <p>Payoff Date: <span id="payoff-date"></span></p>
+                <p>Monthly Payment: <span id="monthly-payment" class="result"></span></p>
+                <p>Total Payments: <span id="total-payments" class="result"></span></p>
+                <p>Total Interest: <span id="total-interest" class="result"></span></p>
+                <p>Payoff Date: <span id="payoff-date" class="result"></span></p>
+                <button type="button" onclick="saveAsPDF()">Save as PDF</button>
             </div>
             
             <div id="charts">
@@ -181,6 +184,31 @@
                 },
                 options: { title: { display: true, text: 'Monthly Principal and Interest Breakdown' }, scales: { x: { stacked: true }, y: { stacked: true } } }
             });
+        }
+        
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.text('Loan Calculation Results', 10, 10);
+            doc.text(`Monthly Payment: ${document.getElementById('monthly-payment').textContent}`, 10, 20);
+            doc.text(`Total Payments: ${document.getElementById('total-payments').textContent}`, 10, 30);
+            doc.text(`Total Interest: ${document.getElementById('total-interest').textContent}`, 10, 40);
+            doc.text(`Payoff Date: ${document.getElementById('payoff-date').textContent}`, 10, 50);
+            
+            doc.addPage();
+            doc.text('Amortization Schedule', 10, 10);
+            const tableRows = Array.from(document.querySelectorAll('#amortization-table tr')).map(tr => 
+                Array.from(tr.querySelectorAll('th, td')).map(cell => cell.textContent)
+            );
+            let y = 20;
+            tableRows.forEach(row => {
+                doc.text(row.join('   '), 10, y); // Simple text alignment
+                y += 10;
+                if (y > 280) { doc.addPage(); y = 10; }
+            });
+            
+            doc.save('loan-results.pdf');
         }
         
         function sharePage() {
