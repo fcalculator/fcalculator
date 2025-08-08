@@ -5,89 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Day and Night Earth Visualizer</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
-        <h1>Day and Night Earth Visualizer</h1>
-        <p>Explore the dynamic interplay of sunlight and shadow across the Earth's surface with this advanced visualizer. Input any date and time to see real-time calculations of solar and lunar positions, day-night boundaries, and astronomical data for precise analysis.</p>
+        <h1>Live Day and Night Earth Visualizer</h1>
+        <p>Experience a real-time visualization of sunlight distribution across the Earth's surface, highlighting regions in daylight and those enveloped in night. This dynamic tool uses astronomical calculations to map the terminator line—the boundary between day and night—based on current UTC time, providing an accurate representation of global illumination patterns as they occur.</p>
     </header>
 
     <div class="tool">
-        <label for="date">Select Date:</label>
-        <input type="date" id="date" value="2025-08-08">
-        <label for="time">Select Time (UTC):</label>
-        <input type="time" id="time" value="11:30">
-        <button onclick="calculate()">Visualize Day and Night</button>
         <canvas id="earthMap" width="720" height="360" style="border:1px solid #ccc; display:block; margin:20px auto;"></canvas>
         <div id="results" class="result"></div>
-        <button onclick="saveAsPDF()">Save Results as PDF</button>
         <canvas id="declinationChart" width="600" height="300" style="display:block; margin:20px auto;"></canvas>
     </div>
 
     <div class="content">
-        <h2>Understanding Earth's Day and Night Cycle</h2>
-        <p>The Earth's rotation on its axis creates the alternating patterns of day and night, with the subsolar point marking where the Sun is directly overhead. This point shifts throughout the year due to the planet's axial tilt of approximately 23.45 degrees, leading to seasonal variations in daylight hours. Our visualizer uses precise astronomical formulas to map these patterns, providing insights into global illumination at any given moment.</p>
+        <h2>Understanding the Dynamics of Day and Night on Earth</h2>
+        <p>The Earth's rotation creates a continuous cycle of day and night, with the subsolar point indicating where the Sun is directly overhead at any moment. This point migrates due to the planet's 23.45-degree axial tilt, influencing seasonal changes in daylight duration. Our live visualizer employs precise formulas to render these patterns in real-time, offering insights into how solar positions affect weather, ecosystems, and human activities worldwide.</p>
         
-        <h3>Key Astronomical Calculations</h3>
-        <p>To determine the subsolar point, we calculate the solar declination (δ) using the formula: δ = 23.45 × sin((360/365) × (d - 81)), where d is the day of the year. The longitude is derived from UTC time as longitude = 15 × (12 - hour). For the sublunar point, similar principles apply with adjustments for the Moon's orbital inclination of about 5.14 degrees.</p>
+        <h3>Astronomical Formulas for Real-Time Mapping</h3>
+        <p>The solar declination (δ) is calculated as δ = 23.45 × sin(2π / 365 × (d - 81)), where d represents the day of the year. Longitude adjustments are made based on current UTC time: longitude = 15 × (hour - 12). For the Moon's position, approximations account for its orbital tilt of 5.14 degrees. The terminator line is determined by the solar zenith angle, where cos(z) = sin(φ)sin(δ) + cos(φ)cos(δ)cos(H), with φ as latitude and H as the hour angle. Regions where cos(z) < 0 are shaded as night, providing a scientifically accurate boundary.</p>
         
-        <p>Ground speed of the subsolar point is approximately 446 m/s near the equator, varying with latitude. This tool simulates these movements, offering a comprehensive view of celestial mechanics influencing Earth's environment.</p>
+        <p>The ground speed of the subsolar point averages 446 m/s at the equator, decreasing towards the poles. This visualization updates automatically to reflect these movements, simulating the Earth's rotation and orbital mechanics in a user-friendly interface.</p>
         
-        <h3>Seasonal and Temporal Variations</h3>
-        <p>During equinoxes, day and night are roughly equal worldwide, while solstices mark the extremes of daylight distribution. For example, the March equinox occurs around March 20, balancing sunlight between hemispheres. Our calculator accounts for these events, displaying how twilight zones—civil, nautical, and astronomical—extend the transition between day and night.</p>
+        <h3>Seasonal Impacts and Global Variations</h3>
+        <p>Equinoxes bring equal day and night lengths globally, while solstices create extremes in polar regions. For instance, the June solstice extends daylight in the Northern Hemisphere, potentially leading to midnight sun phenomena above the Arctic Circle. Our tool captures these variations live, including twilight zones that extend usable light beyond strict sunrise and sunset times.</p>
         
         <table>
             <thead>
                 <tr>
-                    <th>Event</th>
-                    <th>Approximate Date</th>
-                    <th>Description</th>
+                    <th>Seasonal Event</th>
+                    <th>Typical Date</th>
+                    <th>Key Characteristics</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>March Equinox</td>
-                    <td>March 20</td>
-                    <td>Sun crosses celestial equator northward</td>
+                    <td>Vernal Equinox</td>
+                    <td>March 20-21</td>
+                    <td>Sun directly over equator; equal day/night</td>
                 </tr>
                 <tr>
-                    <td>June Solstice</td>
-                    <td>June 21</td>
-                    <td>Longest day in Northern Hemisphere</td>
+                    <td>Summer Solstice</td>
+                    <td>June 20-21</td>
+                    <td>Maximum tilt towards Sun; longest Northern daylight</td>
                 </tr>
                 <tr>
-                    <td>September Equinox</td>
-                    <td>September 22</td>
-                    <td>Sun crosses celestial equator southward</td>
+                    <td>Autumnal Equinox</td>
+                    <td>September 22-23</td>
+                    <td>Sun over equator again; balanced illumination</td>
                 </tr>
                 <tr>
-                    <td>December Solstice</td>
-                    <td>December 21</td>
-                    <td>Longest day in Southern Hemisphere</td>
+                    <td>Winter Solstice</td>
+                    <td>December 21-22</td>
+                    <td>Maximum tilt away; longest Southern daylight</td>
                 </tr>
             </tbody>
         </table>
         
-        <p>Twilight periods add nuance to day-night transitions. Civil twilight allows outdoor activities without artificial light, nautical twilight aids navigation by stars, and astronomical twilight is ideal for stargazing. These zones are visualized on the map for enhanced understanding.</p>
+        <p>Twilight classifications—civil (Sun 0-6° below horizon), nautical (6-12°), and astronomical (12-18°)—are crucial for activities like aviation and astronomy. While our map focuses on the primary day-night divide, these extensions can add up to hours of dim light, varying by latitude and season.</p>
         
         <button onclick="sharePage()">Share this Visualizer</button>
         
-        <h3>Applications in Science and Daily Life</h3>
-        <p>This visualizer is invaluable for astronomers tracking solar positions, travelers planning across time zones (link to our <a href="/time-zone-calculator.html">Time Zone Calculator</a>), and educators explaining Earth's rotation. Integrate with time calculations via our <a href="/time.html">Time Calculator</a> for coordinated global events.</p>
+        <h3>Practical Applications and Educational Value</h3>
+        <p>This live visualizer serves meteorologists forecasting weather patterns influenced by solar heating, satellite operators aligning with illuminated areas, and educators demonstrating planetary motion. Coordinate with time zone differences using our <a href="/time-zone-calculator.html">Time Zone Calculator</a> or precise time computations via the <a href="/time.html">Time Calculator</a> for international planning.</p>
         
-        <p>For deeper insights, consult sources like NASA's Earth Observatory or NOAA's solar data repositories in the related resources below.</p>
+        <p>Explore further through authoritative sources such as NASA's solar system data or NOAA's geophysical models, linked in the resources section below for in-depth study.</p>
     </div>
 
     <section class="related-resources">
         <h2>Related Resources</h2>
         <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Subsolar_point" target="_blank" rel="noopener noreferrer">Wikipedia - Subsolar Point Explanation</a></li>
-            <li><a href="https://en.wikipedia.org/wiki/Sublunary_sphere" target="_blank" rel="noopener noreferrer">Wikipedia - Sublunar Point and Lunar Positions</a></li>
-            <li><a href="https://gml.noaa.gov/grad/solcalc/" target="_blank" rel="noopener noreferrer">NOAA Solar Calculator</a></li>
-            <li><a href="https://www.nasa.gov/" target="_blank" rel="noopener noreferrer">NASA Earth Observatory</a></li>
-            <li><a href="https://www.timeanddate.com/astronomy/" target="_blank" rel="noopener noreferrer">Time and Date Astronomy Resources</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Subsolar_point" target="_blank" rel="noopener noreferrer">Wikipedia - Subsolar Point and Solar Positions</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Terminator_(solar)" target="_blank" rel="noopener noreferrer">Wikipedia - Day-Night Terminator Line</a></li>
+            <li><a href="https://gml.noaa.gov/grad/solcalc/" target="_blank" rel="noopener noreferrer">NOAA Global Monitoring Laboratory Solar Calculator</a></li>
+            <li><a href="https://earthobservatory.nasa.gov/" target="_blank" rel="noopener noreferrer">NASA Earth Observatory</a></li>
+            <li><a href="https://www.timeanddate.com/astronomy/" target="_blank" rel="noopener noreferrer">Time and Date Astronomy Section</a></li>
         </ul>
     </section>
 
@@ -103,30 +96,28 @@
         }
 
         function calculate() {
-            const dateInput = document.getElementById('date').value;
-            const timeInput = document.getElementById('time').value;
-            const date = new Date(dateInput + 'T' + timeInput + ':00Z');
+            const date = new Date();
             const dayOfYear = getDayOfYear(date);
             const declination = 23.45 * Math.sin((2 * Math.PI / 365) * (dayOfYear - 81));
-            const hour = date.getUTCHours() + date.getUTCMinutes() / 60;
+            const hour = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
             let subsolarLon = 15 * (hour - 12);
-            subsolarLon = (subsolarLon + 180) % 360 - 180; // Normalize to -180 to 180
+            subsolarLon = (subsolarLon + 180) % 360 - 180;
             const subsolarLat = declination;
 
-            // Approximate sublunar (moon) - simple model, not accurate
-            const moonDeclination = 23.45 * Math.sin((2 * Math.PI / 365) * (dayOfYear - 81 + 10)); // Offset for moon
-            let sublunarLon = subsolarLon + 180; // Opposite side approx
+            // Approximate sublunar
+            const moonDeclination = 23.45 * Math.sin((2 * Math.PI / 365) * (dayOfYear - 81 + 10));
+            let sublunarLon = subsolarLon + 180;
             sublunarLon = (sublunarLon + 180) % 360 - 180;
             const sublunarLat = moonDeclination;
 
-            // Ground speed approx
-            const sunSpeed = 446.05; // m/s
-            const moonSpeed = 414.29; // m/s
+            const sunSpeed = 446.05;
+            const moonSpeed = 414.29;
 
-            // Display results
+            // Results
             let resultsHtml = `
-                <p class="green">Subsolar Point: Latitude ${subsolarLat.toFixed(2)}° N, Longitude ${subsolarLon.toFixed(2)}° E</p>
-                <p class="green">Sublunar Point: Latitude ${sublunarLat.toFixed(2)}° S, Longitude ${sublunarLon.toFixed(2)}° E</p>
+                <p class="green">Current UTC Time: ${date.toUTCString()}</p>
+                <p class="green">Subsolar Point: Latitude ${subsolarLat.toFixed(2)}°${subsolarLat >= 0 ? 'N' : 'S'}, Longitude ${subsolarLon.toFixed(2)}°${subsolarLon >= 0 ? 'E' : 'W'}</p>
+                <p class="green">Sublunar Point: Latitude ${sublunarLat.toFixed(2)}°${sublunarLat >= 0 ? 'N' : 'S'}, Longitude ${sublunarLon.toFixed(2)}°${sublunarLon >= 0 ? 'E' : 'W'}</p>
                 <p class="green">Sun Ground Speed: ${sunSpeed} m/s</p>
                 <p class="green">Moon Ground Speed: ${moonSpeed} m/s</p>
                 <table>
@@ -135,47 +126,71 @@
                     </thead>
                     <tbody>
                         <tr><td>Solar Declination</td><td>${declination.toFixed(2)}°</td></tr>
-                        <tr><td>Payoff Date Example</td><td>${date.toUTCString()}</td></tr>
                     </tbody>
                 </table>
             `;
             document.getElementById('results').innerHTML = resultsHtml;
 
-            // Draw map on canvas
+            // Draw map
             const canvas = document.getElementById('earthMap');
             const ctx = canvas.getContext('2d');
-            // Blue for ocean/day
             ctx.fillStyle = '#00BFFF';
             ctx.fillRect(0, 0, 720, 360);
-            // Grid lines for lat/lon
+
+            // Grid
             ctx.strokeStyle = '#FFFFFF';
             ctx.lineWidth = 0.5;
             for (let i = 0; i <= 720; i += 72) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 360); ctx.stroke(); }
             for (let i = 0; i <= 360; i += 36) { ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(720, i); ctx.stroke(); }
-            // Night shade approx (left of subsolar lon)
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-            let nightStart = (subsolarLon + 180) / 360 * 720 + 360;
-            ctx.fillRect(0, 0, nightStart % 720, 360);
-            if (nightStart > 720) ctx.fillRect(nightStart % 720, 0, 720, 360);
-            // Sun position red dot
+
+            // Accurate night shade using pixel data
+            const imageData = ctx.getImageData(0, 0, 720, 360);
+            const data = imageData.data;
+            const degToRad = Math.PI / 180;
+            const decRad = declination * degToRad;
+
+            for (let y = 0; y < 360; y++) {
+                const lat = 90 - (y / 360 * 180);
+                const latRad = lat * degToRad;
+                const sinLat = Math.sin(latRad);
+                const cosLat = Math.cos(latRad);
+
+                for (let x = 0; x < 720; x++) {
+                    const lon = (x / 720 * 360) - 180;
+                    const H = (lon - subsolarLon) * degToRad;
+                    const cosZ = sinLat * Math.sin(decRad) + cosLat * Math.cos(decRad) * Math.cos(H);
+                    const i = (y * 720 + x) * 4;
+
+                    if (cosZ < 0) {
+                        data[i] = 0;     // R
+                        data[i + 1] = 0; // G
+                        data[i + 2] = 0; // B
+                        data[i + 3] = 255; // A
+                    }
+                }
+            }
+            ctx.putImageData(imageData, 0, 0);
+
+            // Sun red dot
             const sunX = (subsolarLon + 180) / 360 * 720;
             const sunY = (90 - subsolarLat) / 180 * 360;
             ctx.fillStyle = 'red';
             ctx.beginPath(); ctx.arc(sunX, sunY, 5, 0, 2 * Math.PI); ctx.fill();
-            // Moon position white dot
+
+            // Moon white dot
             const moonX = (sublunarLon + 180) / 360 * 720;
             const moonY = (90 - sublunarLat) / 180 * 360;
             ctx.fillStyle = 'white';
             ctx.beginPath(); ctx.arc(moonX, moonY, 5, 0, 2 * Math.PI); ctx.fill();
 
-            // Chart for declination over year
+            // Declination chart
             const chartCtx = document.getElementById('declinationChart').getContext('2d');
             new Chart(chartCtx, {
                 type: 'line',
                 data: {
                     labels: Array.from({length: 365}, (_, i) => i + 1),
                     datasets: [{
-                        label: 'Solar Declination Over Year',
+                        label: 'Solar Declination Over the Year',
                         data: Array.from({length: 365}, (_, i) => 23.45 * Math.sin((2 * Math.PI / 365) * (i - 81))),
                         borderColor: 'green',
                         fill: false
@@ -185,25 +200,17 @@
             });
         }
 
-        function saveAsPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(12);
-            doc.text("Day and Night Earth Visualizer Results", 105, 20, { align: "center" });
-            doc.text(document.getElementById('results').innerText, 10, 40);
-            doc.setFontSize(8);
-            doc.text("This document was generated using Fcalculator.com", 105, 280, { align: "center" });
-            doc.save('day-night-results.pdf');
-        }
-
         function sharePage() {
             if (navigator.share) {
-                navigator.share({ title: 'Day and Night Earth Visualizer', url: window.location.href });
+                navigator.share({ title: 'Live Day and Night Earth Visualizer', url: window.location.href });
             } else {
                 alert('Share not supported on this browser.');
             }
         }
+
+        // Initial call and auto-update every minute
+        calculate();
+        setInterval(calculate, 60000);
     </script>
 </body>
 </html>
