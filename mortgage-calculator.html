@@ -8,6 +8,7 @@
     <meta name="keywords" content="mortgage calculator, home loan calculator, amortization schedule, monthly mortgage payment, interest rate analysis, down payment impact, extra payments mortgage">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <header>
@@ -104,6 +105,7 @@
                 <p id="totalCost"></p>
                 <p id="payoffDate"></p>
                 <p id="futureAge"></p>
+                <button type="button" onclick="downloadPDF()">Download Results as PDF</button>
             </div>
             <canvas id="breakdownPieChart" width="400" height="200"></canvas>
             <canvas id="amortizationLineChart" width="400" height="200"></canvas>
@@ -174,10 +176,6 @@
             const totalMonthly = monthlyPayment + propertyTax + homeInsurance + (principal * pmiRate);
 
             // Total interest and cost
-            let totalInterest = (monthlyPayment * numPayments) - principal;
-            let totalCost = totalMonthly * numPayments;
-
-            // Adjust for extra payments (simplified)
             let remainingBalance = principal;
             let months = 0;
             let interestPaid = 0;
@@ -186,6 +184,9 @@
             let yearlyInterest = [];
             let yearlyPrincipal = [];
             let currentYear = 1;
+
+            // Amortization data for table and PDF
+            let amortTableData = [];
 
             while (remainingBalance > 0 && months < numPayments) {
                 const interestThisMonth = remainingBalance * interestRate;
@@ -196,38 +197,45 @@
                 principalPaid += principalThisMonth;
                 months++;
 
-                // Yearly aggregation for bar chart
+                // Yearly aggregation for charts and table
                 if (months % 12 === 0 || remainingBalance <= 0) {
                     yearlyInterest.push(interestPaid);
                     yearlyPrincipal.push(principalPaid);
                     amortData.push(remainingBalance);
+                    amortTableData.push({
+                        year: currentYear,
+                        interest: interestPaid.toFixed(2),
+                        principal: principalPaid.toFixed(2),
+                        balance: remainingBalance.toFixed(2)
+                    });
                     interestPaid = 0;
                     principalPaid = 0;
                     currentYear++;
                 }
             }
 
-            totalInterest = interestPaid; // Update with actual after extra
-            totalCost = (totalMonthly * months) + (extraPayment * (months - 1)); // Approximate
+            const totalInterest = yearlyInterest.reduce((sum, val) => sum + val, 0);
+            const totalCost = (totalMonthly * months) + (extraPayment * (months - 1));
             const payoffDate = new Date();
             payoffDate.setMonth(payoffDate.getMonth() + months);
             const yearsToPayoff = months / 12;
             const futureAge = currentAge + yearsToPayoff;
 
+            // Display results
             document.getElementById('monthlyPayment').innerText = `Monthly Payment: $${totalMonthly.toFixed(2)}`;
             document.getElementById('totalInterest').innerText = `Total Interest: $${totalInterest.toFixed(2)}`;
             document.getElementById('totalCost').innerText = `Total Cost: $${totalCost.toFixed(2)}`;
             document.getElementById('payoffDate').innerText = `Payoff Date: ${payoffDate.toLocaleDateString()}`;
             document.getElementById('futureAge').innerText = `Age at Payoff: ${Math.round(futureAge)} years`;
 
-            // Populate amortization table (yearly summary)
+            // Populate amortization table
             const tableBody = document.querySelector('#amortTable tbody');
             tableBody.innerHTML = '';
-            for (let i = 0; i < yearlyInterest.length; i++) {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>${i + 1}</td><td>$${yearlyInterest[i].toFixed(2)}</td><td>$${yearlyPrincipal[i].toFixed(2)}</td><td>$${amortData[i].toFixed(2)}</td>`;
-                tableBody.appendChild(row);
-            }
+            amortTableData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${row.year}</td><td>$${row.interest}</td><td>$${row.principal}</td><td>$${row.balance}</td>`;
+                tableBody.appendChild(tr);
+            });
 
             // Pie Chart for Breakdown
             new Chart(document.getElementById('breakdownPieChart'), {
@@ -261,6 +269,40 @@
                 },
                 options: { title: { display: true, text: 'Yearly Payment Breakdown' }, scales: { x: { stacked: true }, y: { stacked: true } } }
             });
+
+            // Store results for PDF
+            window.mortgageResults = {
+                monthlyPayment: totalMonthly.toFixed(2),
+                totalInterest: totalInterest.toFixed(2),
+                totalCost: totalCost.toFixed(2),
+                payoffDate: payoffDate.toLocaleDateString(),
+                futureAge: Math.round(futureAge),
+                amortTableData: amortTableData
+            };
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const results = window.mortgageResults;
+
+            doc.setFontSize(16);
+            doc.text('Mortgage Calculator Results', 10, 10);
+            doc.setFontSize(12);
+            doc.text(`Monthly Payment: $${results.monthlyPayment}`, 10, 20);
+            doc.text(`Total Interest: $${results.totalInterest}`, 10, 30);
+            doc.text(`Total Cost: $${results.totalCost}`, 10, 40);
+            doc.text(`Payoff Date: ${results.payoffDate}`, 10, 50);
+            doc.text(`Age at Payoff: ${results.futureAge} years`, 10, 60);
+
+            doc.text('Amortization Schedule', 10, 80);
+            doc.autoTable({
+                startY: 90,
+                head: [['Year', 'Interest Paid', 'Principal Paid', 'Ending Balance']],
+                body: results.amortTableData.map(row => [row.year, `$${row.interest}`, `$${row.principal}`, `$${row.balance}`])
+            });
+
+            doc.save('mortgage_results.pdf');
         }
     </script>
 </body>
