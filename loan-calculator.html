@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calculator - Comprehensive Tool for Amortized Loan Analysis</title>
+    <meta name="description" content="Calculate monthly payments, total interest, and amortization schedules for various loans including personal, auto, and mortgages. Explore detailed formulas, compounding effects, and repayment strategies to optimize your borrowing decisions.">
+    <meta name="keywords" content="loan calculator, amortized loan, interest rate calculation, monthly payment formula, loan amortization schedule, extra payments impact, personal loan analysis, auto loan estimator, mortgage repayment tool">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Dodatni inline CSS ako treba za chartove, ali glavni je external */
+        canvas { max-width: 100%; height: auto; }
+        .share-button { display: inline-block; padding: 5px 10px; background: #007bff; color: white; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Loan Calculator</h1>
+        <p>This advanced loan calculator provides in-depth analysis of amortized loans, enabling users to compute monthly payments, total interest accrued, and detailed amortization schedules. By inputting key parameters such as principal amount, annual interest rate, and loan term, borrowers can evaluate repayment scenarios, assess the impact of extra payments, and visualize principal-interest distributions through interactive charts. Understanding loan dynamics is crucial for financial planning, as it helps in comparing secured versus unsecured loans and optimizing terms to minimize overall costs.</p>
+    </header>
+
+    <main>
+        <section id="calculator-section">
+            <h2>Input Loan Parameters</h2>
+            <form id="loan-form">
+                <label for="loan-amount">Loan Amount ($):</label>
+                <input type="number" id="loan-amount" value="10000" required>
+                
+                <label for="interest-rate">Annual Interest Rate (%):</label>
+                <input type="number" id="interest-rate" value="5" step="0.01" required>
+                
+                <label for="loan-term-years">Loan Term (Years):</label>
+                <input type="number" id="loan-term-years" value="5" required>
+                
+                <label for="extra-payment">Extra Monthly Payment ($):</label>
+                <input type="number" id="extra-payment" value="0">
+                
+                <button type="button" onclick="calculateLoan()">Calculate</button>
+            </form>
+            
+            <div id="results">
+                <h2>Loan Calculation Results</h2>
+                <p>Monthly Payment: <span id="monthly-payment"></span></p>
+                <p>Total Payments: <span id="total-payments"></span></p>
+                <p>Total Interest: <span id="total-interest"></span></p>
+                <p>Payoff Date: <span id="payoff-date"></span></p>
+            </div>
+            
+            <div id="charts">
+                <h2>Visual Analysis</h2>
+                <canvas id="pie-chart"></canvas> <!-- Pie chart for Principal vs Interest -->
+                <canvas id="line-chart"></canvas> <!-- Line chart for Balance over Time -->
+                <canvas id="bar-chart"></canvas> <!-- Bar chart for Amortization Breakdown -->
+            </div>
+            
+            <table id="amortization-table">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Payment</th>
+                        <th>Principal</th>
+                        <th>Interest</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+        
+        <section id="explanation-section">
+            <h2>Understanding Loan Amortization and Formulas</h2>
+            <p>Amortized loans involve fixed periodic payments that cover both principal and interest until the loan matures. The monthly payment (PMT) is calculated using the formula: PMT = P × (r × (1 + r)^n) / ((1 + r)^n - 1), where P is the principal loan amount, r is the monthly interest rate (annual rate divided by 12), and n is the number of payments (term in years × 12). This ensures a structured repayment, with early payments predominantly covering interest and later ones reducing principal.</p>
+            
+            <p>For deferred payment loans, the future value is computed as FV = P × (1 + r)^n, representing the lump sum due at maturity. Bonds, particularly zero-coupon types, calculate present value as PV = FV / (1 + r)^n. Compounding frequency, typically monthly, affects the effective interest rate and total cost.</p>
+            
+            <p>Extra payments can significantly reduce total interest and shorten the term. For instance, adding $50 monthly to a $10,000 loan at 5% over 5 years could save hundreds in interest. Use this tool to simulate scenarios and make informed decisions. <span class="share-button" onclick="sharePage()">Share this Calculation</span></p>
+            
+            <h3>Types of Loans and Considerations</h3>
+            <p>Secured loans, like auto or mortgages, require collateral and often have lower rates (e.g., via <a href="/mortgage-calculator.html">Mortgage Calculator</a>). Unsecured loans, such as personal ones, rely on creditworthiness evaluated by factors like capacity, capital, and character. Explore related tools for specific analyses, including <a href="/percentage.html">Percentage Calculator</a> for rate comparisons.</p>
+            
+            <p>Borrowers should consider the annual percentage rate (APR), which includes fees, and compare options to avoid high-cost debt. Government resources highlight the importance of credit scores in determining rates.</p>
+        </section>
+        
+        <section id="related-links">
+            <h2>Related Resources and Calculators</h2>
+            <ul>
+                <li><a href="/mortgage-calculator.html">Mortgage Calculator</a> - Detailed home loan analysis.</li>
+                <li><a href="https://en.wikipedia.org/wiki/Amortization_(business)" target="_blank" rel="noopener noreferrer">Wikipedia on Amortization</a> - In-depth explanation of financial amortization.</li>
+                <li><a href="https://www.federalreserve.gov/consumerinfo/" target="_blank" rel="noopener noreferrer">Federal Reserve Consumer Information</a> - Guidelines on borrowing and interest rates.</li>
+                <li><a href="https://www.consumerfinance.gov/ask-cfpb/what-is-a-loan-en-138/" target="_blank" rel="noopener noreferrer">CFPB on Loans</a> - Consumer protection insights.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    </footer>
+
+    <script>
+        function calculateLoan() {
+            const principal = parseFloat(document.getElementById('loan-amount').value);
+            const annualRate = parseFloat(document.getElementById('interest-rate').value) / 100;
+            const years = parseInt(document.getElementById('loan-term-years').value);
+            const extra = parseFloat(document.getElementById('extra-payment').value) || 0;
+            
+            const monthlyRate = annualRate / 12;
+            const months = years * 12;
+            
+            // Standard monthly payment formula
+            let monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+            
+            // Adjust for extra payments (simplified simulation)
+            let balance = principal;
+            let totalInterest = 0;
+            let totalPayments = 0;
+            let month = 0;
+            const amortizationData = [];
+            const balanceData = [];
+            const principalData = [];
+            const interestData = [];
+            
+            while (balance > 0 && month < months * 2) { // Prevent infinite loop
+                month++;
+                const interest = balance * monthlyRate;
+                let principalPaid = monthlyPayment - interest + extra;
+                if (principalPaid > balance) principalPaid = balance;
+                balance -= principalPaid;
+                totalInterest += interest;
+                totalPayments += monthlyPayment + extra;
+                
+                amortizationData.push({month, payment: (monthlyPayment + extra).toFixed(2), principal: principalPaid.toFixed(2), interest: interest.toFixed(2), balance: balance.toFixed(2)});
+                balanceData.push(balance.toFixed(2));
+                principalData.push(principalPaid.toFixed(2));
+                interestData.push(interest.toFixed(2));
+            }
+            
+            document.getElementById('monthly-payment').textContent = monthlyPayment.toFixed(2);
+            document.getElementById('total-payments').textContent = totalPayments.toFixed(2);
+            document.getElementById('total-interest').textContent = totalInterest.toFixed(2);
+            document.getElementById('payoff-date').textContent = new Date(Date.now() + month * 30 * 24 * 60 * 60 * 1000).toDateString();
+            
+            // Populate amortization table
+            const tableBody = document.querySelector('#amortization-table tbody');
+            tableBody.innerHTML = '';
+            amortizationData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${row.month}</td><td>${row.payment}</td><td>${row.principal}</td><td>${row.interest}</td><td>${row.balance}</td>`;
+                tableBody.appendChild(tr);
+            });
+            
+            // Pie Chart: Principal vs Interest
+            new Chart(document.getElementById('pie-chart'), {
+                type: 'pie',
+                data: {
+                    labels: ['Principal', 'Interest'],
+                    datasets: [{ data: [principal, totalInterest], backgroundColor: ['#36a2eb', '#ff6384'] }]
+                },
+                options: { title: { display: true, text: 'Principal vs Interest Distribution' } }
+            });
+            
+            // Line Chart: Balance over Time
+            new Chart(document.getElementById('line-chart'), {
+                type: 'line',
+                data: {
+                    labels: amortizationData.map(row => row.month),
+                    datasets: [{ label: 'Balance', data: balanceData, borderColor: '#4bc0c0' }]
+                },
+                options: { title: { display: true, text: 'Loan Balance Over Time' } }
+            });
+            
+            // Bar Chart: Principal and Interest per Month
+            new Chart(document.getElementById('bar-chart'), {
+                type: 'bar',
+                data: {
+                    labels: amortizationData.map(row => row.month),
+                    datasets: [
+                        { label: 'Principal', data: principalData, backgroundColor: '#36a2eb' },
+                        { label: 'Interest', data: interestData, backgroundColor: '#ff6384' }
+                    ]
+                },
+                options: { title: { display: true, text: 'Monthly Principal and Interest Breakdown' }, scales: { x: { stacked: true }, y: { stacked: true } } }
+            });
+        }
+        
+        function sharePage() {
+            const url = window.location.href;
+            if (navigator.share) {
+                navigator.share({ title: 'Loan Calculator', url });
+            } else {
+                alert('Share this link: ' + url);
+            }
+        }
+    </script>
+</body>
+</html>
