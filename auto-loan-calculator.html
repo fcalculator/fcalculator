@@ -102,6 +102,8 @@
     </footer>
 
     <script>
+        let amortizationData = [];
+
         function calculateAutoLoan() {
             const autoPrice = parseFloat(document.getElementById('auto-price').value);
             const downPayment = parseFloat(document.getElementById('down-payment').value);
@@ -135,7 +137,7 @@
             document.getElementById('total-cost').textContent = '$' + totalCost.toFixed(2);
             document.getElementById('payoff-date').textContent = payoffDate;
 
-            generateAmortizationTable(principal, interestRate, loanTerm, monthlyPayment);
+            amortizationData = generateAmortizationTable(principal, interestRate, loanTerm, monthlyPayment);
             document.getElementById('results').style.display = 'block';
         }
 
@@ -144,7 +146,7 @@
             let tableBody = document.querySelector('#amortization-table tbody');
             tableBody.innerHTML = '';
             let chartData = { labels: [], principalData: [], interestData: [] };
-            let amortizationData = [];
+            let data = [];
 
             for (let month = 1; month <= term; month++) {
                 const interest = balance * monthlyRate;
@@ -153,7 +155,7 @@
                 if (balance < 0) balance = 0;
                 let row = `<tr><td>${month}</td><td>$${monthlyPayment.toFixed(2)}</td><td>$${principalPayment.toFixed(2)}</td><td>$${interest.toFixed(2)}</td><td>$${balance.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
-                amortizationData.push([month.toString(), monthlyPayment.toFixed(2), principalPayment.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
+                data.push([month.toString(), monthlyPayment.toFixed(2), principalPayment.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
 
                 // Aggregate for chart by year
                 const year = Math.ceil(month / 12);
@@ -183,18 +185,15 @@
                 options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: true } } }
             });
 
-            return amortizationData;
+            return data;
         }
 
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            const amortizationData = generateAmortizationTable(
-                parseFloat(document.getElementById('total-loan').textContent.replace('$', '')),
-                parseFloat(document.getElementById('interest-rate').value) / 100 / 12,
-                parseInt(document.getElementById('loan-term').value),
-                parseFloat(document.getElementById('monthly-payment').textContent.replace('$', ''))
-            );
+
+            doc.setFontSize(14);
+            doc.text("Loan Calculation Results", 105, 15, { align: "center" });
 
             // Loan Results Table
             doc.autoTable({
