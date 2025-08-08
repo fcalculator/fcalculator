@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf-autotable.min.js"></script>
 </head>
 <body>
     <header>
@@ -47,6 +48,7 @@
                 <p>Total Loan Amount: <span id="total-loan" class="green-result"></span></p>
                 <p>Total Interest Paid: <span id="total-interest" class="green-result"></span></p>
                 <p>Total Cost: <span id="total-cost" class="green-result"></span></p>
+                <p>Payoff Date: <span id="payoff-date" class="green-result"></span></p>
 
                 <button onclick="saveAsPDF()">Save Results as PDF</button>
 
@@ -54,10 +56,11 @@
                 <table id="amortization-table">
                     <thead>
                         <tr>
-                            <th>Year</th>
-                            <th>Interest</th>
+                            <th>Month</th>
+                            <th>Payment</th>
                             <th>Principal</th>
-                            <th>Ending Balance</th>
+                            <th>Interest</th>
+                            <th>Balance</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -103,7 +106,8 @@
             const autoPrice = parseFloat(document.getElementById('auto-price').value);
             const downPayment = parseFloat(document.getElementById('down-payment').value);
             const tradeIn = parseFloat(document.getElementById('trade-in').value);
-            const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12;
+            const interestRateAnnual = parseFloat(document.getElementById('interest-rate').value);
+            const interestRate = interestRateAnnual / 100 / 12;
             const loanTerm = parseInt(document.getElementById('loan-term').value);
             const salesTaxRate = parseFloat(document.getElementById('sales-tax').value) / 100;
 
@@ -115,10 +119,21 @@
             const totalInterest = totalPayments - principal;
             const totalCost = autoPrice + salesTax + totalInterest - tradeIn;
 
+            // Calculate payoff date
+            const currentDate = new Date();
+            let payoffMonth = currentDate.getMonth() + loanTerm;
+            let payoffYear = currentDate.getFullYear() + Math.floor(payoffMonth / 12);
+            payoffMonth = payoffMonth % 12;
+            let payoffDay = Math.min(currentDate.getDate(), new Date(payoffYear, payoffMonth + 1, 0).getDate());
+            const payoffDateObj = new Date(payoffYear, payoffMonth, payoffDay);
+            const options = { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' };
+            const payoffDate = payoffDateObj.toLocaleDateString('en-US', options).replace(/,/g, '');
+
             document.getElementById('monthly-payment').textContent = '$' + monthlyPayment.toFixed(2);
             document.getElementById('total-loan').textContent = '$' + principal.toFixed(2);
             document.getElementById('total-interest').textContent = '$' + totalInterest.toFixed(2);
             document.getElementById('total-cost').textContent = '$' + totalCost.toFixed(2);
+            document.getElementById('payoff-date').textContent = payoffDate;
 
             generateAmortizationTable(principal, interestRate, loanTerm, monthlyPayment);
             document.getElementById('results').style.display = 'block';
@@ -129,24 +144,31 @@
             let tableBody = document.querySelector('#amortization-table tbody');
             tableBody.innerHTML = '';
             let chartData = { labels: [], principalData: [], interestData: [] };
+            let amortizationData = [];
 
-            for (let year = 1; year <= Math.ceil(term / 12); year++) {
-                let yearlyInterest = 0;
-                let yearlyPrincipal = 0;
-                for (let month = 1; month <= 12 && (year-1)*12 + month <= term; month++) {
-                    const interest = balance * monthlyRate;
-                    const principalPayment = monthlyPayment - interest;
-                    yearlyInterest += interest;
-                    yearlyPrincipal += principalPayment;
-                    balance -= principalPayment;
-                }
-                let row = `<tr><td>${year}</td><td>$${yearlyInterest.toFixed(2)}</td><td>$${yearlyPrincipal.toFixed(2)}</td><td>$${balance.toFixed(2)}</td></tr>`;
+            for (let month = 1; month <= term; month++) {
+                const interest = balance * monthlyRate;
+                const principalPayment = monthlyPayment - interest;
+                balance -= principalPayment;
+                if (balance < 0) balance = 0;
+                let row = `<tr><td>${month}</td><td>$${monthlyPayment.toFixed(2)}</td><td>$${principalPayment.toFixed(2)}</td><td>$${interest.toFixed(2)}</td><td>$${balance.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
+                amortizationData.push([month.toString(), monthlyPayment.toFixed(2), principalPayment.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
 
-                chartData.labels.push(`Year ${year}`);
-                chartData.principalData.push(yearlyPrincipal);
-                chartData.interestData.push(yearlyInterest);
+                // Aggregate for chart by year
+                const year = Math.ceil(month / 12);
+                if (!chartData.principalData[year - 1]) {
+                    chartData.labels.push(`Year ${year}`);
+                    chartData.principalData[year - 1] = 0;
+                    chartData.interestData[year - 1] = 0;
+                }
+                chartData.principalData[year - 1] += principalPayment;
+                chartData.interestData[year - 1] += interest;
             }
+
+            // Round aggregated data
+            chartData.principalData = chartData.principalData.map(v => v.toFixed(2));
+            chartData.interestData = chartData.interestData.map(v => v.toFixed(2));
 
             const ctx = document.getElementById('amortization-chart').getContext('2d');
             new Chart(ctx, {
@@ -158,68 +180,54 @@
                         { label: 'Interest', data: chartData.interestData, backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgba(255, 99, 132, 1)' }
                     ]
                 },
-                options: { scales: { y: { beginAtZero: true } } }
+                options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: true } } }
             });
+
+            return amortizationData;
         }
 
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            doc.setFontSize(12);
+            const amortizationData = generateAmortizationTable(
+                parseFloat(document.getElementById('total-loan').textContent.replace('$', '')),
+                parseFloat(document.getElementById('interest-rate').value) / 100 / 12,
+                parseInt(document.getElementById('loan-term').value),
+                parseFloat(document.getElementById('monthly-payment').textContent.replace('$', ''))
+            );
 
-            // Naslov - svjetlo plava i bold
-            doc.setTextColor(173, 216, 230); // light blue
-            doc.setFont("helvetica", "bold");
-            doc.text("Auto Loan Calculation Results", 105, 20, { align: "center" });
-
-            // Input vrijednosti - crni tekst, bold naslov
-            doc.setTextColor(0, 0, 0);
-            doc.setFont("helvetica", "bold");
-            doc.text("Input Details:", 105, 35, { align: "center" });
-            doc.setFont("helvetica", "normal");
-            doc.text(`Auto Price: $${document.getElementById('auto-price').value}`, 105, 45, { align: "center" });
-            doc.text(`Down Payment: $${document.getElementById('down-payment').value}`, 105, 50, { align: "center" });
-            doc.text(`Trade-in Value: $${document.getElementById('trade-in').value}`, 105, 55, { align: "center" });
-            doc.text(`Interest Rate: ${document.getElementById('interest-rate').value}%`, 105, 60, { align: "center" });
-            doc.text(`Loan Term: ${document.getElementById('loan-term').value} months`, 105, 65, { align: "center" });
-            doc.text(`Sales Tax Rate: ${document.getElementById('sales-tax').value}%`, 105, 70, { align: "center" });
-
-            // Rezultati - svjetlo zelena
-            doc.setTextColor(144, 238, 144); // light green
-            doc.setFont("helvetica", "bold");
-            doc.text("Loan Results:", 105, 85, { align: "center" });
-            doc.setFont("helvetica", "normal");
-            doc.text(`Monthly Payment: ${document.getElementById('monthly-payment').textContent}`, 105, 95, { align: "center" });
-            doc.text(`Total Loan Amount: ${document.getElementById('total-loan').textContent}`, 105, 100, { align: "center" });
-            doc.text(`Total Interest Paid: ${document.getElementById('total-interest').textContent}`, 105, 105, { align: "center" });
-            doc.text(`Total Cost: ${document.getElementById('total-cost').textContent}`, 105, 110, { align: "center" });
-
-            // Amortizacija - crni tekst, bold naslov, fixed-width font za tablicu
-            doc.setTextColor(0, 0, 0);
-            doc.setFont("helvetica", "bold");
-            doc.text("Amortization Schedule:", 105, 125, { align: "center" });
-            doc.setFont("courier", "normal"); // fixed-width za bolju poravnatost
-            let yPos = 135;
-            doc.text("Year   Interest      Principal     Ending Balance", 105, yPos, { align: "center" });
-            yPos += 5;
-            doc.setLineWidth(0.2);
-            doc.setDrawColor(211, 211, 211); // light gray line
-            doc.line(50, yPos, 160, yPos); // horizontal line
-            yPos += 5;
-            const rows = document.querySelectorAll('#amortization-table tbody tr');
-            rows.forEach(row => {
-                const cells = row.querySelectorAll('td');
-                const rowText = `${cells[0].textContent.padEnd(6)} $${cells[1].textContent.padEnd(12)} $${cells[2].textContent.padEnd(12)} $${cells[3].textContent}`;
-                doc.text(rowText, 105, yPos, { align: "center" });
-                yPos += 5;
-                doc.line(50, yPos, 160, yPos); // horizontal line after each row
-                yPos += 5;
+            // Loan Results Table
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Monthly Payment', document.getElementById('monthly-payment').textContent],
+                    ['Total Payments', '$' + (parseFloat(document.getElementById('monthly-payment').textContent.replace('$', '')) * parseInt(document.getElementById('loan-term').value)).toFixed(2)],
+                    ['Total Interest', document.getElementById('total-interest').textContent],
+                    ['Payoff Date', document.getElementById('payoff-date').textContent]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                margin: { top: 10 }
             });
 
-            // Footer
-            doc.setTextColor(0, 0, 0);
-            doc.setFont("helvetica", "normal");
-            doc.text("File created on Fcalculator.com", 105, 280, { align: "center" });
+            // Amortization Schedule Table
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
+                head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
+                body: amortizationData,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
 
             doc.save('auto-loan-results.pdf');
         }
