@@ -11,11 +11,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <style>
-        /* Responsive styles for mobile friendliness */
+        /* Responsive styles for mobile friendliness with full width expansion */
+        .wide-section {
+            width: 100%;
+            max-width: none;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
         table {
             width: 100%;
             overflow-x: auto;
             display: block;
+        }
+        canvas {
+            width: 100% !important;
+            height: auto !important;
         }
         @media (max-width: 768px) {
             table thead {
@@ -41,12 +51,20 @@
                 font-weight: bold;
                 text-align: left;
             }
+            .wide-section {
+                padding: 0;
+            }
         }
         h4.day-title {
             text-align: center;
         }
         .center-button {
             text-align: center;
+            margin-top: 20px;
+        }
+        .add-row-btn {
+            font-size: small;
+            padding: 5px 10px;
         }
     </style>
 </head>
@@ -92,7 +110,7 @@
                 <button type="button" onclick="proceedToStep2()">Proceed to Step 2</button>
             </form>
             
-            <div id="step2" style="display:none;">
+            <div id="step2" class="wide-section" style="display:none;">
                 <h3>Step 2: Enter Daily Activities and Budgets</h3>
                 <p>For each day of your trip, use the tables below to add activities with time slots and costs. Click 'Add Row' to include multiple entries per day, such as morning coffee at $20 or afternoon dinner at $40. This allows for comprehensive daily planning with flexible expense tracking.</p>
                 <div id="dailyInputs"></div>
@@ -101,7 +119,7 @@
                 </div>
             </div>
             
-            <div id="result" style="display:none;">
+            <div id="result" class="wide-section" style="display:none;">
                 <h3>Step 3: Your Generated Travel Itinerary with Budget (Automated)</h3>
                 <p>The following output automatically compiles your inputs into a detailed table with daily subtotals and an overall budget, visualized through a chart for easy analysis.</p>
                 <table id="itineraryTable">
@@ -133,7 +151,7 @@
                 <li>Advance to Step 3 to automatically view the compiled itinerary, budget totals, and visual chart for review and adjustments.</li>
                 <li>Export the plan via PDF for offline access or sharing, preserving all financial and scheduling data.</li>
             </ol>
-            <p>Enhance your time-related planning with our <a href="/time.html">Time Calculator</a> or <a href="/age.html">Age Calculator</a> for integrated workflow efficiency.</p>
+            <p>Enhance your financial planning with our <a href="/mortgage-calculator.html">Mortgage Calculator</a> or <a href="/loan-calculator.html">Loan Calculator</a> for integrated workflow efficiency.</p>
         </section>
         
         <section id="benefits">
@@ -198,7 +216,7 @@
                         </thead>
                         <tbody></tbody>
                     </table>
-                    <button onclick="addRow('${day}')">Add Row</button>
+                    <button class="add-row-btn" onclick="addRow('${day}')">Add Row</button>
                 `;
                 dailyInputs.appendChild(daySection);
                 addRow(day); // Add initial row
@@ -286,7 +304,9 @@
                 options: {
                     scales: {
                         y: { beginAtZero: true }
-                    }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
                 }
             });
         }
