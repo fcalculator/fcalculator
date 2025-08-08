@@ -71,6 +71,7 @@
         <section id="calculator">
             <h2>Mortgage Payment Calculator</h2>
             <form id="mortgageForm">
+                <h3>Loan Details</h3>
                 <label for="homePrice">Home Price ($):</label>
                 <input type="number" id="homePrice" value="300000" required><br>
                 <label for="downPayment">Down Payment ($):</label>
@@ -79,14 +80,21 @@
                 <input type="number" id="loanTerm" value="30" required><br>
                 <label for="interestRate">Annual Interest Rate (%):</label>
                 <input type="number" id="interestRate" step="0.01" value="4" required><br>
+                
+                <h3>Additional Costs</h3>
                 <label for="propertyTax">Annual Property Tax ($):</label>
                 <input type="number" id="propertyTax" value="3000"><br>
                 <label for="homeInsurance">Annual Home Insurance ($):</label>
                 <input type="number" id="homeInsurance" value="1200"><br>
                 <label for="pmi">PMI Rate (% if down payment <20%):</label>
                 <input type="number" id="pmi" step="0.01" value="0.5"><br>
+                
+                <h3>Extra Options</h3>
                 <label for="extraPayment">Monthly Extra Payment ($):</label>
                 <input type="number" id="extraPayment" value="0"><br>
+                <label for="currentAge">Current Age (Years):</label>
+                <input type="number" id="currentAge" value="35"><br>
+                
                 <button type="button" onclick="calculateMortgage()">Calculate</button>
             </form>
             <div id="results">
@@ -95,6 +103,7 @@
                 <p id="totalInterest"></p>
                 <p id="totalCost"></p>
                 <p id="payoffDate"></p>
+                <p id="futureAge"></p>
             </div>
             <canvas id="breakdownPieChart" width="400" height="200"></canvas>
             <canvas id="amortizationLineChart" width="400" height="200"></canvas>
@@ -104,7 +113,7 @@
         <section id="amortization">
             <h2>Amortization Schedule and Visualizations</h2>
             <p>The amortization schedule illustrates how payments are allocated between principal and interest over time. Early payments primarily cover interest, while later ones reduce principal. Use the chart below to see the balance reduction.</p>
-            <p>For tips on accelerating payoff, consider extra payments. Watch this <a href="https://www.youtube.com/watch?v=example-mortgage-tips" target="_blank" rel="noopener noreferrer">YouTube video on mortgage strategies</a> for more insights.</p>
+            <p>For tips on accelerating payoff, consider extra payments.</p>
             <table id="amortTable">
                 <thead>
                     <tr>
@@ -126,7 +135,7 @@
                 <li>Make bi-weekly payments to effectively add one extra payment per year.</li>
                 <li>Refinance if rates drop significantly.</li>
             </ul>
-            <p>According to financial principles, adhering to the 28/36 rule—where housing costs are no more than 28% of gross income—helps maintain affordability.</p>
+            <p>According to financial principles, adhering to the 28/36 rule—where housing costs are no more than 28% of gross income—helps maintain affordability. For official guidance on managing mortgages, visit the <a href="https://www.consumerfinance.gov/consumer-tools/mortgages/" target="_blank" rel="noopener noreferrer">Consumer Financial Protection Bureau (CFPB) Mortgage Resources</a>.</p>
         </section>
 
         <section id="faq">
@@ -155,6 +164,7 @@
             const propertyTax = parseFloat(document.getElementById('propertyTax').value) / 12 || 0;
             const homeInsurance = parseFloat(document.getElementById('homeInsurance').value) / 12 || 0;
             const extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
+            const currentAge = parseInt(document.getElementById('currentAge').value) || 0;
             const pmiRate = (downPayment / homePrice < 0.2) ? parseFloat(document.getElementById('pmi').value) / 100 / 12 : 0;
             const principal = homePrice - downPayment;
             const numPayments = loanTerm * 12;
@@ -201,11 +211,14 @@
             totalCost = (totalMonthly * months) + (extraPayment * (months - 1)); // Approximate
             const payoffDate = new Date();
             payoffDate.setMonth(payoffDate.getMonth() + months);
+            const yearsToPayoff = months / 12;
+            const futureAge = currentAge + yearsToPayoff;
 
             document.getElementById('monthlyPayment').innerText = `Monthly Payment: $${totalMonthly.toFixed(2)}`;
             document.getElementById('totalInterest').innerText = `Total Interest: $${totalInterest.toFixed(2)}`;
             document.getElementById('totalCost').innerText = `Total Cost: $${totalCost.toFixed(2)}`;
             document.getElementById('payoffDate').innerText = `Payoff Date: ${payoffDate.toLocaleDateString()}`;
+            document.getElementById('futureAge').innerText = `Age at Payoff: ${Math.round(futureAge)} years`;
 
             // Populate amortization table (yearly summary)
             const tableBody = document.querySelector('#amortTable tbody');
