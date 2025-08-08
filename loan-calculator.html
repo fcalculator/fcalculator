@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <style>
         /* Dodatni inline CSS ako treba za chartove, ali glavni je external */
         canvas { max-width: 100%; height: auto; }
@@ -101,6 +102,8 @@
     </footer>
 
     <script>
+        let amortizationData = []; // Global variable for amortization data in PDF
+
         function calculateLoan() {
             const principal = parseFloat(document.getElementById('loan-amount').value);
             const annualRate = parseFloat(document.getElementById('interest-rate').value) / 100;
@@ -118,7 +121,7 @@
             let totalInterest = 0;
             let totalPayments = 0;
             let month = 0;
-            const amortizationData = [];
+            amortizationData = [];
             const balanceData = [];
             const principalData = [];
             const interestData = [];
@@ -190,22 +193,43 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
-            doc.text('Loan Calculation Results', 10, 10);
-            doc.text(`Monthly Payment: ${document.getElementById('monthly-payment').textContent}`, 10, 20);
-            doc.text(`Total Payments: ${document.getElementById('total-payments').textContent}`, 10, 30);
-            doc.text(`Total Interest: ${document.getElementById('total-interest').textContent}`, 10, 40);
-            doc.text(`Payoff Date: ${document.getElementById('payoff-date').textContent}`, 10, 50);
+            // Set consistent font
+            doc.setFont('helvetica');
+            doc.setFontSize(12);
             
-            doc.addPage();
-            doc.text('Amortization Schedule', 10, 10);
-            const tableRows = Array.from(document.querySelectorAll('#amortization-table tr')).map(tr => 
-                Array.from(tr.querySelectorAll('th, td')).map(cell => cell.textContent)
-            );
-            let y = 20;
-            tableRows.forEach(row => {
-                doc.text(row.join('   '), 10, y); // Simple text alignment
-                y += 10;
-                if (y > 280) { doc.addPage(); y = 10; }
+            // Title
+            doc.text('Loan Calculation Results', 10, 10);
+            
+            // Results Table
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Monthly Payment', document.getElementById('monthly-payment').textContent],
+                    ['Total Payments', document.getElementById('total-payments').textContent],
+                    ['Total Interest', document.getElementById('total-interest').textContent],
+                    ['Payoff Date', document.getElementById('payoff-date').textContent]
+                ],
+                theme: 'grid',
+                styles: { font: 'helvetica' },
+                margin: { top: 10 }
+            });
+            
+            // Amortization Schedule
+            let finalY = doc.lastAutoTable.finalY + 10;
+            doc.text('Amortization Schedule', 10, finalY);
+            doc.autoTable({
+                startY: finalY + 10,
+                head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
+                body: amortizationData.map(row => [row.month, row.payment, row.principal, row.interest, row.balance]),
+                theme: 'grid',
+                styles: { font: 'helvetica', fontSize: 10 }, // Smaller font for table to fit better
+                columnStyles: { 0: { cellWidth: 20 }, 1: { cellWidth: 30 }, 2: { cellWidth: 30 }, 3: { cellWidth: 30 }, 4: { cellWidth: 40 } },
+                didDrawPage: function (data) {
+                    // Footer on each page
+                    doc.setFontSize(8);
+                    doc.text('This document was generated using Fcalculator.com', data.settings.margin.left, doc.internal.pageSize.height - 10);
+                }
             });
             
             doc.save('loan-results.pdf');
