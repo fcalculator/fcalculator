@@ -19,7 +19,7 @@
         <button onclick="calculate(false)">Visualize</button>
         <label for="live">Live Update:</label>
         <input type="checkbox" id="live" checked onchange="toggleLive()">
-        <canvas id="earthMap" width="720" height="360" style="border:1px solid #ccc; display:block; margin:20px auto;"></canvas>
+        <canvas id="earthMap" width="940" height="477" style="border:1px solid #ccc; display:block; margin:20px auto;"></canvas>
         <div id="results" class="result"></div>
         <canvas id="declinationChart" width="600" height="300" style="display:block; margin:20px auto;"></canvas>
     </div>
@@ -93,8 +93,12 @@
         Project created by Ivan Brkic. Project launched in 2020. Version 1.02
     </footer>
 
+    <img id="worldMapImg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/BlankMap-World-Equirectangular.svg/940px-BlankMap-World-Equirectangular.svg.png" style="display:none;">
+
     <script>
         let intervalId = null;
+        const mapWidth = 940;
+        const mapHeight = 477;
 
         function getDayOfYear(date) {
             const start = new Date(date.getFullYear(), 0, 0);
@@ -157,69 +161,26 @@
             // Draw map
             const canvas = document.getElementById('earthMap');
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#00BFFF'; // Ocean day
-            ctx.fillRect(0, 0, 720, 360);
+            const img = document.getElementById('worldMapImg');
+            ctx.drawImage(img, 0, 0, mapWidth, mapHeight);
 
-            // Draw continents (rough low-res polygons)
-            const continents = [
-                // North America rough
-                [[-168,72],[-135,82],[-100,80],[-52,70],[-52,25],[-80,10],[-100,25],[-130,20],[-160,30],[-168,72]],
-                // South America
-                [[-81,12],[-35,5],[-30,-55],[-70,-55],[-75,-20],[-81,12]],
-                // Europe
-                [[-10,35],[40,35],[40,70],[-10,70],[-10,35]],
-                // Africa
-                [[-18,37],[51,30],[35,-35],[-18,-35],[-18,37]],
-                // Asia
-                [[40,70],[170,70],[170,20],[51,30],[40,35],[40,70]],
-                // Australia
-                [[110,-10],[155,-10],[155,-45],[110,-45],[110,-10]],
-                // Antarctica
-                [[-180,-60],[180,-60],[180,-90],[-180,-90],[-180,-60]],
-                // Greenland rough
-                [[-75,60],[-20,60],[-20,85],[-75,85],[-75,60]],
-                // Other islands rough, e.g. New Zealand
-                [[165,-30],[180,-30],[180,-50],[165,-50],[165,-30]]
-            ];
-            continents.forEach(poly => {
-                ctx.beginPath();
-                poly.forEach(([lon, lat], i) => {
-                    const x = (lon + 180) / 360 * 720;
-                    const y = (90 - lat) / 180 * 360;
-                    if (i === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                });
-                ctx.closePath();
-                ctx.fillStyle = '#228B22'; // Land day
-                ctx.fill();
-                ctx.strokeStyle = '#000000';
-                ctx.lineWidth = 0.5;
-                ctx.stroke();
-            });
-
-            // Grid
-            ctx.strokeStyle = '#FFFFFF';
-            ctx.lineWidth = 0.5;
-            for (let i = 0; i <= 720; i += 72) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 360); ctx.stroke(); }
-            for (let i = 0; i <= 360; i += 36) { ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(720, i); ctx.stroke(); }
-
-            // Apply night shade by darkening pixels
-            const imageData = ctx.getImageData(0, 0, 720, 360);
+            // Apply night shade
+            const imageData = ctx.getImageData(0, 0, mapWidth, mapHeight);
             const data = imageData.data;
             const degToRad = Math.PI / 180;
             const decRad = declination * degToRad;
 
-            for (let y = 0; y < 360; y++) {
-                const lat = 90 - (y / 360 * 180);
+            for (let y = 0; y < mapHeight; y++) {
+                const lat = 90 - (y / mapHeight * 180);
                 const latRad = lat * degToRad;
                 const sinLat = Math.sin(latRad);
                 const cosLat = Math.cos(latRad);
 
-                for (let x = 0; x < 720; x++) {
-                    const lon = (x / 720 * 360) - 180;
+                for (let x = 0; x < mapWidth; x++) {
+                    const lon = (x / mapWidth * 360) - 180;
                     const H = (lon - subsolarLon) * degToRad;
                     const cosZ = sinLat * Math.sin(decRad) + cosLat * Math.cos(decRad) * Math.cos(H);
-                    const i = (y * 720 + x) * 4;
+                    const i = (y * mapWidth + x) * 4;
 
                     if (cosZ < 0) {
                         data[i] = Math.floor(data[i] * 0.3);     // Darken R
@@ -230,15 +191,21 @@
             }
             ctx.putImageData(imageData, 0, 0);
 
+            // Grid lines (optional, if wanted on top)
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i <= mapWidth; i += mapWidth / 10) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, mapHeight); ctx.stroke(); }
+            for (let i = 0; i <= mapHeight; i += mapHeight / 5) { ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(mapWidth, i); ctx.stroke(); }
+
             // Sun red dot
-            const sunX = (subsolarLon + 180) / 360 * 720;
-            const sunY = (90 - subsolarLat) / 180 * 360;
+            const sunX = (subsolarLon + 180) / 360 * mapWidth;
+            const sunY = (90 - subsolarLat) / 180 * mapHeight;
             ctx.fillStyle = 'red';
             ctx.beginPath(); ctx.arc(sunX, sunY, 5, 0, 2 * Math.PI); ctx.fill();
 
             // Moon white dot
-            const moonX = (sublunarLon + 180) / 360 * 720;
-            const moonY = (90 - sublunarLat) / 180 * 360;
+            const moonX = (sublunarLon + 180) / 360 * mapWidth;
+            const moonY = (90 - sublunarLat) / 180 * mapHeight;
             ctx.fillStyle = 'white';
             ctx.beginPath(); ctx.arc(moonX, moonY, 5, 0, 2 * Math.PI); ctx.fill();
 
@@ -271,9 +238,11 @@
         const now = new Date();
         document.getElementById('datetime').value = now.toISOString().slice(0, 16);
 
-        // Initial call and live
-        calculate(true);
-        toggleLive();
+        // Wait for image load before initial calculate
+        document.getElementById('worldMapImg').onload = function() {
+            calculate(true);
+            toggleLive();
+        };
     </script>
 </body>
 </html>
