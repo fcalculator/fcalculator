@@ -14,6 +14,11 @@
     </header>
 
     <div class="tool">
+        <label for="datetime">Select Date and Time (UTC):</label>
+        <input type="datetime-local" id="datetime">
+        <button onclick="calculate(false)">Visualize</button>
+        <label for="live">Live Update:</label>
+        <input type="checkbox" id="live" checked onchange="toggleLive()">
         <canvas id="earthMap" width="720" height="360" style="border:1px solid #ccc; display:block; margin:20px auto;"></canvas>
         <div id="results" class="result"></div>
         <canvas id="declinationChart" width="600" height="300" style="display:block; margin:20px auto;"></canvas>
@@ -89,14 +94,32 @@
     </footer>
 
     <script>
+        let intervalId = null;
+
         function getDayOfYear(date) {
             const start = new Date(date.getFullYear(), 0, 0);
             const diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) / 60 * 1000);
             return Math.floor(diff / 86400000);
         }
 
-        function calculate() {
-            const date = new Date();
+        function toggleLive() {
+            if (document.getElementById('live').checked) {
+                calculate(true);
+                intervalId = setInterval(() => calculate(true), 60000);
+            } else {
+                if (intervalId) clearInterval(intervalId);
+            }
+        }
+
+        function calculate(useCurrent = false) {
+            let date;
+            if (useCurrent) {
+                date = new Date();
+            } else {
+                const datetimeInput = document.getElementById('datetime').value;
+                if (!datetimeInput) return;
+                date = new Date(datetimeInput + 'Z');
+            }
             const dayOfYear = getDayOfYear(date);
             const declination = 23.45 * Math.sin((2 * Math.PI / 365) * (dayOfYear - 81));
             const hour = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
@@ -115,7 +138,7 @@
 
             // Results
             let resultsHtml = `
-                <p class="green">Current UTC Time: ${date.toUTCString()}</p>
+                <p class="green">Selected Time: ${date.toUTCString()}</p>
                 <p class="green">Subsolar Point: Latitude ${subsolarLat.toFixed(2)}°${subsolarLat >= 0 ? 'N' : 'S'}, Longitude ${subsolarLon.toFixed(2)}°${subsolarLon >= 0 ? 'E' : 'W'}</p>
                 <p class="green">Sublunar Point: Latitude ${sublunarLat.toFixed(2)}°${sublunarLat >= 0 ? 'N' : 'S'}, Longitude ${sublunarLon.toFixed(2)}°${sublunarLon >= 0 ? 'E' : 'W'}</p>
                 <p class="green">Sun Ground Speed: ${sunSpeed} m/s</p>
@@ -134,8 +157,45 @@
             // Draw map
             const canvas = document.getElementById('earthMap');
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#00BFFF';
+            ctx.fillStyle = '#00BFFF'; // Ocean day
             ctx.fillRect(0, 0, 720, 360);
+
+            // Draw continents (rough low-res polygons)
+            const continents = [
+                // North America rough
+                [[-168,72],[-135,82],[-100,80],[-52,70],[-52,25],[-80,10],[-100,25],[-130,20],[-160,30],[-168,72]],
+                // South America
+                [[-81,12],[-35,5],[-30,-55],[-70,-55],[-75,-20],[-81,12]],
+                // Europe
+                [[-10,35],[40,35],[40,70],[-10,70],[-10,35]],
+                // Africa
+                [[-18,37],[51,30],[35,-35],[-18,-35],[-18,37]],
+                // Asia
+                [[40,70],[170,70],[170,20],[51,30],[40,35],[40,70]],
+                // Australia
+                [[110,-10],[155,-10],[155,-45],[110,-45],[110,-10]],
+                // Antarctica
+                [[-180,-60],[180,-60],[180,-90],[-180,-90],[-180,-60]],
+                // Greenland rough
+                [[-75,60],[-20,60],[-20,85],[-75,85],[-75,60]],
+                // Other islands rough, e.g. New Zealand
+                [[165,-30],[180,-30],[180,-50],[165,-50],[165,-30]]
+            ];
+            continents.forEach(poly => {
+                ctx.beginPath();
+                poly.forEach(([lon, lat], i) => {
+                    const x = (lon + 180) / 360 * 720;
+                    const y = (90 - lat) / 180 * 360;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                });
+                ctx.closePath();
+                ctx.fillStyle = '#228B22'; // Land day
+                ctx.fill();
+                ctx.strokeStyle = '#000000';
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            });
 
             // Grid
             ctx.strokeStyle = '#FFFFFF';
@@ -143,7 +203,7 @@
             for (let i = 0; i <= 720; i += 72) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 360); ctx.stroke(); }
             for (let i = 0; i <= 360; i += 36) { ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(720, i); ctx.stroke(); }
 
-            // Accurate night shade using pixel data
+            // Apply night shade by darkening pixels
             const imageData = ctx.getImageData(0, 0, 720, 360);
             const data = imageData.data;
             const degToRad = Math.PI / 180;
@@ -162,10 +222,9 @@
                     const i = (y * 720 + x) * 4;
 
                     if (cosZ < 0) {
-                        data[i] = 0;     // R
-                        data[i + 1] = 0; // G
-                        data[i + 2] = 0; // B
-                        data[i + 3] = 255; // A
+                        data[i] = Math.floor(data[i] * 0.3);     // Darken R
+                        data[i + 1] = Math.floor(data[i + 1] * 0.3); // Darken G
+                        data[i + 2] = Math.floor(data[i + 2] * 0.3); // Darken B
                     }
                 }
             }
@@ -208,9 +267,13 @@
             }
         }
 
-        // Initial call and auto-update every minute
-        calculate();
-        setInterval(calculate, 60000);
+        // Set initial datetime to current
+        const now = new Date();
+        document.getElementById('datetime').value = now.toISOString().slice(0, 16);
+
+        // Initial call and live
+        calculate(true);
+        toggleLive();
     </script>
 </body>
 </html>
