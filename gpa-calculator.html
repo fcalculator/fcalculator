@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accurately calculate your Grade Point Average (GPA) using this comprehensive tool. Input course credits and grades to determine semester or cumulative GPA, with detailed explanations of grading scales and formulas for academic planning.">
+    <meta name="keywords" content="GPA calculator, calculate GPA, college GPA, cumulative GPA, GPA formula, grading scale, academic performance">
+    <title>GPA Calculator - FCalculator.com</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- Za PDF generaciju -->
+</head>
+<body>
+    <header>
+        <h1>GPA Calculator</h1>
+        <p>Grade Point Average (GPA) represents a standardized measure of academic achievement, computed as the weighted average of grades across courses, factoring in credit hours. This calculator enables precise computation of semester or cumulative GPA, supporting standard 4.0 scales with plus/minus variations. Understanding GPA is essential for students tracking progress, meeting graduation requirements, or applying for scholarships and graduate programs. The formula involves multiplying each course's grade value by its credits, summing these quality points, and dividing by total credits attempted.</p>
+    </header>
+    
+    <main>
+        <section id="calculator-section">
+            <h2>Calculate Your GPA</h2>
+            <p>Use this tool to input your courses, credits, and grades. The GPA is calculated using the formula: GPA = (Sum of (Grade Value × Credits)) / Total Credits. Standard grading scale includes A (4.0), B (3.0), etc., with adjustments for plus/minus.</p>
+            
+            <div id="gpa-form">
+                <div id="courses">
+                    <!-- Početni red za kurs -->
+                    <div class="course-row">
+                        <input type="text" placeholder="Course Name (optional)" class="course-name">
+                        <input type="number" placeholder="Credits" class="credits" min="1" step="0.5">
+                        <select class="grade">
+                            <option value="">Select Grade</option>
+                            <option value="4.3">A+</option>
+                            <option value="4.0">A</option>
+                            <option value="3.7">A-</option>
+                            <option value="3.3">B+</option>
+                            <option value="3.0">B</option>
+                            <option value="2.7">B-</option>
+                            <option value="2.3">C+</option>
+                            <option value="2.0">C</option>
+                            <option value="1.7">C-</option>
+                            <option value="1.3">D+</option>
+                            <option value="1.0">D</option>
+                            <option value="0.7">D-</option>
+                            <option value="0.0">F</option>
+                        </select>
+                        <button class="remove-course">Remove</button>
+                    </div>
+                </div>
+                <button id="add-course">Add Course</button>
+                <button id="calculate-gpa">Calculate GPA</button>
+                <div id="result">
+                    <h3>Your GPA: <span id="gpa-value">0.00</span></h3>
+                    <button id="save-pdf">Save as PDF</button>
+                </div>
+            </div>
+            
+            <h3>Grading Scale Table</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Letter Grade</th>
+                        <th>Grade Value</th>
+                        <th>Percentage Range</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>A+</td><td>4.3</td><td>97-100%</td></tr>
+                    <tr><td>A</td><td>4.0</td><td>93-96%</td></tr>
+                    <tr><td>A-</td><td>3.7</td><td>90-92%</td></tr>
+                    <tr><td>B+</td><td>3.3</td><td>87-89%</td></tr>
+                    <tr><td>B</td><td>3.0</td><td>83-86%</td></tr>
+                    <tr><td>B-</td><td>2.7</td><td>80-82%</td></tr>
+                    <tr><td>C+</td><td>2.3</td><td>77-79%</td></tr>
+                    <tr><td>C</td><td>2.0</td><td>73-76%</td></tr>
+                    <tr><td>C-</td><td>1.7</td><td>70-72%</td></tr>
+                    <tr><td>D+</td><td>1.3</td><td>67-69%</td></tr>
+                    <tr><td>D</td><td>1.0</td><td>63-66%</td></tr>
+                    <tr><td>D-</td><td>0.7</td><td>60-62%</td></tr>
+                    <tr><td>F</td><td>0.0</td><td>Below 60%</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>Example GPA Calculations</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Credits</th>
+                        <th>Grade</th>
+                        <th>Quality Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Math</td><td>4</td><td>A (4.0)</td><td>16.0</td></tr>
+                    <tr><td>English</td><td>3</td><td>B+ (3.3)</td><td>9.9</td></tr>
+                    <tr><td>Science</td><td>3</td><td>A- (3.7)</td><td>11.1</td></tr>
+                    <tr><td>Total</td><td>10</td><td>-</td><td>37.0</td></tr>
+                </tbody>
+            </table>
+            <p>GPA = 37.0 / 10 = 3.70. For more student tools, check our <a href="/grade-calculator.html">Grade Calculator</a>.</p>
+            
+            <!-- Mali share button -->
+            <button onclick="sharePage()">Share this GPA Tool</button>
+        </section>
+        
+        <section id="explanation-section">
+            <h2>Understanding GPA and Its Importance</h2>
+            <p>GPA serves as a key metric in evaluating student performance across educational institutions, particularly in higher education systems like those in the United States. It quantifies academic success by averaging grades weighted by course credits, providing a holistic view of achievement over a semester or entire program. Institutions often use GPA thresholds for honors, probation, or eligibility in extracurricular activities. Variations exist globally; for instance, some countries employ percentage-based systems, while others use scales up to 10.0.</p>
+            <p>To raise your GPA, focus on consistent study habits, seeking tutoring when needed, and prioritizing high-credit courses. Data from educational resources indicate that maintaining a GPA above 3.0 significantly enhances opportunities for internships and employment. In the lower part of this explanation, reference sources like the U.S. Department of Education provide further insights into grading standards.</p>
+            <p>For related calculations in student category, explore our <a href="/grade-calculator.html">Grade Calculator</a> or other tools on FCalculator.com.</p>
+        </section>
+    </main>
+    
+    <section id="related-resources">
+        <h2>Related Resources</h2>
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Grading_in_education" target="_blank" rel="noopener noreferrer">Wikipedia: Grading in Education</a> - Comprehensive overview of grading systems worldwide.</li>
+            <li><a href="https://www.ed.gov/" target="_blank" rel="noopener noreferrer">U.S. Department of Education</a> - Official guidelines on academic standards and GPA implications.</li>
+            <li><a href="https://nces.ed.gov/" target="_blank" rel="noopener noreferrer">National Center for Education Statistics</a> - Data on GPA trends and educational outcomes.</li>
+        </ul>
+    </section>
+    
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    </footer>
+    
+    <script>
+        // JS za calculator (autor: Ivan Brkic)
+        const addCourseBtn = document.getElementById('add-course');
+        const coursesDiv = document.getElementById('courses');
+        const calculateBtn = document.getElementById('calculate-gpa');
+        const gpaValue = document.getElementById('gpa-value');
+        const savePdfBtn = document.getElementById('save-pdf');
+
+        addCourseBtn.addEventListener('click', () => {
+            const newRow = coursesDiv.firstElementChild.cloneNode(true);
+            newRow.querySelector('.remove-course').addEventListener('click', (e) => e.target.parentElement.remove());
+            coursesDiv.appendChild(newRow);
+        });
+
+        calculateBtn.addEventListener('click', () => {
+            let totalPoints = 0;
+            let totalCredits = 0;
+            const rows = coursesDiv.querySelectorAll('.course-row');
+            rows.forEach(row => {
+                const credits = parseFloat(row.querySelector('.credits').value) || 0;
+                const grade = parseFloat(row.querySelector('.grade').value) || 0;
+                totalPoints += grade * credits;
+                totalCredits += credits;
+            });
+            const gpa = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : 0.00;
+            gpaValue.textContent = gpa;
+        });
+
+        savePdfBtn.addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(12);
+            doc.text('Your GPA Calculation', 105, 20, { align: 'center' });
+            doc.text(`GPA: ${gpaValue.textContent}`, 105, 40, { align: 'center' });
+            // Dodaj table iz rezultata ako treba
+            doc.setFontSize(10);
+            doc.text('File created on Fcalculator.com', 105, 280, { align: 'center' });
+            doc.save('gpa-calculation.pdf');
+        });
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'GPA Calculator',
+                    text: 'Calculate your GPA easily!',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+    </script>
+</body>
+</html>
