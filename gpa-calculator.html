@@ -25,8 +25,8 @@
                     <!-- Početni red za kurs -->
                     <div class="course-row">
                         <input type="text" placeholder="Course Name (optional)" class="course-name">
-                        <input type="number" placeholder="Credits" class="credits" min="1" step="0.5">
-                        <select class="grade">
+                        <input type="number" placeholder="Credits" class="credits" min="1" step="0.5" required>
+                        <select class="grade" required>
                             <option value="">Select Grade</option>
                             <option value="4.3">A+</option>
                             <option value="4.0">A</option>
@@ -48,7 +48,7 @@
                 <button id="add-course">Add Course</button>
                 <button id="calculate-gpa">Calculate GPA</button>
                 <div id="result">
-                    <h3>Your GPA: <span id="gpa-value">0.00</span></h3>
+                    <h3>Your GPA: <span id="gpa-value" class="result">0.00</span></h3>
                     <button id="save-pdf">Save as PDF</button>
                 </div>
             </div>
@@ -138,9 +138,27 @@
         });
 
         calculateBtn.addEventListener('click', () => {
+            const rows = coursesDiv.querySelectorAll('.course-row');
+            let isValid = true;
+            rows.forEach(row => {
+                const credits = row.querySelector('.credits');
+                const grade = row.querySelector('.grade');
+                if (!credits.value || !grade.value) {
+                    isValid = false;
+                    credits.style.border = '1px solid red';
+                    grade.style.border = '1px solid red';
+                } else {
+                    credits.style.border = '';
+                    grade.style.border = '';
+                }
+            });
+            if (!isValid || rows.length === 0) {
+                alert('Please fill in credits and grades for all courses.');
+                return;
+            }
+
             let totalPoints = 0;
             let totalCredits = 0;
-            const rows = coursesDiv.querySelectorAll('.course-row');
             rows.forEach(row => {
                 const credits = parseFloat(row.querySelector('.credits').value) || 0;
                 const grade = parseFloat(row.querySelector('.grade').value) || 0;
@@ -156,11 +174,40 @@
             const doc = new jsPDF();
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(12);
-            doc.text('Your GPA Calculation', 105, 20, { align: 'center' });
-            doc.text(`GPA: ${gpaValue.textContent}`, 105, 40, { align: 'center' });
-            // Dodaj table iz rezultata ako treba
+            let yPos = 20;
+
+            doc.text('Your GPA Calculation', 105, yPos, { align: 'center' });
+            yPos += 20;
+
+            // Dodaj table sa kursovima
+            doc.text('Courses:', 20, yPos);
+            yPos += 10;
+            const rows = coursesDiv.querySelectorAll('.course-row');
+            let totalPoints = 0;
+            let totalCredits = 0;
+            rows.forEach((row, index) => {
+                const name = row.querySelector('.course-name').value || `Course ${index + 1}`;
+                const credits = parseFloat(row.querySelector('.credits').value) || 0;
+                const gradeVal = parseFloat(row.querySelector('.grade').value) || 0;
+                const gradeText = row.querySelector('.grade').options[row.querySelector('.grade').selectedIndex].text;
+                const qualityPoints = (gradeVal * credits).toFixed(2);
+                doc.text(`${name}: Credits: ${credits}, Grade: ${gradeText} (${gradeVal}), Quality Points: ${qualityPoints}`, 20, yPos);
+                yPos += 10;
+                totalPoints += parseFloat(qualityPoints);
+                totalCredits += credits;
+            });
+
+            yPos += 10;
+            doc.text(`Total Credits: ${totalCredits.toFixed(2)}`, 20, yPos);
+            yPos += 10;
+            doc.text(`Total Quality Points: ${totalPoints.toFixed(2)}`, 20, yPos);
+            yPos += 10;
+            doc.text(`GPA: ${gpaValue.textContent}`, 20, yPos);
+
+            // Footer
             doc.setFontSize(10);
             doc.text('File created on Fcalculator.com', 105, 280, { align: 'center' });
+
             doc.save('gpa-calculation.pdf');
         });
 
