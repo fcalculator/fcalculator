@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Zone Calculator - Enhanced Tool for Cross-Continental Time Alignment</title>
-    <meta name="description" content="Leverage this sophisticated time zone calculator for precise conversions and comparisons across international boundaries. Featuring dynamic hourly visualizations, overlap suggestions for meetings, and adjustments for daylight saving variations, it supports global professionals in synchronizing schedules with UTC precision and historical context.">
+    <title>Time Zone Calculator - Precision Tool for International Time Zone Synchronization</title>
+    <meta name="description" content="Harness this advanced time zone calculator to perform accurate conversions and visualizations across global regions, incorporating daylight saving adjustments and UTC references. Tailored for professionals in international business, travel logistics, and remote team management, it offers hourly timelines, overlap analysis for scheduling, and in-depth insights into temporal dynamics.">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <style>
         /* Dodatni inline CSS za unikatan izgled, ali glavni je iz style.css */
@@ -23,27 +23,27 @@
 <body>
     <header>
         <h1>Time Zone Calculator</h1>
-        <p>Engage with the nuances of planetary time division through this advanced calculator, crafted to execute conversions between disparate time zones with consideration for UTC baselines, seasonal daylight adjustments, and longitudinal variances. It equips users in fields like international trade, aerospace navigation, and cross-border research to achieve seamless temporal harmony.</p>
+        <p>Immerse yourself in the science of global chronometry with this specialized calculator, engineered to facilitate seamless conversions among diverse time zones. By integrating Coordinated Universal Time (UTC) as the pivotal benchmark, alongside accommodations for daylight saving protocols and meridional divergences, it empowers users across sectors such as multinational corporations, aeronautical operations, and academic collaborations to orchestrate activities with unparalleled temporal precision.</p>
     </header>
 
     <main>
         <section>
-            <h2>Historical Development and Operational Principles of Time Zones</h2>
-            <p>The establishment of time zones traces back to the late 19th century, prompted by the proliferation of rail networks and telegraph systems that demanded a departure from localized solar reckonings. Pioneered by figures such as Sir Sandford Fleming, the framework segmented the Earth into 24 longitudinal bands, each ideally encompassing 15 degrees, anchored to the Greenwich Prime Meridian as the UTC zero point.</p>
-            <p>In today's interconnected landscape, time zones underpin essential infrastructures: synchronized clocks drive stock market transactions, while precise offsets enable satellite constellation management. The incorporation of cesium atomic clocks and occasional leap second insertions maintains accuracy down to nanoseconds, crucial for systems like global positioning and algorithmic trading platforms.</p>
-            <p>Daylight saving mechanisms, first implemented amid energy shortages in World War I, introduce periodic shifts in numerous jurisdictions, including much of Europe and North America, to extend evening daylight. This tool adapts to these fluctuations, drawing from standardized international databases to ensure reliable outputs across over 400 recognized zones.</p>
-            <p>Professionals harness such conversions to streamline remote collaborations, averting scheduling conflicts in distributed teams. For voyagers, it facilitates physiological adaptations to new chronobiological environments, alleviating disruptions from transmeridian travel. In scientific endeavors, it standardizes timestamps for data integrity in multinational experiments.</p>
-            <p>At its core, the mathematics of conversion subtracts source offsets from target ones relative to UTC: time in destination = source time + (target_offset - source_offset). Exemplifying this, shifting from Central European Time (UTC +1) to Eastern Daylight Time (UTC -4) entails a -5 hour modification, with safeguards for date boundary crossings via modular operations.</p>
+            <h2>Origins and Functional Framework of Worldwide Time Zones</h2>
+            <p>The inception of time zones dates to the industrial era of the 1800s, catalyzed by the exigencies of expansive railroad systems and telegraphic networks that supplanted parochial solar chronologies. Championed by innovators like Sir Sandford Fleming, this paradigm partitioned the terrestrial sphere into 24 meridional sectors, each nominally 15 degrees wide, calibrated from the Greenwich Prime Meridian as the UTC origin.</p>
+            <p>In the digital age, time zones constitute the backbone of myriad systems: harmonized chronometers propel securities exchanges, whereas exacting offsets underpin orbital mechanics in satellite arrays. The assimilation of atomic chronometry, including cesium-based standards and intermittent leap second calibrations, upholds precision to femtosecond levels, indispensable for technologies spanning geospatial positioning to quantum computing interfaces.</p>
+            <p>Seasonal daylight saving implementations, originated during wartime conservation efforts, impose temporal displacements in various polities, notably across continental Europe and the Americas, to augment usable daylight intervals. This instrument dynamically reconciles these perturbations, leveraging codified global registries to yield dependable computations spanning hundreds of delineated zones.</p>
+            <p>Experts deploy these conversions to optimize distributed workflows, circumventing dissonances in virtual consortia. Voyagers exploit it for acclimating to altered diurnal patterns, attenuating transzonal fatigue syndromes. In empirical pursuits, it unifies chronological annotations, safeguarding dataset coherence in transcontinental inquiries.</p>
+            <p>Fundamentally, derivations entail offset reconciliations vis-à-vis UTC: destination chronos = origin chronos + (destination displacement - origin displacement). To illustrate, transposing from Mountain Daylight Time (UTC -6) to Arabian Standard Time (UTC +3) mandates a +9 hour augmentation, augmented by modular arithmetic to navigate diurnal thresholds.</p>
             <!-- Mali share button u tekstu -->
-            <button onclick="shareResults()" style="background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer;">Share this Analysis</button>
+            <button onclick="shareResults()" style="background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer;">Share this Exposition</button>
         </section>
 
         <section>
-            <h2>Mastering the Time Zone Calculator Interface</h2>
-            <p>Initiate by reviewing the pre-loaded locations (Berlin, New York, Tokyo), then search to add more cities or zones with enhanced recognition for global entries. Reorder or remove as required, and manipulate the slider to explore shifted timelines. The resulting table depicts 24-hour progressions color-coded for daylight and nocturnal periods, complemented by automated suggestions for overlapping slots suitable for virtual gatherings.</p>
+            <h2>Navigating the Time Zone Calculator Features</h2>
+            <p>Commence with the default ensemble of Berlin, New York, and Tokyo; subsequently, query additional metropolises or zones via the search mechanism, benefiting from expanded recognition capabilities. Manipulate sequences through reordering or excision, and traverse temporal shifts with the slider. The ensuing matrix renders 24-hour evolutions, differentiated by chromatic indicators for diurnal and nocturnal phases, augmented by algorithmic propositions for convergent intervals apt for collaborative engagements.</p>
             <form id="timeForm">
                 <label for="searchLocation">Search and Add Location (City or Time Zone):</label>
-                <input type="text" id="searchLocation" placeholder="e.g., Brasilia, Bucharest, or CET">
+                <input type="text" id="searchLocation" placeholder="e.g., Zagreb, Brasilia, Bucharest, or CET">
                 <button type="button" onclick="addLocation()">Add</button>
                 
                 <div id="locationsList"></div>
@@ -65,18 +65,18 @@
         </section>
 
         <section>
-            <h2>Illustrative Scenarios in Global Time Coordination</h2>
-            <p>Within a transnational enterprise based in Berlin (UTC +2 during summer), aligning with counterparts in New York (UTC -4) and Tokyo (UTC +9) necessitates additions of -6 hours and +7 hours, respectively, frequently yielding compromise windows in overlapping afternoons or mornings.</p>
-            <p>For coordinators of worldwide seminars, translating a 2:00 PM commencement in Brasilia (UTC -3) to attendees in Bucharest (UTC +3) results in 8:00 PM, underscoring the calculator's utility in enhancing participation through judicious timing selections.</p>
+            <h2>Exemplary Applications in Transnational Time Harmonization</h2>
+            <p>In a conglomerate anchored in Zagreb (UTC +2 in summer), interfacing with affiliates in Brasilia (UTC -3) and Bucharest (UTC +3) requires subtractions of 5 hours and additions of 1 hour, correspondingly, often culminating in equilibrated segments during mutual business hours.</p>
+            <p>For overseers of transnational symposia, recalibrating a 11:00 AM inception in New York (UTC -4) for constituencies in Tokyo (UTC +9) equates to 12:00 AM the following day, highlighting the calculator's efficacy in fostering inclusive temporal frameworks.</p>
             <p>Internal links for related tools: <a href="/age.html">Age Calculator</a>, <a href="/safe-password-generator.html">Safe Password Generator</a>.</p>
         </section>
 
         <section>
             <h2>Related Resources</h2>
             <ul>
-                <li><a href="https://en.wikipedia.org/wiki/Time_zone" target="_blank" rel="noopener noreferrer">Wikipedia: Time Zone - Extensive exploration of origins and implementations</a></li>
-                <li><a href="https://www.nist.gov/pml/time-and-frequency-division" target="_blank" rel="noopener noreferrer">NIST: Time and Frequency Division - Official benchmarks for temporal accuracy</a></li>
-                <li><a href="https://www.timeanddate.com/time/zones/" target="_blank" rel="noopener noreferrer">Timeanddate.com: Time Zone Abbreviations - Comprehensive worldwide catalog</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Time_zone" target="_blank" rel="noopener noreferrer">Wikipedia: Time Zone - Thorough examination of genesis and mechanics</a></li>
+                <li><a href="https://www.nist.gov/pml/time-and-frequency-division" target="_blank" rel="noopener noreferrer">NIST: Time and Frequency Division - Definitive criteria for chronometric fidelity</a></li>
+                <li><a href="https://www.timeanddate.com/time/zones/" target="_blank" rel="noopener noreferrer">Timeanddate.com: Time Zone Abbreviations - Exhaustive international compendium</a></li>
             </ul>
         </section>
     </main>
@@ -87,40 +87,35 @@
 
     <script>
         // Autor: Ivan Brkic
-        // JS za enhanced time zone calculator, sa proširenom listom gradova i boljim searchom
+        // JS za precision time zone calculator, sa točnim Intl formattingom za vremena i DST
 
         const timeZones = [
-            { city: "New York", zone: "America/New_York", offset: "-4:00" }, // EDT in Aug 2025
-            { city: "Berlin", zone: "Europe/Berlin", offset: "+2:00" }, // CEST
+            { city: "New York", zone: "America/New_York", offset: "-4:00" },
+            { city: "Berlin", zone: "Europe/Berlin", offset: "+2:00" },
             { city: "Tokyo", zone: "Asia/Tokyo", offset: "+9:00" },
             { city: "Sydney", zone: "Australia/Sydney", offset: "+10:00" },
             { city: "Moscow", zone: "Europe/Moscow", offset: "+3:00" },
             { city: "Beijing", zone: "Asia/Shanghai", offset: "+8:00" },
-            { city: "Los Angeles", zone: "America/Los_Angeles", offset: "-7:00" }, // PDT
+            { city: "Los Angeles", zone: "America/Los_Angeles", offset: "-7:00" },
             { city: "Paris", zone: "Europe/Paris", offset: "+2:00" },
             { city: "Dubai", zone: "Asia/Dubai", offset: "+4:00" },
-            { city: "Bucharest", zone: "Europe/Bucharest", offset: "+3:00" }, // EEST
+            { city: "Bucharest", zone: "Europe/Bucharest", offset: "+3:00" },
             { city: "Brasilia", zone: "America/Sao_Paulo", offset: "-3:00" },
-            { city: "London", zone: "Europe/London", offset: "+1:00" }, // BST
+            { city: "London", zone: "Europe/London", offset: "+1:00" },
             { city: "New Delhi", zone: "Asia/Kolkata", offset: "+5:30" },
             { city: "Cape Town", zone: "Africa/Johannesburg", offset: "+2:00" },
             { city: "Rio de Janeiro", zone: "America/Sao_Paulo", offset: "-3:00" },
-            { city: "Mexico City", zone: "America/Mexico_City", offset: "-5:00" }, // CDT
+            { city: "Mexico City", zone: "America/Mexico_City", offset: "-5:00" },
             { city: "Toronto", zone: "America/Toronto", offset: "-4:00" },
             { city: "Singapore", zone: "Asia/Singapore", offset: "+8:00" },
             { city: "Hong Kong", zone: "Asia/Hong_Kong", offset: "+8:00" },
             { city: "Seoul", zone: "Asia/Seoul", offset: "+9:00" },
-            // Dodano više za bolji search i pokrivenost
+            { city: "Zagreb", zone: "Europe/Zagreb", offset: "+2:00" },
+            // Dodano više za bolji search i pokrivenost, uključujući Zagreb
         ];
 
         let locations = [];
         let currentTime = new Date();
-
-        function detectCurrentZone() {
-            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            const city = tz.split('/')[1]?.replace('_', ' ') || 'UTC';
-            addLocation(city, true); // Fallback ako nije u listi
-        }
 
         function addLocation(searchTerm = document.getElementById('searchLocation').value, silent = false) {
             if (!searchTerm) return;
@@ -176,17 +171,11 @@
             updateTable();
         }
 
-        function parseOffset(offsetStr) {
-            const sign = offsetStr.startsWith('-') ? -1 : 1;
-            const [hours, minutes] = offsetStr.replace(/[+-]/, '').split(':').map(Number);
-            return sign * ((hours || 0) * 60 + (minutes || 0));
-        }
-
         function updateTable() {
             if (locations.length === 0) return;
 
             const sliderValue = parseInt(document.getElementById('timeSlider').value);
-            const baseTime = new Date(currentTime.getTime() + sliderValue * 3600000);
+            const baseMillis = currentTime.getTime() + sliderValue * 3600000;
 
             const container = document.getElementById('timeTableContainer');
             container.innerHTML = '';
@@ -212,14 +201,16 @@
                 const row = document.createElement('tr');
                 row.innerHTML = `<td class="result">${loc.city}</td>`;
                 
-                const locOffset = parseOffset(loc.offset);
                 for (let h = 0; h < 24; h++) {
                     const td = document.createElement('td');
-                    const hourTime = new Date(baseTime.getTime() + (h * 3600000) - (locOffset * 60000)); // Corrected adjustment for local time
-                    td.textContent = hourTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                    const localHour = hourTime.getHours();
-                    td.className = (localHour >= 8 && localHour < 18) ? 'day' : 'night'; // Based on local hour
-                    td.onclick = () => scheduleEvent(loc.city, hourTime);
+                    const hourMillis = baseMillis + h * 3600000;
+                    const hourDate = new Date(hourMillis);
+                    const timeOptions = { timeZone: loc.zone, hour: '2-digit', minute: '2-digit', hour12: false };
+                    td.textContent = hourDate.toLocaleTimeString('en-US', timeOptions);
+                    const hourOptions = { timeZone: loc.zone, hour: 'numeric', hour12: false };
+                    const localHour = parseInt(hourDate.toLocaleTimeString('en-US', hourOptions));
+                    td.className = (localHour >= 8 && localHour < 18) ? 'day' : 'night';
+                    td.onclick = () => scheduleEvent(loc.city, hourDate, loc.zone);
                     row.appendChild(td);
                 }
                 tbody.appendChild(row);
@@ -228,27 +219,30 @@
             table.appendChild(tbody);
             container.appendChild(table);
 
-            suggestMeetings();
+            suggestMeetings(baseMillis);
         }
 
-        function scheduleEvent(city, time) {
-            alert(`Scheduled event in ${city} at ${time.toLocaleString()}. Share via link or calendar.`);
-            // Možeš dodati više, npr. generate ICS
+        function scheduleEvent(city, date, zone) {
+            const options = { timeZone: zone, dateStyle: 'full', timeStyle: 'long' };
+            alert(`Scheduled event in ${city} at ${date.toLocaleString('en-US', options)}. Share via link or calendar.`);
         }
 
-        function suggestMeetings() {
+        function suggestMeetings(baseMillis) {
             const list = document.getElementById('meetingList');
             list.innerHTML = '';
-            // Improved logic: find common day hours across locations
+            // Check for each UTC hour if all locations have local working hours
             for (let h = 0; h < 24; h++) {
+                const hourMillis = baseMillis + h * 3600000;
+                const hourDate = new Date(hourMillis);
                 const isOverlap = locations.every(loc => {
-                    const locOffset = parseOffset(loc.offset);
-                    const adjustedH = (h + (locOffset / 60)) % 24;
-                    return adjustedH >= 8 && adjustedH < 18;
+                    const hourOptions = { timeZone: loc.zone, hour: 'numeric', hour12: false };
+                    const localHour = parseInt(hourDate.toLocaleTimeString('en-US', hourOptions));
+                    return localHour >= 8 && localHour < 18;
                 });
                 if (isOverlap) {
                     const li = document.createElement('li');
-                    li.textContent = `Suggested: ${h}:00 (UTC) - Overlap in working hours for all locations`;
+                    const utcTime = hourDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
+                    li.textContent = `Suggested: ${utcTime} UTC - Overlap in working hours for all locations`;
                     list.appendChild(li);
                 }
             }
@@ -258,7 +252,7 @@
             if (navigator.share) {
                 navigator.share({
                     title: 'Time Zone Comparison',
-                    text: 'View my international time alignment!',
+                    text: 'Discover my cross-timezone schedule!',
                     url: window.location.href
                 });
             } else {
@@ -270,7 +264,6 @@
         addLocation('Berlin', true);
         addLocation('New York', true);
         addLocation('Tokyo', true);
-        detectCurrentZone(); // Optional addition if needed
         setInterval(() => { currentTime = new Date(); updateTable(); }, 60000); // Live update
         updateTable();
     </script>
