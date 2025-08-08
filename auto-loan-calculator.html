@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf-autotable.min.js"></script>
 </head>
 <body>
     <header>
@@ -166,7 +165,6 @@
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            doc.setFont("helvetica", "normal");
             doc.setFontSize(12);
 
             // Naslov - svjetlo plava i bold
@@ -196,29 +194,26 @@
             doc.text(`Total Interest Paid: ${document.getElementById('total-interest').textContent}`, 105, 105, { align: "center" });
             doc.text(`Total Cost: ${document.getElementById('total-cost').textContent}`, 105, 110, { align: "center" });
 
-            // Amortizacija - crni tekst, bold naslov, tablica sa light gray borders
+            // Amortizacija - crni tekst, bold naslov, fixed-width font za tablicu
             doc.setTextColor(0, 0, 0);
             doc.setFont("helvetica", "bold");
             doc.text("Amortization Schedule:", 105, 125, { align: "center" });
-
-            // Pripremi podatke za autoTable
-            const tableData = [];
+            doc.setFont("courier", "normal"); // fixed-width za bolju poravnatost
+            let yPos = 135;
+            doc.text("Year   Interest      Principal     Ending Balance", 105, yPos, { align: "center" });
+            yPos += 5;
+            doc.setLineWidth(0.2);
+            doc.setDrawColor(211, 211, 211); // light gray line
+            doc.line(50, yPos, 160, yPos); // horizontal line
+            yPos += 5;
             const rows = document.querySelectorAll('#amortization-table tbody tr');
             rows.forEach(row => {
                 const cells = row.querySelectorAll('td');
-                tableData.push([cells[0].textContent, `$${cells[1].textContent}`, `$${cells[2].textContent}`, `$${cells[3].textContent}`]);
-            });
-
-            doc.autoTable({
-                startY: 130,
-                head: [['Year', 'Interest', 'Principal', 'Ending Balance']],
-                body: tableData,
-                theme: 'grid',
-                styles: { cellPadding: 2, fontSize: 10, textColor: [0, 0, 0], lineColor: [211, 211, 211] }, // light gray borders
-                headStyles: { fillColor: [173, 216, 230], textColor: [0, 0, 0] }, // light blue header
-                alternateRowStyles: { fillColor: [240, 240, 240] }, // light gray alternating rows
-                margin: { left: 20, right: 20 },
-                tableWidth: 'wrap'
+                const rowText = `${cells[0].textContent.padEnd(6)} $${cells[1].textContent.padEnd(12)} $${cells[2].textContent.padEnd(12)} $${cells[3].textContent}`;
+                doc.text(rowText, 105, yPos, { align: "center" });
+                yPos += 5;
+                doc.line(50, yPos, 160, yPos); // horizontal line after each row
+                yPos += 5;
             });
 
             // Footer
