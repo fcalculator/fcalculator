@@ -11,21 +11,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <style>
-        /* Responsive styles for mobile friendliness with full width expansion */
-        .wide-section {
-            width: 100%;
-            max-width: none;
-            padding: 0 10px;
-            box-sizing: border-box;
-        }
+        /* Responsive styles for mobile friendliness */
         table {
             width: 100%;
             overflow-x: auto;
             display: block;
-        }
-        canvas {
-            width: 100% !important;
-            height: auto !important;
         }
         @media (max-width: 768px) {
             table thead {
@@ -51,20 +41,21 @@
                 font-weight: bold;
                 text-align: left;
             }
-            .wide-section {
-                padding: 0;
-            }
         }
         h4.day-title {
             text-align: center;
         }
         .center-button {
             text-align: center;
-            margin-top: 20px;
         }
-        .add-row-btn {
-            font-size: small;
-            padding: 5px 10px;
+        /* Dodano za centriranje Step 2, Step 3 i rezultata */
+        #step2, #result {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #step2 table, #result table, #timelineChart {
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -73,7 +64,7 @@
         <h1>Travel Itinerary Planner</h1>
         <p>This sophisticated travel itinerary planner employs a step-by-step methodology to streamline trip organization, incorporating date selection, granular daily activity inputs, and automated budget aggregation. By allowing users to define travel dates first, then detail activities and costs per day, and finally generate comprehensive summaries, the tool ensures meticulous planning that balances time, experiences, and finances. Such structured approaches are essential for managing complex vacations, where factors like daily expense variations and cumulative budgeting play critical roles in preventing overspending and enhancing enjoyment. Industry insights from tourism analytics suggest that detailed itineraries with financial tracking can improve resource allocation, potentially lowering total costs by 15-30% through informed adjustments and proactive planning.</p>
     </header>
-    
+   
     <main>
         <section id="introduction">
             <h2>Understanding Dynamic Travel Itinerary Planning</h2>
@@ -94,7 +85,7 @@
                 }
             </script>
         </section>
-        
+       
         <section id="calculator">
             <h2>Plan Your Trip Step by Step</h2>
             <p>Engage in a structured planning process divided into progressive steps, ensuring each phase builds upon the previous for accurate and thorough trip organization. This method supports detailed budgeting and activity logging, tailored to the exact duration of your journey.</p>
@@ -103,14 +94,14 @@
                 <p>Initiate your planning by specifying the start and end dates. This determines the trip's duration and unlocks subsequent steps for daily detailing.</p>
                 <label for="startDate">Start Date:</label>
                 <input type="date" id="startDate" required>
-                
+               
                 <label for="endDate">End Date:</label>
                 <input type="date" id="endDate" required>
-                
+               
                 <button type="button" onclick="proceedToStep2()">Proceed to Step 2</button>
             </form>
-            
-            <div id="step2" class="wide-section" style="display:none;">
+           
+            <div id="step2" style="display:none;">
                 <h3>Step 2: Enter Daily Activities and Budgets</h3>
                 <p>For each day of your trip, use the tables below to add activities with time slots and costs. Click 'Add Row' to include multiple entries per day, such as '09:00 - Coffee' at $20 or 'Afternoon - Dinner' at $40. This allows for comprehensive daily planning with flexible expense tracking.</p>
                 <div id="dailyInputs"></div>
@@ -118,8 +109,8 @@
                     <button type="button" onclick="proceedToStep3()">Proceed to Step 3</button>
                 </div>
             </div>
-            
-            <div id="result" class="wide-section" style="display:none;">
+           
+            <div id="result" style="display:none;">
                 <h3>Step 3: Your Generated Travel Itinerary with Budget (Automated)</h3>
                 <p>The following output automatically compiles your inputs into a detailed table with daily subtotals and an overall budget, visualized through a chart for easy analysis.</p>
                 <table id="itineraryTable">
@@ -133,15 +124,15 @@
                     </thead>
                     <tbody></tbody>
                 </table>
-                
+               
                 <canvas id="timelineChart" width="400" height="200"></canvas>
-                
+               
                 <p class="result-green">Total Days: <span id="totalDays"></span></p>
                 <p class="result-green">Total Budget Required: $<span id="totalBudget"></span></p>
                 <button onclick="saveAsPDF()">Save as PDF</button>
             </div>
         </section>
-        
+       
         <section id="how-to-use">
             <h2>How to Use the Step-by-Step Travel Itinerary Planner</h2>
             <p>This planner's phased design facilitates intuitive navigation, from foundational date setup to intricate daily entries and automated summaries, making it suitable for diverse travel scenarios like family vacations or solo adventures. Detailed guidance ensures users can leverage its full potential for optimized outcomes.</p>
@@ -151,15 +142,15 @@
                 <li>Advance to Step 3 to automatically view the compiled itinerary, budget totals, and visual chart for review and adjustments.</li>
                 <li>Export the plan via PDF for offline access or sharing, preserving all financial and scheduling data.</li>
             </ol>
-            <p>Enhance your financial planning with our <a href="/mortgage-calculator.html">Mortgage Calculator</a> or <a href="/loan-calculator.html">Loan Calculator</a> for integrated workflow efficiency.</p>
+            <p>Enhance your time-related planning with our <a href="/time.html">Time Calculator</a> or <a href="/age.html">Age Calculator</a> for integrated workflow efficiency.</p>
         </section>
-        
+       
         <section id="benefits">
             <h2>Benefits of Step-by-Step Trip Planning with Integrated Budgeting</h2>
             <p>Adopting a step-by-step planning model with budgeting offers substantial advantages, including enhanced clarity in scheduling, precise financial projections, and adaptability to changes. By segmenting the process, users can focus on one aspect at a time, reducing errors and improving plan quality. Daily expense tracking promotes fiscal responsibility, allowing for real-time adjustments that align with personal or group budgets.</p>
             <p>Visual elements like charts aid in identifying spending patterns, while automated calculations eliminate manual errors, supporting more strategic travel decisions. Drawing from tourism research, such methodical planning correlates with higher traveler satisfaction and cost savings, as evidenced in reports from <a href="https://en.wikipedia.org/wiki/Tourism" target="_blank" rel="noopener noreferrer">Wikipedia on Tourism</a> and analyses by the <a href="https://www.unwto.org/" target="_blank" rel="noopener noreferrer">UN World Tourism Organization</a>.</p>
         </section>
-        
+       
         <section id="related-resources">
             <h2>Related Resources</h2>
             <ul>
@@ -169,25 +160,24 @@
             </ul>
         </section>
     </main>
-    
+   
     <footer>
         <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
     </footer>
-    
+   
     <script>
         let days = [];
         let dates = [];
         let startDate, endDate;
-
         function proceedToStep2() {
             startDate = new Date(document.getElementById('startDate').value);
             endDate = new Date(document.getElementById('endDate').value);
-            
+           
             if (startDate > endDate || isNaN(startDate) || isNaN(endDate)) {
                 alert('Please select valid start and end dates.');
                 return;
             }
-            
+           
             days = [];
             dates = [];
             let currentDate = new Date(startDate);
@@ -198,7 +188,7 @@
                 dayCount++;
                 currentDate.setDate(currentDate.getDate() + 1);
             }
-            
+           
             const dailyInputs = document.getElementById('dailyInputs');
             dailyInputs.innerHTML = '';
             days.forEach((day, index) => {
@@ -215,15 +205,14 @@
                         </thead>
                         <tbody></tbody>
                     </table>
-                    <button class="add-row-btn" onclick="addRow('${day}')">Add Row</button>
+                    <button onclick="addRow('${day}')">Add Row</button>
                 `;
                 dailyInputs.appendChild(daySection);
                 addRow(day); // Add initial row
             });
-            
+           
             document.getElementById('step2').style.display = 'block';
         }
-
         function addRow(day) {
             const tableBody = document.getElementById(`${day}Table`).querySelector('tbody');
             const row = document.createElement('tr');
@@ -234,16 +223,14 @@
             `;
             tableBody.appendChild(row);
         }
-
         function removeRow(button) {
             button.parentElement.parentElement.remove();
         }
-
         function proceedToStep3() {
             const activityMap = {};
             let totalBudget = 0;
             const dailyCosts = [];
-            
+           
             days.forEach((day, index) => {
                 const table = document.getElementById(`${day}Table`);
                 const rows = table.querySelectorAll('tbody tr');
@@ -259,7 +246,7 @@
                 dailyCosts.push(dayCost);
                 totalBudget += dayCost;
             });
-            
+           
             const tableBody = document.querySelector('#itineraryTable tbody');
             tableBody.innerHTML = '';
             days.forEach((day, index) => {
@@ -279,11 +266,11 @@
                 subtotalRow.innerHTML = `<td colspan="3" data-label="Subtotal"><strong>${day} Subtotal</strong></td><td data-label="Cost ($)"><strong>${dailyCosts[index].toFixed(2)}</strong></td>`;
                 tableBody.appendChild(subtotalRow);
             });
-            
+           
             document.getElementById('totalDays').textContent = days.length;
             document.getElementById('totalBudget').textContent = totalBudget.toFixed(2);
             document.getElementById('result').style.display = 'block';
-            
+           
             // Bar Chart for Daily Costs
             const ctx = document.getElementById('timelineChart').getContext('2d');
             new Chart(ctx, {
@@ -301,21 +288,19 @@
                 options: {
                     scales: {
                         y: { beginAtZero: true }
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false
+                    }
                 }
             });
         }
-        
+       
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            
+           
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(16);
             doc.text('Travel Itinerary Planner with Budget', 105, 15, { align: 'center' });
-            
+           
             const tableData = [];
             const headers = [['Day', 'Date', 'Activity & Time', 'Cost ($)']];
             const tableRows = document.querySelectorAll('#itineraryTable tbody tr');
@@ -335,7 +320,7 @@
                     ]);
                 }
             });
-            
+           
             doc.autoTable({
                 head: headers,
                 body: tableData,
@@ -346,15 +331,15 @@
                 styles: { cellPadding: 3, fontSize: 10, overflow: 'linebreak' },
                 columnStyles: { 0: { cellWidth: 20 }, 1: { cellWidth: 30 }, 2: { cellWidth: 'auto' }, 3: { cellWidth: 25 } }
             });
-            
+           
             const finalY = doc.lastAutoTable.finalY + 10;
             doc.setFontSize(12);
             doc.text(`Total Days: ${document.getElementById('totalDays').textContent}`, 105, finalY, { align: 'center' });
             doc.text(`Total Budget Required: $${document.getElementById('totalBudget').textContent}`, 105, finalY + 10, { align: 'center' });
-            
+           
             doc.setFontSize(10);
             doc.text('File created on Fcalculator.com', 105, doc.internal.pageSize.height - 10, { align: 'center' });
-            
+           
             doc.save('travel-itinerary-with-budget.pdf');
         }
     </script>
