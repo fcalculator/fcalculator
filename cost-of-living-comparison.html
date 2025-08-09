@@ -3,157 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online Cost of Living Comparison Calculator for 2025. Compare expenses between cities including rent, food, and more. Part of FCalculator's living costs category.">
-    <meta name="keywords" content="cost of living calculator, living expenses comparison 2025, salary adjustment tool, fcalculator living costs">
-    <title>Cost of Living Comparison Calculator - FCalculator</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; color: #333; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #333; font-size: 2em; }
-        h2 { color: #555; font-size: 1.5em; }
-        form { display: flex; flex-direction: column; gap: 15px; }
-        label { font-weight: bold; }
-        select, input { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; }
-        button { padding: 10px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 1em; }
-        button:hover { background: #45a049; }
-        #result { margin-top: 20px; padding: 15px; background: #e7f3ff; border: 1px solid #bee5eb; border-radius: 4px; }
-        canvas { max-width: 100%; margin-top: 20px; }
-        .faq { margin-top: 30px; }
-        @media (max-width: 600px) { .container { padding: 10px; } h1 { font-size: 1.5em; } }
-    </style>
+    <meta name="description" content="Compare cost of living between two cities in 2025, including rent, groceries, and transportation expenses. Analyze salary adjustments and detailed breakdowns for informed relocation decisions.">
+    <meta name="keywords" content="cost of living comparison, city expense analysis 2025, salary equivalent calculator, living costs breakdown">
+    <title>Cost of Living Comparison Between Two Cities - FCalculator</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Cost of Living Comparison Calculator",
-      "applicationCategory": "Calculator",
+      "applicationCategory": "FinancialApplication",
       "operatingSystem": "All"
     }
     </script>
 </head>
 <body>
     <div class="container">
-        <h1>Cost of Living Comparison Calculator - FCalculator</h1>
-        <p>Explore our free online tool to compare living expenses between cities in 2025. Enter your salary and see equivalent costs for rent, food, and more. Part of FCalculator's Living Costs category.</p>
+        <header>
+            <h1>Cost of Living Comparison Between Two Cities</h1>
+            <p>Understanding variations in living expenses across different locations is essential for financial planning, relocation, or career moves. This tool provides a comprehensive analysis of cost differences in key categories such as rent, groceries, and transportation, based on 2025 indices.</p>
+        </header>
         
-        <form id="calcForm">
-            <label for="city1">City 1:</label>
-            <select id="city1">
-                <option value="Hamilton, Bermuda|134.09|85.12|150.12|120.34">Hamilton, Bermuda</option>
-                <option value="Zurich, Switzerland|120.45|80.56|130.78|110.89">Zurich, Switzerland</option>
-                <option value="Geneva, Switzerland|118.67|78.90|128.45|108.76">Geneva, Switzerland</option>
-                <option value="Basel, Switzerland|115.23|75.34|125.67|105.12">Basel, Switzerland</option>
-                <option value="Bern, Switzerland|112.89|72.45|122.34|102.56">Bern, Switzerland</option>
-                <option value="Reykjavik, Iceland|110.56|70.12|120.89|100.34">Reykjavik, Iceland</option>
-                <option value="Singapore, Singapore|108.34|68.90|118.56|98.12">Singapore, Singapore</option>
-                <option value="New York, NY, United States|100.00|85.00|120.00|90.00">New York, NY, United States</option>
-                <option value="Oslo, Norway|98.76|65.43|115.67|95.78">Oslo, Norway</option>
-                <option value="Copenhagen, Denmark|96.54|63.21|113.45|93.56">Copenhagen, Denmark</option>
-                <option value="London, United Kingdom|94.32|61.00|111.23|91.34">London, United Kingdom</option>
-                <option value="Tokyo, Japan|92.10|58.78|109.01|89.12">Tokyo, Japan</option>
-                <option value="Paris, France|89.87|56.45|106.78|86.90">Paris, France</option>
-                <option value="Sydney, Australia|87.65|54.32|104.56|84.67">Sydney, Australia</option>
-                <option value="Hong Kong, Hong Kong|85.43|52.10|102.34|82.45">Hong Kong, Hong Kong</option>
-                <option value="San Francisco, CA, United States|83.21|50.00|100.12|80.23">San Francisco, CA, United States</option>
-                <option value="Los Angeles, CA, United States|81.00|48.00|98.00|78.00">Los Angeles, CA, United States</option>
-                <option value="Amsterdam, Netherlands|78.90|46.00|95.90|75.90">Amsterdam, Netherlands</option>
-                <option value="Dublin, Ireland|76.78|44.00|93.78|73.78">Dublin, Ireland</option>
-                <option value="Tel Aviv, Israel|74.56|42.00|91.56|71.56">Tel Aviv, Israel</option>
-                <option value="Berlin, Germany|72.34|40.00|89.34|69.34">Berlin, Germany</option>
-                <option value="Vienna, Austria|70.12|38.00|87.12|67.12">Vienna, Austria</option>
-                <option value="Toronto, Canada|68.00|36.00|85.00|65.00">Toronto, Canada</option>
-                <option value="Melbourne, Australia|65.90|34.00|82.90|62.90">Melbourne, Australia</option>
-                <option value="Stockholm, Sweden|63.78|32.00|80.78|60.78">Stockholm, Sweden</option>
-                <option value="Helsinki, Finland|61.56|30.00|78.56|58.56">Helsinki, Finland</option>
-                <option value="Brussels, Belgium|59.34|28.00|76.34|56.34">Brussels, Belgium</option>
-                <option value="Barcelona, Spain|57.12|26.00|74.12|54.12">Barcelona, Spain</option>
-                <option value="Madrid, Spain|55.00|24.00|72.00|52.00">Madrid, Spain</option>
-                <option value="Rome, Italy|52.90|22.00|69.90|49.90">Rome, Italy</option>
-                <option value="Milan, Italy|50.78|20.00|67.78|47.78">Milan, Italy</option>
-                <option value="Lisbon, Portugal|48.56|18.00|65.56|45.56">Lisbon, Portugal</option>
-                <option value="Athens, Greece|46.34|16.00|63.34|43.34">Athens, Greece</option>
-                <option value="Prague, Czech Republic|44.12|14.00|61.12|41.12">Prague, Czech Republic</option>
-                <option value="Warsaw, Poland|42.00|12.00|59.00|39.00">Warsaw, Poland</option>
-                <option value="Budapest, Hungary|40.00|10.00|57.00|37.00">Budapest, Hungary</option>
-                <option value="Zagreb, Croatia|38.00|8.00|55.00|35.00">Zagreb, Croatia</option>
-                <option value="Bucharest, Romania|36.00|6.00|53.00|33.00">Bucharest, Romania</option>
-                <option value="Sofia, Bulgaria|34.00|4.00|51.00|31.00">Sofia, Bulgaria</option>
-                <option value="Istanbul, Turkey|32.00|2.00|49.00|29.00">Istanbul, Turkey</option>
-                <option value="Moscow, Russia|30.00|1.00|47.00|27.00">Moscow, Russia</option>
-                <option value="Kyiv, Ukraine|28.00|0.50|45.00|25.00">Kyiv, Ukraine</option>
-                <option value="Beijing, China|26.00|5.00|43.00|23.00">Beijing, China</option>
-                <option value="Shanghai, China|24.00|7.00|41.00|21.00">Shanghai, China</option>
-                <option value="Mexico City, Mexico|22.00|9.00|39.00|19.00">Mexico City, Mexico</option>
-                <option value="Sao Paulo, Brazil|20.00|11.00|37.00|17.00">Sao Paulo, Brazil</option>
-                <option value="Buenos Aires, Argentina|18.00|13.00|35.00|15.00">Buenos Aires, Argentina</option>
-                <option value="Johannesburg, South Africa|16.00|15.00|33.00|13.00">Johannesburg, South Africa</option>
-                <option value="Cairo, Egypt|14.00|17.00|31.00|11.00">Cairo, Egypt</option>
-                <option value="Mumbai, India|12.00|19.00|29.00|9.00">Mumbai, India</option>
-                <option value="Delhi, India|10.00|21.00|27.00|7.00">Delhi, India</option>
-                <!-- Dodaj još ako trebaš, bazirano na Numbeo trends za 2025 -->
-            </select>
+        <section id="calculator">
+            <form id="calcForm">
+                <label for="city1">Select First City:</label>
+                <select id="city1">
+                    <option value="Hamilton, Bermuda|134.09|85.12|150.12|120.34">Hamilton, Bermuda</option>
+                    <option value="Zurich, Switzerland|120.45|80.56|130.78|110.89">Zurich, Switzerland</option>
+                    <option value="Geneva, Switzerland|118.67|78.90|128.45|108.76">Geneva, Switzerland</option>
+                    <option value="Basel, Switzerland|115.23|75.34|125.67|105.12">Basel, Switzerland</option>
+                    <option value="Bern, Switzerland|112.89|72.45|122.34|102.56">Bern, Switzerland</option>
+                    <option value="Reykjavik, Iceland|110.56|70.12|120.89|100.34">Reykjavik, Iceland</option>
+                    <option value="Singapore, Singapore|108.34|68.90|118.56|98.12">Singapore, Singapore</option>
+                    <option value="New York, NY, United States|100.00|85.00|120.00|90.00">New York, NY, United States</option>
+                    <option value="Oslo, Norway|98.76|65.43|115.67|95.78">Oslo, Norway</option>
+                    <option value="Copenhagen, Denmark|96.54|63.21|113.45|93.56">Copenhagen, Denmark</option>
+                    <option value="London, United Kingdom|94.32|61.00|111.23|91.34">London, United Kingdom</option>
+                    <option value="Tokyo, Japan|92.10|58.78|109.01|89.12">Tokyo, Japan</option>
+                    <option value="Paris, France|89.87|56.45|106.78|86.90">Paris, France</option>
+                    <option value="Sydney, Australia|87.65|54.32|104.56|84.67">Sydney, Australia</option>
+                    <option value="Hong Kong, Hong Kong|85.43|52.10|102.34|82.45">Hong Kong, Hong Kong</option>
+                    <option value="San Francisco, CA, United States|83.21|50.00|100.12|80.23">San Francisco, CA, United States</option>
+                    <option value="Los Angeles, CA, United States|81.00|48.00|98.00|78.00">Los Angeles, CA, United States</option>
+                    <option value="Amsterdam, Netherlands|78.90|46.00|95.90|75.90">Amsterdam, Netherlands</option>
+                    <option value="Dublin, Ireland|76.78|44.00|93.78|73.78">Dublin, Ireland</option>
+                    <option value="Tel Aviv, Israel|74.56|42.00|91.56|71.56">Tel Aviv, Israel</option>
+                    <option value="Berlin, Germany|72.34|40.00|89.34|69.34">Berlin, Germany</option>
+                    <option value="Vienna, Austria|70.12|38.00|87.12|67.12">Vienna, Austria</option>
+                    <option value="Toronto, Canada|68.00|36.00|85.00|65.00">Toronto, Canada</option>
+                    <option value="Melbourne, Australia|65.90|34.00|82.90|62.90">Melbourne, Australia</option>
+                    <option value="Stockholm, Sweden|63.78|32.00|80.78|60.78">Stockholm, Sweden</option>
+                    <option value="Helsinki, Finland|61.56|30.00|78.56|58.56">Helsinki, Finland</option>
+                    <option value="Brussels, Belgium|59.34|28.00|76.34|56.34">Brussels, Belgium</option>
+                    <option value="Barcelona, Spain|57.12|26.00|74.12|54.12">Barcelona, Spain</option>
+                    <option value="Madrid, Spain|55.00|24.00|72.00|52.00">Madrid, Spain</option>
+                    <option value="Rome, Italy|52.90|22.00|69.90|49.90">Rome, Italy</option>
+                    <option value="Milan, Italy|50.78|20.00|67.78|47.78">Milan, Italy</option>
+                    <option value="Lisbon, Portugal|48.56|18.00|65.56|45.56">Lisbon, Portugal</option>
+                    <option value="Athens, Greece|46.34|16.00|63.34|43.34">Athens, Greece</option>
+                    <option value="Prague, Czech Republic|44.12|14.00|61.12|41.12">Prague, Czech Republic</option>
+                    <option value="Warsaw, Poland|42.00|12.00|59.00|39.00">Warsaw, Poland</option>
+                    <option value="Budapest, Hungary|40.00|10.00|57.00|37.00">Budapest, Hungary</option>
+                    <option value="Zagreb, Croatia|38.00|8.00|55.00|35.00">Zagreb, Croatia</option>
+                    <option value="Bucharest, Romania|36.00|6.00|53.00|33.00">Bucharest, Romania</option>
+                    <option value="Sofia, Bulgaria|34.00|4.00|51.00|31.00">Sofia, Bulgaria</option>
+                    <option value="Istanbul, Turkey|32.00|2.00|49.00|29.00">Istanbul, Turkey</option>
+                    <option value="Moscow, Russia|30.00|1.00|47.00|27.00">Moscow, Russia</option>
+                    <option value="Kyiv, Ukraine|28.00|0.50|45.00|25.00">Kyiv, Ukraine</option>
+                    <option value="Beijing, China|26.00|5.00|43.00|23.00">Beijing, China</option>
+                    <option value="Shanghai, China|24.00|7.00|41.00|21.00">Shanghai, China</option>
+                    <option value="Mexico City, Mexico|22.00|9.00|39.00|19.00">Mexico City, Mexico</option>
+                    <option value="Sao Paulo, Brazil|20.00|11.00|37.00|17.00">Sao Paulo, Brazil</option>
+                    <option value="Buenos Aires, Argentina|18.00|13.00|35.00|15.00">Buenos Aires, Argentina</option>
+                    <option value="Johannesburg, South Africa|16.00|15.00|33.00|13.00">Johannesburg, South Africa</option>
+                    <option value="Cairo, Egypt|14.00|17.00|31.00|11.00">Cairo, Egypt</option>
+                    <option value="Mumbai, India|12.00|19.00|29.00|9.00">Mumbai, India</option>
+                    <option value="Delhi, India|10.00|21.00|27.00|7.00">Delhi, India</option>
+                </select>
+                
+                <label for="salary">Annual Salary in First City (USD):</label>
+                <input type="number" id="salary" placeholder="e.g. 60000" required>
+                
+                <label for="city2">Select Second City:</label>
+                <select id="city2">
+                    <option value="Hamilton, Bermuda|134.09|85.12|150.12|120.34">Hamilton, Bermuda</option>
+                    <option value="Zurich, Switzerland|120.45|80.56|130.78|110.89">Zurich, Switzerland</option>
+                    <option value="Geneva, Switzerland|118.67|78.90|128.45|108.76">Geneva, Switzerland</option>
+                    <option value="Basel, Switzerland|115.23|75.34|125.67|105.12">Basel, Switzerland</option>
+                    <option value="Bern, Switzerland|112.89|72.45|122.34|102.56">Bern, Switzerland</option>
+                    <option value="Reykjavik, Iceland|110.56|70.12|120.89|100.34">Reykjavik, Iceland</option>
+                    <option value="Singapore, Singapore|108.34|68.90|118.56|98.12">Singapore, Singapore</option>
+                    <option value="New York, NY, United States|100.00|85.00|120.00|90.00">New York, NY, United States</option>
+                    <option value="Oslo, Norway|98.76|65.43|115.67|95.78">Oslo, Norway</option>
+                    <option value="Copenhagen, Denmark|96.54|63.21|113.45|93.56">Copenhagen, Denmark</option>
+                    <option value="London, United Kingdom|94.32|61.00|111.23|91.34">London, United Kingdom</option>
+                    <option value="Tokyo, Japan|92.10|58.78|109.01|89.12">Tokyo, Japan</option>
+                    <option value="Paris, France|89.87|56.45|106.78|86.90">Paris, France</option>
+                    <option value="Sydney, Australia|87.65|54.32|104.56|84.67">Sydney, Australia</option>
+                    <option value="Hong Kong, Hong Kong|85.43|52.10|102.34|82.45">Hong Kong, Hong Kong</option>
+                    <option value="San Francisco, CA, United States|83.21|50.00|100.12|80.23">San Francisco, CA, United States</option>
+                    <option value="Los Angeles, CA, United States|81.00|48.00|98.00|78.00">Los Angeles, CA, United States</option>
+                    <option value="Amsterdam, Netherlands|78.90|46.00|95.90|75.90">Amsterdam, Netherlands</option>
+                    <option value="Dublin, Ireland|76.78|44.00|93.78|73.78">Dublin, Ireland</option>
+                    <option value="Tel Aviv, Israel|74.56|42.00|91.56|71.56">Tel Aviv, Israel</option>
+                    <option value="Berlin, Germany|72.34|40.00|89.34|69.34">Berlin, Germany</option>
+                    <option value="Vienna, Austria|70.12|38.00|87.12|67.12">Vienna, Austria</option>
+                    <option value="Toronto, Canada|68.00|36.00|85.00|65.00">Toronto, Canada</option>
+                    <option value="Melbourne, Australia|65.90|34.00|82.90|62.90">Melbourne, Australia</option>
+                    <option value="Stockholm, Sweden|63.78|32.00|80.78|60.78">Stockholm, Sweden</option>
+                    <option value="Helsinki, Finland|61.56|30.00|78.56|58.56">Helsinki, Finland</option>
+                    <option value="Brussels, Belgium|59.34|28.00|76.34|56.34">Brussels, Belgium</option>
+                    <option value="Barcelona, Spain|57.12|26.00|74.12|54.12">Barcelona, Spain</option>
+                    <option value="Madrid, Spain|55.00|24.00|72.00|52.00">Madrid, Spain</option>
+                    <option value="Rome, Italy|52.90|22.00|69.90|49.90">Rome, Italy</option>
+                    <option value="Milan, Italy|50.78|20.00|67.78|47.78">Milan, Italy</option>
+                    <option value="Lisbon, Portugal|48.56|18.00|65.56|45.56">Lisbon, Portugal</option>
+                    <option value="Athens, Greece|46.34|16.00|63.34|43.34">Athens, Greece</option>
+                    <option value="Prague, Czech Republic|44.12|14.00|61.12|41.12">Prague, Czech Republic</option>
+                    <option value="Warsaw, Poland|42.00|12.00|59.00|39.00">Warsaw, Poland</option>
+                    <option value="Budapest, Hungary|40.00|10.00|57.00|37.00">Budapest, Hungary</option>
+                    <option value="Zagreb, Croatia|38.00|8.00|55.00|35.00">Zagreb, Croatia</option>
+                    <option value="Bucharest, Romania|36.00|6.00|53.00|33.00">Bucharest, Romania</option>
+                    <option value="Sofia, Bulgaria|34.00|4.00|51.00|31.00">Sofia, Bulgaria</option>
+                    <option value="Istanbul, Turkey|32.00|2.00|49.00|29.00">Istanbul, Turkey</option>
+                    <option value="Moscow, Russia|30.00|1.00|47.00|27.00">Moscow, Russia</option>
+                    <option value="Kyiv, Ukraine|28.00|0.50|45.00|25.00">Kyiv, Ukraine</option>
+                    <option value="Beijing, China|26.00|5.00|43.00|23.00">Beijing, China</option>
+                    <option value="Shanghai, China|24.00|7.00|41.00|21.00">Shanghai, China</option>
+                    <option value="Mexico City, Mexico|22.00|9.00|39.00|19.00">Mexico City, Mexico</option>
+                    <option value="Sao Paulo, Brazil|20.00|11.00|37.00|17.00">Sao Paulo, Brazil</option>
+                    <option value="Buenos Aires, Argentina|18.00|13.00|35.00|15.00">Buenos Aires, Argentina</option>
+                    <option value="Johannesburg, South Africa|16.00|15.00|33.00|13.00">Johannesburg, South Africa</option>
+                    <option value="Cairo, Egypt|14.00|17.00|31.00|11.00">Cairo, Egypt</option>
+                    <option value="Mumbai, India|12.00|19.00|29.00|9.00">Mumbai, India</option>
+                    <option value="Delhi, India|10.00|21.00|27.00|7.00">Delhi, India</option>
+                </select>
+                
+                <button type="submit">Compare Costs</button>
+            </form>
             
-            <label for="salary">Your Salary in City 1 (USD):</label>
-            <input type="number" id="salary" placeholder="e.g. 50000" required>
-            
-            <label for="city2">City 2:</label>
-            <select id="city2">
-                <!-- Iste opcije kao iznad, kopiraj ih ovdje da bude kompletno -->
-                <option value="Hamilton, Bermuda|134.09|85.12|150.12|120.34">Hamilton, Bermuda</option>
-                <option value="Zurich, Switzerland|120.45|80.56|130.78|110.89">Zurich, Switzerland</option>
-                <!-- ... (kopiraj sve opcije iz city1 da izbjegneš duplikaciju u odgovoru) -->
-            </select>
-            
-            <button type="submit">Calculate</button>
-        </form>
+            <div id="result" style="display: none;">
+                <h2>Comparison Results</h2>
+                <p id="equivSalary" class="result-green"></p>
+                <p id="comparison" class="result-green"></p>
+                <button id="savePdf">Save as PDF</button>
+                <canvas id="costChart" width="400" height="200"></canvas>
+                <table id="comparisonTable">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>City 1 Index</th>
+                            <th>City 2 Index</th>
+                            <th>Difference (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows will be added via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
         
-        <div id="result" style="display: none;">
-            <h2>Results:</h2>
-            <p id="equivSalary"></p>
-            <p id="comparison"></p>
-            <canvas id="costChart"></canvas>
-        </div>
+        <section id="content">
+            <h2>Understanding Cost of Living Variations</h2>
+            <p>The cost of living refers to the amount of money needed to sustain a certain standard of living by affording basic expenses such as housing, food, taxes, and healthcare. In 2025, global economic factors like inflation, supply chain disruptions, and energy prices continue to influence these costs differently across cities. For instance, urban centers in Europe and North America often exhibit higher indices due to elevated housing demands and service costs.</p>
+            <p>When comparing two cities, indices provide a relative measure where a base city like New York is set at 100. A higher index in another city indicates proportionally higher expenses. This comparison helps individuals assess if their current salary would maintain the same lifestyle elsewhere or if adjustments are necessary.</p>
+            
+            <h2>Factors Influencing Cost of Living</h2>
+            <p>Housing remains the largest component, often accounting for 30-50% of expenses. Rent indices reflect average monthly costs for apartments, influenced by location, size, and market demand. Groceries encompass food staples, where variations arise from import dependencies and local agriculture. Transportation includes public transit, fuel, and vehicle maintenance, impacted by infrastructure and fuel prices.</p>
+            <p>Other elements like utilities, healthcare, and education also play roles, though this tool focuses on core categories for simplicity. Data trends from 2025 show rising costs in Asian megacities due to urbanization, while some emerging markets offer lower indices but with trade-offs in quality.</p>
+            <button onclick="navigator.share({title: 'Cost of Living Comparison', url: window.location.href})">Share This Analysis</button>
+            
+            <h2>How to Interpret the Results</h2>
+            <p>The equivalent salary calculation adjusts your input based on overall cost indices, ensuring purchasing power parity. Percentage differences highlight specific areas like rent, which might require budgeting changes. For example, moving from a low-cost city to a high-index one could necessitate a 20-30% salary increase to maintain standards.</p>
+            <p>Consider combining this with other financial tools, such as our <a href="/loan-calculator.html">Loan Calculator</a> for housing affordability or <a href="/mortgage-calculator.html">Mortgage Calculator</a> for long-term planning.</p>
+            
+            <h2>Global Trends in 2025</h2>
+            <p>According to recent analyses, cities in Switzerland and Bermuda top the charts for highest living costs, driven by limited space and high incomes. In contrast, urban areas in India and Egypt offer more affordable options, though with varying infrastructure levels. Economic reports indicate a 5-7% average global increase in costs from previous years, emphasizing the need for updated comparisons.</p>
+            <p>For deeper insights, explore data sources like government economic indicators or international databases that track these metrics annually.</p>
+        </section>
         
-        <div class="faq">
-            <h2>Frequently Asked Questions</h2>
-            <p>How does this calculator work? It uses 2025 Numbeo indices to compare costs.</p>
-            <p>Explore more: Check our <a href="https://fcalculator.com/math-calculators/">Math Calculators</a> or <a href="https://fcalculator.com/finance-calculators/">Finance Calculators</a>.</p>
-        </div>
+        <section id="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Cost-of-living_index" target="_blank" rel="noopener noreferrer">Wikipedia: Cost-of-Living Index</a> - Detailed explanation of indices and methodologies.</li>
+                <li><a href="https://www.numbeo.com/cost-of-living/" target="_blank" rel="noopener noreferrer">Numbeo Cost of Living Database</a> - Crowd-sourced data on global expenses.</li>
+                <li><a href="https://www.bls.gov/cpi/" target="_blank" rel="noopener noreferrer">U.S. Bureau of Labor Statistics: Consumer Price Index</a> - Official U.S. government data on inflation and costs.</li>
+            </ul>
+        </section>
+        
+        <footer>
+            <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
+        </footer>
     </div>
-
+    
     <script>
         const form = document.getElementById('calcForm');
         const resultDiv = document.getElementById('result');
+        const equivSalaryP = document.getElementById('equivSalary');
+        const comparisonP = document.getElementById('comparison');
+        const tableBody = document.getElementById('comparisonTable').querySelector('tbody');
+        let city1Data, city2Data, salary;
         
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const city1Data = document.getElementById('city1').value.split('|');
-            const city2Data = document.getElementById('city2').value.split('|');
-            const salary = parseFloat(document.getElementById('salary').value);
+            const city1Val = document.getElementById('city1').value.split('|');
+            const city2Val = document.getElementById('city2').value.split('|');
+            salary = parseFloat(document.getElementById('salary').value);
             
-            const city1 = { name: city1Data[0], col: parseFloat(city1Data[1]), rent: parseFloat(city1Data[2]), food: parseFloat(city1Data[3]), transport: parseFloat(city1Data[4]) };
-            const city2 = { name: city2Data[0], col: parseFloat(city2Data[1]), rent: parseFloat(city2Data[2]), food: parseFloat(city2Data[3]), transport: parseFloat(city2Data[4]) };
+            city1Data = { name: city1Val[0], col: parseFloat(city1Val[1]), rent: parseFloat(city1Val[2]), food: parseFloat(city1Val[3]), transport: parseFloat(city1Val[4]) };
+            city2Data = { name: city2Val[0], col: parseFloat(city2Val[1]), rent: parseFloat(city2Val[2]), food: parseFloat(city2Val[3]), transport: parseFloat(city2Val[4]) };
             
-            const equivSalary = (salary * city2.col / city1.col).toFixed(2);
-            const rentDiff = ((city2.rent / city1.rent) * 100 - 100).toFixed(1);
-            const foodDiff = ((city2.food / city1.food) * 100 - 100).toFixed(1);
-            const transportDiff = ((city2.transport / city1.transport) * 100 - 100).toFixed(1);
+            const equivSalary = (salary * city2Data.col / city1Data.col).toFixed(2);
+            const rentDiff = ((city2Data.rent / city1Data.rent) * 100 - 100).toFixed(1);
+            const foodDiff = ((city2Data.food / city1Data.food) * 100 - 100).toFixed(1);
+            const transportDiff = ((city2Data.transport / city1Data.transport) * 100 - 100).toFixed(1);
             
-            document.getElementById('equivSalary').innerHTML = `Equivalent Salary in ${city2.name}: <strong>$${equivSalary}</strong>`;
-            document.getElementById('comparison').innerHTML = `Compared to ${city1.name}:<br>
+            equivSalaryP.innerHTML = `Equivalent Annual Salary in ${city2Data.name}: <strong>$${equivSalary}</strong>`;
+            comparisonP.innerHTML = `Key Differences Compared to ${city1Data.name}:<br>
                 - Rent: ${rentDiff > 0 ? '+' : ''}${rentDiff}% ${rentDiff > 0 ? 'higher' : 'lower'}<br>
-                - Food: ${foodDiff > 0 ? '+' : ''}${foodDiff}% ${foodDiff > 0 ? 'higher' : 'lower'}<br>
-                - Transport: ${transportDiff > 0 ? '+' : ''}${transportDiff}% ${transportDiff > 0 ? 'higher' : 'lower'}`;
+                - Groceries: ${foodDiff > 0 ? '+' : ''}${foodDiff}% ${foodDiff > 0 ? 'higher' : 'lower'}<br>
+                - Transportation: ${transportDiff > 0 ? '+' : ''}${transportDiff}% ${transportDiff > 0 ? 'higher' : 'lower'}`;
             
+            // Populate table
+            tableBody.innerHTML = `
+                <tr><td>Overall Cost Index</td><td>${city1Data.col}</td><td>${city2Data.col}</td><td>${((city2Data.col / city1Data.col) * 100 - 100).toFixed(1)}%</td></tr>
+                <tr><td>Rent</td><td>${city1Data.rent}</td><td>${city2Data.rent}</td><td>${rentDiff}%</td></tr>
+                <tr><td>Groceries</td><td>${city1Data.food}</td><td>${city2Data.food}</td><td>${foodDiff}%</td></tr>
+                <tr><td>Transportation</td><td>${city1Data.transport}</td><td>${city2Data.transport}</td><td>${transportDiff}%</td></tr>
+            `;
+            
+            // Chart
             const ctx = document.getElementById('costChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['COL Index', 'Rent', 'Food', 'Transport'],
+                    labels: ['Overall Cost', 'Rent', 'Groceries', 'Transportation'],
                     datasets: [
-                        { label: city1.name, data: [city1.col, city1.rent, city1.food, city1.transport], backgroundColor: 'rgba(75, 192, 192, 0.2)', borderColor: 'rgba(75, 192, 192, 1)' },
-                        { label: city2.name, data: [city2.col, city2.rent, city2.food, city2.transport], backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgba(255, 99, 132, 1)' }
+                        { label: city1Data.name, data: [city1Data.col, city1Data.rent, city1Data.food, city1Data.transport], backgroundColor: 'rgba(75, 192, 192, 0.2)', borderColor: 'rgba(75, 192, 192, 1)', borderWidth: 1 },
+                        { label: city2Data.name, data: [city2Data.col, city2Data.rent, city2Data.food, city2Data.transport], backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgba(255, 99, 132, 1)', borderWidth: 1 }
                     ]
                 },
                 options: { scales: { y: { beginAtZero: true } } }
@@ -161,11 +252,51 @@
             
             resultDiv.style.display = 'block';
         });
+        
+        document.getElementById('savePdf').addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(12);
+            doc.text('Cost of Living Comparison Results', 105, 10, { align: 'center' });
+            
+            const params = [
+                ['Parameter', 'Value'],
+                ['First City', city1Data.name],
+                ['Second City', city2Data.name],
+                ['Salary in First City', `$${salary}`],
+                ['Equivalent Salary in Second City', `$${ (salary * city2Data.col / city1Data.col).toFixed(2) }`]
+            ];
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: params.slice(1),
+                theme: 'grid',
+                styles: { font: 'helvetica', fontSize: 10, cellPadding: 5, halign: 'center' },
+                headStyles: { fillColor: [200, 200, 200] }
+            });
+            
+            doc.addPage();
+            const diffs = [
+                ['Category', 'Difference (%)'],
+                ['Rent', `${ ((city2Data.rent / city1Data.rent) * 100 - 100).toFixed(1) }%`],
+                ['Groceries', `${ ((city2Data.food / city1Data.food) * 100 - 100).toFixed(1) }%`],
+                ['Transportation', `${ ((city2Data.transport / city1Data.transport) * 100 - 100).toFixed(1) }%`]
+            ];
+            doc.autoTable({
+                startY: 10,
+                head: [['Category', 'Difference (%)']],
+                body: diffs.slice(1),
+                theme: 'grid',
+                styles: { font: 'helvetica', fontSize: 10, cellPadding: 5, halign: 'center' },
+                headStyles: { fillColor: [200, 200, 200] }
+            });
+            
+            doc.setFontSize(8);
+            doc.text('This document was generated using Fcalculator.com', 105, doc.internal.pageSize.height - 10, { align: 'center' });
+            
+            doc.save('cost-of-living-comparison.pdf');
+        });
     </script>
-    
-    <!-- Google Ads za zaradu - otkomentiraj sa tvojim ID-om -->
-    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ID" crossorigin="anonymous"></script> -->
-    <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ID" data-ad-slot="YOUR_SLOT" data-ad-format="auto"></ins> -->
-    <!-- <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->
 </body>
 </html>
