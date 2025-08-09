@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Analyze cost of living differences between cities in 2025, covering overall expenses, rent, groceries, restaurants, transportation, and purchasing power. Calculate salary equivalents for relocation and view detailed category breakdowns.">
-    <meta name="keywords" content="cost of living analysis 2025, city comparison tool, salary adjustment calculator, expense category breakdowns">
-    <title>Cost of Living Comparison Between Cities - FCalculator</title>
+    <meta name="description" content="Conduct in-depth analysis of cost of living disparities across global cities in 2025, encompassing overall indices, housing, food, dining, mobility, utilities, apparel, recreation, childcare, education, healthcare, and additional economic factors. Determine salary equivalents for seamless transitions and examine granular category insights for strategic decision-making.">
+    <meta name="keywords" content="cost of living disparities 2025, global city expense evaluation, equivalent income computation, comprehensive category analysis">
+    <title>Global Cost of Living Disparities and City Expense Evaluation - FCalculator</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -14,7 +14,7 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Cost of Living Comparison Calculator",
+      "name": "Cost of Living Disparities Evaluation Tool",
       "applicationCategory": "FinancialApplication",
       "operatingSystem": "All"
     }
@@ -23,195 +23,197 @@
 <body>
     <div class="container">
         <header>
-            <h1>Cost of Living Comparison Between Cities</h1>
-            <p>Evaluating the financial implications of living in different cities is crucial for career transitions, family relocations, or retirement planning. This tool examines 2025 data across key expense categories, including overall cost indices, housing, food items, dining out, transportation options, and local purchasing power to provide a thorough comparison.</p>
+            <h1>Global Cost of Living Disparities and City Expense Evaluation</h1>
+            <p>Assessing disparities in urban expenditures is vital for informed decisions on professional mobility, family resettlement, or long-term financial strategies. This analytical instrument leverages 2025 datasets to dissect expenses across diverse domains, from fundamental housing and nutrition to advanced sectors like education, healthcare, and recreational pursuits, facilitating precise equivalence calculations and holistic economic overviews.</p>
         </header>
         
         <section id="calculator">
             <form id="calcForm">
                 <label for="city1">Select First City:</label>
                 <select id="city1">
-                    <!-- US cities at top -->
-                    <option value="New York, NY, United States|100.0|100.0|100.0|100.0|80.0|100.0">New York, NY, United States</option>
-                    <option value="Honolulu, HI, United States|96.4|57.9|120.7|88.7|75.0|102.3">Honolulu, HI, United States</option>
-                    <option value="San Francisco, CA, United States|95.1|80.2|102.4|106.9|85.0|157.4">San Francisco, CA, United States</option>
-                    <option value="Seattle, WA, United States|87.8|61.4|95.4|94.7|80.0|164.9">Seattle, WA, United States</option>
-                    <option value="Boston, MA, United States|84.8|81.0|92.0|94.4|78.0|146.0">Boston, MA, United States</option>
-                    <option value="Washington, DC, United States|83.9|67.2|88.8|94.2|82.0|147.5">Washington, DC, United States</option>
-                    <option value="Los Angeles, CA, United States|81.0|48.0|98.0|78.0|85.0|120.0">Los Angeles, CA, United States</option>
-                    <option value="San Diego, CA, United States|80.0|60.0|85.0|85.0|80.0|140.0">San Diego, CA, United States</option>
-                    <option value="Chicago, IL, United States|77.0|55.0|80.0|80.0|70.0|130.0">Chicago, IL, United States</option>
-                    <option value="Miami, FL, United States|76.0|60.0|75.0|85.0|65.0|110.0">Miami, FL, United States</option>
-                    <option value="Philadelphia, PA, United States|75.0|52.0|78.0|80.0|70.0|120.0">Philadelphia, PA, United States</option>
-                    <option value="Austin, TX, United States|75.0|55.0|75.0|75.0|65.0|150.0">Austin, TX, United States</option>
-                    <option value="Denver, CO, United States|76.0|50.0|80.0|80.0|70.0|145.0">Denver, CO, United States</option>
-                    <option value="Portland, OR, United States|78.0|50.0|85.0|85.0|75.0|140.0">Portland, OR, United States</option>
-                    <option value="Minneapolis, MN, United States|74.0|45.0|75.0|75.0|65.0|155.0">Minneapolis, MN, United States</option>
-                    <option value="Dallas, TX, United States|70.0|50.0|70.0|70.0|60.0|140.0">Dallas, TX, United States</option>
-                    <option value="Atlanta, GA, United States|72.0|48.0|70.0|75.0|60.0|125.0">Atlanta, GA, United States</option>
-                    <option value="Phoenix, AZ, United States|68.0|40.0|65.0|70.0|55.0|130.0">Phoenix, AZ, United States</option>
-                    <option value="Houston, TX, United States|68.0|45.0|65.0|65.0|55.0|135.0">Houston, TX, United States</option>
-                    <option value="Detroit, MI, United States|65.0|40.0|62.0|68.0|50.0|120.0">Detroit, MI, United States</option>
-                    <option value="Baltimore, MD, United States|70.0|45.0|68.0|72.0|60.0|125.0">Baltimore, MD, United States</option>
-                    <option value="Charlotte, NC, United States|68.0|42.0|65.0|70.0|55.0|130.0">Charlotte, NC, United States</option>
-                    <option value="Orlando, FL, United States|70.0|48.0|68.0|75.0|60.0|115.0">Orlando, FL, United States</option>
-                    <option value="Tampa, FL, United States|68.0|45.0|65.0|70.0|55.0|120.0">Tampa, FL, United States</option>
-                    <option value="Pittsburgh, PA, United States|65.0|40.0|62.0|68.0|50.0|135.0">Pittsburgh, PA, United States</option>
-                    <option value="St. Louis, MO, United States|62.0|35.0|60.0|65.0|50.0|140.0">St. Louis, MO, United States</option>
-                    <option value="Cincinnati, OH, United States|60.0|32.0|58.0|62.0|48.0|130.0">Cincinnati, OH, United States</option>
-                    <option value="Kansas City, MO, United States|62.0|35.0|60.0|65.0|50.0|135.0">Kansas City, MO, United States</option>
-                    <option value="Indianapolis, IN, United States|60.0|30.0|58.0|62.0|48.0|125.0">Indianapolis, IN, United States</option>
-                    <option value="Milwaukee, WI, United States|62.0|35.0|60.0|65.0|50.0|120.0">Milwaukee, WI, United States</option>
-                    <option value="Cleveland, OH, United States|60.0|30.0|58.0|62.0|48.0|115.0">Cleveland, OH, United States</option>
-                    <option value="Columbus, OH, United States|62.0|35.0|60.0|65.0|50.0|125.0">Columbus, OH, United States</option>
-                    <option value="Memphis, TN, United States|58.0|28.0|55.0|60.0|45.0|110.0">Memphis, TN, United States</option>
-                    <option value="Nashville, TN, United States|65.0|40.0|62.0|68.0|55.0|130.0">Nashville, TN, United States</option>
-                    <option value="Oklahoma City, OK, United States|58.0|28.0|55.0|60.0|45.0|120.0">Oklahoma City, OK, United States</option>
-                    <option value="Louisville, KY, United States|60.0|30.0|58.0|62.0|48.0|115.0">Louisville, KY, United States</option>
-                    <option value="New Orleans, LA, United States|65.0|40.0|62.0|68.0|55.0|110.0">New Orleans, LA, United States</option>
-                    <!-- Non-US cities below -->
-                    <option value="Hamilton, Bermuda|134.09|85.12|150.12|120.34|130.0|80.0">Hamilton, Bermuda</option>
-                    <option value="Zurich, Switzerland|120.45|80.56|130.78|110.89|95.0|159.5">Zurich, Switzerland</option>
-                    <option value="Geneva, Switzerland|118.67|78.90|128.45|108.76|90.0|155.9">Geneva, Switzerland</option>
-                    <option value="Basel, Switzerland|116.5|50.6|119.1|119.3|85.0|180.7">Basel, Switzerland</option>
-                    <option value="Bern, Switzerland|112.89|72.45|122.34|102.56|80.0|170.7">Bern, Switzerland</option>
-                    <option value="Reykjavik, Iceland|110.56|70.12|120.89|100.34|85.0|138.5">Reykjavik, Iceland</option>
-                    <option value="Singapore, Singapore|108.34|68.90|118.56|98.12|90.0|100.0">Singapore, Singapore</option>
-                    <option value="Oslo, Norway|98.76|65.43|115.67|95.78|85.0|120.0">Oslo, Norway</option>
-                    <option value="Copenhagen, Denmark|96.54|63.21|113.45|93.56|80.0|110.0">Copenhagen, Denmark</option>
-                    <option value="London, United Kingdom|94.32|61.0|111.23|91.34|85.0|105.0">London, United Kingdom</option>
-                    <option value="Tokyo, Japan|92.10|58.78|109.01|89.12|70.0|95.0">Tokyo, Japan</option>
-                    <option value="Paris, France|89.87|56.45|106.78|86.90|75.0|100.0">Paris, France</option>
-                    <option value="Sydney, Australia|87.65|54.32|104.56|84.67|80.0|110.0">Sydney, Australia</option>
-                    <option value="Hong Kong, Hong Kong|85.43|52.10|102.34|82.45|90.0|90.0">Hong Kong, Hong Kong</option>
-                    <option value="Amsterdam, Netherlands|78.90|46.0|95.90|75.90|70.0|105.0">Amsterdam, Netherlands</option>
-                    <option value="Dublin, Ireland|76.78|44.0|93.78|73.78|65.0|100.0">Dublin, Ireland</option>
-                    <option value="Tel Aviv, Israel|74.56|42.0|91.56|71.56|60.0|95.0">Tel Aviv, Israel</option>
-                    <option value="Berlin, Germany|72.34|40.0|89.34|69.34|65.0|110.0">Berlin, Germany</option>
-                    <option value="Vienna, Austria|70.12|38.0|87.12|67.12|60.0|105.0">Vienna, Austria</option>
-                    <option value="Toronto, Canada|68.0|36.0|85.0|65.0|70.0|120.0">Toronto, Canada</option>
-                    <option value="Melbourne, Australia|65.90|34.0|82.90|62.90|75.0|115.0">Melbourne, Australia</option>
-                    <option value="Stockholm, Sweden|63.78|32.0|80.78|60.78|70.0|110.0">Stockholm, Sweden</option>
-                    <option value="Helsinki, Finland|61.56|30.0|78.56|58.56|65.0|105.0">Helsinki, Finland</option>
-                    <option value="Brussels, Belgium|59.34|28.0|76.34|56.34|60.0|100.0">Brussels, Belgium</option>
-                    <option value="Barcelona, Spain|57.12|26.0|74.12|54.12|55.0|95.0">Barcelona, Spain</option>
-                    <option value="Madrid, Spain|55.0|24.0|72.0|52.0|50.0|90.0">Madrid, Spain</option>
-                    <option value="Rome, Italy|52.90|22.0|69.90|49.90|50.0|85.0">Rome, Italy</option>
-                    <option value="Milan, Italy|50.78|20.0|67.78|47.78|55.0|80.0">Milan, Italy</option>
-                    <option value="Lisbon, Portugal|48.56|18.0|65.56|45.56|50.0|75.0">Lisbon, Portugal</option>
-                    <option value="Athens, Greece|46.34|16.0|63.34|43.34|45.0|70.0">Athens, Greece</option>
-                    <option value="Prague, Czech Republic|44.12|14.0|61.12|41.12|40.0|65.0">Prague, Czech Republic</option>
-                    <option value="Warsaw, Poland|42.0|12.0|59.0|39.0|40.0|60.0">Warsaw, Poland</option>
-                    <option value="Budapest, Hungary|40.0|10.0|57.0|37.0|35.0|55.0">Budapest, Hungary</option>
-                    <option value="Zagreb, Croatia|38.0|8.0|55.0|35.0|35.0|50.0">Zagreb, Croatia</option>
-                    <option value="Bucharest, Romania|36.0|6.0|53.0|33.0|30.0|45.0">Bucharest, Romania</option>
-                    <option value="Sofia, Bulgaria|34.0|4.0|51.0|31.0|30.0|40.0">Sofia, Bulgaria</option>
-                    <option value="Istanbul, Turkey|32.0|2.0|49.0|29.0|25.0|35.0">Istanbul, Turkey</option>
-                    <option value="Moscow, Russia|30.0|1.0|47.0|27.0|25.0|30.0">Moscow, Russia</option>
-                    <option value="Kyiv, Ukraine|28.0|0.5|45.0|25.0|20.0|25.0">Kyiv, Ukraine</option>
-                    <option value="Beijing, China|26.0|5.0|43.0|23.0|20.0|40.0">Beijing, China</option>
-                    <option value="Shanghai, China|24.0|7.0|41.0|21.0|25.0|35.0">Shanghai, China</option>
-                    <option value="Mexico City, Mexico|22.0|9.0|39.0|19.0|20.0|30.0">Mexico City, Mexico</option>
-                    <option value="Sao Paulo, Brazil|20.0|11.0|37.0|17.0|15.0|25.0">Sao Paulo, Brazil</option>
-                    <option value="Buenos Aires, Argentina|18.0|13.0|35.0|15.0|15.0|20.0">Buenos Aires, Argentina</option>
-                    <option value="Johannesburg, South Africa|16.0|15.0|33.0|13.0|10.0|35.0">Johannesburg, South Africa</option>
-                    <option value="Cairo, Egypt|14.0|17.0|31.0|11.0|10.0|30.0">Cairo, Egypt</option>
-                    <option value="Mumbai, India|12.0|19.0|29.0|9.0|5.0|25.0">Mumbai, India</option>
-                    <option value="Delhi, India|10.0|21.0|27.0|7.0|5.0|20.0">Delhi, India</option>
+                    <option value="New York, NY, United States|100.0|100.0|100.0|100.0|80.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0">New York, NY, United States</option>
+                    <option value="Honolulu, HI, United States|96.4|57.9|120.7|88.7|75.0|102.3|95.0|90.0|105.0|110.0|100.0|95.0|90.0|85.0|100.0|95.0|90.0|105.0|100.0|95.0|105.0">Honolulu, HI, United States</option>
+                    <option value="San Francisco, CA, United States|95.1|80.2|102.4|106.9|85.0|157.4|110.0|95.0|120.0|130.0|115.0|110.0|105.0|100.0|115.0|110.0|105.0|120.0|115.0|110.0|125.0">San Francisco, CA, United States</option>
+                    <option value="Seattle, WA, United States|87.8|61.4|95.4|94.7|80.0|164.9|100.0|85.0|110.0|120.0|105.0|100.0|95.0|90.0|105.0|100.0|95.0|110.0|105.0|100.0|115.0">Seattle, WA, United States</option>
+                    <option value="Boston, MA, United States|84.8|81.0|92.0|94.4|78.0|146.0|95.0|80.0|100.0|110.0|100.0|95.0|90.0|85.0|100.0|95.0|90.0|105.0|100.0|95.0|105.0">Boston, MA, United States</option>
+                    <option value="Washington, DC, United States|83.9|67.2|88.8|94.2|82.0|147.5|100.0|85.0|105.0|115.0|105.0|100.0|95.0|90.0|105.0|100.0|95.0|110.0|105.0|100.0|110.0">Washington, DC, United States</option>
+                    <option value="Los Angeles, CA, United States|81.0|48.0|98.0|78.0|85.0|120.0|90.0|80.0|95.0|100.0|95.0|90.0|85.0|80.0|95.0|90.0|85.0|100.0|95.0|90.0|100.0">Los Angeles, CA, United States</option>
+                    <option value="San Diego, CA, United States|80.0|60.0|85.0|85.0|80.0|140.0|85.0|75.0|90.0|95.0|90.0|85.0|80.0|75.0|90.0|85.0|80.0|95.0|90.0|85.0|95.0">San Diego, CA, United States</option>
+                    <option value="Chicago, IL, United States|77.0|55.0|80.0|80.0|70.0|130.0|80.0|70.0|85.0|90.0|85.0|80.0|75.0|70.0|85.0|80.0|75.0|90.0|85.0|80.0|90.0">Chicago, IL, United States</option>
+                    <option value="Miami, FL, United States|76.0|60.0|75.0|85.0|65.0|110.0|75.0|65.0|80.0|85.0|80.0|75.0|70.0|65.0|80.0|75.0|70.0|85.0|80.0|75.0|85.0">Miami, FL, United States</option>
+                    <option value="Philadelphia, PA, United States|75.0|52.0|78.0|80.0|70.0|120.0|70.0|60.0|75.0|80.0|75.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0|75.0|70.0|80.0">Philadelphia, PA, United States</option>
+                    <option value="Austin, TX, United States|75.0|55.0|75.0|75.0|65.0|150.0|75.0|65.0|80.0|85.0|80.0|75.0|70.0|65.0|80.0|75.0|70.0|85.0|80.0|75.0|85.0">Austin, TX, United States</option>
+                    <option value="Denver, CO, United States|76.0|50.0|80.0|80.0|70.0|145.0|80.0|70.0|85.0|90.0|85.0|80.0|75.0|70.0|85.0|80.0|75.0|90.0|85.0|80.0|90.0">Denver, CO, United States</option>
+                    <option value="Portland, OR, United States|78.0|50.0|85.0|85.0|75.0|140.0|85.0|75.0|90.0|95.0|90.0|85.0|80.0|75.0|90.0|85.0|80.0|95.0|90.0|85.0|95.0">Portland, OR, United States</option>
+                    <option value="Minneapolis, MN, United States|74.0|45.0|75.0|75.0|65.0|155.0|75.0|65.0|80.0|85.0|80.0|75.0|70.0|65.0|80.0|75.0|70.0|85.0|80.0|75.0|85.0">Minneapolis, MN, United States</option>
+                    <option value="Dallas, TX, United States|70.0|50.0|70.0|70.0|60.0|140.0|70.0|60.0|75.0|80.0|75.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0|75.0|70.0|80.0">Dallas, TX, United States</option>
+                    <option value="Atlanta, GA, United States|72.0|48.0|70.0|75.0|60.0|125.0|70.0|60.0|75.0|80.0|75.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0|75.0|70.0|80.0">Atlanta, GA, United States</option>
+                    <option value="Phoenix, AZ, United States|68.0|40.0|65.0|70.0|55.0|130.0|65.0|55.0|70.0|75.0|70.0|65.0|60.0|55.0|70.0|65.0|60.0|75.0|70.0|65.0|75.0">Phoenix, AZ, United States</option>
+                    <option value="Houston, TX, United States|68.0|45.0|65.0|65.0|55.0|135.0|65.0|55.0|70.0|75.0|70.0|65.0|60.0|55.0|70.0|65.0|60.0|75.0|70.0|65.0|75.0">Houston, TX, United States</option>
+                    <option value="Detroit, MI, United States|65.0|40.0|62.0|68.0|50.0|120.0|60.0|50.0|65.0|70.0|65.0|60.0|55.0|50.0|65.0|60.0|55.0|70.0|65.0|60.0|70.0">Detroit, MI, United States</option>
+                    <option value="Baltimore, MD, United States|70.0|45.0|68.0|72.0|60.0|125.0|70.0|60.0|75.0|80.0|75.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0|75.0|70.0|80.0">Baltimore, MD, United States</option>
+                    <option value="Charlotte, NC, United States|68.0|42.0|65.0|70.0|55.0|130.0|65.0|55.0|70.0|75.0|70.0|65.0|60.0|55.0|70.0|65.0|60.0|75.0|70.0|65.0|75.0">Charlotte, NC, United States</option>
+                    <option value="Orlando, FL, United States|70.0|48.0|68.0|75.0|60.0|115.0|70.0|60.0|75.0|80.0|75.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0|75.0|70.0|80.0">Orlando, FL, United States</option>
+                    <option value="Tampa, FL, United States|68.0|45.0|65.0|70.0|55.0|120.0|65.0|55.0|70.0|75.0|70.0|65.0|60.0|55.0|70.0|65.0|60.0|75.0|70.0|65.0|75.0">Tampa, FL, United States</option>
+                    <option value="Pittsburgh, PA, United States|65.0|40.0|62.0|68.0|50.0|135.0|60.0|50.0|65.0|70.0|65.0|60.0|55.0|50.0|65.0|60.0|55.0|70.0|65.0|60.0|70.0">Pittsburgh, PA, United States</option>
+                    <option value="St. Louis, MO, United States|62.0|35.0|60.0|65.0|50.0|140.0|55.0|45.0|60.0|65.0|60.0|55.0|50.0|45.0|60.0|55.0|50.0|65.0|60.0|55.0|65.0">St. Louis, MO, United States</option>
+                    <option value="Cincinnati, OH, United States|60.0|32.0|58.0|62.0|48.0|130.0|50.0|40.0|55.0|60.0|55.0|50.0|45.0|40.0|55.0|50.0|45.0|60.0|55.0|50.0|60.0">Cincinnati, OH, United States</option>
+                    <option value="Kansas City, MO, United States|62.0|35.0|60.0|65.0|50.0|135.0|55.0|45.0|60.0|65.0|60.0|55.0|50.0|45.0|60.0|55.0|50.0|65.0|60.0|55.0|65.0">Kansas City, MO, United States</option>
+                    <option value="Indianapolis, IN, United States|60.0|30.0|58.0|62.0|48.0|125.0|50.0|40.0|55.0|60.0|55.0|50.0|45.0|40.0|55.0|50.0|45.0|60.0|55.0|50.0|60.0">Indianapolis, IN, United States</option>
+                    <option value="Milwaukee, WI, United States|62.0|35.0|60.0|65.0|50.0|120.0|55.0|45.0|60.0|65.0|60.0|55.0|50.0|45.0|60.0|55.0|50.0|65.0|60.0|55.0|65.0">Milwaukee, WI, United States</option>
+                    <option value="Cleveland, OH, United States|60.0|30.0|58.0|62.0|48.0|115.0|50.0|40.0|55.0|60.0|55.0|50.0|45.0|40.0|55.0|50.0|45.0|60.0|55.0|50.0|60.0">Cleveland, OH, United States</option>
+                    <option value="Columbus, OH, United States|62.0|35.0|60.0|65.0|50.0|125.0|55.0|45.0|60.0|65.0|60.0|55.0|50.0|45.0|60.0|55.0|50.0|65.0|60.0|55.0|65.0">Columbus, OH, United States</option>
+                    <option value="Memphis, TN, United States|58.0|28.0|55.0|60.0|45.0|110.0|45.0|35.0|50.0|55.0|50.0|45.0|40.0|35.0|50.0|45.0|40.0|55.0|50.0|45.0|55.0">Memphis, TN, United States</option>
+                    <option value="Nashville, TN, United States|65.0|40.0|62.0|68.0|55.0|130.0|60.0|50.0|65.0|70.0|65.0|60.0|55.0|50.0|65.0|60.0|55.0|70.0|65.0|60.0|70.0">Nashville, TN, United States</option>
+                    <option value="Oklahoma City, OK, United States|58.0|28.0|55.0|60.0|45.0|120.0|45.0|35.0|50.0|55.0|50.0|45.0|40.0|35.0|50.0|45.0|40.0|55.0|50.0|45.0|55.0">Oklahoma City, OK, United States</option>
+                    <option value="Louisville, KY, United States|60.0|30.0|58.0|62.0|48.0|115.0|50.0|40.0|55.0|60.0|55.0|50.0|45.0|40.0|55.0|50.0|45.0|60.0|55.0|50.0|60.0">Louisville, KY, United States</option>
+                    <option value="New Orleans, LA, United States|65.0|40.0|62.0|68.0|55.0|110.0|60.0|50.0|65.0|70.0|65.0|60.0|55.0|50.0|65.0|60.0|55.0|70.0|65.0|60.0|70.0">New Orleans, LA, United States</option>
+                    <option value="Hamilton, Bermuda|134.09|85.12|150.12|120.34|130.0|80.0|140.0|130.0|145.0|150.0|140.0|135.0|130.0|125.0|140.0|135.0|130.0|145.0|140.0|135.0|150.0">Hamilton, Bermuda</option>
+                    <option value="Zurich, Switzerland|120.45|80.56|130.78|110.89|95.0|159.5|125.0|115.0|130.0|135.0|125.0|120.0|115.0|110.0|125.0|120.0|115.0|130.0|125.0|120.0|135.0">Zurich, Switzerland</option>
+                    <option value="Geneva, Switzerland|118.67|78.9|128.45|108.76|90.0|155.9|120.0|110.0|125.0|130.0|120.0|115.0|110.0|105.0|120.0|115.0|110.0|125.0|120.0|115.0|130.0">Geneva, Switzerland</option>
+                    <option value="Basel, Switzerland|115.23|75.34|125.67|105.12|85.0|180.7|115.0|105.0|120.0|125.0|115.0|110.0|105.0|100.0|115.0|110.0|105.0|120.0|115.0|110.0|125.0">Basel, Switzerland</option>
+                    <option value="Bern, Switzerland|112.89|72.45|122.34|102.56|80.0|170.7|110.0|100.0|115.0|120.0|110.0|105.0|100.0|95.0|110.0|105.0|100.0|115.0|110.0|105.0|120.0">Bern, Switzerland</option>
+                    <option value="Reykjavik, Iceland|110.56|70.12|120.89|100.34|85.0|138.5|105.0|95.0|110.0|115.0|105.0|100.0|95.0|90.0|105.0|100.0|95.0|110.0|105.0|100.0|115.0">Reykjavik, Iceland</option>
+                    <option value="Singapore, Singapore|108.34|68.9|118.56|98.12|90.0|100.0|100.0|90.0|105.0|110.0|100.0|95.0|90.0|85.0|100.0|95.0|90.0|105.0|100.0|95.0|110.0">Singapore, Singapore</option>
+                    <option value="Oslo, Norway|98.76|65.43|115.67|95.78|85.0|120.0|95.0|85.0|100.0|105.0|95.0|90.0|85.0|80.0|95.0|90.0|85.0|100.0|95.0|90.0|105.0">Oslo, Norway</option>
+                    <option value="Copenhagen, Denmark|96.54|63.21|113.45|93.56|80.0|110.0|90.0|80.0|95.0|100.0|90.0|85.0|80.0|75.0|90.0|85.0|80.0|95.0|90.0|85.0|100.0">Copenhagen, Denmark</option>
+                    <option value="London, United Kingdom|94.32|61.0|111.23|91.34|85.0|105.0|85.0|75.0|90.0|95.0|85.0|80.0|75.0|70.0|85.0|80.0|75.0|90.0|85.0|80.0|95.0">London, United Kingdom</option>
+                    <option value="Tokyo, Japan|92.1|58.78|109.01|89.12|70.0|95.0|80.0|70.0|85.0|90.0|80.0|75.0|70.0|65.0|80.0|75.0|70.0|85.0|80.0|75.0|90.0">Tokyo, Japan</option>
+                    <option value="Paris, France|89.87|56.45|106.78|86.9|75.0|100.0|75.0|65.0|80.0|85.0|75.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0|75.0|70.0|85.0">Paris, France</option>
+                    <option value="Sydney, Australia|87.65|54.32|104.56|84.67|80.0|110.0|70.0|60.0|75.0|80.0|70.0|65.0|60.0|55.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0">Sydney, Australia</option>
+                    <option value="Hong Kong, Hong Kong|85.43|52.1|102.34|82.45|90.0|90.0|65.0|55.0|70.0|75.0|65.0|60.0|55.0|50.0|65.0|60.0|55.0|70.0|65.0|60.0|75.0">Hong Kong, Hong Kong</option>
+                    <option value="Amsterdam, Netherlands|78.9|46.0|95.9|75.9|70.0|105.0|60.0|50.0|65.0|70.0|60.0|55.0|50.0|45.0|60.0|55.0|50.0|65.0|60.0|55.0|70.0">Amsterdam, Netherlands</option>
+                    <option value="Dublin, Ireland|76.78|44.0|93.78|73.78|65.0|100.0|55.0|45.0|60.0|65.0|55.0|50.0|45.0|40.0|55.0|50.0|45.0|60.0|55.0|50.0|65.0">Dublin, Ireland</option>
+                    <option value="Tel Aviv, Israel|74.56|42.0|91.56|71.56|60.0|95.0|50.0|40.0|55.0|60.0|50.0|45.0|40.0|35.0|50.0|45.0|40.0|55.0|50.0|45.0|60.0">Tel Aviv, Israel</option>
+                    <option value="Berlin, Germany|72.34|40.0|89.34|69.34|65.0|110.0|45.0|35.0|50.0|55.0|45.0|40.0|35.0|30.0|45.0|40.0|35.0|50.0|45.0|40.0|55.0">Berlin, Germany</option>
+                    <option value="Vienna, Austria|70.12|38.0|87.12|67.12|60.0|105.0|40.0|30.0|45.0|50.0|40.0|35.0|30.0|25.0|40.0|35.0|30.0|45.0|40.0|35.0|50.0">Vienna, Austria</option>
+                    <option value="Toronto, Canada|68.0|36.0|85.0|65.0|70.0|120.0|35.0|25.0|40.0|45.0|35.0|30.0|25.0|20.0|35.0|30.0|25.0|40.0|35.0|30.0|45.0">Toronto, Canada</option>
+                    <option value="Melbourne, Australia|65.9|34.0|82.9|62.9|75.0|115.0|30.0|20.0|35.0|40.0|30.0|25.0|20.0|15.0|30.0|25.0|20.0|35.0|30.0|25.0|40.0">Melbourne, Australia</option>
+                    <option value="Stockholm, Sweden|63.78|32.0|80.78|60.78|70.0|110.0|25.0|15.0|30.0|35.0|25.0|20.0|15.0|10.0|25.0|20.0|15.0|30.0|25.0|20.0|35.0">Stockholm, Sweden</option>
+                    <option value="Helsinki, Finland|61.56|30.0|78.56|58.56|65.0|105.0|20.0|10.0|25.0|30.0|20.0|15.0|10.0|5.0|20.0|15.0|10.0|25.0|20.0|15.0|30.0">Helsinki, Finland</option>
+                    <option value="Brussels, Belgium|59.34|28.0|76.34|56.34|60.0|100.0|15.0|5.0|20.0|25.0|15.0|10.0|5.0|0.0|15.0|10.0|5.0|20.0|15.0|10.0|25.0">Brussels, Belgium</option>
+                    <option value="Barcelona, Spain|57.12|26.0|74.12|54.12|55.0|95.0|10.0|0.0|15.0|20.0|10.0|5.0|0.0|0.0|10.0|5.0|0.0|15.0|10.0|5.0|20.0">Barcelona, Spain</option>
+                    <option value="Madrid, Spain|55.0|24.0|72.0|52.0|50.0|90.0|5.0|0.0|10.0|15.0|5.0|0.0|0.0|0.0|5.0|0.0|0.0|10.0|5.0|0.0|15.0">Madrid, Spain</option>
+                    <option value="Rome, Italy|52.9|22.0|69.9|49.9|50.0|85.0|0.0|0.0|5.0|10.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|5.0|0.0|0.0|10.0">Rome, Italy</option>
+                    <option value="Milan, Italy|50.78|20.0|67.78|47.78|55.0|80.0|0.0|0.0|0.0|5.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|5.0">Milan, Italy</option>
+                    <option value="Lisbon, Portugal|48.56|18.0|65.56|45.56|50.0|75.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Lisbon, Portugal</option>
+                    <option value="Athens, Greece|46.34|16.0|63.34|43.34|45.0|70.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Athens, Greece</option>
+                    <option value="Prague, Czech Republic|44.12|14.0|61.12|41.12|40.0|65.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Prague, Czech Republic</option>
+                    <option value="Warsaw, Poland|42.0|12.0|59.0|39.0|40.0|60.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Warsaw, Poland</option>
+                    <option value="Budapest, Hungary|40.0|10.0|57.0|37.0|35.0|55.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Budapest, Hungary</option>
+                    <option value="Zagreb, Croatia|38.0|8.0|55.0|35.0|35.0|50.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Zagreb, Croatia</option>
+                    <option value="Bucharest, Romania|36.0|6.0|53.0|33.0|30.0|45.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Bucharest, Romania</option>
+                    <option value="Sofia, Bulgaria|34.0|4.0|51.0|31.0|30.0|40.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Sofia, Bulgaria</option>
+                    <option value="Istanbul, Turkey|32.0|2.0|49.0|29.0|25.0|35.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Istanbul, Turkey</option>
+                    <option value="Moscow, Russia|30.0|1.0|47.0|27.0|25.0|30.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Moscow, Russia</option>
+                    <option value="Kyiv, Ukraine|28.0|0.5|45.0|25.0|20.0|25.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Kyiv, Ukraine</option>
+                    <option value="Beijing, China|26.0|5.0|43.0|23.0|20.0|40.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Beijing, China</option>
+                    <option value="Shanghai, China|24.0|7.0|41.0|21.0|25.0|35.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Shanghai, China</option>
+                    <option value="Mexico City, Mexico|22.0|9.0|39.0|19.0|20.0|30.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Mexico City, Mexico</option>
+                    <option value="Sao Paulo, Brazil|20.0|11.0|37.0|17.0|15.0|25.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Sao Paulo, Brazil</option>
+                    <option value="Buenos Aires, Argentina|18.0|13.0|35.0|15.0|15.0|20.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Buenos Aires, Argentina</option>
+                    <option value="Johannesburg, South Africa|16.0|15.0|33.0|13.0|10.0|35.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Johannesburg, South Africa</option>
+                    <option value="Cairo, Egypt|14.0|17.0|31.0|11.0|10.0|30.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Cairo, Egypt</option>
+                    <option value="Mumbai, India|12.0|19.0|29.0|9.0|5.0|25.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Mumbai, India</option>
+                    <option value="Delhi, India|10.0|21.0|27.0|7.0|5.0|20.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Delhi, India</option>
                 </select>
                 
                 <label for="salary">Annual Salary in First City (USD):</label>
                 <input type="number" id="salary" placeholder="e.g. 60000" required>
                 
+                <label for="currency">Display Currency:</label>
+                <select id="currency">
+                    <option value="USD">$ (USD)</option>
+                    <option value="EUR">€ (EUR)</option>
+                </select>
+                
                 <label for="city2">Select Second City:</label>
                 <select id="city2">
-<!-- US cities at top -->
-                    <option value="New York, NY, United States|100.0|100.0|100.0|100.0|80.0|100.0">New York, NY, United States</option>
-                    <option value="Honolulu, HI, United States|96.4|57.9|120.7|88.7|75.0|102.3">Honolulu, HI, United States</option>
-                    <option value="San Francisco, CA, United States|95.1|80.2|102.4|106.9|85.0|157.4">San Francisco, CA, United States</option>
-                    <option value="Seattle, WA, United States|87.8|61.4|95.4|94.7|80.0|164.9">Seattle, WA, United States</option>
-                    <option value="Boston, MA, United States|84.8|81.0|92.0|94.4|78.0|146.0">Boston, MA, United States</option>
-                    <option value="Washington, DC, United States|83.9|67.2|88.8|94.2|82.0|147.5">Washington, DC, United States</option>
-                    <option value="Los Angeles, CA, United States|81.0|48.0|98.0|78.0|85.0|120.0">Los Angeles, CA, United States</option>
-                    <option value="San Diego, CA, United States|80.0|60.0|85.0|85.0|80.0|140.0">San Diego, CA, United States</option>
-                    <option value="Chicago, IL, United States|77.0|55.0|80.0|80.0|70.0|130.0">Chicago, IL, United States</option>
-                    <option value="Miami, FL, United States|76.0|60.0|75.0|85.0|65.0|110.0">Miami, FL, United States</option>
-                    <option value="Philadelphia, PA, United States|75.0|52.0|78.0|80.0|70.0|120.0">Philadelphia, PA, United States</option>
-                    <option value="Austin, TX, United States|75.0|55.0|75.0|75.0|65.0|150.0">Austin, TX, United States</option>
-                    <option value="Denver, CO, United States|76.0|50.0|80.0|80.0|70.0|145.0">Denver, CO, United States</option>
-                    <option value="Portland, OR, United States|78.0|50.0|85.0|85.0|75.0|140.0">Portland, OR, United States</option>
-                    <option value="Minneapolis, MN, United States|74.0|45.0|75.0|75.0|65.0|155.0">Minneapolis, MN, United States</option>
-                    <option value="Dallas, TX, United States|70.0|50.0|70.0|70.0|60.0|140.0">Dallas, TX, United States</option>
-                    <option value="Atlanta, GA, United States|72.0|48.0|70.0|75.0|60.0|125.0">Atlanta, GA, United States</option>
-                    <option value="Phoenix, AZ, United States|68.0|40.0|65.0|70.0|55.0|130.0">Phoenix, AZ, United States</option>
-                    <option value="Houston, TX, United States|68.0|45.0|65.0|65.0|55.0|135.0">Houston, TX, United States</option>
-                    <option value="Detroit, MI, United States|65.0|40.0|62.0|68.0|50.0|120.0">Detroit, MI, United States</option>
-                    <option value="Baltimore, MD, United States|70.0|45.0|68.0|72.0|60.0|125.0">Baltimore, MD, United States</option>
-                    <option value="Charlotte, NC, United States|68.0|42.0|65.0|70.0|55.0|130.0">Charlotte, NC, United States</option>
-                    <option value="Orlando, FL, United States|70.0|48.0|68.0|75.0|60.0|115.0">Orlando, FL, United States</option>
-                    <option value="Tampa, FL, United States|68.0|45.0|65.0|70.0|55.0|120.0">Tampa, FL, United States</option>
-                    <option value="Pittsburgh, PA, United States|65.0|40.0|62.0|68.0|50.0|135.0">Pittsburgh, PA, United States</option>
-                    <option value="St. Louis, MO, United States|62.0|35.0|60.0|65.0|50.0|140.0">St. Louis, MO, United States</option>
-                    <option value="Cincinnati, OH, United States|60.0|32.0|58.0|62.0|48.0|130.0">Cincinnati, OH, United States</option>
-                    <option value="Kansas City, MO, United States|62.0|35.0|60.0|65.0|50.0|135.0">Kansas City, MO, United States</option>
-                    <option value="Indianapolis, IN, United States|60.0|30.0|58.0|62.0|48.0|125.0">Indianapolis, IN, United States</option>
-                    <option value="Milwaukee, WI, United States|62.0|35.0|60.0|65.0|50.0|120.0">Milwaukee, WI, United States</option>
-                    <option value="Cleveland, OH, United States|60.0|30.0|58.0|62.0|48.0|115.0">Cleveland, OH, United States</option>
-                    <option value="Columbus, OH, United States|62.0|35.0|60.0|65.0|50.0|125.0">Columbus, OH, United States</option>
-                    <option value="Memphis, TN, United States|58.0|28.0|55.0|60.0|45.0|110.0">Memphis, TN, United States</option>
-                    <option value="Nashville, TN, United States|65.0|40.0|62.0|68.0|55.0|130.0">Nashville, TN, United States</option>
-                    <option value="Oklahoma City, OK, United States|58.0|28.0|55.0|60.0|45.0|120.0">Oklahoma City, OK, United States</option>
-                    <option value="Louisville, KY, United States|60.0|30.0|58.0|62.0|48.0|115.0">Louisville, KY, United States</option>
-                    <option value="New Orleans, LA, United States|65.0|40.0|62.0|68.0|55.0|110.0">New Orleans, LA, United States</option>
-                    <!-- Non-US cities below -->
-                    <option value="Hamilton, Bermuda|134.09|85.12|150.12|120.34|130.0|80.0">Hamilton, Bermuda</option>
-                    <option value="Zurich, Switzerland|120.45|80.56|130.78|110.89|95.0|159.5">Zurich, Switzerland</option>
-                    <option value="Geneva, Switzerland|118.67|78.90|128.45|108.76|90.0|155.9">Geneva, Switzerland</option>
-                    <option value="Basel, Switzerland|116.5|50.6|119.1|119.3|85.0|180.7">Basel, Switzerland</option>
-                    <option value="Bern, Switzerland|112.89|72.45|122.34|102.56|80.0|170.7">Bern, Switzerland</option>
-                    <option value="Reykjavik, Iceland|110.56|70.12|120.89|100.34|85.0|138.5">Reykjavik, Iceland</option>
-                    <option value="Singapore, Singapore|108.34|68.90|118.56|98.12|90.0|100.0">Singapore, Singapore</option>
-                    <option value="Oslo, Norway|98.76|65.43|115.67|95.78|85.0|120.0">Oslo, Norway</option>
-                    <option value="Copenhagen, Denmark|96.54|63.21|113.45|93.56|80.0|110.0">Copenhagen, Denmark</option>
-                    <option value="London, United Kingdom|94.32|61.0|111.23|91.34|85.0|105.0">London, United Kingdom</option>
-                    <option value="Tokyo, Japan|92.10|58.78|109.01|89.12|70.0|95.0">Tokyo, Japan</option>
-                    <option value="Paris, France|89.87|56.45|106.78|86.90|75.0|100.0">Paris, France</option>
-                    <option value="Sydney, Australia|87.65|54.32|104.56|84.67|80.0|110.0">Sydney, Australia</option>
-                    <option value="Hong Kong, Hong Kong|85.43|52.10|102.34|82.45|90.0|90.0">Hong Kong, Hong Kong</option>
-                    <option value="Amsterdam, Netherlands|78.90|46.0|95.90|75.90|70.0|105.0">Amsterdam, Netherlands</option>
-                    <option value="Dublin, Ireland|76.78|44.0|93.78|73.78|65.0|100.0">Dublin, Ireland</option>
-                    <option value="Tel Aviv, Israel|74.56|42.0|91.56|71.56|60.0|95.0">Tel Aviv, Israel</option>
-                    <option value="Berlin, Germany|72.34|40.0|89.34|69.34|65.0|110.0">Berlin, Germany</option>
-                    <option value="Vienna, Austria|70.12|38.0|87.12|67.12|60.0|105.0">Vienna, Austria</option>
-                    <option value="Toronto, Canada|68.0|36.0|85.0|65.0|70.0|120.0">Toronto, Canada</option>
-                    <option value="Melbourne, Australia|65.90|34.0|82.90|62.90|75.0|115.0">Melbourne, Australia</option>
-                    <option value="Stockholm, Sweden|63.78|32.0|80.78|60.78|70.0|110.0">Stockholm, Sweden</option>
-                    <option value="Helsinki, Finland|61.56|30.0|78.56|58.56|65.0|105.0">Helsinki, Finland</option>
-                    <option value="Brussels, Belgium|59.34|28.0|76.34|56.34|60.0|100.0">Brussels, Belgium</option>
-                    <option value="Barcelona, Spain|57.12|26.0|74.12|54.12|55.0|95.0">Barcelona, Spain</option>
-                    <option value="Madrid, Spain|55.0|24.0|72.0|52.0|50.0|90.0">Madrid, Spain</option>
-                    <option value="Rome, Italy|52.90|22.0|69.90|49.90|50.0|85.0">Rome, Italy</option>
-                    <option value="Milan, Italy|50.78|20.0|67.78|47.78|55.0|80.0">Milan, Italy</option>
-                    <option value="Lisbon, Portugal|48.56|18.0|65.56|45.56|50.0|75.0">Lisbon, Portugal</option>
-                    <option value="Athens, Greece|46.34|16.0|63.34|43.34|45.0|70.0">Athens, Greece</option>
-                    <option value="Prague, Czech Republic|44.12|14.0|61.12|41.12|40.0|65.0">Prague, Czech Republic</option>
-                    <option value="Warsaw, Poland|42.0|12.0|59.0|39.0|40.0|60.0">Warsaw, Poland</option>
-                    <option value="Budapest, Hungary|40.0|10.0|57.0|37.0|35.0|55.0">Budapest, Hungary</option>
-                    <option value="Zagreb, Croatia|38.0|8.0|55.0|35.0|35.0|50.0">Zagreb, Croatia</option>
-                    <option value="Bucharest, Romania|36.0|6.0|53.0|33.0|30.0|45.0">Bucharest, Romania</option>
-                    <option value="Sofia, Bulgaria|34.0|4.0|51.0|31.0|30.0|40.0">Sofia, Bulgaria</option>
-                    <option value="Istanbul, Turkey|32.0|2.0|49.0|29.0|25.0|35.0">Istanbul, Turkey</option>
-                    <option value="Moscow, Russia|30.0|1.0|47.0|27.0|25.0|30.0">Moscow, Russia</option>
-                    <option value="Kyiv, Ukraine|28.0|0.5|45.0|25.0|20.0|25.0">Kyiv, Ukraine</option>
-                    <option value="Beijing, China|26.0|5.0|43.0|23.0|20.0|40.0">Beijing, China</option>
-                    <option value="Shanghai, China|24.0|7.0|41.0|21.0|25.0|35.0">Shanghai, China</option>
-                    <option value="Mexico City, Mexico|22.0|9.0|39.0|19.0|20.0|30.0">Mexico City, Mexico</option>
-                    <option value="Sao Paulo, Brazil|20.0|11.0|37.0|17.0|15.0|25.0">Sao Paulo, Brazil</option>
-                    <option value="Buenos Aires, Argentina|18.0|13.0|35.0|15.0|15.0|20.0">Buenos Aires, Argentina</option>
-                    <option value="Johannesburg, South Africa|16.0|15.0|33.0|13.0|10.0|35.0">Johannesburg, South Africa</option>
-                    <option value="Cairo, Egypt|14.0|17.0|31.0|11.0|10.0|30.0">Cairo, Egypt</option>
-                    <option value="Mumbai, India|12.0|19.0|29.0|9.0|5.0|25.0">Mumbai, India</option>
-                    <option value="Delhi, India|10.0|21.0|27.0|7.0|5.0|20.0">Delhi, India</option>
+                    <option value="New York, NY, United States|100.0|100.0|100.0|100.0|80.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0|100.0">New York, NY, United States</option>
+                    <option value="Honolulu, HI, United States|96.4|57.9|120.7|88.7|75.0|102.3|95.0|90.0|105.0|110.0|100.0|95.0|90.0|85.0|100.0|95.0|90.0|105.0|100.0|95.0|105.0">Honolulu, HI, United States</option>
+                    <option value="San Francisco, CA, United States|95.1|80.2|102.4|106.9|85.0|157.4|110.0|95.0|120.0|130.0|115.0|110.0|105.0|100.0|115.0|110.0|105.0|120.0|115.0|110.0|125.0">San Francisco, CA, United States</option>
+                    <option value="Seattle, WA, United States|87.8|61.4|95.4|94.7|80.0|164.9|100.0|85.0|110.0|120.0|105.0|100.0|95.0|90.0|105.0|100.0|95.0|110.0|105.0|100.0|115.0">Seattle, WA, United States</option>
+                    <option value="Boston, MA, United States|84.8|81.0|92.0|94.4|78.0|146.0|95.0|80.0|100.0|110.0|100.0|95.0|90.0|85.0|100.0|95.0|90.0|105.0|100.0|95.0|105.0">Boston, MA, United States</option>
+                    <option value="Washington, DC, United States|83.9|67.2|88.8|94.2|82.0|147.5|100.0|85.0|105.0|115.0|105.0|100.0|95.0|90.0|105.0|100.0|95.0|110.0|105.0|100.0|110.0">Washington, DC, United States</option>
+                    <option value="Los Angeles, CA, United States|81.0|48.0|98.0|78.0|85.0|120.0|90.0|80.0|95.0|100.0|95.0|90.0|85.0|80.0|95.0|90.0|85.0|100.0|95.0|90.0|100.0">Los Angeles, CA, United States</option>
+                    <option value="San Diego, CA, United States|80.0|60.0|85.0|85.0|80.0|140.0|85.0|75.0|90.0|95.0|90.0|85.0|80.0|75.0|90.0|85.0|80.0|95.0|90.0|85.0|95.0">San Diego, CA, United States</option>
+                    <option value="Chicago, IL, United States|77.0|55.0|80.0|80.0|70.0|130.0|80.0|70.0|85.0|90.0|85.0|80.0|75.0|70.0|85.0|80.0|75.0|90.0|85.0|80.0|90.0">Chicago, IL, United States</option>
+                    <option value="Miami, FL, United States|76.0|60.0|75.0|85.0|65.0|110.0|75.0|65.0|80.0|85.0|80.0|75.0|70.0|65.0|80.0|75.0|70.0|85.0|80.0|75.0|85.0">Miami, FL, United States</option>
+                    <option value="Philadelphia, PA, United States|75.0|52.0|78.0|80.0|70.0|120.0|70.0|60.0|75.0|80.0|75.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0|75.0|70.0|80.0">Philadelphia, PA, United States</option>
+                    <option value="Austin, TX, United States|75.0|55.0|75.0|75.0|65.0|150.0|75.0|65.0|80.0|85.0|80.0|75.0|70.0|65.0|80.0|75.0|70.0|85.0|80.0|75.0|85.0">Austin, TX, United States</option>
+                    <option value="Denver, CO, United States|76.0|50.0|80.0|80.0|70.0|145.0|80.0|70.0|85.0|90.0|85.0|80.0|75.0|70.0|85.0|80.0|75.0|90.0|85.0|80.0|90.0">Denver, CO, United States</option>
+                    <option value="Portland, OR, United States|78.0|50.0|85.0|85.0|75.0|140.0|85.0|75.0|90.0|95.0|90.0|85.0|80.0|75.0|90.0|85.0|80.0|95.0|90.0|85.0|95.0">Portland, OR, United States</option>
+                    <option value="Minneapolis, MN, United States|74.0|45.0|75.0|75.0|65.0|155.0|75.0|65.0|80.0|85.0|80.0|75.0|70.0|65.0|80.0|75.0|70.0|85.0|80.0|75.0|85.0">Minneapolis, MN, United States</option>
+                    <option value="Dallas, TX, United States|70.0|50.0|70.0|70.0|60.0|140.0|70.0|60.0|75.0|80.0|75.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0|75.0|70.0|80.0">Dallas, TX, United States</option>
+                    <option value="Atlanta, GA, United States|72.0|48.0|70.0|75.0|60.0|125.0|70.0|60.0|75.0|80.0|75.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0|75.0|70.0|80.0">Atlanta, GA, United States</option>
+                    <option value="Phoenix, AZ, United States|68.0|40.0|65.0|70.0|55.0|130.0|65.0|55.0|70.0|75.0|70.0|65.0|60.0|55.0|70.0|65.0|60.0|75.0|70.0|65.0|75.0">Phoenix, AZ, United States</option>
+                    <option value="Houston, TX, United States|68.0|45.0|65.0|65.0|55.0|135.0|65.0|55.0|70.0|75.0|70.0|65.0|60.0|55.0|70.0|65.0|60.0|75.0|70.0|65.0|75.0">Houston, TX, United States</option>
+                    <option value="Detroit, MI, United States|65.0|40.0|62.0|68.0|50.0|120.0|60.0|50.0|65.0|70.0|65.0|60.0|55.0|50.0|65.0|60.0|55.0|70.0|65.0|60.0|70.0">Detroit, MI, United States</option>
+                    <option value="Baltimore, MD, United States|70.0|45.0|68.0|72.0|60.0|125.0|70.0|60.0|75.0|80.0|75.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0|75.0|70.0|80.0">Baltimore, MD, United States</option>
+                    <option value="Charlotte, NC, United States|68.0|42.0|65.0|70.0|55.0|130.0|65.0|55.0|70.0|75.0|70.0|65.0|60.0|55.0|70.0|65.0|60.0|75.0|70.0|65.0|75.0">Charlotte, NC, United States</option>
+                    <option value="Orlando, FL, United States|70.0|48.0|68.0|75.0|60.0|115.0|70.0|60.0|75.0|80.0|75.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0|75.0|70.0|80.0">Orlando, FL, United States</option>
+                    <option value="Tampa, FL, United States|68.0|45.0|65.0|70.0|55.0|120.0|65.0|55.0|70.0|75.0|70.0|65.0|60.0|55.0|70.0|65.0|60.0|75.0|70.0|65.0|75.0">Tampa, FL, United States</option>
+                    <option value="Pittsburgh, PA, United States|65.0|40.0|62.0|68.0|50.0|135.0|60.0|50.0|65.0|70.0|65.0|60.0|55.0|50.0|65.0|60.0|55.0|70.0|65.0|60.0|70.0">Pittsburgh, PA, United States</option>
+                    <option value="St. Louis, MO, United States|62.0|35.0|60.0|65.0|50.0|140.0|55.0|45.0|60.0|65.0|60.0|55.0|50.0|45.0|60.0|55.0|50.0|65.0|60.0|55.0|65.0">St. Louis, MO, United States</option>
+                    <option value="Cincinnati, OH, United States|60.0|32.0|58.0|62.0|48.0|130.0|50.0|40.0|55.0|60.0|55.0|50.0|45.0|40.0|55.0|50.0|45.0|60.0|55.0|50.0|60.0">Cincinnati, OH, United States</option>
+                    <option value="Kansas City, MO, United States|62.0|35.0|60.0|65.0|50.0|135.0|55.0|45.0|60.0|65.0|60.0|55.0|50.0|45.0|60.0|55.0|50.0|65.0|60.0|55.0|65.0">Kansas City, MO, United States</option>
+                    <option value="Indianapolis, IN, United States|60.0|30.0|58.0|62.0|48.0|125.0|50.0|40.0|55.0|60.0|55.0|50.0|45.0|40.0|55.0|50.0|45.0|60.0|55.0|50.0|60.0">Indianapolis, IN, United States</option>
+                    <option value="Milwaukee, WI, United States|62.0|35.0|60.0|65.0|50.0|120.0|55.0|45.0|60.0|65.0|60.0|55.0|50.0|45.0|60.0|55.0|50.0|65.0|60.0|55.0|65.0">Milwaukee, WI, United States</option>
+                    <option value="Cleveland, OH, United States|60.0|30.0|58.0|62.0|48.0|115.0|50.0|40.0|55.0|60.0|55.0|50.0|45.0|40.0|55.0|50.0|45.0|60.0|55.0|50.0|60.0">Cleveland, OH, United States</option>
+                    <option value="Columbus, OH, United States|62.0|35.0|60.0|65.0|50.0|125.0|55.0|45.0|60.0|65.0|60.0|55.0|50.0|45.0|60.0|55.0|50.0|65.0|60.0|55.0|65.0">Columbus, OH, United States</option>
+                    <option value="Memphis, TN, United States|58.0|28.0|55.0|60.0|45.0|110.0|45.0|35.0|50.0|55.0|50.0|45.0|40.0|35.0|50.0|45.0|40.0|55.0|50.0|45.0|55.0">Memphis, TN, United States</option>
+                    <option value="Nashville, TN, United States|65.0|40.0|62.0|68.0|55.0|130.0|60.0|50.0|65.0|70.0|65.0|60.0|55.0|50.0|65.0|60.0|55.0|70.0|65.0|60.0|70.0">Nashville, TN, United States</option>
+                    <option value="Oklahoma City, OK, United States|58.0|28.0|55.0|60.0|45.0|120.0|45.0|35.0|50.0|55.0|50.0|45.0|40.0|35.0|50.0|45.0|40.0|55.0|50.0|45.0|55.0">Oklahoma City, OK, United States</option>
+                    <option value="Louisville, KY, United States|60.0|30.0|58.0|62.0|48.0|115.0|50.0|40.0|55.0|60.0|55.0|50.0|45.0|40.0|55.0|50.0|45.0|60.0|55.0|50.0|60.0">Louisville, KY, United States</option>
+                    <option value="New Orleans, LA, United States|65.0|40.0|62.0|68.0|55.0|110.0|60.0|50.0|65.0|70.0|65.0|60.0|55.0|50.0|65.0|60.0|55.0|70.0|65.0|60.0|70.0">New Orleans, LA, United States</option>
+                    <option value="Hamilton, Bermuda|134.09|85.12|150.12|120.34|130.0|80.0|140.0|130.0|145.0|150.0|140.0|135.0|130.0|125.0|140.0|135.0|130.0|145.0|140.0|135.0|150.0">Hamilton, Bermuda</option>
+                    <option value="Zurich, Switzerland|120.45|80.56|130.78|110.89|95.0|159.5|125.0|115.0|130.0|135.0|125.0|120.0|115.0|110.0|125.0|120.0|115.0|130.0|125.0|120.0|135.0">Zurich, Switzerland</option>
+                    <option value="Geneva, Switzerland|118.67|78.9|128.45|108.76|90.0|155.9|120.0|110.0|125.0|130.0|120.0|115.0|110.0|105.0|120.0|115.0|110.0|125.0|120.0|115.0|130.0">Geneva, Switzerland</option>
+                    <option value="Basel, Switzerland|115.23|75.34|125.67|105.12|85.0|180.7|115.0|105.0|120.0|125.0|115.0|110.0|105.0|100.0|115.0|110.0|105.0|120.0|115.0|110.0|125.0">Basel, Switzerland</option>
+                    <option value="Bern, Switzerland|112.89|72.45|122.34|102.56|80.0|170.7|110.0|100.0|115.0|120.0|110.0|105.0|100.0|95.0|110.0|105.0|100.0|115.0|110.0|105.0|120.0">Bern, Switzerland</option>
+                    <option value="Reykjavik, Iceland|110.56|70.12|120.89|100.34|85.0|138.5|105.0|95.0|110.0|115.0|105.0|100.0|95.0|90.0|105.0|100.0|95.0|110.0|105.0|100.0|115.0">Reykjavik, Iceland</option>
+                    <option value="Singapore, Singapore|108.34|68.9|118.56|98.12|90.0|100.0|100.0|90.0|105.0|110.0|100.0|95.0|90.0|85.0|100.0|95.0|90.0|105.0|100.0|95.0|110.0">Singapore, Singapore</option>
+                    <option value="Oslo, Norway|98.76|65.43|115.67|95.78|85.0|120.0|95.0|85.0|100.0|105.0|95.0|90.0|85.0|80.0|95.0|90.0|85.0|100.0|95.0|90.0|105.0">Oslo, Norway</option>
+                    <option value="Copenhagen, Denmark|96.54|63.21|113.45|93.56|80.0|110.0|90.0|80.0|95.0|100.0|90.0|85.0|80.0|75.0|90.0|85.0|80.0|95.0|90.0|85.0|100.0">Copenhagen, Denmark</option>
+                    <option value="London, United Kingdom|94.32|61.0|111.23|91.34|85.0|105.0|85.0|75.0|90.0|95.0|85.0|80.0|75.0|70.0|85.0|80.0|75.0|90.0|85.0|80.0|95.0">London, United Kingdom</option>
+                    <option value="Tokyo, Japan|92.1|58.78|109.01|89.12|70.0|95.0|80.0|70.0|85.0|90.0|80.0|75.0|70.0|65.0|80.0|75.0|70.0|85.0|80.0|75.0|90.0">Tokyo, Japan</option>
+                    <option value="Paris, France|89.87|56.45|106.78|86.9|75.0|100.0|75.0|65.0|80.0|85.0|75.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0|75.0|70.0|85.0">Paris, France</option>
+                    <option value="Sydney, Australia|87.65|54.32|104.56|84.67|80.0|110.0|70.0|60.0|75.0|80.0|70.0|65.0|60.0|55.0|70.0|65.0|60.0|75.0|70.0|65.0|80.0">Sydney, Australia</option>
+                    <option value="Hong Kong, Hong Kong|85.43|52.1|102.34|82.45|90.0|90.0|65.0|55.0|70.0|75.0|65.0|60.0|55.0|50.0|65.0|60.0|55.0|70.0|65.0|60.0|75.0">Hong Kong, Hong Kong</option>
+                    <option value="Amsterdam, Netherlands|78.9|46.0|95.9|75.9|70.0|105.0|60.0|50.0|65.0|70.0|60.0|55.0|50.0|45.0|60.0|55.0|50.0|65.0|60.0|55.0|70.0">Amsterdam, Netherlands</option>
+                    <option value="Dublin, Ireland|76.78|44.0|93.78|73.78|65.0|100.0|55.0|45.0|60.0|65.0|55.0|50.0|45.0|40.0|55.0|50.0|45.0|60.0|55.0|50.0|65.0">Dublin, Ireland</option>
+                    <option value="Tel Aviv, Israel|74.56|42.0|91.56|71.56|60.0|95.0|50.0|40.0|55.0|60.0|50.0|45.0|40.0|35.0|50.0|45.0|40.0|55.0|50.0|45.0|60.0">Tel Aviv, Israel</option>
+                    <option value="Berlin, Germany|72.34|40.0|89.34|69.34|65.0|110.0|45.0|35.0|50.0|55.0|45.0|40.0|35.0|30.0|45.0|40.0|35.0|50.0|45.0|40.0|55.0">Berlin, Germany</option>
+                    <option value="Vienna, Austria|70.12|38.0|87.12|67.12|60.0|105.0|40.0|30.0|45.0|50.0|40.0|35.0|30.0|25.0|40.0|35.0|30.0|45.0|40.0|35.0|50.0">Vienna, Austria</option>
+                    <option value="Toronto, Canada|68.0|36.0|85.0|65.0|70.0|120.0|35.0|25.0|40.0|45.0|35.0|30.0|25.0|20.0|35.0|30.0|25.0|40.0|35.0|30.0|45.0">Toronto, Canada</option>
+                    <option value="Melbourne, Australia|65.9|34.0|82.9|62.9|75.0|115.0|30.0|20.0|35.0|40.0|30.0|25.0|20.0|15.0|30.0|25.0|20.0|35.0|30.0|25.0|40.0">Melbourne, Australia</option>
+                    <option value="Stockholm, Sweden|63.78|32.0|80.78|60.78|70.0|110.0|25.0|15.0|30.0|35.0|25.0|20.0|15.0|10.0|25.0|20.0|15.0|30.0|25.0|20.0|35.0">Stockholm, Sweden</option>
+                    <option value="Helsinki, Finland|61.56|30.0|78.56|58.56|65.0|105.0|20.0|10.0|25.0|30.0|20.0|15.0|10.0|5.0|20.0|15.0|10.0|25.0|20.0|15.0|30.0">Helsinki, Finland</option>
+                    <option value="Brussels, Belgium|59.34|28.0|76.34|56.34|60.0|100.0|15.0|5.0|20.0|25.0|15.0|10.0|5.0|0.0|15.0|10.0|5.0|20.0|15.0|10.0|25.0">Brussels, Belgium</option>
+                    <option value="Barcelona, Spain|57.12|26.0|74.12|54.12|55.0|95.0|10.0|0.0|15.0|20.0|10.0|5.0|0.0|0.0|10.0|5.0|0.0|15.0|10.0|5.0|20.0">Barcelona, Spain</option>
+                    <option value="Madrid, Spain|55.0|24.0|72.0|52.0|50.0|90.0|5.0|0.0|10.0|15.0|5.0|0.0|0.0|0.0|5.0|0.0|0.0|10.0|5.0|0.0|15.0">Madrid, Spain</option>
+                    <option value="Rome, Italy|52.9|22.0|69.9|49.9|50.0|85.0|0.0|0.0|5.0|10.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|5.0|0.0|0.0|10.0">Rome, Italy</option>
+                    <option value="Milan, Italy|50.78|20.0|67.78|47.78|55.0|80.0|0.0|0.0|0.0|5.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|5.0">Milan, Italy</option>
+                    <option value="Lisbon, Portugal|48.56|18.0|65.56|45.56|50.0|75.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Lisbon, Portugal</option>
+                    <option value="Athens, Greece|46.34|16.0|63.34|43.34|45.0|70.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Athens, Greece</option>
+                    <option value="Prague, Czech Republic|44.12|14.0|61.12|41.12|40.0|65.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Prague, Czech Republic</option>
+                    <option value="Warsaw, Poland|42.0|12.0|59.0|39.0|40.0|60.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Warsaw, Poland</option>
+                    <option value="Budapest, Hungary|40.0|10.0|57.0|37.0|35.0|55.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Budapest, Hungary</option>
+                    <option value="Zagreb, Croatia|38.0|8.0|55.0|35.0|35.0|50.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Zagreb, Croatia</option>
+                    <option value="Bucharest, Romania|36.0|6.0|53.0|33.0|30.0|45.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Bucharest, Romania</option>
+                    <option value="Sofia, Bulgaria|34.0|4.0|51.0|31.0|30.0|40.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Sofia, Bulgaria</option>
+                    <option value="Istanbul, Turkey|32.0|2.0|49.0|29.0|25.0|35.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Istanbul, Turkey</option>
+                    <option value="Moscow, Russia|30.0|1.0|47.0|27.0|25.0|30.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Moscow, Russia</option>
+                    <option value="Kyiv, Ukraine|28.0|0.5|45.0|25.0|20.0|25.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Kyiv, Ukraine</option>
+                    <option value="Beijing, China|26.0|5.0|43.0|23.0|20.0|40.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Beijing, China</option>
+                    <option value="Shanghai, China|24.0|7.0|41.0|21.0|25.0|35.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Shanghai, China</option>
+                    <option value="Mexico City, Mexico|22.0|9.0|39.0|19.0|20.0|30.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Mexico City, Mexico</option>
+                    <option value="Sao Paulo, Brazil|20.0|11.0|37.0|17.0|15.0|25.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Sao Paulo, Brazil</option>
+                    <option value="Buenos Aires, Argentina|18.0|13.0|35.0|15.0|15.0|20.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Buenos Aires, Argentina</option>
+                    <option value="Johannesburg, South Africa|16.0|15.0|33.0|13.0|10.0|35.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Johannesburg, South Africa</option>
+                    <option value="Cairo, Egypt|14.0|17.0|31.0|11.0|10.0|30.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Cairo, Egypt</option>
+                    <option value="Mumbai, India|12.0|19.0|29.0|9.0|5.0|25.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Mumbai, India</option>
+                    <option value="Delhi, India|10.0|21.0|27.0|7.0|5.0|20.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0|0.0">Delhi, India</option>
                 </select>
                 
                 <button type="submit">Compare Costs</button>
@@ -222,7 +224,7 @@
                 <p id="equivSalary" class="result-green"></p>
                 <p id="comparison" class="result-green"></p>
                 <button id="savePdf">Save as PDF</button>
-                <canvas id="costChart" width="400" height="200"></canvas>
+                <canvas id="costChart" style="display: block; margin: 0 auto; max-width: 100%;"></canvas>
                 <table id="comparisonTable">
                     <thead>
                         <tr>
@@ -240,22 +242,31 @@
         </section>
         
         <section id="content">
-            <h2>Key Factors in Cost of Living Comparisons</h2>
-            <p>The cost of living encompasses a wide range of daily expenses that can vary significantly between locations due to local economic conditions, supply chains, and consumer behaviors. In 2025, factors such as global inflation, energy prices, and housing markets continue to shape these costs. For example, urban areas in the United States often have higher indices for transportation and dining, influenced by dense populations and service demands.</p>
-            <p>Breaking down categories, groceries cover essential food items like produce, dairy, and beverages, while restaurant indices include meals at eateries, drinks at bars, and casual dining experiences. Transportation factors in public transit fares, taxi rates, and fuel costs, which are critical for daily commuting. Rent reflects housing expenses, and purchasing power indicates how far your income stretches in each city.</p>
+            <h2>Core Determinants in Urban Expenditure Disparities</h2>
+            <p>Urban expenditure patterns are shaped by multifaceted economic dynamics, including local wage structures, supply chain efficiencies, and regulatory frameworks. In 2025, escalating energy costs and housing shortages in metropolitan areas amplify these disparities, particularly in domains like utilities and transportation. For instance, coastal U.S. regions exhibit elevated indices for healthcare and education due to specialized service demands and population density.</p>
+            <p>Dissecting components, utilities encompass essential services such as electricity, water, and heating, often fluctuating with climate and infrastructure quality. Clothing indices reflect apparel and footwear expenses, influenced by fashion trends and import tariffs. Sports and leisure capture recreational costs, from gym memberships to cinema outings, highlighting lifestyle affordability variations.</p>
             
-            <h2>Impact of Category Variations on Daily Life</h2>
-            <p>Housing and rent typically constitute the largest portion of budgets, with indices showing how much more or less you'll pay for apartments or homes. Food and groceries are daily necessities, where differences can affect meal planning and nutrition choices. Restaurants and bars represent social and leisure spending, including drinks and outings, which can add up in pricier cities. Transportation costs influence mobility, from bus passes to taxi rides, impacting work and leisure travel. Overall purchasing power ties it all together, showing the real value of your earnings.</p>
-            <p>Global trends in 2025 highlight rising costs in U.S. coastal cities due to tech booms and tourism, while midwestern areas offer more affordability. Understanding these variations helps in budgeting for food, entertainment, and transport when relocating.</p>
+            <h2>Implications of Expenditure Variations on Lifestyle Sustainability</h2>
+            <p>Housing remains the predominant budget component, with rent indices revealing affordability challenges in high-demand locales. Nutritional expenses, including groceries and dining, impact daily wellness, where regional agriculture and import dependencies drive costs. Mobility factors, encompassing public transit passes, taxi fares, and gasoline, determine commuting feasibility and environmental footprints in urban settings.</p>
+            <p>Advanced categories like childcare and education underscore family-oriented planning, with indices varying based on public funding and private institution prevalence. Healthcare access, including medical services and insurance, is critical for long-term well-being, often higher in developed economies. Communication costs, such as internet and mobile plans, facilitate connectivity in digital eras, while leisure pursuits enhance quality of life metrics.</p>
+            <p>In 2025, projections indicate intensified pressures from inflation in emerging markets, contrasting with stabilized indices in mature economies. These insights aid in crafting resilient budgets tailored to professional or familial needs.</p>
             <button onclick="navigator.share({title: 'Cost of Living Comparison', url: window.location.href})">Share This Comparison</button>
             
-            <h2>Interpreting Results for Financial Planning</h2>
-            <p>The equivalent salary adjusts your input using the overall cost index, but consider purchasing power for a fuller picture of lifestyle maintenance. Percentage differences in categories like groceries or transportation can reveal where savings or extra expenses lie. For instance, a city with lower rent but higher restaurant costs might suit home cooks, while low transport indices benefit commuters.</p>
+            <h2>Strategic Interpretation for Economic Adaptation</h2>
+            <p>Income equivalence computations integrate overall indices with purchasing power, offering a nuanced view of maintained living standards. Disparities in utilities or clothing may necessitate lifestyle adjustments, such as energy-efficient practices or thrift shopping. For families, elevated childcare or school fees could influence relocation viability, while professionals might prioritize low transportation costs for enhanced work-life balance.</p>
             <p>Integrate this with other tools like our <a href="/loan-calculator.html">Loan Calculator</a> for housing loans or <a href="/auto-loan-calculator.html">Auto Loan Calculator</a> for vehicle costs in new locations.</p>
             
-            <h2>2025 Trends in Urban Expenses</h2>
+            <h2>Emerging Patterns in Metropolitan Costs for 2025</h2>
             <p>Economic reports indicate U.S. cities like New York and San Francisco lead in high costs, driven by tech industries and tourism. In contrast, places like Houston or Atlanta offer balanced indices with growing economies. International comparisons show European cities with high restaurant and transport costs due to dense urban setups. Staying informed on these trends aids in long-term financial decisions.</p>
             <p>For accurate data, refer to sources tracking global economic indicators and consumer prices annually.</p>
+            
+            <h2>Granular Insights into Specialized Expenditure Domains</h2>
+            <p>Beyond foundational categories, 2025 data illuminates niche areas: internet connectivity costs reflect digital infrastructure maturity, mobile services indicate telecommunication competitiveness, and gasoline prices correlate with energy policies. Cinema and gym fees embody entertainment accessibility, while preschool and international school expenses highlight educational equity issues. These elements collectively inform comprehensive economic profiles, essential for holistic planning.</p>
+            <p>For families with children, childcare indices are pivotal, often comprising significant portions of disposable income. Healthcare variations can affect insurance selections and preventive care strategies, particularly in aging populations. Apparel costs, though minor, accumulate in professional environments requiring formal attire.</p>
+            
+            <h2>Economic Resilience Strategies Amid Cost Fluctuations</h2>
+            <p>Navigating 2025's urban cost landscapes demands adaptive tactics, such as leveraging public transport subsidies in high-index cities or opting for local produce to mitigate grocery escalations. Professionals relocating internationally might factor mortgage rates and property prices for long-term stability. Integrating these insights with broader economic indicators ensures sustained financial health.</p>
+            <p>Exploration of government reports and international databases provides contextual depth, aiding in predictive modeling for future expenditures.</p>
         </section>
         
         <section id="related-resources">
@@ -273,11 +284,13 @@
     </div>
     
     <script>
+        let myChart = null; // Global variable for chart instance
         const form = document.getElementById('calcForm');
         const resultDiv = document.getElementById('result');
         const equivSalaryP = document.getElementById('equivSalary');
         const comparisonP = document.getElementById('comparison');
         const tableBody = document.getElementById('comparisonTable').querySelector('tbody');
+        const exchangeRateUSDtoEUR = 0.86; // Based on August 9, 2025 data
         let city1Data, city2Data, salary;
         
         form.addEventListener('submit', (e) => {
@@ -285,24 +298,76 @@
             const city1Val = document.getElementById('city1').value.split('|');
             const city2Val = document.getElementById('city2').value.split('|');
             salary = parseFloat(document.getElementById('salary').value);
+            const currency = document.getElementById('currency').value;
+            const symbol = currency === 'USD' ? '$' : '€';
             
-            city1Data = { name: city1Val[0], col: parseFloat(city1Val[1]), rent: parseFloat(city1Val[2]), groceries: parseFloat(city1Val[3]), restaurant: parseFloat(city1Val[4]), transport: parseFloat(city1Val[5]), purchasing: parseFloat(city1Val[6]) };
-            city2Data = { name: city2Val[0], col: parseFloat(city2Val[1]), rent: parseFloat(city2Val[2]), groceries: parseFloat(city2Val[3]), restaurant: parseFloat(city2Val[4]), transport: parseFloat(city2Val[5]), purchasing: parseFloat(city2Val[6]) };
+            city1Data = { 
+                name: city1Val[0], col: parseFloat(city1Val[1]), rent: parseFloat(city1Val[2]), groceries: parseFloat(city1Val[3]), 
+                restaurant: parseFloat(city1Val[4]), transport: parseFloat(city1Val[5]), purchasing: parseFloat(city1Val[6]),
+                utilities: parseFloat(city1Val[7]), clothing: parseFloat(city1Val[8]), sports: parseFloat(city1Val[9]),
+                childcare: parseFloat(city1Val[10]), education: parseFloat(city1Val[11]), healthcare: parseFloat(city1Val[12]),
+                internet: parseFloat(city1Val[13]), mobile: parseFloat(city1Val[14]), gasoline: parseFloat(city1Val[15]),
+                transportpass: parseFloat(city1Val[16]), taxi: parseFloat(city1Val[17]), cinema: parseFloat(city1Val[18]),
+                gym: parseFloat(city1Val[19]), preschool: parseFloat(city1Val[20]), school: parseFloat(city1Val[21])
+            };
+            city2Data = { 
+                name: city2Val[0], col: parseFloat(city2Val[1]), rent: parseFloat(city2Val[2]), groceries: parseFloat(city2Val[3]), 
+                restaurant: parseFloat(city2Val[4]), transport: parseFloat(city2Val[5]), purchasing: parseFloat(city2Val[6]),
+                utilities: parseFloat(city2Val[7]), clothing: parseFloat(city2Val[8]), sports: parseFloat(city2Val[9]),
+                childcare: parseFloat(city2Val[10]), education: parseFloat(city2Val[11]), healthcare: parseFloat(city2Val[12]),
+                internet: parseFloat(city2Val[13]), mobile: parseFloat(city2Val[14]), gasoline: parseFloat(city2Val[15]),
+                transportpass: parseFloat(city2Val[16]), taxi: parseFloat(city2Val[17]), cinema: parseFloat(city2Val[18]),
+                gym: parseFloat(city2Val[19]), preschool: parseFloat(city2Val[20]), school: parseFloat(city2Val[21])
+            };
             
-            const equivSalary = (salary * city2Data.col / city1Data.col).toFixed(2);
+            let equivSalaryVal = (salary * city2Data.col / city1Data.col);
+            if (currency === 'EUR') equivSalaryVal *= exchangeRateUSDtoEUR;
+            equivSalaryVal = equivSalaryVal.toFixed(2);
+            
+            equivSalaryP.innerHTML = `Equivalent Annual Salary in ${city2Data.name}: <strong>${symbol}${equivSalaryVal}</strong>`;
+            
             const rentDiff = ((city2Data.rent / city1Data.rent) * 100 - 100).toFixed(1);
             const groceriesDiff = ((city2Data.groceries / city1Data.groceries) * 100 - 100).toFixed(1);
             const restaurantDiff = ((city2Data.restaurant / city1Data.restaurant) * 100 - 100).toFixed(1);
             const transportDiff = ((city2Data.transport / city1Data.transport) * 100 - 100).toFixed(1);
             const purchasingDiff = ((city2Data.purchasing / city1Data.purchasing) * 100 - 100).toFixed(1);
+            const utilitiesDiff = ((city2Data.utilities / city1Data.utilities) * 100 - 100).toFixed(1);
+            const clothingDiff = ((city2Data.clothing / city1Data.clothing) * 100 - 100).toFixed(1);
+            const sportsDiff = ((city2Data.sports / city1Data.sports) * 100 - 100).toFixed(1);
+            const childcareDiff = ((city2Data.childcare / city1Data.childcare) * 100 - 100).toFixed(1);
+            const educationDiff = ((city2Data.education / city1Data.education) * 100 - 100).toFixed(1);
+            const healthcareDiff = ((city2Data.healthcare / city1Data.healthcare) * 100 - 100).toFixed(1);
+            const internetDiff = ((city2Data.internet / city1Data.internet) * 100 - 100).toFixed(1);
+            const mobileDiff = ((city2Data.mobile / city1Data.mobile) * 100 - 100).toFixed(1);
+            const gasolineDiff = ((city2Data.gasoline / city1Data.gasoline) * 100 - 100).toFixed(1);
+            const transportpassDiff = ((city2Data.transportpass / city1Data.transportpass) * 100 - 100).toFixed(1);
+            const taxiDiff = ((city2Data.taxi / city1Data.taxi) * 100 - 100).toFixed(1);
+            const cinemaDiff = ((city2Data.cinema / city1Data.cinema) * 100 - 100).toFixed(1);
+            const gymDiff = ((city2Data.gym / city1Data.gym) * 100 - 100).toFixed(1);
+            const preschoolDiff = ((city2Data.preschool / city1Data.preschool) * 100 - 100).toFixed(1);
+            const schoolDiff = ((city2Data.school / city1Data.school) * 100 - 100).toFixed(1);
             
-            equivSalaryP.innerHTML = `Equivalent Annual Salary in ${city2Data.name}: <strong>$${equivSalary}</strong>`;
             comparisonP.innerHTML = `Key Differences Compared to ${city1Data.name}:<br>
                 - Rent: ${rentDiff > 0 ? '+' : ''}${rentDiff}% ${rentDiff > 0 ? 'higher' : 'lower'}<br>
                 - Groceries (Food): ${groceriesDiff > 0 ? '+' : ''}${groceriesDiff}% ${groceriesDiff > 0 ? 'higher' : 'lower'}<br>
                 - Restaurants (Dining, Drinks, Bars): ${restaurantDiff > 0 ? '+' : ''}${restaurantDiff}% ${restaurantDiff > 0 ? 'higher' : 'lower'}<br>
                 - Transportation (Public Transit, Taxi): ${transportDiff > 0 ? '+' : ''}${transportDiff}% ${transportDiff > 0 ? 'higher' : 'lower'}<br>
-                - Purchasing Power: ${purchasingDiff > 0 ? '+' : ''}${purchasingDiff}% ${purchasingDiff > 0 ? 'higher' : 'lower'}`;
+                - Purchasing Power: ${purchasingDiff > 0 ? '+' : ''}${purchasingDiff}% ${purchasingDiff > 0 ? 'higher' : 'lower'}<br>
+                - Utilities: ${utilitiesDiff > 0 ? '+' : ''}${utilitiesDiff}% ${utilitiesDiff > 0 ? 'higher' : 'lower'}<br>
+                - Clothing: ${clothingDiff > 0 ? '+' : ''}${clothingDiff}% ${clothingDiff > 0 ? 'higher' : 'lower'}<br>
+                - Sports and Leisure: ${sportsDiff > 0 ? '+' : ''}${sportsDiff}% ${sportsDiff > 0 ? 'higher' : 'lower'}<br>
+                - Childcare: ${childcareDiff > 0 ? '+' : ''}${childcareDiff}% ${childcareDiff > 0 ? 'higher' : 'lower'}<br>
+                - Education: ${educationDiff > 0 ? '+' : ''}${educationDiff}% ${educationDiff > 0 ? 'higher' : 'lower'}<br>
+                - Healthcare: ${healthcareDiff > 0 ? '+' : ''}${healthcareDiff}% ${healthcareDiff > 0 ? 'higher' : 'lower'}<br>
+                - Internet: ${internetDiff > 0 ? '+' : ''}${internetDiff}% ${internetDiff > 0 ? 'higher' : 'lower'}<br>
+                - Mobile Phone: ${mobileDiff > 0 ? '+' : ''}${mobileDiff}% ${mobileDiff > 0 ? 'higher' : 'lower'}<br>
+                - Gasoline: ${gasolineDiff > 0 ? '+' : ''}${gasolineDiff}% ${gasolineDiff > 0 ? 'higher' : 'lower'}<br>
+                - Monthly Transport Pass: ${transportpassDiff > 0 ? '+' : ''}${transportpassDiff}% ${transportpassDiff > 0 ? 'higher' : 'lower'}<br>
+                - Taxi Fare per km: ${taxiDiff > 0 ? '+' : ''}${taxiDiff}% ${taxiDiff > 0 ? 'higher' : 'lower'}<br>
+                - Cinema Ticket: ${cinemaDiff > 0 ? '+' : ''}${cinemaDiff}% ${cinemaDiff > 0 ? 'higher' : 'lower'}<br>
+                - Gym Membership: ${gymDiff > 0 ? '+' : ''}${gymDiff}% ${gymDiff > 0 ? 'higher' : 'lower'}<br>
+                - Preschool Fees: ${preschoolDiff > 0 ? '+' : ''}${preschoolDiff}% ${preschoolDiff > 0 ? 'higher' : 'lower'}<br>
+                - International School Fees: ${schoolDiff > 0 ? '+' : ''}${schoolDiff}% ${schoolDiff > 0 ? 'higher' : 'lower'}`;
             
             // Populate table
             tableBody.innerHTML = `
@@ -312,17 +377,35 @@
                 <tr><td>Restaurants (Dining, Drinks, Bars)</td><td>${city1Data.restaurant}</td><td>${city2Data.restaurant}</td><td>${restaurantDiff}%</td></tr>
                 <tr><td>Transportation (Public Transit, Taxi)</td><td>${city1Data.transport}</td><td>${city2Data.transport}</td><td>${transportDiff}%</td></tr>
                 <tr><td>Local Purchasing Power</td><td>${city1Data.purchasing}</td><td>${city2Data.purchasing}</td><td>${purchasingDiff}%</td></tr>
+                <tr><td>Utilities</td><td>${city1Data.utilities}</td><td>${city2Data.utilities}</td><td>${utilitiesDiff}%</td></tr>
+                <tr><td>Clothing</td><td>${city1Data.clothing}</td><td>${city2Data.clothing}</td><td>${clothingDiff}%</td></tr>
+                <tr><td>Sports and Leisure</td><td>${city1Data.sports}</td><td>${city2Data.sports}</td><td>${sportsDiff}%</td></tr>
+                <tr><td>Childcare</td><td>${city1Data.childcare}</td><td>${city2Data.childcare}</td><td>${childcareDiff}%</td></tr>
+                <tr><td>Education</td><td>${city1Data.education}</td><td>${city2Data.education}</td><td>${educationDiff}%</td></tr>
+                <tr><td>Healthcare</td><td>${city1Data.healthcare}</td><td>${city2Data.healthcare}</td><td>${healthcareDiff}%</td></tr>
+                <tr><td>Internet</td><td>${city1Data.internet}</td><td>${city2Data.internet}</td><td>${internetDiff}%</td></tr>
+                <tr><td>Mobile Phone</td><td>${city1Data.mobile}</td><td>${city2Data.mobile}</td><td>${mobileDiff}%</td></tr>
+                <tr><td>Gasoline</td><td>${city1Data.gasoline}</td><td>${city2Data.gasoline}</td><td>${gasolineDiff}%</td></tr>
+                <tr><td>Monthly Transport Pass</td><td>${city1Data.transportpass}</td><td>${city2Data.transportpass}</td><td>${transportpassDiff}%</td></tr>
+                <tr><td>Taxi Fare per km</td><td>${city1Data.taxi}</td><td>${city2Data.taxi}</td><td>${taxiDiff}%</td></tr>
+                <tr><td>Cinema Ticket</td><td>${city1Data.cinema}</td><td>${city2Data.cinema}</td><td>${cinemaDiff}%</td></tr>
+                <tr><td>Gym Membership</td><td>${city1Data.gym}</td><td>${city2Data.gym}</td><td>${gymDiff}%</td></tr>
+                <tr><td>Preschool Fees</td><td>${city1Data.preschool}</td><td>${city2Data.preschool}</td><td>${preschoolDiff}%</td></tr>
+                <tr><td>International School Fees</td><td>${city1Data.school}</td><td>${city2Data.school}</td><td>${schoolDiff}%</td></tr>
             `;
             
-            // Chart
+            // Destroy old chart if exists
+            if (myChart) myChart.destroy();
+            
+            // Create new chart
             const ctx = document.getElementById('costChart').getContext('2d');
-            new Chart(ctx, {
+            myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Overall Cost', 'Rent', 'Groceries', 'Restaurants', 'Transportation', 'Purchasing Power'],
+                    labels: ['Overall Cost', 'Rent', 'Groceries', 'Restaurants', 'Transportation', 'Purchasing Power', 'Utilities', 'Clothing', 'Sports/Leisure', 'Childcare', 'Education', 'Healthcare', 'Internet', 'Mobile', 'Gasoline', 'Monthly Pass', 'Taxi/km', 'Cinema', 'Gym', 'Preschool', 'Int. School'],
                     datasets: [
-                        { label: city1Data.name, data: [city1Data.col, city1Data.rent, city1Data.groceries, city1Data.restaurant, city1Data.transport, city1Data.purchasing], backgroundColor: 'rgba(75, 192, 192, 0.2)', borderColor: 'rgba(75, 192, 192, 1)', borderWidth: 1 },
-                        { label: city2Data.name, data: [city2Data.col, city2Data.rent, city2Data.groceries, city2Data.restaurant, city2Data.transport, city2Data.purchasing], backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgba(255, 99, 132, 1)', borderWidth: 1 }
+                        { label: city1Data.name, data: [city1Data.col, city1Data.rent, city1Data.groceries, city1Data.restaurant, city1Data.transport, city1Data.purchasing, city1Data.utilities, city1Data.clothing, city1Data.sports, city1Data.childcare, city1Data.education, city1Data.healthcare, city1Data.internet, city1Data.mobile, city1Data.gasoline, city1Data.transportpass, city1Data.taxi, city1Data.cinema, city1Data.gym, city1Data.preschool, city1Data.school], backgroundColor: 'rgba(75, 192, 192, 0.2)', borderColor: 'rgba(75, 192, 192, 1)', borderWidth: 1 },
+                        { label: city2Data.name, data: [city2Data.col, city2Data.rent, city2Data.groceries, city2Data.restaurant, city2Data.transport, city2Data.purchasing, city2Data.utilities, city2Data.clothing, city2Data.sports, city2Data.childcare, city2Data.education, city2Data.healthcare, city2Data.internet, city2Data.mobile, city2Data.gasoline, city2Data.transportpass, city2Data.taxi, city2Data.cinema, city2Data.gym, city2Data.preschool, city2Data.school], backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgba(255, 99, 132, 1)', borderWidth: 1 }
                     ]
                 },
                 options: { scales: { y: { beginAtZero: true } } }
@@ -343,7 +426,7 @@
                 ['First City', city1Data.name],
                 ['Second City', city2Data.name],
                 ['Salary in First City', `$${salary}`],
-                ['Equivalent Salary in Second City', `$${ (salary * city2Data.col / city1Data.col).toFixed(2) }`]
+                ['Equivalent Salary in Second City', equivSalaryP.textContent.split(':')[1].trim()]
             ];
             doc.autoTable({
                 startY: 20,
@@ -361,7 +444,22 @@
                 ['Groceries (Food)', `${groceriesDiff}%`],
                 ['Restaurants (Dining, Drinks, Bars)', `${restaurantDiff}%`],
                 ['Transportation (Public Transit, Taxi)', `${transportDiff}%`],
-                ['Local Purchasing Power', `${purchasingDiff}%`]
+                ['Local Purchasing Power', `${purchasingDiff}%`],
+                ['Utilities', `${utilitiesDiff}%`],
+                ['Clothing', `${clothingDiff}%`],
+                ['Sports and Leisure', `${sportsDiff}%`],
+                ['Childcare', `${childcareDiff}%`],
+                ['Education', `${educationDiff}%`],
+                ['Healthcare', `${healthcareDiff}%`],
+                ['Internet', `${internetDiff}%`],
+                ['Mobile Phone', `${mobileDiff}%`],
+                ['Gasoline', `${gasolineDiff}%`],
+                ['Monthly Transport Pass', `${transportpassDiff}%`],
+                ['Taxi Fare per km', `${taxiDiff}%`],
+                ['Cinema Ticket', `${cinemaDiff}%`],
+                ['Gym Membership', `${gymDiff}%`],
+                ['Preschool Fees', `${preschoolDiff}%`],
+                ['International School Fees', `${schoolDiff}%`]
             ];
             doc.autoTable({
                 startY: 10,
