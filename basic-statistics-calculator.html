@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Statistics Calculator - Calculate Mean, Median, Mode, Variance, and Standard Deviation</title>
+    <meta name="description" content="Use our Basic Statistics Calculator to compute essential statistical measures including mean, median, mode, variance, and standard deviation from your dataset. Includes detailed formulas, explanations, and examples for accurate data analysis.">
+    <meta name="keywords" content="basic statistics calculator, mean calculator, median calculator, mode calculator, variance calculator, standard deviation calculator, data analysis tool">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <h1>Basic Statistics Calculator</h1>
+        <p>Enter a list of numbers to calculate key statistical measures such as mean, median, mode, variance, and standard deviation. This tool provides precise calculations with step-by-step explanations and visualizations for better understanding of your data.</p>
+    </header>
+
+    <main>
+        <section class="calculator-tool">
+            <h2>Input Your Data</h2>
+            <label for="data-input">Enter numbers (comma or space separated):</label>
+            <textarea id="data-input" rows="4" placeholder="e.g., 5, 10, 15, 20"></textarea>
+            <button onclick="calculateStats()">Calculate</button>
+            <button onclick="saveAsPDF()">Save as PDF</button>
+            <button onclick="sharePage()">Share</button>
+
+            <div class="results">
+                <h3>Results</h3>
+                <table id="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Statistic</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Mean</td><td id="mean" class="result-green"></td></tr>
+                        <tr><td>Median</td><td id="median" class="result-green"></td></tr>
+                        <tr><td>Mode</td><td id="mode" class="result-green"></td></tr>
+                        <tr><td>Variance</td><td id="variance" class="result-green"></td></tr>
+                        <tr><td>Standard Deviation</td><td id="std-dev" class="result-green"></td></tr>
+                    </tbody>
+                </table>
+                <canvas id="stats-chart" width="400" height="200"></canvas>
+            </div>
+        </section>
+
+        <section class="explanation">
+            <h2>Understanding Basic Statistics</h2>
+            <p>Statistics is a branch of mathematics that deals with collecting, analyzing, interpreting, and presenting data. Our Basic Statistics Calculator simplifies the process by computing fundamental measures that describe the central tendency, dispersion, and shape of your dataset. Whether you're a student analyzing exam scores, a researcher examining survey results, or a business professional reviewing sales data, these metrics provide valuable insights.</p>
+            
+            <h3>What is Mean?</h3>
+            <p>The mean, or average, is the sum of all values divided by the number of values. Formula: Mean = (Σx) / n, where Σx is the sum of the data points and n is the count. It represents the central value but can be skewed by outliers.</p>
+            
+            <h3>What is Median?</h3>
+            <p>The median is the middle value when data is sorted in ascending order. For even counts, it's the average of the two middle values. It's robust against outliers and gives a better sense of the 'typical' value in skewed distributions.</p>
+            
+            <h3>What is Mode?</h3>
+            <p>The mode is the most frequently occurring value in the dataset. A dataset can have no mode, one mode (unimodal), or multiple modes (multimodal). It's useful for categorical data or identifying common trends.</p>
+            
+            <h3>What is Variance?</h3>
+            <p>Variance measures how spread out the values are from the mean. Formula: Variance = Σ(x - mean)^2 / (n - 1) for sample variance. Higher variance indicates greater dispersion in the data.</p>
+            
+            <h3>What is Standard Deviation?</h3>
+            <p>Standard deviation is the square root of variance, providing a measure of dispersion in the same units as the data. It's widely used in fields like finance to assess volatility or in quality control to evaluate consistency.</p>
+            
+            <p>For example, consider a dataset of test scores: 85, 90, 78, 92, 85. The mean is 86, median is 85, mode is 85, variance is approximately 30.5, and standard deviation is about 5.52. Use our tool to verify and explore your own data.</p>
+            
+            <div class="share-button">
+                <button onclick="sharePage()">Share this calculator with others</button>
+            </div>
+        </section>
+
+        <section class="formulas">
+            <h2>Detailed Formulas and Examples</h2>
+            <p>Here are the mathematical formulas used in the calculator:</p>
+            <ul>
+                <li><strong>Mean:</strong> \(\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}\)</li>
+                <li><strong>Median:</strong> Sort the data and find the middle value(s).</li>
+                <li><strong>Mode:</strong> Value with the highest frequency.</li>
+                <li><strong>Variance (Sample):</strong> \(s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}\)</li>
+                <li><strong>Standard Deviation:</strong> \(s = \sqrt{s^2}\)</li>
+            </ul>
+            <p>Internal links for more math tools: <a href="/percentage.html">Percentage Calculator</a>, <a href="/pythagorean-theorem-calculator.html">Pythagorean Theorem Calculator</a>, <a href="/worldpopulation.html">World Population Statistics</a>.</p>
+        </section>
+
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <dl>
+                <dt>How do I input data?</dt>
+                <dd>Enter numbers separated by commas or spaces in the textarea. The tool handles numerical data automatically.</dd>
+                
+                <dt>What if there is no mode?</dt>
+                <dd>The calculator will display 'No mode' if all values are unique.</dd>
+                
+                <dt>Is this for population or sample data?</dt>
+                <dd>We use sample formulas (n-1 for variance) by default, suitable for most analyses. For population, adjust manually if needed.</dd>
+                
+                <dt>Can I visualize the data?</dt>
+                <dd>Yes, a simple bar chart shows the frequency distribution for better insight into modes and spread.</dd>
+            </dl>
+        </section>
+
+        <section class="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Statistics" target="_blank" rel="noopener noreferrer">Wikipedia: Statistics Overview</a></li>
+                <li><a href="https://www.khanacademy.org/math/statistics-probability" target="_blank" rel="noopener noreferrer">Khan Academy: Statistics and Probability</a></li>
+                <li><a href="https://www.census.gov/topics/population.html" target="_blank" rel="noopener noreferrer">U.S. Census Bureau: Population Statistics</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    </footer>
+
+    <script>
+        let chart;
+
+        function calculateStats() {
+            const input = document.getElementById('data-input').value.trim();
+            if (!input) return alert('Please enter data.');
+
+            const data = input.split(/[\s,]+/).map(Number).filter(n => !isNaN(n));
+            if (data.length === 0) return alert('Invalid data.');
+
+            data.sort((a, b) => a - b);
+
+            // Mean
+            const mean = data.reduce((a, b) => a + b, 0) / data.length;
+
+            // Median
+            const mid = Math.floor(data.length / 2);
+            const median = data.length % 2 === 0 ? (data[mid - 1] + data[mid]) / 2 : data[mid];
+
+            // Mode
+            const freq = {};
+            data.forEach(n => freq[n] = (freq[n] || 0) + 1);
+            const maxFreq = Math.max(...Object.values(freq));
+            const mode = Object.keys(freq).filter(k => freq[k] === maxFreq).join(', ') || 'No mode';
+
+            // Variance
+            const variance = data.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / (data.length - 1);
+
+            // Std Dev
+            const stdDev = Math.sqrt(variance);
+
+            document.getElementById('mean').textContent = mean.toFixed(2);
+            document.getElementById('median').textContent = median.toFixed(2);
+            document.getElementById('mode').textContent = mode;
+            document.getElementById('variance').textContent = variance.toFixed(2);
+            document.getElementById('std-dev').textContent = stdDev.toFixed(2);
+
+            // Chart: Frequency distribution
+            const labels = Object.keys(freq);
+            const values = Object.values(freq);
+
+            if (chart) chart.destroy();
+            chart = new Chart(document.getElementById('stats-chart'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{ label: 'Frequency', data: values, backgroundColor: 'rgba(0, 200, 200, 0.5)' }]
+                },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFont("helvetica");
+            doc.setFontSize(14);
+            doc.text("Basic Statistics Calculation Results", 105, 15, { align: "center" });
+
+            // Stats Table
+            doc.autoTable({
+                startY: 20,
+                head: [['Statistic', 'Value']],
+                body: [
+                    ['Mean', document.getElementById('mean').textContent],
+                    ['Median', document.getElementById('median').textContent],
+                    ['Mode', document.getElementById('mode').textContent],
+                    ['Variance', document.getElementById('variance').textContent],
+                    ['Standard Deviation', document.getElementById('std-dev').textContent]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 5, halign: 'left' },
+                margin: { top: 10 }
+            });
+
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+
+            doc.save('basic-statistics-results.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Basic Statistics Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
