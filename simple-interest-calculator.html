@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest Calculator - Simple and Compound Interest Computation Tool</title>
+    <meta name="description" content="Calculate simple and compound interest with precision using our advanced interest calculator. Explore detailed formulas, growth charts, and amortization schedules for informed financial decisions.">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <h1>Interest Calculator - Simple and Compound Interest</h1>
+        <p>Determine the growth of your investments or loans through simple interest or the power of compounding. Input your principal, rate, and time to see detailed breakdowns, including total accrued interest, final amounts, and visual growth representations.</p>
+    </header>
+    
+    <main>
+        <section class="calculator-tool">
+            <h2>Interest Calculation Tool</h2>
+            <form id="interest-form">
+                <label for="principal">Principal Amount:</label>
+                <input type="number" id="principal" required min="0" step="0.01">
+                
+                <label for="rate">Annual Interest Rate (%):</label>
+                <input type="number" id="rate" required min="0" step="0.01">
+                
+                <label for="time">Time Period (Years):</label>
+                <input type="number" id="time" required min="0" step="0.1">
+                
+                <label for="type">Interest Type:</label>
+                <select id="type" required>
+                    <option value="simple">Simple Interest</option>
+                    <option value="compound">Compound Interest</option>
+                </select>
+                
+                <label for="frequency" id="freq-label" style="display: none;">Compounding Frequency:</label>
+                <select id="frequency" style="display: none;">
+                    <option value="1">Annually</option>
+                    <option value="2">Semi-Annually</option>
+                    <option value="4">Quarterly</option>
+                    <option value="12">Monthly</option>
+                    <option value="365">Daily</option>
+                </select>
+                
+                <label for="currency">Currency Symbol:</label>
+                <select id="currency">
+                    <option value="$">$ (USD)</option>
+                    <option value="€">€ (EUR)</option>
+                </select>
+                
+                <button type="button" onclick="calculateInterest()">Calculate</button>
+            </form>
+            
+            <div id="results" style="display: none;">
+                <h3>Calculation Results</h3>
+                <p>Total Interest: <span id="total-interest" class="result-green"></span></p>
+                <p>Final Amount: <span id="final-amount" class="result-green"></span></p>
+                <button onclick="saveAsPDF()">Save as PDF</button>
+                <button onclick="sharePage()">Share This Page</button>
+            </div>
+            
+            <canvas id="interestChart" width="400" height="200"></canvas>
+            
+            <div id="schedule" style="display: none;">
+                <h3>Compound Interest Schedule (Yearly Breakdown)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Starting Balance</th>
+                            <th>Interest Earned</th>
+                            <th>Ending Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="schedule-body"></tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section class="explanation">
+            <h2>Understanding Interest: A Fundamental Financial Concept</h2>
+            <p>Interest represents the cost of borrowing money or the reward for saving and investing. It plays a pivotal role in personal finance, banking, and investment strategies. Whether you're evaluating a savings account, a loan, or an investment portfolio, grasping how interest accumulates can significantly impact your financial outcomes.</p>
+            <p>In this comprehensive guide, we delve into the mechanics of simple and compound interest, providing formulas, real-world applications, and tools to visualize growth over time. Our calculator above allows you to input variables and instantly compute results, complete with charts and schedules for deeper insights.</p>
+        </section>
+        
+        <section class="formulas">
+            <h2>Interest Calculation Formulas</h2>
+            <h3>Simple Interest Formula</h3>
+            <p>The simple interest method calculates interest solely on the initial principal amount. It does not account for interest earned on previously accrued interest.</p>
+            <p><strong>Formula:</strong> I = P × r × t</p>
+            <ul>
+                <li>I = Interest amount</li>
+                <li>P = Principal amount</li>
+                <li>r = Annual interest rate (decimal)</li>
+                <li>t = Time period in years</li>
+            </ul>
+            <p><strong>Total Amount:</strong> A = P + I</p>
+            
+            <h3>Compound Interest Formula</h3>
+            <p>Compound interest, often referred to as "interest on interest," calculates earnings on the principal plus all accumulated interest from previous periods. This leads to exponential growth, making it a powerful tool for long-term investments.</p>
+            <p><strong>Formula:</strong> A = P × (1 + r/n)<sup>nt</sup></p>
+            <ul>
+                <li>A = Final amount</li>
+                <li>P = Principal amount</li>
+                <li>r = Annual interest rate (decimal)</li>
+                <li>n = Number of compounding periods per year</li>
+                <li>t = Time period in years</li>
+            </ul>
+            <p><strong>Interest Earned:</strong> I = A - P</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Compounding Frequency</th>
+                        <th>n Value</th>
+                        <th>Example Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Annually</td>
+                        <td>1</td>
+                        <td>Basic savings accounts</td>
+                    </tr>
+                    <tr>
+                        <td>Quarterly</td>
+                        <td>4</td>
+                        <td>Certificates of deposit</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly</td>
+                        <td>12</td>
+                        <td>Credit card balances</td>
+                    </tr>
+                    <tr>
+                        <td>Daily</td>
+                        <td>365</td>
+                        <td>High-yield savings</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section class="comparison">
+            <h2>Simple vs. Compound Interest: Key Differences and Impacts</h2>
+            <p>While simple interest offers straightforward calculations ideal for short-term loans, compound interest accelerates wealth building over extended periods. For instance, a $10,000 investment at 5% annual rate over 10 years yields $5,000 in simple interest but approximately $6,288.95 in compound interest (monthly compounding).</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Simple Interest</th>
+                        <th>Compound Interest</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Calculation Basis</td>
+                        <td>Principal only</td>
+                        <td>Principal + accumulated interest</td>
+                    </tr>
+                    <tr>
+                        <td>Growth Pattern</td>
+                        <td>Linear</td>
+                        <td>Exponential</td>
+                    </tr>
+                    <tr>
+                        <td>Best For</td>
+                        <td>Short-term loans</td>
+                        <td>Long-term investments</td>
+                    </tr>
+                    <tr>
+                        <td>Example Final Amount ($10,000, 5%, 10 years)</td>
+                        <td>$15,000</td>
+                        <td>$16,470.09 (annual compounding)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>Use our tool to compare scenarios and see how compounding frequency influences outcomes.</p>
+        </section>
+        
+        <section class="how-to-use">
+            <h2>How to Use the Interest Calculator</h2>
+            <ol>
+                <li>Enter the principal amount – the initial sum of money.</li>
+                <li>Input the annual interest rate as a percentage.</li>
+                <li>Specify the time period in years.</li>
+                <li>Select simple or compound interest; for compound, choose the frequency.</li>
+                <li>Choose your preferred currency symbol.</li>
+                <li>Click 'Calculate' to view results, chart, and schedule.</li>
+            </ol>
+            <p>The results include total interest, final amount, a growth chart, and a detailed yearly schedule for compound calculations.</p>
+        </section>
+        
+        <section class="faq">
+            <h2>Frequently Asked Questions About Interest Calculations</h2>
+            <details>
+                <summary>What is the rule of 72 in compound interest?</summary>
+                <p>The rule of 72 estimates how long it takes for an investment to double: divide 72 by the annual interest rate. For example, at 6%, it takes about 12 years.</p>
+            </details>
+            <details>
+                <summary>How does inflation affect interest earnings?</summary>
+                <p>Inflation reduces the real value of interest gains. Always consider real interest rate: nominal rate minus inflation rate.</p>
+            </details>
+            <details>
+                <summary>Can interest be negative?</summary>
+                <p>In rare cases, like certain central bank policies, but typically interest rates are positive for borrowers and savers.</p>
+            </details>
+            <details>
+                <summary>What is continuous compounding?</summary>
+                <p>A mathematical limit where compounding occurs infinitely often, using the formula A = P × e^(rt), where e is Euler's number.</p>
+            </details>
+            <details>
+                <summary>How do taxes impact interest income?</summary>
+                <p>Interest earnings are often taxable as income, reducing net gains. Consult tax laws in your jurisdiction for specifics.</p>
+            </details>
+        </section>
+        
+        <section class="applications">
+            <h2>Real-World Applications of Interest Calculations</h2>
+            <p>Interest computations are essential in various scenarios:</p>
+            <ul>
+                <li><strong>Savings and Investments:</strong> Project future value of deposits in banks or retirement accounts.</li>
+                <li><strong>Loans and Mortgages:</strong> Understand total costs beyond principal repayment. Link to our <a href="/mortgage-calculator.html">Mortgage Calculator</a> for detailed home loan analysis.</li>
+                <li><strong>Credit Cards:</strong> Calculate accumulating debt if balances are carried over.</li>
+                <li><strong>Bonds and Securities:</strong> Evaluate yields and returns on fixed-income investments.</li>
+                <li><strong>Business Finance:</strong> Assess profitability of projects or cost of capital.</li>
+            </ul>
+            <p>For related tools, explore our <a href="/compound-interest-growth-calculator.html">Compound Interest Growth Calculator</a> or <a href="/loan-calculator.html">Loan Calculator</a>.</p>
+        </section>
+        
+        <section class="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Compound_interest" target="_blank" rel="noopener noreferrer">Wikipedia: Compound Interest</a> - In-depth explanation of compounding principles.</li>
+                <li><a href="https://www.investor.gov/introduction-investing/investing-basics/glossary/compound-interest" target="_blank" rel="noopener noreferrer">Investor.gov: Compound Interest</a> - Government resource on investment basics.</li>
+                <li><a href="https://www.federalreserve.gov/pubs/consumerhbk/interest.htm" target="_blank" rel="noopener noreferrer">Federal Reserve: Interest Rates</a> - Insights into how interest rates are determined.</li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    </footer>
+    
+    <script>
+        let chart;
+        let scheduleData = [];
+
+        document.getElementById('type').addEventListener('change', function() {
+            const freqLabel = document.getElementById('freq-label');
+            const freqSelect = document.getElementById('frequency');
+            if (this.value === 'compound') {
+                freqLabel.style.display = 'block';
+                freqSelect.style.display = 'block';
+            } else {
+                freqLabel.style.display = 'none';
+                freqSelect.style.display = 'none';
+            }
+        });
+
+        function calculateInterest() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const rate = parseFloat(document.getElementById('rate').value) / 100;
+            const time = parseFloat(document.getElementById('time').value);
+            const type = document.getElementById('type').value;
+            const frequency = parseInt(document.getElementById('frequency').value) || 1;
+            const currency = document.getElementById('currency').value;
+
+            let interest = 0;
+            let finalAmount = 0;
+            let labels = [];
+            let data = [];
+            scheduleData = [];
+
+            if (type === 'simple') {
+                interest = principal * rate * time;
+                finalAmount = principal + interest;
+                document.getElementById('schedule').style.display = 'none';
+
+                // Simple interest chart: linear growth
+                for (let year = 0; year <= time; year++) {
+                    labels.push(`Year ${year}`);
+                    data.push(principal + (principal * rate * year));
+                }
+            } else {
+                finalAmount = principal * Math.pow((1 + rate / frequency), (frequency * time));
+                interest = finalAmount - principal;
+                document.getElementById('schedule').style.display = 'block';
+
+                // Compound interest chart and schedule: yearly breakdown
+                let balance = principal;
+                labels.push('Year 0');
+                data.push(principal);
+                scheduleData.push(['0', currency + principal.toFixed(2), currency + '0.00', currency + principal.toFixed(2)]);
+
+                for (let year = 1; year <= time; year++) {
+                    const startBalance = balance;
+                    const yearlyInterest = startBalance * (Math.pow((1 + rate / frequency), frequency) - 1);
+                    balance = startBalance + yearlyInterest;
+                    labels.push(`Year ${year}`);
+                    data.push(balance);
+                    scheduleData.push([year.toString(), currency + startBalance.toFixed(2), currency + yearlyInterest.toFixed(2), currency + balance.toFixed(2)]);
+                }
+
+                const tbody = document.getElementById('schedule-body');
+                tbody.innerHTML = '';
+                scheduleData.slice(1).forEach(row => {
+                    const tr = document.createElement('tr');
+                    row.forEach(cell => {
+                        const td = document.createElement('td');
+                        td.textContent = cell;
+                        tr.appendChild(td);
+                    });
+                    tbody.appendChild(tr);
+                });
+            }
+
+            document.getElementById('total-interest').textContent = `${currency}${interest.toFixed(2)}`;
+            document.getElementById('final-amount').textContent = `${currency}${finalAmount.toFixed(2)}`;
+            document.getElementById('results').style.display = 'block';
+
+            // Update or create chart
+            const ctx = document.getElementById('interestChart').getContext('2d');
+            if (chart) {
+                chart.destroy();
+            }
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Balance Over Time',
+                        data: data,
+                        borderColor: 'rgba(0, 200, 200, 1)',
+                        backgroundColor: 'rgba(0, 200, 200, 0.2)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+        }
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const currency = document.getElementById('currency').value;
+            const type = document.getElementById('type').value;
+
+            doc.setFont("helvetica");
+            doc.setFontSize(14);
+            doc.text("Interest Calculation Results", 105, 15, { align: "center" });
+
+            // Results Table
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Total Interest', document.getElementById('total-interest').textContent],
+                    ['Final Amount', document.getElementById('final-amount').textContent]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
+                margin: { top: 10 }
+            });
+
+            if (type === 'compound') {
+                // Schedule Table
+                doc.autoTable({
+                    startY: doc.lastAutoTable.finalY + 10,
+                    head: [['Year', 'Starting Balance', 'Interest Earned', 'Ending Balance']],
+                    body: scheduleData.slice(1),
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                    }
+                });
+            } else {
+                doc.setFontSize(10);
+                doc.setTextColor(100);
+                doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+            }
+
+            doc.save('interest-results.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Interest Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
