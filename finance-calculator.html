@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Time Value of Money Calculator - Advanced Financial Analysis Tool for Loans and Investments | FCalculator.com</title>
-    <meta name="description" content="Leverage our Ultimate Time Value of Money Calculator to perform sophisticated computations for present value, future value, payments, rates, and periods. Equipped with in-depth formulas, amortization tables, dynamic charts, and PDF export features for comprehensive financial evaluations and strategic decision-making.">
+    <title>Time Value of Money Calculator - In-Depth Financial Projection and Annuity Analysis Tool</title>
+    <meta name="description" content="Perform detailed time value of money calculations to determine present value, future value, periodic payments, interest rates, and periods for investments, loans, and annuities. Includes amortization schedules, compounding adjustments, interactive graphs, and PDF reports for strategic financial forecasting.">
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf-autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Ultimate Time Value of Money Calculator",
-      "description": "Advanced tool for calculating time value of money concepts including present value, future value, periodic payments, interest rates, and number of periods with amortization schedules and charts.",
+      "name": "Time Value of Money Calculator",
+      "description": "Tool for analyzing time value of money with calculations for present value, future value, payments, rates, and periods, featuring amortization schedules and charts.",
       "publisher": {
         "@type": "Organization",
         "name": "FCalculator.com",
@@ -31,8 +31,8 @@
         <div class="logo">FCalculator.com</div>
     </header>
     <main>
-        <h1>Ultimate Time Value of Money Calculator: Advanced Financial Analysis</h1>
-        <p>This Ultimate Time Value of Money Calculator delivers powerful solutions for evaluating financial scenarios, enabling precise calculations of present value (PV), future value (FV), periodic payments (PMT), interest rates (I/Y), and number of periods (N). Suitable for loans, investments, and annuities, it supports multiple compounding options and payment schedules, providing actionable insights for effective financial management and planning.</p>
+        <h1>Time Value of Money Calculator: In-Depth Financial Projection and Annuity Analysis</h1>
+        <p>This sophisticated Time Value of Money Calculator facilitates comprehensive evaluations of financial scenarios, allowing precise determinations of present value (PV), future value (FV), periodic payments (PMT), interest rates (I/Y), and number of periods (N). Designed for applications in investments, loans, and annuities, it incorporates adjustable compounding frequencies and payment timings to yield reliable projections essential for robust financial strategies and decision-making processes.</p>
         
         <!-- Tool Section -->
         <section id="calculator-tool">
@@ -84,6 +84,7 @@
                 <p id="result-text" class="result-green"></p>
                 <p id="total-payments"></p>
                 <p id="total-interest"></p>
+                <p id="payoff-date"></p>
                 
                 <canvas id="tvm-chart" width="400" height="200"></canvas>
                 
@@ -105,90 +106,90 @@
         
         <!-- Detailed Content Sections -->
         <section>
-            <h2>Delving into Time Value of Money (TVM) Concepts</h2>
-            <p>The time value of money framework posits that current funds possess greater worth than future equivalents due to their inherent potential for growth via investments. This core idea permeates financial disciplines, guiding evaluations in capital budgeting, asset valuation, and retirement strategies. Our calculator empowers users to quantify these dynamics by resolving variables across diverse contexts, factoring in elements such as risk premiums and economic fluctuations.</p>
-            <p>For instance, in corporate finance, it aids in discounting cash flows for net present value assessments, while in personal finance, it simulates loan amortizations to forecast total obligations and optimize repayment plans.</p>
+            <h2>Core Principles of Time Value of Money (TVM)</h2>
+            <p>The time value of money doctrine maintains that present funds surpass equivalent future amounts in value owing to their capacity for earning returns through productive investments. This essential tenet informs myriad financial activities, from capital allocation to asset pricing and pension design. Our calculator enables quantification of these effects by resolving variables in multifaceted situations, accounting for variables like opportunity costs and inflationary pressures.</p>
+            <p>In investment contexts, it facilitates compounding growth projections, whereas in liability management, it delineates amortization paths, empowering users to refine cash flows and curtail expenses across extended horizons.</p>
         </section>
         
         <section>
-            <h2>Fundamental Formulas Driving TVM Calculations</h2>
-            <p>Our Ultimate Time Value of Money Calculator relies on these pivotal equations, customized for compounding intervals and annuity structures:</p>
+            <h2>Fundamental Equations for TVM Evaluations</h2>
+            <p>The calculator harnesses these primary equations, tailored for compounding cadences and annuity configurations:</p>
             <ul>
-                <li><strong>Future Value (FV) of a Principal Sum:</strong> FV = PV × (1 + r)^n</li>
-                <li><strong>Present Value (PV) of a Future Sum:</strong> PV = FV / (1 + r)^n</li>
+                <li><strong>Future Value (FV) of a Principal Amount:</strong> FV = PV × (1 + r)^n</li>
+                <li><strong>Present Value (PV) of a Prospective Amount:</strong> PV = FV / (1 + r)^n</li>
                 <li><strong>Future Value of an Ordinary Annuity:</strong> FV = PMT × [((1 + r)^n - 1) / r]</li>
                 <li><strong>Present Value of an Ordinary Annuity:</strong> PV = PMT × [(1 - (1 + r)^(-n)) / r]</li>
-                <li>Annuities due incorporate an additional (1 + r) multiplier to reflect accelerated compounding from upfront payments.</li>
-                <li>Interest rate and period resolutions utilize advanced iterative algorithms like Newton-Raphson for high-fidelity outcomes.</li>
+                <li>Annuities due enhance the annuity factor by (1 + r), acknowledging expedited payments.</li>
+                <li>Rate and duration resolutions deploy numerical methodologies, such as Newton-Raphson, ensuring meticulous accuracy.</li>
             </ul>
-            <p>These mathematical constructs are calibrated to periodic rates and total intervals, mirroring instruments such as certificates of deposit or adjustable-rate mortgages.</p>
+            <p>These constructs adapt to periodic rates and aggregate intervals, synchronizing with financial products like treasury notes or variable-rate obligations.</p>
         </section>
         
         <section>
-            <h2>Real-World Applications of the Ultimate Time Value of Money Calculator</h2>
-            <p><strong>Scenario 1: Retirement Fund Accumulation</strong> - Specify $10,000 PV, 7% I/Y, annual compounding, over 25 years (N=25). Derive FV to project growth to about $54,274.33.</p>
-            <p><strong>Scenario 2: Student Loan Repayment</strong> - Input $50,000 PV at 5% I/Y for 10 years (N=120 monthly), yielding a PMT of roughly -$530.33.</p>
-            <p><strong>Scenario 3: Bond Yield Estimation</strong> - With $1,000 FV in 5 years via $40 semi-annual PMT, compute I/Y to ascertain the implied rate.</p>
-            <p>These applications underscore the tool's adaptability in addressing multifaceted financial challenges, from wealth building to debt consolidation.</p>
+            <h2>Illustrative Scenarios with the Time Value of Money Calculator</h2>
+            <p><strong>Scenario 1: Pension Fund Expansion</strong> - Specify $15,000 PV, 8% I/Y, semi-annual compounding, spanning 20 years (N=40 periods). Ascertain FV to anticipate accrual near $69,977.99.</p>
+            <p><strong>Scenario 2: Credit Repayment Structuring</strong> - For $100,000 PV at 4.5% I/Y across 15 years (N=180 monthly), derive PMT approximating -$764.99.</p>
+            <p><strong>Scenario 3: Yield Requirement for Objective Fulfillment</strong> - Pursuing $200,000 FV over 10 years with $1,000 monthly PMT, resolve I/Y to pinpoint requisite annual rate.</p>
+            <p>These instances exemplify the instrument's efficacy in navigating varied financial landscapes, from asset accumulation to liability mitigation.</p>
         </section>
         
         <section>
-            <h2>Influence of Compounding Periods on Investment Yields</h2>
+            <h2>Consequences of Compounding Cadences on Fiscal Results</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Compounding Period</th>
-                        <th>Effective Annual Rate (6% Nominal)</th>
-                        <th>Future Value after 5 Years ($20,000 PV)</th>
+                        <th>Compounding Cadence</th>
+                        <th>Effective Annual Rate (4% Nominal)</th>
+                        <th>Future Value after 15 Years ($10,000 PV)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Annual</td>
-                        <td>6.00%</td>
-                        <td>$26,763.71</td>
+                        <td>4.00%</td>
+                        <td>$18,009.43</td>
                     </tr>
                     <tr>
                         <td>Semi-Annual</td>
-                        <td>6.09%</td>
-                        <td>$26,851.29</td>
+                        <td>4.04%</td>
+                        <td>$18,101.52</td>
                     </tr>
                     <tr>
                         <td>Quarterly</td>
-                        <td>6.14%</td>
-                        <td>$26,895.56</td>
+                        <td>4.06%</td>
+                        <td>$18,147.96</td>
                     </tr>
                     <tr>
                         <td>Monthly</td>
-                        <td>6.17%</td>
-                        <td>$26,921.24</td>
+                        <td>4.07%</td>
+                        <td>$18,179.21</td>
                     </tr>
                     <tr>
                         <td>Daily</td>
-                        <td>6.18%</td>
-                        <td>$26,930.97</td>
+                        <td>4.08%</td>
+                        <td>$18,190.31</td>
                     </tr>
                 </tbody>
             </table>
-            <p>This analysis reveals the compounding effect's role in amplifying returns, a key factor in selecting savings vehicles or investment accounts.</p>
+            <p>This examination elucidates compounding's augmentation of yields, a pivotal element in electing deposit mechanisms or capital vehicles.</p>
         </section>
         
         <section>
             <h2>Frequently Asked Questions (FAQ)</h2>
             <dl>
-                <dt>How do annuity types impact valuation?</dt>
-                <dd>Ordinary annuities assume end-of-period flows, yielding lower values than annuities due, which benefit from immediate compounding.</dd>
+                <dt>What differentiates ordinary from due annuities?</dt>
+                <dd>Ordinary annuities entail end-of-period disbursements, resulting in diminished values relative to due annuities, which capitalize on prompt compounding.</dd>
                 
-                <dt>Interpreting cash flow signs in models?</dt>
-                <dd>Positive values denote inflows (e.g., receipts), while negatives indicate outflows (e.g., disbursements), preserving equation integrity.</dd>
+                <dt>Deciphering cash flow polarities in frameworks?</dt>
+                <dd>Affirmative figures signify inflows (e.g., receipts), negatives outflows (e.g., expenditures), upholding model coherence.</dd>
                 
-                <dt>Rationale for numerical solvers in rate calculations?</dt>
-                <dd>Transcendental equations governing rates necessitate iterative techniques for convergent, accurate resolutions.</dd>
+                <dt>Justification for computational iterators in rate derivations?</dt>
+                <dd>Non-algebraic rate equations demand iterative protocols for precise, convergent resolutions.</dd>
                 
-                <dt>Extending to infinite horizons?</dt>
-                <dd>For perpetuities, set N to a large finite value or use simplified formulas like PV = PMT / r for constant growth models.</dd>
+                <dt>Adapting to perpetual streams?</dt>
+                <dd>For indefinite annuities, employ expansive finite N or formulas like PV = PMT / r in steady-state contexts.</dd>
             </dl>
-            <p>Complement your analysis with our <a href="/compound-interest-growth-calculator.html">Compound Interest Growth Calculator</a> or <a href="/loan-calculator.html">Loan Calculator</a>.</p>
+            <p>Augment analyses via our <a href="/compound-interest-growth-calculator.html">Compound Interest Growth Calculator</a> or <a href="/loan-calculator.html">Loan Calculator</a>.</p>
         </section>
         
         <section>
@@ -282,6 +283,12 @@
             document.getElementById('total-payments').textContent = `Total Payments: ${currency}${totalPayments.toFixed(2)}`;
             document.getElementById('total-interest').textContent = `Total Interest: ${currency}${Math.abs(totalInterest).toFixed(2)}`;
             
+            // Payoff Date
+            const currentDate = new Date();
+            const payoffMonth = currentDate.getMonth() + periods;
+            const payoffDate = new Date(currentDate.getFullYear(), payoffMonth, currentDate.getDate());
+            document.getElementById('payoff-date').textContent = `Payoff Date: ${payoffDate.toDateString()}`;
+            
             // Generate amortization if PMT != 0 and PV > 0 (assuming loan scenario)
             amortizationData = [];
             let balance = pv;
@@ -339,7 +346,8 @@
                     ['Annual Interest Rate (I/Y)', document.getElementById('rate').value + '%'],
                     ['Number of Periods (N)', document.getElementById('periods').value],
                     ['Total Payments', document.getElementById('total-payments').textContent.split(': ')[1]],
-                    ['Total Interest', document.getElementById('total-interest').textContent.split(': ')[1]]
+                    ['Total Interest', document.getElementById('total-interest').textContent.split(': ')[1]],
+                    ['Payoff Date', document.getElementById('payoff-date').textContent.split(': ')[1]]
                 ],
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
@@ -364,22 +372,13 @@
                 }
             });
             
-            // Create blob and trigger download
-            const pdfBlob = doc.output('blob');
-            const url = URL.createObjectURL(pdfBlob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'finance-results.pdf';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            doc.save('finance-results.pdf');
         }
         
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Ultimate Time Value of Money Calculator',
+                    title: 'Time Value of Money Calculator',
                     url: window.location.href
                 });
             } else {
