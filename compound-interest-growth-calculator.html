@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Growth Calculator - FCalculator.com</title>
+    <meta name="description" content="Calculate the future value of your investments with our Compound Interest Growth Calculator. Understand how compounding frequency, interest rates, and time impact your savings growth through detailed formulas, charts, and amortization schedules.">
+    <meta name="keywords" content="compound interest calculator, investment growth, savings calculator, future value formula, compounding frequency">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <h1>Compound Interest Growth Calculator</h1>
+        <p>Discover how your savings or investments can grow over time with compound interest. Input your principal amount, annual interest rate, investment period, and compounding frequency to see detailed projections, including future value, total interest earned, and a growth chart.</p>
+    </header>
+
+    <main>
+        <section class="calculator-tool">
+            <form id="compound-interest-form">
+                <label for="principal">Principal Amount:</label>
+                <input type="number" id="principal" required min="0" step="0.01">
+
+                <label for="currency">Currency:</label>
+                <select id="currency">
+                    <option value="$">$ (USD)</option>
+                    <option value="€">€ (EUR)</option>
+                </select>
+
+                <label for="rate">Annual Interest Rate (%):</label>
+                <input type="number" id="rate" required min="0" step="0.01">
+
+                <label for="years">Number of Years:</label>
+                <input type="number" id="years" required min="1" step="1">
+
+                <label for="compounds">Compounding Frequency:</label>
+                <select id="compounds">
+                    <option value="1">Annually</option>
+                    <option value="4">Quarterly</option>
+                    <option value="12">Monthly</option>
+                    <option value="365">Daily</option>
+                </select>
+
+                <button type="button" onclick="calculateCompoundInterest()">Calculate</button>
+            </form>
+
+            <div id="results" style="display: none;">
+                <h2>Calculation Results</h2>
+                <p>Future Value: <span id="future-value" class="result-green"></span></p>
+                <p>Total Interest Earned: <span id="total-interest" class="result-green"></span></p>
+                <p>Initial Principal: <span id="principal-display" class="result-green"></span></p>
+
+                <canvas id="growth-chart" width="400" height="200"></canvas>
+
+                <table id="amortization-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Balance at Start</th>
+                            <th>Interest Earned</th>
+                            <th>Balance at End</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <button onclick="saveAsPDF()">Save as PDF</button>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Understanding Compound Interest</h2>
+            <p>Compound interest is the process where interest is added to the principal sum of a deposit or loan, so that from that moment on, the interest that has been added also earns interest. This addition of interest to the principal is called compounding. It can significantly boost the growth of your investments over time compared to simple interest.</p>
+            <p>The formula for calculating compound interest is: <strong>A = P (1 + r/n)^(nt)</strong>, where:</p>
+            <ul>
+                <li><strong>A</strong> is the amount of money accumulated after n years, including interest.</li>
+                <li><strong>P</strong> is the principal amount (the initial amount of money).</li>
+                <li><strong>r</strong> is the annual interest rate (decimal).</li>
+                <li><strong>n</strong> is the number of times that interest is compounded per year.</li>
+                <li><strong>t</strong> is the time the money is invested for in years.</li>
+            </ul>
+            <p>For example, if you invest $10,000 at an annual interest rate of 5% compounded monthly for 10 years, the future value would be calculated as A = 10000 * (1 + 0.05/12)^(12*10).</p>
+
+            <h3>Benefits of Compounding</h3>
+            <p>Compounding allows your money to grow exponentially. The more frequent the compounding (e.g., monthly vs. annually), the greater the growth. This calculator helps visualize this effect through charts and tables, making it easier to plan for retirement, education funds, or other long-term goals.</p>
+
+            <div class="share-button">
+                <button onclick="sharePage()">Share this Calculator</button>
+            </div>
+
+            <h3>Comparison of Compounding Frequencies</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Frequency</th>
+                        <th>Times per Year</th>
+                        <th>Example Growth (P=$10,000, r=5%, t=10 years)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Annually</td>
+                        <td>1</td>
+                        <td>$16,288.95</td>
+                    </tr>
+                    <tr>
+                        <td>Quarterly</td>
+                        <td>4</td>
+                        <td>$16,436.19</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly</td>
+                        <td>12</td>
+                        <td>$16,470.09</td>
+                    </tr>
+                    <tr>
+                        <td>Daily</td>
+                        <td>365</td>
+                        <td>$16,486.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Explore related financial tools on FCalculator.com, such as our <a href="/mortgage-calculator.html">Mortgage Calculator</a> for home financing or <a href="/loan-calculator.html">Loan Calculator</a> for personal loans.</p>
+
+            <h3>Frequently Asked Questions (FAQ)</h3>
+            <dl>
+                <dt>What is the difference between simple and compound interest?</dt>
+                <dd>Simple interest is calculated only on the principal amount, while compound interest is calculated on the principal plus any accumulated interest.</dd>
+
+                <dt>How does compounding frequency affect growth?</dt>
+                <dd>Higher frequency means more interest accruals per year, leading to faster growth. For instance, daily compounding yields more than annual.</dd>
+
+                <dt>Can I use this for retirement planning?</dt>
+                <dd>Yes, input your expected savings, rate of return, and years until retirement to project your nest egg.</dd>
+
+                <dt>What if I add regular contributions?</dt>
+                <dd>This calculator focuses on one-time investments. For ongoing contributions, consider our upcoming savings planner tool.</dd>
+            </dl>
+
+            <p>For more in-depth information on compound interest, refer to resources from established financial authorities. Data on interest rates and compounding can be explored further through links below.</p>
+        </section>
+    </main>
+
+    <section class="related-resources">
+        <h2>Related Resources</h2>
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Compound_interest" target="_blank" rel="noopener noreferrer">Wikipedia: Compound Interest</a> - Detailed explanation and history.</li>
+            <li><a href="https://www.investor.gov/introduction-investing/investing-basics/glossary/compound-interest" target="_blank" rel="noopener noreferrer">Investor.gov: Compound Interest</a> - U.S. government resource on investing basics.</li>
+            <li><a href="https://www.federalreserve.gov/econres/notes/feds-notes/the-power-of-compound-interest-20191120.htm" target="_blank" rel="noopener noreferrer">Federal Reserve: Power of Compound Interest</a> - Insights from economic research.</li>
+        </ul>
+    </section>
+
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    </footer>
+
+    <script>
+        let chart;
+
+        function calculateCompoundInterest() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const currency = document.getElementById('currency').value;
+            const rate = parseFloat(document.getElementById('rate').value) / 100;
+            const years = parseInt(document.getElementById('years').value);
+            const compounds = parseInt(document.getElementById('compounds').value);
+
+            const futureValue = principal * Math.pow((1 + rate / compounds), (compounds * years));
+            const totalInterest = futureValue - principal;
+
+            document.getElementById('future-value').textContent = `${currency}${futureValue.toFixed(2)}`;
+            document.getElementById('total-interest').textContent = `${currency}${totalInterest.toFixed(2)}`;
+            document.getElementById('principal-display').textContent = `${currency}${principal.toFixed(2)}`;
+
+            // Amortization Table (Yearly)
+            const tableBody = document.querySelector('#amortization-table tbody');
+            tableBody.innerHTML = '';
+            let balance = principal;
+            const labels = [];
+            const data = [];
+            for (let year = 1; year <= years; year++) {
+                const startBalance = balance;
+                const interest = startBalance * Math.pow((1 + rate / compounds), compounds) - startBalance;
+                balance = startBalance + interest;
+                const row = `<tr>
+                    <td>${year}</td>
+                    <td>${currency}${startBalance.toFixed(2)}</td>
+                    <td>${currency}${interest.toFixed(2)}</td>
+                    <td>${currency}${balance.toFixed(2)}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+
+                labels.push(`Year ${year}`);
+                data.push(balance);
+            }
+
+            // Chart
+            const ctx = document.getElementById('growth-chart').getContext('2d');
+            if (chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Investment Growth',
+                        data: data,
+                        borderColor: 'green',
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            document.getElementById('results').style.display = 'block';
+        }
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(12);
+
+            // Center content
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const center = (text, y) => doc.text(text, pageWidth / 2, y, { align: 'center' });
+
+            center('Compound Interest Growth Results', 20);
+
+            // Results Table
+            doc.autoTable({
+                startY: 30,
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Future Value', document.getElementById('future-value').textContent],
+                    ['Total Interest', document.getElementById('total-interest').textContent],
+                    ['Principal', document.getElementById('principal-display').textContent]
+                ],
+                theme: 'grid',
+                styles: { halign: 'center', font: 'helvetica' }
+            });
+
+            // Amortization Schedule
+            let yPos = doc.lastAutoTable.finalY + 10;
+            center('Amortization Schedule', yPos);
+            yPos += 10;
+
+            const tableRows = Array.from(document.querySelectorAll('#amortization-table tr')).map(row =>
+                Array.from(row.cells).map(cell => cell.textContent)
+            );
+
+            doc.autoTable({
+                startY: yPos,
+                head: [tableRows[0]],
+                body: tableRows.slice(1),
+                theme: 'grid',
+                styles: { halign: 'center', font: 'helvetica' }
+            });
+
+            // Footer on each page
+            const totalPages = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= totalPages; i++) {
+                doc.setPage(i);
+                doc.text('This document was generated using Fcalculator.com', pageWidth / 2, doc.internal.pageSize.getHeight() - 10, { align: 'center' });
+            }
+
+            doc.save('compound-interest-results.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Compound Interest Growth Calculator',
+                    text: 'Check out this compound interest calculator on FCalculator.com!',
+                    url: window.location.href
+                });
+            } else {
+                alert('Sharing not supported on this browser.');
+            }
+        }
+    </script>
+</body>
+</html>
