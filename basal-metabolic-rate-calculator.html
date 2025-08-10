@@ -24,7 +24,7 @@
     <main>
         <!-- Tool at the top -->
         <section id="calculator-tool">
-            <h2>Input Your Information</h2>
+            <h2>Provide Your Details</h2>
             <form id="bmr-form">
                 <label for="age">Age (years):</label>
                 <input type="number" id="age" required min="1" max="120" value="30">
@@ -54,122 +54,119 @@
             </form>
 
             <div id="result" class="result"></div>
-            <button class="pdf-button" onclick="generatePDF()" style="display:none;" id="pdf-btn">Save as PDF</button>
 
             <canvas id="bmrChart" width="400" height="200" style="margin-top: 20px;"></canvas>
-            <canvas id="bodyFigure" width="200" height="300" style="margin-top: 20px; display: block; margin-left: auto; margin-right: auto;"></canvas>
-            <p id="figureDescription" style="text-align: center; margin-top: 10px;"></p>
         </section>
 
         <!-- Majority of text below the tool -->
         <section id="explanation">
-            <h2>Understanding Basal Metabolic Rate (BMR)</h2>
-            <p>Basal Metabolic Rate (BMR) quantifies the calories expended by the body at rest to maintain vital functions like respiration, circulation, and cellular repair. Typically comprising 60-70% of daily energy use, BMR varies based on physiological factors including muscle mass, hormonal balance, and genetics. This estimator utilizes the Harris-Benedict formula (revised 1984) for accuracy: Males: BMR = 88.362 + (13.397 × weight kg) + (4.799 × height cm) - (5.677 × age years); Females: BMR = 447.593 + (9.247 × weight kg) + (3.098 × height cm) - (4.330 × age years). Integrating activity multipliers yields Total Daily Energy Expenditure (TDEE), essential for caloric intake strategies in weight control or athletic performance.</p>
-            <p>Visual representations, such as the energy distribution chart above, illustrate BMR versus activity-induced expenditure. Below it, a dynamic body figure depicts approximate physique based on calculated BMI (weight kg / (height m)^2): underweight (&lt;18.5), normal (18.5-24.9), overweight (25-29.9), or obese (&gt;30). Figure height scales proportionally to input height, with body width adjusting for BMI category, providing a visual health indicator.</p>
+            <h2>Exploring Basal Metabolic Rate (BMR)</h2>
+            <p>Basal Metabolic Rate (BMR) measures the calories your body consumes at complete rest to sustain essential functions such as heartbeat, respiration, and temperature regulation. This metric typically represents 60-75% of total daily calorie burn, influenced by factors like body composition, genetics, and environmental conditions. The calculator employs the Harris-Benedict formula (updated in 1984) for precise estimation: For males, BMR = 88.362 + (13.397 × weight in kg) + (4.799 × height in cm) - (5.677 × age in years); for females, BMR = 447.593 + (9.247 × weight in kg) + (3.098 × height in cm) - (4.330 × age in years). By incorporating activity multipliers, it derives Total Daily Energy Expenditure (TDEE), a key indicator for designing balanced diets, weight loss programs, or muscle-building regimens.</p>
+            <p>The accompanying energy distribution chart visualizes the proportion of calories attributed to BMR versus physical activity, aiding in understanding how lifestyle impacts overall metabolism. Regular BMR assessments can reveal changes due to aging, hormonal shifts, or muscle gain/loss, enabling proactive health adjustments.</p>
 
-            <h3>Sample BMR Estimations</h3>
+            <h3>Illustrative BMR Calculations</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Individual Profile</th>
+                        <th>Profile Description</th>
                         <th>Age</th>
                         <th>Gender</th>
                         <th>Weight (kg)</th>
                         <th>Height (cm)</th>
-                        <th>Estimated BMR (calories)</th>
+                        <th>BMR (calories/day)</th>
                         <th>BMI Category</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Young Adult Male</td>
-                        <td>28</td>
+                        <td>Young Professional Male</td>
+                        <td>32</td>
                         <td>Male</td>
-                        <td>75</td>
-                        <td>175</td>
-                        <td>~1770</td>
+                        <td>82</td>
+                        <td>178</td>
+                        <td>~1845</td>
                         <td>Normal</td>
                     </tr>
                     <tr>
-                        <td>Middle-Aged Female</td>
-                        <td>45</td>
+                        <td>Active Adult Female</td>
+                        <td>28</td>
                         <td>Female</td>
-                        <td>65</td>
-                        <td>160</td>
-                        <td>~1350</td>
-                        <td>Overweight</td>
+                        <td>58</td>
+                        <td>162</td>
+                        <td>~1360</td>
+                        <td>Normal</td>
                     </tr>
                     <tr>
-                        <td>Elderly Male</td>
-                        <td>65</td>
+                        <td>Senior Male</td>
+                        <td>60</td>
                         <td>Male</td>
-                        <td>80</td>
+                        <td>75</td>
                         <td>170</td>
-                        <td>~1520</td>
+                        <td>~1560</td>
                         <td>Overweight</td>
                     </tr>
                     <tr>
-                        <td>Active Teen Female</td>
-                        <td>16</td>
+                        <td>Teenage Athlete Female</td>
+                        <td>17</td>
                         <td>Female</td>
-                        <td>55</td>
-                        <td>165</td>
-                        <td>~1380</td>
+                        <td>62</td>
+                        <td>168</td>
+                        <td>~1425</td>
                         <td>Normal</td>
                     </tr>
                 </tbody>
             </table>
 
-            <p>These samples demonstrate BMR fluctuations across demographics. Use the tool for customized results, and note how the body figure adapts to reflect potential health implications.</p>
+            <p>These examples highlight variations in BMR across life stages and physiques. Input your specifics above to generate personalized results and observe the updated energy chart for better metabolic visualization.</p>
 
-            <h3>Importance of BMR in Health Management</h3>
-            <p>BMR knowledge empowers informed decisions on diet and exercise. For instance, a caloric deficit below BMR supports weight loss, while exceeding TDEE aids muscle building. Factors like thyroid function or medications can alter BMR; regular reassessment is advised. The integrated visualizations, including the pie chart for energy breakdown and the physique figure, enhance comprehension of metabolic health.</p>
+            <h3>Role of BMR in Wellness Strategies</h3>
+            <p>Accurately calculating BMR supports targeted nutritional planning, such as creating a 500-calorie deficit for sustainable weight loss or surpluses for athletic gains. It also informs on potential metabolic disorders; for instance, a lower-than-expected BMR might indicate hypothyroidism, warranting medical consultation. Combining BMR with BMI provides a holistic view of body health, where BMI categorizes weight status (underweight <18.5, normal 18.5-24.9, overweight 25-29.9, obese >30) to correlate with energy needs.</p>
 
             <div class="share-button">
-                <button onclick="sharePage()">Share this Estimator</button>
+                <button onclick="sharePage()">Share this Calculator</button>
             </div>
 
-            <h3>BMR Formula Comparisons</h3>
+            <h3>Comparative Analysis of BMR Equations</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Formula Type</th>
-                        <th>Key Advantages</th>
-                        <th>Potential Limitations</th>
-                        <th>Suitability</th>
+                        <th>Equation</th>
+                        <th>Strengths</th>
+                        <th>Weaknesses</th>
+                        <th>Best Application</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Harris-Benedict (Revised)</td>
-                        <td>Validated across populations, easy inputs</td>
-                        <td>Less precise for extremes in body composition</td>
-                        <td>General adult use</td>
+                        <td>Extensively researched, straightforward variables</td>
+                        <td>Potential overestimation in sedentary or obese cases</td>
+                        <td>General population assessments</td>
                     </tr>
                     <tr>
                         <td>Mifflin-St Jeor</td>
-                        <td>Better alignment with contemporary body metrics</td>
-                        <td>Overlooks muscle-fat ratio</td>
-                        <td>Obese or athletic individuals</td>
+                        <td>Aligned with current body composition trends</td>
+                        <td>Ignores lean mass specifics</td>
+                        <td>Clinical or overweight individuals</td>
                     </tr>
                     <tr>
-                        <td>Cunningham</td>
-                        <td>Incorporates lean body mass</td>
-                        <td>Requires body fat data</td>
-                        <td>Athletes</td>
+                        <td>Katch-McArdle</td>
+                        <td>Includes body fat percentage for precision</td>
+                        <td>Requires additional measurements</td>
+                        <td>Fitness enthusiasts or athletes</td>
                     </tr>
                 </tbody>
             </table>
 
             <h2>FAQ</h2>
             <ul>
-                <li><strong>How reliable is BMR estimation?</strong> Formulas offer solid approximations, but lab tests like calorimetry provide ultimate precision. Factors like stress or illness may influence results.</li>
-                <li><strong>Does BMR decline with age?</strong> Yes, typically 1-2% per decade due to muscle loss; strength training can mitigate this.</li>
-                <li><strong>BMR vs. RMR: What's the difference?</strong> BMR is strict fasting/rest; Resting Metabolic Rate (RMR) is similar but less stringent, often 10-20% higher.</li>
-                <li><strong>Related Assessments:</strong> Explore our <a href="/bmi.html">Body Mass Index Calculator</a> or <a href="/calorie.html">Daily Calorie Needs Tool</a> for integrated health evaluations.</li>
+                <li><strong>What factors most affect BMR accuracy?</strong> Age, muscle mass, and hormonal balance play key roles; environmental factors like temperature can cause minor fluctuations. Use lab-based methods for ultimate precision.</li>
+                <li><strong>How often should I recalculate BMR?</strong> Every 3-6 months or after significant weight changes, as metabolism adapts over time.</li>
+                <li><strong>BMR vs. TDEE: Key distinctions?</strong> BMR covers resting needs only; TDEE adds activity, digestion, and non-exercise thermogenesis for total daily burn.</li>
+                <li><strong>Integrated Tools:</strong> Pair with our <a href="/bmi.html">BMI Calculator</a> or <a href="/calorie.html">Calorie Needs Estimator</a> for enhanced health tracking.</li>
             </ul>
 
-            <p>For deeper insights into metabolic processes, refer to authoritative sources such as the <a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate" target="_blank">Wikipedia entry on Basal Metabolic Rate</a> or dietary guidelines from the <a href="https://www.nutrition.gov/topics/basic-nutrition" target="_blank">U.S. Department of Agriculture</a>.</p>
+            <p>Dive deeper into metabolic science through resources like the <a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate" target="_blank">Wikipedia on Basal Metabolic Rate</a> or official guidelines from the <a href="https://www.nutrition.gov/topics/basic-nutrition/calories" target="_blank">U.S. Department of Agriculture Nutrition Center</a>.</p>
         </section>
 
         <section id="related-resources">
@@ -192,6 +189,7 @@
         let tdeeResult = 0;
         let bmi = 0;
         let bmiCategory = '';
+        let myChart = null;
 
         window.onload = function() {
             calculateBMR();
@@ -220,17 +218,21 @@
             // Calculate BMI
             const heightM = height / 100;
             bmi = weight / (heightM * heightM);
-            if (bmi < 18.5) bmiCategory = 'Underweight (Thin)';
+            if (bmi < 18.5) bmiCategory = 'Underweight';
             else if (bmi < 25) bmiCategory = 'Normal Weight';
             else if (bmi < 30) bmiCategory = 'Overweight';
-            else bmiCategory = 'Obese (Heavy)';
+            else bmiCategory = 'Obese';
 
             document.getElementById('result').innerHTML = `Your BMR: ${bmrResult.toFixed(2)} calories/day<br>Your TDEE: ${tdeeResult.toFixed(2)} calories/day<br>Your BMI: ${bmi.toFixed(2)} (${bmiCategory})`;
-            document.getElementById('pdf-btn').style.display = 'block';
 
-            // Render chart
+            // Destroy existing chart if it exists
+            if (myChart) {
+                myChart.destroy();
+            }
+
+            // Render new chart
             const ctx = document.getElementById('bmrChart').getContext('2d');
-            new Chart(ctx, {
+            myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
                     labels: ['BMR (Resting)', 'Activity (TDEE - BMR)'],
@@ -244,92 +246,12 @@
                     title: { display: true, text: 'Energy Distribution' }
                 }
             });
-
-            // Draw body figure
-            drawBodyFigure(gender, height, bmi);
-        }
-
-        function drawBodyFigure(gender, height, bmi) {
-            const canvas = document.getElementById('bodyFigure');
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Scale height: max canvas height 300, assume average height 170cm -> scale factor
-            const scale = Math.min(300 / 170 * (height / 170), 2); // Cap at 2x
-            const figHeight = 150 * scale; // Base figure height 150px scaled
-            const bodyWidth = 40 + (bmi - 22) * 2; // Wider for higher BMI, base at ~22 normal
-
-            // Head
-            ctx.beginPath();
-            ctx.arc(100, 30, 20, 0, 2 * Math.PI);
-            ctx.fillStyle = '#FFD700';
-            ctx.fill();
-            ctx.stroke();
-
-            // Body
-            ctx.beginPath();
-            ctx.rect(100 - bodyWidth / 2, 50, bodyWidth, figHeight - 50);
-            ctx.fillStyle = '#87CEEB';
-            ctx.fill();
-            ctx.stroke();
-
-            // Arms
-            ctx.beginPath();
-            ctx.moveTo(100 - bodyWidth / 2, 70);
-            ctx.lineTo(100 - bodyWidth / 2 - 40, 100);
-            ctx.moveTo(100 + bodyWidth / 2, 70);
-            ctx.lineTo(100 + bodyWidth / 2 + 40, 100);
-            ctx.stroke();
-
-            // Legs
-            ctx.beginPath();
-            ctx.moveTo(100 - bodyWidth / 4, figHeight);
-            ctx.lineTo(100 - bodyWidth / 4 - 20, figHeight + 50);
-            ctx.moveTo(100 + bodyWidth / 4, figHeight);
-            ctx.lineTo(100 + bodyWidth / 4 + 20, figHeight + 50);
-            ctx.stroke();
-
-            // Gender-specific: simple hair or skirt
-            if (gender === 'female') {
-                ctx.beginPath();
-                ctx.moveTo(80, 10);
-                ctx.lineTo(120, 10);
-                ctx.lineTo(100, 30);
-                ctx.fillStyle = '#8B4513';
-                ctx.fill(); // Hair
-            }
-
-            // Description
-            document.getElementById('figureDescription').innerHTML = `Body Representation: Height scaled to ${height} cm, Build: ${bmiCategory}`;
-        }
-
-        function generatePDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(12);
-            doc.text('BMR Estimation Results', 105, 10, { align: 'center' });
-
-            doc.autoTable({
-                head: [['Parameter', 'Value']],
-                body: [
-                    ['BMR', `${bmrResult.toFixed(2)} calories/day`],
-                    ['TDEE', `${tdeeResult.toFixed(2)} calories/day`],
-                    ['BMI', `${bmi.toFixed(2)} (${bmiCategory})`]
-                ],
-                startY: 20,
-                theme: 'grid',
-                styles: { halign: 'center', valign: 'middle' }
-            });
-
-            doc.text('This document was generated using Fcalculator.com', 105, doc.internal.pageSize.height - 10, { align: 'center' });
-            doc.save('bmr_results.pdf');
         }
 
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Basal Metabolic Rate Estimator',
+                    title: 'Basal Metabolic Rate Calculator',
                     url: window.location.href
                 });
             } else {
