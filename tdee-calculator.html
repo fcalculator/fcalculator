@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accurately calculate your Total Daily Energy Expenditure (TDEE) using our advanced tool. Understand your basal metabolic rate, activity levels, and daily calorie needs for effective weight management and fitness goals.">
+    <meta name="keywords" content="TDEE calculator, total daily energy expenditure, BMR calculation, calorie needs, daily calorie expenditure, metabolic rate, fitness calculator, weight management tool">
+    <title>TDEE Calculator - Determine Your Daily Calorie Expenditure for Optimal Health</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <h1>TDEE Calculator</h1>
+        <p>Discover your Total Daily Energy Expenditure (TDEE) to better manage your diet, fitness, and overall health. This tool uses scientifically validated formulas to estimate your basal metabolic rate (BMR) and adjust for activity levels, providing personalized insights into your daily calorie needs.</p>
+    </header>
+
+    <main>
+        <section class="calculator-tool">
+            <h2>Calculate Your TDEE</h2>
+            <form id="tdee-form">
+                <label for="gender">Gender:</label>
+                <select id="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <label for="age">Age (years):</label>
+                <input type="number" id="age" min="1" max="120" required>
+
+                <label for="unit-system">Unit System:</label>
+                <select id="unit-system" onchange="toggleUnits()">
+                    <option value="metric">Metric (cm/kg)</option>
+                    <option value="imperial">Imperial (inches/pounds)</option>
+                </select>
+
+                <div id="metric-units">
+                    <label for="height-cm">Height (cm):</label>
+                    <input type="number" id="height-cm" min="50" max="300" required>
+
+                    <label for="weight-kg">Weight (kg):</label>
+                    <input type="number" id="weight-kg" min="20" max="300" required>
+                </div>
+
+                <div id="imperial-units" style="display: none;">
+                    <label for="height-feet">Height (feet):</label>
+                    <input type="number" id="height-feet" min="1" max="8">
+
+                    <label for="height-inches">Height (inches):</label>
+                    <input type="number" id="height-inches" min="0" max="11">
+
+                    <label for="weight-lbs">Weight (lbs):</label>
+                    <input type="number" id="weight-lbs" min="40" max="700" required>
+                </div>
+
+                <label for="activity-level">Activity Level:</label>
+                <select id="activity-level" required>
+                    <option value="">Select Activity Level</option>
+                    <option value="1.2">Sedentary (little or no exercise)</option>
+                    <option value="1.375">Lightly Active (light exercise/sports 1-3 days/week)</option>
+                    <option value="1.55">Moderately Active (moderate exercise/sports 3-5 days/week)</option>
+                    <option value="1.725">Very Active (hard exercise/sports 6-7 days a week)</option>
+                    <option value="1.9">Super Active (very hard exercise & physical job)</option>
+                </select>
+
+                <button type="button" onclick="calculateTDEE()">Calculate</button>
+            </form>
+
+            <div id="results" style="display: none;">
+                <h3>Results</h3>
+                <p>Your Basal Metabolic Rate (BMR): <span id="bmr-result" class="result-green"></span> calories/day</p>
+                <p>Your Total Daily Energy Expenditure (TDEE): <span id="tdee-result" class="result-green"></span> calories/day</p>
+                <button onclick="saveAsPDF()">Save as PDF</button>
+                <button onclick="sharePage()">Share</button>
+            </div>
+
+            <canvas id="tdeeChart" width="400" height="200"></canvas>
+        </section>
+
+        <section class="content-section">
+            <h2>What is Total Daily Energy Expenditure (TDEE)?</h2>
+            <p>Total Daily Energy Expenditure (TDEE) represents the total number of calories your body burns in a day, accounting for your basal metabolic rate (BMR), physical activity, and the thermic effect of food. Understanding your TDEE is crucial for setting realistic goals in weight loss, maintenance, or gain. It provides a foundation for personalized nutrition plans, helping you align your calorie intake with your energy output to achieve optimal health outcomes.</p>
+            <p>BMR is the energy your body needs at rest to perform basic functions like breathing and circulation. TDEE builds on BMR by incorporating daily activities. Factors influencing TDEE include age, gender, weight, height, and activity level. For instance, a more active individual will have a higher TDEE compared to someone sedentary.</p>
+
+            <h3>How to Calculate TDEE</h3>
+            <p>The calculation starts with determining your BMR using the Mifflin-St Jeor equation, a widely accepted formula for accuracy. For males: BMR = 10 × weight (kg) + 6.25 × height (cm) - 5 × age + 5. For females: BMR = 10 × weight (kg) + 6.25 × height (cm) - 5 × age - 161.</p>
+            <p>Once BMR is calculated, multiply it by an activity factor: Sedentary (1.2), Lightly Active (1.375), Moderately Active (1.55), Very Active (1.725), or Super Active (1.9). This gives your TDEE, offering a comprehensive view of your daily caloric needs.</p>
+
+            <h3>Activity Level Factors Table</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Activity Level</th>
+                        <th>Factor</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sedentary</td>
+                        <td>1.2</td>
+                        <td>Little or no exercise, desk job</td>
+                    </tr>
+                    <tr>
+                        <td>Lightly Active</td>
+                        <td>1.375</td>
+                        <td>Light exercise/sports 1-3 days/week</td>
+                    </tr>
+                    <tr>
+                        <td>Moderately Active</td>
+                        <td>1.55</td>
+                        <td>Moderate exercise/sports 3-5 days/week</td>
+                    </tr>
+                    <tr>
+                        <td>Very Active</td>
+                        <td>1.725</td>
+                        <td>Hard exercise/sports 6-7 days/week</td>
+                    </tr>
+                    <tr>
+                        <td>Super Active</td>
+                        <td>1.9</td>
+                        <td>Very hard exercise, physical job, training twice a day</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Using this table, you can adjust your multiplier based on your lifestyle. For example, if you have a desk job but exercise moderately, select the appropriate level to get an accurate TDEE estimate.</p>
+
+            <h3>Importance of TDEE in Weight Management</h3>
+            <p>Knowing your TDEE allows you to create a calorie deficit for weight loss (consume fewer calories than your TDEE) or a surplus for weight gain (consume more). A deficit of 500 calories per day can lead to about 1 pound of weight loss per week, promoting sustainable changes. Tracking TDEE over time helps adjust for changes in weight or activity, ensuring long-term success in health and fitness endeavors.</p>
+
+            <h3>Example Calculations</h3>
+            <p>Consider a 30-year-old male, 180 cm tall, weighing 80 kg, with moderate activity. BMR = 10*80 + 6.25*180 - 5*30 + 5 = 1775 calories. TDEE = 1775 * 1.55 ≈ 2751 calories/day.</p>
+            <p>For a 25-year-old female, 165 cm tall, 60 kg, lightly active: BMR = 10*60 + 6.25*165 - 5*25 - 161 ≈ 1351 calories. TDEE = 1351 * 1.375 ≈ 1858 calories/day.</p>
+
+            <h3>Comparing TDEE Across Age Groups</h3>
+            <p>TDEE typically decreases with age due to reduced muscle mass and metabolic rate. For instance, a 20-year-old active individual might have a higher TDEE than a 50-year-old with the same activity level. Regular exercise and strength training can help mitigate this decline, maintaining a higher energy expenditure.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Age Group</th>
+                        <th>Average TDEE (Moderately Active Male, 70kg, 175cm)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>20-29</td>
+                        <td>~2600 calories</td>
+                    </tr>
+                    <tr>
+                        <td>30-39</td>
+                        <td>~2500 calories</td>
+                    </tr>
+                    <tr>
+                        <td>40-49</td>
+                        <td>~2400 calories</td>
+                    </tr>
+                    <tr>
+                        <td>50+</td>
+                        <td>~2300 calories</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>This table illustrates the general trend, emphasizing the need for periodic recalculations as you age.</p>
+
+            <h3>Frequently Asked Questions (FAQ)</h3>
+            <ul>
+                <li><strong>What is the difference between BMR and TDEE?</strong> BMR is the calories burned at rest, while TDEE includes all daily activities.</li>
+                <li><strong>How often should I recalculate my TDEE?</strong> Recalculate every few months or after significant weight changes or activity shifts.</li>
+                <li><strong>Can TDEE help with muscle building?</strong> Yes, by creating a calorie surplus while monitoring protein intake and training.</li>
+                <li><strong>Is the Mifflin-St Jeor formula accurate?</strong> It's one of the most reliable for adults, validated through numerous studies.</li>
+                <li><strong>What if my activity level changes weekly?</strong> Average your levels or use a wearable device for more precise tracking.</li>
+            </ul>
+
+            <p>For more insights into calorie management, explore our related tools like the <a href="/calorie.html">Calorie Calculator</a> or <a href="/bmi.html">BMI Calculator</a>.</p>
+
+            <p>Share this tool with friends to help them understand their energy needs: <button onclick="sharePage()">Share</button></p>
+        </section>
+
+        <section class="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate" target="_blank" rel="noopener noreferrer">Wikipedia: Basal Metabolic Rate</a></li>
+                <li><a href="https://www.niddk.nih.gov/health-information/weight-management" target="_blank" rel="noopener noreferrer">NIH: Weight Management</a></li>
+                <li><a href="https://www.cdc.gov/healthyweight/assessing/bmi/adult_bmi/index.html" target="_blank" rel="noopener noreferrer">CDC: Adult BMI Calculator</a></li>
+                <li><a href="https://www.who.int/tools/child-growth-standards" target="_blank" rel="noopener noreferrer">WHO: Growth Standards</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    </footer>
+
+    <script>
+        function toggleUnits() {
+            const unitSystem = document.getElementById('unit-system').value;
+            if (unitSystem === 'metric') {
+                document.getElementById('metric-units').style.display = 'block';
+                document.getElementById('imperial-units').style.display = 'none';
+            } else {
+                document.getElementById('metric-units').style.display = 'none';
+                document.getElementById('imperial-units').style.display = 'block';
+            }
+        }
+
+        function calculateTDEE() {
+            const gender = document.getElementById('gender').value;
+            const age = parseFloat(document.getElementById('age').value);
+            const unitSystem = document.getElementById('unit-system').value;
+            let height, weight;
+
+            if (unitSystem === 'metric') {
+                height = parseFloat(document.getElementById('height-cm').value);
+                weight = parseFloat(document.getElementById('weight-kg').value);
+            } else {
+                const feet = parseFloat(document.getElementById('height-feet').value) || 0;
+                const inches = parseFloat(document.getElementById('height-inches').value) || 0;
+                height = (feet * 12 + inches) * 2.54; // to cm
+                weight = parseFloat(document.getElementById('weight-lbs').value) / 2.20462; // to kg
+            }
+
+            const activityFactor = parseFloat(document.getElementById('activity-level').value);
+
+            if (!gender || !age || !height || !weight || !activityFactor) {
+                alert('Please fill all fields.');
+                return;
+            }
+
+            let bmr;
+            if (gender === 'male') {
+                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+            } else {
+                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+
+            const tdee = bmr * activityFactor;
+
+            document.getElementById('bmr-result').textContent = bmr.toFixed(0);
+            document.getElementById('tdee-result').textContent = tdee.toFixed(0);
+            document.getElementById('results').style.display = 'block';
+
+            // Chart
+            const ctx = document.getElementById('tdeeChart').getContext('2d');
+            if (window.tdeeChartInstance) {
+                window.tdeeChartInstance.destroy();
+            }
+            window.tdeeChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['BMR', 'TDEE'],
+                    datasets: [{
+                        label: 'Calories',
+                        data: [bmr, tdee],
+                        backgroundColor: ['#4CAF50', '#2196F3']
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFontSize(14);
+            doc.text("TDEE Calculation Results", 105, 15, { align: "center" });
+
+            // Results Table
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Basal Metabolic Rate (BMR)', document.getElementById('bmr-result').textContent + ' calories/day'],
+                    ['Total Daily Energy Expenditure (TDEE)', document.getElementById('tdee-result').textContent + ' calories/day']
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 5, halign: 'left' },
+                margin: { top: 10 }
+            });
+
+            // Activity Levels Table
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
+                head: [['Activity Level', 'Factor', 'Description']],
+                body: [
+                    ['Sedentary', '1.2', 'Little or no exercise, desk job'],
+                    ['Lightly Active', '1.375', 'Light exercise/sports 1-3 days/week'],
+                    ['Moderately Active', '1.55', 'Moderate exercise/sports 3-5 days/week'],
+                    ['Very Active', '1.725', 'Hard exercise/sports 6-7 days/week'],
+                    ['Super Active', '1.9', 'Very hard exercise, physical job, training twice a day']
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 5, halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+
+            doc.save('tdee-results.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'TDEE Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
