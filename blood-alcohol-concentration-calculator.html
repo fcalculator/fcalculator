@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Alcohol Concentration Estimator - Comprehensive BAC Assessment Tool</title>
-    <meta name="description" content="Estimate your Blood Alcohol Concentration (BAC) accurately with this detailed tool. Input gender, weight in pounds or kilograms, alcohol consumption specifics, and elapsed time to obtain precise calculations, analyze effects on the body, review legal limits, and explore health considerations for informed decision-making.">
+    <title>Blood Alcohol Concentration Estimator - In-Depth BAC Evaluation Instrument</title>
+    <meta name="description" content="Employ this refined instrument to appraise your Blood Alcohol Concentration (BAC) with precision. Furnish details on gender, weight in pounds or kilograms, specifics of alcohol intake, and temporal intervals to procure exact computations, scrutinize physiological repercussions, examine statutory demarcations, and investigate wellness ramifications for enlightened choices.">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
@@ -13,44 +13,49 @@
     <header>
         <div class="logo">FCalculator.com</div>
         <h1>Blood Alcohol Concentration (BAC) Estimator</h1>
-        <p>Employ this sophisticated estimator to determine your approximate blood alcohol level by incorporating essential physiological attributes, drinking habits, and time factors. Delve into comprehensive explanations of BAC principles, bodily reactions, statutory boundaries, and recommendations for prudent alcohol intake.</p>
+        <p>Utilize this advanced estimator to ascertain your approximate blood alcohol level by integrating crucial physiological characteristics, consumption behaviors, and chronological elements. Immerse in thorough elucidations of BAC fundamentals, corporeal responses, legislative confines, and directives for judicious alcohol utilization.</p>
     </header>
     
     <main>
         <section class="calculator-tool">
-            <h2>Submit Your Information for BAC Estimation</h2>
+            <h2>Furnish Your Particulars for BAC Appraisal</h2>
             <form id="bac-form">
-                <div class="form-group">
-                    <label for="gender">Gender:</label>
-                    <select id="gender" required>
-                        <option value="">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gender">Gender:</label>
+                        <select id="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Weight:</label>
+                        <input type="number" id="weight" min="1" required placeholder="Enter weight">
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="weight">Weight:</label>
-                    <input type="number" id="weight" min="1" required placeholder="Enter weight">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="weight-unit">Unit:</label>
+                        <select id="weight-unit" required>
+                            <option value="pounds">Pounds (lbs)</option>
+                            <option value="kilograms">Kilograms (kg)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="hours-since-first">Time since first drink (in hours):</label>
+                        <input type="number" id="hours-since-first" min="0" required value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="minutes-after-last">Minutes after last drink:</label>
+                        <input type="number" id="minutes-after-last" min="0" max="59" required value="0">
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="weight-unit">Unit:</label>
-                    <select id="weight-unit" required>
-                        <option value="pounds">Pounds (lbs)</option>
-                        <option value="kilograms">Kilograms (kg)</option>
-                    </select>
+                <div class="form-row">
+                    <h3>Alcohol Consumed</h3>
+                    <div id="drinks-container"></div>
+                    <button type="button" onclick="addDrink()">Add Drink</button>
                 </div>
-                
-                <div class="form-group">
-                    <label for="time-since">Time since first drink (in hours):</label>
-                    <input type="number" id="time-since" min="0" step="0.01" required value="0" placeholder="e.g., 1.5 for 1 hour 30 minutes">
-                </div>
-                
-                <h3>Alcohol Consumed</h3>
-                <div id="drinks-container"></div>
-                <button type="button" onclick="addDrink()">Add Drink</button>
-                
                 <button type="submit">Calculate BAC</button>
             </form>
             
@@ -66,91 +71,91 @@
         </section>
         
         <section class="content-section">
-            <h2>Grasping Blood Alcohol Concentration (BAC)</h2>
-            <p>Blood Alcohol Concentration (BAC) denotes the ratio of alcohol present in the bloodstream, acting as a fundamental gauge of alcohol-induced impairment. This measurement is vital for evaluating disruptions in cognitive abilities, physical coordination, and judgment, particularly in activities demanding precision like driving or machinery handling. BAC ascends during alcohol absorption via the gastrointestinal tract and descends as it undergoes hepatic metabolism.</p>
-            <p>Several variables impact BAC, such as body mass, gender differences, the amount and alcohol by volume (ABV) of beverages, drinking pace, meal consumption, and personal metabolic variations. Generally, alcohol is cleared at roughly 0.015% BAC hourly, yet this pace can differ according to age, medical conditions, heredity, and hydration status.</p>
+            <h2>Comprehending Blood Alcohol Concentration (BAC)</h2>
+            <p>Blood Alcohol Concentration (BAC) signifies the proportion of alcohol within the bloodstream, functioning as an essential indicator of alcohol-related impairment. This metric is indispensable for gauging interruptions in cognitive faculties, motor proficiency, and discernment, especially in pursuits necessitating accuracy such as vehicular control or equipment management. BAC escalates amid alcohol assimilation through the alimentary canal and wanes as it experiences hepatic breakdown.</p>
+            <p>Multiple determinants affect BAC, encompassing bodily weight, sexual distinctions, the quantum and alcoholic strength of libations, ingestion velocity, dietary ingestion, and idiosyncratic metabolic divergences. Ordinarily, alcohol is expunged at approximately 0.015% BAC per hour, nevertheless this velocity may fluctuate contingent on chronology, pathological states, inheritance, and moistening condition.</p>
             
-            <h3>The Widmark Formula in BAC Estimation</h3>
-            <p>This tool applies the reliable Widmark formula for approximating BAC:</p>
+            <h3>The Widmark Equation in BAC Appraisal</h3>
+            <p>This apparatus implements the dependable Widmark equation for approximating BAC:</p>
             <p><strong>BAC = (A × 5.14 / (W × r)) - (0.015 × H)</strong></p>
             <ul>
-                <li><strong>A</strong>: Cumulative alcohol intake in ounces.</li>
-                <li><strong>W</strong>: Weight in pounds (converted automatically from kilograms if selected).</li>
-                <li><strong>r</strong>: Distribution factor based on gender (0.73 males, 0.66 females).</li>
-                <li><strong>H</strong>: Hours passed since commencing drinking.</li>
+                <li><strong>A</strong>: Aggregate alcohol ingestion in ounces.</li>
+                <li><strong>W</strong>: Mass in pounds (autonomously transmuted from kilograms if chosen).</li>
+                <li><strong>r</strong>: Gender-dependent dissemination coefficient (0.73 for males, 0.66 for females).</li>
+                <li><strong>H</strong>: Temporal span in hours from initiation of imbibing.</li>
             </ul>
-            <p>The formula integrates alcohol dissemination in bodily fluids with typical elimination kinetics. Actual BAC might deviate owing to unique biological traits.</p>
+            <p>The equation amalgamates alcohol dispersion in somatic liquids with customary expulsion dynamics. Veritable BAC could digress due to singular biotic attributes.</p>
             
-            <h3>BAC Ranges and Corresponding Effects</h3>
-            <p>Various BAC levels induce particular physical and mental alterations. The subsequent table outlines prevalent BAC intervals and their consequences:</p>
+            <h3>BAC Spectrums and Pertinent Consequences</h3>
+            <p>Diverse BAC tiers provoke specific somatic and cerebral modifications. The ensuing table delineates widespread BAC spans and their ramifications:</p>
             <table>
                 <thead>
                     <tr>
-                        <th>BAC Range (%)</th>
-                        <th>Usual Manifestations</th>
-                        <th>Observed Deficits</th>
+                        <th>BAC Spectrum (%)</th>
+                        <th>Customary Exhibitions</th>
+                        <th>Noted Shortcomings</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>0.00 - 0.02</td>
-                        <td>Insignificant shifts; regular demeanor preserved.</td>
-                        <td>Negligible impacts, identifiable solely via precise evaluations.</td>
+                        <td>Trivial alterations; conventional comportment sustained.</td>
+                        <td>Insignificant influences, perceivable exclusively via exact appraisals.</td>
                     </tr>
                     <tr>
                         <td>0.03 - 0.05</td>
-                        <td>Gentle easing, subtle uplift in mood, heightened interactivity.</td>
-                        <td>Lessened attentiveness and mild dexterity hurdles.</td>
+                        <td>Tender alleviation, faint mood elevation, amplified communicativeness.</td>
+                        <td>Attenuated vigilance and gentle agility obstacles.</td>
                     </tr>
                     <tr>
                         <td>0.06 - 0.09</td>
-                        <td>Suppressed affective responses, lessened discomfort awareness.</td>
-                        <td>Hampered decision-making, spatial judgment, and side vision.</td>
+                        <td>Repressed emotive retorts, diminished unease perception.</td>
+                        <td>Obstructed adjudication, volumetric assessment, and lateral sight.</td>
                     </tr>
                     <tr>
                         <td>0.10 - 0.19</td>
-                        <td>Amplified expressiveness, likely sickness, emotional fluctuations.</td>
-                        <td>Garbling words, instability, postponed reactions.</td>
+                        <td>Intensified articulateness, probable malaise, sentimental oscillations.</td>
+                        <td>Slurring lexicon, disequilibrium, deferred reflexes.</td>
                     </tr>
                     <tr>
                         <td>0.20 - 0.29</td>
-                        <td>Extreme confusion, regurgitation, affective unpredictability.</td>
-                        <td>Possible memory lapses, substantial coordination loss.</td>
+                        <td>Profound bewilderment, emesis, affective inconstancy.</td>
+                        <td>Feasible mnemonic voids, considerable synchronization forfeiture.</td>
                     </tr>
                     <tr>
                         <td>0.30 - 0.39</td>
-                        <td>Deep lethargy, probable unconsciousness.</td>
-                        <td>Breathing suppression, elevated lethal danger.</td>
+                        <td>Intense torpor, likely insensibility.</td>
+                        <td>Ventilatory inhibition, heightened mortal peril.</td>
                     </tr>
                     <tr>
                         <td>0.40+</td>
-                        <td>Induced coma, intense neural inhibition.</td>
-                        <td>Critical; risk of heart failure.</td>
+                        <td>Provoked stupor, vehement neural restraint.</td>
+                        <td>Urgent; hazard of cardiac cessation.</td>
                     </tr>
                 </tbody>
             </table>
             
-            <h3>Statutory Thresholds and Protective Measures</h3>
-            <p>Across numerous areas, vehicular operation BAC caps are 0.08% for those over 21, enforcing stricter zero-tolerance (0.00% - 0.02%) for youths and occupational motorists. Breaching these can yield sanctions including pecuniary penalties, permit annulment, or detention. Prioritize security by appointing a non-drinker chauffeur or utilizing communal conveyance post-alcohol use.</p>
-            <p>Alcohol's health effects are dual; limited ingestion could yield heart-protective outcomes, but immoderate use amplifies perils of hepatic fibrosis, neoplasms, and reliance. Tailored consultations with health experts are advised.</p>
+            <h3>Legislative Boundaries and Safeguard Protocols</h3>
+            <p>In myriad locales, vehicular manipulation BAC ceilings are 0.08% for persons exceeding 21, imposing more stringent nil-tolerance (0.00% - 0.02%) for juveniles and vocational chauffeurs. Transgressing these may engender chastisements comprising fiscal levies, credential revocation, or confinement. Accentuate protection by designating a teetotal operator or employing collective transit subsequent to alcohol ingestion.</p>
+            <p>Alcohol's salubrity implications are dichotomous; constrained absorption might proffer cardio-shielding results, yet exorbitant use augments dangers of hepatic sclerosis, tumors, and reliance. Customized deliberations with wellness authorities are counseled.</p>
             
-            <h3>Elements Affecting BAC Uptake and Clearance</h3>
+            <h3>Components Influencing BAC Ingestion and Expurgation</h3>
             <ul>
-                <li><strong>Gender Disparities</strong>: Women typically register higher BAC from reduced fluid volume and enzymatic variances.</li>
-                <li><strong>Physique Makeup</strong>: Muscle-rich compositions dilute alcohol superiorly to fat-dominant ones.</li>
-                <li><strong>Nutritional Intake</strong>: Pre-drink dining decelerates uptake, curbing maximum BAC.</li>
-                <li><strong>Drug Interactions</strong>: Certain pharmaceuticals may heighten alcohol influences or disrupt processing.</li>
-                <li><strong>Age and Wellness</strong>: Mature persons or those with hepatic ailments process slower.</li>
+                <li><strong>Sexual Variances</strong>: Females customarily log elevated BAC from abridged liquid capacity and enzymatic discrepancies.</li>
+                <li><strong>Somatic Constitution</strong>: Sinewy configurations dilute alcohol preeminently to lipid-predominant ones.</li>
+                <li><strong>Alimentary Absorption</strong>: Antecedent repasts to imbibing retard uptake, constraining apex BAC.</li>
+                <li><strong>Pharmaceutical Interplays</strong>: Particular medicaments may escalate alcohol impacts or perturb handling.</li>
+                <li><strong>Chronology and Well-being</strong>: Elder individuals or hepatic-afflicted process sluggishly.</li>
             </ul>
             
-            <h3>Standard Beverage Equivalences</h3>
+            <h3>Normative Libation Parities</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Beverage Type</th>
-                        <th>Portion Size</th>
-                        <th>Typical ABV (%)</th>
-                        <th>Ethanol Amount (oz)</th>
+                        <th>Libation Category</th>
+                        <th>Allocation Dimension</th>
+                        <th>Archetypal ABV (%)</th>
+                        <th>Ethanol Quantum (oz)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -167,7 +172,7 @@
                         <td>0.6 oz</td>
                     </tr>
                     <tr>
-                        <td>Distilled Spirits</td>
+                        <td>Refined Spirits</td>
                         <td>1.5 oz</td>
                         <td>40%</td>
                         <td>0.6 oz</td>
@@ -175,21 +180,21 @@
                 </tbody>
             </table>
             
-            <p>Investigate allied wellness instruments through our <a href="/bmi.html">BMI Estimator</a> or <a href="/calorie.html">Caloric Requirement Calculator</a>.</p>
+            <p>Probe confederate salubrity mechanisms via our <a href="/bmi.html">BMI Appraiser</a> or <a href="/calorie.html">Caloric Necessity Estimator</a>.</p>
             
-            <h3>Frequently Posed Queries (FAQ)</h3>
+            <h3>Commonly Inquired Interrogatives (FAQ)</h3>
             <dl>
-                <dt>What defines a secure BAC?</dt>
-                <dd>The utmost secure is 0.00%, especially for focus-intensive endeavors like motoring.</dd>
+                <dt>What characterizes a protected BAC?</dt>
+                <dd>The paramount protected is 0.00%, peculiarly for concentration-rigorous ventures like motoring.</dd>
                 
-                <dt>How trustworthy are BAC approximators?</dt>
-                <dd>They offer estimates via conventional frameworks; verify actuals with analyzers or lab assays.</dd>
+                <dt>How dependable are BAC approximators?</dt>
+                <dd>They tender estimations through orthodox structures; authenticate actuals with scrutinizers or laboratory examinations.</dd>
                 
-                <dt>Is BAC reduction accelerable?</dt>
-                <dd>No techniques hasten clearance; solely duration permits metabolic action.</dd>
+                <dt>Is BAC diminution hastenable?</dt>
+                <dd>No methodologies accelerate purgation; exclusively duration authorizes metabolic function.</dd>
                 
-                <dt>What chronic impacts stem from high BAC?</dt>
-                <dd>Ongoing elevations may cause tissue harm, habituation, and augmented chronic ailment vulnerabilities.</dd>
+                <dt>What perennial repercussions derive from lofty BAC?</dt>
+                <dd>Perpetual elevations might instigate fabric impairment, compulsion, and amplified chronic malady susceptibilities.</dd>
             </dl>
         </section>
         
@@ -210,12 +215,13 @@
     <script>
         let drinkCount = 0;
         let bacData = [];
+        let chart = null;
         
         function addDrink() {
             drinkCount++;
             const container = document.getElementById('drinks-container');
             const drinkDiv = document.createElement('div');
-            drinkDiv.className = 'drink-input';
+            drinkDiv.className = 'form-row drink-input';
             drinkDiv.innerHTML = `
                 <div class="form-group">
                     <label for="drink-type-${drinkCount}">Drink Type:</label>
@@ -241,7 +247,7 @@
             if (unit === 'kilograms') {
                 weight *= 2.20462; // Convert kg to lbs
             }
-            const hours = parseFloat(document.getElementById('time-since').value);
+            const hours = parseFloat(document.getElementById('hours-since-first').value) + parseFloat(document.getElementById('minutes-after-last').value) / 60;
             let totalAlcohol = 0;
             
             for (let i = 1; i <= drinkCount; i++) {
@@ -279,7 +285,10 @@
         
         function drawChart() {
             const ctx = document.getElementById('bac-chart').getContext('2d');
-            new Chart(ctx, {
+            if (chart) {
+                chart.destroy();
+            }
+            chart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: Array.from({length: 11}, (_, i) => i + ' hours'),
