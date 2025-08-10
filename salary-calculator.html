@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf-autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
     <header>
@@ -202,8 +202,15 @@
             const holidays = parseInt(document.getElementById('holidays-per-year').value) || 0;
             const vacationDays = parseInt(document.getElementById('vacation-days-per-year').value) || 0;
             const totalPossibleDays = daysPerWeek * 52;
-            const workingDays = totalPossibleDays - holidays - vacationDays;
-            const adjustedAnnualGross = unadjustedAnnualGross * (workingDays / totalPossibleDays);
+            let workingDays = totalPossibleDays - holidays - vacationDays;
+            if (workingDays <= 0) workingDays = 1; // Prevent division by zero
+
+            let adjustedAnnualGross;
+            if (salaryType === 'annual') {
+                adjustedAnnualGross = unadjustedAnnualGross; // No adjustment for annual salaries (paid time off assumed)
+            } else {
+                adjustedAnnualGross = unadjustedAnnualGross * (workingDays / totalPossibleDays);
+            }
 
             const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
             const preTaxDeductions = parseFloat(document.getElementById('pre-tax-deductions').value) || 0;
@@ -262,51 +269,59 @@
         }
 
         function saveAsPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+            if (monthlyData.length === 0) {
+                alert('Please calculate the salary first.');
+                return;
+            }
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
 
-            doc.setFont("helvetica");
-            doc.setFontSize(14);
-            doc.text("Salary Calculation Results", 105, 15, { align: "center" });
+                doc.setFont("helvetica");
+                doc.setFontSize(14);
+                doc.text("Salary Calculation Results", 105, 15, { align: "center" });
 
-            // Results Table
-            doc.autoTable({
-                startY: 20,
-                head: [['Parameter', 'Value']],
-                body: [
-                    ['Unadjusted Annual Gross Salary', document.getElementById('unadjusted-annual-gross').textContent],
-                    ['Adjusted Annual Gross Salary', document.getElementById('adjusted-annual-gross').textContent],
-                    ['Unadjusted Annual Net Salary', document.getElementById('unadjusted-annual-net').textContent],
-                    ['Adjusted Annual Net Salary', document.getElementById('adjusted-annual-net').textContent],
-                    ['Monthly Net Salary', document.getElementById('monthly-net').textContent],
-                    ['Weekly Net Salary', document.getElementById('weekly-net').textContent],
-                    ['Daily Net Salary', document.getElementById('daily-net').textContent],
-                    ['Total Deductions', document.getElementById('total-deductions').textContent]
-                ],
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [255, 255, 255] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
-                margin: { top: 10 }
-            });
+                // Results Table
+                doc.autoTable({
+                    startY: 20,
+                    head: [['Parameter', 'Value']],
+                    body: [
+                        ['Unadjusted Annual Gross Salary', document.getElementById('unadjusted-annual-gross').textContent],
+                        ['Adjusted Annual Gross Salary', document.getElementById('adjusted-annual-gross').textContent],
+                        ['Unadjusted Annual Net Salary', document.getElementById('unadjusted-annual-net').textContent],
+                        ['Adjusted Annual Net Salary', document.getElementById('adjusted-annual-net').textContent],
+                        ['Monthly Net Salary', document.getElementById('monthly-net').textContent],
+                        ['Weekly Net Salary', document.getElementById('weekly-net').textContent],
+                        ['Daily Net Salary', document.getElementById('daily-net').textContent],
+                        ['Total Deductions', document.getElementById('total-deductions').textContent]
+                    ],
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [255, 255, 255] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
+                    margin: { top: 10 }
+                });
 
-            // Monthly Breakdown Table
-            doc.autoTable({
-                startY: doc.lastAutoTable.finalY + 10,
-                head: [['Month', 'Gross Pay (Adjusted)', 'Deductions', 'Net Pay']],
-                body: monthlyData,
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
-                didDrawPage: function (data) {
-                    doc.setFontSize(10);
-                    doc.setTextColor(100);
-                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-                }
-            });
+                // Monthly Breakdown Table
+                doc.autoTable({
+                    startY: doc.lastAutoTable.finalY + 10,
+                    head: [['Month', 'Gross Pay (Adjusted)', 'Deductions', 'Net Pay']],
+                    body: monthlyData,
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                    }
+                });
 
-            doc.save('salary-results.pdf');
+                doc.save('salary-results.pdf');
+            } catch (e) {
+                alert('Error generating PDF: ' + e.message);
+            }
         }
 
         function sharePage() {
