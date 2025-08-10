@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Time Across Major US Cities</title>
+    <meta name="description" content="Explore the current time in real-time across the United States' diverse time zones for the 20 largest metropolitan areas. This page offers live updating clocks with ticking seconds, 2025 population projections, in-depth time zone explanations including DST, global comparisons, and valuable insights for travelers, businesses, and residents managing multi-zone schedules.">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Current Time Across Major US Cities",
+      "url": "https://fcalculator.com/time/current-time-in-usa.html",
+      "description": "Live display of current time in US time zones for the top 20 metropolitan areas, with 2025 population data, time zone history, DST details, and practical applications for coordination.",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "FCalculator.com",
+          "item": "https://fcalculator.com/"
+        },{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Time",
+          "item": "https://fcalculator.com/time.html"
+        },{
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Current Time in the USA",
+          "item": "https://fcalculator.com/time/current-time-in-usa.html"
+        }]
+      }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/time.html">Time</a> > <a href="/time/current-time-in-usa.html">Current Time in the USA</a>
+        </div>
+        <h1>Current Time Across Major US Cities</h1>
+        <p>The United States spans four primary continental time zones: Eastern Standard Time (EST, UTC-5), Central Standard Time (CST, UTC-6), Mountain Standard Time (MST, UTC-7), and Pacific Standard Time (PST, UTC-8). Daylight Saving Time (DST) is observed nationwide except in Arizona (excluding Navajo Nation) and Hawaii, advancing clocks by one hour from the second Sunday in March to the first Sunday in November. This page provides live, ticking clocks for each zone, updating in real-time with hours, minutes, and seconds. Below, discover synchronized times for the 20 largest US metropolitan areas based on 2025 population projections, complemented by detailed historical context, DST effects, and comparisons to international time zones to support efficient planning for work, travel, and daily activities.</p>
+    </header>
+    
+    <main>
+        <!-- Tool Section -->
+        <section id="time-tool" style="text-align: center; margin: 20px 0;">
+            <h2>Real-Time Clocks in US Continental Time Zones</h2>
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                <div>
+                    <h3>EST (e.g., New York)</h3>
+                    <div id="time-est" style="font-size: 2em; font-weight: bold; color: #00c8c8;">Loading...</div>
+                </div>
+                <div>
+                    <h3>CST (e.g., Chicago)</h3>
+                    <div id="time-cst" style="font-size: 2em; font-weight: bold; color: #00c8c8;">Loading...</div>
+                </div>
+                <div>
+                    <h3>MST (e.g., Denver)</h3>
+                    <div id="time-mst" style="font-size: 2em; font-weight: bold; color: #00c8c8;">Loading...</div>
+                </div>
+                <div>
+                    <h3>PST (e.g., Los Angeles)</h3>
+                    <div id="time-pst" style="font-size: 2em; font-weight: bold; color: #00c8c8;">Loading...</div>
+                </div>
+            </div>
+            <p>These clocks refresh every second, showing precise time in the US's main zones, with automatic DST adjustments. Implemented via JavaScript, they use standard time zone identifiers for accuracy throughout the year.</p>
+            <button onclick="sharePage()">Share This Page</button>
+        </section>
+        
+        <!-- Cities Table Section -->
+        <section id="cities-list">
+            <h2>Current Time in the 20 Largest US Metropolitan Areas (2025 Projections)</h2>
+            <p>The table outlines the 20 most populous US metropolitan areas for 2025, with times differing by zone: EST for the east, CST for central, MST for mountain regions, and PST for the west. Live updates capture real-time flow, including seconds, and incorporate DST for observing areas.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Metropolitan Area</th>
+                        <th>Population (2025 Projection)</th>
+                        <th>Time Zone</th>
+                        <th>Current Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>New York-Newark-Jersey City, NY-NJ-PA</td>
+                        <td>19,154,000</td>
+                        <td>EST</td>
+                        <td id="time-new-york">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Los Angeles-Long Beach-Anaheim, CA</td>
+                        <td>12,678,000</td>
+                        <td>PST</td>
+                        <td id="time-los-angeles">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Chicago-Naperville-Elgin, IL-IN-WI</td>
+                        <td>9,042,000</td>
+                        <td>CST</td>
+                        <td id="time-chicago">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Houston-The Woodlands-Sugar Land, TX</td>
+                        <td>6,890,000</td>
+                        <td>CST</td>
+                        <td id="time-houston">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Dallas-Fort Worth-Arlington, TX</td>
+                        <td>6,408,000</td>
+                        <td>CST</td>
+                        <td id="time-dallas">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Washington-Arlington-Alexandria, DC-VA-MD-WV</td>
+                        <td>5,900,000</td>
+                        <td>EST</td>
+                        <td id="time-washington">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Philadelphia-Camden-Wilmington, PA-NJ-DE-MD</td>
+                        <td>5,800,000</td>
+                        <td>EST</td>
+                        <td id="time-philadelphia">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Atlanta-Sandy Springs-Alpharetta, GA</td>
+                        <td>5,700,000</td>
+                        <td>EST</td>
+                        <td id="time-atlanta">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Miami-Fort Lauderdale-Pompano Beach, FL</td>
+                        <td>5,600,000</td>
+                        <td>EST</td>
+                        <td id="time-miami">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Boston-Cambridge-Newton, MA-NH</td>
+                        <td>4,800,000</td>
+                        <td>EST</td>
+                        <td id="time-boston">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Phoenix-Mesa-Chandler, AZ</td>
+                        <td>4,700,000</td>
+                        <td>MST</td>
+                        <td id="time-phoenix">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>San Francisco-Oakland-Berkeley, CA</td>
+                        <td>4,600,000</td>
+                        <td>PST</td>
+                        <td id="time-san-francisco">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>Riverside-San Bernardino-Ontario, CA</td>
+                        <td>4,500,000</td>
+                        <td>PST</td>
+                        <td id="time-riverside">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>Detroit-Warren-Dearborn, MI</td>
+                        <td>4,300,000</td>
+                        <td>EST</td>
+                        <td id="time-detroit">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>Seattle-Tacoma-Bellevue, WA</td>
+                        <td>4,000,000</td>
+                        <td>PST</td>
+                        <td id="time-seattle">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>Minneapolis-St. Paul-Bloomington, MN-WI</td>
+                        <td>3,700,000</td>
+                        <td>CST</td>
+                        <td id="time-minneapolis">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>San Diego-Chula Vista-Carlsbad, CA</td>
+                        <td>3,300,000</td>
+                        <td>PST</td>
+                        <td id="time-san-diego">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>Tampa-St. Petersburg-Clearwater, FL</td>
+                        <td>3,200,000</td>
+                        <td>EST</td>
+                        <td id="time-tampa">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>Denver-Aurora-Lakewood, CO</td>
+                        <td>3,000,000</td>
+                        <td>MST</td>
+                        <td id="time-denver">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>Baltimore-Columbia-Towson, MD</td>
+                        <td>2,800,000</td>
+                        <td>EST</td>
+                        <td id="time-baltimore">Loading...</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Population projections for 2025 are based on metropolitan statistical area estimates, reflecting urban sprawl, economic migration, and growth trends. For detailed demographics, consult sources like the US Census Bureau.</p>
+        </section>
+        
+        <!-- Chart Section -->
+        <section id="population-chart">
+            <h2>2025 Population Projections Chart</h2>
+            <p>This bar chart depicts the projected populations of the US's 20 largest metropolitan areas in 2025, showcasing concentration in coastal and southern regions.</p>
+            <canvas id="populationChart" width="400" height="200"></canvas>
+            <p>The chart illustrates significant urban hubs influencing national economy and policy, with New York and Los Angeles leading.</p>
+        </section>
+        
+        <!-- Detailed Explanation Section -->
+        <section id="time-zone-details">
+            <h2>Exploring US Time Zones</h2>
+            <p>Established in 1883 by railroads to standardize schedules, US time zones divide the country into logical bands for solar alignment. EST covers the Atlantic coast, CST the Midwest, MST the Rockies, and PST the West Coast. DST, enacted in 1918 for wartime energy savings and standardized by the Uniform Time Act of 1966, allows states to opt out (Arizona and Hawaii do). This system aids commerce but poses challenges for national broadcasts and cross-country calls, with a 3-hour span between coasts. Proposals for fewer zones have been debated, but the current setup supports regional needs.</p>
+            <p>Global comparisons:</p>
+            <ul>
+                <li>EST is 5 hours behind UTC, aligning with London's GMT during winter.</li>
+                <li>CST is 6 hours behind UTC, similar to Mexico City's time.</li>
+                <li>MST is 7 hours behind UTC, matching Bogota, Colombia.</li>
+                <li>PST is 8 hours behind UTC, same as Peru.</li>
+            </ul>
+            <p>Financial markets like NYSE operate on EST from 9:30 AM to 4:00 PM. Travelers note zone shifts; a New York to LA flight loses 3 hours. Events like Super Bowl are timed for prime viewing across zones.</p>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section id="faq">
+            <h2>Frequently Asked Questions About Time in the US</h2>
+            <dl>
+                <dt>Why four main time zones?</dt>
+                <dd>To correspond with the sun's position across the wide continent, optimizing daylight use and operational efficiency.</dd>
+                
+                <dt>Which states skip DST?</dt>
+                <dd>Arizona (except Navajo areas) and Hawaii, due to ample sunlight and minimal seasonal changes.</dd>
+                
+                <dt>Converting to US times?</dt>
+                <dd>Subtract the offset from UTC, adding 1 hour during DST (March-November) for most areas.</dd>
+                
+                <dt>Common date/time formats?</dt>
+                <dd>MM/DD/YYYY for dates, 12-hour with AM/PM or 24-hour in formal contexts.</dd>
+            </dl>
+            <p>These details stem from federal time standards, facilitating better comprehension of US temporal dynamics.</p>
+        </section>
+        
+        <!-- Related Resources -->
+        <section id="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Time_in_the_United_States" target="_blank" rel="noopener noreferrer">Wikipedia: Time in the United States</a> - Historical and structural overview.</li>
+                <li><a href="https://www.timeanddate.com/time/zones/usa" target="_blank" rel="noopener noreferrer">Time and Date: US Time Zones</a> - Worldwide offsets and tools.</li>
+                <li><a href="https://www.census.gov/topics/population.html" target="_blank" rel="noopener noreferrer">US Census Bureau: Population</a> - Official demographic data.</li>
+                <li><a href="/time/time-zone-calculator.html">Time Zone Calculator</a> - Compare US zones.</li>
+                <li><a href="/time/custom-event-countdown-timer.html">Custom Event Countdown Timer</a> - Plan US events.</li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const cityTimeZones = {
+            'new-york': 'America/New_York',
+            'los-angeles': 'America/Los_Angeles',
+            'chicago': 'America/Chicago',
+            'houston': 'America/Chicago',
+            'dallas': 'America/Chicago',
+            'washington': 'America/New_York',
+            'philadelphia': 'America/New_York',
+            'atlanta': 'America/New_York',
+            'miami': 'America/New_York',
+            'boston': 'America/New_York',
+            'phoenix': 'America/Phoenix',
+            'san-francisco': 'America/Los_Angeles',
+            'riverside': 'America/Los_Angeles',
+            'detroit': 'America/Detroit',
+            'seattle': 'America/Los_Angeles',
+            'minneapolis': 'America/Chicago',
+            'san-diego': 'America/Los_Angeles',
+            'tampa': 'America/New_York',
+            'denver': 'America/Denver',
+            'baltimore': 'America/New_York'
+        };
+
+        function getTimeString(timeZone) {
+            return new Date().toLocaleString('en-US', {
+                timeZone: timeZone,
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            });
+        }
+
+        function updateTime() {
+            document.getElementById('time-est').textContent = getTimeString('America/New_York');
+            document.getElementById('time-cst').textContent = getTimeString('America/Chicago');
+            document.getElementById('time-mst').textContent = getTimeString('America/Denver');
+            document.getElementById('time-pst').textContent = getTimeString('America/Los_Angeles');
+
+            Object.keys(cityTimeZones).forEach(city => {
+                const el = document.getElementById(`time-${city}`);
+                if (el) {
+                    el.textContent = getTimeString(cityTimeZones[city]);
+                }
+            });
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+        
+        // Population Chart
+        const ctx = document.getElementById('populationChart').getContext('2d');
+        const populationData = {
+            labels: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Dallas', 'Washington', 'Philadelphia', 'Atlanta', 'Miami', 'Boston', 'Phoenix', 'San Francisco', 'Riverside', 'Detroit', 'Seattle', 'Minneapolis', 'San Diego', 'Tampa', 'Denver', 'Baltimore'],
+            datasets: [{
+                label: 'Population (2025 Projection)',
+                data: [19154000, 12678000, 9042000, 6890000, 6408000, 5900000, 5800000, 5700000, 5600000, 4800000, 4700000, 4600000, 4500000, 4300000, 4000000, 3700000, 3300000, 3200000, 3000000, 2800000],
+                backgroundColor: 'rgba(0, 200, 200, 0.5)',
+                borderColor: 'rgba(0, 200, 200, 1)',
+                borderWidth: 1
+            }]
+        };
+        new Chart(ctx, {
+            type: 'bar',
+            data: populationData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Current Time in the USA',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
