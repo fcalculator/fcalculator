@@ -6,8 +6,6 @@
     <meta name="description" content="Generate random numbers within specified ranges using our advanced random number generator. Ideal for statistical sampling, simulations, and educational purposes with options for integers, decimals, uniqueness, and sorting.">
     <title>Random Number Generator - FCalculator.com</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
     <header>
@@ -53,7 +51,6 @@
             <div id="result" class="result">
                 <h2>Generated Numbers:</h2>
                 <p id="numbers" class="green-text"></p>
-                <button type="button" onclick="saveAsPDF()" id="pdf-button" style="display:none;">Save as PDF</button>
                 <button type="button" onclick="sharePage()">Share This Page</button>
             </div>
         </section>
@@ -203,53 +200,6 @@
             }
 
             document.getElementById('numbers').textContent = generatedNumbers.join(', ');
-            document.getElementById('pdf-button').style.display = 'block';
-        }
-
-        function saveAsPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            doc.setFontSize(14);
-            doc.text("Random Number Generation Results", 105, 15, { align: "center" });
-
-            // Parameters Table
-            doc.autoTable({
-                startY: 20,
-                head: [['Parameter', 'Value']],
-                body: [
-                    ['Lower Limit', document.getElementById('min').value],
-                    ['Upper Limit', document.getElementById('max').value],
-                    ['Quantity', document.getElementById('quantity').value],
-                    ['Type', document.getElementById('type').value],
-                    ['Unique', document.getElementById('unique').value],
-                    ['Sort', document.getElementById('sort').value]
-                ],
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [255, 255, 255] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
-                margin: { top: 10 }
-            });
-
-            // Generated Numbers Table
-            const numbersBody = generatedNumbers.map((num, index) => [index + 1, num]);
-            doc.autoTable({
-                startY: doc.lastAutoTable.finalY + 10,
-                head: [['Index', 'Number']],
-                body: numbersBody,
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
-                didDrawPage: function (data) {
-                    doc.setFontSize(10);
-                    doc.setTextColor(100);
-                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-                }
-            });
-
-            doc.save('random-numbers.pdf');
         }
 
         function sharePage() {
