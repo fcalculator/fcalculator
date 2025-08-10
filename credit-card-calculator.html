@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Debt Repayment Tool</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Credit Card Calculator",
+        "url": "https://fcalculator.com/credit-card-calculator.html",
+        "description": "A comprehensive tool to estimate credit card debt payoff timelines, monthly payments, total interest costs, and amortization schedules based on balance, APR, and payment strategies.",
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "FCalculator.com",
+                "item": "https://fcalculator.com/"
+            },{
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Financial",
+                "item": "https://fcalculator.com/financial.html"
+            },{
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Credit Card Calculator",
+                "item": "https://fcalculator.com/credit-card-calculator.html"
+            }]
+        },
+        "mainEntity": {
+            "@type": "FAQPage",
+            "mainEntity": [{
+                "@type": "Question",
+                "name": "How is credit card interest calculated?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Credit card interest is typically calculated using the average daily balance method, where the daily periodic rate (APR divided by 365) is applied to the daily balance over the billing cycle."
+                }
+            },{
+                "@type": "Question",
+                "name": "What factors affect credit card payoff time?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Key factors include the outstanding balance, annual percentage rate (APR), monthly payment amount, and any additional fees or charges."
+                }
+            }]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/financial.html">Financial</a> > <a href="/credit-card-calculator.html">Credit Card Calculator</a>
+        </div>
+        <h1>Credit Card Calculator</h1>
+        <p>Understanding and managing credit card debt is essential for financial health. This calculator helps you estimate the time required to pay off your credit card balance, the total interest you'll pay, and the monthly payments needed to achieve your goals. By inputting your balance, interest rate, and payment preferences, you can explore different scenarios and develop a repayment strategy that fits your budget.</p>
+    </header>
+    <main>
+        <section class="calculator-tool">
+            <h2>Calculate Your Credit Card Payoff</h2>
+            <form id="credit-card-form">
+                <label for="balance">Credit Card Balance:</label>
+                <input type="number" id="balance" placeholder="Enter balance" required>
+                
+                <label for="apr">Annual Interest Rate (APR %):</label>
+                <input type="number" id="apr" placeholder="Enter APR" step="0.01" required>
+                
+                <label for="currency">Currency:</label>
+                <select id="currency">
+                    <option value="$">$ (USD)</option>
+                    <option value="€">€ (EUR)</option>
+                </select>
+                
+                <label>Payoff Strategy:</label>
+                <div>
+                    <input type="radio" id="fixed-payment" name="strategy" value="fixed" checked>
+                    <label for="fixed-payment">Fixed Monthly Payment</label>
+                    <input type="number" id="monthly-payment" placeholder="Enter monthly payment" required>
+                </div>
+                <div>
+                    <input type="radio" id="fixed-time" name="strategy" value="time">
+                    <label for="fixed-time">Pay Off in Specific Months</label>
+                    <input type="number" id="months" placeholder="Enter months" disabled>
+                </div>
+                <button type="button" onclick="calculatePayoff()">Calculate</button>
+            </form>
+            <div id="results" style="display:none;">
+                <h3>Results</h3>
+                <p>Months to Pay Off: <span id="payoff-months" class="result-green"></span></p>
+                <p>Monthly Payment: <span id="result-payment" class="result-green"></span></p>
+                <p>Total Payments: <span id="total-payments" class="result-green"></span></p>
+                <p>Total Interest: <span id="total-interest" class="result-green"></span></p>
+                <canvas id="interestChart" width="400" height="200"></canvas>
+                <h4>Amortization Schedule</h4>
+                <table id="amortization-table">
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Payment</th>
+                            <th>Principal</th>
+                            <th>Interest</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <button onclick="saveAsPDF()">Save as PDF</button>
+                <button onclick="sharePage()">Share This Page</button>
+            </div>
+        </section>
+        <section>
+            <h2>How Credit Card Interest and Payoff Calculations Work</h2>
+            <p>Credit cards operate on revolving credit, where interest is charged on unpaid balances. The most common method for calculating interest is the average daily balance (ADB) approach. Here's a breakdown of the key formulas used in this calculator:</p>
+            <ul>
+                <li><strong>Daily Periodic Rate (DPR):</strong> DPR = APR / 365</li>
+                <li><strong>Monthly Interest Rate:</strong> Monthly Rate = APR / 12 / 100</li>
+                <li><strong>Months to Pay Off (for fixed payment):</strong> n = -log(1 - (balance * monthly_rate) / payment) / log(1 + monthly_rate)</li>
+                <li><strong>Monthly Payment (for fixed time):</strong> payment = balance * (monthly_rate * (1 + monthly_rate)^n) / ((1 + monthly_rate)^n - 1)</li>
+            </ul>
+            <p>In the amortization schedule, each month's interest is calculated as balance * monthly_rate, principal paid is payment - interest, and the balance is reduced accordingly. This process continues until the balance reaches zero. Factors like minimum payments (often 2% of balance or $35, whichever is higher) can extend payoff times significantly if not exceeded.</p>
+            <p>For example, with a $5,000 balance at 18% APR and $150 monthly payments, it might take over 4 years to pay off, accruing substantial interest. Adjusting payments higher can save thousands in interest over time.</p>
+        </section>
+        <section>
+            <h2>Benefits of Using a Credit Card Payoff Strategy</h2>
+            <p>Developing a clear repayment plan can reduce financial stress and improve your credit score. By paying more than the minimum, you minimize interest accumulation. Consider balance transfers to cards with 0% introductory APR for 12-18 months, which can accelerate payoff if completed within the promotional period. Always factor in transfer fees (typically 3-5% of the balance).</p>
+            <table>
+                <caption>Average Credit Card APRs by Category</caption>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Average APR (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Rewards Cards</td><td>17-25</td></tr>
+                    <tr><td>Cash Back Cards</td><td>15-22</td></tr>
+                    <tr><td>Balance Transfer Cards</td><td>0 (intro), then 15-24</td></tr>
+                    <tr><td>Secured Cards</td><td>20-28</td></tr>
+                </tbody>
+            </table>
+            <p>Internal tip: Check our <a href="/loan-calculator.html">Loan Calculator</a> for comparing debt consolidation options or <a href="/compound-interest-growth-calculator.html">Compound Interest Calculator</a> to see how interest grows over time.</p>
+        </section>
+        <section>
+            <h2>Tips for Managing Credit Card Debt Effectively</h2>
+            <p>Avoid new purchases while paying down debt to prevent balance increases. Track spending with budgeting tools and aim to pay off high-interest cards first (debt avalanche method) or smallest balances first (debt snowball for motivation). Regularly review your credit report for errors, as maintaining a good credit utilization ratio (under 30%) boosts your score.</p>
+            <p>In the United States, the average household credit card debt exceeds $6,000, highlighting the importance of proactive management. Globally, similar trends exist in Europe, where regulations like the EU Consumer Credit Directive provide protections but emphasize responsible borrowing.</p>
+            <button onclick="sharePage()">Share These Tips</button>
+        </section>
+        <section>
+            <h2>Frequently Asked Questions</h2>
+            <dl>
+                <dt>What is the impact of minimum payments?</dt>
+                <dd>Minimum payments extend payoff periods dramatically, often resulting in interest costs exceeding the original balance. Always pay more if possible.</dd>
+                <dt>Should I consider debt consolidation?</dt>
+                <dd>Yes, if you qualify for lower rates. Use our <a href="/finance-calculator.html">Finance Calculator</a> to compare options.</dd>
+                <dt>How does APR differ from interest rate?</dt>
+                <dd>APR includes fees and represents the total cost of borrowing annually, while the interest rate is the base percentage charged on the balance.</dd>
+            </dl>
+            <p>For more in-depth information, explore resources from authoritative sources listed below.</p>
+        </section>
+        <section class="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Credit_card" target="_blank" rel="noopener noreferrer">Wikipedia: Credit Card Overview</a></li>
+                <li><a href="https://www.consumerfinance.gov/ask-cfpb/category-credit-cards/" target="_blank" rel="noopener noreferrer">Consumer Financial Protection Bureau: Credit Card Guidance</a></li>
+                <li><a href="https://www.federalreserve.gov/creditcardcalculator/" target="_blank" rel="noopener noreferrer">Federal Reserve: Credit Card Repayment Calculator</a></li>
+                <li><a href="https://ec.europa.eu/info/topics/consumer-protection_en" target="_blank" rel="noopener noreferrer">European Commission: Consumer Protection on Credit</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        let amortizationData = [];
+        let chart;
+
+        function calculatePayoff() {
+            const balance = parseFloat(document.getElementById('balance').value);
+            const apr = parseFloat(document.getElementById('apr').value) / 100;
+            const monthlyRate = apr / 12;
+            const currency = document.getElementById('currency').value;
+            const strategy = document.querySelector('input[name="strategy"]:checked').value;
+
+            amortizationData = [];
+            let months = 0;
+            let payment = 0;
+            let totalInterest = 0;
+            let totalPayments = 0;
+            let currentBalance = balance;
+
+            if (strategy === 'fixed') {
+                payment = parseFloat(document.getElementById('monthly-payment').value);
+                while (currentBalance > 0 && months < 10000) {  // Prevent infinite loop
+                    months++;
+                    const interest = currentBalance * monthlyRate;
+                    let principal = payment - interest;
+                    if (principal > currentBalance) {
+                        principal = currentBalance;
+                        payment = principal + interest;
+                    }
+                    currentBalance -= principal;
+                    totalInterest += interest;
+                    totalPayments += payment;
+                    amortizationData.push([months, currency + payment.toFixed(2), currency + principal.toFixed(2), currency + interest.toFixed(2), currency + currentBalance.toFixed(2)]);
+                }
+            } else {
+                const targetMonths = parseInt(document.getElementById('months').value);
+                payment = balance * (monthlyRate * Math.pow(1 + monthlyRate, targetMonths)) / (Math.pow(1 + monthlyRate, targetMonths) - 1);
+                currentBalance = balance;
+                for (let m = 1; m <= targetMonths; m++) {
+                    const interest = currentBalance * monthlyRate;
+                    const principal = payment - interest;
+                    currentBalance -= principal;
+                    totalInterest += interest;
+                    totalPayments += payment;
+                    amortizationData.push([m, currency + payment.toFixed(2), currency + principal.toFixed(2), currency + interest.toFixed(2), currency + currentBalance.toFixed(2)]);
+                }
+                months = targetMonths;
+            }
+
+            document.getElementById('payoff-months').textContent = months;
+            document.getElementById('result-payment').textContent = currency + payment.toFixed(2);
+            document.getElementById('total-payments').textContent = currency + totalPayments.toFixed(2);
+            document.getElementById('total-interest').textContent = currency + totalInterest.toFixed(2);
+
+            const tableBody = document.querySelector('#amortization-table tbody');
+            tableBody.innerHTML = '';
+            amortizationData.forEach(row => {
+                const tr = document.createElement('tr');
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    tr.appendChild(td);
+                });
+                tableBody.appendChild(tr);
+            });
+
+            document.getElementById('results').style.display = 'block';
+
+            // Chart
+            const ctx = document.getElementById('interestChart').getContext('2d');
+            if (chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Principal', 'Interest'],
+                    datasets: [{
+                        data: [balance, totalInterest],
+                        backgroundColor: ['#36A2EB', '#FF6384']
+                    }]
+                },
+                options: { responsive: true }
+            });
+        }
+
+        // Enable/disable inputs based on strategy
+        document.querySelectorAll('input[name="strategy"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.getElementById('monthly-payment').disabled = radio.value !== 'fixed';
+                document.getElementById('months').disabled = radio.value !== 'time';
+            });
+        });
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont("helvetica");
+            doc.setFontSize(14);
+            doc.text("Credit Card Payoff Results", 105, 15, { align: "center" });
+
+            // Results Table
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Months to Pay Off', document.getElementById('payoff-months').textContent],
+                    ['Monthly Payment', document.getElementById('result-payment').textContent],
+                    ['Total Payments', document.getElementById('total-payments').textContent],
+                    ['Total Interest', document.getElementById('total-interest').textContent]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 2, font: "helvetica", textColor: [0, 0, 0], halign: 'left' },
+                margin: { top: 10 }
+            });
+
+            // Amortization Table
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
+                head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
+                body: amortizationData,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 2, font: "helvetica", textColor: [0, 0, 0], halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+
+            doc.save('credit-card-payoff-results.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Credit Card Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
