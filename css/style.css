@@ -20,6 +20,14 @@
     box-sizing: border-box;
 }
 
+.logo {
+            font-size: 16px;
+            font-weight: 700;
+            color: #343a40;
+            font-family: 'Roboto', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 /* Body: Wider content, minimal padding, compact text */
 body {
     font-family: var(--font-family);
