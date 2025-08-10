@@ -29,6 +29,7 @@
             letter-spacing: 1px;
             border-bottom: 0.5px solid var(--border-color);
             text-align: right;
+            margin-bottom: calc(var(--spacing-unit) * 0.25); /* Minimal bottom margin */
         }
 /* Body: Wider content, minimal padding, compact text */
 body {
