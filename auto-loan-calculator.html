@@ -3,264 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehicle Loan Estimator: Payments, Interest and Amortization</title>
-    <meta name="description" content="Estimate auto loan payments, total interest, and amortization schedules with precision. Analyze impacts of down payments, trade-ins, sales tax, and interest rates for informed vehicle financing decisions in various economic scenarios.">
-    <meta name="keywords" content="auto loan estimator, car payment calculation, vehicle financing details, monthly auto payments, loan amortization breakdown, interest rate effects, down payment strategies, trade-in valuation, sales tax implications">
+    <meta name="description" content="Advanced auto loan calculator for precise monthly payment estimates, amortization schedules, and total cost analysis in vehicle financing. Delve into interest rate impacts, down payment strategies, and tax considerations for informed automotive purchase decisions.">
+    <meta name="keywords" content="auto loan estimator, vehicle financing calculator, car payment schedule, interest accrual analysis, down payment effects, trade-in valuation, sales tax integration">
+    <title>Vehicle Financing Estimator | FCalculator.com</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
-    <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Vehicle Loan Estimator: Detailed Payments and Costs">
-    <meta property="og:description" content="Compute precise auto loan metrics including monthly installments, cumulative interest, and payoff timelines. Includes formulas, examples, and tips for optimizing car purchases and financing terms.">
-    <meta property="og:url" content="https://fcalculator.com/auto-loan-calculator.html">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://fcalculator.com/images/auto-loan-preview.jpg">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf-autotable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Vehicle Loan Estimator",
-      "description": "Tool for estimating auto loan payments, interest, and amortization schedules.",
-      "url": "https://fcalculator.com/auto-loan-calculator.html",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "FCalculator.com",
-            "item": "https://fcalculator.com/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Financial",
-            "item": "https://fcalculator.com/financial.html"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Auto Loan Calculator",
-            "item": "https://fcalculator.com/auto-loan-calculator.html"
-          }
-        ]
-      }
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Auto Loan Calculator",
+        "url": "https://fcalculator.com/auto-loan-calculator.html",
+        "description": "Tool for calculating auto loan payments, interest, and amortization schedules.",
+        "applicationCategory": "FinancialApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
     }
     </script>
 </head>
 <body>
+    <div class="logo">FCalculator.com</div>
+    <div class="breadcrumb">
+        <a href="/">FCalculator.com</a> > <a href="/financial.html">Financial</a> > <a href="/auto-loan-calculator.html">Auto Loan Calculator</a>
+    </div>
     <header>
-        <div class="logo">FCalculator.com</div>
-        <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/financial.html">Financial</a> > <a href="/auto-loan-calculator.html">Auto Loan Calculator</a>
-        </div>
-        <h1>Auto Loan Calculator: Precise Vehicle Financing Projections</h1>
-        <p>Delve into comprehensive calculations for auto loans, factoring in vehicle costs, interest rates, terms, down payments, trade-ins, and taxes. This tool generates monthly payment estimates, total interest accruals, payoff dates, and detailed amortization schedules to aid in evaluating financing viability and long-term costs associated with car acquisitions.</p>
+        <h1>Auto Loan Calculator</h1>
+        <p>This comprehensive calculator evaluates vehicle financing scenarios by incorporating principal amounts, interest rates, loan durations, down payments, trade-in values, and sales taxes. It generates detailed amortization schedules and total cost projections, enabling users to assess long-term implications of different terms and rates. Factors like credit scores influencing APRs and regional tax variations are accounted for, providing realistic insights into affordability and equity buildup over time.</p>
     </header>
-    
+
     <main>
-        <section id="loan-tool">
-            <h2>Input Loan Parameters</h2>
-            <p>Provide details below for accurate projections. Calculations use current New York time for payoff estimates.</p>
+        <section id="calculator">
+            <h2>Input Your Vehicle Financing Parameters</h2>
             <form id="auto-loan-form">
-                <label for="auto-price">Vehicle Price:</label>
-                <input type="number" id="auto-price" value="40000" required>
-                <label for="down-payment">Down Payment:</label>
-                <input type="number" id="down-payment" value="5000" required>
-                <label for="trade-in">Trade-in Value:</label>
-                <input type="number" id="trade-in" value="0">
-                <label for="interest-rate">Annual Interest Rate (%):</label>
-                <input type="number" id="interest-rate" step="0.01" value="5.5" required>
-                <label for="loan-term">Loan Term (Months):</label>
-                <input type="number" id="loan-term" value="60" required>
-                <label for="sales-tax">Sales Tax Rate (%):</label>
-                <input type="number" id="sales-tax" step="0.01" value="7">
                 <label for="currency">Currency:</label>
                 <select id="currency">
-                    <option value="$">$</option>
-                    <option value="€">€</option>
+                    <option value="$">$ (USD)</option>
+                    <option value="€">€ (EUR)</option>
                 </select>
-                <button type="button" onclick="calculateAutoLoan()">Calculate</button>
+
+                <label for="auto-price">Vehicle Price:</label>
+                <input type="number" id="auto-price" value="40000" required>
+
+                <label for="down-payment">Down Payment:</label>
+                <input type="number" id="down-payment" value="5000" required>
+
+                <label for="trade-in">Trade-in Value:</label>
+                <input type="number" id="trade-in" value="0">
+
+                <label for="interest-rate">Annual Interest Rate (%):</label>
+                <input type="number" id="interest-rate" step="0.01" value="5.5" required>
+
+                <label for="loan-term">Loan Duration (months):</label>
+                <input type="number" id="loan-term" value="60" required>
+
+                <label for="sales-tax">Sales Tax Rate (%):</label>
+                <input type="number" id="sales-tax" step="0.01" value="7">
+
+                <button type="button" onclick="calculateAutoLoan()">Compute</button>
             </form>
-            <div id="results" style="display: none;">
-                <h2>Financing Overview</h2>
-                <p>Monthly Payment: <span id="monthly-payment" class="green-result"></span></p>
-                <p>Total Loan Amount: <span id="total-loan" class="green-result"></span></p>
-                <p>Total Interest: <span id="total-interest" class="green-result"></span></p>
-                <p>Total Cost: <span id="total-cost" class="green-result"></span></p>
-                <p>Payoff Date: <span id="payoff-date" class="green-result"></span></p>
-                <button type="button" onclick="saveAsPDF()">Save as PDF</button>
-                <h3>Amortization Breakdown</h3>
+
+            <div id="results" style="display:none;">
+                <h2>Financing Outcomes</h2>
+                <p>Monthly Installment: <span id="monthly-payment" class="green-result"></span></p>
+                <p>Financed Amount: <span id="total-loan" class="green-result"></span></p>
+                <p>Accrued Interest: <span id="total-interest" class="green-result"></span></p>
+                <p>Overall Expenditure: <span id="total-cost" class="green-result"></span></p>
+                <p>Settlement Date: <span id="payoff-date" class="green-result"></span></p>
+
+                <button onclick="saveAsPDF()">Export as PDF</button>
+
+                <h3>Repayment Breakdown</h3>
                 <table id="amortization-table">
                     <thead>
                         <tr>
                             <th>Month</th>
-                            <th>Payment</th>
-                            <th>Principal</th>
-                            <th>Interest</th>
-                            <th>Balance</th>
+                            <th>Installment</th>
+                            <th>Principal Reduction</th>
+                            <th>Interest Charge</th>
+                            <th>Remaining Balance</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
+
                 <canvas id="amortization-chart" width="400" height="200"></canvas>
             </div>
         </section>
 
-        <section id="introduction">
-            <h2>Principles of Auto Loan Structures</h2>
-            <p>Auto loans function as installment credits secured by the vehicle, with repayment spanning 36 to 84 months. Lenders assess borrower credit profiles to determine rates, which influence monthly obligations and overall expenses. Incorporating variables like down payments reduces principal, thereby lowering interest over time. Trade-ins offset costs, but valuations vary by market conditions and vehicle state. Sales tax, applied to net prices in most jurisdictions, adds to the financed amount unless paid upfront.</p>
-            <p>Historical trends show auto loan durations extending, with averages reaching 69 months in recent years, per Federal Reserve data. This elongation allows lower monthly payments but increases total interest. Understanding these dynamics aids in aligning financing with personal budgets and economic forecasts.</p>
-        </section>
+        <section id="explanation">
+            <h2>Core Principles of Vehicle Loans</h2>
+            <p>Vehicle loans function as secured debt instruments where the purchased asset acts as collateral, with repayment spans typically between 36 and 84 months. Monthly obligations encompass principal repayment and interest accumulation, calculated via compounding formulas. Lenders evaluate borrower risk through credit histories, potentially leading to repossession upon default. New vehicle rates often undercut those for used models due to depreciation dynamics and residual value projections.</p>
+            <p>Securing funds directly from financial institutions or credit unions facilitates pre-qualification, bolstering bargaining leverage at sellers. Dealer-arranged financing, while expedient, may inflate rates through commissions. Cross-referencing offers optimizes outcomes; complement this with our <a href="/loan-calculator.html">general lending evaluator</a> for holistic personal debt insights.</p>
 
-        <section id="formulas">
-            <h2>Core Formulas in Loan Computations</h2>
-            <p>The monthly payment derives from the formula: M = P [r(1+r)^n] / [(1+r)^n – 1], where P is principal, r is monthly rate, n is term months. Principal = Vehicle Price + Sales Tax - Down Payment - Trade-in. Total Interest = (Monthly Payment × Term) - Principal. These equations account for compound interest, emphasizing shorter terms for cost savings.</p>
-            <h3>Step-by-Step Calculation Guide</h3>
-            <ol>
-                <li>Compute taxable base: Vehicle Price - Trade-in.</li>
-                <li>Apply sales tax: Taxable Base × Tax Rate.</li>
-                <li>Determine principal: Vehicle Price + Tax - Down Payment - Trade-in.</li>
-                <li>Calculate monthly payment using the amortization formula.</li>
-                <li>Project payoff: Add term months to current New York date, adjusting for day validity.</li>
-            </ol>
-            <p>Manual adjustments for leap years ensure accuracy in long-term projections.</p>
-        </section>
+            <h3>Rebate and Incentive Effects on Financing</h3>
+            <p>Automotive manufacturers deploy rebates to boost demand, deducting from sticker prices and altering taxable bases in varying jurisdictions. Certain regions subtract incentives pre-tax, others post, impacting net outlays significantly for premium segments. Seldom applicable to pre-owned inventory, these promotions reward seasonal buying alignments for maximal savings.</p>
 
-        <section id="applications">
-            <h2>Real-World Financing Scenarios</h2>
-            <p>In dealership negotiations, pre-approved loans from banks empower buyers to secure better terms. For used vehicles, higher rates necessitate thorough inspections to mitigate risks. Refinancing becomes viable if credit improves or rates decline, potentially saving thousands. Leasing alternatives suit short-term needs, as explored in our <a href="/cost-of-living-comparison.html">cost comparison tool</a>.</p>
-            <ul>
-                <li>Budgeting: Align payments with income to avoid defaults.</li>
-                <li>Tax Strategies: Deduct interest on business vehicles per IRS guidelines.</li>
-                <li>Economic Impacts: Monitor inflation effects on rates via Federal Reserve reports.</li>
-            </ul>
-            <p>For related tools, explore our <a href="/loan-calculator.html">Loan Calculator</a> or <a href="/compound-interest-growth-calculator.html">Compound Interest Calculator</a> within the same category.</p>
-            <button onclick="sharePage()">Share This Tool</button>
-        </section>
+            <h3>Ancillary Costs in Automotive Acquisitions</h3>
+            <p>Transaction fees extend beyond principals, incorporating variable sales taxes (absent in states like Delaware), administrative charges around $400 on average, licensing expenses, and transport levies. Compulsory insurance for collateralized assets averages over $1,500 yearly, modulated by demographics and geography. Capitalizing extras escalates interest burdens; cash settlements mitigate this, as explored in our <a href="/mortgage-calculator.html">home equity assessor</a>.</p>
+            <p><button onclick="sharePage()">Distribute This Tool</button> - Disseminate insights on prudent vehicle funding.</p>
 
-        <section id="examples">
-            <h2>Illustrative Loan Examples</h2>
-            <p>For a $30,000 vehicle at 4% rate over 48 months with $5,000 down: Monthly ~$565, Total Interest ~$2,120. Variations with higher rates or longer terms amplify costs.</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Vehicle Price</th>
-                        <th>Rate (%)</th>
-                        <th>Term (Months)</th>
-                        <th>Monthly Payment</th>
-                        <th>Total Interest</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>25000</td>
-                        <td>3.5</td>
-                        <td>60</td>
-                        <td>~373</td>
-                        <td>~2380</td>
-                    </tr>
-                    <tr>
-                        <td>40000</td>
-                        <td>5.5</td>
-                        <td>72</td>
-                        <td>~608</td>
-                        <td>~5380</td>
-                    </tr>
-                    <tr>
-                        <td>50000</td>
-                        <td>6.0</td>
-                        <td>84</td>
-                        <td>~689</td>
-                        <td>~7890</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>These scenarios highlight rate sensitivity; consult our <a href="/salary-calculator.html">salary tool</a> for affordability checks.</p>
-        </section>
-
-        <section id="tips">
-            <h2>Optimization Strategies for Loans</h2>
-            <p>Boost credit scores pre-application for lower rates. Larger down payments curtail interest. Shop multiple lenders, including credit unions. Avoid unnecessary add-ons like extended warranties. Periodic reviews for refinancing opportunities can yield savings amid rate fluctuations.</p>
-            <p>For international buyers, currency choices ($/€) adapt projections to regional economics.</p>
-        </section>
-
-        <section id="faq">
-            <h2>Frequently Asked Questions</h2>
-            <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": [
-                {
-                  "@type": "Question",
-                  "name": "How does down payment affect auto loans?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "It reduces principal, lowering monthly payments and total interest."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "What role does sales tax play?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Added to financed amount unless paid upfront, varying by state."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "Why consider trade-ins?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "They offset costs, potentially reducing tax base in some areas."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "How accurate are payoff dates?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Based on New York time, assuming consistent payments."
-                  }
-                },
-                {
-                  "@type": "Question",
-                  "name": "Can I switch currencies?",
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes, select $ or € for display preferences."
-                  }
-                }
-              ]
-            }
-            </script>
-            <p>Explore further via links like <a href="https://en.wikipedia.org/wiki/Gregorian_calendar" target="_blank" rel="noopener noreferrer">Gregorian Calendar on Wikipedia</a> for date handling insights.</p>
-        </section>
-
-        <section id="related-resources">
-            <h2>Related Resources</h2>
-            <ul>
-                <li><a href="https://en.wikipedia.org/wiki/Car_finance" target="_blank" rel="noopener noreferrer">Wikipedia: Car Finance Overview</a></li>
-                <li><a href="https://www.consumerfinance.gov/consumer-tools/auto-loans/" target="_blank" rel="noopener noreferrer">CFPB: Auto Loans Guidance</a></li>
-                <li><a href="https://www.ftc.gov/business-guidance/resources/buyers-guide-used-car-dealers" target="_blank" rel="noopener noreferrer">FTC: Used Car Buyers Guide</a></li>
-                <li><a href="https://www.federalreserve.gov/releases/g19/current/" target="_blank" rel="noopener noreferrer">Federal Reserve: Consumer Credit Data</a></li>
-            </ul>
+            <h3>Optimizing Loan Acquisition Tactics</h3>
+            <p>Proactive preparation involves debt-to-income assessments and credit reviews for rate negotiations. Pre-approvals empower dealer discussions, balancing rebates against subsidized financing. Shorter durations curtail interest, though elevating installments; refinancing exploits rate dips. Leasing alternatives suit transient needs, paralleling evaluations in our <a href="/compound-interest-growth-calculator.html">investment growth simulator</a>.</p>
+            <p>Empirical trends from Federal Reserve data underscore rate volatility tied to economic cycles, advocating locked commitments during favorable windows.</p>
         </section>
     </main>
 
+    <section id="related-resources">
+        <h2>Related Resources</h2>
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Car_finance" target="_blank" rel="noopener noreferrer">Wikipedia: Automotive Lending Overview</a></li>
+            <li><a href="https://www.consumerfinance.gov/consumer-tools/auto-loans/" target="_blank" rel="noopener noreferrer">CFPB: Vehicle Loan Guidance</a></li>
+            <li><a href="https://consumer.ftc.gov/articles/buying-used-car-dealer" target="_blank" rel="noopener noreferrer">FTC: Dealer Purchase Advice</a></li>
+        </ul>
+    </section>
+
     <footer>
-        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
 
     <script>
         let amortizationData = [];
-        let currencySymbol = '$';
+        let selectedCurrency = '$';
 
         function calculateAutoLoan() {
-            currencySymbol = document.getElementById('currency').value;
+            selectedCurrency = document.getElementById('currency').value;
             const autoPrice = parseFloat(document.getElementById('auto-price').value);
             const downPayment = parseFloat(document.getElementById('down-payment').value);
             const tradeIn = parseFloat(document.getElementById('trade-in').value);
@@ -268,21 +140,17 @@
             const interestRate = interestRateAnnual / 100 / 12;
             const loanTerm = parseInt(document.getElementById('loan-term').value);
             const salesTaxRate = parseFloat(document.getElementById('sales-tax').value) / 100;
+
             const taxableAmount = autoPrice - tradeIn;
             const salesTax = taxableAmount * salesTaxRate;
             const principal = autoPrice + salesTax - downPayment - tradeIn;
-            let monthlyPayment;
-            if (interestRate === 0) {
-                monthlyPayment = principal / loanTerm;
-            } else {
-                monthlyPayment = principal * (interestRate * Math.pow(1 + interestRate, loanTerm)) / (Math.pow(1 + interestRate, loanTerm) - 1);
-            }
+            const monthlyPayment = principal * (interestRate * Math.pow(1 + interestRate, loanTerm)) / (Math.pow(1 + interestRate, loanTerm) - 1);
             const totalPayments = monthlyPayment * loanTerm;
             const totalInterest = totalPayments - principal;
             const totalCost = autoPrice + salesTax + totalInterest - tradeIn;
 
-            const nyTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
-            const currentDate = new Date(nyTime);
+            // Payoff date with New York time zone (UTC-4 or -5, using JS Date with adjustment)
+            const currentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
             let payoffMonth = currentDate.getMonth() + loanTerm;
             let payoffYear = currentDate.getFullYear() + Math.floor(payoffMonth / 12);
             payoffMonth = payoffMonth % 12;
@@ -291,10 +159,10 @@
             const options = { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' };
             const payoffDate = payoffDateObj.toLocaleDateString('en-US', options).replace(/,/g, '');
 
-            document.getElementById('monthly-payment').textContent = currencySymbol + monthlyPayment.toFixed(2);
-            document.getElementById('total-loan').textContent = currencySymbol + principal.toFixed(2);
-            document.getElementById('total-interest').textContent = currencySymbol + totalInterest.toFixed(2);
-            document.getElementById('total-cost').textContent = currencySymbol + totalCost.toFixed(2);
+            document.getElementById('monthly-payment').textContent = selectedCurrency + monthlyPayment.toFixed(2);
+            document.getElementById('total-loan').textContent = selectedCurrency + principal.toFixed(2);
+            document.getElementById('total-interest').textContent = selectedCurrency + totalInterest.toFixed(2);
+            document.getElementById('total-cost').textContent = selectedCurrency + totalCost.toFixed(2);
             document.getElementById('payoff-date').textContent = payoffDate;
 
             amortizationData = generateAmortizationTable(principal, interestRate, loanTerm, monthlyPayment);
@@ -307,13 +175,13 @@
             tableBody.innerHTML = '';
             let chartData = { labels: [], principalData: [], interestData: [] };
             let data = [];
+
             for (let month = 1; month <= term; month++) {
                 const interest = balance * monthlyRate;
-                let principalPayment = monthlyPayment - interest;
-                if (principalPayment > balance) principalPayment = balance;
+                const principalPayment = monthlyPayment - interest;
                 balance -= principalPayment;
-                if (balance < 0.01) balance = 0; // Avoid floating point issues
-                let row = `<tr><td>${month}</td><td>${currencySymbol}${monthlyPayment.toFixed(2)}</td><td>${currencySymbol}${principalPayment.toFixed(2)}</td><td>${currencySymbol}${interest.toFixed(2)}</td><td>${currencySymbol}${balance.toFixed(2)}</td></tr>`;
+                if (balance < 0) balance = 0;
+                let row = `<tr><td>${month}</td><td>${selectedCurrency}${monthlyPayment.toFixed(2)}</td><td>${selectedCurrency}${principalPayment.toFixed(2)}</td><td>${selectedCurrency}${interest.toFixed(2)}</td><td>${selectedCurrency}${balance.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
                 data.push([month.toString(), monthlyPayment.toFixed(2), principalPayment.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
 
@@ -327,6 +195,9 @@
                 chartData.interestData[year - 1] += interest;
             }
 
+            chartData.principalData = chartData.principalData.map(v => v.toFixed(2));
+            chartData.interestData = chartData.interestData.map(v => v.toFixed(2));
+
             const ctx = document.getElementById('amortization-chart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
@@ -339,6 +210,7 @@
                 },
                 options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: true } } }
             });
+
             return data;
         }
 
@@ -346,43 +218,35 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            doc.setFont("helvetica");
             doc.setFontSize(14);
             doc.text("Auto Loan Calculation Results", 105, 15, { align: "center" });
 
+            // Loan Results Table
             doc.autoTable({
                 startY: 20,
                 head: [['Parameter', 'Value']],
                 body: [
-                    ['Monthly Payment', document.getElementById('monthly-payment').textContent],
-                    ['Total Loan Amount', document.getElementById('total-loan').textContent],
-                    ['Total Interest', document.getElementById('total-interest').textContent],
-                    ['Total Cost', document.getElementById('total-cost').textContent],
+                    ['Monthly Payment', selectedCurrency + parseFloat(document.getElementById('monthly-payment').textContent.replace(/[$€]/, ''))],
+                    ['Total Payments', selectedCurrency + (parseFloat(document.getElementById('monthly-payment').textContent.replace(/[$€]/, '')) * parseInt(document.getElementById('loan-term').value)).toFixed(2)],
+                    ['Total Interest', selectedCurrency + parseFloat(document.getElementById('total-interest').textContent.replace(/[$€]/, ''))],
                     ['Payoff Date', document.getElementById('payoff-date').textContent]
                 ],
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [255, 255, 255] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
-                margin: { top: 10 },
-                pageBreak: 'auto',
-                didDrawPage: function (data) {
-                    doc.setFontSize(10);
-                    doc.setTextColor(100);
-                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-                }
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                margin: { top: 10 }
             });
 
+            // Amortization Schedule Table
             doc.autoTable({
                 startY: doc.lastAutoTable.finalY + 10,
                 head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
-                body: amortizationData,
+                body: amortizationData.map(row => [row[0], selectedCurrency + row[1], selectedCurrency + row[2], selectedCurrency + row[3], selectedCurrency + row[4]]),
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
-                margin: { top: 10 },
-                pageBreak: 'auto',
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
                 didDrawPage: function (data) {
                     doc.setFontSize(10);
                     doc.setTextColor(100);
@@ -396,7 +260,7 @@
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Vehicle Loan Estimator',
+                    title: 'Auto Loan Calculator',
                     url: window.location.href
                 });
             } else {
