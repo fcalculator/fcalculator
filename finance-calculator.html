@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance Calculator - Time Value of Money Tool for Investments and Loans | FCalculator.com</title>
-    <meta name="description" content="Use our advanced Finance Calculator to compute present value, future value, periodic payments, interest rates, and number of periods. Explore detailed formulas, amortization schedules, and interactive charts for better financial planning.">
+    <title>Advanced Finance Calculator - Comprehensive Time Value of Money Tool for Investments and Loans | FCalculator.com</title>
+    <meta name="description" content="Explore our Advanced Finance Calculator for precise computations of present value, future value, payments, rates, and periods. Includes detailed formulas, amortization schedules, interactive charts, and PDF export for financial planning.">
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf-autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </head>
 <body>
     <header>
         <div class="logo">FCalculator.com</div>
     </header>
     <main>
-        <h1>Finance Calculator: Time Value of Money (TVM) Analysis</h1>
-        <p>Our Finance Calculator is a comprehensive tool designed to help you understand and compute the time value of money concepts. Whether you're planning investments, evaluating loans, or analyzing annuities, this calculator provides precise calculations for present value (PV), future value (FV), periodic payments (PMT), interest rates (I/Y), and number of periods (N). With options for compounding frequency and payment timing, it offers flexibility for real-world financial scenarios.</p>
+        <h1>Advanced Finance Calculator: Time Value of Money (TVM) Analysis</h1>
+        <p>This Advanced Finance Calculator provides in-depth analysis for time value of money concepts, enabling users to calculate present value (PV), future value (FV), periodic payments (PMT), interest rates (I/Y), and number of periods (N). Tailored for investments, loans, and annuities, it supports various compounding frequencies and payment timings, delivering accurate results for informed financial decisions.</p>
         
         <!-- Tool Section -->
         <section id="calculator-tool">
@@ -90,83 +91,89 @@
         <!-- Detailed Content Sections -->
         <section>
             <h2>Understanding Time Value of Money (TVM)</h2>
-            <p>The time value of money is a fundamental financial principle that recognizes a dollar today is worth more than a dollar in the future due to its potential earning capacity. This concept underpins investments, loans, and retirement planning. Our calculator helps you quantify these values by solving for key variables in various scenarios.</p>
-            <p>For instance, if you're investing in a savings account with compound interest, you can determine how much your initial deposit will grow over time. Alternatively, for loans, it calculates monthly payments needed to pay off a principal amount at a given interest rate.</p>
+            <p>The time value of money principle asserts that a sum of money today holds greater value than the same sum in the future due to earning potential through investments. This foundational concept influences financial decisions in areas like saving, borrowing, and investing. Our calculator quantifies these effects by solving for variables in complex scenarios, considering factors such as compounding and payment schedules.</p>
+            <p>For example, in loan scenarios, it determines how interest accrues over time, helping borrowers understand total costs. In investments, it projects growth based on rates and contributions, aiding in retirement planning or portfolio management.</p>
         </section>
         
         <section>
             <h2>Key Formulas in TVM Calculations</h2>
-            <p>Here are the core formulas used in our Finance Calculator:</p>
+            <p>The calculator employs these essential formulas, adjusted for compounding and annuity types:</p>
             <ul>
-                <li><strong>Future Value (FV) of a Single Sum:</strong> FV = PV × (1 + r)^n, where r is the periodic interest rate and n is the number of periods.</li>
-                <li><strong>Present Value (PV) of a Single Sum:</strong> PV = FV / (1 + r)^n</li>
-                <li><strong>Future Value of an Annuity (ordinary):</strong> FV = PMT × [((1 + r)^n - 1) / r]</li>
-                <li><strong>Present Value of an Annuity (ordinary):</strong> PV = PMT × [(1 - (1 + r)^(-n)) / r]</li>
-                <li>For annuities due (beginning of period), multiply the annuity factor by (1 + r).</li>
-                <li>Interest rate and periods are solved using numerical methods or logarithmic rearrangements where applicable.</li>
+                <li><strong>Future Value (FV) of a Lump Sum:</strong> FV = PV × (1 + r)^n</li>
+                <li><strong>Present Value (PV) of a Lump Sum:</strong> PV = FV / (1 + r)^n</li>
+                <li><strong>Future Value of an Ordinary Annuity:</strong> FV = PMT × [((1 + r)^n - 1) / r]</li>
+                <li><strong>Present Value of an Ordinary Annuity:</strong> PV = PMT × [(1 - (1 + r)^(-n)) / r]</li>
+                <li>For annuities due, the formulas are multiplied by (1 + r) to account for the timing difference.</li>
+                <li>Rate and period solutions use iterative methods like Newton-Raphson for precision.</li>
             </ul>
-            <p>These formulas adjust for compounding frequency by dividing the annual rate by the number of compounding periods and multiplying the number of periods accordingly.</p>
+            <p>Compounding frequency modifies r to the periodic rate and n to total periods, ensuring accuracy in real-world applications.</p>
         </section>
         
         <section>
-            <h2>Examples of Using the Finance Calculator</h2>
-            <p><strong>Example 1: Investment Growth</strong> - Suppose you invest $10,000 (PV) at 5% annual interest (I/Y), compounded monthly, for 10 years (N=120 periods). Leave FV blank to calculate it as approximately $16,470.09.</p>
-            <p><strong>Example 2: Loan Payment</strong> - For a $200,000 loan (PV) at 4% interest (I/Y), over 30 years (N=360 monthly periods), leave PMT blank to find the monthly payment of about $954.83 (negative for outflow).</p>
-            <p><strong>Example 3: Retirement Savings</strong> - If you want $1,000,000 (FV) in 20 years, saving $500 monthly (PMT), compounded annually at an unknown rate, leave I/Y blank to solve for the required interest rate.</p>
+            <h2>Practical Examples Using the Advanced Finance Calculator</h2>
+            <p><strong>Example 1: Compound Interest on Savings</strong> - Input $5,000 PV, 6% I/Y, monthly compounding, 15 years (N=180). Calculate FV to see growth to approximately $12,040.48.</p>
+            <p><strong>Example 2: Mortgage Payment Determination</strong> - For a $300,000 PV loan at 3.5% I/Y over 30 years (N=360 monthly), compute PMT as about -$1,347.13.</p>
+            <p><strong>Example 3: Required Rate for Goal Achievement</strong> - Targeting $500,000 FV in 25 years with $200 monthly PMT, solve for I/Y to find the needed annual rate.</p>
+            <p>These examples demonstrate the tool's versatility in handling diverse financial queries.</p>
         </section>
         
         <section>
-            <h2>Comparison of Compounding Frequencies</h2>
+            <h2>Impact of Compounding Frequencies on Returns</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Frequency</th>
-                        <th>Effective Rate (at 5% nominal)</th>
-                        <th>Example FV after 1 Year ($1,000 PV)</th>
+                        <th>Compounding Frequency</th>
+                        <th>Effective Annual Rate (at 5% Nominal)</th>
+                        <th>Future Value after 1 Year ($10,000 PV)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Annual</td>
                         <td>5.00%</td>
-                        <td>$1,050.00</td>
+                        <td>$10,500.00</td>
+                    </tr>
+                    <tr>
+                        <td>Semi-Annual</td>
+                        <td>5.06%</td>
+                        <td>$10,506.25</td>
                     </tr>
                     <tr>
                         <td>Quarterly</td>
                         <td>5.09%</td>
-                        <td>$1,050.95</td>
+                        <td>$10,509.45</td>
                     </tr>
                     <tr>
                         <td>Monthly</td>
                         <td>5.12%</td>
-                        <td>$1,051.16</td>
+                        <td>$10,511.62</td>
                     </tr>
                     <tr>
                         <td>Daily</td>
                         <td>5.13%</td>
-                        <td>$1,051.27</td>
+                        <td>$10,512.67</td>
                     </tr>
                 </tbody>
             </table>
-            <p>This table illustrates how more frequent compounding increases the effective yield on investments.</p>
+            <p>This comparison highlights how frequent compounding enhances returns, a critical consideration in choosing financial products.</p>
         </section>
         
         <section>
             <h2>Frequently Asked Questions (FAQ)</h2>
             <dl>
-                <dt>What is the difference between ordinary annuity and annuity due?</dt>
-                <dd>An ordinary annuity has payments at the end of each period, while an annuity due has them at the beginning, affecting the total value due to extra compounding.</dd>
+                <dt>How does payment timing affect calculations?</dt>
+                <dd>Annuities due (beginning) yield higher values due to additional compounding periods compared to ordinary annuities (end).</dd>
                 
-                <dt>How does compounding frequency impact calculations?</dt>
-                <dd>Higher frequency means more interest accruals per year, leading to higher future values for the same nominal rate.</dd>
+                <dt>What if multiple variables are unknown?</dt>
+                <dd>The calculator solves for one unknown at a time; input all but one to compute the missing value accurately.</dd>
                 
-                <dt>Can this calculator handle negative values?</dt>
-                <dd>Yes, use negative signs for cash outflows like loan payments to maintain consistent cash flow signs.</dd>
+                <dt>Handling negative cash flows?</dt>
+                <dd>Use negative signs for outflows (e.g., loan payments) to maintain proper cash flow direction in equations.</dd>
                 
-                <dt>What if I need to solve for interest rate?</dt>
-                <dd>Leave the rate field blank; the calculator uses iterative methods to find the rate that satisfies the equation.</dd>
+                <dt>Why use iterative methods for rates?</dt>
+                <dd>Complex equations for rates require numerical approximations for precise solutions without closed-form expressions.</dd>
             </dl>
-            <p>For more insights, check our related tools like the <a href="/compound-interest-growth-calculator.html">Compound Interest Growth Calculator</a> or <a href="/loan-calculator.html">Loan Calculator</a>.</p>
+            <p>Explore related calculators like our <a href="/compound-interest-growth-calculator.html">Compound Interest Growth Calculator</a> or <a href="/loan-calculator.html">Loan Calculator</a> for specialized analyses.</p>
         </section>
         
         <section>
@@ -269,7 +276,7 @@
                 const interest = balance * r;
                 let principal = pmt - interest;
                 if (timing === 'begin' && period === 1) principal = pmt - interest / (1 + r); // Adjust first
-                balance += principal;
+                balance -= principal; // Note: Adjusted sign for balance reduction
                 amortizationData.push([period, pmt.toFixed(2), principal.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
                 
                 const row = document.createElement('tr');
@@ -347,7 +354,7 @@
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Finance Calculator',
+                    title: 'Advanced Finance Calculator',
                     url: window.location.href
                 });
             } else {
