@@ -312,10 +312,10 @@
                 let principalPayment = monthlyPayment - interest;
                 if (principalPayment > balance) principalPayment = balance;
                 balance -= principalPayment;
-                if (balance < 0) balance = 0;
+                if (balance < 0.01) balance = 0; // Avoid floating point issues
                 let row = `<tr><td>${month}</td><td>${currencySymbol}${monthlyPayment.toFixed(2)}</td><td>${currencySymbol}${principalPayment.toFixed(2)}</td><td>${currencySymbol}${interest.toFixed(2)}</td><td>${currencySymbol}${balance.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
-                data.push([month, monthlyPayment, principalPayment, interest, balance]);
+                data.push([month.toString(), monthlyPayment.toFixed(2), principalPayment.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
 
                 const year = Math.ceil(month / 12);
                 if (!chartData.principalData[year - 1]) {
@@ -365,6 +365,7 @@
                 alternateRowStyles: { fillColor: [255, 255, 255] },
                 styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
                 margin: { top: 10 },
+                pageBreak: 'auto',
                 didDrawPage: function (data) {
                     doc.setFontSize(10);
                     doc.setTextColor(100);
@@ -375,12 +376,13 @@
             doc.autoTable({
                 startY: doc.lastAutoTable.finalY + 10,
                 head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
-                body: amortizationData.map(row => row.map((cell, index) => index === 0 ? cell.toString() : currencySymbol + cell.toFixed(2))),
+                body: amortizationData,
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
                 styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
                 margin: { top: 10 },
+                pageBreak: 'auto',
                 didDrawPage: function (data) {
                     doc.setFontSize(10);
                     doc.setTextColor(100);
