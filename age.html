@@ -3,23 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age Calculator - Free Online Age Calculation Tool | FCalculator.com</title>
-    <meta name="description" content="Use our free online age calculator to determine your exact age in years, months, days, and seconds from your birthdate. Perfect for birthday planning, legal verification, or curiosity. Learn how to calculate age in months, days, or seconds with formulas, examples, and real-world applications. Accurate, easy, and SEO-optimized for all your age-related queries.">
-    <meta name="keywords" content="age calculator, calculate age, online age calculator, age in months calculator, calculate age in seconds, how to calculate age from birthdate, free age calc tool, age in days calculator, birthday age calculator, exact age calculator">
+    <title>Precise Age Calculator: Compute Years, Months, Days and Seconds</title>
+    <meta name="description" content="Calculate your exact age from birthdate with precision down to seconds. Explore formulas, historical context, real-world applications, and detailed examples for accurate age determination in various scenarios.">
+    <meta name="keywords" content="age calculator, calculate age from birthdate, age in months, age in days, age in seconds, birthday age computation, exact age determination">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Age Calculator - FCalculator.com | Precise Age Calculation Tool">
-    <meta property="og:description" content="Discover the best free online age calculator for computing age in years, months, days, and seconds. Includes tutorials, formulas, and tips on how to calculate age accurately for personal, legal, or health purposes.">
+    <meta property="og:title" content="Precise Age Calculator: Years, Months, Days and Seconds">
+    <meta property="og:description" content="Determine age accurately from birthdate, including breakdowns in months, days, and seconds. Includes in-depth explanations, formulas, and practical uses for personal and professional needs.">
     <meta property="og:url" content="https://fcalculator.com/age.html">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://fcalculator.com/images/age-calculator-thumbnail.jpg">
+    <meta property="og:image" content="https://fcalculator.com/images/age-calculator-preview.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf-autotable.min.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Age Calculator",
-      "description": "Free online tool to calculate age in years, months, days, and seconds.",
-      "url": "https://fcalculator.com/age.html"
+      "name": "Precise Age Calculator",
+      "description": "Tool for calculating age in years, months, days, and seconds from birthdate.",
+      "url": "https://fcalculator.com/age.html",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "FCalculator.com",
+            "item": "https://fcalculator.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Other Calculators",
+            "item": "https://fcalculator.com/other.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Age Calculator",
+            "item": "https://fcalculator.com/age.html"
+          }
+        ]
+      }
     }
     </script>
 </head>
@@ -27,89 +52,105 @@
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/other.html">Other</a> > <a href="/age.html">Age Calculator</a>
+            <a href="/">FCalculator.com</a> > <a href="/other.html">Other Calculators</a> > <a href="/age.html">Age Calculator</a>
         </div>
-        <h1>Age Calculator - Free Online Tool to Calculate Age Easily</h1>
-        <p>Welcome to FCalculator.com's ultimate age calculator, your go-to free online resource for determining age from birthdate. Whether you're calculating age in years, months, days, or even seconds for birthday celebrations, legal documents, health assessments, or just curiosity, this tool provides precise results. Our age calculator online free tool is designed for accuracy, handling leap years and time zones seamlessly. With step-by-step formulas, real-world examples, and interactive features, you'll master how to calculate age from birthdate in no time. Bookmark this page now and never wonder about your exact age again – it's the best age in months calculator and age in seconds tool available!</p>
+        <h1>Age Calculator: Determine Exact Age from Birthdate</h1>
+        <p>Explore how to compute age precisely, accounting for leap years and time differences. This tool provides results in years, months, days, total months lived, and seconds, useful for personal tracking, legal purposes, or historical analysis.</p>
     </header>
     
     <main>
-        <!-- Izračuni pri vrhu -->
-        <section id="basic-age">
-            <h2>Basic Age Calculator: Calculate Age from Birthdate</h2>
-            <p>Enter your birthdate to get your age in years, months, days, total months lived, and seconds lived. Formula: Subtract birthdate from current date, adjusting for months and days.</p>
+        <section id="age-tool">
+            <h2>Compute Your Age</h2>
+            <p>Input your birthdate to receive a detailed age breakdown. The calculation adjusts for current date in New York time zone.</p>
             <form>
-                <label>Birthdate:</label> <input type="date" id="birthdate">
-                <span id="age-result"></span>
-                <button type="button" onclick="calculateAge()">Calculate</button>
+                <label for="birthdate">Birthdate:</label>
+                <input type="date" id="birthdate" required>
+                <button type="button" onclick="calculateAge()">Calculate Age</button>
             </form>
-            <p>Example: Born on January 1, 1990? As of today, you're approximately 35 years old, with detailed months and seconds below. This online age calculator is perfect for quick checks.</p>
+            <div id="age-result" class="result"></div>
+            <button type="button" id="save-pdf-btn" onclick="saveAsPDF()" style="display: none;">Save as PDF</button>
+            <p>Results include years, months, days, total months, and seconds lived for comprehensive insight.</p>
         </section>
-        
-        <!-- Tekst dolje -->
+
         <section id="introduction">
-            <h2>What is an Age Calculator and Why Use One?</h2>
-            <p>An age calculator is a vital online tool that computes your exact age based on your birthdate and the current date. If you're searching for "how to calculate age from birthdate," this free age calc tool simplifies the process by providing results in years, months, days, and even seconds. Our age calculator online free stands out because it's user-friendly, handles complex date math like leap years, and comes with educational content to explain manual calculations.</p>
-            <p>Age calculations are essential in everyday life – from determining eligibility for jobs, licenses, or benefits to planning birthday parties or tracking life milestones. By using our exact age calculator, you save time and ensure accuracy. Unlike basic date subtractors, our tool includes advanced features like calculating age in months or seconds, making it the top choice for precise results. Whether you're a student learning date math or a professional needing age verification, this is the best free online age calculator available.</p>
-            <p>In this comprehensive guide, we'll dive deep into age calculation methods, formulas, step-by-step instructions, common uses, and expert tips. Our goal is to create the most detailed resource on the web for age-related queries, encouraging you to return whenever you need to calculate age online.</p>
+            <h2>Understanding Age Calculation</h2>
+            <p>Age calculation involves determining the elapsed time between a birthdate and the present day, expressed in multiple units for clarity. This process considers calendar irregularities such as leap years to ensure accuracy. For instance, individuals born on February 29 face unique adjustments in non-leap years. Such computations are foundational in fields like demography, where precise age data informs population studies, or in medicine, where age influences health risk assessments.</p>
+            <p>Beyond basic subtraction, advanced methods incorporate time zones and exact timestamps. In professional contexts, like insurance or retirement planning, knowing age in months or days can affect eligibility criteria. This guide delves into the mechanics, providing formulas and examples to enhance your understanding of these essential calculations.</p>
+            <p>Historical records show age tracking evolved with calendar systems, from ancient lunar cycles to the modern Gregorian calendar, which minimizes errors over centuries. Today, digital tools streamline these processes, but grasping the underlying principles remains valuable for verification and education.</p>
         </section>
-        
-        <section id="age-explanation">
-            <h2>More on Basic Age Calculator</h2>
-            <p>The basic age calculator forms the core of all date-based age computations. It answers questions like "How old am I in months?" or "What is my age in seconds?" For example, if your birthdate is January 1, 2000, this tool quickly provides your current age. The formula involves subtracting the birth year, month, and day from today's date, with adjustments for negative values. Our online age calculator automates this, but understanding the process helps with manual verification.</p>
-            <p>Example: For a birthdate of March 15, 1985, the result might be 40 years, 4 months, and 23 days (depending on the current date). This is ideal for real-world scenarios like retirement planning or school enrollment. Our free age calc tool also computes total months lived and seconds, offering a unique perspective on lifespan.</p>
-            <h3>Step-by-Step Guide: How to Calculate Age from Birthdate</h3>
+
+        <section id="formulas">
+            <h2>Formulas for Age Determination</h2>
+            <p>The primary formula for age in years subtracts the birth year from the current year, with adjustments if the birthday has not yet occurred: Age = Current Year - Birth Year - (if Current Month/Day < Birth Month/Day). For months: (Age in Years × 12) + (Current Month - Birth Month). Days are derived from the total milliseconds difference divided by 86,400,000, while seconds multiply days by 86,400.</p>
+            <p>These equations handle variations like leap years by relying on date object differences in programming. Manual calculations require careful month-end adjustments to avoid inaccuracies.</p>
+            <h3>Step-by-Step Calculation Process</h3>
             <ol>
-                <li>Subtract the birth year from the current year to get base age.</li>
-                <li>Adjust if the current month/day is before the birth month/day (subtract 1 year).</li>
-                <li>Calculate months: (current month - birth month) + 12 if negative.</li>
-                <li>For days: Use milliseconds difference divided by 86400000.</li>
-                <li>For seconds: Multiply days by 86400.</li>
-                <li>Use our exact age calculator for instant results!</li>
+                <li>Obtain current date in the desired time zone (e.g., New York).</li>
+                <li>Subtract birth year from current year for initial age estimate.</li>
+                <li>Adjust downward if birthday month and day are future in the current year.</li>
+                <li>Compute remaining months and days separately for precision.</li>
+                <li>Convert total days to seconds for extended metrics.</li>
             </ol>
-            <p>Pro Tip: For large-scale calculations, like age in seconds for historical figures, this method scales perfectly. Explore our age in months calculator feature for detailed tracking.</p>
+            <p>Applying these steps manually builds intuition, though automated tools ensure consistency across large datasets or frequent queries.</p>
         </section>
-        
-        <section id="explanations">
-            <h2>What is Age Calculation? In-Depth Definition and History</h2>
-            <p>Age calculation refers to determining the time elapsed since a birthdate, expressed in various units like years, months, days, or seconds. It's a fundamental concept in chronology, used to measure lifespan. For instance, calculating age in months provides a finer granularity than years alone. The history of age calculation ties back to ancient calendars, like the Gregorian system, which accounts for leap years to ensure accuracy in tools like our birthday age calculator.</p>
-            <h3>The History of Age Calculation</h3>
-            <p>Age tracking originated in ancient civilizations for taxation and military service. The Julian calendar in 45 BC improved accuracy, evolving into the Gregorian in 1582. Today, digital tools like our online age calculator use these systems for precise computations, including how to calculate age in seconds for scientific purposes.</p>
-            <h3>Age Calculation Formula Breakdown</h3>
-            <p>Core formula: Age in years = Current Year - Birth Year (with month/day adjustment). For months: (Years × 12) + (Current Month - Birth Month). Days: (Current Date - Birth Date) in milliseconds / 86400000. Seconds: Days × 86400. These power every exact age calculator, ensuring reliability.</p>
-            <h3>Real-World Applications of Age Calculations</h3>
-            <p>Age calculations are everywhere:</p>
+
+        <section id="applications">
+            <h2>Practical Applications of Age Computations</h2>
+            <p>Age determinations play a critical role in diverse areas. In education, they verify enrollment ages or scholarship qualifications. Legally, they confirm voting rights, contract capacities, or inheritance timelines. Health professionals use age to tailor screenings, such as recommending colonoscopies post-45 years.</p>
+            <p>In research, age in seconds facilitates precise lifespan comparisons across species or historical figures. Personal uses include milestone celebrations or genealogy tracing, where month-level details reveal family patterns.</p>
             <ul>
-                <li><strong>Personal Milestones:</strong> Plan birthdays or anniversaries (e.g., calculate age in months for infants).</li>
-                <li><strong>Legal and Administrative:</strong> Verify age for voting, driving, or retirement benefits using a birthday age calculator.</li>
-                <li><strong>Health and Fitness:</strong> Track biological age vs. chronological age for wellness programs.</li>
-                <li><strong>Education:</strong> Determine school entry age or scholarship eligibility.</li>
-                <li><strong>Science and Research:</strong> Calculate age in seconds for lifespan studies or historical analysis.</li>
+                <li>Demographic Analysis: Track population aging trends.</li>
+                <li>Financial Planning: Calculate retirement eligibility.</li>
+                <li>Scientific Studies: Measure biological vs. chronological age.</li>
             </ul>
-            <p>Tip: Always double-check with our free online age calculator to avoid errors. Share this tool: <button onclick="sharePage()">Share Now</button> and help others discover how to calculate age accurately.</p>
+            <p>For related tools, explore our <a href="/time.html">Time Calculator</a> or <a href="/time-zone-calculator.html">Time Zone Converter</a> within the same category.</p>
+            <button onclick="sharePage()">Share This Tool</button>
         </section>
-        
-        <section id="tips-and-examples">
-            <h2>Tips, Tricks, and Advanced Examples for Age Calculations</h2>
-            <p>To master age calculations, remember to account for leap years (February 29 births). Avoid common mistakes like ignoring time zones. Use mental math for rough estimates – subtract years first, then refine with months/days.</p>
-            <h3>Advanced Age Calculation Examples</h3>
+
+        <section id="examples">
+            <h2>Detailed Examples and Comparisons</h2>
+            <p>Consider a birthdate of January 1, 1990. As of August 10, 2025 (New York time), the age is 35 years, 7 months, and 9 days, equating to roughly 427 months and 1,119,024,000 seconds. Variations occur with leap year births; for February 29, 2000, age adjustments treat March 1 as the birthday in non-leap years.</p>
             <table>
                 <thead>
-                    <tr><th>Birthdate</th><th>Current Date Example</th><th>Age in Years/Months</th><th>Total Seconds (Approx)</th></tr>
+                    <tr>
+                        <th>Birthdate</th>
+                        <th>Age in Years/Months (as of Aug 10, 2025)</th>
+                        <th>Total Days</th>
+                        <th>Total Seconds (Approx)</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <tr><td>January 1, 2000</td><td>August 7, 2025</td><td>25 years, 7 months</td><td>~788,940,800</td></tr>
-                    <tr><td>March 15, 1985</td><td>August 7, 2025</td><td>40 years, 4 months</td><td>~1,272,000,000</td></tr>
-                    <tr><td>December 31, 1999</td><td>August 7, 2025</td><td>25 years, 7 months</td><td>~789,000,000</td></tr>
+                    <tr>
+                        <td>January 1, 1990</td>
+                        <td>35 years, 7 months</td>
+                        <td>12,951</td>
+                        <td>1,119,024,000</td>
+                    </tr>
+                    <tr>
+                        <td>March 15, 1985</td>
+                        <td>40 years, 4 months</td>
+                        <td>14,726</td>
+                        <td>1,272,326,400</td>
+                    </tr>
+                    <tr>
+                        <td>December 31, 1999</td>
+                        <td>25 years, 7 months</td>
+                        <td>9,346</td>
+                        <td>807,494,400</td>
+                    </tr>
                 </tbody>
             </table>
-            <p>Unique Feature: Our tool shows age in seconds, perfect for fun facts like "You've lived over a billion seconds!" For Excel users: Use =DATEDIF(birthdate, TODAY(), "y") for years, or "ym" for months.</p>
-            <h3>Common Mistakes and How to Avoid Them</h3>
-            <p>Mistake 1: Forgetting leap years (e.g., February 29). Mistake 2: Not adjusting for current date before birthday. Always use our age in months calculator for precision.</p>
+            <p>These examples illustrate how small date differences impact totals, emphasizing the need for accurate tools.</p>
         </section>
-        
+
+        <section id="tips">
+            <h2>Tips for Accurate Age Calculations</h2>
+            <p>Account for time zones by standardizing to a reference like New York. Verify leap year impacts manually for February births. Use date libraries in software to automate complex scenarios. Common pitfalls include overlooking daylight saving changes or assuming uniform month lengths—always calculate days via timestamps.</p>
+            <p>For historical ages, reference calendar reforms; pre-1752 dates in some regions followed the Julian system. In data analysis, aggregate ages in months for finer statistical insights.</p>
+        </section>
+
         <section id="faq">
-            <h2>Age Calculator FAQ: Answers to Your Top Questions</h2>
+            <h2>Frequently Asked Questions</h2>
             <script type="application/ld+json">
             {
               "@context": "https://schema.org",
@@ -117,100 +158,146 @@
               "mainEntity": [
                 {
                   "@type": "Question",
-                  "name": "How do I calculate age from birthdate?",
+                  "name": "How is age calculated from birthdate?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Subtract birth year from current year, adjust for months/days. Use our online age calculator for quick results."
+                    "text": "By subtracting the birth year from the current year and adjusting for months and days if the birthday has not passed."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "How to calculate age in months?",
+                  "name": "What about leap years in age computation?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Multiply years by 12 and add remaining months. Our tool does this automatically."
+                    "text": "Leap years are automatically handled in date differences, adding an extra day every four years as per Gregorian rules."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "Can I calculate age in seconds?",
+                  "name": "Can age be expressed in seconds?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, multiply total days by 86400. Try our age in seconds feature above."
+                    "text": "Yes, by multiplying total days by 86,400, providing a granular view of elapsed time."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "Is this age calculator free?",
+                  "name": "Why use New York time as default?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, completely free, ad-free, and unlimited for all users."
+                    "text": "It standardizes calculations across users, avoiding discrepancies from local time zones."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "What are real-life uses of an age calculator?",
+                  "name": "What are common uses for detailed age breakdowns?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Birthday planning, legal age verification, health tracking, and more. See our applications section."
+                    "text": "From legal verifications to health assessments and personal milestone tracking."
                   }
                 }
               ]
             }
             </script>
-            <p>Have more questions? Contact us or explore related tools.</p>
+            <p>For additional inquiries, refer to resources like the <a href="https://en.wikipedia.org/wiki/Gregorian_calendar" target="_blank" rel="noopener noreferrer">Gregorian Calendar on Wikipedia</a>.</p>
         </section>
-        
-        <section id="related-tools">
-            <h2>Related Calculators on FCalculator.com</h2>
-            <p>Expand your toolkit with these free online calculators:</p>
+
+        <section id="related-resources">
+            <h2>Related Resources</h2>
             <ul>
-                <li><a href="/percentage.html">Percentage Calculator (Math)</a></li>
-                <li><a href="/bmi.html">BMI Calculator (Health)</a></li>
-                <li><a href="/date.html">Date Calculator</a></li>
-                <li><a href="/time.html">Time Calculator</a></li>
-                <li><a href="/hours.html">Hours Calculator</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Age_calculation" target="_blank" rel="noopener noreferrer">Wikipedia: Age Calculation Methods</a></li>
+                <li><a href="https://www.ssa.gov/planners/retire/ageincrease.html" target="_blank" rel="noopener noreferrer">U.S. Social Security Administration: Retirement Age Details</a></li>
+                <li><a href="https://www.cdc.gov/nchs/fastats/life-expectancy.htm" target="_blank" rel="noopener noreferrer">CDC: Life Expectancy Data</a></li>
+                <li><a href="https://www.timeanddate.com/date/duration.html" target="_blank" rel="noopener noreferrer">Time and Date: Duration Calculator</a></li>
             </ul>
-            <p>These complement our age calculator for comprehensive date and time computations.</p>
-        </section>
-        
-        <section id="conclusion">
-            <h2>Conclusion: Why FCalculator.com is Your Best Age Calculator Choice</h2>
-            <p>In summary, our free online age calculator is the ultimate tool for calculating age in years, months, days, and seconds. With detailed explanations, interactive features, and real-world examples, we've built a resource that educates while solving your queries. Whether for personal use or professional needs, this exact age calculator ensures precision and ease. Bookmark it, share it, and return often – we're dedicated to topping searches for "age calculator online free." Thank you for choosing FCalculator.com!</p>
         </section>
     </main>
-    
+
     <footer>
-        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
-    
+
     <script>
+        let ageData = {};
+
         function calculateAge() {
-            var birthdate = new Date(document.getElementById('birthdate').value);
-            var today = new Date();
-            var ageYear = today.getFullYear() - birthdate.getFullYear();
-            var ageMonth = today.getMonth() - birthdate.getMonth();
+            const birthdateInput = document.getElementById('birthdate').value;
+            if (!birthdateInput) return;
+
+            const birthdate = new Date(birthdateInput);
+            const nyTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+            const today = new Date(nyTime);
+
+            let ageYear = today.getFullYear() - birthdate.getFullYear();
+            let ageMonth = today.getMonth() - birthdate.getMonth();
             if (ageMonth < 0 || (ageMonth === 0 && today.getDate() < birthdate.getDate())) {
                 ageYear--;
                 ageMonth += 12;
             }
-            var totalMonths = (ageYear * 12) + ageMonth;
-            var ageDay = Math.floor((today - birthdate) / (1000 * 60 * 60 * 24));
-            var ageSeconds = ageDay * 86400;
-            document.getElementById('age-result').innerText = ageYear + ' years, ' + ageMonth + ' months, Total days: ' + ageDay + 
-                '\nTotal months lived: ' + totalMonths + 
-                '<br>Total seconds lived: ' + ageSeconds.toLocaleString();
+            const ageDay = Math.floor((today - birthdate) / (1000 * 60 * 60 * 24));
+            const totalMonths = (ageYear * 12) + ageMonth;
+            const ageSeconds = ageDay * 86400;
+
+            ageData = {
+                years: ageYear,
+                months: ageMonth,
+                days: ageDay,
+                totalMonths: totalMonths,
+                seconds: ageSeconds
+            };
+
+            document.getElementById('age-result').innerHTML = `
+                Years: ${ageYear}<br>
+                Months: ${ageMonth}<br>
+                Days: ${ageDay}<br>
+                Total Months Lived: ${totalMonths}<br>
+                Total Seconds Lived: ${ageSeconds.toLocaleString()}
+            `;
+            document.getElementById('save-pdf-btn').style.display = 'block';
         }
-        
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFont("helvetica");
+            doc.setFontSize(14);
+            doc.text("Age Calculation Results", 105, 15, { align: "center" });
+
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Years', ageData.years],
+                    ['Months', ageData.months],
+                    ['Days', ageData.days],
+                    ['Total Months Lived', ageData.totalMonths],
+                    ['Total Seconds Lived', ageData.seconds.toLocaleString()]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
+                margin: { top: 10 },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+
+            doc.save('age-results.pdf');
+        }
+
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Age Calculator - FCalculator.com',
+                    title: 'Precise Age Calculator',
                     url: window.location.href
                 });
             } else {
-                alert('Share this page: ' + window.location.href);
+                alert('Share this page manually.');
             }
         }
     </script>
