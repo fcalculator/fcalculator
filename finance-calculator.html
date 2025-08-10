@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Calculator - Time Value of Money Tool for Investments and Loans | FCalculator.com</title>
+    <meta name="description" content="Use our advanced Finance Calculator to compute present value, future value, periodic payments, interest rates, and number of periods. Explore detailed formulas, amortization schedules, and interactive charts for better financial planning.">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf-autotable.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+    </header>
+    <main>
+        <h1>Finance Calculator: Time Value of Money (TVM) Analysis</h1>
+        <p>Our Finance Calculator is a comprehensive tool designed to help you understand and compute the time value of money concepts. Whether you're planning investments, evaluating loans, or analyzing annuities, this calculator provides precise calculations for present value (PV), future value (FV), periodic payments (PMT), interest rates (I/Y), and number of periods (N). With options for compounding frequency and payment timing, it offers flexibility for real-world financial scenarios.</p>
+        
+        <!-- Tool Section -->
+        <section id="calculator-tool">
+            <h2>Time Value of Money Calculator</h2>
+            <form id="tvm-form">
+                <label for="currency">Currency:</label>
+                <select id="currency">
+                    <option value="$">$ (USD)</option>
+                    <option value="€">€ (EUR)</option>
+                </select>
+                
+                <label for="pv">Present Value (PV):</label>
+                <input type="number" id="pv" step="0.01" placeholder="Enter PV or leave blank">
+                
+                <label for="fv">Future Value (FV):</label>
+                <input type="number" id="fv" step="0.01" placeholder="Enter FV or leave blank">
+                
+                <label for="pmt">Periodic Payment (PMT):</label>
+                <input type="number" id="pmt" step="0.01" placeholder="Enter PMT or leave blank (negative for outflows)">
+                
+                <label for="rate">Annual Interest Rate (I/Y %):</label>
+                <input type="number" id="rate" step="0.01" placeholder="Enter rate or leave blank">
+                
+                <label for="periods">Number of Periods (N):</label>
+                <input type="number" id="periods" step="1" placeholder="Enter N or leave blank">
+                
+                <label for="compounding">Compounding Frequency:</label>
+                <select id="compounding">
+                    <option value="1">Annually</option>
+                    <option value="2">Semi-Annually</option>
+                    <option value="4">Quarterly</option>
+                    <option value="12">Monthly</option>
+                    <option value="365">Daily</option>
+                </select>
+                
+                <label for="payment-timing">Payment Timing:</label>
+                <select id="payment-timing">
+                    <option value="end">End of Period</option>
+                    <option value="begin">Beginning of Period</option>
+                </select>
+                
+                <button type="button" onclick="calculateTVM()">Calculate</button>
+                <button type="button" onclick="saveAsPDF()">Save as PDF</button>
+                <button type="button" onclick="sharePage()">Share</button>
+            </form>
+            
+            <div id="results" style="display: none;">
+                <h3>Calculation Results</h3>
+                <p id="result-text" class="result-green"></p>
+                <p id="total-payments"></p>
+                <p id="total-interest"></p>
+                
+                <canvas id="tvm-chart" width="400" height="200"></canvas>
+                
+                <h4>Amortization Schedule</h4>
+                <table id="amortization-table">
+                    <thead>
+                        <tr>
+                            <th>Period</th>
+                            <th>Payment</th>
+                            <th>Principal</th>
+                            <th>Interest</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Detailed Content Sections -->
+        <section>
+            <h2>Understanding Time Value of Money (TVM)</h2>
+            <p>The time value of money is a fundamental financial principle that recognizes a dollar today is worth more than a dollar in the future due to its potential earning capacity. This concept underpins investments, loans, and retirement planning. Our calculator helps you quantify these values by solving for key variables in various scenarios.</p>
+            <p>For instance, if you're investing in a savings account with compound interest, you can determine how much your initial deposit will grow over time. Alternatively, for loans, it calculates monthly payments needed to pay off a principal amount at a given interest rate.</p>
+        </section>
+        
+        <section>
+            <h2>Key Formulas in TVM Calculations</h2>
+            <p>Here are the core formulas used in our Finance Calculator:</p>
+            <ul>
+                <li><strong>Future Value (FV) of a Single Sum:</strong> FV = PV × (1 + r)^n, where r is the periodic interest rate and n is the number of periods.</li>
+                <li><strong>Present Value (PV) of a Single Sum:</strong> PV = FV / (1 + r)^n</li>
+                <li><strong>Future Value of an Annuity (ordinary):</strong> FV = PMT × [((1 + r)^n - 1) / r]</li>
+                <li><strong>Present Value of an Annuity (ordinary):</strong> PV = PMT × [(1 - (1 + r)^(-n)) / r]</li>
+                <li>For annuities due (beginning of period), multiply the annuity factor by (1 + r).</li>
+                <li>Interest rate and periods are solved using numerical methods or logarithmic rearrangements where applicable.</li>
+            </ul>
+            <p>These formulas adjust for compounding frequency by dividing the annual rate by the number of compounding periods and multiplying the number of periods accordingly.</p>
+        </section>
+        
+        <section>
+            <h2>Examples of Using the Finance Calculator</h2>
+            <p><strong>Example 1: Investment Growth</strong> - Suppose you invest $10,000 (PV) at 5% annual interest (I/Y), compounded monthly, for 10 years (N=120 periods). Leave FV blank to calculate it as approximately $16,470.09.</p>
+            <p><strong>Example 2: Loan Payment</strong> - For a $200,000 loan (PV) at 4% interest (I/Y), over 30 years (N=360 monthly periods), leave PMT blank to find the monthly payment of about $954.83 (negative for outflow).</p>
+            <p><strong>Example 3: Retirement Savings</strong> - If you want $1,000,000 (FV) in 20 years, saving $500 monthly (PMT), compounded annually at an unknown rate, leave I/Y blank to solve for the required interest rate.</p>
+        </section>
+        
+        <section>
+            <h2>Comparison of Compounding Frequencies</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Frequency</th>
+                        <th>Effective Rate (at 5% nominal)</th>
+                        <th>Example FV after 1 Year ($1,000 PV)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Annual</td>
+                        <td>5.00%</td>
+                        <td>$1,050.00</td>
+                    </tr>
+                    <tr>
+                        <td>Quarterly</td>
+                        <td>5.09%</td>
+                        <td>$1,050.95</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly</td>
+                        <td>5.12%</td>
+                        <td>$1,051.16</td>
+                    </tr>
+                    <tr>
+                        <td>Daily</td>
+                        <td>5.13%</td>
+                        <td>$1,051.27</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>This table illustrates how more frequent compounding increases the effective yield on investments.</p>
+        </section>
+        
+        <section>
+            <h2>Frequently Asked Questions (FAQ)</h2>
+            <dl>
+                <dt>What is the difference between ordinary annuity and annuity due?</dt>
+                <dd>An ordinary annuity has payments at the end of each period, while an annuity due has them at the beginning, affecting the total value due to extra compounding.</dd>
+                
+                <dt>How does compounding frequency impact calculations?</dt>
+                <dd>Higher frequency means more interest accruals per year, leading to higher future values for the same nominal rate.</dd>
+                
+                <dt>Can this calculator handle negative values?</dt>
+                <dd>Yes, use negative signs for cash outflows like loan payments to maintain consistent cash flow signs.</dd>
+                
+                <dt>What if I need to solve for interest rate?</dt>
+                <dd>Leave the rate field blank; the calculator uses iterative methods to find the rate that satisfies the equation.</dd>
+            </dl>
+            <p>For more insights, check our related tools like the <a href="/compound-interest-growth-calculator.html">Compound Interest Growth Calculator</a> or <a href="/loan-calculator.html">Loan Calculator</a>.</p>
+        </section>
+        
+        <section>
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Time_value_of_money" target="_blank">Wikipedia: Time Value of Money</a></li>
+                <li><a href="https://www.investopedia.com/terms/t/timevalueofmoney.asp" target="_blank">Investopedia: Time Value of Money Explained</a></li>
+                <li><a href="https://www.treasury.gov/resource-center/fin-mkts/Pages/default.aspx" target="_blank">U.S. Department of the Treasury: Financial Markets</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    
+    <script>
+        let amortizationData = [];
+        let chart;
+        
+        function calculateTVM() {
+            const currency = document.getElementById('currency').value;
+            let pv = parseFloat(document.getElementById('pv').value) || 0;
+            let fv = parseFloat(document.getElementById('fv').value) || 0;
+            let pmt = parseFloat(document.getElementById('pmt').value) || 0;
+            let rate = parseFloat(document.getElementById('rate').value) / 100 || 0;
+            let n = parseFloat(document.getElementById('periods').value) || 0;
+            const comp = parseInt(document.getElementById('compounding').value);
+            const timing = document.getElementById('payment-timing').value;
+            
+            const r = rate / comp;
+            let periods = n * comp;
+            
+            // Adjust for payment timing
+            let annuityFactor = timing === 'begin' ? (1 + r) : 1;
+            
+            // Detect which to solve for
+            if (!document.getElementById('pv').value) {
+                // Solve for PV
+                if (pmt !== 0) {
+                    pv = (pmt * annuityFactor * (1 - Math.pow(1 + r, -periods)) / r) + (fv / Math.pow(1 + r, periods));
+                } else {
+                    pv = fv / Math.pow(1 + r, periods);
+                }
+                document.getElementById('pv').value = pv.toFixed(2);
+                document.getElementById('result-text').textContent = `Present Value (PV): ${currency}${pv.toFixed(2)}`;
+            } else if (!document.getElementById('fv').value) {
+                // Solve for FV
+                if (pmt !== 0) {
+                    fv = pv * Math.pow(1 + r, periods) + (pmt * annuityFactor * (Math.pow(1 + r, periods) - 1) / r);
+                } else {
+                    fv = pv * Math.pow(1 + r, periods);
+                }
+                document.getElementById('fv').value = fv.toFixed(2);
+                document.getElementById('result-text').textContent = `Future Value (FV): ${currency}${fv.toFixed(2)}`;
+            } else if (!document.getElementById('pmt').value) {
+                // Solve for PMT
+                const pvPart = pv * Math.pow(1 + r, periods);
+                const annuity = (Math.pow(1 + r, periods) - 1) / r;
+                pmt = (fv - pvPart) / (annuity * annuityFactor);
+                document.getElementById('pmt').value = pmt.toFixed(2);
+                document.getElementById('result-text').textContent = `Periodic Payment (PMT): ${currency}${pmt.toFixed(2)}`;
+            } else if (!document.getElementById('rate').value) {
+                // Solve for rate (iterative Newton-Raphson)
+                let guess = 0.05 / comp; // initial guess
+                for (let i = 0; i < 100; i++) {
+                    const f = pv * Math.pow(1 + guess, periods) + pmt * annuityFactor * (Math.pow(1 + guess, periods) - 1) / guess + fv;
+                    const df = pv * periods * Math.pow(1 + guess, periods - 1) + pmt * annuityFactor * ((periods * Math.pow(1 + guess, periods - 1) * guess - (Math.pow(1 + guess, periods) - 1)) / Math.pow(guess, 2));
+                    guess -= f / df;
+                    if (Math.abs(f) < 0.00001) break;
+                }
+                rate = guess * comp * 100;
+                document.getElementById('rate').value = rate.toFixed(2);
+                document.getElementById('result-text').textContent = `Annual Interest Rate (I/Y): ${rate.toFixed(2)}%`;
+            } else if (!document.getElementById('periods').value) {
+                // Solve for N
+                if (pmt === 0) {
+                    periods = Math.log(fv / pv) / Math.log(1 + r);
+                } else {
+                    periods = Math.log((fv + pmt * annuityFactor / r) / (pv + pmt * annuityFactor / r)) / Math.log(1 + r);
+                }
+                n = periods / comp;
+                document.getElementById('periods').value = n.toFixed(2);
+                document.getElementById('result-text').textContent = `Number of Periods (N): ${n.toFixed(2)}`;
+            }
+            
+            // Calculate totals
+            const totalPayments = pmt * periods;
+            const totalInterest = totalPayments + fv - pv; // Adjust based on signs
+            
+            document.getElementById('total-payments').textContent = `Total Payments: ${currency}${totalPayments.toFixed(2)}`;
+            document.getElementById('total-interest').textContent = `Total Interest: ${currency}${Math.abs(totalInterest).toFixed(2)}`;
+            
+            // Generate amortization if PMT != 0
+            amortizationData = [];
+            let balance = pv;
+            const tableBody = document.querySelector('#amortization-table tbody');
+            tableBody.innerHTML = '';
+            for (let period = 1; period <= periods; period++) {
+                const interest = balance * r;
+                let principal = pmt - interest;
+                if (timing === 'begin' && period === 1) principal = pmt - interest / (1 + r); // Adjust first
+                balance += principal;
+                amortizationData.push([period, pmt.toFixed(2), principal.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${period}</td><td>${currency}${pmt.toFixed(2)}</td><td>${currency}${principal.toFixed(2)}</td><td>${currency}${interest.toFixed(2)}</td><td>${currency}${balance.toFixed(2)}</td>`;
+                tableBody.appendChild(row);
+            }
+            
+            // Chart
+            const ctx = document.getElementById('tvm-chart').getContext('2d');
+            if (chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: amortizationData.map(data => data[0]),
+                    datasets: [{
+                        label: 'Balance Over Time',
+                        data: amortizationData.map(data => data[4]),
+                        borderColor: 'green',
+                        fill: false
+                    }]
+                },
+                options: { scales: { y: { beginAtZero: false } } }
+            });
+            
+            document.getElementById('results').style.display = 'block';
+        }
+        
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFont("helvetica");
+            doc.setFontSize(14);
+            doc.text("Finance Calculation Results", 105, 15, { align: "center" });
+            
+            // Results Table
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Present Value (PV)', document.getElementById('pv').value],
+                    ['Future Value (FV)', document.getElementById('fv').value],
+                    ['Periodic Payment (PMT)', document.getElementById('pmt').value],
+                    ['Annual Interest Rate (I/Y)', document.getElementById('rate').value + '%'],
+                    ['Number of Periods (N)', document.getElementById('periods').value],
+                    ['Total Payments', document.getElementById('total-payments').textContent.split(': ')[1]],
+                    ['Total Interest', document.getElementById('total-interest').textContent.split(': ')[1]]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, halign: 'left' },
+                margin: { top: 10 }
+            });
+            
+            // Amortization Schedule Table
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
+                head: [['Period', 'Payment', 'Principal', 'Interest', 'Balance']],
+                body: amortizationData,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+            
+            doc.save('finance-results.pdf');
+        }
+        
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Finance Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
