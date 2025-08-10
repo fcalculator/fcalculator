@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate your annual, monthly, and hourly salary with deductions for taxes and benefits. Use our detailed salary breakdown tool to understand take-home pay, including formulas and examples for accurate financial planning.">
+    <meta name="keywords" content="salary calculator, annual salary, monthly pay, hourly wage, take-home pay, deductions calculator, gross to net salary">
+    <title>Salary Calculator - FCalculator.com</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf-autotable.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <h1>Salary Calculator</h1>
+        <p>Determine your gross and net salary based on hourly rates, working hours, and deductions. This tool provides a comprehensive breakdown of your earnings, helping you plan budgets and understand tax impacts.</p>
+    </header>
+
+    <main>
+        <section class="calculator-tool">
+            <h2>Enter Your Salary Details</h2>
+            <form id="salary-form">
+                <label for="hourly-rate">Hourly Rate:</label>
+                <input type="number" id="hourly-rate" required min="0" step="0.01">
+
+                <label for="hours-per-week">Hours per Week:</label>
+                <input type="number" id="hours-per-week" required min="0" step="0.1" value="40">
+
+                <label for="weeks-per-year">Weeks per Year:</label>
+                <input type="number" id="weeks-per-year" required min="0" step="1" value="52">
+
+                <label for="tax-rate">Tax Rate (%):</label>
+                <input type="number" id="tax-rate" required min="0" max="100" step="0.1" value="20">
+
+                <label for="other-deductions">Other Deductions (flat amount):</label>
+                <input type="number" id="other-deductions" required min="0" step="0.01" value="0">
+
+                <label for="currency">Currency:</label>
+                <select id="currency">
+                    <option value="$">$ (USD)</option>
+                    <option value="€">€ (EUR)</option>
+                </select>
+
+                <button type="button" onclick="calculateSalary()">Calculate</button>
+            </form>
+
+            <div id="results" style="display: none;">
+                <h2>Salary Results</h2>
+                <p>Annual Gross Salary: <span id="annual-gross" class="result-green"></span></p>
+                <p>Annual Net Salary: <span id="annual-net" class="result-green"></span></p>
+                <p>Monthly Gross Salary: <span id="monthly-gross" class="result-green"></span></p>
+                <p>Monthly Net Salary: <span id="monthly-net" class="result-green"></span></p>
+                <p>Total Deductions: <span id="total-deductions" class="result-green"></span></p>
+
+                <canvas id="salary-chart" width="400" height="200"></canvas>
+
+                <h3>Monthly Breakdown Table</h3>
+                <table id="monthly-table">
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Gross Pay</th>
+                            <th>Deductions</th>
+                            <th>Net Pay</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <button onclick="saveAsPDF()">Save as PDF</button>
+                <button onclick="sharePage()">Share This Page</button>
+            </div>
+        </section>
+
+        <section class="explanation">
+            <h2>Understanding Salary Calculations</h2>
+            <p>Salary calculations involve converting hourly wages into monthly and annual figures while accounting for deductions such as taxes and benefits. This tool uses standard formulas to provide accurate estimates. For instance, annual gross salary is calculated as: Hourly Rate × Hours per Week × Weeks per Year.</p>
+            <p>Net salary subtracts taxes (applied as a percentage) and flat deductions. Understanding these components helps in budgeting, negotiating job offers, and planning for retirement. Factors like overtime, bonuses, and regional tax laws can influence results, so consult local regulations for precision.</p>
+            <p>Example: If your hourly rate is $20, working 40 hours per week for 52 weeks, with a 20% tax rate and no other deductions, your annual gross is $41,600, and net is $33,280.</p>
+        </section>
+
+        <section class="formulas">
+            <h2>Detailed Formulas</h2>
+            <ul>
+                <li>Annual Gross = Hourly Rate × Hours/Week × Weeks/Year</li>
+                <li>Monthly Gross = Annual Gross / 12</li>
+                <li>Total Taxes = (Annual Gross × Tax Rate) / 100</li>
+                <li>Annual Net = Annual Gross - Total Taxes - Other Deductions</li>
+                <li>Monthly Net = Annual Net / 12</li>
+            </ul>
+            <p>These equations ensure transparency in how your take-home pay is derived, allowing for adjustments based on personal circumstances.</p>
+        </section>
+
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <dl>
+                <dt>What is the difference between gross and net salary?</dt>
+                <dd>Gross salary is your total earnings before deductions, while net salary is what you take home after taxes and other withholdings.</dd>
+                <dt>How do taxes affect my salary?</dt>
+                <dd>Taxes are typically a percentage of gross income, varying by country and income bracket. This calculator uses a flat rate for simplicity.</dd>
+                <dt>Can I include benefits like health insurance?</dt>
+                <dd>Yes, add them as flat deductions in the 'Other Deductions' field for a more accurate net pay estimate.</dd>
+                <dt>Why choose between $ and €?</dt>
+                <dd>This allows users from different regions to view results in their preferred currency symbol, though calculations are numerical.</dd>
+                <dt>How accurate is this calculator?</dt>
+                <dd>It's a general tool; for personalized advice, consult a financial advisor or use official tax software.</dd>
+            </dl>
+        </section>
+
+        <section class="additional-info">
+            <h2>Salary Trends and Insights</h2>
+            <p>In today's economy, average salaries vary by industry and location. For example, tech sectors often offer higher hourly rates, while service industries may emphasize overtime. Use this calculator alongside resources like government labor statistics to benchmark your earnings.</p>
+            <p>Internal links: Explore more financial tools such as our <a href="/mortgage-calculator.html">Mortgage Calculator</a> or <a href="/loan-calculator.html">Loan Calculator</a> for comprehensive budgeting.</p>
+            <p>For data sources, refer to reliable outlets like the U.S. Bureau of Labor Statistics or Eurostat for European wage insights.</p>
+        </section>
+    </main>
+
+    <section class="related-resources">
+        <h2>Related Resources</h2>
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Salary" target="_blank" rel="noopener noreferrer">Wikipedia: Salary Overview</a></li>
+            <li><a href="https://www.bls.gov/oes/current/oes_nat.htm" target="_blank" rel="noopener noreferrer">U.S. Bureau of Labor Statistics: Occupational Employment and Wages</a></li>
+            <li><a href="https://ec.europa.eu/eurostat/web/lfs/data/database" target="_blank" rel="noopener noreferrer">Eurostat: Labour Force Survey</a></li>
+            <li><a href="https://www.irs.gov/taxtopics/tc551" target="_blank" rel="noopener noreferrer">IRS: Wage and Salary Information</a></li>
+        </ul>
+    </section>
+
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    </footer>
+
+    <script>
+        let salaryChart;
+        let monthlyData = [];
+
+        function calculateSalary() {
+            const hourlyRate = parseFloat(document.getElementById('hourly-rate').value);
+            const hoursPerWeek = parseFloat(document.getElementById('hours-per-week').value);
+            const weeksPerYear = parseInt(document.getElementById('weeks-per-year').value);
+            const taxRate = parseFloat(document.getElementById('tax-rate').value);
+            const otherDeductions = parseFloat(document.getElementById('other-deductions').value);
+            const currency = document.getElementById('currency').value;
+
+            const annualGross = hourlyRate * hoursPerWeek * weeksPerYear;
+            const monthlyGross = annualGross / 12;
+            const totalTaxes = (annualGross * taxRate) / 100;
+            const totalDeductions = totalTaxes + otherDeductions;
+            const annualNet = annualGross - totalDeductions;
+            const monthlyNet = annualNet / 12;
+
+            document.getElementById('annual-gross').textContent = `${currency}${annualGross.toFixed(2)}`;
+            document.getElementById('annual-net').textContent = `${currency}${annualNet.toFixed(2)}`;
+            document.getElementById('monthly-gross').textContent = `${currency}${monthlyGross.toFixed(2)}`;
+            document.getElementById('monthly-net').textContent = `${currency}${monthlyNet.toFixed(2)}`;
+            document.getElementById('total-deductions').textContent = `${currency}${totalDeductions.toFixed(2)}`;
+
+            // Monthly Breakdown
+            monthlyData = [];
+            const tableBody = document.querySelector('#monthly-table tbody');
+            tableBody.innerHTML = '';
+            for (let month = 1; month <= 12; month++) {
+                const monthlyDeductions = totalDeductions / 12;
+                const monthlyNetPay = monthlyGross - monthlyDeductions;
+                monthlyData.push([month, `${currency}${monthlyGross.toFixed(2)}`, `${currency}${monthlyDeductions.toFixed(2)}`, `${currency}${monthlyNetPay.toFixed(2)}`]);
+
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${month}</td><td>${currency}${monthlyGross.toFixed(2)}</td><td>${currency}${monthlyDeductions.toFixed(2)}</td><td>${currency}${monthlyNetPay.toFixed(2)}</td>`;
+                tableBody.appendChild(row);
+            }
+
+            // Chart
+            const ctx = document.getElementById('salary-chart').getContext('2d');
+            if (salaryChart) salaryChart.destroy();
+            salaryChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Net Salary', 'Taxes', 'Other Deductions'],
+                    datasets: [{
+                        data: [annualNet, totalTaxes, otherDeductions],
+                        backgroundColor: ['#4CAF50', '#FF9800', '#F44336']
+                    }]
+                },
+                options: { responsive: true }
+            });
+
+            document.getElementById('results').style.display = 'block';
+        }
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFont("helvetica");
+            doc.setFontSize(14);
+            doc.text("Salary Calculation Results", 105, 15, { align: "center" });
+
+            // Results Table
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Annual Gross Salary', document.getElementById('annual-gross').textContent],
+                    ['Annual Net Salary', document.getElementById('annual-net').textContent],
+                    ['Monthly Gross Salary', document.getElementById('monthly-gross').textContent],
+                    ['Monthly Net Salary', document.getElementById('monthly-net').textContent],
+                    ['Total Deductions', document.getElementById('total-deductions').textContent]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
+                margin: { top: 10 }
+            });
+
+            // Monthly Breakdown Table
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
+                head: [['Month', 'Gross Pay', 'Deductions', 'Net Pay']],
+                body: monthlyData,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+
+            doc.save('salary-results.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Salary Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
