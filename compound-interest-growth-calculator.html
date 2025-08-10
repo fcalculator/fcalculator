@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.3/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
     <header>
@@ -232,41 +233,56 @@
             const doc = new jsPDF();
             doc.setFont("helvetica", "normal");
             doc.setFontSize(12);
+
+            // Centrirani naslov
             doc.text("Compound Interest Growth Results", 105, 10, { align: "center" });
 
+            // Summary tablica
             const principal = document.getElementById('principal-result').textContent;
             const total = document.getElementById('total-amount').textContent;
             const interest = document.getElementById('interest-earned').textContent;
 
-            doc.text("Parameter", 20, 30);
-            doc.text("Value", 100, 30);
-            doc.text("Principal", 20, 40);
-            doc.text(principal, 100, 40);
-            doc.text("Total Amount", 20, 50);
-            doc.text(total, 100, 50);
-            doc.text("Interest Earned", 20, 60);
-            doc.text(interest, 100, 60);
-
-            doc.text("Growth Breakdown", 105, 80, { align: "center" });
-
-            const rows = document.querySelectorAll('#breakdown-table tr');
-            let y = 90;
-            rows.forEach((row, index) => {
-                const cells = row.querySelectorAll('th, td');
-                if (cells.length) {
-                    doc.text(cells[0].textContent, 20, y);
-                    doc.text(cells[1].textContent, 80, y);
-                    doc.text(cells[2].textContent, 140, y);
-                    y += 10;
-                    if (y > 270 && index < rows.length - 1) {
-                        doc.addPage();
-                        y = 20;
-                    }
+            doc.autoTable({
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Principal', principal],
+                    ['Total Amount', total],
+                    ['Interest Earned', interest]
+                ],
+                startY: 20,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 128, 128], textColor: [255, 255, 255], fontStyle: 'bold' },
+                bodyStyles: { textColor: [0, 0, 0] },
+                columnStyles: { 0: { cellWidth: 'auto' }, 1: { cellWidth: 'auto' } },
+                margin: { left: 10, right: 10 },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.text("This document was generated using Fcalculator.com", 105, doc.internal.pageSize.height - 10, { align: "center" });
                 }
             });
 
-            doc.setFontSize(10);
-            doc.text("This document was generated using Fcalculator.com", 105, 290, { align: "center" });
+            // Breakdown tablica
+            const rows = [];
+            const tableRows = document.querySelectorAll('#breakdown-table tbody tr');
+            tableRows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                rows.push([cells[0].textContent, cells[1].textContent, cells[2].textContent]);
+            });
+
+            doc.autoTable({
+                head: [['Year', 'Balance', 'Interest Added']],
+                body: rows,
+                startY: doc.lastAutoTable.finalY + 20,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 128, 128], textColor: [255, 255, 255], fontStyle: 'bold' },
+                bodyStyles: { textColor: [0, 0, 0] },
+                columnStyles: { 0: { cellWidth: 'auto' }, 1: { cellWidth: 'auto' }, 2: { cellWidth: 'auto' } },
+                margin: { left: 10, right: 10 },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.text("This document was generated using Fcalculator.com", 105, doc.internal.pageSize.height - 10, { align: "center" });
+                }
+            });
 
             doc.save('compound-interest-results.pdf');
         }
