@@ -6,8 +6,6 @@
     <title>Custom Event Countdown Timer</title>
     <meta name="description" content="Precisely calculate the remaining time to any future event with our advanced countdown timer tool, featuring detailed breakdowns in days, hours, minutes, and seconds for accurate planning.">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf-autotable.min.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -37,14 +35,13 @@
                 <input type="datetime-local" id="event-date" required>
                 <button type="button" onclick="startCountdown()">Start Countdown</button>
             </form>
-            <div id="countdown-result" class="result">
+            <div id="countdown-result" class="result" style="text-align: center; font-size: 2em;">
                 <p>Time Remaining:</p>
                 <span id="days" class="green">0</span> days 
                 <span id="hours" class="green">0</span> hours 
                 <span id="minutes" class="green">0</span> minutes 
                 <span id="seconds" class="green">0</span> seconds
             </div>
-            <button onclick="saveAsPDF()">Save as PDF</button>
             <button onclick="sharePage()">Share This Page</button>
         </section>
 
@@ -167,7 +164,7 @@
                 const distance = countDownDate - now;
                 if (distance < 0) {
                     clearInterval(countdownInterval);
-                    document.getElementById('countdown-result').innerHTML = '<p class="green">Event Arrived</p>';
+                    document.getElementById('countdown-result').innerHTML = '<p class="green" style="font-size: 2em;">Event Arrived</p>';
                     return;
                 }
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -179,42 +176,6 @@
                 document.getElementById('minutes').textContent = minutes;
                 document.getElementById('seconds').textContent = seconds;
             }, 1000);
-        }
-
-        function saveAsPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            doc.setFont("helvetica");
-            doc.setFontSize(14);
-            doc.text("Countdown Timer Results", 105, 15, { align: "center" });
-
-            // Results Table
-            doc.autoTable({
-                startY: 20,
-                head: [['Parameter', 'Value']],
-                body: [
-                    ['Days', document.getElementById('days').textContent],
-                    ['Hours', document.getElementById('hours').textContent],
-                    ['Minutes', document.getElementById('minutes').textContent],
-                    ['Seconds', document.getElementById('seconds').textContent]
-                ],
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [255, 255, 255] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 5, halign: 'left' },
-                margin: { top: 10 }
-            });
-
-            // Add footer to every page
-            const pageCount = doc.internal.getNumberOfPages();
-            for (let i = 1; i <= pageCount; i++) {
-                doc.setPage(i);
-                doc.setFontSize(10);
-                doc.setTextColor(100);
-                doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-            }
-
-            doc.save('countdown-timer-results.pdf');
         }
 
         function sharePage() {
