@@ -47,7 +47,7 @@ header {
     border-bottom: 1px solid var(--border-color);
 }
 header h1 {
-    font-size: calc(var(--font-size-base) * 1.5); /* Smaller H1 */
+    font-size: calc(var(--font-size-base) * 1.4); /* Smaller H1 */
     color: var(--primary-color);
     font-weight: bold;
     margin-bottom: calc(var(--spacing-unit) * 0.25); /* Minimal bottom margin */
