@@ -136,6 +136,7 @@
                 <li>Tax Strategies: Deduct interest on business vehicles per IRS guidelines.</li>
                 <li>Economic Impacts: Monitor inflation effects on rates via Federal Reserve reports.</li>
             </ul>
+            <p>For related tools, explore our <a href="/loan-calculator.html">Loan Calculator</a> or <a href="/compound-interest-growth-calculator.html">Compound Interest Calculator</a> within the same category.</p>
             <button onclick="sharePage()">Share This Tool</button>
         </section>
 
@@ -176,7 +177,7 @@
                     </tr>
                 </tbody>
             </table>
-            <p>These scenarios highlight rate sensitivity; consult our <a href="/compound-interest-growth-calculator.html">interest growth tool</a> for deeper analysis.</p>
+            <p>These scenarios highlight rate sensitivity; consult our <a href="/salary-calculator.html">salary tool</a> for affordability checks.</p>
         </section>
 
         <section id="tips">
@@ -235,7 +236,7 @@
               ]
             }
             </script>
-            <p>Explore further via links like <a href="https://en.wikipedia.org/wiki/Automobile_costs" target="_blank" rel="noopener noreferrer">Wikipedia on Automobile Costs</a>.</p>
+            <p>Explore further via links like <a href="https://en.wikipedia.org/wiki/Gregorian_calendar" target="_blank" rel="noopener noreferrer">Gregorian Calendar on Wikipedia</a> for date handling insights.</p>
         </section>
 
         <section id="related-resources">
@@ -270,7 +271,12 @@
             const taxableAmount = autoPrice - tradeIn;
             const salesTax = taxableAmount * salesTaxRate;
             const principal = autoPrice + salesTax - downPayment - tradeIn;
-            const monthlyPayment = principal * (interestRate * Math.pow(1 + interestRate, loanTerm)) / (Math.pow(1 + interestRate, loanTerm) - 1);
+            let monthlyPayment;
+            if (interestRate === 0) {
+                monthlyPayment = principal / loanTerm;
+            } else {
+                monthlyPayment = principal * (interestRate * Math.pow(1 + interestRate, loanTerm)) / (Math.pow(1 + interestRate, loanTerm) - 1);
+            }
             const totalPayments = monthlyPayment * loanTerm;
             const totalInterest = totalPayments - principal;
             const totalCost = autoPrice + salesTax + totalInterest - tradeIn;
@@ -308,7 +314,7 @@
                 if (balance < 0) balance = 0;
                 let row = `<tr><td>${month}</td><td>${currencySymbol}${monthlyPayment.toFixed(2)}</td><td>${currencySymbol}${principalPayment.toFixed(2)}</td><td>${currencySymbol}${interest.toFixed(2)}</td><td>${currencySymbol}${balance.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
-                data.push([month.toString(), monthlyPayment.toFixed(2), principalPayment.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
+                data.push([month, monthlyPayment, principalPayment, interest, balance]);
 
                 const year = Math.ceil(month / 12);
                 if (!chartData.principalData[year - 1]) {
@@ -319,8 +325,6 @@
                 chartData.principalData[year - 1] += principalPayment;
                 chartData.interestData[year - 1] += interest;
             }
-            chartData.principalData = chartData.principalData.map(v => v.toFixed(2));
-            chartData.interestData = chartData.interestData.map(v => v.toFixed(2));
 
             const ctx = document.getElementById('amortization-chart').getContext('2d');
             new Chart(ctx, {
@@ -365,7 +369,7 @@
             doc.autoTable({
                 startY: doc.lastAutoTable.finalY + 10,
                 head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
-                body: amortizationData.map(row => row.map(cell => (typeof cell === 'string' && cell.match(/^\d+$/) ? cell : currencySymbol + cell)),
+                body: amortizationData.map(row => row.map((cell, index) => index === 0 ? cell : currencySymbol + cell.toFixed(2))),
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
