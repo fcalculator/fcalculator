@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basal Metabolic Rate (BMR) Calculator - Accurate Energy Expenditure Estimation</title>
+    <meta name="description" content="Calculate your Basal Metabolic Rate (BMR) using the Harris-Benedict formula. Understand your daily calorie needs for weight management, fitness, and health. Includes detailed explanations, examples, and activity level adjustments.">
+    <meta name="keywords" content="basal metabolic rate calculator, BMR calculation, daily calorie needs, Harris-Benedict formula, metabolism estimator, health energy expenditure">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        /* Additional inline styles if needed, but relying on main CSS */
+        .result { color: green; font-weight: bold; }
+        .pdf-button { margin-top: 10px; }
+        .share-button { display: inline-block; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Basal Metabolic Rate (BMR) Calculator</h1>
+        <p>Discover your body's baseline energy needs with this precise BMR calculator. Based on the scientifically validated Harris-Benedict equation, it helps in planning diets, exercise routines, and overall wellness strategies.</p>
+    </header>
+
+    <main>
+        <!-- Tool at the top -->
+        <section id="calculator-tool">
+            <h2>Enter Your Details</h2>
+            <form id="bmr-form">
+                <label for="age">Age (years):</label>
+                <input type="number" id="age" required min="1" max="120">
+
+                <label for="gender">Gender:</label>
+                <select id="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" required min="1">
+
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" required min="1">
+
+                <label for="activity">Activity Level (for TDEE):</label>
+                <select id="activity">
+                    <option value="1.2">Sedentary (little or no exercise)</option>
+                    <option value="1.375">Lightly active (light exercise 1-3 days/week)</option>
+                    <option value="1.55">Moderately active (moderate exercise 3-5 days/week)</option>
+                    <option value="1.725">Very active (hard exercise 6-7 days/week)</option>
+                    <option value="1.9">Super active (very hard exercise & physical job)</option>
+                </select>
+
+                <button type="button" onclick="calculateBMR()">Calculate BMR</button>
+            </form>
+
+            <div id="result" class="result"></div>
+            <button class="pdf-button" onclick="generatePDF()" style="display:none;" id="pdf-btn">Save as PDF</button>
+
+            <canvas id="bmrChart" width="400" height="200" style="margin-top: 20px;"></canvas>
+        </section>
+
+        <!-- Majority of text below the tool -->
+        <section id="explanation">
+            <h2>What is Basal Metabolic Rate (BMR)?</h2>
+            <p>Basal Metabolic Rate (BMR) represents the number of calories your body needs to perform basic life-sustaining functions such as breathing, circulation, and cell production while at rest. It accounts for approximately 60-70% of your total daily energy expenditure. Understanding BMR is crucial for effective weight management, as it forms the foundation for calculating Total Daily Energy Expenditure (TDEE), which includes physical activity.</p>
+            <p>The Harris-Benedict formula, revised in 1984, is widely used for BMR estimation. For males: BMR = 88.362 + (13.397 × weight in kg) + (4.799 × height in cm) - (5.677 × age in years). For females: BMR = 447.593 + (9.247 × weight in kg) + (3.098 × height in cm) - (4.330 × age in years). This calculator applies these equations accurately.</p>
+
+            <h3>Example Calculations</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Profile</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Weight (kg)</th>
+                        <th>Height (cm)</th>
+                        <th>BMR (calories)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Adult Male</td>
+                        <td>30</td>
+                        <td>Male</td>
+                        <td>80</td>
+                        <td>180</td>
+                        <td>~1866</td>
+                    </tr>
+                    <tr>
+                        <td>Adult Female</td>
+                        <td>25</td>
+                        <td>Female</td>
+                        <td>60</td>
+                        <td>165</td>
+                        <td>~1400</td>
+                    </tr>
+                    <tr>
+                        <td>Active Teen</td>
+                        <td>18</td>
+                        <td>Male</td>
+                        <td>70</td>
+                        <td>175</td>
+                        <td>~1725</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>These examples illustrate how factors like age, gender, and body size influence BMR. For personalized results, use the tool above.</p>
+
+            <h3>Why Calculate BMR?</h3>
+            <p>Knowing your BMR helps in creating calorie deficits for weight loss or surpluses for muscle gain. It's essential for athletes, dieters, and those monitoring metabolic health. Combine it with activity levels to get TDEE for a complete picture.</p>
+
+            <div class="share-button">
+                <button onclick="sharePage()">Share this Calculator</button>
+            </div>
+
+            <h3>Comparison of BMR Formulas</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Formula</th>
+                        <th>Pros</th>
+                        <th>Cons</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Harris-Benedict</td>
+                        <td>Simple, widely validated</td>
+                        <td>May overestimate for obese individuals</td>
+                    </tr>
+                    <tr>
+                        <td>Mifflin-St Jeor</td>
+                        <td>More accurate for modern populations</td>
+                        <td>Similar limitations</td>
+                    </tr>
+                    <tr>
+                        <td>Katch-McArdle</td>
+                        <td>Accounts for body fat</td>
+                        <td>Requires body fat percentage</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>FAQ</h2>
+            <ul>
+                <li><strong>How accurate is this BMR calculator?</strong> It uses established formulas but is an estimate. Consult a doctor for precise measurements via indirect calorimetry.</li>
+                <li><strong>Can BMR change over time?</strong> Yes, with age, muscle mass, and hormonal shifts. Recalculate periodically.</li>
+                <li><strong>What's the difference between BMR and TDEE?</strong> BMR is resting energy; TDEE includes activity. This tool calculates both.</li>
+                <li><strong>Related Tools:</strong> Check our <a href="/bmi.html">BMI Calculator</a> or <a href="/calorie.html">Calorie Intake Calculator</a> for comprehensive health insights.</li>
+            </ul>
+
+            <p>For more on metabolism, explore resources from high-authority sources like the <a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate" target="_blank">Wikipedia on Basal Metabolic Rate</a> or guidelines from the <a href="https://www.niddk.nih.gov/health-information/weight-management" target="_blank">National Institutes of Health</a>.</p>
+        </section>
+
+        <section id="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://www.who.int/tools/child-growth-standards" target="_blank">World Health Organization - Growth Standards</a></li>
+                <li><a href="https://www.cdc.gov/healthyweight/assessing/bmi/index.html" target="_blank">CDC - Body Mass Index Information</a></li>
+                <li><a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank">PubMed - Research on Metabolism</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    </footer>
+
+    <script>
+        let bmrResult = 0;
+        let tdeeResult = 0;
+
+        function calculateBMR() {
+            const age = parseFloat(document.getElementById('age').value);
+            const gender = document.getElementById('gender').value;
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const activity = parseFloat(document.getElementById('activity').value);
+
+            if (isNaN(age) || isNaN(weight) || isNaN(height)) {
+                alert('Please enter valid numbers.');
+                return;
+            }
+
+            if (gender === 'male') {
+                bmrResult = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+            } else {
+                bmrResult = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+            }
+
+            tdeeResult = bmrResult * activity;
+
+            document.getElementById('result').innerHTML = `Your BMR: ${bmrResult.toFixed(2)} calories/day<br>Your TDEE: ${tdeeResult.toFixed(2)} calories/day`;
+            document.getElementById('pdf-btn').style.display = 'block';
+
+            // Render chart
+            const ctx = document.getElementById('bmrChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['BMR (Resting)', 'Activity (TDEE - BMR)'],
+                    datasets: [{
+                        data: [bmrResult, tdeeResult - bmrResult],
+                        backgroundColor: ['#36A2EB', '#FF6384']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: { display: true, text: 'Energy Distribution' }
+                }
+            });
+        }
+
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(12);
+            doc.text('BMR Calculation Results', 105, 10, { align: 'center' });
+
+            doc.autoTable({
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['BMR', `${bmrResult.toFixed(2)} calories/day`],
+                    ['TDEE', `${tdeeResult.toFixed(2)} calories/day`]
+                ],
+                startY: 20,
+                theme: 'grid',
+                styles: { halign: 'center', valign: 'middle' }
+            });
+
+            doc.text('This document was generated using Fcalculator.com', 105, doc.internal.pageSize.height - 10, { align: 'center' });
+            doc.save('bmr_results.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Basal Metabolic Rate Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+    </script>
+</body>
+</html>
