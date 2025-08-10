@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ovulation Predictor: Track Fertile Days and Cycle Phases</title>
+    <meta name="description" content="Accurately predict your ovulation date and fertile window using our advanced calculator. Explore detailed explanations on menstrual cycles, factors influencing ovulation, and methods for tracking fertility to support conception planning.">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Ovulation Predictor: Track Fertile Days and Cycle Phases",
+      "description": "Use this tool to estimate ovulation dates, fertile windows, and understand cycle phases for better fertility awareness.",
+      "url": "https://fcalculator.com/ovulation-calculator.html",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "FCalculator.com",
+            "item": "https://fcalculator.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Health & Fitness",
+            "item": "https://fcalculator.com/health-fitness.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Ovulation Calculator",
+            "item": "https://fcalculator.com/ovulation-calculator.html"
+          }
+        ]
+      }
+    }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="/">FCalculator.com</a></div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/health-fitness.html">Health & Fitness</a> > <a href="/ovulation-calculator.html">Ovulation Calculator</a>
+        </div>
+        <h1>Ovulation Predictor: Track Fertile Days and Cycle Phases</h1>
+        <p>Understanding your ovulation cycle is essential for women planning conception or monitoring reproductive health. This tool estimates your ovulation date and fertile window based on the first day of your last menstrual period and average cycle length. It provides insights into cycle phases, helping you identify peak fertility periods. Note that this is an estimation tool and should not replace medical advice or be used for contraception purposes.</p>
+    </header>
+    
+    <main>
+        <section class="tool-section">
+            <h2>Calculate Your Ovulation and Fertile Window</h2>
+            <form id="ovulation-form">
+                <label for="last-period">First Day of Last Period:</label>
+                <input type="date" id="last-period" required>
+                
+                <label for="cycle-length">Average Cycle Length (days, typically 21-35):</label>
+                <input type="number" id="cycle-length" min="21" max="35" value="28" required>
+                
+                <button type="button" onclick="calculateOvulation()">Calculate</button>
+            </form>
+            
+            <div id="results" style="display:none;">
+                <h3>Results:</h3>
+                <p id="ovulation-date" class="result-green"></p>
+                <p id="fertile-window" class="result-green"></p>
+                <p id="next-period" class="result-green"></p>
+                
+                <canvas id="fertility-chart" width="400" height="200"></canvas>
+                
+                <table id="fertile-table">
+                    <thead>
+                        <tr>
+                            <th>Day in Cycle</th>
+                            <th>Fertility Status</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                
+                <button onclick="saveAsPDF()">Save as PDF</button>
+                <button onclick="sharePage()">Share This Page</button>
+            </div>
+        </section>
+        
+        <section class="explanation-section">
+            <h2>What is Ovulation and Why Track It?</h2>
+            <p>Ovulation is a key phase in the menstrual cycle where a mature egg is released from the ovary, ready for fertilization. This typically occurs once per cycle, around the midpoint, and lasts about 12-24 hours. Tracking ovulation helps women understand their reproductive patterns, increasing the chances of conception by identifying the fertile window—the days when pregnancy is most likely.</p>
+            <p>The menstrual cycle is divided into phases: follicular (pre-ovulation), ovulation, and luteal (post-ovulation). Hormones like estrogen and luteinizing hormone (LH) regulate these phases. For a standard 28-day cycle, ovulation often happens on day 14, but this varies based on individual factors such as stress, age, and health conditions.</p>
+            <p>Our calculator uses a standard formula: ovulation day is estimated by subtracting 14 days (average luteal phase length) from the expected next period start. The fertile window spans approximately 5 days before ovulation to 1 day after, accounting for sperm survival (up to 5 days) and egg viability (1 day).</p>
+            
+            <h3>Factors Influencing Ovulation</h3>
+            <ul>
+                <li><strong>Cycle Regularity:</strong> Women with regular cycles (21-35 days) can predict ovulation more reliably. Irregular cycles, common in conditions like PCOS, may require additional tracking methods.</li>
+                <li><strong>Age and Lifestyle:</strong> Fertility peaks in the 20s and declines after 35. Factors like exercise, diet, and stress impact hormone balance.</li>
+                <li><strong>Health Conditions:</strong> Thyroid issues, obesity, or medications can alter cycles.</li>
+            </ul>
+            
+            <h3>Alternative Tracking Methods</h3>
+            <p>Beyond calendar-based calculators, consider:</p>
+            <ul>
+                <li><strong>Basal Body Temperature (BBT):</strong> Track daily waking temperature; a slight rise (0.5°F) signals ovulation.</li>
+                <li><strong>Ovulation Predictor Kits (OPKs):</strong> Detect LH surge 24-48 hours before ovulation.</li>
+                <li><strong>Cervical Mucus Monitoring:</strong> Changes from sticky to slippery indicate fertility.</li>
+            </ul>
+            <p>Combining methods enhances accuracy. For example, link to our <a href="/heart-rate-calculator.html">Heart Rate Calculator</a> for overall health monitoring or <a href="/bmi.html">BMI Calculator</a> to assess weight-related fertility factors.</p>
+            
+            <h2>Understanding the Fertile Window in Detail</h2>
+            <p>The fertile window is the period when conception is possible. Sperm can survive in the female reproductive tract for up to 5 days, while the egg remains viable for about 24 hours post-ovulation. Thus, intercourse during this window maximizes pregnancy chances.</p>
+            <p>For irregular cycles, calculate by monitoring multiple cycles to find an average length. Studies show that even with apps, prediction accuracy is limited—often below 21% for exact ovulation day due to variability. Always consult a healthcare provider for personalized advice.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cycle Length</th>
+                        <th>Estimated Ovulation Day</th>
+                        <th>Fertile Window Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>28 days</td>
+                        <td>Day 14</td>
+                        <td>Days 9-15</td>
+                    </tr>
+                    <tr>
+                        <td>32 days</td>
+                        <td>Day 18</td>
+                        <td>Days 13-19</td>
+                    </tr>
+                    <tr>
+                        <td>25 days</td>
+                        <td>Day 11</td>
+                        <td>Days 6-12</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Limitations and Accuracy of Ovulation Calculators</h2>
+            <p>While useful, ovulation calculators provide estimates based on averages. Real-life variability—such as cycle irregularities or external factors—can reduce accuracy. Research indicates that calendar methods predict ovulation correctly in only 16-89% of cases, with apps often overestimating fertile days. They are not reliable for preventing pregnancy and should not substitute professional medical tools like ultrasounds.</p>
+            <p>Disclaimers: This tool assumes regular cycles and a fixed 14-day luteal phase, which isn't universal. For contraception, use methods like condoms or consult a doctor. If experiencing infertility, seek fertility specialists.</p>
+            
+            <h2>FAQ: Common Questions About Ovulation Tracking</h2>
+            <dl>
+                <dt>How accurate is this ovulation calculator?</dt>
+                <dd>It offers a general estimate based on cycle data, but accuracy varies. Studies show similar tools predict exact ovulation in about 21% of cases for irregular cycles.</dd>
+                
+                <dt>Can I use this for birth control?</dt>
+                <dd>No, this is not a contraception method. Rely on proven birth control options.</dd>
+                
+                <dt>What if my cycles are irregular?</dt>
+                <dd>Use additional methods like OPKs or BBT tracking. Average multiple cycles for better estimates.</dd>
+                
+                <dt>How does age affect ovulation?</dt>
+                <dd>Fertility decreases with age due to fewer eggs and hormonal changes. Women over 35 may have shorter cycles.</dd>
+                
+                <dt>Does stress impact ovulation?</dt>
+                <dd>Yes, chronic stress can delay or suppress ovulation by affecting hormones.</dd>
+            </dl>
+            
+            <p>Share this tool with friends planning their families: <button onclick="sharePage()">Share</button></p>
+        </section>
+        
+        <section class="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Ovulation" target="_blank" rel="noopener noreferrer">Wikipedia: Ovulation</a> - Comprehensive overview of the ovulation process.</li>
+                <li><a href="https://www.womenshealth.gov/ovulation-calculator" target="_blank" rel="noopener noreferrer">Office on Women's Health: Ovulation Calculator</a> - Government resource on fertility tracking.</li>
+                <li><a href="https://www.stanfordchildrens.org/en/topic/default?id=ovulation-date-calculator-41-OvulationCalc" target="_blank" rel="noopener noreferrer">Stanford Medicine: Ovulation Date Calculator</a> - Medical insights into cycle calculations.</li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    
+    <script>
+        let fertilityChart;
+        
+        function calculateOvulation() {
+            const lastPeriod = new Date(document.getElementById('last-period').value);
+            const cycleLength = parseInt(document.getElementById('cycle-length').value);
+            
+            if (isNaN(lastPeriod.getTime()) || isNaN(cycleLength)) {
+                alert('Please enter valid inputs.');
+                return;
+            }
+            
+            const nextPeriod = new Date(lastPeriod);
+            nextPeriod.setDate(nextPeriod.getDate() + cycleLength);
+            
+            const ovulationDay = new Date(nextPeriod);
+            ovulationDay.setDate(ovulationDay.getDate() - 14);
+            
+            const fertileStart = new Date(ovulationDay);
+            fertileStart.setDate(fertileStart.getDate() - 5);
+            
+            const fertileEnd = new Date(ovulationDay);
+            fertileEnd.setDate(fertileEnd.getDate() + 1);
+            
+            document.getElementById('ovulation-date').textContent = `Estimated Ovulation Date: ${ovulationDay.toDateString()}`;
+            document.getElementById('fertile-window').textContent = `Fertile Window: ${fertileStart.toDateString()} to ${fertileEnd.toDateString()}`;
+            document.getElementById('next-period').textContent = `Next Period Start: ${nextPeriod.toDateString()}`;
+            
+            // Populate table
+            const tableBody = document.querySelector('#fertile-table tbody');
+            tableBody.innerHTML = '';
+            for (let day = 1; day <= cycleLength; day++) {
+                const row = document.createElement('tr');
+                const status = (day >= (ovulationDay.getDate() - lastPeriod.getDate() - 4) && day <= (ovulationDay.getDate() - lastPeriod.getDate() + 2)) ? 'Fertile' : 'Non-Fertile';
+                row.innerHTML = `<td>Day ${day}</td><td>${status}</td>`;
+                tableBody.appendChild(row);
+            }
+            
+            // Chart
+            const ctx = document.getElementById('fertility-chart').getContext('2d');
+            if (fertilityChart) fertilityChart.destroy();
+            fertilityChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Fertile Days', 'Non-Fertile Days'],
+                    datasets: [{
+                        data: [7, cycleLength - 7], // Approx 7 fertile days
+                        backgroundColor: ['#4CAF50', '#FFC107']
+                    }]
+                },
+                options: { responsive: true }
+            });
+            
+            document.getElementById('results').style.display = 'block';
+        }
+        
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFont('helvetica');
+            doc.setFontSize(14);
+            doc.text('Ovulation Calculation Results', 105, 15, { align: 'center' });
+            
+            // Results Table
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Ovulation Date', document.getElementById('ovulation-date').textContent.replace('Estimated Ovulation Date: ', '')],
+                    ['Fertile Window', document.getElementById('fertile-window').textContent.replace('Fertile Window: ', '')],
+                    ['Next Period', document.getElementById('next-period').textContent.replace('Next Period Start: ', '')]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 128, 128], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 5, textColor: [0, 0, 0], halign: 'left' },
+                margin: { top: 10 }
+            });
+            
+            // Fertile Table
+            const fertileData = Array.from(document.querySelectorAll('#fertile-table tbody tr')).map(row => [
+                row.cells[0].textContent,
+                row.cells[1].textContent
+            ]);
+            
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
+                head: [['Day in Cycle', 'Fertility Status']],
+                body: fertileData,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 128, 128], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 5, textColor: [0, 0, 0], halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+            
+            doc.save('ovulation-results.pdf');
+        }
+        
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Ovulation Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
