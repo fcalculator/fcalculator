@@ -28,6 +28,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             border-bottom: 0.5px solid var(--border-color);
+            text-align: right;
         }
 /* Body: Wider content, minimal padding, compact text */
 body {
