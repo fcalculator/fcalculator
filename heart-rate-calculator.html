@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate your target heart rate zones for effective workouts. Use age, resting heart rate, and intensity levels to determine optimal exercise ranges based on proven formulas like Karvonen method. Includes detailed explanations, heart rate zones by age, safety precautions, and customizable results.">
+    <meta name="keywords" content="target heart rate calculator, maximum heart rate formula, heart rate zones, exercise intensity levels, Karvonen method, resting heart rate, fitness heart rate monitoring">
+    <title>Target Heart Rate Calculator - Personalized Exercise Zones and Intensity Guide</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Target Heart Rate Calculator - Personalized Exercise Zones and Intensity Guide</h1>
+        <p>Discover your ideal heart rate zones for safe and effective training. This tool uses established physiological formulas to compute maximum heart rate, heart rate reserve, and target ranges tailored to your age and fitness goals. Whether you're aiming for fat burning, cardiovascular improvement, or peak performance, understanding these metrics can optimize your workouts and prevent overexertion.</p>
+    </header>
+
+    <main>
+        <section id="calculator-tool">
+            <h2>Calculate Your Target Heart Rate</h2>
+            <form id="heart-rate-form">
+                <label for="age">Age (years):</label>
+                <input type="number" id="age" min="1" max="120" required>
+
+                <label for="resting-hr">Resting Heart Rate (bpm, optional):</label>
+                <input type="number" id="resting-hr" min="30" max="100" placeholder="Enter if known">
+
+                <label for="intensity">Desired Intensity Level (%):</label>
+                <input type="number" id="intensity" min="50" max="100" value="70" required>
+
+                <label for="formula">Max HR Formula:</label>
+                <select id="formula">
+                    <option value="haskell">Haskell & Fox (220 - age)</option>
+                    <option value="tanaka">Tanaka (208 - 0.7 × age)</option>
+                    <option value="nes">Nes (211 - 0.64 × age)</option>
+                </select>
+
+                <button type="button" onclick="calculateHeartRate()">Calculate</button>
+            </form>
+
+            <div id="results" style="display:none;">
+                <h3>Results</h3>
+                <p class="result-green">Maximum Heart Rate: <span id="max-hr"></span> bpm</p>
+                <p class="result-green">Heart Rate Reserve: <span id="hr-reserve"></span> bpm</p>
+                <p class="result-green">Target Heart Rate: <span id="target-hr"></span> bpm</p>
+                <button onclick="generatePDF()">Save as PDF</button>
+            </div>
+
+            <canvas id="hr-chart" width="400" height="200"></canvas>
+        </section>
+
+        <section id="explanations">
+            <h2>Understanding Target Heart Rate and Its Importance in Fitness</h2>
+            <p>Target heart rate refers to the optimal range of beats per minute (bpm) your heart should achieve during physical activity to maximize benefits while minimizing risks. This metric is crucial for tailoring exercise programs to individual needs, such as improving endurance, burning fat, or enhancing cardiovascular health. By staying within specific zones, you can ensure your workouts are efficient and aligned with your fitness objectives.</p>
+            <p>Physiologically, heart rate increases with exercise intensity to supply more oxygen and nutrients to muscles. Monitoring it helps prevent under-training, where efforts yield minimal results, or over-training, which can lead to fatigue, injury, or cardiovascular strain. Studies from organizations like the American Heart Association emphasize that personalized heart rate zones based on age and resting pulse provide a reliable guide for safe activity levels.</p>
+            <p>For instance, beginners might focus on lower zones for gradual adaptation, while athletes target higher ranges for performance gains. Incorporating this into routines, alongside tools like our <a href="/bmi.html">BMI Calculator</a> or <a href="/calorie.html">Calorie Intake Estimator</a>, creates a comprehensive approach to health management.</p>
+
+            <h3>Key Formulas for Calculating Heart Rate Metrics</h3>
+            <p>Several evidence-based formulas estimate maximum heart rate (MHR), the highest bpm achievable during maximal effort. The most common is the Haskell & Fox method: MHR = 220 - age. Alternatives include Tanaka's formula (MHR = 208 - 0.7 × age) for better accuracy in older adults, and Nes' equation (MHR = 211 - 0.64 × age) derived from large population studies.</p>
+            <p>To find target zones, the Karvonen method uses heart rate reserve (HRR = MHR - resting heart rate), then applies: Target HR = (HRR × intensity percentage) + resting HR. This accounts for individual fitness levels, making it superior for precise training. Without resting HR, a simpler percentage of MHR (e.g., 50-85%) can be used.</p>
+
+            <h3>Heart Rate Zones and Their Benefits</h3>
+            <p>Heart rate zones divide exercise intensity into categories, each offering unique physiological advantages. Below is a detailed table outlining zones based on percentage of MHR, with examples for a 40-year-old individual (MHR ≈ 180 bpm).</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zone</th>
+                        <th>Percentage of MHR</th>
+                        <th>Target BPM (Example: Age 40)</th>
+                        <th>Benefits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Zone 1: Very Light</td>
+                        <td>50-60%</td>
+                        <td>90-108 bpm</td>
+                        <td>Warm-up, recovery, improves basic endurance</td>
+                    </tr>
+                    <tr>
+                        <td>Zone 2: Light</td>
+                        <td>60-70%</td>
+                        <td>108-126 bpm</td>
+                        <td>Fat burning, enhances aerobic capacity</td>
+                    </tr>
+                    <tr>
+                        <td>Zone 3: Moderate</td>
+                        <td>70-80%</td>
+                        <td>126-144 bpm</td>
+                        <td>Builds cardiovascular strength, improves efficiency</td>
+                    </tr>
+                    <tr>
+                        <td>Zone 4: Hard</td>
+                        <td>80-90%</td>
+                        <td>144-162 bpm</td>
+                        <td>Increases anaerobic threshold, boosts speed</td>
+                    </tr>
+                    <tr>
+                        <td>Zone 5: Very Hard</td>
+                        <td>90-100%</td>
+                        <td>162-180 bpm</td>
+                        <td>Maximizes performance, short bursts only</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Visualizing these zones can help plan workouts. The chart above displays a breakdown for your calculated results.</p>
+
+            <button onclick="sharePage()">Share This Tool</button>
+            <p>Share your personalized heart rate insights with friends or trainers to enhance group fitness sessions.</p>
+
+            <h3>Safety Precautions and Monitoring Tips</h3>
+            <p>While target heart rate guides are valuable, individual factors like medications (e.g., beta-blockers), medical conditions, or pregnancy can alter responses. Always consult a healthcare professional before starting intense programs, especially if you experience chest pain, dizziness, or irregular beats during exercise.</p>
+            <p>Measure resting heart rate upon waking, averaging over several days for accuracy. Use pulse checks or wearables for real-time monitoring. Start low and progress gradually to avoid risks, and combine with balanced nutrition using our <a href="/basal-metabolic-rate-calculator.html">Basal Metabolic Rate Calculator</a>.</p>
+
+            <h3>FAQ on Target Heart Rate Calculation</h3>
+            <dl>
+                <dt>What is the most accurate way to measure maximum heart rate?</dt>
+                <dd>A supervised graded exercise test provides the best precision, but age-based formulas offer reliable estimates for general use.</dd>
+
+                <dt>How does resting heart rate affect target zones?</dt>
+                <dd>Lower resting rates indicate better fitness, widening your HRR and allowing higher intensity without exceeding safe limits.</dd>
+
+                <dt>Can I use this for weight loss?</dt>
+                <dd>Yes, focusing on Zone 2 maximizes fat oxidation. Pair with calorie tracking via our <a href="/calorie.html">Daily Calorie Calculator</a>.</dd>
+
+                <dt>What if my heart rate exceeds the target during exercise?</dt>
+                <dd>Slow down immediately to reduce strain. Persistent issues warrant medical evaluation.</dd>
+
+                <dt>Are there differences for men and women?</dt>
+                <dd>Formulas are unisex, but women may have slightly higher resting rates; adjust based on personal data.</dd>
+            </dl>
+
+            <p>For deeper insights, reference physiological studies on cardiovascular responses to exercise.</p>
+        </section>
+
+        <section id="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://www.heart.org/en/healthy-living/fitness/fitness-basics/target-heart-rates" target="_blank" rel="noopener noreferrer">American Heart Association: Target Heart Rates</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Heart_rate" target="_blank" rel="noopener noreferrer">Wikipedia: Heart Rate Physiology</a></li>
+                <li><a href="https://www.cdc.gov/physicalactivity/basics/measuring/heartrate.htm" target="_blank" rel="noopener noreferrer">CDC: Measuring Physical Activity Intensity</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
+    </footer>
+
+    <script>
+        let chart;
+
+        function calculateHeartRate() {
+            const age = parseInt(document.getElementById('age').value);
+            const restingHr = parseInt(document.getElementById('resting-hr').value) || 70; // Default if not provided
+            const intensity = parseFloat(document.getElementById('intensity').value) / 100;
+            const formula = document.getElementById('formula').value;
+
+            let maxHr;
+            if (formula === 'tanaka') {
+                maxHr = 208 - 0.7 * age;
+            } else if (formula === 'nes') {
+                maxHr = 211 - 0.64 * age;
+            } else {
+                maxHr = 220 - age;
+            }
+
+            const hrReserve = maxHr - restingHr;
+            const targetHr = (hrReserve * intensity) + restingHr;
+
+            document.getElementById('max-hr').textContent = Math.round(maxHr);
+            document.getElementById('hr-reserve').textContent = Math.round(hrReserve);
+            document.getElementById('target-hr').textContent = Math.round(targetHr);
+            document.getElementById('results').style.display = 'block';
+
+            // Update Chart
+            const zones = [
+                { label: 'Zone 1 (50-60%)', value: (maxHr * 0.55) },
+                { label: 'Zone 2 (60-70%)', value: (maxHr * 0.65) },
+                { label: 'Zone 3 (70-80%)', value: (maxHr * 0.75) },
+                { label: 'Zone 4 (80-90%)', value: (maxHr * 0.85) },
+                { label: 'Zone 5 (90-100%)', value: (maxHr * 0.95) }
+            ];
+
+            const ctx = document.getElementById('hr-chart').getContext('2d');
+            if (chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: zones.map(z => z.label),
+                    datasets: [{
+                        label: 'Average BPM in Zone',
+                        data: zones.map(z => Math.round(z.value)),
+                        backgroundColor: ['#90EE90', '#FFD700', '#FFA500', '#FF4500', '#FF0000']
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont('helvetica');
+            doc.setFontSize(12);
+            doc.text('Target Heart Rate Calculation Results', 105, 20, { align: 'center' });
+
+            doc.text('Parameter', 20, 40);
+            doc.text('Value', 100, 40);
+
+            doc.text('Age', 20, 50);
+            doc.text(document.getElementById('age').value + ' years', 100, 50);
+
+            doc.text('Resting Heart Rate', 20, 60);
+            doc.text(document.getElementById('resting-hr').value || '70' + ' bpm', 100, 60);
+
+            doc.text('Maximum Heart Rate', 20, 70);
+            doc.text(document.getElementById('max-hr').textContent + ' bpm', 100, 70);
+
+            doc.text('Heart Rate Reserve', 20, 80);
+            doc.text(document.getElementById('hr-reserve').textContent + ' bpm', 100, 80);
+
+            doc.text('Target Heart Rate', 20, 90);
+            doc.text(document.getElementById('target-hr').textContent + ' bpm', 100, 90);
+
+            doc.text('Heart Rate Zones', 20, 110);
+            // Add zones table
+            doc.autoTable({
+                startY: 120,
+                head: [['Zone', 'Percentage', 'BPM Range']],
+                body: [
+                    ['Zone 1', '50-60%', Math.round(parseInt(document.getElementById('max-hr').textContent) * 0.5) + '-' + Math.round(parseInt(document.getElementById('max-hr').textContent) * 0.6)],
+                    ['Zone 2', '60-70%', Math.round(parseInt(document.getElementById('max-hr').textContent) * 0.6) + '-' + Math.round(parseInt(document.getElementById('max-hr').textContent) * 0.7)],
+                    ['Zone 3', '70-80%', Math.round(parseInt(document.getElementById('max-hr').textContent) * 0.7) + '-' + Math.round(parseInt(document.getElementById('max-hr').textContent) * 0.8)],
+                    ['Zone 4', '80-90%', Math.round(parseInt(document.getElementById('max-hr').textContent) * 0.8) + '-' + Math.round(parseInt(document.getElementById('max-hr').textContent) * 0.9)],
+                    ['Zone 5', '90-100%', Math.round(parseInt(document.getElementById('max-hr').textContent) * 0.9) + '-' + Math.round(parseInt(document.getElementById('max-hr').textContent))]
+                ],
+                styles: { halign: 'center' }
+            });
+
+            const pageHeight = doc.internal.pageSize.getHeight();
+            doc.text('This document was generated using Fcalculator.com', 105, pageHeight - 10, { align: 'center' });
+
+            doc.save('heart-rate-results.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Target Heart Rate Calculator',
+                    text: 'Check out my heart rate zones!',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+    </script>
+</body>
+</html>
