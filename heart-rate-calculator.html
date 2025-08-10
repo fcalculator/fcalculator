@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
     <header>
-        <header> <div class="logo">FCalculator.com</div>
+        <div class="logo">FCalculator.com</div>
         <h1>Target Heart Rate Calculator - Personalized Exercise Zones and Intensity Guide</h1>
         <p>Discover your ideal heart rate zones for safe and effective training. This tool uses established physiological formulas to compute maximum heart rate, heart rate reserve, and target ranges tailored to your age and fitness goals. Whether you're aiming for fat burning, cardiovascular improvement, or peak performance, understanding these metrics can optimize your workouts and prevent overexertion.</p>
     </header>
@@ -45,6 +46,21 @@
                 <p class="result-green">Maximum Heart Rate: <span id="max-hr"></span> bpm</p>
                 <p class="result-green">Heart Rate Reserve: <span id="hr-reserve"></span> bpm</p>
                 <p class="result-green">Target Heart Rate: <span id="target-hr"></span> bpm</p>
+
+                <h4>Heart Rate Zones</h4>
+                <table id="zones-table">
+                    <thead>
+                        <tr>
+                            <th>Zone</th>
+                            <th>Percentage of MHR</th>
+                            <th>BPM Range</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows will be populated by JS -->
+                    </tbody>
+                </table>
+
                 <button onclick="generatePDF()">Save as PDF</button>
             </div>
 
@@ -174,26 +190,37 @@
             document.getElementById('max-hr').textContent = Math.round(maxHr);
             document.getElementById('hr-reserve').textContent = Math.round(hrReserve);
             document.getElementById('target-hr').textContent = Math.round(targetHr);
+
+            // Populate zones table
+            const zonesTableBody = document.querySelector('#zones-table tbody');
+            zonesTableBody.innerHTML = ''; // Clear previous
+            const zones = [
+                { zone: 'Zone 1', perc: '50-60%', range: Math.round(maxHr * 0.5) + '-' + Math.round(maxHr * 0.6) },
+                { zone: 'Zone 2', perc: '60-70%', range: Math.round(maxHr * 0.6) + '-' + Math.round(maxHr * 0.7) },
+                { zone: 'Zone 3', perc: '70-80%', range: Math.round(maxHr * 0.7) + '-' + Math.round(maxHr * 0.8) },
+                { zone: 'Zone 4', perc: '80-90%', range: Math.round(maxHr * 0.8) + '-' + Math.round(maxHr * 0.9) },
+                { zone: 'Zone 5', perc: '90-100%', range: Math.round(maxHr * 0.9) + '-' + Math.round(maxHr) }
+            ];
+            zones.forEach(z => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${z.zone}</td><td>${z.perc}</td><td>${z.range} bpm</td>`;
+                zonesTableBody.appendChild(row);
+            });
+
             document.getElementById('results').style.display = 'block';
 
             // Update Chart
-            const zones = [
-                { label: 'Zone 1 (50-60%)', value: (maxHr * 0.55) },
-                { label: 'Zone 2 (60-70%)', value: (maxHr * 0.65) },
-                { label: 'Zone 3 (70-80%)', value: (maxHr * 0.75) },
-                { label: 'Zone 4 (80-90%)', value: (maxHr * 0.85) },
-                { label: 'Zone 5 (90-100%)', value: (maxHr * 0.95) }
-            ];
-
+            const zoneLabels = zones.map(z => z.zone);
+            const zoneData = zones.map(z => (parseInt(z.range.split('-')[0]) + parseInt(z.range.split('-')[1])) / 2);
             const ctx = document.getElementById('hr-chart').getContext('2d');
             if (chart) chart.destroy();
             chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: zones.map(z => z.label),
+                    labels: zoneLabels,
                     datasets: [{
                         label: 'Average BPM in Zone',
-                        data: zones.map(z => Math.round(z.value)),
+                        data: zoneData.map(Math.round),
                         backgroundColor: ['#90EE90', '#FFD700', '#FFA500', '#FF4500', '#FF0000']
                     }]
                 },
@@ -212,28 +239,25 @@
             doc.setFontSize(12);
             doc.text('Target Heart Rate Calculation Results', 105, 20, { align: 'center' });
 
-            doc.text('Parameter', 20, 40);
-            doc.text('Value', 100, 40);
-
-            doc.text('Age', 20, 50);
-            doc.text(document.getElementById('age').value + ' years', 100, 50);
-
-            doc.text('Resting Heart Rate', 20, 60);
-            doc.text(document.getElementById('resting-hr').value || '70' + ' bpm', 100, 60);
-
-            doc.text('Maximum Heart Rate', 20, 70);
-            doc.text(document.getElementById('max-hr').textContent + ' bpm', 100, 70);
-
-            doc.text('Heart Rate Reserve', 20, 80);
-            doc.text(document.getElementById('hr-reserve').textContent + ' bpm', 100, 80);
-
-            doc.text('Target Heart Rate', 20, 90);
-            doc.text(document.getElementById('target-hr').textContent + ' bpm', 100, 90);
-
-            doc.text('Heart Rate Zones', 20, 110);
-            // Add zones table
+            // Parameters as autoTable without borders
             doc.autoTable({
-                startY: 120,
+                startY: 30,
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Age', document.getElementById('age').value + ' years'],
+                    ['Resting Heart Rate', (document.getElementById('resting-hr').value || '70') + ' bpm'],
+                    ['Maximum Heart Rate', document.getElementById('max-hr').textContent + ' bpm'],
+                    ['Heart Rate Reserve', document.getElementById('hr-reserve').textContent + ' bpm'],
+                    ['Target Heart Rate', document.getElementById('target-hr').textContent + ' bpm']
+                ],
+                styles: { halign: 'center', lineWidth: 0, fillColor: [255, 255, 255], textColor: [0, 0, 0] },
+                headStyles: { fillColor: [255, 255, 255], textColor: [0, 0, 0], fontStyle: 'bold' },
+                alternateRowStyles: { fillColor: [255, 255, 255] }
+            });
+
+            // Heart Rate Zones table
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
                 head: [['Zone', 'Percentage', 'BPM Range']],
                 body: [
                     ['Zone 1', '50-60%', Math.round(parseInt(document.getElementById('max-hr').textContent) * 0.5) + '-' + Math.round(parseInt(document.getElementById('max-hr').textContent) * 0.6)],
