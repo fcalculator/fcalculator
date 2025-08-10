@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate random numbers within specified ranges using our advanced random number generator. Ideal for statistical sampling, simulations, and educational purposes with options for integers, decimals, uniqueness, and sorting.">
+    <title>Random Number Generator - FCalculator.com</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <h1>Random Number Generator</h1>
+        <p>This random number generator allows you to create sequences of random integers or decimals within defined limits. Customize options such as the quantity of numbers, uniqueness requirements, and sorting preferences to suit your needs in statistics, gaming, or research simulations.</p>
+    </header>
+
+    <main>
+        <section class="tool-section">
+            <form id="random-form">
+                <label for="min">Lower Limit:</label>
+                <input type="number" id="min" value="1" required>
+
+                <label for="max">Upper Limit:</label>
+                <input type="number" id="max" value="100" required>
+
+                <label for="quantity">How Many Numbers:</label>
+                <input type="number" id="quantity" value="1" min="1" max="100" required>
+
+                <label for="type">Type:</label>
+                <select id="type">
+                    <option value="integer">Integer</option>
+                    <option value="decimal">Decimal</option>
+                </select>
+
+                <label for="unique">Unique Numbers:</label>
+                <select id="unique">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <label for="sort">Sort:</label>
+                <select id="sort">
+                    <option value="none">None</option>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+
+                <button type="button" onclick="generateNumbers()">Generate</button>
+            </form>
+
+            <div id="result" class="result">
+                <h2>Generated Numbers:</h2>
+                <p id="numbers" class="green-text"></p>
+                <button type="button" onclick="saveAsPDF()" id="pdf-button" style="display:none;">Save as PDF</button>
+                <button type="button" onclick="sharePage()">Share This Page</button>
+            </div>
+        </section>
+
+        <section class="explanation">
+            <h2>Understanding Random Number Generation</h2>
+            <p>Random number generation is a fundamental concept in mathematics, statistics, and computer science. It involves producing numbers that lack any predictable pattern, making them useful for simulations, sampling, and cryptographic applications. In practice, most computer-based generators, including this tool, use pseudo-random algorithms that approximate true randomness through complex mathematical formulas.</p>
+            <p>The process begins with a seed value, often derived from system time or user input, which is then transformed using functions like linear congruential generators or more advanced methods such as Mersenne Twister. These algorithms ensure a uniform distribution across the specified range, meaning each number has an equal chance of being selected.</p>
+            <p>For integers, the generation typically scales a random value between 0 and 1 to the desired range and rounds accordingly. Decimals extend this by preserving fractional parts. Options for uniqueness prevent duplicates, which is crucial for lottery simulations or random sampling without replacement.</p>
+            <p>Sorting the output can help in analyzing patterns or preparing data for further processing. Note that while pseudo-random numbers suffice for most non-security purposes, true randomness requires hardware sources like thermal noise or quantum phenomena.</p>
+
+            <h3>Applications of Random Numbers</h3>
+            <p>Random numbers find extensive use across various fields:</p>
+            <ul>
+                <li><strong>Statistics and Research:</strong> For creating random samples in surveys or experiments to ensure unbiased results.</li>
+                <li><strong>Gaming and Lotteries:</strong> Generating unpredictable outcomes in games or drawing winning numbers.</li>
+                <li><strong>Simulations:</strong> Modeling real-world scenarios in physics, finance, or biology where variability is key.</li>
+                <li><strong>Cryptography:</strong> Though this tool is not cryptographically secure, understanding basics aids in appreciating secure random generation.</li>
+                <li><strong>Educational Tools:</strong> Teaching probability concepts or demonstrating distributions.</li>
+            </ul>
+
+            <h3>Formulas and Methods</h3>
+            <p>A basic pseudo-random number can be generated using:</p>
+            <pre>X_{n+1} = (a * X_n + c) mod m</pre>
+            <p>Where <em>a</em>, <em>c</em>, and <em>m</em> are constants, and <em>X_0</em> is the seed. This linear congruential generator forms the basis for many implementations.</p>
+            <p>For a uniform distribution between min and max:</p>
+            <pre>random = min + (max - min) * rand()</pre>
+            <p>Where rand() produces a value between 0 and 1.</p>
+
+            <h3>Example Usage</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Min</th>
+                        <th>Max</th>
+                        <th>Quantity</th>
+                        <th>Type</th>
+                        <th>Unique</th>
+                        <th>Sort</th>
+                        <th>Example Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lottery Draw</td>
+                        <td>1</td>
+                        <td>49</td>
+                        <td>6</td>
+                        <td>Integer</td>
+                        <td>Yes</td>
+                        <td>Ascending</td>
+                        <td>5, 12, 23, 34, 41, 48</td>
+                    </tr>
+                    <tr>
+                        <td>Simulation Data</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>10</td>
+                        <td>Decimal</td>
+                        <td>No</td>
+                        <td>None</td>
+                        <td>0.23, 0.87, 0.45, ...</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>FAQ</h3>
+            <dl>
+                <dt>What is the difference between pseudo-random and true random numbers?</dt>
+                <dd>Pseudo-random numbers are generated by algorithms and are deterministic if the seed is known, while true random numbers come from unpredictable physical processes.</dd>
+
+                <dt>Can I generate very large numbers?</dt>
+                <dd>This tool supports standard number ranges suitable for most applications. For extremely large numbers, consider specialized software.</dd>
+
+                <dt>Is this generator suitable for security purposes?</dt>
+                <dd>No, it uses JavaScript's Math.random(), which is pseudo-random and not cryptographically secure.</dd>
+
+                <dt>How does uniqueness work?</dt>
+                <dd>When enabled, the tool ensures no duplicates by regenerating if necessary, up to the available unique values in the range.</dd>
+
+                <dt>Why sort the numbers?</dt>
+                <dd>Sorting can organize output for easier reading or integration into ordered lists, like in statistical analysis.</dd>
+            </dl>
+
+            <p>For more mathematical tools, check our <a href="/percentage.html">Percentage Calculator</a> or <a href="/basic-statistics-calculator.html">Basic Statistics Calculator</a>.</p>
+        </section>
+
+        <section class="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Random_number_generation" target="_blank" rel="noopener noreferrer">Wikipedia: Random Number Generation</a> - Comprehensive overview of methods and history.</li>
+                <li><a href="https://www.nist.gov/publications/statistical-testing-random-number-generators" target="_blank" rel="noopener noreferrer">NIST: Statistical Testing of Random Number Generators</a> - Guidelines from the National Institute of Standards and Technology.</li>
+                <li><a href="https://www.random.org/" target="_blank" rel="noopener noreferrer">RANDOM.ORG</a> - True random number service based on atmospheric noise.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    </footer>
+
+    <script>
+        let generatedNumbers = [];
+
+        function generateNumbers() {
+            const min = parseFloat(document.getElementById('min').value);
+            const max = parseFloat(document.getElementById('max').value);
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const type = document.getElementById('type').value;
+            const unique = document.getElementById('unique').value === 'yes';
+            const sort = document.getElementById('sort').value;
+
+            if (min >= max || quantity < 1) {
+                alert('Invalid input. Ensure min < max and quantity > 0.');
+                return;
+            }
+
+            generatedNumbers = [];
+            const rangeSize = max - min;
+            const used = new Set();
+
+            while (generatedNumbers.length < quantity) {
+                let num;
+                if (type === 'integer') {
+                    num = Math.floor(Math.random() * (max - min + 1)) + min;
+                } else {
+                    num = (Math.random() * rangeSize + min).toFixed(2);
+                }
+
+                if (unique) {
+                    if (!used.has(num)) {
+                        used.add(num);
+                        generatedNumbers.push(num);
+                    }
+                } else {
+                    generatedNumbers.push(num);
+                }
+
+                if (unique && used.size >= (type === 'integer' ? (max - min + 1) : Infinity)) break;
+            }
+
+            if (sort === 'asc') {
+                generatedNumbers.sort((a, b) => a - b);
+            } else if (sort === 'desc') {
+                generatedNumbers.sort((a, b) => b - a);
+            }
+
+            document.getElementById('numbers').textContent = generatedNumbers.join(', ');
+            document.getElementById('pdf-button').style.display = 'block';
+        }
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFontSize(14);
+            doc.text("Random Number Generation Results", 105, 15, { align: "center" });
+
+            // Parameters Table
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Lower Limit', document.getElementById('min').value],
+                    ['Upper Limit', document.getElementById('max').value],
+                    ['Quantity', document.getElementById('quantity').value],
+                    ['Type', document.getElementById('type').value],
+                    ['Unique', document.getElementById('unique').value],
+                    ['Sort', document.getElementById('sort').value]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                margin: { top: 10 }
+            });
+
+            // Generated Numbers Table
+            const numbersBody = generatedNumbers.map((num, index) => [index + 1, num]);
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
+                head: [['Index', 'Number']],
+                body: numbersBody,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+
+            doc.save('random-numbers.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Random Number Generator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
