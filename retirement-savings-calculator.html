@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Plan your retirement savings effectively with detailed projections, considering factors like inflation, investment returns, and personal contributions. Explore comprehensive explanations and strategies for long-term financial security.">
-    <meta name="keywords" content="retirement savings calculator, retirement planning, investment returns, inflation impact, retirement income projection">
-    <title>Retirement Savings Projection Tool</title>
+    <meta name="description" content="Project your retirement savings with advanced calculations considering income growth, inflation, investment returns, and additional income sources. Gain insights into required savings, withdrawal strategies, and long-term financial sustainability through detailed projections and educational resources.">
+    <meta name="keywords" content="retirement savings projection, retirement income calculator, investment growth forecasting, inflation impact on savings, safe withdrawal rates">
+    <title>Advanced Retirement Savings and Income Projection Tool</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <header>
-        <h1>Retirement Savings Projection Tool</h1>
-        <p>Understanding retirement savings involves assessing current assets, future contributions, and growth potential through investments while accounting for economic variables such as inflation and market returns. This tool provides personalized projections to help individuals evaluate their path to financial independence in later years, incorporating real-world factors for accurate planning.</p>
+        <h1>Advanced Retirement Savings and Income Projection Tool</h1>
+        <p>Retirement planning encompasses evaluating current financial status, future contributions, investment growth, and economic factors like inflation to ensure sustainable income post-career. This tool offers comprehensive projections, incorporating variables such as annual income adjustments and alternative income sources, to provide realistic estimates of savings accumulation, required nest egg, and withdrawal feasibility for a secure future.</p>
     </header>
     
     <main>
         <section id="calculator-section">
-            <h2>Calculate Your Retirement Savings</h2>
+            <h2>Project Your Retirement Savings</h2>
             <form id="retirement-form">
                 <label for="current-age">Current Age:</label>
                 <input type="number" id="current-age" min="18" max="100" value="35" required>
@@ -28,6 +28,12 @@
                 
                 <label for="life-expectancy">Life Expectancy:</label>
                 <input type="number" id="life-expectancy" min="70" max="120" value="95" required>
+                
+                <label for="current-income">Current Annual Pre-Tax Income:</label>
+                <input type="number" id="current-income" min="0" value="60000" required>
+                
+                <label for="income-increase">Annual Income Increase (%):</label>
+                <input type="number" id="income-increase" min="0" max="10" step="0.1" value="2" required>
                 
                 <label for="current-savings">Current Retirement Savings:</label>
                 <input type="number" id="current-savings" min="0" value="50000" required>
@@ -41,8 +47,11 @@
                 <label for="inflation-rate">Inflation Rate (%):</label>
                 <input type="number" id="inflation-rate" min="0" max="10" step="0.1" value="3" required>
                 
-                <label for="desired-retirement-income">Desired Annual Income in Retirement (adjusted for inflation):</label>
-                <input type="number" id="desired-retirement-income" min="0" value="50000" required>
+                <label for="desired-retirement-income">Desired Annual Income in Retirement (as % of pre-retirement income):</label>
+                <input type="number" id="desired-retirement-income" min="0" max="100" value="80" required>
+                
+                <label for="other-income">Other Annual Income in Retirement (e.g., pensions, Social Security):</label>
+                <input type="number" id="other-income" min="0" value="20000" required>
                 
                 <label for="currency">Currency:</label>
                 <select id="currency">
@@ -56,10 +65,11 @@
             <div id="results" style="display: none;">
                 <h3>Retirement Projection Results</h3>
                 <p class="result-green">Projected Savings at Retirement: <span id="projected-savings"></span></p>
-                <p class="result-green">Savings Needed for Retirement: <span id="savings-needed"></span></p>
+                <p class="result-green">Savings Needed for Desired Income: <span id="savings-needed"></span></p>
                 <p class="result-green">Shortfall/Surplus: <span id="shortfall-surplus"></span></p>
                 <p class="result-green">Years in Retirement: <span id="years-in-retirement"></span></p>
-                <p class="result-green">Safe Annual Withdrawal (4% Rule): <span id="safe-withdrawal"></span></p>
+                <p class="result-green">Safe Annual Withdrawal (4% Rule, adjusted for other income): <span id="safe-withdrawal"></span></p>
+                <p class="result-green">Estimated Duration of Savings: <span id="savings-duration"></span> years</p>
                 
                 <h4>Savings Growth Projection Table</h4>
                 <table id="projection-table">
@@ -83,39 +93,82 @@
         </section>
         
         <section id="explanations">
-            <h2>Understanding Retirement Savings Projections</h2>
-            <p>Retirement planning requires a thorough evaluation of multiple variables that influence the growth and sustainability of savings over time. Factors such as compound interest, market volatility, and personal lifestyle choices play critical roles in determining whether accumulated funds will suffice for a comfortable post-working life. By inputting details like current age, expected retirement timeline, and investment growth rates, users can gain insights into potential outcomes and adjust strategies accordingly.</p>
+            <h2>Comprehensive Insights into Retirement Savings Projections</h2>
+            <p>Effective retirement planning involves a multifaceted approach, integrating current earnings, projected income growth, consistent contributions, and investment performance while mitigating risks from inflation and market fluctuations. By simulating various scenarios, this tool helps users understand the interplay between these elements, enabling informed decisions on savings rates, portfolio allocation, and retirement timing to achieve financial independence.</p>
             
-            <p>Investment returns, often estimated between 5% to 8% annually based on historical market data, compound over decades to significantly amplify savings. However, inflation erodes purchasing power; for instance, a 3% annual rate means today's expenses could double in about 24 years. Balancing these elements ensures projections align with realistic economic conditions.</p>
+            <p>Income dynamics play a pivotal role; annual raises compound over time, increasing contribution potential. Historical data indicates average wage growth around 2-3% annually, but personal factors like career progression can vary this. Investment returns, typically 5-8% for diversified portfolios based on long-term market averages, must outpace inflation—often 2-3% per year—to preserve purchasing power. For example, unchecked inflation could erode savings value by 50% over 25 years at 3% rate.</p>
             
-            <p>Contributions form the foundation of retirement funds. Regular additions, whether through employer-sponsored plans or personal accounts, benefit from tax advantages in many jurisdictions. Strategies like maximizing annual limits or diversifying portfolios can enhance growth, while considering life expectancy extends the planning horizon to avoid outliving resources.</p>
+            <p>Desired retirement income, commonly 70-80% of pre-retirement earnings, accounts for reduced expenses like commuting but includes healthcare costs. Incorporating other sources, such as pensions or government benefits, reduces reliance on personal savings. Strategies like the 4% withdrawal rule suggest annual draws from the nest egg to sustain funds for 30+ years, adjusted for conservative estimates.</p>
             
-            <h3>Key Factors Affecting Retirement Savings</h3>
+            <h3>Key Factors Influencing Retirement Outcomes</h3>
             <ul>
-                <li><strong>Compound Interest:</strong> Earnings on both principal and accumulated interest accelerate growth exponentially over long periods.</li>
-                <li><strong>Inflation Adjustment:</strong> Projections must account for rising costs to maintain living standards.</li>
-                <li><strong>Withdrawal Strategies:</strong> Rules like the 4% safe withdrawal rate help ensure funds last throughout retirement years.</li>
-                <li><strong>Risk Tolerance:</strong> Higher returns often come with greater volatility, requiring portfolio adjustments as retirement nears.</li>
+                <li><strong>Compound Growth:</strong> Reinvested earnings accelerate accumulation; starting early can double effective savings through time value of money.</li>
+                <li><strong>Inflation and Cost Adjustments:</strong> Projections inflate future needs; e.g., today's $50,000 income might require $100,000 in 24 years at 3% inflation.</li>
+                <li><strong>Withdrawal and Longevity Planning:</strong> Balancing draws with life expectancy prevents depletion; rules like 4% adjust for volatility.</li>
+                <li><strong>Risk Management:</strong> Shift to conservative assets near retirement; diversification across stocks, bonds minimizes losses.</li>
+                <li><strong>Alternative Income Streams:</strong> Pensions, annuities, or rental income supplement savings, extending fund longevity.</li>
             </ul>
+            
+            <h3>Common Sources of Retirement Funds</h3>
+            <p>Beyond personal savings, diverse sources bolster security:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Description</th>
+                        <th>Typical Benefits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Social Security/Government Pensions</td>
+                        <td>Public programs providing baseline income based on work history.</td>
+                        <td>Average $18,000/year; inflation-adjusted.</td>
+                    </tr>
+                    <tr>
+                        <td>Employer Pensions/401(k)s</td>
+                        <td>Defined benefit or contribution plans with employer matches.</td>
+                        <td>Tax-deferred growth; matches up to 6% of salary.</td>
+                    </tr>
+                    <tr>
+                        <td>IRAs/Roth IRAs</td>
+                        <td>Individual accounts for tax-advantaged savings.</td>
+                        <td>Annual limits $7,000; Roth offers tax-free withdrawals.</td>
+                    </tr>
+                    <tr>
+                        <td>Investments/Annuities</td>
+                        <td>Stocks, bonds, or insurance products for steady income.</td>
+                        <td>Potential 7% returns; annuities guarantee lifetime payments.</td>
+                    </tr>
+                    <tr>
+                        <td>Personal Assets</td>
+                        <td>Home equity, rentals, or inheritance.</td>
+                        <td>Flexible access; reverse mortgages convert home value to cash.</td>
+                    </tr>
+                </tbody>
+            </table>
             
             <p>Share this tool: <button onclick="sharePage()">Share</button></p>
             
             <h3>Frequently Asked Questions</h3>
             <dl>
-                <dt>How does inflation impact retirement planning?</dt>
-                <dd>Inflation reduces the future value of money, meaning savings must grow faster than rising costs. Historical data from sources like the U.S. Bureau of Labor Statistics indicates average rates around 3%, necessitating adjustments in projections.</dd>
+                <dt>How does income growth affect projections?</dt>
+                <dd>Annual increases boost contributions and future income baselines; a 2% rise compounds to significantly higher pre-retirement earnings, altering savings needs.</dd>
                 
-                <dt>What is a realistic expected return rate?</dt>
-                <dd>Based on long-term stock market averages, 6-7% after fees is common for balanced portfolios, as per data from Vanguard's investment research.</dd>
+                <dt>What role does other income play?</dt>
+                <dd>Sources like pensions reduce the required nest egg; for instance, $20,000 annual benefits could lower personal savings needs by $500,000 under the 4% rule.</dd>
                 
-                <dt>Should I include other income sources?</dt>
-                <dd>Yes, pensions or social security can reduce reliance on personal savings. For U.S. residents, refer to the Social Security Administration for benefit estimates.</dd>
+                <dt>Is the 4% withdrawal rule reliable?</dt>
+                <dd>Based on historical data from studies like the Trinity Study, it sustains funds for 30 years in most scenarios, but adjust for personal risk tolerance and market conditions.</dd>
                 
-                <dt>How accurate are these projections?</dt>
-                <dd>They provide estimates based on inputs and assumptions; actual results vary with market conditions and personal changes. Consult professionals for tailored advice.</dd>
+                <dt>How accurate are these estimates?</dt>
+                <dd>They rely on inputs and assumptions; real outcomes vary with economic changes. Use as a guide and consult financial experts for personalized plans.</dd>
+                
+                <dt>Should I account for healthcare costs?</dt>
+                <dd>Yes, inflate desired income; average retirees spend $300,000 on medical expenses, per Fidelity estimates.</dd>
             </dl>
             
-            <p>For deeper insights into retirement concepts, explore Wikipedia's entry on <a href="https://en.wikipedia.org/wiki/Retirement" target="_blank">Retirement</a>. Government resources like the U.S. Department of Labor's guidelines on <a href="https://www.dol.gov/general/topic/retirement" target="_blank">retirement planning</a> offer valuable data.</p>
+            <p>For foundational knowledge on retirement concepts, refer to Wikipedia's overview of <a href="https://en.wikipedia.org/wiki/Retirement" target="_blank">Retirement</a>. Official data from the U.S. Social Security Administration provides benefit projections at <a href="https://www.ssa.gov/planners/retire/" target="_blank">SSA Retirement Planner</a>.</p>
             
             <p>Related internal tools: <a href="/mortgage-calculator.html">Mortgage Calculator</a>, <a href="/loan-calculator.html">Loan Calculator</a>, <a href="/auto-loan-calculator.html">Auto Loan Calculator</a>.</p>
         </section>
@@ -123,10 +176,10 @@
         <section id="related-resources">
             <h2>Related Resources</h2>
             <ul>
-                <li><a href="https://www.ssa.gov/planners/retire/" target="_blank">Social Security Administration Retirement Planner</a></li>
                 <li><a href="https://www.bls.gov/data/inflation_calculator.htm" target="_blank">Bureau of Labor Statistics Inflation Calculator</a></li>
                 <li><a href="https://en.wikipedia.org/wiki/Compound_interest" target="_blank">Wikipedia on Compound Interest</a></li>
                 <li><a href="https://www.vanguard.com/" target="_blank">Vanguard Investment Research</a></li>
+                <li><a href="https://www.fidelity.com/viewpoints/retirement/how-much-do-i-need-to-retire" target="_blank">Fidelity Retirement Insights</a></li>
             </ul>
         </section>
     </main>
@@ -142,17 +195,33 @@
             const currentAge = parseInt(document.getElementById('current-age').value);
             const retirementAge = parseInt(document.getElementById('retirement-age').value);
             const lifeExpectancy = parseInt(document.getElementById('life-expectancy').value);
+            const currentIncome = parseFloat(document.getElementById('current-income').value);
+            const incomeIncrease = parseFloat(document.getElementById('income-increase').value) / 100;
             const currentSavings = parseFloat(document.getElementById('current-savings').value);
             const annualContribution = parseFloat(document.getElementById('annual-contribution').value);
             const returnRate = parseFloat(document.getElementById('return-rate').value) / 100;
             const inflationRate = parseFloat(document.getElementById('inflation-rate').value) / 100;
-            const desiredIncome = parseFloat(document.getElementById('desired-retirement-income').value);
+            const desiredIncomePct = parseFloat(document.getElementById('desired-retirement-income').value) / 100;
+            const otherIncome = parseFloat(document.getElementById('other-income').value);
             const currency = document.getElementById('currency').value;
             
             const yearsToRetirement = retirementAge - currentAge;
             const yearsInRetirement = lifeExpectancy - retirementAge;
             
-            // Projected savings at retirement
+            // Calculate projected income at retirement
+            let projectedIncome = currentIncome;
+            for (let i = 1; i < yearsToRetirement; i++) {
+                projectedIncome *= (1 + incomeIncrease);
+            }
+            
+            // Desired retirement income adjusted for inflation
+            const desiredIncome = projectedIncome * desiredIncomePct;
+            let adjustedDesiredIncome = desiredIncome;
+            for (let i = 0; i < yearsToRetirement; i++) {
+                adjustedDesiredIncome *= (1 + inflationRate);
+            }
+            
+            // Projected savings
             let projectedSavings = currentSavings;
             const labels = [];
             const data = [];
@@ -179,20 +248,27 @@
                 tableBody.appendChild(row);
             }
             
-            // Adjust desired income for inflation over years to retirement
-            const adjustedDesiredIncome = desiredIncome * Math.pow(1 + inflationRate, yearsToRetirement);
-            
-            // Savings needed using 4% rule
-            const savingsNeeded = adjustedDesiredIncome / 0.04;
+            // Savings needed (4% rule, net of other income)
+            const netDesiredIncome = adjustedDesiredIncome - otherIncome;
+            const savingsNeeded = netDesiredIncome > 0 ? netDesiredIncome / 0.04 : 0;
             
             const shortfallSurplus = projectedSavings - savingsNeeded;
-            const safeWithdrawal = projectedSavings * 0.04;
+            const safeWithdrawal = (projectedSavings * 0.04) + otherIncome;
+            
+            // Estimate duration (simplified, assuming constant withdrawal)
+            let savingsDuration = 0;
+            let tempSavings = projectedSavings;
+            while (tempSavings > 0 && savingsDuration < 100) {
+                tempSavings = tempSavings * (1 + returnRate / 2) - safeWithdrawal; // Approximate annual
+                savingsDuration++;
+            }
             
             document.getElementById('projected-savings').textContent = `${currency}${projectedSavings.toFixed(2)}`;
             document.getElementById('savings-needed').textContent = `${currency}${savingsNeeded.toFixed(2)}`;
             document.getElementById('shortfall-surplus').textContent = `${currency}${shortfallSurplus.toFixed(2)} ${shortfallSurplus >= 0 ? '(Surplus)' : '(Shortfall)'}`;
             document.getElementById('years-in-retirement').textContent = yearsInRetirement;
             document.getElementById('safe-withdrawal').textContent = `${currency}${safeWithdrawal.toFixed(2)}`;
+            document.getElementById('savings-duration').textContent = savingsDuration;
             
             document.getElementById('results').style.display = 'block';
             
@@ -221,42 +297,73 @@
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            doc.setFont('helvetica');
+            doc.setFont('helvetica', 'normal');
             doc.setFontSize(12);
             
-            doc.text('Retirement Savings Projection Results', 105, 10, { align: 'center' });
+            // Center title
+            doc.text('Retirement Savings Projection Results', 105, 15, { align: 'center' });
             
-            // Parameters table
-            doc.text('Parameters', 10, 20);
-            doc.text('Current Age: ' + document.getElementById('current-age').value, 10, 30);
-            doc.text('Retirement Age: ' + document.getElementById('retirement-age').value, 10, 40);
-            doc.text('Life Expectancy: ' + document.getElementById('life-expectancy').value, 10, 50);
-            doc.text('Current Savings: ' + document.getElementById('currency').value + document.getElementById('current-savings').value, 10, 60);
-            doc.text('Annual Contribution: ' + document.getElementById('currency').value + document.getElementById('annual-contribution').value, 10, 70);
-            doc.text('Return Rate: ' + document.getElementById('return-rate').value + '%', 10, 80);
-            doc.text('Inflation Rate: ' + document.getElementById('inflation-rate').value + '%', 10, 90);
-            doc.text('Desired Income: ' + document.getElementById('currency').value + document.getElementById('desired-retirement-income').value, 10, 100);
-            
-            // Results
-            doc.text('Projected Savings: ' + document.getElementById('projected-savings').textContent, 10, 110);
-            doc.text('Savings Needed: ' + document.getElementById('savings-needed').textContent, 10, 120);
-            doc.text('Shortfall/Surplus: ' + document.getElementById('shortfall-surplus').textContent, 10, 130);
-            doc.text('Years in Retirement: ' + document.getElementById('years-in-retirement').textContent, 10, 140);
-            doc.text('Safe Withdrawal: ' + document.getElementById('safe-withdrawal').textContent, 10, 150);
-            
-            // Projection table (simplified for PDF, first few rows)
-            doc.text('Projection Schedule', 10, 160);
-            const tableRows = document.querySelectorAll('#projection-table tbody tr');
-            let y = 170;
-            tableRows.forEach((row, index) => {
-                if (index < 10) { // Limit to avoid overflow
-                    const cells = row.querySelectorAll('td');
-                    doc.text(`${cells[0].textContent} | ${cells[1].textContent} | ${cells[2].textContent} | ${cells[3].textContent} | ${cells[4].textContent} | ${cells[5].textContent}`, 10, y);
-                    y += 10;
-                }
+            // Parameters section
+            doc.text('Parameters', 105, 25, { align: 'center' });
+            let y = 35;
+            const params = [
+                `Current Age: ${document.getElementById('current-age').value}`,
+                `Retirement Age: ${document.getElementById('retirement-age').value}`,
+                `Life Expectancy: ${document.getElementById('life-expectancy').value}`,
+                `Current Income: ${document.getElementById('currency').value}${document.getElementById('current-income').value}`,
+                `Income Increase: ${document.getElementById('income-increase').value}%`,
+                `Current Savings: ${document.getElementById('currency').value}${document.getElementById('current-savings').value}`,
+                `Annual Contribution: ${document.getElementById('currency').value}${document.getElementById('annual-contribution').value}`,
+                `Return Rate: ${document.getElementById('return-rate').value}%`,
+                `Inflation Rate: ${document.getElementById('inflation-rate').value}%`,
+                `Desired Income (%): ${document.getElementById('desired-retirement-income').value}%`,
+                `Other Income: ${document.getElementById('currency').value}${document.getElementById('other-income').value}`
+            ];
+            params.forEach(param => {
+                doc.text(param, 20, y);
+                y += 10;
             });
             
-            doc.text('This document was generated using Fcalculator.com', 105, 280, { align: 'center' });
+            // Results section
+            doc.addPage();
+            doc.text('Projection Results', 105, 15, { align: 'center' });
+            y = 25;
+            const results = [
+                `Projected Savings: ${document.getElementById('projected-savings').textContent}`,
+                `Savings Needed: ${document.getElementById('savings-needed').textContent}`,
+                `Shortfall/Surplus: ${document.getElementById('shortfall-surplus').textContent}`,
+                `Years in Retirement: ${document.getElementById('years-in-retirement').textContent}`,
+                `Safe Withdrawal: ${document.getElementById('safe-withdrawal').textContent}`,
+                `Savings Duration: ${document.getElementById('savings-duration').textContent} years`
+            ];
+            results.forEach(result => {
+                doc.text(result, 20, y);
+                y += 10;
+            });
+            
+            // Projection Schedule
+            doc.text('Projection Schedule', 105, y + 10, { align: 'center' });
+            y += 20;
+            doc.text('Year   Age   Beginning Balance   Contribution   Interest   Ending Balance', 20, y);
+            y += 10;
+            const tableRows = document.querySelectorAll('#projection-table tbody tr');
+            tableRows.forEach(row => {
+                if (y > 260) {
+                    doc.addPage();
+                    y = 20;
+                }
+                const cells = row.querySelectorAll('td');
+                const rowText = `${cells[0].textContent.padEnd(6)} ${cells[1].textContent.padEnd(5)} ${cells[2].textContent.padEnd(20)} ${cells[3].textContent.padEnd(15)} ${cells[4].textContent.padEnd(15)} ${cells[5].textContent}`;
+                doc.text(rowText, 20, y);
+                y += 10;
+            });
+            
+            // Footer on each page
+            const pageCount = doc.getNumberOfPages();
+            for (let i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                doc.text('This document was generated using Fcalculator.com', 105, 280, { align: 'center' });
+            }
             
             doc.save('retirement-savings-projection.pdf');
         }
@@ -264,7 +371,7 @@
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Retirement Savings Projection Tool',
+                    title: 'Advanced Retirement Savings and Income Projection Tool',
                     url: window.location.href
                 });
             } else {
