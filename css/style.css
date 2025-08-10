@@ -7,7 +7,7 @@
     --border-color: #DCDCDC; /* Light gray borders */
     --success-color: #32CD32; /* Lime green for results */
     --font-family: 'Verdana', Arial, sans-serif; /* Compact, readable font like on calculator sites */
-    --font-size-base: 14px; /* Smaller base font for tight, professional look */
+    --font-size-base: 13px; /* Smaller base font for tight, professional look */
     --spacing-unit: 0.75rem; /* Minimal spacing for reduced gaps */
     --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.08); /* Very subtle shadow */
     --shadow-hover: 0 3px 6px rgba(0, 0, 0, 0.12); /* Light hover effect */
