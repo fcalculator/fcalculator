@@ -36,14 +36,23 @@
         }
         .sector {
             position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform-origin: 50% 50%;
+        }
+        .label {
+            position: absolute;
+            left: 50%;
+            top: 0;
             width: 50%;
-            height: 50%;
-            transform-origin: 100% 100%;
-            text-align: center;
-            line-height: 150px;
-            font-size: 12px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #fff;
-            clip-path: polygon(0 0, 100% 0, 100% 100%);
+            font-size: 12px;
         }
         .result {
             text-align: center;
@@ -252,10 +261,17 @@
             numbers.forEach((num, index) => {
                 const sector = document.createElement('div');
                 sector.className = 'sector';
-                sector.style.backgroundColor = `hsl(${index * (360 / numbers.length)}, 70%, 50%)`;
-                sector.style.transform = `rotate(${index * sectorAngle}deg) skewY(${90 - sectorAngle}deg)`;
-                sector.innerText = visible ? num : '';
+                sector.style.backgroundColor = `hsl(${index * sectorAngle}, 70%, 50%)`;
+                sector.style.transform = `rotate(${index * sectorAngle}deg) skewY(-${90 - sectorAngle}deg)`;
                 sector.dataset.num = num;
+
+                const label = document.createElement('div');
+                label.className = 'label';
+                label.style.transform = `skewY(${90 - sectorAngle}deg) rotate(${sectorAngle / 2}deg)`;
+                label.innerText = visible ? num : '';
+                label.dataset.num = num;
+
+                sector.appendChild(label);
                 wheel.appendChild(sector);
             });
         }
@@ -267,8 +283,8 @@
 
         function toggleVisibility() {
             visible = !visible;
-            document.querySelectorAll('.sector').forEach(sector => {
-                sector.innerText = visible ? sector.dataset.num : '';
+            document.querySelectorAll('.label').forEach(label => {
+                label.innerText = visible ? label.dataset.num : '';
             });
             document.getElementById('toggle-btn').innerText = visible ? 'Hide All' : 'Show All';
         }
@@ -280,7 +296,6 @@
             wheel.style.transform = `rotate(-${randomRotation}deg)`;
             setTimeout(() => {
                 const sectorAngle = 360 / numbers.length;
-                // Adjust for the direction of rotation and find which sector is at the top or a fixed pointer
                 let adjustedRotation = (randomRotation % 360);
                 let selectedIndex = Math.floor(adjustedRotation / sectorAngle);
                 selectedIndex = (numbers.length - selectedIndex) % numbers.length; // Adjust if needed for pointer position
