@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore our flexible countdown timer with durations from 1 minute to 5 hours, auto-start via URL anchors like #30-minute-countdown, real-time minutes and seconds display, restart functionality, and multiple alarm sounds for completion alerts.">
+    <meta name="description" content="Use our customizable countdown timer with durations from 1 minute to 5 hours, auto-starting via URL anchors like #30-minute-countdown, featuring real-time minutes and seconds display, restart functionality, and multiple alarm sounds when the timer reaches zero.">
     <meta name="keywords" content="countdown timer, customizable timer, online timer, time management tool, alarm timer, duration timer, productivity timer">
-    <title>Customizable Countdown Timer with Preset Durations</title>
+    <title>Customizable Countdown Timer with Audio Alerts</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "Customizable Countdown Timer with Preset Durations",
+        "name": "Customizable Countdown Timer with Audio Alerts",
         "url": "https://fcalculator.com/time/timer-countdown.html",
-        "description": "A dynamic online countdown timer offering preset durations, instant start through URL anchors like #30-minute-countdown, real-time tracking, and customizable alarm sounds for completion notifications.",
+        "description": "A versatile online countdown timer with preset durations, automatic start through URL anchors like #30-minute-countdown, real-time tracking, and selectable alarm sounds for completion notifications.",
         "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -46,26 +46,26 @@
         <a href="/">FCalculator.com</a> > <a href="/time.html">Time</a> > <a href="/time/timer-countdown.html">Countdown Timer</a>
     </div>
     <header>
-        <h1>Countdown Timer: Dynamic Tool for Tailored Time Tracking with Audio Notifications</h1>
-        <p>Master your schedule with our adaptable countdown timer, supporting durations from 1 minute to 5 hours. Access specific timers directly via URL anchors like <a href="/time/timer-countdown.html#30-minute-countdown">30-minute countdown</a>, which starts instantly upon loading. With real-time minutes and seconds display, a restart button, and a choice of alarm sounds triggered at zero, this tool streamlines time management for productivity, wellness, cooking, or study without external apps or hardware.</p>
+        <h1>Countdown Timer: Tailored Solution for Precise Time Management with Sound Notifications</h1>
+        <p>Optimize your time with our dynamic countdown timer, offering durations from 1 minute to 5 hours. Navigate directly to specific timers like <a href="/time/timer-countdown.html#30-minute-countdown">30-minute countdown</a> for instant start. With real-time minutes and seconds display, a restart button, and customizable alarm sounds that play at zero, this tool enhances productivity, wellness, cooking, or study sessions, all accessible without downloads.</p>
     </header>
     <main>
         <section class="tool-section">
-            <h2>Customize and Launch Your Countdown</h2>
+            <h2>Configure Your Countdown</h2>
             <label for="duration-select">Select Duration:</label>
             <select id="duration-select">
-                <option value="1">1 Minute</option>
-                <option value="2">2 Minutes</option>
-                <option value="3">3 Minutes</option>
-                <option value="5">5 Minutes</option>
-                <option value="10">10 Minutes</option>
-                <option value="15">15 Minutes</option>
-                <option value="20">20 Minutes</option>
-                <option value="30">30 Minutes</option>
-                <option value="45">45 Minutes</option>
-                <option value="60">1 Hour</option>
-                <option value="120">2 Hours</option>
-                <option value="300">5 Hours</option>
+                <option value="60" data-hash="1-minute-countdown">1 Minute</option>
+                <option value="120" data-hash="2-minute-countdown">2 Minutes</option>
+                <option value="180" data-hash="3-minute-countdown">3 Minutes</option>
+                <option value="300" data-hash="5-minute-countdown">5 Minutes</option>
+                <option value="600" data-hash="10-minute-countdown">10 Minutes</option>
+                <option value="900" data-hash="15-minute-countdown">15 Minutes</option>
+                <option value="1200" data-hash="20-minute-countdown">20 Minutes</option>
+                <option value="1800" data-hash="30-minute-countdown">30 Minutes</option>
+                <option value="2700" data-hash="45-minute-countdown">45 Minutes</option>
+                <option value="3600" data-hash="1-hour-countdown">1 Hour</option>
+                <option value="7200" data-hash="2-hour-countdown">2 Hours</option>
+                <option value="18000" data-hash="5-hour-countdown">5 Hours</option>
             </select>
             <label for="sound-select">Select Alarm Sound:</label>
             <select id="sound-select">
@@ -82,7 +82,7 @@
         </section>
         <section class="quick-links">
             <h2>Quick Access to Preset Timers</h2>
-            <p>Jump directly to your desired countdown duration:</p>
+            <p>Start your preferred countdown instantly:</p>
             <ul>
                 <li><a href="/time/timer-countdown.html#1-minute-countdown">1 Minute Countdown</a></li>
                 <li><a href="/time/timer-countdown.html#2-minute-countdown">2 Minute Countdown</a></li>
@@ -99,59 +99,59 @@
             </ul>
         </section>
         <section class="explanation">
-            <h2>Unlocking the Power of Customizable Countdown Timing</h2>
-            <p>Countdown timers transform how we approach time-sensitive tasks by creating defined windows that enhance focus and urgency. This tool's preset durations, from 1 minute to 5 hours, cater to varied needs, whether for quick mindfulness breaks or extended project phases. The URL anchor feature (e.g., #30-minute-countdown) ensures instant access, making it SEO-friendly and user-convenient for direct navigation via search engines. Audio alerts upon completion reduce the need for constant screen checks, freeing cognitive resources for immersion in activities like studying, exercising, or culinary precision.</p>
-            <p>Unlike single-purpose timers, this solution's versatility supports iterative use through its dropdown and restart mechanisms, fostering adaptability across professional and personal contexts. Its web-based design ensures accessibility on any device, enhancing its utility for mobile and remote lifestyles.</p>
+            <h2>Mastering Time with a Versatile Countdown Timer</h2>
+            <p>Countdown timers are indispensable for structuring activities, offering clear endpoints that boost focus and efficiency. This tool supports durations from 1 minute to 5 hours, with direct access via URL anchors like #30-minute-countdown, ensuring seamless navigation for users and search engines. The audio alerts at completion, customizable through four distinct sounds, eliminate the need for constant monitoring, making it ideal for multitasking in productivity, fitness, or culinary tasks. Its design fosters habit-building by aligning with cognitive patterns for sustained engagement.</p>
+            <p>Unlike fixed-duration timers, this customizable version supports dynamic scheduling, with dropdown selections and URL-driven starts enhancing usability. Its browser-based operation ensures accessibility across devices, perfect for mobile and remote contexts.</p>
         </section>
         <section class="how-to">
-            <h2>Mechanics Behind the Countdown Timer</h2>
-            <p>Built on JavaScript, this timer delivers precise second-by-second updates, driven by user-selected or URL-specified durations. The operational sequence includes:</p>
+            <h2>Technical Structure of the Countdown Timer</h2>
+            <p>Powered by JavaScript, this timer ensures precise decrements, driven by either URL hashes or dropdown choices. The process entails:</p>
             <ol>
-                <li>Extracting duration from URL hash (e.g., #30-minute-countdown) or dropdown selection, converting to seconds.</li>
-                <li>Using setInterval to decrement every 1000 milliseconds.</li>
-                <li>Formatting output with zero-padded minutes and seconds for clarity.</li>
-                <li>Triggering the selected audio alert at zero and halting the countdown.</li>
-                <li>Enabling restarts to reload the current or new duration.</li>
+                <li>Parsing URL hash (e.g., #30-minute-countdown) or dropdown value to set seconds.</li>
+                <li>Implementing setInterval for 1000ms decrements.</li>
+                <li>Formatting display with padded minutes and seconds.</li>
+                <li>Playing the selected audio at zero and stopping the timer.</li>
+                <li>Enabling restarts to reload the selected duration.</li>
             </ol>
-            <p>Key calculations: totalSeconds = minutes * 60; displayMinutes = Math.floor(totalSeconds / 60); displaySeconds = totalSeconds % 60. Executed client-side, it ensures reliability without server dependency. For complementary tools, explore our <a href="/time/5-minute-timer.html">5-Minute Timer</a> or <a href="/time-zone-calculator.html">Time Zone Calculator</a> in the Time category.</p>
+            <p>Core logic: totalSeconds = value; displayMinutes = Math.floor(totalSeconds / 60); displaySeconds = totalSeconds % 60. Client-side execution ensures reliability, with New York time as a contextual reference. For specific durations, try our <a href="/time/5-minute-timer.html">5-Minute Timer</a> or <a href="/time-zone-calculator.html">Time Zone Calculator</a> in the Time category.</p>
         </section>
         <section class="examples">
-            <h2>Real-World Uses of the Countdown Timer</h2>
-            <p>Practical applications highlight its flexibility:</p>
+            <h2>Practical Scenarios for the Countdown Timer</h2>
+            <p>Versatile applications illustrate its utility:</p>
             <ul>
-                <li>In productivity: Set a <a href="/time/timer-countdown.html#25-minute-countdown">25-minute countdown</a> for Pomodoro sessions, signaled by a buzzer.</li>
-                <li>In wellness: Use a <a href="/time/timer-countdown.html#15-minute-countdown">15-minute countdown</a> for meditation, with a gentle beep alert.</li>
-                <li>In education: Apply a <a href="/time/timer-countdown.html#45-minute-countdown">45-minute countdown</a> for focused revision, ensuring timely breaks.</li>
-                <li>In cooking: Monitor a <a href="/time/timer-countdown.html#20-minute-countdown">20-minute countdown</a> for baking, with a distinct alarm.</li>
-                <li>In planning: Track a <a href="/time/timer-countdown.html#2-hour-countdown">2-hour countdown</a> for event preparations, alerted by a watch sound.</li>
+                <li>In productivity: Use a <a href="/time/timer-countdown.html#25-minute-countdown">25-minute countdown</a> for Pomodoro focus, signaled by a buzzer.</li>
+                <li>In wellness: Set a <a href="/time/timer-countdown.html#10-minute-countdown">10-minute countdown</a> for meditation, with a soft beep.</li>
+                <li>In study: Apply a <a href="/time/timer-countdown.html#45-minute-countdown">45-minute countdown</a> for deep learning, alerted by a watch sound.</li>
+                <li>In kitchen: Track a <a href="/time/timer-countdown.html#20-minute-countdown">20-minute countdown</a> for roasting, with a loud alarm.</li>
+                <li>In planning: Monitor a <a href="/time/timer-countdown.html#2-hour-countdown">2-hour countdown</a> for project phases, with a distinct tone.</li>
             </ul>
-            <p>These scenarios showcase how tailored durations with audio cues streamline diverse activities.</p>
+            <p>These examples highlight how tailored durations and alerts enhance task management.</p>
         </section>
         <section class="faq">
             <h2>Frequently Asked Questions (FAQ)</h2>
             <dl>
-                <dt>How does the URL anchor system work?</dt>
-                <dd>Append # with duration (e.g., #30-minute-countdown) to auto-start; it extracts the numeric value, converting hours to minutes if needed.</dd>
+                <dt>How do URL anchors function?</dt>
+                <dd>Use # with duration (e.g., #30-minute-countdown) to auto-start; the system converts to seconds for countdown.</dd>
                 
-                <dt>What if no duration is specified?</dt>
-                <dd>Defaults to 1 minute; adjust via the dropdown for immediate recalculation and start.</dd>
+                <dt>What if no duration is set?</dt>
+                <dd>Defaults to 1 minute; select another via dropdown for immediate start.</dd>
                 
-                <dt>Are alarm sounds user-definable?</dt>
-                <dd>Select from four royalty-free options; sounds play at zero, sourced from public domains for compatibility.</dd>
+                <dt>Why might the alarm not play?</dt>
+                <dd>Browser restrictions (e.g., autoplay policies) may block sound; ensure tab is active and volume is on. Four royalty-free sounds are provided.</dd>
                 
-                <dt>Will it function in background tabs?</dt>
-                <dd>Accuracy depends on active tabs; browser throttling may affect background timing—keep visible.</dd>
+                <dt>Does it work in background tabs?</dt>
+                <dd>Accuracy may vary due to browser throttling; keep the tab active for best results.</dd>
                 
-                <dt>Is offline use supported?</dt>
-                <dd>Yes, after loading, it runs locally, though initial access requires internet.</dd>
+                <dt>Is offline operation possible?</dt>
+                <dd>Yes, after initial load, it functions locally without internet.</dd>
             </dl>
         </section>
         <section class="related-resources">
             <h2>Related Resources</h2>
             <ul>
-                <li><a href="https://en.wikipedia.org/wiki/Time_management" target="_blank" rel="noopener noreferrer">Wikipedia: Time Management - Techniques for effective interval use</a></li>
-                <li><a href="https://www.cdc.gov/physicalactivity/basics/pa-health/index.html" target="_blank" rel="noopener noreferrer">CDC: Physical Activity Guidelines - Timed exercise benefits</a></li>
-                <li><a href="https://www.health.harvard.edu/blog/the-pomodoro-technique-helps-you-power-through-tasks-in-25-minute-tomato-shaped-chunks-2019121718580" target="_blank" rel="noopener noreferrer">Harvard Health: Pomodoro Technique - Structured timing strategies</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Time_management" target="_blank" rel="noopener noreferrer">Wikipedia: Time Management - Strategies for interval-based planning</a></li>
+                <li><a href="https://www.cdc.gov/physicalactivity/basics/pa-health/index.html" target="_blank" rel="noopener noreferrer">CDC: Physical Activity Guidelines - Timed activity benefits</a></li>
+                <li><a href="https://www.health.harvard.edu/blog/the-pomodoro-technique-helps-you-power-through-tasks-in-25-minute-tomato-shaped-chunks-2019121718580" target="_blank" rel="noopener noreferrer">Harvard Health: Pomodoro Technique - Structured interval timing</a></li>
                 <li><a href="https://www.nist.gov/pml/time-and-frequency-division" target="_blank" rel="noopener noreferrer">NIST: Time and Frequency Division - Precision timing standards</a></li>
             </ul>
         </section>
@@ -162,30 +162,43 @@
     </footer>
     <script>
         const sounds = [
-            'http://soundbible.com/grab.php?id=2061&type=mp3', // Loud Alarm Clock Buzzer
-            'http://soundbible.com/grab.php?id=1787&type=mp3', // Annoying Alarm Clock
-            'http://soundbible.com/grab.php?id=535&type=mp3',  // Alarm Clock Beeps
-            'http://soundbible.com/grab.php?id=2197&type=mp3'  // Analog Watch Alarm
+            'https://www.soundjay.com/buttons/sounds/beep-01a.mp3', // Beep Sound 1
+            'https://www.soundjay.com/buttons/sounds/beep-07.mp3',  // Beep Sound 2
+            'https://www.soundjay.com/buttons/sounds/beep-08b.mp3', // Beep Sound 3
+            'https://www.soundjay.com/buttons/sounds/beep-09.mp3'   // Beep Sound 4
         ];
         let time = 60; // Default 1 minute in seconds
         let interval;
         let selectedSound = 0;
         
         function parseHash() {
-            const hash = window.location.hash.toLowerCase().replace('-', ' ').replace('countdown', '').trim();
+            const hash = window.location.hash.toLowerCase().replace('#', '').replace('-', ' ').replace('countdown', '').trim();
             if (hash) {
-                const match = hash.match(/(\d+)\s*(minute|hour)/i);
-                if (match) {
-                    const num = parseInt(match[1]);
-                    const unit = match[2].toLowerCase();
-                    return unit === 'hour' ? num * 60 : num;
+                const durations = {
+                    '1 minute': 60,
+                    '2 minute': 120,
+                    '3 minute': 180,
+                    '5 minute': 300,
+                    '10 minute': 600,
+                    '15 minute': 900,
+                    '20 minute': 1200,
+                    '30 minute': 1800,
+                    '45 minute': 2700,
+                    '1 hour': 3600,
+                    '2 hour': 7200,
+                    '5 hour': 18000
+                };
+                for (const [key, value] of Object.entries(durations)) {
+                    if (hash === key) {
+                        return value;
+                    }
                 }
             }
-            return null;
+            return 60; // Default to 1 minute
         }
         
-        function setDuration(minutes) {
-            time = minutes * 60;
+        function setDuration(seconds) {
+            time = seconds;
             updateTimer();
             startTimer();
         }
@@ -210,27 +223,41 @@
             }, 1000);
         }
         
-        function restartTimer() {
-            const selectedMinutes = parseInt(document.getElementById('duration-select').value);
-            setDuration(selectedMinutes);
+        function playAlarm() {
+            try {
+                const audio = new Audio(sounds[selectedSound]);
+                audio.play().catch(error => {
+                    console.error('Audio playback failed:', error);
+                    alert('Alarm sound could not play due to browser restrictions. Ensure the tab is active and volume is enabled.');
+                });
+            } catch (error) {
+                console.error('Error initializing audio:', error);
+            }
         }
         
-        function playAlarm() {
-            const audio = new Audio(sounds[selectedSound]);
-            audio.play();
+        function restartTimer() {
+            const selectedSeconds = parseInt(document.getElementById('duration-select').value);
+            setDuration(selectedSeconds);
         }
         
         window.onload = () => {
-            const hashMinutes = parseHash();
-            if (hashMinutes) {
-                document.getElementById('duration-select').value = hashMinutes > 60 ? hashMinutes / 60 : hashMinutes;
-                setDuration(hashMinutes);
+            const hashSeconds = parseHash();
+            const select = document.getElementById('duration-select');
+            const options = Array.from(select.options);
+            const matchingOption = options.find(opt => parseInt(opt.value) === hashSeconds);
+            if (matchingOption) {
+                select.value = matchingOption.value;
             } else {
-                setDuration(1);
+                select.value = '60'; // Default to 1 minute
             }
+            setDuration(hashSeconds);
             
-            document.getElementById('duration-select').addEventListener('change', (e) => {
+            select.addEventListener('change', (e) => {
                 setDuration(parseInt(e.target.value));
+                const selectedOption = options.find(opt => opt.value === e.target.value);
+                if (selectedOption) {
+                    window.location.hash = selectedOption.dataset.hash;
+                }
             });
             
             document.getElementById('sound-select').addEventListener('change', (e) => {
@@ -243,6 +270,9 @@
                 navigator.share({
                     title: 'Countdown Timer',
                     url: window.location.href
+                }).catch(error => {
+                    console.error('Sharing failed:', error);
+                    alert('Share this page manually.');
                 });
             } else {
                 alert('Share this page manually.');
