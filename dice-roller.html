@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realistic Dice Roll Simulator - 3D Animated Dice with Pips</title>
+    <title>Personalized Animated Dice Roller - Custom Names and Realistic Rolls</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Realistic Dice Roll Simulator",
-      "url": "https://fcalculator.com/realistic-dice-roll-simulator.html",
-      "description": "Immerse in a realistic dice rolling experience with 3D animations and traditional pip designs. Customize dice count, observe dynamic tumbling, and analyze probability distributions for educational or gaming purposes.",
+      "name": "Personalized Animated Dice Roller",
+      "url": "https://fcalculator.com/personalized-animated-dice-roller.html",
+      "description": "Customize your dice rolling experience with personalized names for each die, realistic 3D animations, and traditional pip designs. Perfect for gaming sessions, educational probability lessons, or fun random generations with a personal touch.",
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [{
@@ -28,8 +28,8 @@
         },{
           "@type": "ListItem",
           "position": 3,
-          "name": "Realistic Dice Roll Simulator",
-          "item": "https://fcalculator.com/realistic-dice-roll-simulator.html"
+          "name": "Personalized Animated Dice Roller",
+          "item": "https://fcalculator.com/personalized-animated-dice-roller.html"
         }]
       }
     }
@@ -47,7 +47,7 @@
             height: 100px;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 2s;
+            transition: transform 0.5s ease-out;
             margin: 20px;
         }
         .face {
@@ -58,6 +58,7 @@
             border: 1px solid black;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
             position: relative;
+            backface-visibility: hidden;
         }
         .pip {
             width: 20px;
@@ -77,8 +78,9 @@
             animation: roll 2s ease-in-out;
         }
         @keyframes roll {
-            0% { transform: rotateX(0deg) rotateY(0deg); }
-            100% { transform: rotateX(720deg) rotateY(720deg); }
+            0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+            50% { transform: rotateX(180deg) rotateY(360deg) rotateZ(180deg); }
+            100% { transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg); }
         }
     </style>
 </head>
@@ -86,22 +88,25 @@
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/other.html">Other</a> > <a href="/realistic-dice-roll-simulator.html">Realistic Dice Roll Simulator</a>
+            <a href="/">FCalculator.com</a> > <a href="/other.html">Other</a> > <a href="/personalized-animated-dice-roller.html">Personalized Animated Dice Roller</a>
         </div>
-        <h1>Realistic Dice Roll Simulator</h1>
-        <p>Discover the excitement of traditional dice rolling through our advanced 3D simulator featuring authentic pip patterns. Observe each die as it tumbles realistically, providing an engaging way to generate random outcomes for games, probability studies, or casual use.</p>
+        <h1>Personalized Animated Dice Roller</h1>
+        <p>Enhance your dice rolling adventures by assigning custom names to each die, watching them animate in 3D with authentic pip patterns. This tool combines personalization with probability simulation, ideal for role-playing games, classroom activities, or personalized decision-making processes.</p>
     </header>
     
     <main>
         <!-- Tool Section -->
         <section class="tool-section">
-            <h2>Simulate Dice Rolls</h2>
+            <h2>Customize and Roll Your Dice</h2>
             <form id="dice-form">
                 <label for="num-dice">Number of Dice:</label>
                 <input type="number" id="num-dice" min="1" max="5" value="1" required>
                 
                 <label for="num-sides">Sides per Die:</label>
                 <input type="number" id="num-sides" min="2" max="6" value="6" required>
+                
+                <label for="dice-names">Dice Names (comma-separated):</label>
+                <input type="text" id="dice-names" placeholder="Die 1, Die 2, ..." >
                 
                 <button type="button" onclick="rollDice()">Roll Dice</button>
             </form>
@@ -119,101 +124,121 @@
         
         <!-- Detailed Content -->
         <section>
-            <h2>The Mechanics of Realistic Dice Simulation</h2>
-            <p>Our simulator employs CSS 3D transformations to replicate the physical behavior of dice. Each die is constructed as a virtual cube with faces adorned in classic pip configurations, ensuring an accurate representation of standard six-sided dice. The animation sequence involves randomized spinning followed by a settling phase, displaying the outcome prominently.</p>
-            <p>Dice have evolved from ancient tools used in divination to essential components in modern gaming. This digital rendition maintains the integrity of random chance while incorporating visual fidelity through pip designs, which traditionally represent numbers via dot patterns for quick recognition.</p>
-            <p>In-depth analysis reveals that pip arrangements follow specific symmetries: opposites sum to seven, enhancing balance in physical dice. Our model adheres to this standard, with configurations optimized for visual clarity during animations.</p>
+            <h2>Exploring Personalized Dice Simulations</h2>
+            <p>Our personalized dice roller introduces custom naming for each die, allowing users to label them for specific players or purposes, such as "Player 1's Attack Die" or "Marija's Luck Roll." Combined with 3D animations and pip-based visuals, it creates an immersive experience that mirrors physical dice while adding digital convenience and customization.</p>
+            <p>The animation employs controlled rotations to simulate realistic tumbling without excessive movement, ensuring the dice remain visually contained. Pip arrangements adhere to standard configurations where opposite faces sum to seven, promoting balance and familiarity in outcomes.</p>
+            <p>Historically, dice personalization dates back to custom engravings in ancient games. Today, this digital tool extends that tradition, enabling unique identifiers for multiplayer scenarios or thematic games, enhancing engagement and tracking.</p>
         </section>
         
         <section>
-            <h2>Guide to Using the Simulator</h2>
+            <h2>How to Personalize and Use the Roller</h2>
             <ol>
-                <li>Choose the number of dice, limited to five for optimal display and performance.</li>
-                <li>Set the sides per die, with a maximum of six to support traditional pip visuals.</li>
-                <li>Press "Roll Dice" to initiate the simulation.</li>
-                <li>View the animated rolls and final results, including individual values and total sum.</li>
-                <li>Share your experience using the provided button.</li>
+                <li>Input the number of dice, up to five for clear visualization.</li>
+                <li>Select sides per die, up to six for pip authenticity.</li>
+                <li>Enter names separated by commas; defaults to "Die 1," etc., if omitted.</li>
+                <li>Click "Roll Dice" to animate and reveal results.</li>
+                <li>Review named outcomes and total sum; share via the button.</li>
             </ol>
-            <p>This interface is user-friendly across devices, promoting accessibility for educational demonstrations or virtual game nights. Experiment with different counts to observe varying probability outcomes.</p>
+            <p>This setup supports diverse uses, from named rolls in board games to labeled simulations in probability education, with names aiding in result attribution and analysis.</p>
         </section>
         
         <section>
-            <h2>Exploring Dice Probabilities</h2>
-            <p>Each face on a six-sided die holds a 1/6 probability, approximately 16.67%. Pip designs aid in rapid outcome assessment, a feature rooted in historical dice craftsmanship.</p>
+            <h2>Probability Fundamentals with Personalized Rolls</h2>
+            <p>Assigning names doesn't alter probabilities but aids in tracking individual die performances over multiple rolls. For six-sided dice, each face's likelihood remains 1/6, with pips facilitating quick reads.</p>
             
             <table>
                 <thead>
                     <tr>
-                        <th>Sides</th>
-                        <th>Face Probability</th>
-                        <th>Typical Usage</th>
+                        <th>Face Value</th>
+                        <th>Probability</th>
+                        <th>Pip Configuration Example</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td>1</td>
+                        <td>~16.67%</td>
+                        <td>Single central pip</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>~16.67%</td>
+                        <td>Diagonal pips</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>~16.67%</td>
+                        <td>Diagonal with center</td>
+                    </tr>
+                    <tr>
                         <td>4</td>
-                        <td>25%</td>
-                        <td>Simple RPG elements</td>
+                        <td>~16.67%</td>
+                        <td>Quartered pips</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>~16.67%</td>
+                        <td>Quartered with center</td>
                     </tr>
                     <tr>
                         <td>6</td>
                         <td>~16.67%</td>
-                        <td>Classic board games</td>
+                        <td>Two rows of three</td>
                     </tr>
                 </tbody>
             </table>
             
-            <p>Multi-die rolls produce summed distributions resembling bell curves. The following chart depicts combinations for two six-sided dice, emphasizing the peak at seven.</p>
+            <p>With multiple named dice, sums form distributions. The chart illustrates combinations for two dice, useful for understanding aggregated probabilities in personalized scenarios.</p>
             
-            <h3>Combination Distribution for Two Dice</h3>
+            <h3>Sum Combinations for Two Six-Sided Dice</h3>
             <canvas id="dice-chart" width="400" height="200"></canvas>
             
-            <p>This visualization underscores combinatorial probabilities, where central values arise from more pathways, a fundamental principle in statistical analysis.</p>
+            <p>Personal names allow attributing high or low rolls to specific entities, enriching statistical insights in repeated experiments.</p>
         </section>
         
         <section>
-            <h2>Versatile Applications of the Simulator</h2>
+            <h2>Applications of Personalized Dice Rolling</h2>
             <ul>
-                <li><strong>Gaming Enhancement:</strong> Integrate into online tabletop sessions for immersive randomness.</li>
-                <li><strong>Educational Aid:</strong> Illustrate chance concepts in classrooms with visual pip-based outcomes.</li>
-                <li><strong>Random Selection:</strong> Facilitate fair choices in group settings through animated rolls.</li>
-                <li><strong>Recreational Use:</strong> Enjoy the tactile feel of dice digitally for leisure activities.</li>
+                <li><strong>Multiplayer Gaming:</strong> Name dice per player for clear result assignment in RPGs or board games.</li>
+                <li><strong>Educational Customization:</strong> Label dice for group activities, teaching probability with personalized data tracking.</li>
+                <li><strong>Decision Tools:</strong> Use named dice for themed random selections, like "Team A's Choice."</li>
+                <li><strong>Entertainment:</strong> Add fun with custom names in casual or family games.</li>
             </ul>
-            <p>Complement this tool with related calculators like our <a href="/random-number.html">Random Number Generator</a> for extended functionality or <a href="/percentage.html">Percentage Calculator</a> for probability computations.</p>
+            <p>Integrate with tools like our <a href="/random-number.html">Random Number Generator</a> for broader randomness or <a href="/percentage.html">Percentage Calculator</a> for probability breakdowns.</p>
         </section>
         
         <section>
             <h2>Frequently Asked Questions</h2>
             <dl>
-                <dt>How are pips arranged on the dice?</dt>
-                <dd>Pips follow standard patterns: centered for one, diagonal for two and three, quartered for four, and so on, with opposites summing to seven.</dd>
+                <dt>How do names affect the simulation?</dt>
+                <dd>Names are for labeling only, enhancing usability without impacting randomness or animation.</dd>
                 
-                <dt>Why is the side limit set to six?</dt>
-                <dd>To maintain authenticity with pip visuals; higher-sided dice typically use numerals, which can be explored in our basic <a href="/dice-roller.html">Dice Roller</a>.</dd>
+                <dt>Why limit to six sides?</dt>
+                <dd>To preserve traditional pip visuals; explore numeral-based options in our <a href="/dice-roller.html">Standard Dice Roller</a>.</dd>
                 
-                <dt>What ensures fair outcomes?</dt>
-                <dd>JavaScript's random function generates unbiased results, simulating physical fairness.</dd>
+                <dt>Can animations be adjusted?</dt>
+                <dd>Current animations are optimized for containment; feedback welcome for refinements.</dd>
                 
-                <dt>Can I adjust animation speed?</dt>
-                <dd>Current settings provide a natural pace; customizations may appear in future updates.</dd>
+                <dt>What if names exceed dice count?</dt>
+                <dd>Extra names are ignored; fewer use defaults like "Die X."</dd>
                 
-                <dt>How does this aid probability learning?</dt>
-                <dd>Repeated simulations allow empirical data collection, comparable to theoretical models via charts and tables.</dd>
+                <dt>How to analyze named results?</dt>
+                <dd>Track over rolls to spot patterns, using the sum for collective insights.</dd>
             </dl>
         </section>
         
         <section>
             <h2>Disclaimer</h2>
-            <p>This simulator serves entertainment and educational goals. It does not provide certified randomness for professional or gambling contexts. Users should consult appropriate tools for critical applications.</p>
+            <p>This tool is for entertainment and educational purposes. Outcomes are pseudo-random and not suitable for high-stakes decisions.</p>
         </section>
         
         <section class="related-resources">
             <h2>Related Resources</h2>
             <ul>
-                <li><a href="https://en.wikipedia.org/wiki/Dice#History" target="_blank" rel="noopener noreferrer">Wikipedia: History of Dice</a></li>
-                <li><a href="https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-probability-statistics/cc-7th-basic-prob/a/probability-1-basic" target="_blank" rel="noopener noreferrer">Khan Academy: Introduction to Probability</a></li>
-                <li><a href="https://www.dndbeyond.com/sources/basic-rules/using-ability-scores#Dice" target="_blank" rel="noopener noreferrer">D&D Beyond: Dice in Role-Playing</a></li>
-                <li><a href="https://www.random.org/analysis/" target="_blank" rel="noopener noreferrer">RANDOM.ORG: Randomness Analysis</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Dice#Arrangement" target="_blank" rel="noopener noreferrer">Wikipedia: Dice Arrangements and History</a></li>
+                <li><a href="https://www.khanacademy.org/math/probability/probability-geometry/probability-basics/a/probability-1-module" target="_blank" rel="noopener noreferrer">Khan Academy: Probability Basics</a></li>
+                <li><a href="https://www.dndbeyond.com/sources/basic-rules/step-by-step-characters#Dice" target="_blank" rel="noopener noreferrer">D&D Beyond: Using Dice in Games</a></li>
+                <li><a href="https://www.random.org/dice/?num=1" target="_blank" rel="noopener noreferrer">RANDOM.ORG: Online Dice Roller</a></li>
             </ul>
         </section>
     </main>
@@ -231,6 +256,7 @@
     
     <script>
         let rollResults = [];
+        let diceNames = [];
         
         function addPips(el, num) {
             const positions = [
@@ -259,18 +285,7 @@
                 const [className, numStr] = faceStr.split(':');
                 const el = document.createElement('div');
                 el.classList.add('face', className);
-                const num = parseInt(numStr);
-                const numSides = parseInt(document.getElementById('num-sides').value);
-                if (numSides === 6) {
-                    addPips(el, num);
-                } else {
-                    el.textContent = num;
-                    el.style.fontSize = '40px';
-                    el.style.fontWeight = 'bold';
-                    el.style.display = 'flex';
-                    el.style.justifyContent = 'center';
-                    el.style.alignItems = 'center';
-                }
+                addPips(el, parseInt(numStr));
                 die.appendChild(el);
             });
             setTimeout(() => {
@@ -288,7 +303,7 @@
                 case 3: return 'rotateX(0deg) rotateY(-90deg)';
                 case 4: return 'rotateX(0deg) rotateY(90deg)';
                 case 5: return 'rotateX(-90deg) rotateY(0deg)';
-                case 6: return 'rotateX(0deg) rotateY(180deg)';
+                case 6: return 'rotateX(180deg) rotateY(0deg)';
                 default: return 'rotateX(0deg) rotateY(0deg)';
             }
         }
@@ -296,33 +311,34 @@
         function rollDice() {
             const numDice = parseInt(document.getElementById('num-dice').value);
             const numSides = parseInt(document.getElementById('num-sides').value);
+            const namesInput = document.getElementById('dice-names').value.trim();
+            diceNames = namesInput ? namesInput.split(',').map(name => name.trim()) : [];
             rollResults = [];
             let sum = 0;
             const container = document.getElementById('dice-container');
             container.innerHTML = '';
             
             for (let i = 0; i < numDice; i++) {
-                let roll = Math.floor(Math.random() * numSides) + 1;
-                if (numSides === 6) {
-                    // Use as is for pips
-                } else {
-                    // For non-6, show roll as text on a random face
-                    roll = roll > 6 ? Math.floor(Math.random() * 6) + 1 : roll; // Map to 1-6 for rotation
-                }
+                const roll = Math.floor(Math.random() * numSides) + 1;
                 rollResults.push(roll);
                 sum += roll;
                 const die = createDie(roll);
                 container.appendChild(die);
             }
             
-            document.getElementById('rolls').textContent = `Individual Rolls: ${rollResults.join(', ')}`;
+            const rollsText = rollResults.map((roll, i) => {
+                const name = (diceNames[i] || `Die ${i+1}`);
+                return `${name}: ${roll}`;
+            }).join(', ');
+            
+            document.getElementById('rolls').textContent = `Individual Rolls: ${rollsText}`;
             document.getElementById('sum').textContent = `Total Sum: ${sum}`;
         }
         
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Realistic Dice Roll Simulator',
+                    title: 'Personalized Animated Dice Roller',
                     url: window.location.href
                 });
             } else {
