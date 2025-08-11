@@ -43,6 +43,7 @@
             line-height: 150px;
             font-size: 12px;
             color: #fff;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
         }
         .result {
             text-align: center;
@@ -93,7 +94,7 @@
         <!-- Tool Section at the Top -->
         <section class="tool-section">
             <h2>Generate Random Numbers</h2>
-            <p>Use the inputs below to configure your number wheel. Enter the lowest and highest numbers to define the range. Optionally, exclude specific numbers by listing them separated by commas. Set an interval to skip numbers in the sequence for more controlled randomness.</p>
+            <p>Use the inputs below to configure your number wheel. Enter the lowest and highest numbers to define the range. Optionally, exclude specific numbers by listing them separated by commas. Set an interval to skip numbers in the sequence for more controlled randomness. Once configured, generate the wheel, shuffle if needed, toggle visibility, and spin to get a random selection.</p>
             <div class="input-group">
                 <label for="lowest-number">Lowest Number:</label>
                 <input type="number" id="lowest-number" value="1">
@@ -110,7 +111,7 @@
                 <div class="buttons">
                     <button onclick="generateWheel()">Generate Wheel</button>
                     <button onclick="shuffleNumbers()">Shuffle</button>
-                    <button onclick="toggleVisibility()">Hide All</button>
+                    <button id="toggle-btn" onclick="toggleVisibility()">Hide All</button>
                     <button onclick="spinWheel()">Spin</button>
                     <button onclick="saveAsPDF()">Save as PDF</button>
                 </div>
@@ -126,18 +127,18 @@
         <section class="description">
             <h2>Understanding Random Number Generation</h2>
             <p>Random number generation is a fundamental concept in probability and statistics, used in simulations, cryptography, and sampling methods. Our wheel employs JavaScript's Math.random() function to ensure pseudo-random selections, mimicking true randomness for practical applications.</p>
-            <p>The process involves creating a sequence of numbers within your specified range, applying exclusions and intervals, and then visually representing them on a spinning wheel for an engaging user experience.</p>
+            <p>The process involves creating a sequence of numbers within your specified range, applying exclusions and intervals, and then visually representing them on a spinning wheel for an engaging user experience. This visualization helps in understanding distribution and selection probability.</p>
 
             <h3>Step-by-Step Guide</h3>
             <ol>
-                <li>Define the range: Set the minimum and maximum values to bound your number set.</li>
-                <li>Exclude unwanted numbers: Input comma-separated values to remove specific entries from consideration.</li>
-                <li>Apply intervals: Use steps to create arithmetic progressions, ideal for even or odd number selections.</li>
-                <li>Generate and spin: Create the wheel, shuffle if desired, and spin to select a random number.</li>
+                <li>Define the range: Set the minimum and maximum values to bound your number set. For example, from 1 to 100 for a standard lottery-style draw.</li>
+                <li>Exclude unwanted numbers: Input comma-separated values to remove specific entries from consideration, ensuring tailored randomness.</li>
+                <li>Apply intervals: Use steps to create arithmetic progressions, ideal for even or odd number selections, like every 2nd number for evens.</li>
+                <li>Generate and spin: Create the wheel, shuffle if desired for added randomness, toggle visibility for mystery, and spin to select a random number.</li>
             </ol>
 
             <h3>Applications in Various Fields</h3>
-            <p>In education, this tool can demonstrate probability concepts. In gaming, it ensures fair raffle draws. For data analysis, it aids in random sampling from datasets.</p>
+            <p>In education, this tool can demonstrate probability concepts through visual spins. In gaming, it ensures fair raffle draws with customizable options. For data analysis, it aids in random sampling from datasets, supporting statistical validity.</p>
 
             <table>
                 <thead>
@@ -163,6 +164,16 @@
                         <td>Skips numbers at regular steps.</td>
                         <td>Interval 2: Odds only</td>
                     </tr>
+                    <tr>
+                        <td>Shuffle</td>
+                        <td>Randomizes the order of numbers on the wheel.</td>
+                        <td>Reshuffle for new arrangement</td>
+                    </tr>
+                    <tr>
+                        <td>Visibility Toggle</td>
+                        <td>Hides or shows numbers on the wheel.</td>
+                        <td>Hide for blind selection</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -183,6 +194,7 @@
                 <li>1-10: Ideal for simple dice-like rolls.</li>
                 <li>1-100: Common for lotteries and games.</li>
                 <li>Even numbers (interval 2): For parity-based selections.</li>
+                <li>1-1000 with exclusions: For advanced raffles excluding certain entries.</li>
             </ul>
         </section>
 
@@ -235,13 +247,15 @@
         function drawWheel() {
             const wheel = document.getElementById('wheel');
             wheel.innerHTML = '';
+            wheel.style.transform = 'rotate(0deg)'; // Reset rotation
             const sectorAngle = 360 / numbers.length;
             numbers.forEach((num, index) => {
                 const sector = document.createElement('div');
                 sector.className = 'sector';
-                sector.style.backgroundColor = `hsl(${index * sectorAngle}, 70%, 50%)`;
-                sector.style.transform = `rotate(${index * sectorAngle}deg) skewY(-${90 - sectorAngle}deg)`;
+                sector.style.backgroundColor = `hsl(${index * (360 / numbers.length)}, 70%, 50%)`;
+                sector.style.transform = `rotate(${index * sectorAngle}deg) skewY(${90 - sectorAngle}deg)`;
                 sector.innerText = visible ? num : '';
+                sector.dataset.num = num;
                 wheel.appendChild(sector);
             });
         }
@@ -265,7 +279,11 @@
             const randomRotation = Math.random() * 360 + 360 * 5; // Spin 5 full rotations + random
             wheel.style.transform = `rotate(-${randomRotation}deg)`;
             setTimeout(() => {
-                const selectedIndex = Math.floor((randomRotation % 360) / (360 / numbers.length));
+                const sectorAngle = 360 / numbers.length;
+                // Adjust for the direction of rotation and find which sector is at the top or a fixed pointer
+                let adjustedRotation = (randomRotation % 360);
+                let selectedIndex = Math.floor(adjustedRotation / sectorAngle);
+                selectedIndex = (numbers.length - selectedIndex) % numbers.length; // Adjust if needed for pointer position
                 const selected = numbers[selectedIndex];
                 document.getElementById('result').innerText = `Selected Number: ${selected}`;
             }, 4000); // Match transition time
