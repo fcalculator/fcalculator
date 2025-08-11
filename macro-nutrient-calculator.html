@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macro Nutrient Calculator - Personalized Daily Intake Guide</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Macro Nutrient Calculator",
+      "description": "Calculate your daily macronutrient needs for proteins, carbs, and fats based on personal factors like age, weight, activity level, and fitness goals.",
+      "url": "https://fcalculator.com/macro-nutrient-calculator.html",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "FCalculator.com",
+          "item": "https://fcalculator.com/"
+        },{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Health & Fitness",
+          "item": "https://fcalculator.com/health-fitness.html"
+        },{
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Macro Nutrient Calculator",
+          "item": "https://fcalculator.com/macro-nutrient-calculator.html"
+        }]
+      },
+      "potentialAction": {
+        "@type": "CalculateAction",
+        "target": "https://fcalculator.com/macro-nutrient-calculator.html",
+        "result": {
+          "@type": "NutritionInformation",
+          "name": "Daily Macronutrients"
+        }
+      }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/health-fitness.html">Health & Fitness</a> > <a href="/macro-nutrient-calculator.html">Macro Nutrient Calculator</a>
+        </div>
+        <h1>Macro Nutrient Calculator: Determine Your Daily Protein, Carbs, and Fat Needs</h1>
+        <p>Understanding your macronutrient requirements is essential for optimizing nutrition, whether you're aiming to build muscle, lose fat, or maintain a healthy lifestyle. This tool uses scientifically validated formulas to provide personalized recommendations based on your unique profile.</p>
+    </header>
+    
+    <main>
+        <!-- Tool at the top -->
+        <section id="calculator-tool">
+            <h2>Calculate Your Macros</h2>
+            <form id="macro-form">
+                <label for="gender">Gender:</label>
+                <select id="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                
+                <label for="age">Age (years):</label>
+                <input type="number" id="age" min="1" required>
+                
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" min="1" required>
+                
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" min="1" required>
+                
+                <label for="activity">Activity Level:</label>
+                <select id="activity">
+                    <option value="1.2">Sedentary (little or no exercise)</option>
+                    <option value="1.375">Lightly active (light exercise 1-3 days/week)</option>
+                    <option value="1.55">Moderately active (moderate exercise 3-5 days/week)</option>
+                    <option value="1.725">Very active (hard exercise 6-7 days/week)</option>
+                    <option value="1.9">Extra active (very hard exercise & physical job)</option>
+                </select>
+                
+                <label for="goal">Goal:</label>
+                <select id="goal">
+                    <option value="maintain">Maintain weight</option>
+                    <option value="loss">Weight loss (-500 cal/day)</option>
+                    <option value="gain">Weight gain (+500 cal/day)</option>
+                </select>
+                
+                <label for="bodyfat">Body Fat % (optional, for more accuracy):</label>
+                <input type="number" id="bodyfat" min="0" max="100">
+                
+                <button type="button" onclick="calculateMacros()">Calculate</button>
+            </form>
+            
+            <div id="results" style="display:none;">
+                <h3>Your Daily Macros</h3>
+                <p>Daily Calories: <span id="calories" class="result-green"></span></p>
+                <p>Protein (g): <span id="protein" class="result-green"></span></p>
+                <p>Carbs (g): <span id="carbs" class="result-green"></span></p>
+                <p>Fat (g): <span id="fat" class="result-green"></span></p>
+                
+                <canvas id="macroChart" width="400" height="200"></canvas>
+                
+                <button onclick="saveAsPDF()">Save as PDF</button>
+                <button onclick="sharePage()">Share</button>
+            </div>
+        </section>
+        
+        <!-- Detailed content below -->
+        <section id="introduction">
+            <h2>What Are Macronutrients and Why Do They Matter?</h2>
+            <p>Macronutrients, often referred to as "macros," are the primary nutrients your body requires in large amounts to function optimally. These include proteins, carbohydrates, and fats. Each plays a critical role in energy production, muscle repair, hormone regulation, and overall health. Proteins support tissue growth and repair, carbohydrates provide quick energy for daily activities and workouts, while fats are essential for cell function and nutrient absorption.</p>
+            <p>Balancing these macros is key to achieving specific fitness outcomes. For instance, higher protein intake can aid muscle building, while adjusted carb levels might enhance endurance. Our calculator uses evidence-based equations like the Mifflin-St Jeor formula for basal metabolic rate (BMR) and total daily energy expenditure (TDEE) to tailor recommendations to your lifestyle.</p>
+            <p>Whether you're tracking for weight management or performance, understanding macros empowers better food choices. Link to our <a href="/bmi.html">BMI Calculator</a> for complementary body composition insights or <a href="/calorie.html">Calorie Calculator</a> for basic energy needs.</p>
+        </section>
+        
+        <section id="how-it-works">
+            <h2>How the Macro Nutrient Calculator Works</h2>
+            <p>This tool begins by calculating your BMR, the energy your body needs at rest. For accuracy, it optionally incorporates body fat percentage via the Katch-McArdle formula. Then, it factors in your activity level to determine TDEE. Finally, it adjusts calories based on your goal and distributes them into macros: typically 30% protein, 45% carbs, and 25% fats, with tweaks for loss or gain.</p>
+            <p>Formulas used:</p>
+            <ul>
+                <li>BMR (Mifflin-St Jeor): Men = 10 × weight(kg) + 6.25 × height(cm) - 5 × age + 5; Women = -161 instead of +5.</li>
+                <li>TDEE = BMR × activity multiplier.</li>
+                <li>Macros: Protein ~1.6-2.2g/kg, fats 20-30% of calories, carbs remainder.</li>
+            </ul>
+            <p>This approach ensures precise, sustainable results without guesswork.</p>
+        </section>
+        
+        <section id="macro-examples">
+            <h2>Sample Macro Breakdowns and Food Sources</h2>
+            <p>Here's a table comparing macro distributions for different goals (based on 2000 cal/day):</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Goal</th>
+                        <th>Protein (g)</th>
+                        <th>Carbs (g)</th>
+                        <th>Fat (g)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Weight Loss</td>
+                        <td>150</td>
+                        <td>200</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>Maintain</td>
+                        <td>125</td>
+                        <td>225</td>
+                        <td>67</td>
+                    </tr>
+                    <tr>
+                        <td>Muscle Gain</td>
+                        <td>175</td>
+                        <td>250</td>
+                        <td>56</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>Food sources table:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Macro</th>
+                        <th>Examples</th>
+                        <th>Daily Serving Ideas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Protein</td>
+                        <td>Chicken, eggs, fish, tofu</td>
+                        <td>100g chicken breast = 25g protein</td>
+                    </tr>
+                    <tr>
+                        <td>Carbs</td>
+                        <td>Oats, rice, fruits, vegetables</td>
+                        <td>1 cup rice = 45g carbs</td>
+                    </tr>
+                    <tr>
+                        <td>Fat</td>
+                        <td>Avocados, nuts, olive oil</td>
+                        <td>1 tbsp oil = 14g fat</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="benefits">
+            <h2>Benefits of Tracking Macros</h2>
+            <p>Tracking macros goes beyond calorie counting by ensuring nutrient balance. It can improve energy levels, support recovery from workouts, and promote long-term health. Studies show that personalized macro plans lead to better adherence and results compared to generic diets. For athletes, higher carbs enhance performance; for weight loss, increased protein preserves muscle mass.</p>
+            <p>Integrate this with tools like our <a href="/tdee-calculator.html">TDEE Calculator</a> for comprehensive tracking.</p>
+        </section>
+        
+        <section id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <dl>
+                <dt>What if I don't know my body fat percentage?</dt>
+                <dd>The calculator uses Mifflin-St Jeor by default; body fat improves accuracy for lean individuals.</dd>
+                
+                <dt>How often should I recalculate?</dt>
+                <dd>Every 4-6 weeks or after significant weight changes.</dd>
+                
+                <dt>Can this help with specific diets like keto?</dt>
+                <dd>Yes, adjust outputs manually for low-carb (e.g., <20% carbs).</dd>
+                
+                <dt>Is macro tracking suitable for everyone?</dt>
+                <dd>It's great for fitness enthusiasts but consult a doctor for medical conditions.</dd>
+            </dl>
+        </section>
+        
+        <section id="disclaimer">
+            <h2>Disclaimer</h2>
+            <p>This calculator provides general guidance and is not a substitute for professional medical or nutritional advice. Results are estimates; consult a healthcare provider before making dietary changes, especially if you have health conditions.</p>
+        </section>
+        
+        <section id="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Macronutrient" target="_blank" rel="noopener">Wikipedia: Macronutrients</a></li>
+                <li><a href="https://www.nutrition.gov/topics/basic-nutrition/macronutrients" target="_blank" rel="noopener">Nutrition.gov: Macronutrients Overview</a></li>
+                <li><a href="https://www.health.harvard.edu/blog/macronutrients-what-they-are-and-why-they-matter-202010052102" target="_blank" rel="noopener">Harvard Health: Macronutrients Explained</a></li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    
+    <script>
+        let macroChart;
+        let macroData = [];
+
+        function calculateMacros() {
+            const gender = document.getElementById('gender').value;
+            const age = parseInt(document.getElementById('age').value);
+            const height = parseInt(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const activity = parseFloat(document.getElementById('activity').value);
+            const goal = document.getElementById('goal').value;
+            const bodyfat = parseFloat(document.getElementById('bodyfat').value) || null;
+
+            let bmr;
+            if (bodyfat) {
+                const lbm = weight * (1 - bodyfat / 100);
+                bmr = 370 + (21.6 * lbm);
+            } else {
+                if (gender === 'male') {
+                    bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+                } else {
+                    bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+                }
+            }
+
+            let tdee = bmr * activity;
+
+            let calories = tdee;
+            if (goal === 'loss') calories -= 500;
+            if (goal === 'gain') calories += 500;
+
+            calories = Math.round(calories);
+
+            const proteinPercentage = 0.3; // 30%
+            const fatPercentage = 0.25; // 25%
+            const carbsPercentage = 0.45; // 45%
+
+            const protein = Math.round((calories * proteinPercentage) / 4);
+            const fat = Math.round((calories * fatPercentage) / 9);
+            const carbs = Math.round((calories * carbsPercentage) / 4);
+
+            document.getElementById('calories').textContent = calories;
+            document.getElementById('protein').textContent = protein;
+            document.getElementById('carbs').textContent = carbs;
+            document.getElementById('fat').textContent = fat;
+
+            document.getElementById('results').style.display = 'block';
+
+            // Chart
+            const ctx = document.getElementById('macroChart').getContext('2d');
+            if (macroChart) macroChart.destroy();
+            macroChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Protein', 'Carbs', 'Fat'],
+                    datasets: [{
+                        data: [protein * 4, carbs * 4, fat * 9],
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                    }]
+                },
+                options: { responsive: true }
+            });
+
+            // For PDF
+            macroData = [
+                ['Daily Calories', calories],
+                ['Protein (g)', protein],
+                ['Carbs (g)', carbs],
+                ['Fat (g)', fat]
+            ];
+        }
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFontSize(14);
+            doc.text("Macro Nutrient Calculation Results", 105, 15, { align: "center" });
+
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: macroData,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica' },
+                margin: { top: 10 },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+
+            doc.save('macro-nutrient-results.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Macro Nutrient Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
