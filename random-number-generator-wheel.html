@@ -3,333 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Number Generator Wheel - Spin to Pick Numbers</title>
-    <meta name="description" content="Spin the wheel to generate random numbers effortlessly. Customize ranges, intervals, and exclusions for precise results. Ideal for games, decisions, and more.">
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Random Number Generator Wheel - Interactive Number Picker | FCalculator.com</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Random Number Generator Wheel",
-      "description": "A versatile tool to generate random numbers by spinning a customizable wheel. Perfect for lotteries, games, and random selections.",
-      "url": "https://fcalculator.com/random-number-generator.html",
-      "publisher": {
-        "@type": "Organization",
-        "name": "FCalculator.com",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://fcalculator.com/logo.png"
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Random Number Generator Wheel - Interactive Number Picker",
+        "description": "An interactive tool for generating random numbers using a spinning wheel. Customize ranges, exclusions, and intervals for unbiased selections in games, raffles, and decisions.",
+        "url": "https://fcalculator.com/random-number-generator-wheel.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com"
         }
-      }
     }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        /* Additional styles for the wheel - since main CSS is linked, add specifics here */
+        .wheel-container {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            position: relative;
+        }
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #000;
+            overflow: hidden;
+            transition: transform 4s ease-out;
+        }
+        .sector {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: 100% 100%;
+            text-align: center;
+            line-height: 150px;
+            font-size: 12px;
+            color: #fff;
+        }
+        .result {
+            text-align: center;
+            font-size: 2em;
+            color: green;
+            margin: 20px 0;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .input-group label {
+            margin-top: 10px;
+        }
+        .input-group input {
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .share-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/other.html">Other Calculators</a> > <a href="/random-number-generator.html">Random Number Generator</a>
+            <a href="/">FCalculator.com</a> > <a href="/other.html">Other</a> > <a href="/random-number-generator-wheel.html">Random Number Generator Wheel</a>
         </div>
-        <h1>Random Number Generator Wheel</h1>
-        <p>Discover our interactive random number generator wheel, designed to provide fair and unbiased random selections. Whether you're organizing a raffle, making quick decisions, or teaching probability concepts, this tool offers customizable options to suit your needs. Set your number range, define intervals, exclude specific values, and spin the wheel for instant results.</p>
+        <h1>Random Number Generator Wheel - Interactive Number Picker</h1>
+        <p>Explore the principles of randomness with our interactive number generator wheel. This tool allows for precise customization of number ranges, exclusions, and intervals, providing unbiased selections suitable for statistical analysis, gaming, and decision-making processes.</p>
     </header>
-    
+
     <main>
+        <!-- Tool Section at the Top -->
         <section class="tool-section">
-            <h2>Generate Your Random Number</h2>
-            <p>Use the controls below to customize your random number generation. Enter the minimum and maximum values for the range, specify an interval if needed (e.g., generate only even numbers by setting interval to 2), and exclude any unwanted numbers. Choose between normal mode for repeated selections or elimination mode to remove picked numbers progressively.</p>
-            
-            <div class="input-form">
-                <label for="min">Minimum Number:</label>
-                <input type="number" id="min" value="1" placeholder="Enter min value">
-                
-                <label for="max">Maximum Number:</label>
-                <input type="number" id="max" value="100" placeholder="Enter max value">
-                
-                <label for="interval">Interval (optional):</label>
-                <input type="number" id="interval" value="1" placeholder="Enter interval">
-                
-                <label for="exclude">Exclude Numbers (comma-separated):</label>
-                <input type="text" id="exclude" placeholder="e.g., 5,10,15">
-                
-                <label for="mode">Mode:</label>
-                <select id="mode">
-                    <option value="normal">Normal (Repeat Allowed)</option>
-                    <option value="elimination">Elimination (Remove After Pick)</option>
-                </select>
-                
-                <button onclick="spinWheel()">Spin the Wheel</button>
+            <h2>Generate Random Numbers</h2>
+            <p>Use the inputs below to configure your number wheel. Enter the lowest and highest numbers to define the range. Optionally, exclude specific numbers by listing them separated by commas. Set an interval to skip numbers in the sequence for more controlled randomness.</p>
+            <div class="input-group">
+                <label for="lowest-number">Lowest Number:</label>
+                <input type="number" id="lowest-number" value="1">
+
+                <label for="highest-number">Highest Number:</label>
+                <input type="number" id="highest-number" value="100">
+
+                <label for="exclude-numbers">Exclude Numbers (comma-separated):</label>
+                <input type="text" id="exclude-numbers" placeholder="e.g., 5,10,15">
+
+                <label for="interval">Interval/Steps (optional):</label>
+                <input type="number" id="interval" value="1" min="1">
+
+                <div class="buttons">
+                    <button onclick="generateWheel()">Generate Wheel</button>
+                    <button onclick="shuffleNumbers()">Shuffle</button>
+                    <button onclick="toggleVisibility()">Hide All</button>
+                    <button onclick="spinWheel()">Spin</button>
+                    <button onclick="saveAsPDF()">Save as PDF</button>
+                </div>
             </div>
-            
-            <div id="wheel-container" style="margin: 20px auto; width: 300px; height: 300px; position: relative;">
-                <canvas id="wheel" width="300" height="300"></canvas>
-                <div id="result" class="result"></div>
+            <div class="wheel-container">
+                <div id="wheel" class="wheel"></div>
             </div>
-            
-            <div id="history" class="history-section">
-                <h3>Generation History</h3>
-                <table id="history-table">
-                    <thead>
-                        <tr>
-                            <th>Pick Number</th>
-                            <th>Result</th>
-                            <th>Timestamp (New York Time)</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            
-            <button onclick="saveAsPDF()" class="pdf-button">Save as PDF</button>
-            <button onclick="sharePage()" class="share-button">Share this Page</button>
+            <div class="result" id="result">Selected Number: </div>
+            <button class="share-btn" onclick="sharePage()">Share this page</button>
         </section>
-        
-        <section class="description-section">
+
+        <!-- Detailed Descriptions Below the Tool -->
+        <section class="description">
             <h2>Understanding Random Number Generation</h2>
-            <p>Random number generators (RNGs) are essential in various fields, from statistical sampling to cryptography and gaming. Our wheel-based RNG uses JavaScript's Math.random() function combined with customizable parameters to ensure transparency and fairness. The wheel visually represents the possible numbers, spinning to select one at random.</p>
-            
-            <h3>Key Features of Our Random Number Generator</h3>
-            <ul>
-                <li>Customizable Range: Set minimum and maximum values to define the pool of possible numbers.</li>
-                <li>Interval Control: Generate numbers at specific steps, like multiples of 5 or even numbers only.</li>
-                <li>Exclusion List: Remove specific numbers from consideration, ideal for avoiding duplicates or unwanted values.</li>
-                <li>Two Modes: Normal for unlimited picks, Elimination for progressive removal.</li>
-                <li>Visual Wheel: Engaging spinning animation for an interactive experience.</li>
-                <li>History Tracking: View past results with timestamps in New York time zone.</li>
-            </ul>
-            
-            <h3>How the Wheel Works</h3>
-            <p>The wheel is divided into segments based on your input range and interval. Each segment represents a possible number. When you spin, the wheel rotates randomly and stops on a segment, displaying the selected number in green at the center.</p>
-            
+            <p>Random number generation is a fundamental concept in probability and statistics, used in simulations, cryptography, and sampling methods. Our wheel employs JavaScript's Math.random() function to ensure pseudo-random selections, mimicking true randomness for practical applications.</p>
+            <p>The process involves creating a sequence of numbers within your specified range, applying exclusions and intervals, and then visually representing them on a spinning wheel for an engaging user experience.</p>
+
+            <h3>Step-by-Step Guide</h3>
+            <ol>
+                <li>Define the range: Set the minimum and maximum values to bound your number set.</li>
+                <li>Exclude unwanted numbers: Input comma-separated values to remove specific entries from consideration.</li>
+                <li>Apply intervals: Use steps to create arithmetic progressions, ideal for even or odd number selections.</li>
+                <li>Generate and spin: Create the wheel, shuffle if desired, and spin to select a random number.</li>
+            </ol>
+
+            <h3>Applications in Various Fields</h3>
+            <p>In education, this tool can demonstrate probability concepts. In gaming, it ensures fair raffle draws. For data analysis, it aids in random sampling from datasets.</p>
+
             <table>
-                <caption>Example Ranges and Intervals</caption>
                 <thead>
                     <tr>
-                        <th>Min</th>
-                        <th>Max</th>
-                        <th>Interval</th>
-                        <th>Possible Numbers</th>
+                        <th>Feature</th>
+                        <th>Description</th>
+                        <th>Example</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>10</td>
-                        <td>1</td>
-                        <td>1,2,3,4,5,6,7,8,9,10</td>
+                        <td>Range Setting</td>
+                        <td>Defines the inclusive bounds for numbers.</td>
+                        <td>1 to 100</td>
                     </tr>
                     <tr>
-                        <td>0</td>
-                        <td>100</td>
-                        <td>10</td>
-                        <td>0,10,20,30,40,50,60,70,80,90,100</td>
+                        <td>Exclusions</td>
+                        <td>Removes specific numbers from the wheel.</td>
+                        <td>Exclude 42, 50</td>
                     </tr>
                     <tr>
-                        <td>5</td>
-                        <td>25</td>
-                        <td>5</td>
-                        <td>5,10,15,20,25</td>
+                        <td>Interval</td>
+                        <td>Skips numbers at regular steps.</td>
+                        <td>Interval 2: Odds only</td>
                     </tr>
                 </tbody>
             </table>
-            
-            <h3>Applications of Random Number Generators</h3>
-            <p>In education, RNGs help teach probability and statistics. For example, simulate dice rolls or lottery draws. In business, use for random sampling in surveys. Gamers can use it for board games or decision-making. Always remember, true randomness is key for fair outcomes.</p>
-            
-            <p>For more on probability, check out <a href="https://en.wikipedia.org/wiki/Random_number_generation" target="_blank" rel="noopener noreferrer">Wikipedia's article on Random Number Generation</a>.</p>
-            
-            <h3>Internal Tools for Exploration</h3>
-            <p>Explore related tools: <a href="/safe-password-generator.html">Safe Password Generator</a>, <a href="/dice-roller.html">Dice Roller</a>, <a href="/age.html">Age Calculator</a>.</p>
-            
-            <div class="disclaimer">
-                <h3>Disclaimer</h3>
-                <p>This tool is for entertainment and educational purposes only. It should not be used for gambling, financial decisions, or any scenario requiring certified randomness. Results are generated client-side and may not be cryptographically secure.</p>
-            </div>
+
+            <h3>Frequently Asked Questions</h3>
+            <dl>
+                <dt>How truly random is the selection?</dt>
+                <dd>While based on pseudo-random algorithms, it provides sufficient randomness for most non-cryptographic uses. For more details, refer to <a href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator" target="_blank">Wikipedia on Pseudorandom Number Generators</a>.</dd>
+
+                <dt>Can I handle large ranges?</dt>
+                <dd>The tool supports up to 1000 numbers to prevent performance issues. Larger sets may cause browser lag.</dd>
+
+                <dt>What if I need text instead of numbers?</dt>
+                <dd>For text-based spinning, consider exploring general wheel spinners on authoritative sites like <a href="https://www.random.org/" target="_blank">RANDOM.ORG</a>.</dd>
+            </dl>
+
+            <h3>Popular Number Ranges and Configurations</h3>
+            <ul>
+                <li>1-10: Ideal for simple dice-like rolls.</li>
+                <li>1-100: Common for lotteries and games.</li>
+                <li>Even numbers (interval 2): For parity-based selections.</li>
+            </ul>
         </section>
-        
-        <section class="faq-section">
-            <h2>Frequently Asked Questions</h2>
-            <details>
-                <summary>What is the maximum range I can set?</summary>
-                <p>The tool supports ranges up to 1000 numbers for performance reasons. For larger sets, consider breaking into multiple spins.</p>
-            </details>
-            <details>
-                <summary>How does elimination mode work?</summary>
-                <p>In elimination mode, once a number is picked, it's removed from the wheel for subsequent spins, ensuring no repeats until reset.</p>
-            </details>
-            <details>
-                <summary>Can I save my results?</summary>
-                <p>Yes, use the Save as PDF button to export your history table with timestamps.</p>
-            </details>
-            <details>
-                <summary>Is the wheel truly random?</summary>
-                <p>It uses JavaScript's pseudo-random generator, suitable for most uses but not for high-stakes applications requiring true randomness.</p>
-            </details>
-        </section>
-        
+
         <section class="related-resources">
             <h2>Related Resources</h2>
             <ul>
-                <li><a href="https://www.random.org/" target="_blank" rel="noopener noreferrer">RANDOM.ORG - True Random Number Service</a></li>
-                <li><a href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator" target="_blank" rel="noopener noreferrer">Wikipedia: Pseudorandom Number Generator</a></li>
-                <li><a href="https://www.nist.gov/publications/random-number-generation-and-testing" target="_blank" rel="noopener noreferrer">NIST: Random Number Generation and Testing</a></li>
-                <li><a href="https://mathworld.wolfram.com/RandomNumber.html" target="_blank" rel="noopener noreferrer">MathWorld: Random Number</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Random_number_generation" target="_blank">Wikipedia: Random Number Generation</a></li>
+                <li><a href="https://www.nist.gov/publications/random-number-generation" target="_blank">NIST: Random Number Generation Guidelines</a></li>
+                <li><a href="https://www.random.org/" target="_blank">RANDOM.ORG - True Random Number Service</a></li>
             </ul>
         </section>
     </main>
-    
+
     <footer>
-        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
-        <nav>
-            <a href="/sitemap.html">sitemap</a>
-            <a href="/about.html">about us</a>
-            <a href="/contact.html">contact us</a>
-            <a href="/terms.html">terms of use</a>
-            <a href="/privacy.html">privacy policy</a>
-        </nav>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
-    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <script>
         let numbers = [];
-        let remainingNumbers = [];
-        let history = [];
-        let pickCount = 0;
-        
-        function generateNumbers() {
-            const min = parseInt(document.getElementById('min').value) || 1;
-            const max = parseInt(document.getElementById('max').value) || 100;
-            const interval = parseInt(document.getElementById('interval').value) || 1;
-            const exclude = document.getElementById('exclude').value.split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
-            
+        let visible = true;
+
+        function generateNumbers(low, high, exclude, interval) {
             numbers = [];
-            for (let i = min; i <= max; i += interval) {
-                if (!exclude.includes(i)) {
+            const excludeSet = new Set(exclude.split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n)));
+            for (let i = low; i <= high; i += interval) {
+                if (!excludeSet.has(i)) {
                     numbers.push(i);
                 }
             }
-            remainingNumbers = [...numbers];
-        }
-        
-        function drawWheel() {
-            const canvas = document.getElementById('wheel');
-            const ctx = canvas.getContext('2d');
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const radius = canvas.width / 2 - 10;
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            if (remainingNumbers.length === 0) return;
-            
-            const arc = (2 * Math.PI) / remainingNumbers.length;
-            remainingNumbers.forEach((num, index) => {
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, index * arc, (index + 1) * arc);
-                ctx.fillStyle = index % 2 === 0 ? '#f0f0f0' : '#d0d0d0';
-                ctx.fill();
-                ctx.stroke();
-                
-                ctx.save();
-                ctx.translate(centerX, centerY);
-                ctx.rotate(index * arc + arc / 2);
-                ctx.textAlign = 'right';
-                ctx.fillStyle = '#000';
-                ctx.font = '12px Arial';
-                ctx.fillText(num, radius - 10, 5);
-                ctx.restore();
-            });
-        }
-        
-        function spinWheel() {
-            generateNumbers();
-            if (remainingNumbers.length === 0) {
-                alert('No numbers available in the specified range.');
-                return;
+            if (numbers.length > 1000) {
+                alert('Limit exceeded: Only first 1000 numbers will be used.');
+                numbers = numbers.slice(0, 1000);
             }
-            
+            return numbers;
+        }
+
+        function generateWheel() {
+            const low = parseInt(document.getElementById('lowest-number').value);
+            const high = parseInt(document.getElementById('highest-number').value);
+            const exclude = document.getElementById('exclude-numbers').value;
+            const interval = parseInt(document.getElementById('interval').value) || 1;
+
+            generateNumbers(low, high, exclude, interval);
             drawWheel();
-            
-            const mode = document.getElementById('mode').value;
-            const randomIndex = Math.floor(Math.random() * remainingNumbers.length);
-            const selected = remainingNumbers[randomIndex];
-            
-            // Simulate spin animation
-            let angle = 0;
-            const spinDuration = 2000; // 2 seconds
-            const startTime = Date.now();
-            
-            function animate() {
-                const elapsed = Date.now() - startTime;
-                if (elapsed < spinDuration) {
-                    angle = (elapsed / spinDuration) * Math.PI * 10; // 5 full rotations
-                    const canvas = document.getElementById('wheel');
-                    canvas.style.transform = `rotate(${angle}rad)`;
-                    requestAnimationFrame(animate);
-                } else {
-                    const targetAngle = (randomIndex / remainingNumbers.length) * Math.PI * 2 + Math.PI * 10;
-                    canvas.style.transform = `rotate(${targetAngle}rad)`;
-                    document.getElementById('result').innerText = selected;
-                    document.getElementById('result').style.color = 'green';
-                    document.getElementById('result').style.fontSize = '48px';
-                    document.getElementById('result').style.textAlign = 'center';
-                    document.getElementById('result').style.position = 'absolute';
-                    document.getElementById('result').style.top = '50%';
-                    document.getElementById('result').style.left = '50%';
-                    document.getElementById('result').style.transform = 'translate(-50%, -50%)';
-                    
-                    pickCount++;
-                    const now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
-                    history.push({ pick: pickCount, result: selected, time: now });
-                    updateHistoryTable();
-                    
-                    if (mode === 'elimination') {
-                        remainingNumbers.splice(randomIndex, 1);
-                        drawWheel();
-                    }
-                }
-            }
-            
-            animate();
         }
-        
-        function updateHistoryTable() {
-            const tbody = document.querySelector('#history-table tbody');
-            tbody.innerHTML = '';
-            history.forEach(entry => {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>${entry.pick}</td><td>${entry.result}</td><td>${entry.time}</td>`;
-                tbody.appendChild(row);
+
+        function drawWheel() {
+            const wheel = document.getElementById('wheel');
+            wheel.innerHTML = '';
+            const sectorAngle = 360 / numbers.length;
+            numbers.forEach((num, index) => {
+                const sector = document.createElement('div');
+                sector.className = 'sector';
+                sector.style.backgroundColor = `hsl(${index * sectorAngle}, 70%, 50%)`;
+                sector.style.transform = `rotate(${index * sectorAngle}deg) skewY(-${90 - sectorAngle}deg)`;
+                sector.innerText = visible ? num : '';
+                wheel.appendChild(sector);
             });
         }
-        
+
+        function shuffleNumbers() {
+            numbers = numbers.sort(() => Math.random() - 0.5);
+            drawWheel();
+        }
+
+        function toggleVisibility() {
+            visible = !visible;
+            document.querySelectorAll('.sector').forEach(sector => {
+                sector.innerText = visible ? sector.dataset.num : '';
+            });
+            document.getElementById('toggle-btn').innerText = visible ? 'Hide All' : 'Show All';
+        }
+
+        function spinWheel() {
+            if (numbers.length === 0) return;
+            const wheel = document.getElementById('wheel');
+            const randomRotation = Math.random() * 360 + 360 * 5; // Spin 5 full rotations + random
+            wheel.style.transform = `rotate(-${randomRotation}deg)`;
+            setTimeout(() => {
+                const selectedIndex = Math.floor((randomRotation % 360) / (360 / numbers.length));
+                const selected = numbers[selectedIndex];
+                document.getElementById('result').innerText = `Selected Number: ${selected}`;
+            }, 4000); // Match transition time
+        }
+
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            
+
             doc.setFontSize(14);
-            doc.text("Random Number Generation Results", 105, 15, { align: "center" });
-            
+            doc.text("Random Number Generator Results", 105, 15, { align: "center" });
+
+            // Configuration Table
             doc.autoTable({
                 startY: 20,
-                head: [['Pick Number', 'Result', 'Timestamp (New York Time)']],
-                body: history.map(entry => [entry.pick, entry.result, entry.time]),
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Lowest Number', document.getElementById('lowest-number').value],
+                    ['Highest Number', document.getElementById('highest-number').value],
+                    ['Exclude Numbers', document.getElementById('exclude-numbers').value],
+                    ['Interval', document.getElementById('interval').value],
+                    ['Selected Number', document.getElementById('result').textContent.replace('Selected Number: ', '')]
+                ],
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, textColor: [0, 0, 0], halign: 'left' },
-                didDrawPage: function (data) {
-                    doc.setFontSize(10);
-                    doc.setTextColor(100);
-                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-                }
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                margin: { top: 10 }
             });
-            
+
+            // Numbers List Table if needed
+            if (numbers.length > 0) {
+                const numberData = numbers.map((num, index) => [index + 1, num]);
+                doc.autoTable({
+                    startY: doc.lastAutoTable.finalY + 10,
+                    head: [['Index', 'Number']],
+                    body: numberData,
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                    }
+                });
+            }
+
             doc.save('random-number-results.pdf');
         }
-        
+
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
@@ -340,6 +328,9 @@
                 alert('Share this page manually.');
             }
         }
+
+        // Initialize
+        generateWheel();
     </script>
 </body>
 </html>
