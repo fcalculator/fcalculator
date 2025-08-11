@@ -162,14 +162,15 @@
     </footer>
     <script>
         const sounds = [
-            'https://www.soundjay.com/button/beep-07a.mp3', // Loud Buzzer
-            'https://www.soundjay.com/button/beep-08b.mp3', // Annoying Beep
-            'https://www.soundjay.com/clock/alarm-clock-1.mp3', // Classic Alarm
-            'https://www.soundjay.com/button/button-09a.mp3'  // Soft Chime
+            'https://freesound.org/data/previews/316/316919_35187-lq.mp3', // Loud Buzzer
+            'https://freesound.org/data/previews/250/250629_4019426-lq.mp3', // Annoying Beep
+            'https://freesound.org/data/previews/198/198841_285997-lq.mp3', // Classic Alarm
+            'https://freesound.org/data/previews/66/66167_931655-lq.mp3'  // Soft Chime
         ];
         let time = 60; // Default 1 minute in seconds
         let interval;
         let selectedSound = 0;
+        let audioUnlocked = false;
         
         function parseHash() {
             const hash = window.location.hash.toLowerCase().replace('#', '');
@@ -213,16 +214,31 @@
             setDuration(selectedSeconds);
         }
         
-        function playAlarm() {
-            const audio = new Audio(sounds[selectedSound]);
-            const playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // Playback started successfully
-                }).catch(error => {
-                    console.error('Playback failed:', error);
-                    alert('Alarm sound could not play. Please interact with the page (e.g., click anywhere) and try again.');
+        function unlockAudio() {
+            if (!audioUnlocked) {
+                const silentAudio = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');
+                silentAudio.play().then(() => {
+                    audioUnlocked = true;
+                }).catch((error) => {
+                    console.error('Audio unlock failed:', error);
                 });
+            }
+        }
+        
+        function playAlarm() {
+            if (audioUnlocked) {
+                const audio = new Audio(sounds[selectedSound]);
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // Success
+                    }).catch(error => {
+                        console.error('Playback failed:', error);
+                        alert('Alarm sound playback was prevented. Please click on the page to enable audio.');
+                    });
+                }
+            } else {
+                alert('Please click on the page to enable audio alerts.');
             }
         }
         
@@ -242,12 +258,16 @@
                 selectedSound = parseInt(e.target.value);
             });
             
-            // Force user interaction for audio playback
-            document.body.addEventListener('click', () => {
-                // Silent audio to unlock autoplay
-                const silentAudio = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');
-                silentAudio.play().catch(() => {});
-            }, { once: true });
+            // Unlock audio on any user interaction
+            document.body.addEventListener('click', unlockAudio);
+            document.body.addEventListener('touchstart', unlockAudio);
+            
+            // Handle hash changes without reload
+            window.addEventListener('hashchange', () => {
+                const newHashSeconds = parseHash();
+                select.value = newHashSeconds.toString();
+                setDuration(newHashSeconds);
+            });
         };
         
         function sharePage() {
