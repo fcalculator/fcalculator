@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dice Roller Simulator</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -76,12 +74,13 @@
         }
         .share-button {
             display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
+            margin: 10px auto;
+            padding: 5px 10px;
             background-color: #007bff;
             color: white;
             border: none;
             cursor: pointer;
+            font-size: 0.8em;
         }
     </style>
 </head>
@@ -96,18 +95,17 @@
     </header>
     <main>
         <section class="tool-section">
-            <button class="share-button" onclick="sharePage()">Share This Page</button>
             <div class="calculator-form">
                 <label for="num-dice">Number of Dice:</label>
                 <input type="number" id="num-dice" value="1" min="1" max="10">
                 <label for="num-sides">Number of Sides:</label>
                 <input type="number" id="num-sides" value="6" min="2" max="100">
                 <button onclick="rollDice()">Roll Dice</button>
-                <button onclick="saveAsPDF()">Save as PDF</button>
             </div>
             <div id="dice-container" class="dice-container"></div>
             <div id="result" class="result"></div>
             <div id="sum" class="result"></div>
+            <button class="share-button" onclick="sharePage()">Share This Page</button>
         </section>
         <section class="description">
             <h2>Understanding Dice Mechanics</h2>
@@ -194,7 +192,6 @@
             <h2>Applications in Games and Education</h2>
             <p>In tabletop role-playing games like Dungeons & Dragons, dice determine combat outcomes, skill successes, and narrative branches. Educational settings use dice to teach concepts such as expected value, variance, and binomial distributions. For example, rolling two d6 and summing results introduces students to convoluted probabilities.</p>
             <p>Advanced users can simulate complex scenarios, such as advantage rolls (rolling twice and taking the higher) or exploding dice (rerolling on maximum values), enhancing strategic analysis.</p>
-            <button onclick="sharePage()" class="share-button">Share This Insight</button>
             <h2>Frequently Asked Questions</h2>
             <h3>What makes a die fair?</h3>
             <p>A fair die has equal probability for each face, achieved through symmetrical design and uniform density. Virtual dice ensure this through mathematical algorithms.</p>
@@ -253,35 +250,6 @@
             const sum = rollResults.reduce((a, b) => a + b, 0);
             document.getElementById('result').textContent = `Results: ${rollResults.join(', ')}`;
             document.getElementById('sum').textContent = `Sum: ${sum}`;
-        }
-
-        function saveAsPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            doc.setFont("helvetica");
-            doc.setFontSize(14);
-            doc.text("Dice Roller Results", 105, 15, { align: "center" });
-
-            // Results Table
-            const bodyData = rollResults.map((res, index) => [`Die ${index + 1}`, res]);
-            bodyData.push(['Sum', rollResults.reduce((a, b) => a + b, 0)]);
-
-            doc.autoTable({
-                startY: 20,
-                head: [['Parameter', 'Value']],
-                body: bodyData,
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [255, 255, 255] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 5, font: "helvetica", halign: 'left' },
-                margin: { top: 10 }
-            });
-
-            doc.setFontSize(10);
-            doc.setTextColor(100);
-            doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-
-            doc.save('dice-roller-results.pdf');
         }
 
         function sharePage() {
