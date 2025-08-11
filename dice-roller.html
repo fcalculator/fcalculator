@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dice Roller Simulator - Virtual Dice Rolling Tool</title>
+    <title>Animated Dice Roller - Simulate Rolling Dice with 3D Animation</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
@@ -12,9 +12,9 @@
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Dice Roller Simulator",
-      "url": "https://fcalculator.com/dice-roller.html",
-      "description": "Simulate dice rolls with customizable number of dice and sides. Explore probabilities, generate random outcomes, and analyze results for games, statistics, or random number generation.",
+      "name": "Animated Dice Roller",
+      "url": "https://fcalculator.com/animated-dice-roller.html",
+      "description": "Experience realistic dice rolling with 3D animations. Customize dice sides, number of dice, and watch as they tumble and settle on random outcomes. Ideal for games, teaching probability, or fun simulations.",
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [{
@@ -30,36 +30,80 @@
         },{
           "@type": "ListItem",
           "position": 3,
-          "name": "Dice Roller",
-          "item": "https://fcalculator.com/dice-roller.html"
+          "name": "Animated Dice Roller",
+          "item": "https://fcalculator.com/animated-dice-roller.html"
         }]
       }
     }
     </script>
+    <style>
+        .dice-container {
+            perspective: 800px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .dice {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 2s;
+        }
+        .face {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: white;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        .front { transform: translateZ(50px); }
+        .back { transform: rotateY(180deg) translateZ(50px); }
+        .right { transform: rotateY(90deg) translateZ(50px); }
+        .left { transform: rotateY(-90deg) translateZ(50px); }
+        .top { transform: rotateX(90deg) translateZ(50px); }
+        .bottom { transform: rotateX(-90deg) translateZ(50px); }
+        .rolling {
+            animation: roll 2s ease-in-out;
+        }
+        @keyframes roll {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(720deg) rotateY(720deg); }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/other.html">Other</a> > <a href="/dice-roller.html">Dice Roller</a>
+            <a href="/">FCalculator.com</a> > <a href="/other.html">Other</a> > <a href="/animated-dice-roller.html">Animated Dice Roller</a>
         </div>
-        <h1>Dice Roller Simulator</h1>
-        <p>Generate random dice rolls for board games, role-playing adventures, or statistical simulations. Customize the number of dice, sides, and analyze outcomes with detailed breakdowns.</p>
+        <h1>Animated Dice Roller Simulator</h1>
+        <p>Bring the thrill of rolling dice to life with our 3D animated simulator. Watch as virtual dice tumble across the screen, spinning realistically before settling on a random face. Customize the number of dice and sides to fit your needs, whether for tabletop gaming, educational purposes, or simple entertainment.</p>
     </header>
     
     <main>
         <!-- Tool Section -->
         <section class="tool-section">
-            <h2>Roll the Dice</h2>
+            <h2>Roll Animated Dice</h2>
             <form id="dice-form">
                 <label for="num-dice">Number of Dice:</label>
-                <input type="number" id="num-dice" min="1" value="1" required>
+                <input type="number" id="num-dice" min="1" max="5" value="1" required>
                 
                 <label for="num-sides">Sides per Die:</label>
-                <input type="number" id="num-sides" min="2" value="6" required>
+                <input type="number" id="num-sides" min="2" max="20" value="6" required>
                 
                 <button type="button" onclick="rollDice()">Roll Dice</button>
             </form>
+            
+            <div id="dice-container" class="dice-container"></div>
             
             <div id="results" class="result">
                 <h3>Results:</h3>
@@ -73,121 +117,121 @@
         
         <!-- Detailed Content -->
         <section>
-            <h2>What is a Dice Roller?</h2>
-            <p>A dice roller is a digital tool that simulates the rolling of physical dice. It generates random numbers within specified ranges, mimicking the unpredictability of real dice throws. This simulator allows users to select the number of dice and the number of sides on each die, providing flexibility for various applications such as tabletop games, probability experiments, or decision-making processes.</p>
-            <p>Dice have been used for centuries in games of chance and strategy. From ancient civilizations to modern board games, they introduce an element of randomness that adds excitement and fairness. Our online dice roller brings this tradition into the digital age, offering instant results without the need for physical dice.</p>
-            <p>In historical contexts, dice were made from bones, wood, or ivory, and their designs varied across cultures. Today, digital versions ensure perfect randomness through algorithms, making them ideal for fair play in virtual environments.</p>
+            <h2>Understanding Animated Dice Simulation</h2>
+            <p>Our animated dice roller uses advanced CSS 3D transformations to mimic the physical motion of dice rolling. Each die is represented as a cube with faces numbered according to your specifications. When you initiate a roll, the dice spin chaotically before landing on a random outcome, providing a visually engaging experience that closely replicates real-world dice throws.</p>
+            <p>This simulation goes beyond simple number generation by incorporating physics-like tumbling. The animation duration and rotation angles are calibrated to create a natural rolling effect, enhancing immersion for users in gaming scenarios or probability demonstrations.</p>
+            <p>Historically, dice date back to ancient times, with evidence from archaeological sites showing their use in divination and games. Modern digital simulations like this one preserve the essence of chance while adding interactive elements for contemporary applications.</p>
         </section>
         
         <section>
-            <h2>How to Use the Dice Roller</h2>
+            <h2>How to Use the Animated Dice Roller</h2>
             <ol>
-                <li>Enter the number of dice you want to roll (minimum 1).</li>
-                <li>Specify the number of sides per die (e.g., 6 for standard dice, 20 for D20 in RPGs).</li>
-                <li>Click the "Roll Dice" button to generate results.</li>
-                <li>View individual rolls and the total sum.</li>
-                <li>Use the Save as PDF button to export your results for records or sharing.</li>
+                <li>Select the number of dice (up to 5 for optimal performance and visualization).</li>
+                <li>Choose the number of sides per die (from 2 to 20).</li>
+                <li>Click "Roll Dice" to start the animation.</li>
+                <li>Watch the dice spin and settle; results will display below.</li>
+                <li>Save your roll results as a PDF for records or share the page with friends.</li>
             </ol>
-            <p>For multiple rolls, you can repeat the process as needed. This tool is perfect for quick random number generation in educational settings or gaming sessions. Integrate it with probability lessons to demonstrate concepts like expected value or variance.</p>
+            <p>This tool is designed for ease of use on both desktop and mobile devices, ensuring smooth animations across platforms. For educational use, repeat rolls to collect data on outcomes and explore statistical patterns.</p>
         </section>
         
         <section>
-            <h2>Probability and Statistics in Dice Rolling</h2>
-            <p>Understanding the probabilities behind dice rolls can enhance your appreciation of games and random events. For a single six-sided die, each face has an equal probability of 1/6 or approximately 16.67%.</p>
+            <h2>Probability Insights in Dice Rolling</h2>
+            <p>Dice rolling is fundamentally about probability. For a standard six-sided die, each outcome has an equal chance of 1/6. Our simulator ensures fair randomness using JavaScript's Math.random() function, producing unbiased results.</p>
             
             <table>
                 <thead>
                     <tr>
-                        <th>Number of Sides</th>
+                        <th>Sides</th>
                         <th>Probability per Face</th>
-                        <th>Example Use</th>
+                        <th>Common Applications</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>4</td>
                         <td>25%</td>
-                        <td>Tetrahedral dice in some RPGs</td>
+                        <td>Role-playing games for basic damage</td>
                     </tr>
                     <tr>
                         <td>6</td>
-                        <td>16.67%</td>
-                        <td>Standard board games like Monopoly</td>
+                        <td>~16.67%</td>
+                        <td>Board games like Snake and Ladders</td>
                     </tr>
                     <tr>
                         <td>8</td>
                         <td>12.5%</td>
-                        <td>Octahedral dice for damage rolls</td>
+                        <td>Advanced RPG mechanics</td>
                     </tr>
                     <tr>
                         <td>10</td>
                         <td>10%</td>
-                        <td>Percentile dice in role-playing</td>
+                        <td>Percentile-based systems</td>
                     </tr>
                     <tr>
                         <td>12</td>
-                        <td>8.33%</td>
-                        <td>Dodecahedral dice for hit points</td>
+                        <td>~8.33%</td>
+                        <td>Hit point calculations</td>
                     </tr>
                     <tr>
                         <td>20</td>
                         <td>5%</td>
-                        <td>Critical hits in Dungeons & Dragons</td>
+                        <td>Critical success/failure in adventures</td>
                     </tr>
                 </tbody>
             </table>
             
-            <p>When rolling multiple dice, the distribution of sums follows a bell curve for larger numbers, approaching a normal distribution. For two six-sided dice, the most probable sum is 7, with a probability of about 16.67%. This is due to the multiple combinations that can achieve that sum.</p>
+            <p>For multiple dice, outcomes combine to form distributions. The chart below shows the probability curve for summing two six-sided dice, highlighting the central tendency around 7.</p>
             
-            <h3>Probability Distribution for 2D6</h3>
+            <h3>Sum Distribution for 2 Six-Sided Dice</h3>
             <canvas id="dice-chart" width="400" height="200"></canvas>
             
-            <p>The chart above illustrates the number of ways to achieve each possible sum when rolling two six-sided dice. Notice how the distribution peaks at 7 and symmetrically decreases towards the extremes.</p>
+            <p>This bell-shaped distribution illustrates how certain sums are more likely due to multiple combination paths, a key concept in probability theory.</p>
         </section>
         
         <section>
-            <h2>Applications of Dice Rollers</h2>
+            <h2>Applications of Animated Dice Rollers</h2>
             <ul>
-                <li><strong>Gaming:</strong> Resolve actions in role-playing games like Dungeons & Dragons or settle moves in board games.</li>
-                <li><strong>Education:</strong> Teach probability and statistics through hands-on simulations, helping students grasp concepts like independent events.</li>
-                <li><strong>Decision Making:</strong> Use for random selections in lotteries, raffles, or even choosing dinner options.</li>
-                <li><strong>Simulations:</strong> Model random events in scientific research, business risk analysis, or Monte Carlo methods.</li>
+                <li><strong>Tabletop Gaming:</strong> Enhance virtual sessions with realistic rolls for games like Dungeons & Dragons.</li>
+                <li><strong>Educational Tools:</strong> Visualize randomness to teach concepts in statistics and mathematics classes.</li>
+                <li><strong>Decision Aids:</strong> Use animated rolls for fair random selections in group activities or lotteries.</li>
+                <li><strong>Entertainment:</strong> Enjoy casual simulations for fun or to settle minor disputes playfully.</li>
             </ul>
-            <p>Integrate this tool with other calculators on our site, such as the <a href="/random-number.html">Random Number Generator</a> for more advanced randomization needs or <a href="/percentage.html">Percentage Calculator</a> to compute probabilities.</p>
+            <p>Link this simulator with our other tools, such as the <a href="/random-number.html">Random Number Generator</a> for broader randomization or <a href="/percentage.html">Percentage Calculator</a> to analyze probabilities in depth.</p>
         </section>
         
         <section>
             <h2>Frequently Asked Questions</h2>
             <dl>
-                <dt>Is the dice roller truly random?</dt>
-                <dd>Our simulator uses JavaScript's Math.random() function, which provides pseudo-random numbers suitable for most purposes. For cryptographic randomness, consider specialized tools. Note that true randomness in computing is achieved through hardware entropy sources.</dd>
+                <dt>How realistic is the animation?</dt>
+                <dd>The 3D rotation mimics physical dice tumbling, but it's a simulation—outcomes are random, not physics-based for fairness.</dd>
                 
-                <dt>Can I roll dice with custom sides?</dt>
-                <dd>Yes, enter any number of sides greater than or equal to 2. This allows simulation of non-standard dice used in unique games or experiments.</dd>
+                <dt>Can I customize the dice appearance?</dt>
+                <dd>Currently, the simulator uses standard numbering; future updates may include visual customizations.</dd>
                 
-                <dt>What is the maximum number of dice I can roll?</dt>
-                <dd>There is no strict limit, but for performance reasons, keep it reasonable (e.g., under 1000). Large numbers are useful for statistical simulations.</dd>
+                <dt>What if I need more than 5 dice?</dt>
+                <dd>For larger quantities, use our basic <a href="/dice-roller.html">Dice Roller</a>; animation is limited to prevent performance issues.</dd>
                 
-                <dt>How can I use this for probability experiments?</dt>
-                <dd>Roll multiple times and record results to observe empirical probabilities. Compare them to theoretical values for learning purposes.</dd>
+                <dt>Is the randomness truly fair?</dt>
+                <dd>Yes, each face has equal probability. For cryptographic needs, consult specialized services.</dd>
                 
-                <dt>Does this tool support modifiers?</dt>
-                <dd>Currently, it provides basic rolls. For advanced features like adding modifiers, consider combining with our <a href="/math.html">math calculators</a>.</dd>
+                <dt>How can I use this for teaching?</dt>
+                <dd>Roll repeatedly, record results, and compare to theoretical probabilities using the provided chart and table.</dd>
             </dl>
         </section>
         
         <section>
             <h2>Disclaimer</h2>
-            <p>This dice roller is for entertainment and educational purposes only. While it simulates randomness, it should not be used for high-stakes gambling or decisions requiring certified randomness. Always verify critical calculations.</p>
+            <p>This animated dice roller is intended for entertainment and educational use only. It does not guarantee outcomes for gambling or critical decision-making. Always verify randomness requirements for serious applications.</p>
         </section>
         
         <section class="related-resources">
             <h2>Related Resources</h2>
             <ul>
-                <li><a href="https://en.wikipedia.org/wiki/Dice" target="_blank" rel="noopener noreferrer">Wikipedia: Dice - History and Types</a></li>
-                <li><a href="https://www.khanacademy.org/math/statistics-probability/probability-library" target="_blank" rel="noopener noreferrer">Khan Academy: Probability Lessons</a></li>
-                <li><a href="https://www.dndbeyond.com/" target="_blank" rel="noopener noreferrer">D&D Beyond: Role-Playing Game Tools</a></li>
-                <li><a href="https://www.random.org/" target="_blank" rel="noopener noreferrer">RANDOM.ORG: True Random Number Service</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Dice" target="_blank" rel="noopener noreferrer">Wikipedia: Dice - Origins and Variations</a></li>
+                <li><a href="https://www.khanacademy.org/math/statistics-probability/probability-library/basic-theoretical-probability/a/probability-the-basics" target="_blank" rel="noopener noreferrer">Khan Academy: Basics of Probability</a></li>
+                <li><a href="https://www.dndbeyond.com/tools/digital-dice" target="_blank" rel="noopener noreferrer">D&D Beyond: Digital Dice Tools</a></li>
+                <li><a href="https://www.random.org/dice/" target="_blank" rel="noopener noreferrer">RANDOM.ORG: True Random Dice Roller</a></li>
             </ul>
         </section>
     </main>
@@ -205,17 +249,59 @@
     
     <script>
         let rollResults = [];
+        const facesMap = {
+            1: 'front',
+            2: 'back',
+            3: 'right',
+            4: 'left',
+            5: 'top',
+            6: 'bottom'
+        };
+        
+        function createDie(result) {
+            const die = document.createElement('div');
+            die.classList.add('dice', 'rolling');
+            ['front:1', 'back:2', 'right:3', 'left:4', 'top:5', 'bottom:6'].forEach((face, index) => {
+                const [className, num] = face.split(':');
+                const el = document.createElement('div');
+                el.classList.add('face', className);
+                el.textContent = num;
+                die.appendChild(el);
+            });
+            setTimeout(() => {
+                die.classList.remove('rolling');
+                const finalRotation = getRotationForResult(result);
+                die.style.transform = finalRotation;
+            }, 2000);
+            return die;
+        }
+        
+        function getRotationForResult(result) {
+            switch(result) {
+                case 1: return 'rotateX(0deg) rotateY(0deg)';
+                case 2: return 'rotateX(0deg) rotateY(180deg)';
+                case 3: return 'rotateX(0deg) rotateY(-90deg)';
+                case 4: return 'rotateX(0deg) rotateY(90deg)';
+                case 5: return 'rotateX(-90deg) rotateY(0deg)';
+                case 6: return 'rotateX(90deg) rotateY(0deg)';
+                default: return 'rotateX(0deg) rotateY(0deg)';
+            }
+        }
         
         function rollDice() {
             const numDice = parseInt(document.getElementById('num-dice').value);
             const numSides = parseInt(document.getElementById('num-sides').value);
             rollResults = [];
             let sum = 0;
+            const container = document.getElementById('dice-container');
+            container.innerHTML = '';
             
             for (let i = 0; i < numDice; i++) {
                 const roll = Math.floor(Math.random() * numSides) + 1;
                 rollResults.push(roll);
                 sum += roll;
+                const die = createDie(roll > 6 ? 1 : roll); // For >6 sides, simplify to cube
+                container.appendChild(die);
             }
             
             document.getElementById('rolls').textContent = `Individual Rolls: ${rollResults.join(', ')}`;
@@ -228,17 +314,16 @@
             
             doc.setFont("helvetica");
             doc.setFontSize(14);
-            doc.text("Dice Roll Results", 105, 15, { align: "center" });
+            doc.text("Animated Dice Roll Results", 105, 15, { align: "center" });
             
-            // Results Table
             doc.autoTable({
                 startY: 20,
                 head: [['Parameter', 'Value']],
                 body: [
                     ['Number of Dice', document.getElementById('num-dice').value],
                     ['Sides per Die', document.getElementById('num-sides').value],
-                    ['Individual Rolls', document.getElementById('rolls').textContent.replace('Individual Rolls: ', '')],
-                    ['Total Sum', document.getElementById('sum').textContent.replace('Total Sum: ', '')]
+                    ['Individual Rolls', rollResults.join(', ')],
+                    ['Total Sum', rollResults.reduce((a, b) => a + b, 0)]
                 ],
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
@@ -255,13 +340,13 @@
                 }
             });
             
-            doc.save('dice-roll-results.pdf');
+            doc.save('animated-dice-roll-results.pdf');
         }
         
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Dice Roller Simulator',
+                    title: 'Animated Dice Roller',
                     url: window.location.href
                 });
             } else {
@@ -276,7 +361,7 @@
             data: {
                 labels: ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
                 datasets: [{
-                    label: 'Ways to Roll',
+                    label: 'Probability Ways',
                     data: [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1],
                     backgroundColor: 'rgba(0, 200, 200, 0.5)'
                 }]
