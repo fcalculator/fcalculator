@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Generation Tool</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is a random number generator?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A random number generator is a tool that produces numbers without a predictable pattern, useful in simulations, games, and statistical analysis."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does pseudo-random generation work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Pseudo-random generators use mathematical algorithms to simulate randomness, starting from a seed value to produce sequences that appear random."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What are true random numbers?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "True random numbers come from physical sources like atmospheric noise or quantum events, ensuring unpredictability for high-security applications."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/other.html">Other</a> > <a href="/random-number-generator.html">Random Number Generator</a>
+        </div>
+        <h1>Random Number Generator</h1>
+        <p>Explore the principles of randomness with this comprehensive tool designed for generating integers or decimals within specified ranges. Ideal for statistical modeling, educational purposes, and everyday decision-making.</p>
+    </header>
+    
+    <main>
+        <section class="tool-section">
+            <h2>Generate Random Numbers</h2>
+            <p>Use the form below to create custom random numbers. Start by setting the lower and upper limits to define your range. Then, specify how many numbers you need. Choose if duplicates are allowed for variety in results. Select sorting options to organize the output. For decimal results, enable the decimal mode and set precision. Hit 'Generate' to see your results instantly.</p>
+            <form id="random-form">
+                <label for="min">Lower Limit:</label>
+                <input type="number" id="min" value="0" required>
+                
+                <label for="max">Upper Limit:</label>
+                <input type="number" id="max" value="100" required>
+                
+                <label for="count">How Many Numbers:</label>
+                <input type="number" id="count" value="1" min="1" max="1000" required>
+                
+                <label for="allow-repeats">Allow Repeats:</label>
+                <select id="allow-repeats">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+                
+                <label for="sort">Sort Numbers:</label>
+                <select id="sort">
+                    <option value="none">Do Not Sort</option>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+                
+                <label for="type">Type of Result:</label>
+                <select id="type">
+                    <option value="integer">Integer</option>
+                    <option value="decimal">Decimal</option>
+                </select>
+                
+                <label for="precision" style="display:none;">Decimal Precision:</label>
+                <input type="number" id="precision" value="2" min="1" max="10" style="display:none;">
+                
+                <button type="button" onclick="generateRandom()">Generate</button>
+            </form>
+            
+            <div id="result" class="result" style="text-align: center; font-size: 24px; color: green;"></div>
+            
+            <button onclick="saveAsPDF()" class="pdf-button">Save as PDF</button>
+            <button onclick="sharePage()" class="share-button">Share This Page</button>
+            
+            <canvas id="distributionChart" width="400" height="200" style="margin-top: 20px;"></canvas>
+        </section>
+        
+        <section class="description">
+            <h2>Understanding Random Number Generation</h2>
+            <p>Random number generation plays a crucial role in various fields, from computer science to probability theory. This tool employs pseudo-random algorithms to produce sequences that mimic true randomness, ensuring even distribution across the defined range. For instance, in simulations, random numbers help model uncertain events like weather patterns or stock market fluctuations.</p>
+            
+            <h3>Key Concepts in Randomness</h3>
+            <p>Pseudo-random numbers are generated using deterministic processes, such as linear congruential generators, which start with a seed value and apply mathematical transformations. While not truly random, they suffice for most practical applications, including games, lotteries, and data sampling. In contrast, true random numbers derive from physical entropy sources, offering higher unpredictability for cryptography.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Use Cases</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pseudo-Random</td>
+                        <td>Algorithm-based, repeatable with same seed</td>
+                        <td>Simulations, testing</td>
+                    </tr>
+                    <tr>
+                        <td>True Random</td>
+                        <td>From physical sources like noise</td>
+                        <td>Security, encryption</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>For more tools in this category, check our <a href="/safe-password-generator.html">Safe Password Generator</a> or <a href="/dice-roller.html">Dice Roller</a>.</p>
+            
+            <h3>Distribution and Analysis</h3>
+            <p>When generating multiple numbers, observe their distribution in the chart above. This visual representation helps analyze uniformity, which is essential in statistical studies. For example, in a range of 1-100 with 1000 generations, expect a flat histogram if the generator is unbiased.</p>
+            
+            <h3>Practical Examples</h3>
+            <ul>
+                <li>Generating lottery picks: Set min=1, max=49, count=6, no repeats, sort ascending.</li>
+                <li>Simulating dice rolls: Min=1, max=6, count=1, allow repeats.</li>
+                <li>Random sampling for surveys: Min=1000, max=9999, count=50, no repeats.</li>
+            </ul>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Example Range</th>
+                        <th>Generated Numbers (Sample)</th>
+                        <th>Application</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1-10</td>
+                        <td>3, 7, 2, 9, 5</td>
+                        <td>Simple draws</td>
+                    </tr>
+                    <tr>
+                        <td>0-1 (Decimal)</td>
+                        <td>0.45, 0.78, 0.12</td>
+                        <td>Probability simulations</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>In probability theory, the quality of randomness affects outcomes in Monte Carlo methods, where large sets of random numbers approximate complex integrals. Ensuring uniformity prevents biases in results.</p>
+        </section>
+        
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <details>
+                <summary>What factors influence random number quality?</summary>
+                <p>The seed value, algorithm complexity, and range size all play roles in producing high-quality pseudo-random sequences.</p>
+            </details>
+            <details>
+                <summary>Can I use this for cryptographic purposes?</summary>
+                <p>No, this tool uses pseudo-random methods; for security, rely on hardware-based true random generators.</p>
+            </details>
+            <details>
+                <summary>How to interpret the distribution chart?</summary>
+                <p>The chart shows frequency of numbers in bins, helping visualize if the generation is uniform across the range.</p>
+            </details>
+        </section>
+        
+        <section class="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Random_number_generation" target="_blank" rel="noopener noreferrer">Wikipedia: Random Number Generation</a></li>
+                <li><a href="https://csrc.nist.gov/projects/random-bit-generation" target="_blank" rel="noopener noreferrer">NIST: Random Number Generation</a></li>
+                <li><a href="https://www.random.org/" target="_blank" rel="noopener noreferrer">RANDOM.ORG: True Random Numbers</a></li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    
+    <script>
+        let chartInstance = null;
+        let generatedNumbers = [];
+
+        function generateRandom() {
+            const min = parseFloat(document.getElementById('min').value);
+            const max = parseFloat(document.getElementById('max').value);
+            const count = parseInt(document.getElementById('count').value);
+            const allowRepeats = document.getElementById('allow-repeats').value === 'yes';
+            const sort = document.getElementById('sort').value;
+            const type = document.getElementById('type').value;
+            const precision = parseInt(document.getElementById('precision').value);
+
+            if (min >= max || count < 1) {
+                alert('Invalid input. Ensure min < max and count > 0.');
+                return;
+            }
+
+            generatedNumbers = [];
+            const used = new Set();
+
+            for (let i = 0; i < count; i++) {
+                let num;
+                do {
+                    if (type === 'integer') {
+                        num = Math.floor(Math.random() * (max - min + 1)) + min;
+                    } else {
+                        num = (Math.random() * (max - min) + min).toFixed(precision);
+                    }
+                    if (!allowRepeats && used.has(num)) continue;
+                    generatedNumbers.push(num);
+                    used.add(num);
+                } while (generatedNumbers.length < i + 1 && !allowRepeats);
+            }
+
+            if (sort === 'asc') generatedNumbers.sort((a, b) => a - b);
+            if (sort === 'desc') generatedNumbers.sort((a, b) => b - a);
+
+            document.getElementById('result').textContent = generatedNumbers.join(', ');
+
+            updateChart();
+        }
+
+        function updateChart() {
+            const ctx = document.getElementById('distributionChart').getContext('2d');
+            const bins = 10;
+            const binSize = (Math.max(...generatedNumbers) - Math.min(...generatedNumbers)) / bins;
+            const frequencies = new Array(bins).fill(0);
+
+            generatedNumbers.forEach(num => {
+                const bin = Math.min(Math.floor((num - Math.min(...generatedNumbers)) / binSize), bins - 1);
+                frequencies[bin]++;
+            });
+
+            if (chartInstance) chartInstance.destroy();
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Array.from({length: bins}, (_, i) => `Bin ${i+1}`),
+                    datasets: [{ label: 'Frequency', data: frequencies, backgroundColor: 'rgba(0, 200, 200, 0.5)' }]
+                },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        document.getElementById('type').addEventListener('change', function() {
+            const precisionInput = document.querySelector('label[for="precision"]');
+            const precisionField = document.getElementById('precision');
+            if (this.value === 'decimal') {
+                precisionInput.style.display = 'block';
+                precisionField.style.display = 'block';
+            } else {
+                precisionInput.style.display = 'none';
+                precisionField.style.display = 'none';
+            }
+        });
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFontSize(14);
+            doc.text("Random Number Generation Results", 105, 15, { align: "center" });
+
+            // Results Table
+            const bodyData = generatedNumbers.map((num, index) => [index + 1, num]);
+            doc.autoTable({
+                startY: 20,
+                head: [['Number Index', 'Value']],
+                body: bodyData,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, halign: 'left' },
+                margin: { top: 10 },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+
+            doc.save('random-number-results.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Random Number Generator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
