@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Number Generation Tool</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
@@ -93,9 +92,7 @@
             <div id="result" class="result" style="text-align: center; font-size: 24px; color: green;"></div>
             
             <button onclick="saveAsPDF()" class="pdf-button">Save as PDF</button>
-            <button onclick="sharePage()" class="share-button">Share This Page</button>
-            
-            <canvas id="distributionChart" width="400" height="200" style="margin-top: 20px;"></canvas>
+            <button onclick="sharePage()" class="share-button" style="display: block; margin: 10px auto;">Share Page</button>
         </section>
         
         <section class="description">
@@ -130,7 +127,7 @@
             <p>For more tools in this category, check our <a href="/safe-password-generator.html">Safe Password Generator</a> or <a href="/dice-roller.html">Dice Roller</a>.</p>
             
             <h3>Distribution and Analysis</h3>
-            <p>When generating multiple numbers, observe their distribution in the chart above. This visual representation helps analyze uniformity, which is essential in statistical studies. For example, in a range of 1-100 with 1000 generations, expect a flat histogram if the generator is unbiased.</p>
+            <p>When generating multiple numbers, observe their distribution. This helps analyze uniformity, which is essential in statistical studies. For example, in a range of 1-100 with 1000 generations, expect a flat histogram if the generator is unbiased.</p>
             
             <h3>Practical Examples</h3>
             <ul>
@@ -175,8 +172,8 @@
                 <p>No, this tool uses pseudo-random methods; for security, rely on hardware-based true random generators.</p>
             </details>
             <details>
-                <summary>How to interpret the distribution chart?</summary>
-                <p>The chart shows frequency of numbers in bins, helping visualize if the generation is uniform across the range.</p>
+                <summary>How to interpret the distribution?</summary>
+                <p>Analyze the frequency of numbers to visualize if the generation is uniform across the range.</p>
             </details>
         </section>
         
@@ -196,7 +193,6 @@
     </footer>
     
     <script>
-        let chartInstance = null;
         let generatedNumbers = [];
 
         function generateRandom() {
@@ -234,30 +230,6 @@
             if (sort === 'desc') generatedNumbers.sort((a, b) => b - a);
 
             document.getElementById('result').textContent = generatedNumbers.join(', ');
-
-            updateChart();
-        }
-
-        function updateChart() {
-            const ctx = document.getElementById('distributionChart').getContext('2d');
-            const bins = 10;
-            const binSize = (Math.max(...generatedNumbers) - Math.min(...generatedNumbers)) / bins;
-            const frequencies = new Array(bins).fill(0);
-
-            generatedNumbers.forEach(num => {
-                const bin = Math.min(Math.floor((num - Math.min(...generatedNumbers)) / binSize), bins - 1);
-                frequencies[bin]++;
-            });
-
-            if (chartInstance) chartInstance.destroy();
-            chartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: Array.from({length: bins}, (_, i) => `Bin ${i+1}`),
-                    datasets: [{ label: 'Frequency', data: frequencies, backgroundColor: 'rgba(0, 200, 200, 0.5)' }]
-                },
-                options: { scales: { y: { beginAtZero: true } } }
-            });
         }
 
         document.getElementById('type').addEventListener('change', function() {
