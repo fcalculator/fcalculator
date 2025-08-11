@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Macro Nutrient Calculator - Personalized Daily Intake Guide</title>
+    <title>Macro Nutrient Calculator - Tailored Protein, Carbs, and Fat Recommendations</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -51,8 +51,8 @@
         <div class="breadcrumb">
             <a href="/">FCalculator.com</a> > <a href="/health-fitness.html">Health & Fitness</a> > <a href="/macro-nutrient-calculator.html">Macro Nutrient Calculator</a>
         </div>
-        <h1>Macro Nutrient Calculator: Determine Your Daily Protein, Carbs, and Fat Needs</h1>
-        <p>Understanding your macronutrient requirements is essential for optimizing nutrition, whether you're aiming to build muscle, lose fat, or maintain a healthy lifestyle. This tool uses scientifically validated formulas to provide personalized recommendations based on your unique profile.</p>
+        <h1>Macro Nutrient Calculator: Personalized Breakdown of Daily Protein, Carbs, and Fat Intake</h1>
+        <p>Macronutrients form the foundation of your diet, supplying the energy and building blocks your body needs for optimal function. This calculator provides a detailed, evidence-based assessment of your daily requirements, helping you align your nutrition with health goals like weight management or athletic performance.</p>
     </header>
     
     <main>
@@ -99,10 +99,10 @@
             
             <div id="results" style="display:none;">
                 <h3>Your Daily Macros</h3>
-                <p>Daily Calories: <span id="calories" class="result-green"></span></p>
-                <p>Protein (g): <span id="protein" class="result-green"></span></p>
-                <p>Carbs (g): <span id="carbs" class="result-green"></span></p>
-                <p>Fat (g): <span id="fat" class="result-green"></span></p>
+                <p>Daily Calories: <span id="calories" class="result-green"></span> - This represents your estimated total daily energy expenditure, adjusted for activity level and fitness goal. It's the amount of calories your body needs to support basic functions, movement, and achieve objectives like weight maintenance, loss, or gain.</p>
+                <p>Protein (g): <span id="protein" class="result-green"></span> - Protein is a key macronutrient required in large amounts for building and repairing tissues, producing enzymes and hormones, and supporting immune function. Consume this amount daily from sources like meat, eggs, dairy, legumes, and nuts to promote muscle health and satiety.</p>
+                <p>Carbs (g): <span id="carbs" class="result-green"></span> - Carbohydrates are the body's primary source of energy, fueling brain function, muscle activity, and overall vitality. This recommendation provides the grams needed for sustained energy, drawn from whole grains, fruits, vegetables, and other complex sources to avoid blood sugar spikes.</p>
+                <p>Fat (g): <span id="fat" class="result-green"></span> - Fats are essential for cell growth, organ protection, hormone production, and absorbing fat-soluble vitamins (A, D, E, K). Aim for this daily intake from healthy sources like avocados, oils, seeds, and fatty fish to maintain long-term health and energy balance.</p>
                 
                 <canvas id="macroChart" width="400" height="200"></canvas>
                 
@@ -302,10 +302,10 @@
 
             // For PDF
             macroData = [
-                ['Daily Calories', calories],
-                ['Protein (g)', protein],
-                ['Carbs (g)', carbs],
-                ['Fat (g)', fat]
+                ['Daily Calories', calories, 'This represents your estimated total daily energy expenditure, adjusted for activity level and fitness goal. It\'s the amount of calories your body needs to support basic functions, movement, and achieve objectives like weight maintenance, loss, or gain.'],
+                ['Protein (g)', protein, 'Protein is a key macronutrient required in large amounts for building and repairing tissues, producing enzymes and hormones, and supporting immune function. Consume this amount daily from sources like meat, eggs, dairy, legumes, and nuts to promote muscle health and satiety.'],
+                ['Carbs (g)', carbs, 'Carbohydrates are the body\'s primary source of energy, fueling brain function, muscle activity, and overall vitality. This recommendation provides the grams needed for sustained energy, drawn from whole grains, fruits, vegetables, and other complex sources to avoid blood sugar spikes.'],
+                ['Fat (g)', fat, 'Fats are essential for cell growth, organ protection, hormone production, and absorbing fat-soluble vitamins (A, D, E, K). Aim for this daily intake from healthy sources like avocados, oils, seeds, and fatty fish to maintain long-term health and energy balance.']
             ];
         }
 
@@ -318,12 +318,13 @@
 
             doc.autoTable({
                 startY: 20,
-                head: [['Parameter', 'Value']],
+                head: [['Parameter', 'Value', 'Explanation']],
                 body: macroData,
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [255, 255, 255] },
                 styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica' },
+                columnStyles: { 2: { cellWidth: 'auto' } }, // Wider explanation column
                 margin: { top: 10 },
                 didDrawPage: function (data) {
                     doc.setFontSize(10);
