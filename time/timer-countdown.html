@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Leverage our adaptable countdown timer with durations ranging from 1 minute to 5 hours, featuring auto-start via URL anchors such as #30-minute-countdown, real-time minutes and seconds visualization, restart capability, and selectable audio alerts upon reaching zero for enhanced time tracking in productivity, wellness, and daily routines.">
     <meta name="keywords" content="countdown timer, customizable timer, online timer, time management tool, alarm timer, duration timer, productivity timer">
-    <title>Countdown Timer with Custom Durations</title>
+    <title>Countdown Timer for Precise Intervals</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script type="application/ld+json">
     {
@@ -54,18 +54,25 @@
             <h2>Setup and Activate Your Countdown</h2>
             <label for="duration-select">Select Duration:</label>
             <select id="duration-select" style="display: block; margin-bottom: 10px;">
-                <option value="60" data-hash="1-minute-countdown" data-title="1-Minute Countdown Timer for Instant Timing">1 Minute</option>
-                <option value="120" data-hash="2-minute-countdown" data-title="2-Minute Countdown Timer for Short Intervals">2 Minutes</option>
-                <option value="180" data-hash="3-minute-countdown" data-title="3-Minute Countdown Timer for Quick Activities">3 Minutes</option>
-                <option value="300" data-hash="5-minute-countdown" data-title="5-Minute Countdown Timer for Brief Tasks">5 Minutes</option>
-                <option value="600" data-hash="10-minute-countdown" data-title="10-Minute Countdown Timer for Moderate Sessions">10 Minutes</option>
-                <option value="900" data-hash="15-minute-countdown" data-title="15-Minute Countdown Timer for Focused Bursts">15 Minutes</option>
-                <option value="1200" data-hash="20-minute-countdown" data-title="20-Minute Countdown Timer for Productive Intervals">20 Minutes</option>
-                <option value="1800" data-hash="30-minute-countdown" data-title="30-Minute Countdown Timer for Efficient Timing">30 Minutes</option>
-                <option value="2700" data-hash="45-minute-countdown" data-title="45-Minute Countdown Timer for Extended Focus">45 Minutes</option>
-                <option value="3600" data-hash="1-hour-countdown" data-title="1-Hour Countdown Timer for Hour-Long Sessions">1 Hour</option>
-                <option value="7200" data-hash="2-hour-countdown" data-title="2-Hour Countdown Timer for Longer Durations">2 Hours</option>
-                <option value="18000" data-hash="5-hour-countdown" data-title="5-Hour Countdown Timer for Prolonged Tracking">5 Hours</option>
+                <option value="60" data-hash="1-minute-countdown">1 Minute</option>
+                <option value="120" data-hash="2-minute-countdown">2 Minutes</option>
+                <option value="180" data-hash="3-minute-countdown">3 Minutes</option>
+                <option value="300" data-hash="5-minute-countdown">5 Minutes</option>
+                <option value="600" data-hash="10-minute-countdown">10 Minutes</option>
+                <option value="900" data-hash="15-minute-countdown">15 Minutes</option>
+                <option value="1200" data-hash="20-minute-countdown">20 Minutes</option>
+                <option value="1800" data-hash="30-minute-countdown">30 Minutes</option>
+                <option value="2700" data-hash="45-minute-countdown">45 Minutes</option>
+                <option value="3600" data-hash="1-hour-countdown">1 Hour</option>
+                <option value="7200" data-hash="2-hour-countdown">2 Hours</option>
+                <option value="18000" data-hash="5-hour-countdown">5 Hours</option>
+            </select>
+            <label for="sound-select">Select Alarm Sound:</label>
+            <select id="sound-select" style="display: block; margin-bottom: 10px;">
+                <option value="0">Loud Buzzer</option>
+                <option value="1">Annoying Beep</option>
+                <option value="2">Classic Alarm</option>
+                <option value="3">Soft Chime</option>
             </select>
             <div id="timer-result" class="result" style="text-align: center; font-size: 2em;">
                 <span id="minutes" class="green">00</span>:<span id="seconds" class="green">00</span>
