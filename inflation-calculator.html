@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inflation Calculator: Evaluate Purchasing Power Evolution</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Inflation Calculator",
+      "url": "https://fcalculator.com/inflation-calculator.html",
+      "applicationCategory": "FinancialApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/finance-calculator.html">Finance</a> > <a href="/inflation-calculator.html">Inflation Calculator</a>
+        </div>
+        <h1>Inflation Calculator: Assessing the Impact on Money's Value Over Time</h1>
+        <p>Discover how inflation erodes purchasing power by calculating adjusted values based on historical Consumer Price Index (CPI) data. This tool helps you understand economic trends and plan finances accordingly.</p>
+    </header>
+    <main>
+        <section id="calculator-section">
+            <h2>Inflation Calculation Tool</h2>
+            <p>Use this comprehensive calculator to determine how much a specific amount of money from a past year would be worth today, accounting for inflation. Enter the amount, select the currency symbol (US Dollar or Euro - note that calculations use US CPI data for accuracy, with Euro as an approximation), choose start and end years (from 1913 to 2025), and click Calculate. The tool provides the adjusted amount, total inflation percentage, and average annual inflation rate. Detailed explanations are provided below each input field for clarity.</p>
+            <form id="inflation-form">
+                <label for="currency">Currency Symbol (Select $ for US Dollar or € for Euro approximation):</label>
+                <select id="currency">
+                    <option value="usd">$ (US Dollar)</option>
+                    <option value="eur">€ (Euro)</option>
+                </select>
+                <p class="input-explain">Choose the currency symbol to display results. Calculations are based on US CPI; Euro uses the same for approximation purposes.</p>
+                
+                <label for="amount">Initial Amount (Enter a positive number, e.g., 100):</label>
+                <input type="number" id="amount" min="0" step="0.01" value="100">
+                <p class="input-explain">This is the original amount of money you want to adjust for inflation. It represents the value in the start year.</p>
+                
+                <label for="startYear">Start Year (From 1913 to 2024):</label>
+                <input type="number" id="startYear" min="1913" max="2024" value="2000">
+                <p class="input-explain">The year from which to start the inflation adjustment. Historical CPI data begins in 1913.</p>
+                
+                <label for="endYear">End Year (Up to 2025):</label>
+                <input type="number" id="endYear" min="1914" max="2025" value="2025">
+                <p class="input-explain">The year to which you want to adjust the amount. For 2025, data is based on available figures up to mid-year.</p>
+                
+                <button type="button" onclick="calculateInflation()">Calculate Inflation Impact</button>
+            </form>
+            <div id="results" class="result green"></div>
+            <canvas id="inflationChart" width="400" height="200"></canvas>
+            <button onclick="saveAsPDF()">Save as PDF</button>
+            <button onclick="sharePage()">Share this page</button>
+        </section>
+        
+        <section id="historical-data">
+            <h2>Historical Inflation Rates and CPI Values</h2>
+            <p>Below is a table summarizing historical annual inflation rates and CPI averages in the United States from 1913 to 2025. This data is sourced from reliable government sources like the Bureau of Labor Statistics. Use it to analyze trends over time.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Average CPI</th>
+                        <th>Inflation Rate (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1913</td><td>9.883</td><td>-</td></tr>
+                    <tr><td>1914</td><td>10.017</td><td>1.0</td></tr>
+                    <tr><td>1915</td><td>10.108</td><td>1.0</td></tr>
+                    <tr><td>1916</td><td>10.883</td><td>7.9</td></tr>
+                    <tr><td>1917</td><td>12.825</td><td>17.4</td></tr>
+                    <tr><td>1918</td><td>15.042</td><td>18.0</td></tr>
+                    <tr><td>1919</td><td>17.333</td><td>14.6</td></tr>
+                    <tr><td>1920</td><td>20.042</td><td>15.6</td></tr>
+                    <tr><td>1921</td><td>17.850</td><td>-10.5</td></tr>
+                    <tr><td>1922</td><td>16.750</td><td>-6.1</td></tr>
+                    <tr><td>1923</td><td>17.050</td><td>1.8</td></tr>
+                    <tr><td>1924</td><td>17.125</td><td>0.0</td></tr>
+                    <tr><td>1925</td><td>17.542</td><td>2.3</td></tr>
+                    <!-- Continuing with data from extracts, abbreviated for brevity; full in JS -->
+                    <tr><td>2020</td><td>258.811</td><td>1.2</td></tr>
+                    <tr><td>2021</td><td>270.970</td><td>4.7</td></tr>
+                    <tr><td>2022</td><td>292.655</td><td>8.0</td></tr>
+                    <tr><td>2023</td><td>304.702</td><td>4.1</td></tr>
+                    <tr><td>2024</td><td>313.689</td><td>2.9</td></tr>
+                    <tr><td>2025</td><td>322.561</td><td>2.7</td></tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="explanation">
+            <h2>Understanding Inflation and Its Economic Implications</h2>
+            <p>Inflation represents the rate at which the general level of prices for goods and services rises, leading to a decrease in purchasing power. Over time, this phenomenon affects savings, investments, and daily expenses. Historical data shows that inflation rates fluctuate due to factors like supply chain disruptions, monetary policy, and global events. For instance, the high inflation in the 1970s was influenced by oil shocks, while recent years have seen impacts from pandemics and geopolitical tensions.</p>
+            <p>The Consumer Price Index (CPI) is a key measure used to track these changes, reflecting the average price variation for a basket of consumer goods and services. By using CPI data, this calculator adjusts past amounts to current values, helping users grasp long-term economic shifts. Comparing inflation across periods can aid in financial planning, such as retirement savings or investment strategies.</p>
+            <p>In addition to the calculator, explore internal tools like our <a href="/compound-interest-growth-calculator.html">Compound Interest Growth Calculator</a> or <a href="/loan-calculator.html">Loan Calculator</a> for related financial insights.</p>
+            <p>For more on economic theories behind inflation, refer to resources from established institutions.</p>
+        </section>
+        
+        <section id="faq">
+            <h2>Frequently Asked Questions About Inflation</h2>
+            <dl>
+                <dt>What is the difference between CPI and core inflation?</dt>
+                <dd>CPI includes all items, while core inflation excludes volatile food and energy prices for a more stable measure.</dd>
+                <dt>How is the inflation rate calculated?</dt>
+                <dd>It uses the formula: ((CPI_end / CPI_start) - 1) * 100 for total, or compounded for average annual.</dd>
+                <dt>Why might deflation occur?</dt>
+                <dd>Deflation happens when prices fall, often due to reduced demand, as seen in the Great Depression.</dd>
+                <dt>Can inflation be beneficial?</dt>
+                <dd>Moderate inflation (2-3%) encourages spending and economic growth, but high rates erode value.</dd>
+                <dt>How accurate is this calculator for Euro?</dt>
+                <dd>It uses US CPI for approximation; for precise EU data, consult Eurostat.</dd>
+            </dl>
+        </section>
+        
+        <section id="disclaimer">
+            <h2>Financial Disclaimer</h2>
+            <p>This inflation calculator is provided for informational and educational purposes only. It does not constitute financial advice, and results are based on historical data which may not predict future trends. Consult a professional advisor for personalized financial decisions. FCalculator.com is not liable for any losses incurred from using this tool.</p>
+        </section>
+        
+        <section id="related-resources">
+            <h2>Related Resources</h2>
+            <ul>
+                <li><a href="https://www.bls.gov/cpi/" target="_blank" rel="noopener noreferrer">U.S. Bureau of Labor Statistics - Consumer Price Index</a></li>
+                <li><a href="https://ec.europa.eu/eurostat/web/hicp" target="_blank" rel="noopener noreferrer">Eurostat - Harmonised Index of Consumer Prices</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Inflation" target="_blank" rel="noopener noreferrer">Wikipedia - Inflation Economics</a></li>
+                <li><a href="https://www.federalreserve.gov/monetarypolicy.htm" target="_blank" rel="noopener noreferrer">Federal Reserve - Monetary Policy and Inflation</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        // Author: Ivan Brkic
+        const cpiData = {
+            1913: 9.883, 1914: 10.017, 1915: 10.108, 1916: 10.883, 1917: 12.825, 1918: 15.042, 1919: 17.333, 1920: 20.042,
+            1921: 17.850, 1922: 16.750, 1923: 17.050, 1924: 17.125, 1925: 17.542, 1926: 17.700, 1927: 17.358, 1928: 17.158,
+            1929: 17.158, 1930: 16.700, 1931: 15.208, 1932: 13.642, 1933: 12.933, 1934: 13.383, 1935: 13.725, 1936: 13.867,
+            1937: 14.383, 1938: 14.092, 1939: 13.908, 1940: 14.008, 1941: 14.725, 1942: 16.333, 1943: 17.308, 1944: 17.592,
+            1945: 17.992, 1946: 19.517, 1947: 22.325, 1948: 24.042, 1949: 23.808, 1950: 24.067, 1951: 25.958, 1952: 26.550,
+            1953: 26.767, 1954: 26.850, 1955: 26.775, 1956: 27.183, 1957: 28.092, 1958: 28.858, 1959: 29.150, 1960: 29.575,
+            1961: 29.892, 1962: 30.250, 1963: 30.625, 1964: 31.017, 1965: 31.508, 1966: 32.458, 1967: 33.358, 1968: 34.783,
+            1969: 36.683, 1970: 38.825, 1971: 40.492, 1972: 41.817, 1973: 44.400, 1974: 49.308, 1975: 53.817, 1976: 56.908,
+            1977: 60.608, 1978: 65.233, 1979: 72.575, 1980: 82.408, 1981: 90.925, 1982: 96.500, 1983: 99.600, 1984: 103.883,
+            1985: 107.567, 1986: 109.608, 1987: 113.625, 1988: 118.258, 1989: 123.967, 1990: 130.658, 1991: 136.192, 1992: 140.317,
+            1993: 144.458, 1994: 148.225, 1995: 152.383, 1996: 156.850, 1997: 160.517, 1998: 163.008, 1999: 166.575, 2000: 172.200,
+            2001: 177.067, 2002: 179.875, 2003: 183.958, 2004: 188.883, 2005: 195.292, 2006: 201.592, 2007: 207.342, 2008: 215.303,
+            2009: 214.537, 2010: 218.056, 2011: 224.939, 2012: 229.594, 2013: 232.957, 2014: 236.736, 2015: 237.017, 2016: 240.011,
+            2017: 245.120, 2018: 251.107, 2019: 255.657, 2020: 258.811, 2021: 270.970, 2022: 292.655, 2023: 304.702, 2024: 313.689,
+            2025: 322.561
+        };
+        const inflationRates = {
+            1914: 1.0, 1915: 1.0, 1916: 7.9, 1917: 17.4, 1918: 18.0, 1919: 14.6, 1920: 15.6, 1921: -10.5, 1922: -6.1, 1923: 1.8,
+            1924: 0.0, 1925: 2.3, 1926: 1.1, 1927: -1.7, 1928: -1.7, 1929: 0.0, 1930: -2.3, 1931: -9.0, 1932: -9.9, 1933: -5.1,
+            1934: 3.1, 1935: 2.2, 1936: 1.5, 1937: 3.6, 1938: -2.1, 1939: -1.4, 1940: 0.7, 1941: 5.0, 1942: 10.9, 1943: 6.1,
+            1944: 1.7, 1945: 2.3, 1946: 8.3, 1947: 14.4, 1948: 8.1, 1949: -1.2, 1950: 1.3, 1951: 7.9, 1952: 1.9, 1953: 0.8,
+            1954: 0.7, 1955: -0.4, 1956: 1.5, 1957: 3.3, 1958: 2.8, 1959: 0.7, 1960: 1.7, 1961: 1.0, 1962: 1.0, 1963: 1.3,
+            1964: 1.3, 1965: 1.6, 1966: 2.9, 1967: 3.1, 1968: 4.2, 1969: 5.5, 1970: 5.7, 1971: 4.4, 1972: 3.2, 1973: 6.2,
+            1974: 11.0, 1975: 9.1, 1976: 5.8, 1977: 6.5, 1978: 7.6, 1979: 11.3, 1980: 13.5, 1981: 10.3, 1982: 6.2, 1983: 3.2,
+            1984: 4.3, 1985: 3.6, 1986: 1.9, 1987: 3.6, 1988: 4.1, 1989: 4.8, 1990: 5.4, 1991: 4.2, 1992: 3.0, 1993: 3.0,
+            1994: 2.6, 1995: 2.8, 1996: 3.0, 1997: 2.3, 1998: 1.6, 1999: 2.2, 2000: 3.4, 2001: 2.8, 2002: 1.6, 2003: 2.3,
+            2004: 2.7, 2005: 3.4, 2006: 3.2, 2007: 2.8, 2008: 3.8, 2009: -0.4, 2010: 1.6, 2011: 3.2, 2012: 2.1, 2013: 1.5,
+            2014: 1.6, 2015: 0.1, 2016: 1.3, 2017: 2.1, 2018: 2.4, 2019: 1.8, 2020: 1.2, 2021: 4.7, 2022: 8.0, 2023: 4.1,
+            2024: 2.9, 2025: 2.7
+        };
+        
+        let chart;
+        
+        function calculateInflation() {
+            const currency = document.getElementById('currency').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const startYear = parseInt(document.getElementById('startYear').value);
+            const endYear = parseInt(document.getElementById('endYear').value);
+            
+            if (isNaN(amount) || isNaN(startYear) || isNaN(endYear) || startYear >= endYear || !cpiData[startYear] || !cpiData[endYear]) {
+                document.getElementById('results').innerHTML = '<p>Please enter valid values.</p>';
+                return;
+            }
+            
+            const symbol = currency === 'usd' ? '$' : '€';
+            const cpiStart = cpiData[startYear];
+            const cpiEnd = cpiData[endYear];
+            const adjustedAmount = amount * (cpiEnd / cpiStart);
+            const totalInflation = ((cpiEnd / cpiStart) - 1) * 100;
+            const years = endYear - startYear;
+            const averageAnnual = (Math.pow(cpiEnd / cpiStart, 1 / years) - 1) * 100;
+            
+            document.getElementById('results').innerHTML = `
+                <h3>Inflation Results</h3>
+                <p>Adjusted Amount in ${endYear}: ${symbol}${adjustedAmount.toFixed(2)}</p>
+                <p>Total Inflation: ${totalInflation.toFixed(2)}%</p>
+                <p>Average Annual Inflation: ${averageAnnual.toFixed(2)}%</p>
+            `;
+            
+            updateChart(startYear, endYear);
+        }
+        
+        function updateChart(start, end) {
+            const ctx = document.getElementById('inflationChart').getContext('2d');
+            const years = Object.keys(inflationRates).filter(y => y >= start && y <= end);
+            const rates = years.map(y => inflationRates[y]);
+            
+            if (chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: years,
+                    datasets: [{
+                        label: 'Inflation Rate (%)',
+                        data: rates,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: false }
+                    }
+                }
+            });
+        }
+        
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFontSize(14);
+            doc.text("Inflation Calculation Results", 105, 15, { align: "center" });
+            
+            // Parameters Table
+            const resultsDiv = document.getElementById('results');
+            const params = [
+                ['Adjusted Amount', resultsDiv.querySelector('p:nth-child(2)').textContent],
+                ['Total Inflation', resultsDiv.querySelector('p:nth-child(3)').textContent],
+                ['Average Annual Inflation', resultsDiv.querySelector('p:nth-child(4)').textContent]
+            ];
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: params,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica' },
+                margin: { top: 10 }
+            });
+            
+            // Historical Table (sample, abbreviated)
+            const histData = [];
+            for (let year = 1913; year <= 2025; year++) {
+                histData.push([year, cpiData[year] || 'N/A', inflationRates[year] || 'N/A']);
+            }
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
+                head: [['Year', 'Average CPI', 'Inflation Rate (%)']],
+                body: histData,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+            
+            doc.save('inflation-results.pdf');
+        }
+        
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Inflation Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
