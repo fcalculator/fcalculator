@@ -72,20 +72,20 @@
     <main>
         <section class="tool-section">
             <form id="tool-form">
-                <div class="currency-selector">
-                    <label for="currency">Currency:</label>
-                    <select id="currency">
-                        <option value="USD">$ (USD)</option>
-                        <option value="EUR">€ (EUR)</option>
-                        <option value="GBP">£ (GBP)</option>
-                        <option value="JPY">¥ (JPY)</option>
-                        <option value="CAD">C$ (CAD)</option>
-                        <option value="AUD">A$ (AUD)</option>
-                    </select>
-                </div>
                 <div class="sections-container">
                     <fieldset>
                         <legend>Investment Details</legend>
+                        <div class="input-row">
+                            <label for="currency">Currency</label>
+                            <select id="currency">
+                                <option value="USD">$ (USD)</option>
+                                <option value="EUR">€ (EUR)</option>
+                                <option value="GBP">£ (GBP)</option>
+                                <option value="JPY">¥ (JPY)</option>
+                                <option value="CAD">C$ (CAD)</option>
+                                <option value="AUD">A$ (AUD)</option>
+                            </select>
+                        </div>
                         <div class="input-row">
                             <label for="investment-amount">Investment Amount</label>
                             <input type="number" id="investment-amount" value="1000" required>
@@ -166,7 +166,7 @@
                 <p>This tool is for informational and educational purposes only and does not constitute financial advice. Cryptocurrency markets are unpredictable, and users should consult professionals before making real investments. FCalculator.com is not responsible for any losses incurred based on simulations.</p>
             </div>
             <h3>FAQ</h3>
-            <p><strong>What data source does the calculator use?</strong> It relies on CryptoCompare API for historical and current Bitcoin prices, ensuring accurate and up-to-date information across multiple currencies.</p>
+            <p><strong>What data source does the calculator use?</strong> It relies on CoinGecko API for historical and current Bitcoin prices, ensuring accurate and up-to-date information across multiple currencies.</p>
             <p><strong>Can I simulate investments older than 10 years?</strong> Yes, the tool supports dates back to Bitcoin's early days, though data accuracy may vary for very early periods.</p>
             <p><strong>Why include a price chart?</strong> The line chart visualizes Bitcoin's price trajectory from your purchase date to today, highlighting volatility and growth patterns for better understanding.</p>
             <p><strong>How accurate are the results?</strong> Results are based on closing daily prices; actual outcomes could differ due to transaction fees or exact timing.</p>
@@ -191,24 +191,30 @@
         async function calculateBitcoinInvestment() {
             const amount = parseFloat(document.getElementById('investment-amount').value);
             const date = document.getElementById('purchase-date').value;
-            const currency = document.getElementById('currency').value;
+            const currency = document.getElementById('currency').value.toLowerCase();
             const tz = 'America/New_York';
             const purchaseDate = new Date(date);
             const currentDate = new Date().toLocaleString('en-US', { timeZone: tz });
             const currentTimestamp = Math.floor(new Date(currentDate).getTime() / 1000);
             const purchaseTimestamp = Math.floor(purchaseDate.getTime() / 1000);
 
+            // Format date for CoinGecko: dd-mm-yyyy
+            const day = purchaseDate.getDate().toString().padStart(2, '0');
+            const month = (purchaseDate.getMonth() + 1).toString().padStart(2, '0');
+            const year = purchaseDate.getFullYear();
+            const histDate = `${day}-${month}-${year}`;
+
             // Fetch historical price on purchase date
-            const histUrl = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=${currency}&limit=1&toTs=${purchaseTimestamp}`;
+            const histUrl = `https://api.coingecko.com/api/v3/coins/bitcoin/history?date=${histDate}`;
             const histResponse = await fetch(histUrl);
             const histData = await histResponse.json();
-            const purchasePrice = histData.Data.Data[1]?.close || histData.Data.Data[0]?.close;
+            const purchasePrice = histData.market_data.current_price[currency];
 
             // Fetch current price
-            const currentUrl = `https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=${currency}`;
+            const currentUrl = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${currency}`;
             const currentResponse = await fetch(currentUrl);
             const currentData = await currentResponse.json();
-            const currentPrice = currentData[currency];
+            const currentPrice = currentData.bitcoin[currency];
 
             // Calculations
             const btcBought = amount / purchasePrice;
@@ -218,32 +224,31 @@
 
             // Display summary
             document.getElementById('result-summary').innerHTML = `
-                <p>Investment: ${amount.toFixed(2)} ${currency}</p>
+                <p>Investment: ${amount.toFixed(2)} ${currency.toUpperCase()}</p>
                 <p>BTC Bought: ${btcBought.toFixed(8)}</p>
-                <p>Current Value: ${currentValue.toFixed(2)} ${currency}</p>
-                <p>Profit/Loss: ${profitLoss.toFixed(2)} ${currency} (${percentageChange}%)</p>
+                <p>Current Value: ${currentValue.toFixed(2)} ${currency.toUpperCase()}</p>
+                <p>Profit/Loss: ${profitLoss.toFixed(2)} ${currency.toUpperCase()} (${percentageChange}%)</p>
             `;
 
             // Populate table
             const tableBody = document.querySelector('#result-table tbody');
             tableBody.innerHTML = `
-                <tr><td>Investment Amount</td><td>${amount.toFixed(2)} ${currency}</td></tr>
+                <tr><td>Investment Amount</td><td>${amount.toFixed(2)} ${currency.toUpperCase()}</td></tr>
                 <tr><td>Purchase Date</td><td>${date}</td></tr>
-                <tr><td>Purchase Price (per BTC)</td><td>${purchasePrice.toFixed(2)} ${currency}</td></tr>
+                <tr><td>Purchase Price (per BTC)</td><td>${purchasePrice.toFixed(2)} ${currency.toUpperCase()}</td></tr>
                 <tr><td>BTC Purchased</td><td>${btcBought.toFixed(8)}</td></tr>
-                <tr><td>Current Price (per BTC)</td><td>${currentPrice.toFixed(2)} ${currency}</td></tr>
-                <tr><td>Current Value</td><td>${currentValue.toFixed(2)} ${currency}</td></tr>
-                <tr><td>Profit/Loss</td><td>${profitLoss.toFixed(2)} ${currency}</td></tr>
+                <tr><td>Current Price (per BTC)</td><td>${currentPrice.toFixed(2)} ${currency.toUpperCase()}</td></tr>
+                <tr><td>Current Value</td><td>${currentValue.toFixed(2)} ${currency.toUpperCase()}</td></tr>
+                <tr><td>Profit/Loss</td><td>${profitLoss.toFixed(2)} ${currency.toUpperCase()}</td></tr>
                 <tr><td>Percentage Change</td><td>${percentageChange}%</td></tr>
             `;
 
             // Fetch full history for chart
-            const daysDiff = Math.ceil((currentTimestamp - purchaseTimestamp) / 86400);
-            const chartUrl = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=${currency}&limit=${daysDiff}&toTs=${currentTimestamp}`;
+            const chartUrl = `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=${currency}&from=${purchaseTimestamp}&to=${currentTimestamp}`;
             const chartResponse = await fetch(chartUrl);
             const chartData = await chartResponse.json();
-            const labels = chartData.Data.Data.map(d => new Date(d.time * 1000).toLocaleDateString());
-            const prices = chartData.Data.Data.map(d => d.close);
+            const labels = chartData.prices.map(p => new Date(p[0]).toLocaleDateString());
+            const prices = chartData.prices.map(p => p[1]);
 
             // Render chart
             const ctx = document.getElementById('priceChart').getContext('2d');
