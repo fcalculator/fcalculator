@@ -212,7 +212,7 @@
 
         async function fetchBitcoinPrice(date, vsCurrency = 'usd') {
             const formattedDate = date.split('-').reverse().join('-'); // Convert YYYY-MM-DD to DD-MM-YYYY for API
-            const response = await fetch(`https://api.coingecko.com/api/v3/coins/bitcoin/history?date=${formattedDate}`);
+            const response = await fetch(`https://api.coingecko.com/api/v3/coins/bitcoin/history?date=${formattedDate}&localization=false`);
             const data = await response.json();
             if (!data.market_data || !data.market_data.current_price[vsCurrency.toLowerCase()]) {
                 throw new Error('No price data available for this date. Please choose a date after April 28, 2013.');
@@ -293,7 +293,7 @@
 
                 document.getElementById('results').style.display = 'block';
             } catch (error) {
-                alert(error.message || 'Error fetching data. Please try a valid date after April 28, 2013.');
+                alert(error.message || 'Network error fetching data. Please check your connection, try a later date, or refresh the page.');
             }
         }
 
