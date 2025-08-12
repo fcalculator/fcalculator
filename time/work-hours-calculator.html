@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Hours Calculator</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "FCalculator.com",
+        "url": "https://fcalculator.com",
+        "logo": "https://fcalculator.com/images/logo.png"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/time.html">Time</a> > <a href="/time/work-hours-calculator.html">Work Hours Calculator</a>
+        </div>
+        <h1>Work Hours Calculator</h1>
+        <p>Precisely determine total working hours by accounting for start and end times, breaks, and overtime thresholds to support accurate payroll processing and efficient time management.</p>
+    </header>
+
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container">
+                <fieldset>
+                    <legend>Settings</legend>
+                    <div class="input-row">
+                        <label for="overtime-threshold">Overtime After (hours/week)</label>
+                        <input type="number" id="overtime-threshold" value="40" min="0" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="deduct-breaks">Deduct Breaks</label>
+                        <input type="checkbox" id="deduct-breaks" checked>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Monday</legend>
+                    <div class="input-row">
+                        <label for="mon-start">Start Time</label>
+                        <input type="time" id="mon-start" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="mon-end">End Time</label>
+                        <input type="time" id="mon-end" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="mon-break">Break (minutes)</label>
+                        <input type="number" id="mon-break" value="0" min="0" required>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Tuesday</legend>
+                    <div class="input-row">
+                        <label for="tue-start">Start Time</label>
+                        <input type="time" id="tue-start" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="tue-end">End Time</label>
+                        <input type="time" id="tue-end" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="tue-break">Break (minutes)</label>
+                        <input type="number" id="tue-break" value="0" min="0" required>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Wednesday</legend>
+                    <div class="input-row">
+                        <label for="wed-start">Start Time</label>
+                        <input type="time" id="wed-start" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="wed-end">End Time</label>
+                        <input type="time" id="wed-end" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="wed-break">Break (minutes)</label>
+                        <input type="number" id="wed-break" value="0" min="0" required>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Thursday</legend>
+                    <div class="input-row">
+                        <label for="thu-start">Start Time</label>
+                        <input type="time" id="thu-start" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="thu-end">End Time</label>
+                        <input type="time" id="thu-end" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="thu-break">Break (minutes)</label>
+                        <input type="number" id="thu-break" value="0" min="0" required>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Friday</legend>
+                    <div class="input-row">
+                        <label for="fri-start">Start Time</label>
+                        <input type="time" id="fri-start" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="fri-end">End Time</label>
+                        <input type="time" id="fri-end" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="fri-break">Break (minutes)</label>
+                        <input type="number" id="fri-break" value="0" min="0" required>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Saturday</legend>
+                    <div class="input-row">
+                        <label for="sat-start">Start Time</label>
+                        <input type="time" id="sat-start">
+                    </div>
+                    <div class="input-row">
+                        <label for="sat-end">End Time</label>
+                        <input type="time" id="sat-end">
+                    </div>
+                    <div class="input-row">
+                        <label for="sat-break">Break (minutes)</label>
+                        <input type="number" id="sat-break" value="0" min="0">
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Sunday</legend>
+                    <div class="input-row">
+                        <label for="sun-start">Start Time</label>
+                        <input type="time" id="sun-start">
+                    </div>
+                    <div class="input-row">
+                        <label for="sun-end">End Time</label>
+                        <input type="time" id="sun-end">
+                    </div>
+                    <div class="input-row">
+                        <label for="sun-break">Break (minutes)</label>
+                        <input type="number" id="sun-break" value="0" min="0">
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="calculateWorkHours()">Calculate</button>
+        </form>
+
+        <div id="results" style="text-align: center; font-size: 1.2em;"></div>
+        <button onclick="saveAsPDF()">Save as PDF</button>
+        <button onclick="sharePage()">Share this page</button>
+    </section>
+
+    <section>
+        <h2>How the Work Hours Calculator Functions</h2>
+        <p>This calculator processes daily work schedules by subtracting start times from end times and deducting break durations if selected. It aggregates weekly hours, identifies regular and overtime portions based on the specified threshold, and presents results in both time format (hours:minutes) and decimal equivalents for payroll compatibility.</p>
+        <p>To use it effectively, enter start and end times for each day using the 24-hour format provided by the time inputs. Specify breaks in minutes, and adjust the overtime threshold as needed—commonly set at 40 hours per week in many jurisdictions. The tool handles non-working days gracefully by allowing empty fields, which default to zero hours.</p>
+        <p>The core calculation for daily hours is: End Time - Start Time - Break Time (in hours). Weekly totals sum these values, with overtime calculated as any excess over the threshold. For decimal conversion, the formula is:</p>
+        \[ \text{Decimal Hours} = \text{Hours} + \frac{\text{Minutes}}{60} \]
+        <p>This ensures precise payroll computations, where decimal hours can be multiplied by hourly rates. For instance, 8 hours and 15 minutes converts to 8.25 decimal hours.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Example Input</th>
+                    <th>Daily Hours (hh:mm)</th>
+                    <th>Decimal Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Start: 09:00, End: 17:00, Break: 60 min</td>
+                    <td>7:00</td>
+                    <td>7.00</td>
+                </tr>
+                <tr>
+                    <td>Start: 08:30, End: 16:45, Break: 30 min</td>
+                    <td>7:45</td>
+                    <td>7.75</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Integrating this tool into your routine can streamline time tracking, reduce errors in manual calculations, and comply with labor regulations. For related time management, explore our <a href="/time/time-zone-calculator.html">Time Zone Calculator</a> or <a href="/time/work-hours-calculator.html">Custom Event Countdown Timer</a>.</p>
+    </section>
+
+    <section>
+        <h2>Benefits of Tracking Work Hours Accurately</h2>
+        <p>Accurate work hour tracking supports fair compensation, helps in budgeting labor costs, and ensures compliance with employment laws. It allows employers to monitor productivity patterns and employees to verify their paychecks. In regions like the United States, under the Fair Labor Standards Act, overtime must be paid at 1.5 times the regular rate for hours exceeding 40 per week.</p>
+        <p>Consider a scenario where an employee works varying shifts: the calculator reveals weekly totals, highlighting potential overtime liabilities. This data can inform scheduling decisions, preventing burnout and optimizing workforce allocation.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Weekly Hours</th>
+                    <th>Overtime Impact</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Standard 40-hour week</td>
+                    <td>40:00</td>
+                    <td>No overtime</td>
+                </tr>
+                <tr>
+                    <td>Extended shifts</td>
+                    <td>45:00</td>
+                    <td>5 hours overtime</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Such insights are invaluable for small businesses and freelancers alike.</p>
+    </section>
+
+    <section>
+        <h2>Disclaimer</h2>
+        <p>This Work Hours Calculator provides general estimates based on user inputs and should not be relied upon for official payroll, legal, or financial decisions. Always consult relevant labor laws, professional advisors, or verified time-tracking systems for accuracy. Results may vary by jurisdiction and individual circumstances.</p>
+    </section>
+
+    <section>
+        <h2>Frequently Asked Questions</h2>
+        <p><strong>How do I handle non-working days?</strong> Leave the start and end times blank or set to the same value; the calculator will treat them as zero hours.</p>
+        <p><strong>What if my work spans midnight?</strong> The tool assumes single-day shifts; for overnight work, adjust inputs to reflect accurate durations manually.</p>
+        <p><strong>Does it support part-time schedules?</strong> Yes, enter varying hours per day, and the weekly total will reflect flexible or reduced workloads.</p>
+        <p><strong>How is overtime calculated?</strong> Overtime is any hours exceeding the set threshold (default 40 per week), separated from regular hours in the results.</p>
+        <p><strong>Can I convert results to decimal for payroll?</strong> Absolutely, the output includes decimal equivalents alongside hh:mm formats.</p>
+    </section>
+
+    <section>
+        <h2>Related Resources</h2>
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Working_time" target="_blank" rel="noopener noreferrer">Wikipedia on Working Time</a></li>
+            <li><a href="https://www.dol.gov/agencies/whd/overtime" target="_blank" rel="noopener noreferrer">U.S. Department of Labor Overtime Guidelines</a></li>
+            <li><a href="https://www.canada.ca/en/services/jobs/workplace/federal-labour-standards/work-hours.html" target="_blank" rel="noopener noreferrer">Canada Labour Code on Work Hours</a></li>
+            <li><a href="https://ec.europa.eu/social/main.jsp?catId=706&langId=en" target="_blank" rel="noopener noreferrer">EU Working Time Directive</a></li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+
+    <script>
+        let dailyData = [];
+
+        function timeToMinutes(time) {
+            if (!time) return 0;
+            const [hours, minutes] = time.split(':').map(Number);
+            return hours * 60 + minutes;
+        }
+
+        function minutesToTime(minutes) {
+            const hours = Math.floor(minutes / 60);
+            const mins = minutes % 60;
+            return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+        }
+
+        function minutesToDecimal(minutes) {
+            return (minutes / 60).toFixed(2);
+        }
+
+        function calculateWorkHours() {
+            const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+            let totalMinutes = 0;
+            dailyData = [];
+
+            const deductBreaks = document.getElementById('deduct-breaks').checked;
+            const overtimeThreshold = parseInt(document.getElementById('overtime-threshold').value) * 60;
+
+            days.forEach(day => {
+                const start = document.getElementById(`${day}-start`).value;
+                const end = document.getElementById(`${day}-end`).value;
+                const breakMins = parseInt(document.getElementById(`${day}-break`).value) || 0;
+
+                if (start && end) {
+                    let dayMinutes = timeToMinutes(end) - timeToMinutes(start);
+                    if (deductBreaks) dayMinutes -= breakMins;
+                    if (dayMinutes < 0) dayMinutes = 0; // Prevent negative
+                    totalMinutes += dayMinutes;
+
+                    dailyData.push({
+                        day: day.charAt(0).toUpperCase() + day.slice(1),
+                        hours: minutesToTime(dayMinutes),
+                        decimal: minutesToDecimal(dayMinutes)
+                    });
+                } else {
+                    dailyData.push({
+                        day: day.charAt(0).toUpperCase() + day.slice(1),
+                        hours: '0:00',
+                        decimal: '0.00'
+                    });
+                }
+            });
+
+            const regMinutes = Math.min(totalMinutes, overtimeThreshold);
+            const otMinutes = Math.max(0, totalMinutes - overtimeThreshold);
+
+            let resultsHTML = '<h3>Weekly Summary</h3>';
+            resultsHTML += `<p>Regular Hours: ${minutesToTime(regMinutes)} (${minutesToDecimal(regMinutes)} decimal)</p>`;
+            resultsHTML += `<p>Overtime Hours: ${minutesToTime(otMinutes)} (${minutesToDecimal(otMinutes)} decimal)</p>`;
+            resultsHTML += `<p>Total Hours: ${minutesToTime(totalMinutes)} (${minutesToDecimal(totalMinutes)} decimal)</p>`;
+
+            resultsHTML += '<h3>Daily Breakdown</h3>';
+            resultsHTML += '<table><thead><tr><th>Day</th><th>Hours (hh:mm)</th><th>Decimal Hours</th></tr></thead><tbody>';
+            dailyData.forEach(data => {
+                resultsHTML += `<tr><td>${data.day}</td><td>${data.hours}</td><td>${data.decimal}</td></tr>`;
+            });
+            resultsHTML += '</tbody></table>';
+
+            document.getElementById('results').innerHTML = resultsHTML;
+        }
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFontSize(14);
+            doc.text("Work Hours Calculation Results", 105, 15, { align: "center" });
+
+            // Weekly Summary Table
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value (hh:mm)', 'Decimal']],
+                body: [
+                    ['Regular Hours', minutesToTime(Math.min(totalMinutes, overtimeThreshold)), minutesToDecimal(Math.min(totalMinutes, overtimeThreshold))],
+                    ['Overtime Hours', minutesToTime(Math.max(0, totalMinutes - overtimeThreshold)), minutesToDecimal(Math.max(0, totalMinutes - overtimeThreshold))],
+                    ['Total Hours', minutesToTime(totalMinutes), minutesToDecimal(totalMinutes)]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 5, halign: 'left' },
+                margin: { top: 10 }
+            });
+
+            // Daily Breakdown Table
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
+                head: [['Day', 'Hours (hh:mm)', 'Decimal Hours']],
+                body: dailyData.map(data => [data.day, data.hours, data.decimal]),
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 5, halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+
+            doc.save('work-hours-results.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Work Hours Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
