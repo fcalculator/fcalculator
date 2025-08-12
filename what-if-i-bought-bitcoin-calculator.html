@@ -189,80 +189,88 @@
     </footer>
     <script>
         async function calculateBitcoinInvestment() {
-            const amount = parseFloat(document.getElementById('investment-amount').value);
-            const date = document.getElementById('purchase-date').value;
-            const currency = document.getElementById('currency').value.toLowerCase();
-            const tz = 'America/New_York';
-            const purchaseDate = new Date(date);
-            const currentDate = new Date().toLocaleString('en-US', { timeZone: tz });
-            const currentTimestamp = Math.floor(new Date(currentDate).getTime() / 1000);
-            const purchaseTimestamp = Math.floor(purchaseDate.getTime() / 1000);
+            try {
+                const amount = parseFloat(document.getElementById('investment-amount').value);
+                const date = document.getElementById('purchase-date').value;
+                const currency = document.getElementById('currency').value.toLowerCase();
+                const tz = 'America/New_York';
+                const purchaseDate = new Date(date);
+                const currentDate = new Date().toLocaleString('en-US', { timeZone: tz });
+                const currentTimestamp = Math.floor(new Date(currentDate).getTime() / 1000);
+                const purchaseTimestamp = Math.floor(purchaseDate.getTime() / 1000);
 
-            // Format date for CoinGecko: dd-mm-yyyy
-            const day = purchaseDate.getDate().toString().padStart(2, '0');
-            const month = (purchaseDate.getMonth() + 1).toString().padStart(2, '0');
-            const year = purchaseDate.getFullYear();
-            const histDate = `${day}-${month}-${year}`;
+                // Format date for CoinGecko: dd-mm-yyyy
+                const day = purchaseDate.getDate().toString().padStart(2, '0');
+                const month = (purchaseDate.getMonth() + 1).toString().padStart(2, '0');
+                const year = purchaseDate.getFullYear();
+                const histDate = `${day}-${month}-${year}`;
 
-            // Fetch historical price on purchase date
-            const histUrl = `https://api.coingecko.com/api/v3/coins/bitcoin/history?date=${histDate}`;
-            const histResponse = await fetch(histUrl);
-            const histData = await histResponse.json();
-            const purchasePrice = histData.market_data.current_price[currency];
+                // Fetch historical price on purchase date
+                const histUrl = `https://api.coingecko.com/api/v3/coins/bitcoin/history?date=${histDate}`;
+                const histResponse = await fetch(histUrl);
+                if (!histResponse.ok) throw new Error('Historical API failed: ' + histResponse.status);
+                const histData = await histResponse.json();
+                const purchasePrice = histData.market_data.current_price[currency];
 
-            // Fetch current price
-            const currentUrl = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${currency}`;
-            const currentResponse = await fetch(currentUrl);
-            const currentData = await currentResponse.json();
-            const currentPrice = currentData.bitcoin[currency];
+                // Fetch current price
+                const currentUrl = `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${currency}`;
+                const currentResponse = await fetch(currentUrl);
+                if (!currentResponse.ok) throw new Error('Current API failed: ' + currentResponse.status);
+                const currentData = await currentResponse.json();
+                const currentPrice = currentData.bitcoin[currency];
 
-            // Calculations
-            const btcBought = amount / purchasePrice;
-            const currentValue = btcBought * currentPrice;
-            const profitLoss = currentValue - amount;
-            const percentageChange = ((profitLoss / amount) * 100).toFixed(2);
+                // Calculations
+                const btcBought = amount / purchasePrice;
+                const currentValue = btcBought * currentPrice;
+                const profitLoss = currentValue - amount;
+                const percentageChange = ((profitLoss / amount) * 100).toFixed(2);
 
-            // Display summary
-            document.getElementById('result-summary').innerHTML = `
-                <p>Investment: ${amount.toFixed(2)} ${currency.toUpperCase()}</p>
-                <p>BTC Bought: ${btcBought.toFixed(8)}</p>
-                <p>Current Value: ${currentValue.toFixed(2)} ${currency.toUpperCase()}</p>
-                <p>Profit/Loss: ${profitLoss.toFixed(2)} ${currency.toUpperCase()} (${percentageChange}%)</p>
-            `;
+                // Display summary
+                document.getElementById('result-summary').innerHTML = `
+                    <p>Investment: ${amount.toFixed(2)} ${currency.toUpperCase()}</p>
+                    <p>BTC Bought: ${btcBought.toFixed(8)}</p>
+                    <p>Current Value: ${currentValue.toFixed(2)} ${currency.toUpperCase()}</p>
+                    <p>Profit/Loss: ${profitLoss.toFixed(2)} ${currency.toUpperCase()} (${percentageChange}%)</p>
+                `;
 
-            // Populate table
-            const tableBody = document.querySelector('#result-table tbody');
-            tableBody.innerHTML = `
-                <tr><td>Investment Amount</td><td>${amount.toFixed(2)} ${currency.toUpperCase()}</td></tr>
-                <tr><td>Purchase Date</td><td>${date}</td></tr>
-                <tr><td>Purchase Price (per BTC)</td><td>${purchasePrice.toFixed(2)} ${currency.toUpperCase()}</td></tr>
-                <tr><td>BTC Purchased</td><td>${btcBought.toFixed(8)}</td></tr>
-                <tr><td>Current Price (per BTC)</td><td>${currentPrice.toFixed(2)} ${currency.toUpperCase()}</td></tr>
-                <tr><td>Current Value</td><td>${currentValue.toFixed(2)} ${currency.toUpperCase()}</td></tr>
-                <tr><td>Profit/Loss</td><td>${profitLoss.toFixed(2)} ${currency.toUpperCase()}</td></tr>
-                <tr><td>Percentage Change</td><td>${percentageChange}%</td></tr>
-            `;
+                // Populate table
+                const tableBody = document.querySelector('#result-table tbody');
+                tableBody.innerHTML = `
+                    <tr><td>Investment Amount</td><td>${amount.toFixed(2)} ${currency.toUpperCase()}</td></tr>
+                    <tr><td>Purchase Date</td><td>${date}</td></tr>
+                    <tr><td>Purchase Price (per BTC)</td><td>${purchasePrice.toFixed(2)} ${currency.toUpperCase()}</td></tr>
+                    <tr><td>BTC Purchased</td><td>${btcBought.toFixed(8)}</td></tr>
+                    <tr><td>Current Price (per BTC)</td><td>${currentPrice.toFixed(2)} ${currency.toUpperCase()}</td></tr>
+                    <tr><td>Current Value</td><td>${currentValue.toFixed(2)} ${currency.toUpperCase()}</td></tr>
+                    <tr><td>Profit/Loss</td><td>${profitLoss.toFixed(2)} ${currency.toUpperCase()}</td></tr>
+                    <tr><td>Percentage Change</td><td>${percentageChange}%</td></tr>
+                `;
 
-            // Fetch full history for chart
-            const chartUrl = `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=${currency}&from=${purchaseTimestamp}&to=${currentTimestamp}`;
-            const chartResponse = await fetch(chartUrl);
-            const chartData = await chartResponse.json();
-            const labels = chartData.prices.map(p => new Date(p[0]).toLocaleDateString());
-            const prices = chartData.prices.map(p => p[1]);
+                // Fetch full history for chart
+                const chartUrl = `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=${currency}&from=${purchaseTimestamp}&to=${currentTimestamp}`;
+                const chartResponse = await fetch(chartUrl);
+                if (!chartResponse.ok) throw new Error('Chart API failed: ' + chartResponse.status);
+                const chartData = await chartResponse.json();
+                const labels = chartData.prices.map(p => new Date(p[0]).toLocaleDateString());
+                const prices = chartData.prices.map(p => p[1]);
 
-            // Render chart
-            const ctx = document.getElementById('priceChart').getContext('2d');
-            if (window.myChart) window.myChart.destroy();
-            window.myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{ label: 'BTC Price', data: prices, borderColor: 'teal', fill: false }]
-                },
-                options: { responsive: true, scales: { y: { beginAtZero: false } } }
-            });
+                // Render chart
+                const ctx = document.getElementById('priceChart').getContext('2d');
+                if (window.myChart) window.myChart.destroy();
+                window.myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{ label: 'BTC Price', data: prices, borderColor: 'teal', fill: false }]
+                    },
+                    options: { responsive: true, scales: { y: { beginAtZero: false } } }
+                });
 
-            document.getElementById('results').style.display = 'block';
+                document.getElementById('results').style.display = 'block';
+            } catch (error) {
+                alert('Error during calculation: ' + error.message + '. Check console for details.');
+                console.error(error);
+            }
         }
 
         function saveAsPDF() {
