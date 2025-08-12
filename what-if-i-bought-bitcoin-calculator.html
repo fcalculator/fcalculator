@@ -204,8 +204,8 @@
                 const histResponse = await fetch(histUrl);
                 if (!histResponse.ok) throw new Error('Historical API failed: ' + histResponse.status);
                 const histData = await histResponse.json();
-                if (histData.Data.length === 0) throw new Error('No historical data for this date and currency.');
-                const purchasePrice = histData.Data[1].close || histData.Data[0].close; // Data[1] is the day, Data[0] previous if needed
+                if (histData.Data.length === 0) throw new Error('No historical data for this date and currency. Try another date.');
+                const purchasePrice = histData.Data[1]?.close || histData.Data[0].close; // Fallback to Data[0] if Data[1] not available
 
                 // Fetch current price
                 const currentUrl = `https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=${currency}`;
