@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rental Property ROI Simulator | FCalculator.com</title>
+    <title>Rental Property ROI Calculator | FCalculator.com</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -14,9 +14,9 @@
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "Rental Property Investment Simulator",
-        "description": "Simulate returns on rental property investments with detailed cash flow projections, ROI calculations, and amortization schedules.",
-        "url": "https://fcalculator.com/rental-property-investment-simulator.html",
+        "name": "Rental Property ROI Calculator",
+        "description": "Calculate returns on rental property investments with detailed cash flow projections, ROI calculations, and amortization schedules.",
+        "url": "https://fcalculator.com/rental-property-roi-simulator.html",
         "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -35,8 +35,8 @@
                 {
                     "@type": "ListItem",
                     "position": 3,
-                    "name": "Rental Property Investment Simulator",
-                    "item": "https://fcalculator.com/rental-property-investment-simulator.html"
+                    "name": "Rental Property ROI Calculator",
+                    "item": "https://fcalculator.com/rental-property-roi-simulator.html"
                 }
             ]
         }
@@ -47,9 +47,9 @@
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/financial.html">Financial</a> > <a href="/rental-property-investment-simulator.html">Rental Property Investment Simulator</a>
+            <a href="/">FCalculator.com</a> > <a href="/financial.html">Financial</a> > <a href="/rental-property-roi-simulator.html">Rental Property ROI Calculator</a>
         </div>
-        <h1>Rental Property Investment Simulator</h1>
+        <h1>Rental Property ROI Calculator</h1>
         <p>Explore potential returns from rental properties by inputting key financial variables. This tool provides comprehensive projections including cash flow, ROI, and detailed breakdowns.</p>
     </header>
 
@@ -58,51 +58,51 @@
             <form id="rental-form">
                 <label for="currency">Currency:</label>
                 <select id="currency">
-                    <option value="$">$</option>
+                    <option value="$" selected>$</option>
                     <option value="€">€</option>
                 </select>
 
                 <label for="property-price">Property Price</label>
-                <input type="number" id="property-price" required>
+                <input type="number" id="property-price" value="250000" required>
 
                 <label for="down-payment">Down Payment (%)</label>
-                <input type="number" id="down-payment" min="0" max="100" required>
+                <input type="number" id="down-payment" min="0" max="100" value="20" required>
 
                 <label for="interest-rate">Annual Interest Rate (%)</label>
-                <input type="number" id="interest-rate" step="0.01" required>
+                <input type="number" id="interest-rate" step="0.01" value="4.5" required>
 
                 <label for="loan-term">Loan Term (Years)</label>
-                <input type="number" id="loan-term" required>
+                <input type="number" id="loan-term" value="30" required>
 
                 <label for="monthly-rent">Monthly Rent</label>
-                <input type="number" id="monthly-rent" required>
+                <input type="number" id="monthly-rent" value="1500" required>
 
                 <label for="annual-taxes">Annual Property Taxes</label>
-                <input type="number" id="annual-taxes" required>
+                <input type="number" id="annual-taxes" value="3000" required>
 
                 <label for="annual-insurance">Annual Insurance</label>
-                <input type="number" id="annual-insurance" required>
+                <input type="number" id="annual-insurance" value="1200" required>
 
                 <label for="monthly-maintenance">Monthly Maintenance (% of Rent)</label>
-                <input type="number" id="monthly-maintenance" min="0" max="100" required>
+                <input type="number" id="monthly-maintenance" min="0" max="100" value="10" required>
 
                 <label for="vacancy-rate">Vacancy Rate (%)</label>
-                <input type="number" id="vacancy-rate" min="0" max="100" required>
+                <input type="number" id="vacancy-rate" min="0" max="100" value="5" required>
 
                 <button type="button" onclick="calculateRental()">Calculate</button>
             </form>
 
-            <div id="results" style="text-align: center; font-size: 1.5em; color: green; display: none;">
-                <p id="monthly-mortgage"></p>
-                <p id="monthly-cash-flow"></p>
-                <p id="annual-roi"></p>
-                <p id="total-return"></p>
+            <div id="results" style="text-align: center; font-size: 1.5em; color: green;">
+                <p id="monthly-mortgage">Monthly Mortgage: $957.87</p>
+                <p id="monthly-cash-flow">Monthly Cash Flow: $137.63</p>
+                <p id="annual-roi">Annual ROI: 3.30%</p>
+                <p id="total-return">Total Return Over Term: $49546.80</p>
             </div>
 
             <canvas id="expenseChart" width="400" height="200"></canvas>
             <canvas id="cashFlowChart" width="400" height="200"></canvas>
 
-            <table id="amortization-table" style="display: none; margin: 20px auto;">
+            <table id="amortization-table" style="margin: 20px auto;">
                 <thead>
                     <tr>
                         <th>Year</th>
@@ -114,13 +114,13 @@
                 <tbody></tbody>
             </table>
 
-            <button onclick="saveAsPDF()" style="display: none;" id="pdf-button">Save as PDF</button>
+            <button onclick="saveAsPDF()" id="pdf-button">Save as PDF</button>
             <button onclick="sharePage()" class="share-button">Share this page</button>
         </section>
 
         <section class="content-section">
             <h2>Understanding Rental Property Investments</h2>
-            <p>Rental properties can be a lucrative investment avenue, offering both steady income through rent and potential appreciation in property value over time. This simulator helps you model various scenarios to assess viability.</p>
+            <p>Rental properties can be a lucrative investment avenue, offering both steady income through rent and potential appreciation in property value over time. This calculator helps you model various scenarios to assess viability.</p>
             <p>The key formula for monthly mortgage payment is the standard loan amortization formula:</p>
             \[ M = P \frac{r(1+r)^n}{(1+r)^n - 1} \]
             <p>Where \( M \) is the monthly payment, \( P \) is the loan principal, \( r \) is the monthly interest rate, and \( n \) is the number of payments.</p>
@@ -185,7 +185,7 @@
             <p>For more on real estate economics, refer to resources from <a href="https://en.wikipedia.org/wiki/Real_estate_investing" target="_blank">Wikipedia on Real Estate Investing</a> or government data from <a href="https://www.hud.gov/" target="_blank">U.S. Department of Housing and Urban Development</a>.</p>
 
             <h3>Disclaimer</h3>
-            <p>This simulator provides estimates based on user inputs and does not constitute financial advice. Consult a professional advisor for personalized guidance. Actual results may vary due to market conditions, unexpected costs, or changes in laws.</p>
+            <p>This calculator provides estimates based on user inputs and does not constitute financial advice. Consult a professional advisor for personalized guidance. Actual results may vary due to market conditions, unexpected costs, or changes in laws.</p>
 
             <h3>FAQ</h3>
             <ul>
@@ -311,7 +311,7 @@
 
             doc.setFont("helvetica");
             doc.setFontSize(14);
-            doc.text("Rental Property Investment Results", 105, 15, { align: "center" });
+            doc.text("Rental Property ROI Calculator Results", 105, 15, { align: "center" });
 
             // Results Table
             doc.autoTable({
@@ -326,39 +326,4 @@
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [255, 255, 255] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
-                margin: { top: 10 }
-            });
-
-            // Amortization Table
-            doc.autoTable({
-                startY: doc.lastAutoTable.finalY + 10,
-                head: [['Year', 'Principal Paid', 'Interest Paid', 'Balance']],
-                body: amortizationData,
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
-                didDrawPage: function (data) {
-                    doc.setFontSize(10);
-                    doc.setTextColor(100);
-                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-                }
-            });
-
-            doc.save('rental-property-results.pdf');
-        }
-
-        function sharePage() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Rental Property Investment Simulator',
-                    url: window.location.href
-                });
-            } else {
-                alert('Share this page manually.');
-            }
-        }
-    </script>
-</body>
-</html>
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding
