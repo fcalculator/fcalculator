@@ -268,13 +268,13 @@ footer {
             .sections-container {
                 flex-direction: column;
             }
-            .input-row {
-                flex-direction: column;
-            }
             .input-row label {
                 text-align: left;
-                margin-right: 0;
-                margin-bottom: 5px;
+                margin-right: 10px;
+                margin-bottom: 0;
+            }
+            .input-row {
+                flex-wrap: wrap;
             }
         }
         #pdf-button, .share-button {
