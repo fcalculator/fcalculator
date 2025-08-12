@@ -270,6 +270,10 @@
         let amortizationData = [];
         let chart1, chart2;
         let currencySymbol = '';
+        let monthlyPaymentValue = '';
+        let totalPaymentsValue = '';
+        let totalInterestValue = '';
+        let payoffDateValue = '';
 
         function calculateAutoLoan() {
             currencySymbol = document.getElementById('currency').value;
@@ -295,10 +299,15 @@
             const payoffDate = new Date(today);
             payoffDate.setMonth(payoffDate.getMonth() + loanTerm);
 
-            document.getElementById('monthly-payment').textContent = `Monthly Payment: ${currencySymbol}${monthlyPayment.toFixed(2)}`;
-            document.getElementById('total-payments').textContent = `Total Payments: ${currencySymbol}${totalPayments.toFixed(2)}`;
-            document.getElementById('total-interest').textContent = `Total Interest: ${currencySymbol}${totalInterest.toFixed(2)}`;
-            document.getElementById('payoff-date').textContent = `Payoff Date: ${payoffDate.toDateString()}`;
+            monthlyPaymentValue = monthlyPayment.toFixed(2);
+            totalPaymentsValue = totalPayments.toFixed(2);
+            totalInterestValue = totalInterest.toFixed(2);
+            payoffDateValue = payoffDate.toDateString();
+
+            document.getElementById('monthly-payment').textContent = `Monthly Payment: ${currencySymbol}${monthlyPaymentValue}`;
+            document.getElementById('total-payments').textContent = `Total Payments: ${currencySymbol}${totalPaymentsValue}`;
+            document.getElementById('total-interest').textContent = `Total Interest: ${currencySymbol}${totalInterestValue}`;
+            document.getElementById('payoff-date').textContent = `Payoff Date: ${payoffDateValue}`;
 
             // Amortization Schedule
             amortizationData = [];
@@ -353,52 +362,55 @@
         }
 
         function saveAsPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+            if (!amortizationData.length) {
+                alert('Please calculate the loan first!');
+                return;
+            }
 
-            doc.setFontSize(14);
-            doc.text("Auto Loan Calculation Results", 105, 15, { align: "center" });
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
 
-            // Extract values without labels and currency
-            const monthlyPaymentVal = document.getElementById('monthly-payment').textContent.split(': ')[1].replace(currencySymbol, '') || '';
-            const totalPaymentsVal = document.getElementById('total-payments').textContent.split(': ')[1].replace(currencySymbol, '') || '';
-            const totalInterestVal = document.getElementById('total-interest').textContent.split(': ')[1].replace(currencySymbol, '') || '';
-            const payoffDateVal = document.getElementById('payoff-date').textContent.split(': ')[1] || '';
+                doc.setFontSize(14);
+                doc.text("Auto Loan Calculation Results", 105, 15, { align: "center" });
 
-            // Loan Results Table
-            doc.autoTable({
-                startY: 20,
-                head: [['Parameter', 'Value']],
-                body: [
-                    ['Monthly Payment', monthlyPaymentVal],
-                    ['Total Payments', totalPaymentsVal],
-                    ['Total Interest', totalInterestVal],
-                    ['Payoff Date', payoffDateVal]
-                ],
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [255, 255, 255] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
-                margin: { top: 10 }
-            });
+                // Loan Results Table
+                doc.autoTable({
+                    startY: 20,
+                    head: [['Parameter', 'Value']],
+                    body: [
+                        ['Monthly Payment', monthlyPaymentValue],
+                        ['Total Payments', totalPaymentsValue],
+                        ['Total Interest', totalInterestValue],
+                        ['Payoff Date', payoffDateValue]
+                    ],
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [255, 255, 255] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                    margin: { top: 10 }
+                });
 
-            // Amortization Schedule Table
-            doc.autoTable({
-                startY: doc.lastAutoTable.finalY + 10,
-                head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
-                body: amortizationData,
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
-                didDrawPage: function (data) {
-                    doc.setFontSize(10);
-                    doc.setTextColor(100);
-                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-                }
-            });
+                // Amortization Schedule Table
+                doc.autoTable({
+                    startY: doc.lastAutoTable.finalY + 10,
+                    head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
+                    body: amortizationData,
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                    }
+                });
 
-            doc.save('auto-loan-results.pdf');
+                doc.save('auto-loan-results.pdf');
+            } catch (e) {
+                alert('Error generating PDF: ' + e.message);
+            }
         }
 
         function sharePage() {
