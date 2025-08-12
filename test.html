@@ -42,6 +42,37 @@
         }
     }
     </script>
+    <style>
+        #rental-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .currency-section {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .sections-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+        }
+        fieldset {
+            flex: 1 1 300px;
+            margin: 10px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        @media (max-width: 768px) {
+            .sections-container {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -56,118 +87,122 @@
     <main>
         <section class="tool-section">
             <form id="rental-form">
-                <label for="currency">Currency:</label>
-                <select id="currency">
-                    <option value="$" selected>$</option>
-                    <option value="€">€</option>
-                </select>
-
-                <fieldset>
-                    <legend>Purchase</legend>
-                    <label for="property-price">Purchase Price</label>
-                    <input type="number" id="property-price" value="250000" required>
-
-                    <label for="closing-cost">Closing Cost</label>
-                    <input type="number" id="closing-cost" value="5000" required>
-
-                    <label for="use-loan">Use Loan?</label>
-                    <select id="use-loan">
-                        <option value="yes" selected>Yes</option>
-                        <option value="no">No</option>
+                <div class="currency-section">
+                    <label for="currency">Currency:</label>
+                    <select id="currency">
+                        <option value="$" selected>$</option>
+                        <option value="€">€</option>
                     </select>
+                </div>
 
-                    <label for="down-payment">Down Payment (%)</label>
-                    <input type="number" id="down-payment" min="0" max="100" value="20" required>
+                <div class="sections-container">
+                    <fieldset>
+                        <legend>Purchase</legend>
+                        <label for="property-price">Purchase Price</label>
+                        <input type="number" id="property-price" value="250000" required>
 
-                    <label for="interest-rate">Annual Interest Rate (%)</label>
-                    <input type="number" id="interest-rate" step="0.01" value="4.5" required>
+                        <label for="closing-cost">Closing Cost</label>
+                        <input type="number" id="closing-cost" value="5000" required>
 
-                    <label for="loan-term">Loan Term (Years)</label>
-                    <input type="number" id="loan-term" value="30" required>
-                </fieldset>
+                        <label for="use-loan">Use Loan?</label>
+                        <select id="use-loan">
+                            <option value="yes" selected>Yes</option>
+                            <option value="no">No</option>
+                        </select>
 
-                <fieldset>
-                    <legend>Repairs</legend>
-                    <label for="need-repairs">Need Repairs?</label>
-                    <select id="need-repairs">
-                        <option value="no" selected>No</option>
-                        <option value="yes">Yes</option>
-                    </select>
+                        <label for="down-payment">Down Payment (%)</label>
+                        <input type="number" id="down-payment" min="0" max="100" value="20" required>
 
-                    <label for="repair-cost">Repair Cost</label>
-                    <input type="number" id="repair-cost" value="10000" required>
+                        <label for="interest-rate">Annual Interest Rate (%)</label>
+                        <input type="number" id="interest-rate" step="0.01" value="4.5" required>
 
-                    <label for="after-repair-value">Value After Repairs</label>
-                    <input type="number" id="after-repair-value" value="270000" required>
-                </fieldset>
+                        <label for="loan-term">Loan Term (Years)</label>
+                        <input type="number" id="loan-term" value="30" required>
+                    </fieldset>
 
-                <fieldset>
-                    <legend>Recurring Operating Expenses</legend>
-                    <label for="annual-taxes">Annual Property Taxes</label>
-                    <input type="number" id="annual-taxes" value="3000" required>
-                    <label for="taxes-increase">Annual Increase (%)</label>
-                    <input type="number" id="taxes-increase" value="3" step="0.1" required>
+                    <fieldset>
+                        <legend>Repairs</legend>
+                        <label for="need-repairs">Need Repairs?</label>
+                        <select id="need-repairs">
+                            <option value="no" selected>No</option>
+                            <option value="yes">Yes</option>
+                        </select>
 
-                    <label for="annual-insurance">Annual Insurance</label>
-                    <input type="number" id="annual-insurance" value="1200" required>
-                    <label for="insurance-increase">Annual Increase (%)</label>
-                    <input type="number" id="insurance-increase" value="3" step="0.1" required>
+                        <label for="repair-cost">Repair Cost</label>
+                        <input type="number" id="repair-cost" value="10000" required>
 
-                    <label for="hoa-fee">HOA Fee (Monthly)</label>
-                    <input type="number" id="hoa-fee" value="100" required>
-                    <label for="hoa-increase">Annual Increase (%)</label>
-                    <input type="number" id="hoa-increase" value="3" step="0.1" required>
+                        <label for="after-repair-value">Value After Repairs</label>
+                        <input type="number" id="after-repair-value" value="270000" required>
+                    </fieldset>
 
-                    <label for="monthly-maintenance">Monthly Maintenance (% of Rent)</label>
-                    <input type="number" id="monthly-maintenance" min="0" max="100" value="10" required>
-                    <label for="maintenance-increase">Annual Increase (%)</label>
-                    <input type="number" id="maintenance-increase" value="3" step="0.1" required>
+                    <fieldset>
+                        <legend>Recurring Operating Expenses</legend>
+                        <label for="annual-taxes">Annual Property Taxes</label>
+                        <input type="number" id="annual-taxes" value="3000" required>
+                        <label for="taxes-increase">Annual Increase (%)</label>
+                        <input type="number" id="taxes-increase" value="3" step="0.1" required>
 
-                    <label for="other-costs">Other Monthly Costs</label>
-                    <input type="number" id="other-costs" value="50" required>
-                    <label for="other-costs-increase">Annual Increase (%)</label>
-                    <input type="number" id="other-costs-increase" value="3" step="0.1" required>
-                </fieldset>
+                        <label for="annual-insurance">Annual Insurance</label>
+                        <input type="number" id="annual-insurance" value="1200" required>
+                        <label for="insurance-increase">Annual Increase (%)</label>
+                        <input type="number" id="insurance-increase" value="3" step="0.1" required>
 
-                <fieldset>
-                    <legend>Income</legend>
-                    <label for="monthly-rent">Monthly Rent</label>
-                    <input type="number" id="monthly-rent" value="1500" required>
-                    <label for="rent-increase">Annual Increase (%)</label>
-                    <input type="number" id="rent-increase" value="3" step="0.1" required>
+                        <label for="hoa-fee">HOA Fee (Monthly)</label>
+                        <input type="number" id="hoa-fee" value="100" required>
+                        <label for="hoa-increase">Annual Increase (%)</label>
+                        <input type="number" id="hoa-increase" value="3" step="0.1" required>
 
-                    <label for="other-income">Other Monthly Income</label>
-                    <input type="number" id="other-income" value="0" required>
-                    <label for="other-income-increase">Annual Increase (%)</label>
-                    <input type="number" id="other-income-increase" value="3" step="0.1" required>
+                        <label for="monthly-maintenance">Monthly Maintenance (% of Rent)</label>
+                        <input type="number" id="monthly-maintenance" min="0" max="100" value="10" required>
+                        <label for="maintenance-increase">Annual Increase (%)</label>
+                        <input type="number" id="maintenance-increase" value="3" step="0.1" required>
 
-                    <label for="vacancy-rate">Vacancy Rate (%)</label>
-                    <input type="number" id="vacancy-rate" min="0" max="100" value="5" required>
+                        <label for="other-costs">Other Monthly Costs</label>
+                        <input type="number" id="other-costs" value="50" required>
+                        <label for="other-costs-increase">Annual Increase (%)</label>
+                        <input type="number" id="other-costs-increase" value="3" step="0.1" required>
+                    </fieldset>
 
-                    <label for="management-fee">Management Fee (% of Rent)</label>
-                    <input type="number" id="management-fee" min="0" max="100" value="8" required>
-                </fieldset>
+                    <fieldset>
+                        <legend>Income</legend>
+                        <label for="monthly-rent">Monthly Rent</label>
+                        <input type="number" id="monthly-rent" value="1500" required>
+                        <label for="rent-increase">Annual Increase (%)</label>
+                        <input type="number" id="rent-increase" value="3" step="0.1" required>
 
-                <fieldset>
-                    <legend>Sell</legend>
-                    <label for="know-sell-price">Do You Know the Sell Price?</label>
-                    <select id="know-sell-price">
-                        <option value="no" selected>No</option>
-                        <option value="yes">Yes</option>
-                    </select>
+                        <label for="other-income">Other Monthly Income</label>
+                        <input type="number" id="other-income" value="0" required>
+                        <label for="other-income-increase">Annual Increase (%)</label>
+                        <input type="number" id="other-income-increase" value="3" step="0.1" required>
 
-                    <label for="appreciation">Value Appreciation (% per Year)</label>
-                    <input type="number" id="appreciation" step="0.1" value="3" required>
+                        <label for="vacancy-rate">Vacancy Rate (%)</label>
+                        <input type="number" id="vacancy-rate" min="0" max="100" value="5" required>
 
-                    <label for="sell-price">Sell Price</label>
-                    <input type="number" id="sell-price" value="400000" required>
+                        <label for="management-fee">Management Fee (% of Rent)</label>
+                        <input type="number" id="management-fee" min="0" max="100" value="8" required>
+                    </fieldset>
 
-                    <label for="holding-length">Holding Length (Years)</label>
-                    <input type="number" id="holding-length" value="20" required>
+                    <fieldset>
+                        <legend>Sell</legend>
+                        <label for="know-sell-price">Do You Know the Sell Price?</label>
+                        <select id="know-sell-price">
+                            <option value="no" selected>No</option>
+                            <option value="yes">Yes</option>
+                        </select>
 
-                    <label for="sell-cost">Cost to Sell (%)</label>
-                    <input type="number" id="sell-cost" min="0" max="100" value="8" required>
-                </fieldset>
+                        <label for="appreciation">Value Appreciation (% per Year)</label>
+                        <input type="number" id="appreciation" step="0.1" value="3" required>
+
+                        <label for="sell-price">Sell Price</label>
+                        <input type="number" id="sell-price" value="400000" required>
+
+                        <label for="holding-length">Holding Length (Years)</label>
+                        <input type="number" id="holding-length" value="20" required>
+
+                        <label for="sell-cost">Cost to Sell (%)</label>
+                        <input type="number" id="sell-cost" min="0" max="100" value="8" required>
+                    </fieldset>
+                </div>
 
                 <button type="button" onclick="calculateRental()">Calculate</button>
             </form>
