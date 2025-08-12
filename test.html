@@ -62,102 +62,112 @@
                     <option value="€">€</option>
                 </select>
 
-                <h3>Purchase</h3>
-                <label for="property-price">Purchase Price</label>
-                <input type="number" id="property-price" value="250000" required>
+                <fieldset>
+                    <legend>Purchase</legend>
+                    <label for="property-price">Purchase Price</label>
+                    <input type="number" id="property-price" value="250000" required>
 
-                <label for="closing-cost">Closing Cost</label>
-                <input type="number" id="closing-cost" value="5000" required>
+                    <label for="closing-cost">Closing Cost</label>
+                    <input type="number" id="closing-cost" value="5000" required>
 
-                <label for="use-loan">Use Loan?</label>
-                <select id="use-loan">
-                    <option value="yes" selected>Yes</option>
-                    <option value="no">No</option>
-                </select>
+                    <label for="use-loan">Use Loan?</label>
+                    <select id="use-loan">
+                        <option value="yes" selected>Yes</option>
+                        <option value="no">No</option>
+                    </select>
 
-                <label for="down-payment">Down Payment (%)</label>
-                <input type="number" id="down-payment" min="0" max="100" value="20" required>
+                    <label for="down-payment">Down Payment (%)</label>
+                    <input type="number" id="down-payment" min="0" max="100" value="20" required>
 
-                <label for="interest-rate">Annual Interest Rate (%)</label>
-                <input type="number" id="interest-rate" step="0.01" value="4.5" required>
+                    <label for="interest-rate">Annual Interest Rate (%)</label>
+                    <input type="number" id="interest-rate" step="0.01" value="4.5" required>
 
-                <label for="loan-term">Loan Term (Years)</label>
-                <input type="number" id="loan-term" value="30" required>
+                    <label for="loan-term">Loan Term (Years)</label>
+                    <input type="number" id="loan-term" value="30" required>
+                </fieldset>
 
-                <h3>Repairs</h3>
-                <label for="need-repairs">Need Repairs?</label>
-                <select id="need-repairs">
-                    <option value="no" selected>No</option>
-                    <option value="yes">Yes</option>
-                </select>
+                <fieldset>
+                    <legend>Repairs</legend>
+                    <label for="need-repairs">Need Repairs?</label>
+                    <select id="need-repairs">
+                        <option value="no" selected>No</option>
+                        <option value="yes">Yes</option>
+                    </select>
 
-                <label for="repair-cost">Repair Cost</label>
-                <input type="number" id="repair-cost" value="10000" required>
+                    <label for="repair-cost">Repair Cost</label>
+                    <input type="number" id="repair-cost" value="10000" required>
 
-                <label for="after-repair-value">Value After Repairs</label>
-                <input type="number" id="after-repair-value" value="270000" required>
+                    <label for="after-repair-value">Value After Repairs</label>
+                    <input type="number" id="after-repair-value" value="270000" required>
+                </fieldset>
 
-                <h3>Recurring Operating Expenses</h3>
-                <label for="annual-taxes">Annual Property Taxes</label>
-                <input type="number" id="annual-taxes" value="3000" required>
-                <label for="taxes-increase">Annual Increase (%)</label>
-                <input type="number" id="taxes-increase" value="3" step="0.1" required>
+                <fieldset>
+                    <legend>Recurring Operating Expenses</legend>
+                    <label for="annual-taxes">Annual Property Taxes</label>
+                    <input type="number" id="annual-taxes" value="3000" required>
+                    <label for="taxes-increase">Annual Increase (%)</label>
+                    <input type="number" id="taxes-increase" value="3" step="0.1" required>
 
-                <label for="annual-insurance">Annual Insurance</label>
-                <input type="number" id="annual-insurance" value="1200" required>
-                <label for="insurance-increase">Annual Increase (%)</label>
-                <input type="number" id="insurance-increase" value="3" step="0.1" required>
+                    <label for="annual-insurance">Annual Insurance</label>
+                    <input type="number" id="annual-insurance" value="1200" required>
+                    <label for="insurance-increase">Annual Increase (%)</label>
+                    <input type="number" id="insurance-increase" value="3" step="0.1" required>
 
-                <label for="hoa-fee">HOA Fee (Monthly)</label>
-                <input type="number" id="hoa-fee" value="100" required>
-                <label for="hoa-increase">Annual Increase (%)</label>
-                <input type="number" id="hoa-increase" value="3" step="0.1" required>
+                    <label for="hoa-fee">HOA Fee (Monthly)</label>
+                    <input type="number" id="hoa-fee" value="100" required>
+                    <label for="hoa-increase">Annual Increase (%)</label>
+                    <input type="number" id="hoa-increase" value="3" step="0.1" required>
 
-                <label for="monthly-maintenance">Monthly Maintenance (% of Rent)</label>
-                <input type="number" id="monthly-maintenance" min="0" max="100" value="10" required>
-                <label for="maintenance-increase">Annual Increase (%)</label>
-                <input type="number" id="maintenance-increase" value="3" step="0.1" required>
+                    <label for="monthly-maintenance">Monthly Maintenance (% of Rent)</label>
+                    <input type="number" id="monthly-maintenance" min="0" max="100" value="10" required>
+                    <label for="maintenance-increase">Annual Increase (%)</label>
+                    <input type="number" id="maintenance-increase" value="3" step="0.1" required>
 
-                <label for="other-costs">Other Monthly Costs</label>
-                <input type="number" id="other-costs" value="50" required>
-                <label for="other-costs-increase">Annual Increase (%)</label>
-                <input type="number" id="other-costs-increase" value="3" step="0.1" required>
+                    <label for="other-costs">Other Monthly Costs</label>
+                    <input type="number" id="other-costs" value="50" required>
+                    <label for="other-costs-increase">Annual Increase (%)</label>
+                    <input type="number" id="other-costs-increase" value="3" step="0.1" required>
+                </fieldset>
 
-                <h3>Income</h3>
-                <label for="monthly-rent">Monthly Rent</label>
-                <input type="number" id="monthly-rent" value="1500" required>
-                <label for="rent-increase">Annual Increase (%)</label>
-                <input type="number" id="rent-increase" value="3" step="0.1" required>
+                <fieldset>
+                    <legend>Income</legend>
+                    <label for="monthly-rent">Monthly Rent</label>
+                    <input type="number" id="monthly-rent" value="1500" required>
+                    <label for="rent-increase">Annual Increase (%)</label>
+                    <input type="number" id="rent-increase" value="3" step="0.1" required>
 
-                <label for="other-income">Other Monthly Income</label>
-                <input type="number" id="other-income" value="0" required>
-                <label for="other-income-increase">Annual Increase (%)</label>
-                <input type="number" id="other-income-increase" value="3" step="0.1" required>
+                    <label for="other-income">Other Monthly Income</label>
+                    <input type="number" id="other-income" value="0" required>
+                    <label for="other-income-increase">Annual Increase (%)</label>
+                    <input type="number" id="other-income-increase" value="3" step="0.1" required>
 
-                <label for="vacancy-rate">Vacancy Rate (%)</label>
-                <input type="number" id="vacancy-rate" min="0" max="100" value="5" required>
+                    <label for="vacancy-rate">Vacancy Rate (%)</label>
+                    <input type="number" id="vacancy-rate" min="0" max="100" value="5" required>
 
-                <label for="management-fee">Management Fee (% of Rent)</label>
-                <input type="number" id="management-fee" min="0" max="100" value="8" required>
+                    <label for="management-fee">Management Fee (% of Rent)</label>
+                    <input type="number" id="management-fee" min="0" max="100" value="8" required>
+                </fieldset>
 
-                <h3>Sell</h3>
-                <label for="know-sell-price">Do You Know the Sell Price?</label>
-                <select id="know-sell-price">
-                    <option value="no" selected>No</option>
-                    <option value="yes">Yes</option>
-                </select>
+                <fieldset>
+                    <legend>Sell</legend>
+                    <label for="know-sell-price">Do You Know the Sell Price?</label>
+                    <select id="know-sell-price">
+                        <option value="no" selected>No</option>
+                        <option value="yes">Yes</option>
+                    </select>
 
-                <label for="appreciation">Value Appreciation (% per Year)</label>
-                <input type="number" id="appreciation" step="0.1" value="3" required>
+                    <label for="appreciation">Value Appreciation (% per Year)</label>
+                    <input type="number" id="appreciation" step="0.1" value="3" required>
 
-                <label for="sell-price">Sell Price</label>
-                <input type="number" id="sell-price" value="400000" required>
+                    <label for="sell-price">Sell Price</label>
+                    <input type="number" id="sell-price" value="400000" required>
 
-                <label for="holding-length">Holding Length (Years)</label>
-                <input type="number" id="holding-length" value="20" required>
+                    <label for="holding-length">Holding Length (Years)</label>
+                    <input type="number" id="holding-length" value="20" required>
 
-                <label for="sell-cost">Cost to Sell (%)</label>
-                <input type="number" id="sell-cost" min="0" max="100" value="8" required>
+                    <label for="sell-cost">Cost to Sell (%)</label>
+                    <input type="number" id="sell-cost" min="0" max="100" value="8" required>
+                </fieldset>
 
                 <button type="button" onclick="calculateRental()">Calculate</button>
             </form>
@@ -174,6 +184,8 @@
             <canvas id="expenseChart" width="400" height="200"></canvas>
             <canvas id="cashFlowChart" width="400" height="200"></canvas>
             <canvas id="valueChart" width="400" height="200"></canvas>
+            <canvas id="noiChart" width="400" height="200"></canvas>
+            <canvas id="roiComponentsChart" width="400" height="200"></canvas>
 
             <table id="amortization-table" style="margin: 20px auto;">
                 <thead>
@@ -193,7 +205,7 @@
 
         <section class="content-section">
             <h2>Understanding Rental Property Investments</h2>
-            <p>Rental properties offer a dual benefit of steady rental income and potential long-term appreciation. This calculator enables you to evaluate investment viability by factoring in purchase costs, financing, operating expenses, and future sale proceeds.</p>
+            <p>Rental properties offer a dual benefit of steady rental income and potential long-term appreciation. This calculator enables you to evaluate investment viability by factoring in purchase costs, financing, operating expenses, and future sale proceeds. By inputting variables like down payment, interest rates, and annual increases, you can simulate various scenarios to understand cash flow dynamics and overall profitability.</p>
             <p>The monthly mortgage payment is calculated using the amortization formula:</p>
             \[ M = P \frac{r(1+r)^n}{(1+r)^n - 1} \]
             <p>Where \( M \) is the monthly payment, \( P \) is the loan principal, \( r \) is the monthly interest rate, and \( n \) is the number of payments.</p>
@@ -203,7 +215,7 @@
                 <li><strong>Cash Flow</strong>: Monthly rent minus all expenses (mortgage, taxes, insurance, HOA, maintenance, management, vacancy).</li>
                 <li><strong>Cap Rate</strong>: Net Operating Income (NOI) divided by property value: \( \text{Cap Rate} = \frac{\text{NOI}}{\text{Property Value}} \).</li>
                 <li><strong>ROI</strong>: Annual net income divided by initial investment: \( \text{ROI} = \frac{\text{Annual Net Income}}{\text{Initial Investment}} \times 100 \).</li>
-                <li><strong>IRR</strong>: The rate at which the net present value of cash flows equals zero, reflecting the investment’s overall profitability.</li>
+                <li><strong>IRR</strong>: The rate at which the net present value of cash flows equals zero, reflecting the investment’s overall profitability over time.</li>
             </ul>
 
             <h3>Factors Impacting Returns</h3>
@@ -217,15 +229,19 @@
                 <tbody>
                     <tr>
                         <td>Appreciation</td>
-                        <td>Increases potential profit upon sale but is speculative.</td>
+                        <td>Increases potential profit upon sale but is speculative and depends on market trends.</td>
                     </tr>
                     <tr>
                         <td>Management Fees</td>
-                        <td>Reduces cash flow but saves time for passive investors.</td>
+                        <td>Reduces cash flow but saves time for passive investors, often ranging from 8-12% of rent.</td>
                     </tr>
                     <tr>
                         <td>Closing and Repair Costs</td>
-                        <td>Increases initial investment, lowering short-term ROI.</td>
+                        <td>Increases initial investment, lowering short-term ROI but potentially boosting long-term value.</td>
+                    </tr>
+                    <tr>
+                        <td>Annual Increases</td>
+                        <td>Accounts for inflation in expenses and income, providing realistic multi-year projections.</td>
                     </tr>
                 </tbody>
             </table>
@@ -242,18 +258,23 @@
                 <tbody>
                     <tr>
                         <td>Buy and Hold</td>
-                        <td>Stable income and appreciation</td>
-                        <td>Requires active management</td>
+                        <td>Stable income and appreciation over time</td>
+                        <td>Requires active management and ties up capital</td>
                     </tr>
                     <tr>
                         <td>Fix and Flip</td>
-                        <td>High short-term gains</td>
-                        <td>Risky due to market volatility</td>
+                        <td>High short-term gains from repairs and quick sales</td>
+                        <td>Risky due to market volatility and unexpected costs</td>
                     </tr>
                     <tr>
                         <td>REITs</td>
-                        <td>Low effort, diversified</td>
-                        <td>Limited control, lower returns</td>
+                        <td>Passive investment with diversification</td>
+                        <td>Limited control over assets and lower personalized returns</td>
+                    </tr>
+                    <tr>
+                        <td>Short-Term Rentals</td>
+                        <td>Higher income potential in tourist areas</td>
+                        <td>Higher vacancy rates and regulatory challenges</td>
                     </tr>
                 </tbody>
             </table>
@@ -266,7 +287,7 @@
             <h3>FAQ</h3>
             <ul>
                 <li><strong>What is a good cap rate?</strong> Typically 5-10%, depending on location and risk tolerance.</li>
-                <li><strong>How does appreciation affect ROI?</strong> It boosts returns upon sale but isn’t guaranteed.</li>
+                <li><strong>How does appreciation affect ROI?</strong> It boosts returns upon sale but isn’t guaranteed; use conservative estimates for projections.</li>
                 <li><strong>Related tools:</strong> Explore our <a href="/mortgage-calculator.html">Mortgage Calculator</a> or <a href="/compound-interest-growth-calculator.html">Compound Interest Calculator</a>.</li>
             </ul>
         </section>
@@ -293,6 +314,8 @@
         let expenseData = [];
         let cashFlowData = [];
         let valueData = [];
+        let noiData = [];
+        let roiComponentsData = [];
 
         function calculateRental() {
             const currency = document.getElementById('currency').value;
@@ -457,6 +480,30 @@
                 },
                 options: { responsive: true, plugins: { title: { display: true, text: 'Property Value Over Time' } } }
             });
+
+            // New Chart: NOI Bar Chart
+            noiData = yearlyNOI;
+            const noiCtx = document.getElementById('noiChart').getContext('2d');
+            new Chart(noiCtx, {
+                type: 'bar',
+                data: {
+                    labels: Array.from({length: holdingLength}, (_, i) => `Year ${i+1}`),
+                    datasets: [{ label: 'Net Operating Income', data: noiData, backgroundColor: '#4BC0C0' }]
+                },
+                options: { responsive: true, plugins: { title: { display: true, text: 'Net Operating Income Over Years' } } }
+            });
+
+            // New Chart: ROI Components Doughnut
+            roiComponentsData = [totalCashFlow, (sellPrice - sellCost - loan), -initialInvestment];
+            const roiComponentsCtx = document.getElementById('roiComponentsChart').getContext('2d');
+            new Chart(roiComponentsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Total Cash Flow', 'Sale Profit', 'Initial Investment'],
+                    datasets: [{ data: roiComponentsData.map(Math.abs), backgroundColor: ['#36A2EB', '#FFCE56', '#FF6384'] }]
+                },
+                options: { responsive: true, plugins: { title: { display: true, text: 'ROI Components Breakdown' } } }
+            });
         }
 
         function saveAsPDF() {
@@ -499,7 +546,7 @@
                 didDrawPage: function (data) {
                     doc.setFontSize(10);
                     doc.setTextColor(100);
-                    doc.text('This document was generated using FCalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
                 }
             });
 
