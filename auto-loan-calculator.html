@@ -374,7 +374,6 @@
                 doc.setFontSize(14);
                 doc.text("Auto Loan Calculation Results", 105, 15, { align: "center" });
 
-                // Loan Results Table
                 doc.autoTable({
                     startY: 20,
                     head: [['Parameter', 'Value']],
@@ -387,11 +386,10 @@
                     theme: 'grid',
                     headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                     alternateRowStyles: { fillColor: [255, 255, 255] },
-                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
                     margin: { top: 10 }
                 });
 
-                // Amortization Schedule Table
                 doc.autoTable({
                     startY: doc.lastAutoTable.finalY + 10,
                     head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
@@ -399,7 +397,7 @@
                     theme: 'grid',
                     headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                     alternateRowStyles: { fillColor: [245, 245, 245] },
-                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
                     didDrawPage: function (data) {
                         doc.setFontSize(10);
                         doc.setTextColor(100);
