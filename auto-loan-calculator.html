@@ -317,7 +317,7 @@
                 amortizationData.push([month, monthlyPayment.toFixed(2), principalPaid.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
 
                 const row = document.createElement('tr');
-                row.innerHTML = `<td>${month}</td><td>${currency}${monthlyPayment.toFixed(2)}</td><td>${currency}${principalPaid.toFixed(2)}</td><td>${currency}${interest.toFixed(2)}</td><td>${currency}${balance.toFixed(2)}</td>`;
+                row.innerHTML = `<td>${month}</td><td style="color: black;">${currency}${monthlyPayment.toFixed(2)}</td><td style="color: black;">${currency}${principalPaid.toFixed(2)}</td><td style="color: black;">${currency}${interest.toFixed(2)}</td><td style="color: black;">${currency}${balance.toFixed(2)}</td>`;
                 tableBody.appendChild(row);
 
                 totalPrincipalPaid += principalPaid;
@@ -358,15 +358,21 @@
             doc.setFontSize(14);
             doc.text("Auto Loan Calculation Results", 105, 15, { align: "center" });
 
+            // Extract values without labels
+            const monthlyPaymentVal = document.getElementById('monthly-payment').textContent.split(': ')[1] || '';
+            const totalPaymentsVal = document.getElementById('total-payments').textContent.split(': ')[1] || '';
+            const totalInterestVal = document.getElementById('total-interest').textContent.split(': ')[1] || '';
+            const payoffDateVal = document.getElementById('payoff-date').textContent.split(': ')[1] || '';
+
             // Loan Results Table
             doc.autoTable({
                 startY: 20,
                 head: [['Parameter', 'Value']],
                 body: [
-                    ['Monthly Payment', document.getElementById('monthly-payment').textContent],
-                    ['Total Payments', document.getElementById('total-payments').textContent],
-                    ['Total Interest', document.getElementById('total-interest').textContent],
-                    ['Payoff Date', document.getElementById('payoff-date').textContent]
+                    ['Monthly Payment', monthlyPaymentVal],
+                    ['Total Payments', totalPaymentsVal],
+                    ['Total Interest', totalInterestVal],
+                    ['Payoff Date', payoffDateVal]
                 ],
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
