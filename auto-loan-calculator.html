@@ -369,13 +369,14 @@
 
             try {
                 const { jsPDF } = window.jspdf;
+                const autoTable = window.jspdfAutoTable.default;
                 const doc = new jsPDF();
 
                 doc.setFontSize(14);
                 doc.text("Auto Loan Calculation Results", 105, 15, { align: "center" });
 
                 // Loan Results Table
-                doc.autoTable({
+                autoTable(doc, {
                     startY: 20,
                     head: [['Parameter', 'Value']],
                     body: [
@@ -392,7 +393,7 @@
                 });
 
                 // Amortization Schedule Table
-                doc.autoTable({
+                autoTable(doc, {
                     startY: doc.lastAutoTable.finalY + 10,
                     head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
                     body: amortizationData,
