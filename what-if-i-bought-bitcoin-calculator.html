@@ -15,7 +15,7 @@
       "@type": "WebPage",
       "name": "What If I Bought Bitcoin Calculator",
       "url": "https://fcalculator.com/what-if-i-bought-bitcoin-calculator.html",
-      "description": "A comprehensive tool to simulate hypothetical Bitcoin investments based on historical price data. Enter an investment amount, date, and currency to see potential current value, profit or loss, and a detailed price history chart.",
+      "description": "A comprehensive tool to simulate hypothetical Bitcoin investments based on historical price data. Enter an investment amount, date, and currency to see potential current value, profit or loss, and a detailed price history chart. Note: Historical data available from July 2017 onwards.",
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -50,7 +50,7 @@
       "mainEntity": {
         "@type": "FinancialService",
         "name": "Bitcoin Investment Simulator",
-        "description": "This calculator uses historical cryptocurrency data to model 'what if' scenarios for Bitcoin purchases, providing insights into potential returns, risks, and market volatility over time.",
+        "description": "This calculator uses historical cryptocurrency data to model 'what if' scenarios for Bitcoin purchases, providing insights into potential returns, risks, and market volatility over time. Data sourced from Binance API, available from July 2017.",
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -67,7 +67,7 @@
             <a href="/">FCalculator.com</a> > <a href="/finance-calculator.html">Financial Calculators</a> > <a href="/what-if-i-bought-bitcoin-calculator.html">What If I Bought Bitcoin Calculator</a>
         </div>
         <h1>What If I Bought Bitcoin Calculator</h1>
-        <p>Explore hypothetical Bitcoin investment scenarios using historical price data. Input your investment amount, purchase date, and preferred currency to simulate current value and potential returns.</p>
+        <p>Explore hypothetical Bitcoin investment scenarios using historical price data. Input your investment amount, purchase date (from July 2017 onwards), and preferred currency to simulate current value and potential returns.</p>
     </header>
     <main>
         <section class="tool-section">
@@ -92,10 +92,11 @@
                         </div>
                         <div class="input-row">
                             <label for="purchase-date">Purchase Date</label>
-                            <input type="date" id="purchase-date" value="2015-08-12" required>
+                            <input type="date" id="purchase-date" value="2017-08-12" required>
                         </div>
                     </fieldset>
                 </div>
+                <p style="color: red; text-align: center;">Note: Historical data available only from July 2017 onwards due to data source limitations.</p>
                 <button type="button" onclick="calculateBitcoinInvestment()">Calculate</button>
             </form>
         </section>
@@ -117,8 +118,8 @@
         </section>
         <section class="explanation-section">
             <h2>Understanding the What If I Bought Bitcoin Calculator</h2>
-            <p>This tool allows users to simulate past Bitcoin investments by calculating how much an initial amount would be worth today based on historical prices. It fetches real-time and historical data from reliable sources to provide accurate simulations.</p>
-            <p>To use it, enter the amount you hypothetically invested, select the purchase date (up to 10 years back or more), and choose your currency. The calculator determines the Bitcoin price on that date, computes how many Bitcoins you could have bought, and multiplies by the current price to show the present value.</p>
+            <p>This tool allows users to simulate past Bitcoin investments by calculating how much an initial amount would be worth today based on historical prices. It fetches real-time and historical data from reliable sources to provide accurate simulations. Important: Due to data source (Binance API), historical prices are available only from July 2017 onwards.</p>
+            <p>To use it, enter the amount you hypothetically invested, select the purchase date (from July 2017 or later), and choose your currency. The calculator determines the Bitcoin price on that date, computes how many Bitcoins you could have bought, and multiplies by the current price to show the present value.</p>
             <h3>Key Calculation Formula</h3>
             <p>The core computation follows this mathematical approach:</p>
             \[ \text{Number of BTC} = \frac{\text{Investment Amount}}{\text{BTC Price on Purchase Date}} \]
@@ -126,7 +127,7 @@
             \[ \text{Profit/Loss} = \text{Current Value} - \text{Investment Amount} \]
             <p>These formulas account for market volatility and provide insights into potential growth or decline.</p>
             <h3>Historical Context of Bitcoin Investments</h3>
-            <p>Bitcoin, introduced in 2009, has experienced significant price fluctuations. For instance, in 2015, the average price was around $300 USD, rising dramatically to peaks like $69,000 in 2021. This calculator helps visualize such trends through charts showing price evolution from your chosen date to now.</p>
+            <p>Bitcoin, introduced in 2009, has experienced significant price fluctuations. For instance, in 2017, the average price was around $4,000 USD, rising dramatically to peaks like $69,000 in 2021. This calculator helps visualize such trends through charts showing price evolution from your chosen date to now, starting from available data in 2017.</p>
             <table>
                 <thead>
                     <tr>
@@ -137,14 +138,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>2015</td>
-                        <td>~300</td>
-                        <td>Post-Mt. Gox recovery</td>
-                    </tr>
-                    <tr>
                         <td>2017</td>
                         <td>~4,000</td>
                         <td>Bull run and ICO boom</td>
+                    </tr>
+                    <tr>
+                        <td>2018</td>
+                        <td>~7,500</td>
+                        <td>Market correction</td>
                     </tr>
                     <tr>
                         <td>2021</td>
@@ -160,14 +161,14 @@
             </table>
             <p>Source: Data derived from cryptocurrency market analyses. For more on Bitcoin history, visit <a href="https://en.wikipedia.org/wiki/History_of_bitcoin" target="_blank">Wikipedia's Bitcoin History</a>.</p>
             <h3>Risks and Considerations</h3>
-            <p>Cryptocurrency investments are highly volatile. Past performance does not guarantee future results. Factors like regulatory changes (e.g., from <a href="https://www.sec.gov/" target="_blank">SEC.gov</a>) and market sentiment can impact values.</p>
+            <p>Cryptocurrency investments are highly volatile. Past performance does not guarantee future results. Factors like regulatory changes (e.g., from <a href="https://www.sec.gov/" target="_blank">SEC.gov</a>) and market sentiment can impact values. Note that this tool uses data from 2017 onwards, so earlier simulations are not supported.</p>
             <div class="disclaimer">
                 <h3>Disclaimer</h3>
                 <p>This tool is for informational and educational purposes only and does not constitute financial advice. Cryptocurrency markets are unpredictable, and users should consult professionals before making real investments. FCalculator.com is not responsible for any losses incurred based on simulations.</p>
             </div>
             <h3>FAQ</h3>
-            <p><strong>What data source does the calculator use?</strong> It relies on CryptoCompare API for historical and current Bitcoin prices, ensuring accurate and up-to-date information across multiple currencies.</p>
-            <p><strong>Can I simulate investments older than 10 years?</strong> Yes, the tool supports dates back to Bitcoin's early days, though data accuracy may vary for very early periods.</p>
+            <p><strong>What data source does the calculator use?</strong> It relies on Binance API for historical and current Bitcoin prices, ensuring accurate and up-to-date information across multiple currencies. Data is available only from July 2017 onwards.</p>
+            <p><strong>Can I simulate investments older than 2017?</strong> No, due to data availability from the source, simulations are limited to dates from July 2017 or later. For earlier periods, consider alternative tools or sources.</p>
             <p><strong>Why include a price chart?</strong> The line chart visualizes Bitcoin's price trajectory from your purchase date to today, highlighting volatility and growth patterns for better understanding.</p>
             <p><strong>How accurate are the results?</strong> Results are based on closing daily prices; actual outcomes could differ due to transaction fees or exact timing.</p>
             <p>Related tools on our site: <a href="/compound-interest-growth-calculator.html">Compound Interest Growth Calculator</a>, <a href="/inflation-calculator.html">Inflation Calculator</a>.</p>
@@ -193,26 +194,34 @@
                 const amount = parseFloat(document.getElementById('investment-amount').value);
                 const date = document.getElementById('purchase-date').value;
                 const currency = document.getElementById('currency').value;
+                const binanceSymbol = currency === 'USD' ? 'USDT' : currency;
+                const symbol = `BTC${binanceSymbol}`;
                 const tz = 'America/New_York';
                 const purchaseDate = new Date(date);
                 const currentDate = new Date().toLocaleString('en-US', { timeZone: tz });
                 const currentTimestamp = Math.floor(new Date(currentDate).getTime() / 1000);
                 const purchaseTimestamp = Math.floor(purchaseDate.getTime() / 1000);
 
+                if (purchaseTimestamp < Math.floor(new Date('2017-07-01').getTime() / 1000)) {
+                    throw new Error('Historical data available only from July 2017 onwards. Please select a later date.');
+                }
+
                 // Fetch historical price on purchase date
-                const histUrl = `https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=${currency}&limit=1&toTs=${purchaseTimestamp}`;
+                const startMillis = purchaseTimestamp * 1000;
+                const endMillis = (purchaseTimestamp + 86400) * 1000;
+                const histUrl = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1d&startTime=${startMillis}&endTime=${endMillis}&limit=1`;
                 const histResponse = await fetch(histUrl);
                 if (!histResponse.ok) throw new Error('Historical API failed: ' + histResponse.status);
                 const histData = await histResponse.json();
-                if (histData.Data.length === 0) throw new Error('No historical data for this date and currency. Try another date.');
-                const purchasePrice = histData.Data[1]?.close || histData.Data[0].close; // Fallback to Data[0] if Data[1] not available
+                if (histData.length === 0) throw new Error('No data for this date. Try another.');
+                const purchasePrice = parseFloat(histData[0][4]); // close price
 
                 // Fetch current price
-                const currentUrl = `https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=${currency}`;
+                const currentUrl = `https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`;
                 const currentResponse = await fetch(currentUrl);
                 if (!currentResponse.ok) throw new Error('Current API failed: ' + currentResponse.status);
                 const currentData = await currentResponse.json();
-                const currentPrice = currentData[currency];
+                const currentPrice = parseFloat(currentData.price);
 
                 // Calculations
                 const btcBought = amount / purchasePrice;
@@ -241,26 +250,23 @@
                     <tr><td>Percentage Change</td><td>${percentageChange}%</td></tr>
                 `;
 
-                // Fetch full history for chart in chunks (limit 2000 per request)
-                const chunkSize = 2000;
+                // Fetch full history for chart in chunks
+                const chunkSize = 1000; // Binance limit per request
                 const totalDays = Math.ceil((currentTimestamp - purchaseTimestamp) / 86400);
                 let prices = [];
                 let labels = [];
-                let currentToTs = currentTimestamp;
-                while (currentToTs > purchaseTimestamp) {
-                    const limit = Math.min(chunkSize, Math.ceil((currentToTs - purchaseTimestamp) / 86400));
-                    const chartUrl = `https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=${currency}&limit=${limit}&toTs=${currentToTs}`;
+                let currentStart = startMillis;
+                while (currentStart < currentTimestamp * 1000) {
+                    const chunkEnd = Math.min(currentStart + chunkSize * 86400 * 1000, currentTimestamp * 1000 + 86400 * 1000);
+                    const chartUrl = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1d&startTime=${currentStart}&endTime=${chunkEnd}&limit=${chunkSize}`;
                     const chartResponse = await fetch(chartUrl);
                     if (!chartResponse.ok) throw new Error('Chart API failed: ' + chartResponse.status);
                     const chunkData = await chartResponse.json();
-                    const chunkPrices = chunkData.Data.reverse(); // Reverse to ascending order
-                    chunkPrices.forEach(d => {
-                        if (d.time >= purchaseTimestamp) {
-                            labels.push(new Date(d.time * 1000).toLocaleDateString());
-                            prices.push(d.close);
-                        }
+                    chunkData.forEach(d => {
+                        labels.push(new Date(d[0]).toLocaleDateString());
+                        prices.push(parseFloat(d[4])); // close
                     });
-                    currentToTs = chunkPrices[0].time - 1; // Next chunk ends before first of this
+                    currentStart = chunkEnd;
                 }
 
                 // Render chart
