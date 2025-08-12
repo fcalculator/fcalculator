@@ -3,246 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Advanced auto loan calculator for precise monthly payment estimates, amortization schedules, and total cost analysis in vehicle financing. Delve into interest rate impacts, down payment strategies, and tax considerations for informed automotive purchase decisions.">
-    <meta name="keywords" content="auto loan estimator, vehicle financing calculator, car payment schedule, interest accrual analysis, down payment effects, trade-in valuation, sales tax integration">
-    <title>Vehicle Financing Estimator | FCalculator.com</title>
+    <title>Age Calculator: Precise Calculation of Years, Months, and Days Lived</title>
+    <meta name="description" content="Calculate your exact age in years, months, days, hours, and more with detailed breakdowns and historical context for personal milestones.">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-    <script src="https://unpkg.com/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Auto Loan Calculator",
-        "url": "https://fcalculator.com/auto-loan-calculator.html",
-        "description": "Tool for calculating auto loan payments, interest, and amortization schedules.",
-        "applicationCategory": "FinancialApplication",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        }
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "FCalculator.com",
+      "url": "https://fcalculator.com",
+      "logo": "https://fcalculator.com/logo.png",
+      "description": "Comprehensive online calculators for finance, health, math, and more."
     }
     </script>
 </head>
 <body>
-    <div class="logo">FCalculator.com</div>
-    <div class="breadcrumb">
-        <a href="/">FCalculator.com</a> > <a href="/financial.html">Financial</a> > <a href="/auto-loan-calculator.html">Auto Loan Calculator</a>
-    </div>
     <header>
-        <h1>Auto Loan Calculator</h1>
-        <p>This comprehensive calculator evaluates vehicle financing scenarios by incorporating principal amounts, interest rates, loan durations, down payments, trade-in values, and sales taxes. It generates detailed amortization schedules and total cost projections, enabling users to assess long-term implications of different terms and rates. Factors like credit scores influencing APRs and regional tax variations are accounted for, providing realistic insights into affordability and equity buildup over time.</p>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/other.html">Other</a> > <a href="/age-calculator.html">Age Calculator</a>
+        </div>
+        <h1>Age Calculator</h1>
+        <p>Determine your precise age or the age difference between two dates, accounting for leap years and time zones, with breakdowns in years, months, days, hours, minutes, and seconds for accurate personal tracking.</p>
     </header>
 
-    <main>
-        <section id="calculator">
-            <h2>Input Your Vehicle Financing Parameters</h2>
-            <form id="auto-loan-form">
-                <label for="currency">Currency:</label>
-                <select id="currency">
-                    <option value="$">$ (USD)</option>
-                    <option value="€">€ (EUR)</option>
-                </select>
-
-                <label for="auto-price">Vehicle Price:</label>
-                <input type="number" id="auto-price" value="40000" required>
-
-                <label for="down-payment">Down Payment:</label>
-                <input type="number" id="down-payment" value="5000" required>
-
-                <label for="trade-in">Trade-in Value:</label>
-                <input type="number" id="trade-in" value="0">
-
-                <label for="interest-rate">Annual Interest Rate (%):</label>
-                <input type="number" id="interest-rate" step="0.01" value="5.5" required>
-
-                <label for="loan-term">Loan Duration (months):</label>
-                <input type="number" id="loan-term" value="60" required>
-
-                <label for="sales-tax">Sales Tax Rate (%):</label>
-                <input type="number" id="sales-tax" step="0.01" value="7">
-
-                <button type="button" onclick="calculateAutoLoan()">Compute</button>
-            </form>
-
-            <div id="results" style="display:none;">
-                <h2>Financing Outcomes</h2>
-                <p>Monthly Installment: <span id="monthly-payment" class="green-result"></span></p>
-                <p>Financed Amount: <span id="total-loan" class="green-result"></span></p>
-                <p>Accrued Interest: <span id="total-interest" class="green-result"></span></p>
-                <p>Overall Expenditure: <span id="total-cost" class="green-result"></span></p>
-                <p>Settlement Date: <span id="payoff-date" class="green-result"></span></p>
-
-                <button onclick="saveAsPDF()">Export as PDF</button>
-
-                <h3>Repayment Breakdown</h3>
-                <table id="amortization-table">
-                    <thead>
-                        <tr>
-                            <th>Month</th>
-                            <th>Installment</th>
-                            <th>Principal Reduction</th>
-                            <th>Interest Charge</th>
-                            <th>Remaining Balance</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-
-                <canvas id="amortization-chart" width="400" height="200"></canvas>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container">
+                <fieldset>
+                    <legend>Birth Date</legend>
+                    <div class="input-row">
+                        <label for="birth-date">Birth Date (YYYY-MM-DD)</label>
+                        <input type="date" id="birth-date" required>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Calculation Date</legend>
+                    <div class="input-row">
+                        <label for="calc-date">Calculate Age On (YYYY-MM-DD, default today)</label>
+                        <input type="date" id="calc-date">
+                    </div>
+                </fieldset>
             </div>
-        </section>
+            <button type="button" onclick="calculateAge()">Calculate</button>
+        </form>
+    </section>
 
-        <section id="explanation">
-            <h2>Core Principles of Vehicle Loans</h2>
-            <p>Vehicle loans function as secured debt instruments where the purchased asset acts as collateral, with repayment spans typically between 36 and 84 months. Monthly obligations encompass principal repayment and interest accumulation, calculated via compounding formulas. Lenders evaluate borrower risk through credit histories, potentially leading to repossession upon default. New vehicle rates often undercut those for used models due to depreciation dynamics and residual value projections.</p>
-            <p>Securing funds directly from financial institutions or credit unions facilitates pre-qualification, bolstering bargaining leverage at sellers. Dealer-arranged financing, while expedient, may inflate rates through commissions. Cross-referencing offers optimizes outcomes; complement this with our <a href="/loan-calculator.html">general lending evaluator</a> for holistic personal debt insights.</p>
+    <section class="results-section">
+        <h2>Age Calculation Results</h2>
+        <div id="age-results"></div>
+        <button onclick="saveAsPDF()">Save as PDF</button>
+        <button onclick="sharePage()">Share this Page</button>
+    </section>
 
-            <h3>Rebate and Incentive Effects on Financing</h3>
-            <p>Automotive manufacturers deploy rebates to boost demand, deducting from sticker prices and altering taxable bases in varying jurisdictions. Certain regions subtract incentives pre-tax, others post, impacting net outlays significantly for premium segments. Seldom applicable to pre-owned inventory, these promotions reward seasonal buying alignments for maximal savings.</p>
+    <section class="explanation-section">
+        <h2>How the Age Calculator Works</h2>
+        <p>This age calculator uses precise date difference algorithms to compute the exact time elapsed between your birth date and the selected calculation date. It accounts for variations such as leap years (every four years, except centuries not divisible by 400) and ensures accuracy down to seconds. The default calculation date is today's date in New York time zone (Eastern Time).</p>
+        <p>To use the tool, enter your birth date in YYYY-MM-DD format. Optionally, provide a future or past date to calculate age on that specific day. The results include a breakdown:</p>
+        <ul>
+            <li>Years: Full calendar years completed.</li>
+            <li>Months: Additional months beyond full years.</li>
+            <li>Days: Remaining days after months.</li>
+            <li>Hours, Minutes, Seconds: For granular precision.</li>
+        </ul>
+        <p>The mathematical formula for basic age in years is:</p>
+        \[ \text{Age in Years} = \floor{\frac{\text{Days Between Dates}}{365.25}} \]
+        <p>Where 365.25 accounts for leap years on average. For more detailed breakdowns, the tool subtracts dates component-wise, adjusting for month lengths and leap days.</p>
 
-            <h3>Ancillary Costs in Automotive Acquisitions</h3>
-            <p>Transaction fees extend beyond principals, incorporating variable sales taxes (absent in states like Delaware), administrative charges around $400 on average, licensing expenses, and transport levies. Compulsory insurance for collateralized assets averages over $1,500 yearly, modulated by demographics and geography. Capitalizing extras escalates interest burdens; cash settlements mitigate this, as explored in our <a href="/mortgage-calculator.html">home equity assessor</a>.</p>
-            <p><button onclick="sharePage()">Distribute This Tool</button> - Disseminate insights on prudent vehicle funding.</p>
+        <h2>Understanding Age Milestones and Their Significance</h2>
+        <p>Age calculations are essential for tracking life stages, from infancy to seniority. Below is a table outlining common age milestones with descriptions:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Age Range</th>
+                    <th>Milestone</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0-2 Years</td>
+                    <td>Infancy</td>
+                    <td>Rapid physical and cognitive development, including first steps and words.</td>
+                </tr>
+                <tr>
+                    <td>3-12 Years</td>
+                    <td>Childhood</td>
+                    <td>Schooling begins, social skills form, and physical growth accelerates.</td>
+                </tr>
+                <tr>
+                    <td>13-19 Years</td>
+                    <td>Adolescence</td>
+                    <td>Puberty, identity formation, and preparation for adulthood.</td>
+                </tr>
+                <tr>
+                    <td>20-39 Years</td>
+                    <td>Young Adulthood</td>
+                    <td>Career building, relationships, and independence.</td>
+                </tr>
+                <tr>
+                    <td>40-64 Years</td>
+                    <td>Middle Age</td>
+                    <td>Peak professional achievements, family responsibilities, and health maintenance.</td>
+                </tr>
+                <tr>
+                    <td>65+ Years</td>
+                    <td>Seniority</td>
+                    <td>Retirement, reflection, and focus on legacy and well-being.</td>
+                </tr>
+            </tbody>
+        </table>
 
-            <h3>Optimizing Loan Acquisition Tactics</h3>
-            <p>Proactive preparation involves debt-to-income assessments and credit reviews for rate negotiations. Pre-approvals empower dealer discussions, balancing rebates against subsidized financing. Shorter durations curtail interest, though elevating installments; refinancing exploits rate dips. Leasing alternatives suit transient needs, paralleling evaluations in our <a href="/compound-interest-growth-calculator.html">investment growth simulator</a>.</p>
-            <p>Empirical trends from Federal Reserve data underscore rate volatility tied to economic cycles, advocating locked commitments during favorable windows.</p>
-        </section>
-    </main>
+        <h2>Factors Affecting Age Calculation Accuracy</h2>
+        <p>Age isn't just a number; it's influenced by calendar systems, time zones, and even cultural definitions. For instance, in some cultures, age is counted from conception rather than birth. This tool uses the Gregorian calendar for universal consistency. If calculating for historical dates before 1582, note potential discrepancies due to calendar reforms.</p>
+        <p>For advanced users, consider integrating this with our <a href="/time.html">Time Calculator</a> for event planning or <a href="/safe-password-generator.html">Safe Password Generator</a> for age-based security prompts.</p>
 
-    <section id="related-resources">
+        <h2>Disclaimer</h2>
+        <p>This age calculator provides estimates based on input dates and standard Gregorian calendar rules. It is for informational purposes only and should not be used for legal, medical, or official age verification. Always consult official documents for precise age determination.</p>
+
+        <h2>Frequently Asked Questions (FAQ)</h2>
+        <p><strong>How does the calculator handle leap years?</strong> It automatically adjusts for leap days by checking if February 29 falls between the dates, ensuring no overcounting.</p>
+        <p><strong>Can I calculate age in weeks or other units?</strong> The results include days, which can be divided by 7 for weeks. For custom units, use the detailed breakdown.</p>
+        <p><strong>What if the birth date is in the future?</strong> The tool will return a negative age or zero, indicating the period until that date.</p>
+        <p><strong>Does time zone affect the calculation?</strong> Yes, the default is New York (ET). For other zones, adjust the date accordingly using our <a href="/time-zone-calculator.html">Time Zone Calculator</a>.</p>
+        <p><strong>How accurate is the seconds count?</strong> It assumes midnight starts for dates but calculates precisely from the exact timestamp if browser supports it.</p>
+    </section>
+
+    <section class="related-resources">
         <h2>Related Resources</h2>
         <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Car_finance" target="_blank" rel="noopener noreferrer">Wikipedia: Automotive Lending Overview</a></li>
-            <li><a href="https://www.consumerfinance.gov/consumer-tools/auto-loans/" target="_blank" rel="noopener noreferrer">CFPB: Vehicle Loan Guidance</a></li>
-            <li><a href="https://consumer.ftc.gov/articles/buying-used-car-dealer" target="_blank" rel="noopener noreferrer">FTC: Dealer Purchase Advice</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Age_calculation" target="_blank" rel="noopener noreferrer">Wikipedia: Age Calculation</a> - Detailed historical and mathematical context.</li>
+            <li><a href="https://www.ssa.gov/oact/babynames/limits.html" target="_blank" rel="noopener noreferrer">U.S. Social Security Administration: Age-Related Data</a> - Government resources for age verification.</li>
+            <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4754270/" target="_blank" rel="noopener noreferrer">NCBI: Biological vs. Chronological Age</a> - Scientific insights into aging.</li>
         </ul>
     </section>
 
     <footer>
-        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
 
     <script>
-        let amortizationData = [];
-        let selectedCurrency = '$';
+        function calculateAge() {
+            const birthDateInput = document.getElementById('birth-date').value;
+            const calcDateInput = document.getElementById('calc-date').value || new Date().toISOString().split('T')[0];
 
-        function calculateAutoLoan() {
-            selectedCurrency = document.getElementById('currency').value;
-            const autoPrice = parseFloat(document.getElementById('auto-price').value);
-            const downPayment = parseFloat(document.getElementById('down-payment').value);
-            const tradeIn = parseFloat(document.getElementById('trade-in').value);
-            const interestRateAnnual = parseFloat(document.getElementById('interest-rate').value);
-            const interestRate = interestRateAnnual / 100 / 12;
-            const loanTerm = parseInt(document.getElementById('loan-term').value);
-            const salesTaxRate = parseFloat(document.getElementById('sales-tax').value) / 100;
-
-            const taxableAmount = autoPrice - tradeIn;
-            const salesTax = taxableAmount * salesTaxRate;
-            const principal = autoPrice + salesTax - downPayment - tradeIn;
-            const monthlyPayment = principal * (interestRate * Math.pow(1 + interestRate, loanTerm)) / (Math.pow(1 + interestRate, loanTerm) - 1);
-            const totalPayments = monthlyPayment * loanTerm;
-            const totalInterest = totalPayments - principal;
-            const totalCost = autoPrice + salesTax + totalInterest - tradeIn;
-
-            // Payoff date with New York time zone (UTC-4 or -5, using JS Date with adjustment)
-            const currentDate = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
-            let payoffMonth = currentDate.getMonth() + loanTerm;
-            let payoffYear = currentDate.getFullYear() + Math.floor(payoffMonth / 12);
-            payoffMonth = payoffMonth % 12;
-            let payoffDay = Math.min(currentDate.getDate(), new Date(payoffYear, payoffMonth + 1, 0).getDate());
-            const payoffDateObj = new Date(payoffYear, payoffMonth, payoffDay);
-            const options = { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' };
-            const payoffDate = payoffDateObj.toLocaleDateString('en-US', options).replace(/,/g, '');
-
-            document.getElementById('monthly-payment').textContent = selectedCurrency + monthlyPayment.toFixed(2);
-            document.getElementById('total-loan').textContent = selectedCurrency + principal.toFixed(2);
-            document.getElementById('total-interest').textContent = selectedCurrency + totalInterest.toFixed(2);
-            document.getElementById('total-cost').textContent = selectedCurrency + totalCost.toFixed(2);
-            document.getElementById('payoff-date').textContent = payoffDate;
-
-            amortizationData = generateAmortizationTable(principal, interestRate, loanTerm, monthlyPayment);
-            document.getElementById('results').style.display = 'block';
-        }
-
-        function generateAmortizationTable(principal, monthlyRate, term, monthlyPayment) {
-            let balance = principal;
-            let tableBody = document.querySelector('#amortization-table tbody');
-            tableBody.innerHTML = '';
-            let chartData = { labels: [], principalData: [], interestData: [] };
-            let data = [];
-
-            for (let month = 1; month <= term; month++) {
-                const interest = balance * monthlyRate;
-                const principalPayment = monthlyPayment - interest;
-                balance -= principalPayment;
-                if (balance < 0) balance = 0;
-                let row = `<tr><td>${month}</td><td>${selectedCurrency}${monthlyPayment.toFixed(2)}</td><td>${selectedCurrency}${principalPayment.toFixed(2)}</td><td>${selectedCurrency}${interest.toFixed(2)}</td><td>${selectedCurrency}${balance.toFixed(2)}</td></tr>`;
-                tableBody.innerHTML += row;
-                data.push([month.toString(), monthlyPayment.toFixed(2), principalPayment.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
-
-                const year = Math.ceil(month / 12);
-                if (!chartData.principalData[year - 1]) {
-                    chartData.labels.push(`Year ${year}`);
-                    chartData.principalData[year - 1] = 0;
-                    chartData.interestData[year - 1] = 0;
-                }
-                chartData.principalData[year - 1] += principalPayment;
-                chartData.interestData[year - 1] += interest;
+            if (!birthDateInput) {
+                alert('Please enter a birth date.');
+                return;
             }
 
-            chartData.principalData = chartData.principalData.map(v => v.toFixed(2));
-            chartData.interestData = chartData.interestData.map(v => v.toFixed(2));
+            const birthDate = new Date(birthDateInput);
+            const calcDate = new Date(calcDateInput);
 
-            const ctx = document.getElementById('amortization-chart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: chartData.labels,
-                    datasets: [
-                        { label: 'Principal', data: chartData.principalData, backgroundColor: 'rgba(75, 192, 192, 0.2)', borderColor: 'rgba(75, 192, 192, 1)' },
-                        { label: 'Interest', data: chartData.interestData, backgroundColor: 'rgba(255, 99, 132, 0.2)', borderColor: 'rgba(255, 99, 132, 1)' }
-                    ]
-                },
-                options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: true } } }
-            });
+            if (birthDate > calcDate) {
+                document.getElementById('age-results').innerHTML = '<p>Birth date is in the future. Age: 0</p>';
+                return;
+            }
 
-            return data;
+            const diffMs = calcDate - birthDate;
+            const diffSecs = Math.floor(diffMs / 1000);
+            const diffMins = Math.floor(diffSecs / 60);
+            const diffHours = Math.floor(diffMins / 60);
+            const diffDays = Math.floor(diffHours / 24);
+
+            let years = calcDate.getFullYear() - birthDate.getFullYear();
+            let months = calcDate.getMonth() - birthDate.getMonth();
+            let days = calcDate.getDate() - birthDate.getDate();
+
+            if (days < 0) {
+                months--;
+                days += new Date(calcDate.getFullYear(), calcDate.getMonth(), 0).getDate();
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            const resultsHTML = `
+                <p>Years: ${years}</p>
+                <p>Months: ${months}</p>
+                <p>Days: ${days}</p>
+                <p>Total Days: ${diffDays}</p>
+                <p>Hours: ${diffHours}</p>
+                <p>Minutes: ${diffMins}</p>
+                <p>Seconds: ${diffSecs}</p>
+            `;
+            document.getElementById('age-results').innerHTML = resultsHTML;
         }
+
+        let ageData = []; // For PDF table
 
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
             doc.setFontSize(14);
-            doc.text("Auto Loan Calculation Results", 105, 15, { align: "center" });
+            doc.text("Age Calculation Results", 105, 15, { align: "center" });
 
-            // Loan Results Table
+            // Results Table
+            const years = document.querySelector('#age-results p:nth-child(1)').textContent;
+            const months = document.querySelector('#age-results p:nth-child(2)').textContent;
+            const days = document.querySelector('#age-results p:nth-child(3)').textContent;
+            const totalDays = document.querySelector('#age-results p:nth-child(4)').textContent;
+            const hours = document.querySelector('#age-results p:nth-child(5)').textContent;
+            const minutes = document.querySelector('#age-results p:nth-child(6)').textContent;
+            const seconds = document.querySelector('#age-results p:nth-child(7)').textContent;
+
             doc.autoTable({
                 startY: 20,
                 head: [['Parameter', 'Value']],
                 body: [
-                    ['Monthly Payment', selectedCurrency + parseFloat(document.getElementById('monthly-payment').textContent.replace(/[$€]/, ''))],
-                    ['Total Payments', selectedCurrency + (parseFloat(document.getElementById('monthly-payment').textContent.replace(/[$€]/, '')) * parseInt(document.getElementById('loan-term').value)).toFixed(2)],
-                    ['Total Interest', selectedCurrency + parseFloat(document.getElementById('total-interest').textContent.replace(/[$€]/, ''))],
-                    ['Payoff Date', document.getElementById('payoff-date').textContent]
+                    [years.split(': ')[0], years.split(': ')[1]],
+                    [months.split(': ')[0], months.split(': ')[1]],
+                    [days.split(': ')[0], days.split(': ')[1]],
+                    [totalDays.split(': ')[0], totalDays.split(': ')[1]],
+                    [hours.split(': ')[0], hours.split(': ')[1]],
+                    [minutes.split(': ')[0], minutes.split(': ')[1]],
+                    [seconds.split(': ')[0], seconds.split(': ')[1]]
                 ],
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [255, 255, 255] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 5, textColor: [0, 0, 0], halign: 'left' },
                 margin: { top: 10 }
             });
 
-            // Amortization Schedule Table
             doc.autoTable({
                 startY: doc.lastAutoTable.finalY + 10,
-                head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
-                body: amortizationData.map(row => [row[0], selectedCurrency + row[1], selectedCurrency + row[2], selectedCurrency + row[3], selectedCurrency + row[4]]),
+                head: [['Age Breakdown', 'Details']],
+                body: [
+                    ['Note', 'This breakdown accounts for leap years and exact date differences.']
+                ],
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
@@ -254,19 +249,24 @@
                 }
             });
 
-            doc.save('auto-loan-results.pdf');
+            doc.save('age-calculation-results.pdf');
         }
 
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Auto Loan Calculator',
+                    title: 'Age Calculator',
                     url: window.location.href
                 });
             } else {
                 alert('Share this page manually.');
             }
         }
+
+        // Automatski popuni današnji datum u Calculation Date polju
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('calc-date').value = new Date().toISOString().split('T')[0];
+        });
     </script>
 </body>
 </html>
