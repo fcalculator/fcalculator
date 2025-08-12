@@ -269,6 +269,9 @@
                     currentStart = chunkEnd;
                 }
 
+                // Calculate investment value over time
+                const investmentValues = prices.map(p => btcBought * p);
+
                 // Render chart
                 const ctx = document.getElementById('priceChart').getContext('2d');
                 if (window.myChart) window.myChart.destroy();
@@ -276,7 +279,10 @@
                     type: 'line',
                     data: {
                         labels: labels,
-                        datasets: [{ label: 'BTC Price', data: prices, borderColor: 'teal', fill: false }]
+                        datasets: [
+                            { label: 'BTC Price', data: prices, borderColor: 'teal', fill: false },
+                            { label: 'Investment Value', data: investmentValues, borderColor: 'orange', fill: false }
+                        ]
                     },
                     options: { responsive: true, scales: { y: { beginAtZero: false } } }
                 });
@@ -292,19 +298,19 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const table = document.getElementById('result-table');
-            const summary = document.getElementById('result-summary').innerText;
 
             doc.setFont('helvetica');
             doc.setFontSize(12);
-            doc.text('Bitcoin Investment Simulation Results', 105, 10, { align: 'center' });
-            doc.text(summary, 10, 20);
+            doc.text('Bitcoin Investment Simulation Results', doc.internal.pageSize.width / 2, 10, { align: 'center' });
 
             doc.autoTable({
                 html: '#result-table',
-                startY: 50,
+                startY: 20,
                 theme: 'grid',
-                headStyles: { fillColor: [0, 128, 128] }, // Teal header
-                styles: { font: 'helvetica', textColor: [0, 0, 0], lineColor: [0, 0, 0], lineWidth: 0.1, cellPadding: 3, halign: 'left' },
+                headStyles: { fillColor: [0, 128, 128], textColor: [255, 255, 255], fontStyle: 'bold' }, // Teal header with white text
+                bodyStyles: { textColor: [0, 0, 0] },
+                styles: { font: 'helvetica', lineColor: [0, 0, 0], lineWidth: 0.1, cellPadding: 3, halign: 'left', valign: 'middle', overflow: 'linebreak' },
+                margin: { top: 20, left: 14, right: 14, bottom: 20 },
                 didDrawPage: function (data) {
                     doc.setFontSize(8);
                     doc.text('This document was generated using Fcalculator.com', data.settings.margin.left, doc.internal.pageSize.height - 10);
