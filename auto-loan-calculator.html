@@ -7,8 +7,8 @@
     <meta name="description" content="Calculate your auto loan payments with accuracy, including monthly installments, total interest costs, amortization schedules, and payoff timelines for informed car financing decisions.">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf-autotable.min.js"></script>
+    <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable@3.5.25/dist/jspdf.autotable.min.js"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script type="application/ld+json">
     {
@@ -369,14 +369,13 @@
 
             try {
                 const { jsPDF } = window.jspdf;
-                const autoTable = window.jspdfAutoTable.default;
                 const doc = new jsPDF();
 
                 doc.setFontSize(14);
                 doc.text("Auto Loan Calculation Results", 105, 15, { align: "center" });
 
                 // Loan Results Table
-                autoTable(doc, {
+                doc.autoTable({
                     startY: 20,
                     head: [['Parameter', 'Value']],
                     body: [
@@ -393,7 +392,7 @@
                 });
 
                 // Amortization Schedule Table
-                autoTable(doc, {
+                doc.autoTable({
                     startY: doc.lastAutoTable.finalY + 10,
                     head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
                     body: amortizationData,
