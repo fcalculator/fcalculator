@@ -203,6 +203,8 @@
     </footer>
 
     <script>
+        let myChart; // Global variable for chart instance
+
         // Default to New York time zone for dates
         const nyTimeZone = 'America/New_York';
         const today = new Date().toLocaleDateString('en-CA', { timeZone: nyTimeZone });
@@ -260,7 +262,10 @@
 
                 // Chart
                 const ctx = document.getElementById('growthChart').getContext('2d');
-                new Chart(ctx, {
+                if (myChart) {
+                    myChart.destroy(); // Destroy previous chart instance
+                }
+                myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: ['Investment Date', 'Current Date'],
