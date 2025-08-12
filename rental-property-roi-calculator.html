@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rental Property ROI Calculator</title>
+    <title>Rental Property ROI Calculator | FCalculator.com</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -92,6 +92,29 @@
                 margin-right: 0;
                 margin-bottom: 5px;
             }
+        }
+        #pdf-button, .share-button {
+            margin: 10px;
+        }
+        .results-section {
+            text-align: center;
+            font-size: 1.3em;
+            color: green;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .results-section p {
+            margin: 10px 0;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .results-section p:last-child {
+            border-bottom: none;
         }
     </style>
 </head>
@@ -270,7 +293,7 @@
                 <button type="button" onclick="calculateRental()">Calculate</button>
             </form>
 
-            <div id="results" style="text-align: center; font-size: 1.3em; color: green;">
+            <div id="results" class="results-section" style="display: none;">
                 <p id="monthly-mortgage">Monthly Mortgage: $957.87</p>
                 <p id="monthly-cash-flow">Monthly Cash Flow: $117.63</p>
                 <p id="cap-rate">Cap Rate: 4.18%</p>
@@ -303,17 +326,17 @@
 
         <section class="content-section">
             <h2>Understanding Rental Property Investments</h2>
-            <p>Rental property investments represent a strategic approach to building wealth through real estate, combining immediate cash flow from tenants with long-term asset appreciation. Investors often evaluate factors such as location, property condition, and market trends to maximize returns. This calculator assists in modeling scenarios by incorporating variables like initial purchase costs, ongoing expenses, and projected income streams, enabling informed decision-making for both novice and experienced real estate enthusiasts. Understanding these elements is crucial for assessing the potential profitability and risks associated with rental properties, from urban apartments to suburban homes.</p>
+            <p>Rental property investments represent a strategic approach to building wealth through real estate, combining immediate cash flow from tenants with long-term asset appreciation. Investors often evaluate factors such as location, property condition, and market trends to maximize returns. This calculator assists in modeling scenarios by incorporating variables like initial purchase costs, ongoing expenses, and projected income streams, enabling informed decision-making for both novice and experienced real estate enthusiasts. Understanding these elements is crucial for assessing the potential profitability and risks associated with rental properties, from urban apartments to suburban homes. With rising demand for housing in growing economies, rental investments can provide steady income while hedging against inflation.</p>
             <p>To compute the monthly mortgage payment, the tool employs the standard amortization formula:</p>
             \[ M = P \frac{r(1+r)^n}{(1+r)^n - 1} \]
-            <p>Here, \( M \) denotes the monthly payment, \( P \) is the principal loan amount, \( r \) stands for the monthly interest rate, and \( n \) represents the total number of payments over the loan term. This formula ensures accurate projections of financing costs, which are crucial for assessing overall investment viability. By adjusting parameters like interest rates and loan terms, users can explore how different financing options impact cash flow and return metrics.</p>
+            <p>Here, \( M \) denotes the monthly payment, \( P \) is the principal loan amount, \( r \) stands for the monthly interest rate, and \( n \) represents the total number of payments over the loan term. This formula ensures accurate projections of financing costs, which are crucial for assessing overall investment viability. By adjusting parameters like interest rates and loan terms, users can explore how different financing options impact cash flow and return metrics, helping to optimize borrowing strategies in volatile interest rate environments.</p>
 
             <h3>Key Metrics Explained</h3>
             <ul>
-                <li><strong>Cash Flow</strong>: Represents the net income generated from rental payments after deducting all operational expenses, including mortgage payments, property taxes, insurance, HOA fees, maintenance, management costs, and vacancy allowances. Positive cash flow is essential for covering costs and providing ongoing returns, while negative flow may indicate the need for adjustments in rental pricing or expense management.</li>
-                <li><strong>Cap Rate</strong>: Calculated as Net Operating Income (NOI) divided by the property's value, this metric offers a snapshot of potential yield: \( \text{Cap Rate} = \frac{\text{NOI}}{\text{Property Value}} \). It helps compare investment opportunities independent of financing structures, with higher rates often found in emerging markets or higher-risk properties.</li>
-                <li><strong>ROI</strong>: Measures the annual return on the initial investment, expressed as a percentage: \( \text{ROI} = \frac{\text{Annual Net Income}}{\text{Initial Investment}} \times 100 \). This includes cash flow and equity buildup over time, providing a comprehensive view of investment efficiency beyond simple profit calculations.</li>
-                <li><strong>IRR</strong>: The Internal Rate of Return accounts for the time value of money, solving for the discount rate that makes the net present value of all cash flows zero. It's particularly useful for evaluating investments with varying cash flows over multiple years, incorporating factors like inflation and opportunity costs.</li>
+                <li><strong>Cash Flow</strong>: Represents the net income generated from rental payments after deducting all operational expenses, including mortgage payments, property taxes, insurance, HOA fees, maintenance, management costs, and vacancy allowances. Positive cash flow is essential for covering costs and providing ongoing returns, while negative flow may indicate the need for adjustments in rental pricing or expense management. Monitoring cash flow helps investors maintain financial health and reinvest in property improvements.</li>
+                <li><strong>Cap Rate</strong>: Calculated as Net Operating Income (NOI) divided by the property's value, this metric offers a snapshot of potential yield: \( \text{Cap Rate} = \frac{\text{NOI}}{\text{Property Value}} \). It helps compare investment opportunities independent of financing structures, with higher rates often found in emerging markets or higher-risk properties. Cap rate is particularly useful for valuing income-producing assets in commercial real estate contexts.</li>
+                <li><strong>ROI</strong>: Measures the annual return on the initial investment, expressed as a percentage: \( \text{ROI} = \frac{\text{Annual Net Income}}{\text{Initial Investment}} \times 100 \). This includes cash flow and equity buildup over time, providing a comprehensive view of investment efficiency beyond simple profit calculations. ROI can be leveraged to benchmark against other asset classes like stocks or bonds.</li>
+                <li><strong>IRR</strong>: The Internal Rate of Return accounts for the time value of money, solving for the discount rate that makes the net present value of all cash flows zero. It's particularly useful for evaluating investments with varying cash flows over multiple years, incorporating factors like inflation and opportunity costs. IRR aids in comparing complex projects with differing timelines and cash inflows.</li>
             </ul>
 
             <h3>Factors Impacting Returns</h3>
@@ -327,27 +350,31 @@
                 <tbody>
                     <tr>
                         <td>Appreciation</td>
-                        <td>Drives long-term gains by increasing property value, influenced by economic growth, location improvements, and market demand, though it's subject to regional real estate cycles and broader economic conditions.</td>
+                        <td>Drives long-term gains by increasing property value, influenced by economic growth, location improvements, and market demand, though it's subject to regional real estate cycles and broader economic conditions. In high-growth areas, appreciation can significantly amplify total returns over holding periods.</td>
                     </tr>
                     <tr>
                         <td>Management Fees</td>
-                        <td>Typically 8-12% of rental income, these fees reduce net cash flow but delegate tasks like tenant screening and maintenance, ideal for hands-off investors seeking to minimize operational involvement.</td>
+                        <td>Typically 8-12% of rental income, these fees reduce net cash flow but delegate tasks like tenant screening and maintenance, ideal for hands-off investors seeking to minimize operational involvement. Professional management can enhance tenant retention and property value preservation.</td>
                     </tr>
                     <tr>
                         <td>Closing and Repair Costs</td>
-                        <td>Upfront expenses that elevate the initial outlay, potentially delaying profitability but enhancing property appeal and rental rates post-renovation, especially in competitive markets.</td>
+                        <td>Upfront expenses that elevate the initial outlay, potentially delaying profitability but enhancing property appeal and rental rates post-renovation, especially in competitive markets. Strategic repairs can lead to higher occupancy and premium pricing.</td>
                     </tr>
                     <tr>
                         <td>Annual Increases</td>
-                        <td>Inflation adjustments for expenses and rents ensure projections align with real-world economic shifts, preventing underestimation of future costs or income in dynamic financial environments.</td>
+                        <td>Inflation adjustments for expenses and rents ensure projections align with real-world economic shifts, preventing underestimation of future costs or income in dynamic financial environments. This factor is key for long-term planning in inflationary periods.</td>
                     </tr>
                     <tr>
                         <td>Vacancy Rates</td>
-                        <td>Accounts for unoccupied periods, typically 5-10%, which directly affect income; lower rates in high-demand areas improve overall returns and stability of cash flows.</td>
+                        <td>Accounts for unoccupied periods, typically 5-10%, which directly affect income; lower rates in high-demand areas improve overall returns and stability of cash flows. Effective marketing and tenant relations can minimize vacancies.</td>
                     </tr>
                     <tr>
                         <td>Tax Implications</td>
-                        <td>Deductions for depreciation, interest, and repairs can enhance after-tax returns, but changes in tax laws require ongoing monitoring to optimize investment strategies.</td>
+                        <td>Deductions for depreciation, interest, and repairs can enhance after-tax returns, but changes in tax laws require ongoing monitoring to optimize investment strategies. Tax advantages like 1031 exchanges can defer capital gains for portfolio growth.</td>
+                    </tr>
+                    <tr>
+                        <td>Location Dynamics</td>
+                        <td>Properties in thriving neighborhoods with access to amenities, jobs, and transportation command higher rents and appreciation, but oversupply or economic downturns can erode value. Researching local market data is essential for risk mitigation.</td>
                     </tr>
                 </tbody>
             </table>
@@ -364,28 +391,28 @@
                 <tbody>
                     <tr>
                         <td>Buy and Hold</td>
-                        <td>Provides consistent rental income and benefits from property value growth over extended periods, building equity through mortgage paydown.</td>
-                        <td>Involves ongoing management responsibilities and capital immobilization, with risks from market downturns affecting liquidity.</td>
+                        <td>Provides consistent rental income and benefits from property value growth over extended periods, building equity through mortgage paydown and tax advantages.</td>
+                        <td>Involves ongoing management responsibilities and capital immobilization, with risks from market downturns affecting liquidity and income stability.</td>
                     </tr>
                     <tr>
                         <td>Fix and Flip</td>
-                        <td>Offers rapid profits through targeted renovations and quick resales in rising markets, suitable for experienced investors with construction knowledge.</td>
-                        <td>Carries risks from unforeseen repair costs and market downturns affecting sale prices, requiring precise timing and cost control.</td>
+                        <td>Offers rapid profits through targeted renovations and quick resales in rising markets, suitable for experienced investors with construction knowledge and market timing skills.</td>
+                        <td>Carries risks from unforeseen repair costs and market downturns affecting sale prices, requiring precise timing and cost control to avoid losses.</td>
                     </tr>
                     <tr>
                         <td>REITs</td>
-                        <td>Enables passive participation with diversified portfolios and liquidity, accessible to investors without direct property ownership.</td>
-                        <td>Limits direct control and may yield lower returns compared to hands-on ownership, with fees impacting net gains.</td>
+                        <td>Enables passive participation with diversified portfolios and liquidity, accessible to investors without direct property ownership through stock-like investments.</td>
+                        <td>Limits direct control and may yield lower returns compared to hands-on ownership, with fees impacting net gains and market volatility affecting share prices.</td>
                     </tr>
                     <tr>
                         <td>Short-Term Rentals</td>
-                        <td>Generates higher per-night income in popular locations like vacation spots, leveraging platforms for broader reach.</td>
-                        <td>Faces seasonal vacancies and stricter local regulations on platforms like Airbnb, increasing operational complexity.</td>
+                        <td>Generates higher per-night income in popular locations like vacation spots, leveraging platforms for broader reach and flexible pricing.</td>
+                        <td>Faces seasonal vacancies and stricter local regulations on platforms like Airbnb, increasing operational complexity and compliance costs.</td>
                     </tr>
                     <tr>
                         <td>Multi-Family Properties</td>
-                        <td>Spreads risk across multiple units and scales income potential, often with better cash flow per square foot.</td>
-                        <td>Requires more intensive management and higher upfront costs, with tenant turnover impacting stability.</td>
+                        <td>Spreads risk across multiple units and scales income potential, often with better cash flow per square foot and economies of scale in management.</td>
+                        <td>Requires more intensive management and higher upfront costs, with tenant turnover impacting stability and potential for concentrated risks in one location.</td>
                     </tr>
                 </tbody>
             </table>
@@ -428,6 +455,12 @@
         let valueData = [];
         let noiData = [];
         let roiComponentsData = [];
+
+        let expenseChartInstance;
+        let cashFlowChartInstance;
+        let valueChartInstance;
+        let noiChartInstance;
+        let roiComponentsChartInstance;
 
         function calculateRental() {
             const currency = document.getElementById('currency').value;
@@ -553,10 +586,17 @@
                 tableBody.appendChild(row);
             }
 
+            // Destroy existing charts
+            if (expenseChartInstance) expenseChartInstance.destroy();
+            if (cashFlowChartInstance) cashFlowChartInstance.destroy();
+            if (valueChartInstance) valueChartInstance.destroy();
+            if (noiChartInstance) noiChartInstance.destroy();
+            if (roiComponentsChartInstance) roiComponentsChartInstance.destroy();
+
             // Charts
             expenseData = [monthlyMortgage, taxes, insurance, hoa, rent * maintPct, otherCosts, rent * managementPct, rent * vacancyPct];
             const expenseCtx = document.getElementById('expenseChart').getContext('2d');
-            new Chart(expenseCtx, {
+            expenseChartInstance = new Chart(expenseCtx, {
                 type: 'pie',
                 data: {
                     labels: ['Mortgage', 'Taxes', 'Insurance', 'HOA', 'Maintenance', 'Other Costs', 'Management', 'Vacancy Loss'],
@@ -570,7 +610,7 @@
                 cashFlowData.push(yearlyIncome[i] - yearlyExpenses[i]);
             }
             const cashFlowCtx = document.getElementById('cashFlowChart').getContext('2d');
-            new Chart(cashFlowCtx, {
+            cashFlowChartInstance = new Chart(cashFlowCtx, {
                 type: 'line',
                 data: {
                     labels: Array.from({length: holdingLength}, (_, i) => `Year ${i+1}`),
@@ -584,7 +624,7 @@
                 valueData.push((needRepairs ? afterRepairValue : price) * Math.pow(1 + appreciation, i));
             }
             const valueCtx = document.getElementById('valueChart').getContext('2d');
-            new Chart(valueCtx, {
+            valueChartInstance = new Chart(valueCtx, {
                 type: 'line',
                 data: {
                     labels: Array.from({length: holdingLength}, (_, i) => `Year ${i+1}`),
@@ -596,7 +636,7 @@
             // New Chart: NOI Bar Chart
             noiData = yearlyNOI;
             const noiCtx = document.getElementById('noiChart').getContext('2d');
-            new Chart(noiCtx, {
+            noiChartInstance = new Chart(noiCtx, {
                 type: 'bar',
                 data: {
                     labels: Array.from({length: holdingLength}, (_, i) => `Year ${i+1}`),
@@ -608,7 +648,7 @@
             // New Chart: ROI Components Doughnut
             roiComponentsData = [totalCashFlow, (sellPrice - sellCost - loan), -initialInvestment];
             const roiComponentsCtx = document.getElementById('roiComponentsChart').getContext('2d');
-            new Chart(roiComponentsCtx, {
+            roiComponentsChartInstance = new Chart(roiComponentsCtx, {
                 type: 'doughnut',
                 data: {
                     labels: ['Total Cash Flow', 'Sale Profit', 'Initial Investment'],
