@@ -269,9 +269,10 @@
     <script>
         let amortizationData = [];
         let chart1, chart2;
+        let currencySymbol = '';
 
         function calculateAutoLoan() {
-            const currency = document.getElementById('currency').value;
+            currencySymbol = document.getElementById('currency').value;
             const vehiclePrice = parseFloat(document.getElementById('vehicle-price').value);
             const downPayment = parseFloat(document.getElementById('down-payment').value);
             const tradeInValue = parseFloat(document.getElementById('trade-in-value').value);
@@ -294,9 +295,9 @@
             const payoffDate = new Date(today);
             payoffDate.setMonth(payoffDate.getMonth() + loanTerm);
 
-            document.getElementById('monthly-payment').textContent = `Monthly Payment: ${currency}${monthlyPayment.toFixed(2)}`;
-            document.getElementById('total-payments').textContent = `Total Payments: ${currency}${totalPayments.toFixed(2)}`;
-            document.getElementById('total-interest').textContent = `Total Interest: ${currency}${totalInterest.toFixed(2)}`;
+            document.getElementById('monthly-payment').textContent = `Monthly Payment: ${currencySymbol}${monthlyPayment.toFixed(2)}`;
+            document.getElementById('total-payments').textContent = `Total Payments: ${currencySymbol}${totalPayments.toFixed(2)}`;
+            document.getElementById('total-interest').textContent = `Total Interest: ${currencySymbol}${totalInterest.toFixed(2)}`;
             document.getElementById('payoff-date').textContent = `Payoff Date: ${payoffDate.toDateString()}`;
 
             // Amortization Schedule
@@ -317,7 +318,7 @@
                 amortizationData.push([month, monthlyPayment.toFixed(2), principalPaid.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
 
                 const row = document.createElement('tr');
-                row.innerHTML = `<td>${month}</td><td style="color: black;">${currency}${monthlyPayment.toFixed(2)}</td><td style="color: black;">${currency}${principalPaid.toFixed(2)}</td><td style="color: black;">${currency}${interest.toFixed(2)}</td><td style="color: black;">${currency}${balance.toFixed(2)}</td>`;
+                row.innerHTML = `<td>${month}</td><td style="color: black;">${currencySymbol}${monthlyPayment.toFixed(2)}</td><td style="color: black;">${currencySymbol}${principalPaid.toFixed(2)}</td><td style="color: black;">${currencySymbol}${interest.toFixed(2)}</td><td style="color: black;">${currencySymbol}${balance.toFixed(2)}</td>`;
                 tableBody.appendChild(row);
 
                 totalPrincipalPaid += principalPaid;
@@ -358,10 +359,10 @@
             doc.setFontSize(14);
             doc.text("Auto Loan Calculation Results", 105, 15, { align: "center" });
 
-            // Extract values without labels
-            const monthlyPaymentVal = document.getElementById('monthly-payment').textContent.split(': ')[1] || '';
-            const totalPaymentsVal = document.getElementById('total-payments').textContent.split(': ')[1] || '';
-            const totalInterestVal = document.getElementById('total-interest').textContent.split(': ')[1] || '';
+            // Extract values without labels and currency
+            const monthlyPaymentVal = document.getElementById('monthly-payment').textContent.split(': ')[1].replace(currencySymbol, '') || '';
+            const totalPaymentsVal = document.getElementById('total-payments').textContent.split(': ')[1].replace(currencySymbol, '') || '';
+            const totalInterestVal = document.getElementById('total-interest').textContent.split(': ')[1].replace(currencySymbol, '') || '';
             const payoffDateVal = document.getElementById('payoff-date').textContent.split(': ')[1] || '';
 
             // Loan Results Table
