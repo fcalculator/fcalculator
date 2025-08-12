@@ -3,162 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rental Property Investment Simulator</title>
+    <title>Rental Property ROI Simulator | FCalculator.com</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
-    <style>
-        /* Unikatan CSS za sekciju unosa podataka, inspiriran calculator.net, ali unikatno: plavi headeri sa rounded corners, light blue-gray background za grupe, larger font (16px), bold labels, good spacing, mobile first grid, shadows za depth, dual inputs u flexu */
-        .calculator-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f0f8ff; /* Light blue-gray background for whole container */
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .instructions {
-            text-align: center;
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .input-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .input-section {
-            background-color: #ffffff; /* White background for sections */
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .section-header {
-            background-color: #007bff; /* Blue header like calculator.net */
-            color: white;
-            padding: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .input-group {
-            padding: 10px;
-            font-size: 16px; /* Larger font for easy reading */
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .input-group input[type="number"],
-        .input-group select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-
-        .dual-input {
-            display: flex;
-            gap: 10px;
-        }
-
-        .dual-input input {
-            flex: 1;
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        .radio-group label {
-            display: inline;
-            font-weight: normal;
-        }
-
-        .increase-group {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            font-weight: bold;
-            background-color: #e9ecef; /* Light gray for increase headers */
-        }
-
-        .input-help {
-            font-size: 14px;
-            color: #666;
-            margin-top: 5px;
-        }
-
-        .currency-group {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .button-group {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .button-group button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .button-group button:first-child {
-            background-color: #28a745; /* Green Calculate */
-            color: white;
-            margin-right: 10px;
-        }
-
-        .button-group button:last-child {
-            background-color: #6c757d; /* Gray Clear */
-            color: white;
-        }
-
-        /* Mobile first adjustments */
-        @media (max-width: 768px) {
-            .input-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .dual-input {
-                flex-direction: column;
-            }
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Rental Property Investment Simulator",
-        "description": "Simulate rental property investments to forecast cash flows, returns, and profitability metrics over time, incorporating financing, expenses, and market growth factors.",
-        "url": "https://fcalculator.com/rental-property-calculator.html",
+        "description": "Simulate returns on rental property investments with detailed cash flow projections, ROI calculations, and amortization schedules.",
+        "url": "https://fcalculator.com/rental-property-investment-simulator.html",
         "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
                 {
                     "@type": "ListItem",
                     "position": 1,
-                    "name": "FCalculator.com",
+                    "name": "Home",
                     "item": "https://fcalculator.com/"
                 },
                 {
@@ -170,8 +35,8 @@
                 {
                     "@type": "ListItem",
                     "position": 3,
-                    "name": "Rental Property Calculator",
-                    "item": "https://fcalculator.com/rental-property-calculator.html"
+                    "name": "Rental Property Investment Simulator",
+                    "item": "https://fcalculator.com/rental-property-investment-simulator.html"
                 }
             ]
         }
@@ -182,511 +47,304 @@
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/financial.html">Financial</a> > <a href="/rental-property-calculator.html">Rental Property Calculator</a>
+            <a href="/">FCalculator.com</a> > <a href="/financial.html">Financial</a> > <a href="/rental-property-investment-simulator.html">Rental Property Investment Simulator</a>
         </div>
         <h1>Rental Property Investment Simulator</h1>
-        <p>Explore the potential of rental real estate by modeling various scenarios. This simulator projects financial outcomes based on purchase details, income streams, operational costs, and exit strategies, helping investors gauge viability and optimize strategies.</p>
+        <p>Explore potential returns from rental properties by inputting key financial variables. This tool provides comprehensive projections including cash flow, ROI, and detailed breakdowns.</p>
     </header>
+
     <main>
-        <section id="calculator-section">
+        <section class="tool-section">
             <form id="rental-form">
-                <div class="calculator-container">
-                    <p class="instructions">Modify the values and click Calculate to analyze your rental property investment. Use estimates for uncertain figures; all inputs are in your selected currency.</p>
-                    <div class="input-grid">
-                        <div class="input-section purchase-section">
-                            <div class="section-header">Purchase</div>
-                            <div class="input-group">
-                                <label for="purchase-price">Purchase Price</label>
-                                <input type="number" id="purchase-price" value="200000" min="0">
-                                <p class="input-help">Total cost to buy the property, including any fees if not separated in closing costs.</p>
-                            </div>
-                            <div class="input-group">
-                                <label>Use Loan?</label>
-                                <div class="radio-group">
-                                    <input type="radio" id="use-loan-yes" name="use-loan" value="yes" checked>
-                                    <label for="use-loan-yes">Yes</label>
-                                    <input type="radio" id="use-loan-no" name="use-loan" value="no">
-                                    <label for="use-loan-no">No</label>
-                                </div>
-                                <p class="input-help">Choose 'Yes' if financing part of the purchase with a mortgage.</p>
-                            </div>
-                            <div class="input-group">
-                                <label for="down-payment">Down Payment (%)</label>
-                                <input type="number" id="down-payment" value="20" min="0" max="100">
-                                <p class="input-help">Percentage of purchase price paid upfront; affects loan amount and monthly payments.</p>
-                            </div>
-                            <div class="input-group">
-                                <label for="interest-rate">Interest Rate (%)</label>
-                                <input type="number" id="interest-rate" value="6" min="0">
-                                <p class="input-help">Annual percentage rate for the loan; lower rates reduce total interest paid.</p>
-                            </div>
-                            <div class="input-group">
-                                <label for="loan-term">Loan Term (years)</label>
-                                <input type="number" id="loan-term" value="30" min="1">
-                                <p class="input-help">Number of years to repay the loan; longer terms mean lower monthly payments but more interest.</p>
-                            </div>
-                            <div class="input-group">
-                                <label for="closing-cost">Closing Cost</label>
-                                <input type="number" id="closing-cost" value="6000" min="0">
-                                <p class="input-help">One-time fees for appraisals, inspections, and legal services at closing.</p>
-                            </div>
-                            <div class="input-group">
-                                <label>Need Repairs?</label>
-                                <div class="radio-group">
-                                    <input type="radio" id="need-repairs-yes" name="need-repairs" value="yes">
-                                    <label for="need-repairs-yes">Yes</label>
-                                    <input type="radio" id="need-repairs-no" name="need-repairs" value="no" checked>
-                                    <label for="need-repairs-no">No</label>
-                                </div>
-                                <p class="input-help">Select 'Yes' if immediate renovations are required post-purchase.</p>
-                            </div>
-                            <div class="input-group" id="repair-cost-group" style="display: none;">
-                                <label for="repair-cost">Repair Cost</label>
-                                <input type="number" id="repair-cost" value="0" min="0">
-                                <p class="input-help">Budget for initial fixes; added to total investment if 'Yes' selected.</p>
-                            </div>
-                        </div>
+                <label for="currency">Currency:</label>
+                <select id="currency">
+                    <option value="$">$</option>
+                    <option value="€">€</option>
+                </select>
 
-                        <div class="input-section income-section">
-                            <div class="section-header">Income</div>
-                            <div class="increase-group">
-                                <span></span>
-                                <span>Annual Increase (%)</span>
-                            </div>
-                            <div class="input-group dual-input">
-                                <label for="monthly-rent">Monthly Rent</label>
-                                <input type="number" id="monthly-rent" value="2000" min="0">
-                                <input type="number" id="rent-increase" value="3" min="0">
-                                <p class="input-help">Starting rent per month and expected yearly increase due to market or inflation.</p>
-                            </div>
-                            <div class="input-group dual-input">
-                                <label for="other-monthly-income">Other Monthly Income</label>
-                                <input type="number" id="other-monthly-income" value="0" min="0">
-                                <input type="number" id="other-income-increase" value="3" min="0">
-                                <p class="input-help">Additional revenue like parking or laundry fees, with growth rate.</p>
-                            </div>
-                            <div class="input-group">
-                                <label for="vacancy-rate">Vacancy Rate (%)</label>
-                                <input type="number" id="vacancy-rate" value="5" min="0" max="100">
-                                <p class="input-help">Percentage of time the property might be unoccupied; conservative estimate is 5-10%.</p>
-                            </div>
-                            <div class="input-group">
-                                <label for="management-fee">Management Fee (%)</label>
-                                <input type="number" id="management-fee" value="0" min="0" max="100">
-                                <p class="input-help">Fee as percentage of rent for professional management; 0% if self-managed.</p>
-                            </div>
-                        </div>
+                <label for="property-price">Property Price</label>
+                <input type="number" id="property-price" required>
 
-                        <div class="input-section expenses-section">
-                            <div class="section-header">Recurring Operating Expenses</div>
-                            <div class="increase-group">
-                                <span>Annual</span>
-                                <span>Annual Increase (%)</span>
-                            </div>
-                            <div class="input-group dual-input">
-                                <label for="property-tax">Property Tax (Annual)</label>
-                                <input type="number" id="property-tax" value="3000" min="0">
-                                <input type="number" id="tax-increase" value="3" min="0">
-                                <p class="input-help">Yearly tax based on assessed value, with projected increases.</p>
-                            </div>
-                            <div class="input-group dual-input">
-                                <label for="total-insurance">Total Insurance (Annual)</label>
-                                <input type="number" id="total-insurance" value="1200" min="0">
-                                <input type="number" id="insurance-increase" value="3" min="0">
-                                <p class="input-help">Comprehensive insurance coverage costs, adjusting for inflation.</p>
-                            </div>
-                            <div class="input-group dual-input">
-                                <label for="hoa-fee">HOA Fee (Annual)</label>
-                                <input type="number" id="hoa-fee" value="0" min="0">
-                                <input type="number" id="hoa-increase" value="3" min="0">
-                                <p class="input-help">Homeowners association dues if applicable, with annual hikes.</p>
-                            </div>
-                            <div class="input-group dual-input">
-                                <label for="maintenance">Maintenance (Annual)</label>
-                                <input type="number" id="maintenance" value="2000" min="0">
-                                <input type="number" id="maintenance-increase" value="3" min="0">
-                                <p class="input-help">Budget for repairs and upkeep, increasing over time.</p>
-                            </div>
-                            <div class="input-group dual-input">
-                                <label for="other-costs">Other Costs (Annual)</label>
-                                <input type="number" id="other-costs" value="500" min="0">
-                                <input type="number" id="other-costs-increase" value="3" min="0">
-                                <p class="input-help">Miscellaneous expenses like utilities or marketing, with growth.</p>
-                            </div>
-                        </div>
+                <label for="down-payment">Down Payment (%)</label>
+                <input type="number" id="down-payment" min="0" max="100" required>
 
-                        <div class="input-section sell-section">
-                            <div class="section-header">Sell</div>
-                            <div class="input-group">
-                                <label>Do You Know the Sell Price?</label>
-                                <div class="radio-group">
-                                    <input type="radio" id="know-sell-yes" name="know-sell" value="yes">
-                                    <label for="know-sell-yes">Yes</label>
-                                    <input type="radio" id="know-sell-no" name="know-sell" value="no" checked>
-                                    <label for="know-sell-no">No</label>
-                                </div>
-                                <p class="input-help">If you have a specific exit price, select 'Yes'; otherwise, use appreciation to estimate.</p>
-                            </div>
-                            <div class="input-group" id="sell-price-group">
-                                <label for="sell-price">Sell Price (if known)</label>
-                                <input type="number" id="sell-price" value="0" min="0" disabled>
-                                <p class="input-help">Projected selling price at the end of holding period.</p>
-                            </div>
-                            <div class="input-group">
-                                <label for="value-appreciation">Value Appreciation (% per year)</label>
-                                <input type="number" id="value-appreciation" value="3" min="0">
-                                <p class="input-help">Annual growth in property value; historical average is around 3-5%.</p>
-                            </div>
-                            <div class="input-group">
-                                <label for="holding-length">Holding Length (years)</label>
-                                <input type="number" id="holding-length" value="20" min="1">
-                                <p class="input-help">Timeframe for owning the property before selling.</p>
-                            </div>
-                            <div class="input-group">
-                                <label for="cost-to-sell">Cost to Sell (%)</label>
-                                <input type="number" id="cost-to-sell" value="8" min="0" max="100">
-                                <p class="input-help">Commissions and fees as percentage of sell price; typically 6-10%.</p>
-                            </div>
-                        </div>
-                    </div>
+                <label for="interest-rate">Annual Interest Rate (%)</label>
+                <input type="number" id="interest-rate" step="0.01" required>
 
-                    <div class="currency-group">
-                        <label for="currency">Currency</label>
-                        <select id="currency">
-                            <option value="$" selected>$</option>
-                            <option value="€">€</option>
-                        </select>
-                        <p class="input-help">Display results in dollars or euros; calculations are currency-agnostic.</p>
-                    </div>
+                <label for="loan-term">Loan Term (Years)</label>
+                <input type="number" id="loan-term" required>
 
-                    <div class="button-group">
-                        <button type="button" onclick="calculate()">Calculate</button>
-                        <button type="button" onclick="clearForm()">Clear</button>
-                    </div>
-                </div>
+                <label for="monthly-rent">Monthly Rent</label>
+                <input type="number" id="monthly-rent" required>
+
+                <label for="annual-taxes">Annual Property Taxes</label>
+                <input type="number" id="annual-taxes" required>
+
+                <label for="annual-insurance">Annual Insurance</label>
+                <input type="number" id="annual-insurance" required>
+
+                <label for="monthly-maintenance">Monthly Maintenance (% of Rent)</label>
+                <input type="number" id="monthly-maintenance" min="0" max="100" required>
+
+                <label for="vacancy-rate">Vacancy Rate (%)</label>
+                <input type="number" id="vacancy-rate" min="0" max="100" required>
+
+                <button type="button" onclick="calculateRental()">Calculate</button>
             </form>
 
             <div id="results" style="text-align: center; font-size: 1.5em; color: green; display: none;">
-                <h2>Results</h2>
+                <p id="monthly-mortgage"></p>
                 <p id="monthly-cash-flow"></p>
-                <p id="annual-cash-flow"></p>
-                <p id="cap-rate"></p>
-                <p id="cash-on-cash"></p>
-                <p id="roi"></p>
-                <p id="irr"></p>
-                <p id="payoff-date"></p>
-                <canvas id="amortization-chart" width="400" height="200" style="display: none; margin: 20px auto;"></canvas>
-                <button onclick="saveAsPDF()">Save as PDF</button>
+                <p id="annual-roi"></p>
+                <p id="total-return"></p>
             </div>
-            <button onclick="sharePage()" style="display: block; margin: 20px auto; font-size: 0.8em;">Share this page</button>
+
+            <canvas id="expenseChart" width="400" height="200"></canvas>
+            <canvas id="cashFlowChart" width="400" height="200"></canvas>
+
+            <table id="amortization-table" style="display: none; margin: 20px auto;">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Principal Paid</th>
+                        <th>Interest Paid</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <button onclick="saveAsPDF()" style="display: none;" id="pdf-button">Save as PDF</button>
+            <button onclick="sharePage()" class="share-button">Share this page</button>
         </section>
 
-        <section id="description">
-            <h2>Delving into Rental Property Dynamics</h2>
-            <p>Investing in rental properties involves balancing income generation with expense management and capital growth. This simulator aids in understanding how variables like loan terms, vacancy rates, and appreciation influence overall returns, enabling data-driven decisions in a volatile real estate market.</p>
+        <section class="content-section">
+            <h2>Understanding Rental Property Investments</h2>
+            <p>Rental properties can be a lucrative investment avenue, offering both steady income through rent and potential appreciation in property value over time. This simulator helps you model various scenarios to assess viability.</p>
+            <p>The key formula for monthly mortgage payment is the standard loan amortization formula:</p>
+            \[ M = P \frac{r(1+r)^n}{(1+r)^n - 1} \]
+            <p>Where \( M \) is the monthly payment, \( P \) is the loan principal, \( r \) is the monthly interest rate, and \( n \) is the number of payments.</p>
 
-            <h3>Core Computational Formulas</h3>
-            <p>Net Operating Income (NOI) Calculation:</p>
-            \[ \text{NOI} = (\text{Total Annual Income} \times (1 - \text{Vacancy Rate})) \times (1 - \text{Management Fee}) - \text{Total Annual Expenses} \]
-            <p>Capitalization Rate (Cap Rate):</p>
-            \[ \text{Cap Rate} = \frac{\text{First Year NOI}}{\text{Purchase Price}} \times 100\% \]
-            <p>Annual Cash Flow:</p>
-            \[ \text{Annual Cash Flow} = \text{NOI} - \text{Annual Loan Payments} \]
-            <p>Cash on Cash Return:</p>
-            \[ \text{Cash on Cash Return} = \frac{\text{First Year Cash Flow}}{\text{Initial Cash Outlay}} \times 100\% \]
-            <p>Annualized Return on Investment (ROI):</p>
-            \[ \text{Annualized ROI} = \left( \frac{\text{Total Net Profit}}{\text{Initial Investment}} \times 100\% \right) / \text{Holding Years} \]
+            <h3>Cash Flow Analysis</h3>
+            <p>Cash flow is calculated as monthly rent minus expenses like mortgage, taxes, insurance, maintenance, and adjusted for vacancy. Positive cash flow indicates profitability.</p>
 
-            <h3>Operational Guidance</h3>
-            <p>Populate the fields with your property specifics. The tool iterates through each year, applying growth rates and calculating cumulative metrics. Review the amortization chart for loan details and adjust assumptions to test sensitivity.</p>
+            <h3>Return on Investment (ROI)</h3>
+            <p>ROI measures the efficiency of your investment: \( ROI = \frac{Annual\ Net\ Income}{Initial\ Investment} \times 100 \). This tool projects ROI over the loan term.</p>
 
-            <h3>Disclaimer</h3>
-            <p>Outputs are hypothetical and rely on user-provided data. They do not replace professional financial advice. Real estate involves risks; consult experts for tax implications, legal considerations, and market analysis.</p>
-
-            <h3>FAQ</h3>
-            <ul>
-                <li><strong>How accurate are the projections?</strong> Accuracy depends on input quality; use realistic estimates from local market data.</li>
-                <li><strong>What if expenses fluctuate?</strong> The tool assumes steady annual increases; for variability, run multiple scenarios.</li>
-                <li><strong>Does it include taxes on sale?</strong> No, focus is on pre-tax metrics; add capital gains tax manually if needed.</li>
-                <li><strong>Why use IRR?</strong> It accounts for cash flow timing, providing a comprehensive return measure.</li>
-            </ul>
-
-            <h3>Performance Metrics Overview Table</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Metric</th>
-                        <th>Definition</th>
-                        <th>Ideal Range</th>
+                        <th>Factor</th>
+                        <th>Impact on Investment</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Cap Rate</td>
-                        <td>NOI as percentage of property value</td>
-                        <td>6-12% for stable markets</td>
+                        <td>Down Payment</td>
+                        <td>Higher down payment reduces loan amount and interest costs but ties up more capital initially.</td>
                     </tr>
                     <tr>
-                        <td>Cash on Cash</td>
-                        <td>Return on invested capital</td>
-                        <td>8-15% for leveraged deals</td>
+                        <td>Vacancy Rate</td>
+                        <td>Accounts for periods without tenants; a conservative estimate (5-10%) is recommended.</td>
                     </tr>
                     <tr>
-                        <td>ROI</td>
-                        <td>Total return annualized</td>
-                        <td>10-20% over long term</td>
-                    </tr>
-                    <tr>
-                        <td>IRR</td>
-                        <td>Discount rate making NPV zero</td>
-                        <td>12-25% for high-growth areas</td>
+                        <td>Maintenance Costs</td>
+                        <td>Typically 1-2% of property value annually, but adjusted here as % of rent.</td>
                     </tr>
                 </tbody>
             </table>
 
-            <p>Deepen your knowledge with resources like <a href="https://en.wikipedia.org/wiki/Internal_rate_of_return" target="_blank">Wikipedia on Internal Rate of Return</a> or <a href="https://www.investopedia.com/terms/c/capitalizationrate.asp" target="_blank">Investopedia's Guide to Cap Rates</a>.</p>
+            <h3>Comparison of Investment Strategies</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Strategy</th>
+                        <th>Pros</th>
+                        <th>Cons</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Buy and Hold</td>
+                        <td>Long-term appreciation and rental income</td>
+                        <td>Illiquidity and management overhead</td>
+                    </tr>
+                    <tr>
+                        <td>Fix and Flip</td>
+                        <td>Quick profits</td>
+                        <td>High risk from market fluctuations</td>
+                    </tr>
+                    <tr>
+                        <td>REITs</td>
+                        <td>Passive investment</td>
+                        <td>Lower control over assets</td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <p>Explore related financial tools: <a href="/mortgage-calculator.html">Mortgage Simulator</a>, <a href="/loan-calculator.html">Loan Analyzer</a>, <a href="/compound-interest-growth-calculator.html">Compound Growth Forecaster</a>.</p>
+            <p>For more on real estate economics, refer to resources from <a href="https://en.wikipedia.org/wiki/Real_estate_investing" target="_blank">Wikipedia on Real Estate Investing</a> or government data from <a href="https://www.hud.gov/" target="_blank">U.S. Department of Housing and Urban Development</a>.</p>
+
+            <h3>Disclaimer</h3>
+            <p>This simulator provides estimates based on user inputs and does not constitute financial advice. Consult a professional advisor for personalized guidance. Actual results may vary due to market conditions, unexpected costs, or changes in laws.</p>
+
+            <h3>FAQ</h3>
+            <ul>
+                <li><strong>What is cap rate?</strong> Capitalization rate is NOI divided by property value, indicating yield without financing.</li>
+                <li><strong>How to factor in appreciation?</strong> This tool focuses on rental returns; appreciation can be added manually to total ROI.</li>
+                <li><strong>Internal links:</strong> Check our <a href="/mortgage-calculator.html">Mortgage Calculator</a> or <a href="/compound-interest-growth-calculator.html">Compound Interest Calculator</a> for related tools.</li>
+            </ul>
         </section>
 
-        <section id="related-resources">
+        <section class="related-resources">
             <h2>Related Resources</h2>
             <ul>
-                <li><a href="https://www.hud.gov/topics/buying_a_home" target="_blank">HUD Home Buying Guide</a></li>
-                <li><a href="https://www.epa.gov/sites/production/files/2018-12/documents/guide_to_home_energy_efficiency.pdf" target="_blank">EPA Energy Efficiency for Properties (PDF)</a></li>
-                <li><a href="https://www.investopedia.com/terms/r/realestate.asp" target="_blank">Investopedia Real Estate Basics</a></li>
-                <li><a href="https://www.irs.gov/publications/p527" target="_blank">IRS Publication 527: Residential Rental Property</a></li>
+                <li><a href="https://www.investopedia.com/terms/r/realestate.asp" target="_blank">Investopedia on Real Estate</a></li>
+                <li><a href="https://www.census.gov/topics/housing.html" target="_blank">U.S. Census Bureau Housing Data</a></li>
+                <li><a href="https://ec.europa.eu/info/topics/single-market/services/services-goods/real-estate_en" target="_blank">EU Real Estate Information</a></li>
             </ul>
         </section>
     </main>
+
     <footer>
-        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
-        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+        <div class="footer-links">
+            <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+        </div>
     </footer>
 
     <script>
         let amortizationData = [];
-        let currencySymbol = '$';
+        let expenseData = [];
+        let cashFlowData = [];
 
-        document.querySelectorAll('input[name="need-repairs"]').forEach(radio => {
-            radio.addEventListener('change', () => {
-                document.getElementById('repair-cost-group').style.display = radio.value === 'yes' ? 'block' : 'none';
-            });
-        });
+        function calculateRental() {
+            const currency = document.getElementById('currency').value;
+            const price = parseFloat(document.getElementById('property-price').value);
+            const downPct = parseFloat(document.getElementById('down-payment').value) / 100;
+            const rate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12;
+            const term = parseInt(document.getElementById('loan-term').value) * 12;
+            const rent = parseFloat(document.getElementById('monthly-rent').value);
+            const taxes = parseFloat(document.getElementById('annual-taxes').value) / 12;
+            const insurance = parseFloat(document.getElementById('annual-insurance').value) / 12;
+            const maintPct = parseFloat(document.getElementById('monthly-maintenance').value) / 100;
+            const vacancyPct = parseFloat(document.getElementById('vacancy-rate').value) / 100;
 
-        document.querySelectorAll('input[name="know-sell"]').forEach(radio => {
-            radio.addEventListener('change', () => {
-                document.getElementById('sell-price').disabled = radio.value !== 'yes';
-            });
-        });
+            const downPayment = price * downPct;
+            const loan = price - downPayment;
+            const monthlyMortgage = loan * (rate * Math.pow(1 + rate, term)) / (Math.pow(1 + rate, term) - 1);
 
-        function calculate() {
-            const purchasePrice = parseFloat(document.getElementById('purchase-price').value);
-            const useLoan = document.querySelector('input[name="use-loan"]:checked').value === 'yes';
-            const downPaymentPct = parseFloat(document.getElementById('down-payment').value) / 100;
-            const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12;
-            const loanTerm = parseFloat(document.getElementById('loan-term').value);
-            const loanTermMonths = loanTerm * 12;
-            const closingCost = parseFloat(document.getElementById('closing-cost').value);
-            const needRepairs = document.querySelector('input[name="need-repairs"]:checked').value === 'yes';
-            const repairCost = needRepairs ? parseFloat(document.getElementById('repair-cost').value) : 0;
+            const maint = rent * maintPct;
+            const effectiveRent = rent * (1 - vacancyPct);
+            const monthlyExpenses = monthlyMortgage + taxes + insurance + maint;
+            const cashFlow = effectiveRent - monthlyExpenses;
 
-            const monthlyRent = parseFloat(document.getElementById('monthly-rent').value);
-            const rentIncrease = parseFloat(document.getElementById('rent-increase').value) / 100;
-            const otherMonthly = parseFloat(document.getElementById('other-monthly-income').value);
-            const otherIncrease = parseFloat(document.getElementById('other-income-increase').value) / 100;
-            const vacancyRate = parseFloat(document.getElementById('vacancy-rate').value) / 100;
-            const managementFee = parseFloat(document.getElementById('management-fee').value) / 100;
+            const annualIncome = cashFlow * 12;
+            const roi = (annualIncome / downPayment) * 100;
+            const totalReturn = annualIncome * document.getElementById('loan-term').value;
 
-            const propertyTax = parseFloat(document.getElementById('property-tax').value);
-            const taxIncrease = parseFloat(document.getElementById('tax-increase').value) / 100;
-            const insurance = parseFloat(document.getElementById('total-insurance').value);
-            const insuranceIncrease = parseFloat(document.getElementById('insurance-increase').value) / 100;
-            const hoa = parseFloat(document.getElementById('hoa-fee').value);
-            const hoaIncrease = parseFloat(document.getElementById('hoa-increase').value) / 100;
-            const maintenance = parseFloat(document.getElementById('maintenance').value);
-            const maintenanceIncrease = parseFloat(document.getElementById('maintenance-increase').value) / 100;
-            const otherCosts = parseFloat(document.getElementById('other-costs').value);
-            const otherCostsIncrease = parseFloat(document.getElementById('other-costs-increase').value) / 100;
+            document.getElementById('monthly-mortgage').textContent = `Monthly Mortgage: ${currency}${monthlyMortgage.toFixed(2)}`;
+            document.getElementById('monthly-cash-flow').textContent = `Monthly Cash Flow: ${currency}${cashFlow.toFixed(2)}`;
+            document.getElementById('annual-roi').textContent = `Annual ROI: ${roi.toFixed(2)}%`;
+            document.getElementById('total-return').textContent = `Total Return Over Term: ${currency}${totalReturn.toFixed(2)}`;
 
-            const knowSell = document.querySelector('input[name="know-sell"]:checked').value === 'yes';
-            let sellPrice = knowSell ? parseFloat(document.getElementById('sell-price').value) : 0;
-            const appreciation = parseFloat(document.getElementById('value-appreciation').value) / 100;
-            const holdingYears = parseFloat(document.getElementById('holding-length').value);
-            const costToSellPct = parseFloat(document.getElementById('cost-to-sell').value) / 100;
-
-            currencySymbol = document.getElementById('currency').value;
-
-            const downPayment = purchasePrice * downPaymentPct;
-            const loanAmount = useLoan ? purchasePrice - downPayment : 0;
-            const initialInvestment = downPayment + closingCost + repairCost;
-
-            let monthlyPayment = 0;
-            let totalInterest = 0;
-            amortizationData = [];
-            let payoffDate = '';
-            if (useLoan && loanAmount > 0 && interestRate > 0 && loanTermMonths > 0) {
-                const p = loanAmount;
-                const r = interestRate;
-                const n = loanTermMonths;
-                monthlyPayment = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
-                let balance = p;
-                let totalPayments = monthlyPayment * n;
-                totalInterest = totalPayments - p;
-
-                for (let month = 1; month <= n; month++) {
-                    const interest = balance * r;
-                    const principal = monthlyPayment - interest;
-                    balance -= principal;
-                    amortizationData.push([month, monthlyPayment.toFixed(2), principal.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
-                }
-
-                const currentDate = new Date(2025, 7, 11); // August 11, 2025
-                const payoffYear = currentDate.getFullYear() + loanTerm;
-                const payoffMonth = currentDate.getMonth();
-                const payoffDay = currentDate.getDate();
-                payoffDate = new Date(payoffYear, payoffMonth, payoffDay).toDateString();
-
-                const ctx = document.getElementById('amortization-chart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: amortizationData.map(row => row[0]),
-                        datasets: [{
-                            label: 'Loan Balance',
-                            data: amortizationData.map(row => row[4]),
-                            borderColor: 'blue',
-                            fill: false
-                        }]
-                    },
-                    options: { scales: { y: { beginAtZero: true } } }
-                });
-                document.getElementById('amortization-chart').style.display = 'block';
-            }
-
-            let totalCashFlow = 0;
-            let currentRent = monthlyRent;
-            let currentOther = otherMonthly;
-            let currentTax = propertyTax;
-            let currentIns = insurance;
-            let currentHoa = hoa;
-            let currentMaint = maintenance;
-            let currentOtherCosts = otherCosts;
-            let currentValue = purchasePrice;
-
-            for (let year = 1; year <= holdingYears; year++) {
-                const grossIncome = (currentRent + currentOther) * 12 * (1 - vacancyRate);
-                const effectiveIncome = grossIncome * (1 - managementFee);
-                const expenses = currentTax + currentIns + currentHoa + currentMaint + currentOtherCosts;
-                const noi = effectiveIncome - expenses;
-                const debtService = useLoan ? monthlyPayment * 12 : 0;
-                const annualCashFlow = noi - debtService;
-                totalCashFlow += annualCashFlow;
-
-                currentRent *= (1 + rentIncrease);
-                currentOther *= (1 + otherIncrease);
-                currentTax *= (1 + taxIncrease);
-                currentIns *= (1 + insuranceIncrease);
-                currentHoa *= (1 + hoaIncrease);
-                currentMaint *= (1 + maintenanceIncrease);
-                currentOtherCosts *= (1 + otherCostsIncrease);
-                currentValue *= (1 + appreciation);
-            }
-
-            if (!knowSell) sellPrice = currentValue;
-            const netSell = sellPrice * (1 - costToSellPct) - (useLoan ? parseFloat(amortizationData[amortizationData.length - 1][4]) : 0);
-            const netProfit = netSell - purchasePrice + totalCashFlow;
-
-            const firstGross = (monthlyRent + otherMonthly) * 12 * (1 - vacancyRate);
-            const firstEffective = firstGross * (1 - managementFee);
-            const firstExpenses = propertyTax + insurance + hoa + maintenance + otherCosts;
-            const firstNOI = firstEffective - firstExpenses;
-            const capRate = (firstNOI / purchasePrice) * 100;
-            const firstCashFlow = firstNOI - (useLoan ? monthlyPayment * 12 : 0);
-            const cashOnCash = (firstCashFlow / initialInvestment) * 100;
-            const roi = (netProfit / initialInvestment) * 100 / holdingYears;
-            const irr = calculateIRR([-initialInvestment, ...Array(holdingYears).fill(firstCashFlow).slice(0, holdingYears - 1), firstCashFlow + netSell]);
-
-            document.getElementById('monthly-cash-flow').innerText = `Monthly Cash Flow: ${currencySymbol}${ (firstCashFlow / 12).toFixed(2) }`;
-            document.getElementById('annual-cash-flow').innerText = `Annual Cash Flow: ${currencySymbol}${ firstCashFlow.toFixed(2) }`;
-            document.getElementById('cap-rate').innerText = `Cap Rate: ${capRate.toFixed(2)}%`;
-            document.getElementById('cash-on-cash').innerText = `Cash on Cash Return: ${cashOnCash.toFixed(2)}%`;
-            document.getElementById('roi').innerText = `Annualized ROI: ${roi.toFixed(2)}%`;
-            document.getElementById('irr').innerText = `IRR: ${irr.toFixed(2)}%`;
-            document.getElementById('payoff-date').innerText = useLoan ? `Payoff Date: ${payoffDate}` : '';
             document.getElementById('results').style.display = 'block';
-        }
+            document.getElementById('pdf-button').style.display = 'block';
 
-        function calculateIRR(cashFlows) {
-            const maxIter = 100;
-            let guess = 0.1;
-            for (let i = 0; i < maxIter; i++) {
-                let npv = 0;
-                let dnpv = 0;
-                for (let t = 0; t < cashFlows.length; t++) {
-                    npv += cashFlows[t] / Math.pow(1 + guess, t);
-                    dnpv -= t * cashFlows[t] / Math.pow(1 + guess, t + 1);
+            // Amortization
+            amortizationData = [];
+            let balance = loan;
+            let totalPrincipal = 0;
+            let totalInterest = 0;
+            const tableBody = document.querySelector('#amortization-table tbody');
+            tableBody.innerHTML = '';
+            document.getElementById('amortization-table').style.display = 'table';
+
+            for (let year = 1; year <= document.getElementById('loan-term').value; year++) {
+                let yearlyPrincipal = 0;
+                let yearlyInterest = 0;
+                for (let month = 1; month <= 12; month++) {
+                    const interest = balance * rate;
+                    const principal = monthlyMortgage - interest;
+                    balance -= principal;
+                    yearlyPrincipal += principal;
+                    yearlyInterest += interest;
                 }
-                if (dnpv === 0) break;
-                guess -= npv / dnpv;
+                totalPrincipal += yearlyPrincipal;
+                totalInterest += yearlyInterest;
+                amortizationData.push([year, currency + yearlyPrincipal.toFixed(2), currency + yearlyInterest.toFixed(2), currency + balance.toFixed(2)]);
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${year}</td><td>${currency}${yearlyPrincipal.toFixed(2)}</td><td>${currency}${yearlyInterest.toFixed(2)}</td><td>${currency}${balance.toFixed(2)}</td>`;
+                tableBody.appendChild(row);
             }
-            return guess * 100;
-        }
 
-        function clearForm() {
-            document.getElementById('rental-form').reset();
-            document.getElementById('results').style.display = 'none';
-            document.getElementById('amortization-chart').style.display = 'none';
-            document.getElementById('repair-cost-group').style.display = 'none';
-            document.getElementById('sell-price').disabled = true;
+            // Charts
+            expenseData = [monthlyMortgage, taxes, insurance, maint, rent * vacancyPct];
+            const expenseCtx = document.getElementById('expenseChart').getContext('2d');
+            new Chart(expenseCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Mortgage', 'Taxes', 'Insurance', 'Maintenance', 'Vacancy Loss'],
+                    datasets: [{ data: expenseData, backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'] }]
+                },
+                options: { responsive: true, title: { display: true, text: 'Expense Breakdown' } }
+            });
+
+            cashFlowData = [];
+            for (let i = 1; i <= document.getElementById('loan-term').value; i++) {
+                cashFlowData.push(annualIncome * i);
+            }
+            const cashFlowCtx = document.getElementById('cashFlowChart').getContext('2d');
+            new Chart(cashFlowCtx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: document.getElementById('loan-term').value}, (_, i) => `Year ${i+1}`),
+                    datasets: [{ label: 'Cumulative Cash Flow', data: cashFlowData, borderColor: '#36A2EB' }]
+                },
+                options: { responsive: true, title: { display: true, text: 'Cash Flow Over Time' } }
+            });
         }
 
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            doc.setFont('helvetica');
-            doc.setFontSize(14);
-            doc.text('Rental Property Investment Results', 105, 15, { align: 'center' });
+            const currency = document.getElementById('currency').value;
 
+            doc.setFont("helvetica");
+            doc.setFontSize(14);
+            doc.text("Rental Property Investment Results", 105, 15, { align: "center" });
+
+            // Results Table
             doc.autoTable({
                 startY: 20,
                 head: [['Parameter', 'Value']],
                 body: [
+                    ['Monthly Mortgage', document.getElementById('monthly-mortgage').textContent.split(': ')[1]],
                     ['Monthly Cash Flow', document.getElementById('monthly-cash-flow').textContent.split(': ')[1]],
-                    ['Annual Cash Flow', document.getElementById('annual-cash-flow').textContent.split(': ')[1]],
-                    ['Cap Rate', document.getElementById('cap-rate').textContent.split(': ')[1]],
-                    ['Cash on Cash Return', document.getElementById('cash-on-cash').textContent.split(': ')[1]],
-                    ['Annualized ROI', document.getElementById('roi').textContent.split(': ')[1]],
-                    ['IRR', document.getElementById('irr').textContent.split(': ')[1]],
-                    ['Payoff Date', document.getElementById('payoff-date').textContent.split(': ')[1] || 'N/A']
+                    ['Annual ROI', document.getElementById('annual-roi').textContent.split(': ')[1]],
+                    ['Total Return Over Term', document.getElementById('total-return').textContent.split(': ')[1]]
                 ],
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [255, 255, 255] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 5, font: 'helvetica', halign: 'left' },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
                 margin: { top: 10 }
             });
 
-            if (amortizationData.length > 0) {
-                doc.autoTable({
-                    startY: doc.lastAutoTable.finalY + 10,
-                    head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
-                    body: amortizationData,
-                    theme: 'grid',
-                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                    alternateRowStyles: { fillColor: [245, 245, 245] },
-                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 5, font: 'helvetica', halign: 'left' },
-                    didDrawPage: function (data) {
-                        doc.setFontSize(10);
-                        doc.setTextColor(100);
-                        doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-                    }
-                });
-            } else {
-                doc.setFontSize(10);
-                doc.setTextColor(100);
-                doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-            }
+            // Amortization Table
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
+                head: [['Year', 'Principal Paid', 'Interest Paid', 'Balance']],
+                body: amortizationData,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
 
             doc.save('rental-property-results.pdf');
         }
