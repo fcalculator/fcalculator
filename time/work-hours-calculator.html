@@ -253,6 +253,8 @@
 
     <script>
         let dailyData = [];
+        let totalMinutes = 0;
+        let overtimeThreshold = 0;
 
         function timeToMinutes(time) {
             if (!time) return 0;
@@ -272,11 +274,11 @@
 
         function calculateWorkHours() {
             const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-            let totalMinutes = 0;
+            totalMinutes = 0;
             dailyData = [];
 
             const deductBreaks = document.getElementById('deduct-breaks').checked;
-            const overtimeThreshold = parseInt(document.getElementById('overtime-threshold').value) * 60;
+            overtimeThreshold = parseInt(document.getElementById('overtime-threshold').value) * 60;
 
             days.forEach(day => {
                 const start = document.getElementById(`${day}-start`).value;
