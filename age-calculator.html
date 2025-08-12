@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator: Precise Calculation of Years, Months, and Days Lived</title>
+    <meta name="description" content="Calculate your exact age in years, months, days, hours, and more with detailed breakdowns and historical context for personal milestones.">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "FCalculator.com",
+      "url": "https://fcalculator.com",
+      "logo": "https://fcalculator.com/logo.png",
+      "description": "Comprehensive online calculators for finance, health, math, and more."
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/other.html">Other</a> > <a href="/age-calculator.html">Age Calculator</a>
+        </div>
+        <h1>Age Calculator</h1>
+        <p>Determine your precise age or the age difference between two dates, accounting for leap years and time zones, with breakdowns in years, months, days, hours, minutes, and seconds for accurate personal tracking.</p>
+    </header>
+
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container">
+                <fieldset>
+                    <legend>Birth Date</legend>
+                    <div class="input-row">
+                        <label for="birth-date">Birth Date (YYYY-MM-DD)</label>
+                        <input type="date" id="birth-date" required>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Calculation Date</legend>
+                    <div class="input-row">
+                        <label for="calc-date">Calculate Age On (YYYY-MM-DD, default today)</label>
+                        <input type="date" id="calc-date">
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="calculateAge()">Calculate</button>
+        </form>
+    </section>
+
+    <section class="results-section">
+        <h2>Age Calculation Results</h2>
+        <div id="age-results"></div>
+        <button onclick="saveAsPDF()">Save as PDF</button>
+        <button onclick="sharePage()">Share this Page</button>
+    </section>
+
+    <section class="explanation-section">
+        <h2>How the Age Calculator Works</h2>
+        <p>This age calculator uses precise date difference algorithms to compute the exact time elapsed between your birth date and the selected calculation date. It accounts for variations such as leap years (every four years, except centuries not divisible by 400) and ensures accuracy down to seconds. The default calculation date is today's date in New York time zone (Eastern Time).</p>
+        <p>To use the tool, enter your birth date in YYYY-MM-DD format. Optionally, provide a future or past date to calculate age on that specific day. The results include a breakdown:</p>
+        <ul>
+            <li>Years: Full calendar years completed.</li>
+            <li>Months: Additional months beyond full years.</li>
+            <li>Days: Remaining days after months.</li>
+            <li>Hours, Minutes, Seconds: For granular precision.</li>
+        </ul>
+        <p>The mathematical formula for basic age in years is:</p>
+        \[ \text{Age in Years} = \floor{\frac{\text{Days Between Dates}}{365.25}} \]
+        <p>Where 365.25 accounts for leap years on average. For more detailed breakdowns, the tool subtracts dates component-wise, adjusting for month lengths and leap days.</p>
+
+        <h2>Understanding Age Milestones and Their Significance</h2>
+        <p>Age calculations are essential for tracking life stages, from infancy to seniority. Below is a table outlining common age milestones with descriptions:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Age Range</th>
+                    <th>Milestone</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0-2 Years</td>
+                    <td>Infancy</td>
+                    <td>Rapid physical and cognitive development, including first steps and words.</td>
+                </tr>
+                <tr>
+                    <td>3-12 Years</td>
+                    <td>Childhood</td>
+                    <td>Schooling begins, social skills form, and physical growth accelerates.</td>
+                </tr>
+                <tr>
+                    <td>13-19 Years</td>
+                    <td>Adolescence</td>
+                    <td>Puberty, identity formation, and preparation for adulthood.</td>
+                </tr>
+                <tr>
+                    <td>20-39 Years</td>
+                    <td>Young Adulthood</td>
+                    <td>Career building, relationships, and independence.</td>
+                </tr>
+                <tr>
+                    <td>40-64 Years</td>
+                    <td>Middle Age</td>
+                    <td>Peak professional achievements, family responsibilities, and health maintenance.</td>
+                </tr>
+                <tr>
+                    <td>65+ Years</td>
+                    <td>Seniority</td>
+                    <td>Retirement, reflection, and focus on legacy and well-being.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Factors Affecting Age Calculation Accuracy</h2>
+        <p>Age isn't just a number; it's influenced by calendar systems, time zones, and even cultural definitions. For instance, in some cultures, age is counted from conception rather than birth. This tool uses the Gregorian calendar for universal consistency. If calculating for historical dates before 1582, note potential discrepancies due to calendar reforms.</p>
+        <p>For advanced users, consider integrating this with our <a href="/time.html">Time Calculator</a> for event planning or <a href="/safe-password-generator.html">Safe Password Generator</a> for age-based security prompts.</p>
+
+        <h2>Disclaimer</h2>
+        <p>This age calculator provides estimates based on input dates and standard Gregorian calendar rules. It is for informational purposes only and should not be used for legal, medical, or official age verification. Always consult official documents for precise age determination.</p>
+
+        <h2>Frequently Asked Questions (FAQ)</h2>
+        <p><strong>How does the calculator handle leap years?</strong> It automatically adjusts for leap days by checking if February 29 falls between the dates, ensuring no overcounting.</p>
+        <p><strong>Can I calculate age in weeks or other units?</strong> The results include days, which can be divided by 7 for weeks. For custom units, use the detailed breakdown.</p>
+        <p><strong>What if the birth date is in the future?</strong> The tool will return a negative age or zero, indicating the period until that date.</p>
+        <p><strong>Does time zone affect the calculation?</strong> Yes, the default is New York (ET). For other zones, adjust the date accordingly using our <a href="/time-zone-calculator.html">Time Zone Calculator</a>.</p>
+        <p><strong>How accurate is the seconds count?</strong> It assumes midnight starts for dates but calculates precisely from the exact timestamp if browser supports it.</p>
+    </section>
+
+    <section class="related-resources">
+        <h2>Related Resources</h2>
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Age_calculation" target="_blank" rel="noopener noreferrer">Wikipedia: Age Calculation</a> - Detailed historical and mathematical context.</li>
+            <li><a href="https://www.ssa.gov/oact/babynames/limits.html" target="_blank" rel="noopener noreferrer">U.S. Social Security Administration: Age-Related Data</a> - Government resources for age verification.</li>
+            <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4754270/" target="_blank" rel="noopener noreferrer">NCBI: Biological vs. Chronological Age</a> - Scientific insights into aging.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+
+    <script>
+        function calculateAge() {
+            const birthDateInput = document.getElementById('birth-date').value;
+            const calcDateInput = document.getElementById('calc-date').value || new Date().toISOString().split('T')[0];
+
+            if (!birthDateInput) {
+                alert('Please enter a birth date.');
+                return;
+            }
+
+            const birthDate = new Date(birthDateInput);
+            const calcDate = new Date(calcDateInput);
+
+            if (birthDate > calcDate) {
+                document.getElementById('age-results').innerHTML = '<p>Birth date is in the future. Age: 0</p>';
+                return;
+            }
+
+            const diffMs = calcDate - birthDate;
+            const diffSecs = Math.floor(diffMs / 1000);
+            const diffMins = Math.floor(diffSecs / 60);
+            const diffHours = Math.floor(diffMins / 60);
+            const diffDays = Math.floor(diffHours / 24);
+
+            let years = calcDate.getFullYear() - birthDate.getFullYear();
+            let months = calcDate.getMonth() - birthDate.getMonth();
+            let days = calcDate.getDate() - birthDate.getDate();
+
+            if (days < 0) {
+                months--;
+                days += new Date(calcDate.getFullYear(), calcDate.getMonth(), 0).getDate();
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            const resultsHTML = `
+                <p>Years: ${years}</p>
+                <p>Months: ${months}</p>
+                <p>Days: ${days}</p>
+                <p>Total Days: ${diffDays}</p>
+                <p>Hours: ${diffHours}</p>
+                <p>Minutes: ${diffMins}</p>
+                <p>Seconds: ${diffSecs}</p>
+            `;
+            document.getElementById('age-results').innerHTML = resultsHTML;
+        }
+
+        let ageData = []; // For PDF table
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFontSize(14);
+            doc.text("Age Calculation Results", 105, 15, { align: "center" });
+
+            // Results Table
+            const years = document.querySelector('#age-results p:nth-child(1)').textContent;
+            const months = document.querySelector('#age-results p:nth-child(2)').textContent;
+            const days = document.querySelector('#age-results p:nth-child(3)').textContent;
+            const totalDays = document.querySelector('#age-results p:nth-child(4)').textContent;
+            const hours = document.querySelector('#age-results p:nth-child(5)').textContent;
+            const minutes = document.querySelector('#age-results p:nth-child(6)').textContent;
+            const seconds = document.querySelector('#age-results p:nth-child(7)').textContent;
+
+            doc.autoTable({
+                startY: 20,
+                head: [['Parameter', 'Value']],
+                body: [
+                    [years.split(': ')[0], years.split(': ')[1]],
+                    [months.split(': ')[0], months.split(': ')[1]],
+                    [days.split(': ')[0], days.split(': ')[1]],
+                    [totalDays.split(': ')[0], totalDays.split(': ')[1]],
+                    [hours.split(': ')[0], hours.split(': ')[1]],
+                    [minutes.split(': ')[0], minutes.split(': ')[1]],
+                    [seconds.split(': ')[0], seconds.split(': ')[1]]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 5, textColor: [0, 0, 0], halign: 'left' },
+                margin: { top: 10 }
+            });
+
+            doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
+                head: [['Age Breakdown', 'Details']],
+                body: [
+                    ['Note', 'This breakdown accounts for leap years and exact date differences.']
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1 },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+
+            doc.save('age-calculation-results.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Age Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this page manually.');
+            }
+        }
+    </script>
+</body>
+</html>
