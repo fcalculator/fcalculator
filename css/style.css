@@ -226,7 +226,9 @@ footer {
         font-size: calc(var(--font-size-base) * 0.85);
     }
 }
-     #rental-form {
+
+     #rental-form 
+       {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -250,8 +252,29 @@ footer {
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+        .input-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .input-row label {
+            flex: 1;
+            margin-right: 10px;
+            text-align: right;
+        }
+        .input-row input, .input-row select {
+            flex: 1;
+        }
         @media (max-width: 768px) {
             .sections-container {
                 flex-direction: column;
+            }
+            .input-row {
+                flex-direction: column;
+            }
+            .input-row label {
+                text-align: left;
+                margin-right: 0;
+                margin-bottom: 5px;
             }
         }
