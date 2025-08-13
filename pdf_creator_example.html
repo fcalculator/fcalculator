@@ -1,0 +1,99 @@
+<script>
+function generatePDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Postavljanje fonta i naslova
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(18);
+    doc.text("Auto Loan Calculation Results", 105, 15, { align: 'center' });
+
+    // Primjer podataka za summary tablicu (prilagoditi prema tool-u)
+    const summaryData = [
+        ['Monthly Payment', '858.64'],
+        ['Total Payments', '51518.47'],
+        ['Total Interest', '6018.47'],
+        ['Payoff Date', 'Tue Aug 13 2030']
+    ];
+
+    // Summary tablica
+    doc.autoTable({
+        head: [['Parameter', 'Value']],
+        body: summaryData,
+        startY: 25,
+        styles: {
+            font: "helvetica",
+            fontSize: 10,
+            textColor: [0, 0, 0],
+            lineColor: [0, 0, 0],
+            lineWidth: 0.1,
+            cellPadding: 3,
+            halign: 'left',
+            valign: 'middle'
+        },
+        headStyles: {
+            fillColor: [0, 128, 128], // Teal boja za header
+            textColor: [255, 255, 255],
+            halign: 'center'
+        },
+        alternateRowStyles: {
+            fillColor: [255, 255, 255]
+        },
+        columnStyles: {
+            0: { cellWidth: 'auto', halign: 'left' },
+            1: { halign: 'left' }
+        },
+        margin: { top: 25, left: 14, right: 14 }
+    });
+
+    // Primjer podataka za amortizacijsku tablicu (prilagoditi prema tool-u, array of arrays)
+    const amortizationData = [
+        ['1', '858.64', '669.06', '189.58', '44830.94'],
+        // Dodaj ostale redove iz PDF primjera...
+        ['60', '858.64', '855.08', '3.56', '0.00']
+    ];
+
+    // Amortizacijska tablica sa footerom na svakoj stranici
+    doc.autoTable({
+        head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
+        body: amortizationData,
+        startY: doc.lastAutoTable.finalY + 10,
+        styles: {
+            font: "helvetica",
+            fontSize: 10,
+            textColor: [0, 0, 0],
+            lineColor: [0, 0, 0],
+            lineWidth: 0.1,
+            cellPadding: 3,
+            halign: 'left',
+            valign: 'middle',
+            overflow: 'linebreak'
+        },
+        headStyles: {
+            fillColor: [0, 128, 128], // Teal boja za header
+            textColor: [255, 255, 255],
+            halign: 'center'
+        },
+        alternateRowStyles: {
+            fillColor: [255, 255, 255]
+        },
+        columnStyles: {
+            0: { cellWidth: 30, halign: 'left' },
+            1: { cellWidth: 40, halign: 'left' },
+            2: { cellWidth: 40, halign: 'left' },
+            3: { cellWidth: 40, halign: 'left' },
+            4: { cellWidth: 'auto', halign: 'left' }
+        },
+        margin: { left: 14, right: 14 },
+        didDrawPage: function (data) {
+            // Footer na svakoj stranici
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text("This document was generated using Fcalculator.com", 105, doc.internal.pageSize.height - 10, { align: 'center' });
+        }
+    });
+
+    // Spremanje PDF-a
+    doc.save('auto-loan-results.pdf');
+}
+</script>
