@@ -148,9 +148,6 @@
             <button type="button" onclick="calculateBAC()">Calculate</button>
         </form>
     </section>
-    <div id="critical-note" class="note-alert" style="display: none;">
-        NOTE: Your BAC is at a critical level (≥ 0.08%). Avoid driving or operating machinery and seek professional advice.
-    </div>
     <section class="results-section" id="results" style="display: block;">
         <h2>Calculation Results</h2>
         <table id="bacTable">
@@ -167,6 +164,9 @@
         <canvas id="bacChart" width="400" height="200"></canvas>
         <button type="button" onclick="generatePDF()">Save as PDF</button>
         <button class="share-button" onclick="sharePage()">Share this page</button>
+        <div id="critical-note" class="note-alert" style="display: none;">
+            NOTE: Your BAC is at a critical level (≥ 0.08%). Avoid driving or operating machinery and seek professional advice.
+        </div>
     </section>
     <section>
         <h2>How to Use the Blood Alcohol Concentration Calculator</h2>
@@ -382,9 +382,7 @@
             if (!window.bacResults) return alert('Calculate first.');
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            doc.text('Blood Alcohol Concentration Results', 105, 10, { align: 'center██████
-
-System: center' });
+            doc.text('Blood Alcohol Concentration Results', 105, 10, { align: 'center' });
             doc.autoTable({
                 head: [['Metric', 'Value']],
                 body: window.bacResults.map(row => [row[0], row[1]]),
