@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Estimate your blood alcohol concentration (BAC) based on drinks consumed, body weight, gender, and time elapsed. Understand factors influencing BAC levels, legal limits, and health implications with detailed formulas and visualizations.">
+    <meta name="description" content="Estimate your blood alcohol concentration (BAC) based on drinks consumed, body weight, gender, and time elapsed. It understands factors influencing BAC levels, legal limits, and health implications with detailed formulas and visualizations.">
     <title>Blood Alcohol Concentration Calculator - Estimate BAC Levels Accurately</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -81,7 +81,7 @@
     </header>
     <section class="tool-section">
         <form id="tool-form">
-            <div class="sections-container">
+            <div class="sections-container-1">
                 <fieldset>
                     <legend>Personal Details</legend>
                     <div class="input-row">
@@ -104,21 +104,27 @@
                 <fieldset>
                     <legend>Drink Details (Add Multiple)</legend>
                     <div id="drinks-container">
-                        <div class="drink-row">
-                            <label for="drink-type-1">Drink Type</label>
-                            <select id="drink-type-1" required>
-                                <option value="beer">Beer (5% ABV, 12 oz)</option>
-                                <option value="wine">Wine (12% ABV, 5 oz)</option>
-                                <option value="shot">Shot (40% ABV, 1.5 oz)</option>
-                                <option value="cocktail">Cocktail (mixed, ~1.5 oz spirits)</option>
-                                <option value="pint">Pint of Beer (5% ABV, 16 oz)</option>
-                                <option value="glass-wine">Large Glass Wine (12% ABV, 8 oz)</option>
-                                <option value="double-shot">Double Shot (40% ABV, 3 oz)</option>
-                            </select>
-                            <label for="quantity-1">Quantity</label>
-                            <input type="number" id="quantity-1" value="1" required min="1">
-                            <label for="time-consumed-1">Time Consumed (hours ago)</label>
-                            <input type="number" id="time-consumed-1" value="0" required min="0" step="0.5">
+                        <div class="drink-row" style="margin-bottom: 15px;">
+                            <div class="input-row">
+                                <label for="drink-type-1">Drink Type</label>
+                                <select id="drink-type-1" required>
+                                    <option value="beer">Beer (5% ABV, 12 oz)</option>
+                                    <option value="wine">Wine (12% ABV, 5 oz)</option>
+                                    <option value="shot">Shot (40% ABV, 1.5 oz)</option>
+                                    <option value="cocktail">Cocktail (mixed, ~1.5 oz spirits)</option>
+                                    <option value="pint">Pint of Beer (5% ABV, 16 oz)</option>
+                                    <option value="glass-wine">Large Glass Wine (12% ABV, 8 oz)</option>
+                                    <option value="double-shot">Double Shot (40% ABV, 3 oz)</option>
+                                </select>
+                            </div>
+                            <div class="input-row">
+                                <label for="quantity-1">Quantity</label>
+                                <input type="number" id="quantity-1" value="1" required min="1">
+                            </div>
+                            <div class="input-row">
+                                <label for="time-consumed-1">Time Consumed (hours ago)</label>
+                                <input type="number" id="time-consumed-1" value="0" required min="0" step="0.5">
+                            </div>
                         </div>
                     </div>
                     <button type="button" onclick="addDrinkRow()">Add Another Drink</button>
@@ -255,21 +261,28 @@
             const container = document.getElementById('drinks-container');
             const row = document.createElement('div');
             row.className = 'drink-row';
+            row.style.marginBottom = '15px';
             row.innerHTML = `
-                <label for="drink-type-${drinkCount}">Drink Type</label>
-                <select id="drink-type-${drinkCount}" required>
-                    <option value="beer">Beer (5% ABV, 12 oz)</option>
-                    <option value="wine">Wine (12% ABV, 5 oz)</option>
-                    <option value="shot">Shot (40% ABV, 1.5 oz)</option>
-                    <option value="cocktail">Cocktail (mixed, ~1.5 oz spirits)</option>
-                    <option value="pint">Pint of Beer (5% ABV, 16 oz)</option>
-                    <option value="glass-wine">Large Glass Wine (12% ABV, 8 oz)</option>
-                    <option value="double-shot">Double Shot (40% ABV, 3 oz)</option>
-                </select>
-                <label for="quantity-${drinkCount}">Quantity</label>
-                <input type="number" id="quantity-${drinkCount}" value="1" required min="1">
-                <label for="time-consumed-${drinkCount}">Time Consumed (hours ago)</label>
-                <input type="number" id="time-consumed-${drinkCount}" value="0" required min="0" step="0.5">
+                <div class="input-row">
+                    <label for="drink-type-${drinkCount}">Drink Type</label>
+                    <select id="drink-type-${drinkCount}" required>
+                        <option value="beer">Beer (5% ABV, 12 oz)</option>
+                        <option value="wine">Wine (12% ABV, 5 oz)</option>
+                        <option value="shot">Shot (40% ABV, 1.5 oz)</option>
+                        <option value="cocktail">Cocktail (mixed, ~1.5 oz spirits)</option>
+                        <option value="pint">Pint of Beer (5% ABV, 16 oz)</option>
+                        <option value="glass-wine">Large Glass Wine (12% ABV, 8 oz)</option>
+                        <option value="double-shot">Double Shot (40% ABV, 3 oz)</option>
+                    </select>
+                </div>
+                <div class="input-row">
+                    <label for="quantity-${drinkCount}">Quantity</label>
+                    <input type="number" id="quantity-${drinkCount}" value="1" required min="1">
+                </div>
+                <div class="input-row">
+                    <label for="time-consumed-${drinkCount}">Time Consumed (hours ago)</label>
+                    <input type="number" id="time-consumed-${drinkCount}" value="0" required min="0" step="0.5">
+                </div>
             `;
             container.appendChild(row);
         }
@@ -306,26 +319,51 @@
             if (bacUnit === 'promille') displayBac *= 10;
             else if (bacUnit === 'mgL') displayBac *= 1000;
 
+            const soberTime = (bac / 0.015) + elapsedTime;
+
             const results = [
                 ['Estimated BAC', displayBac.toFixed(3) + (bacUnit === 'percent' ? '%' : bacUnit === 'promille' ? '‰' : ' mg/L')],
                 ['Impairment Level', bac < 0.03 ? 'Minimal' : bac < 0.08 ? 'Moderate' : 'High'],
-                ['Time to Sober (hrs)', ((bac / 0.015) + elapsedTime).toFixed(1)]
+                ['Time to Sober (hrs)', soberTime.toFixed(1)]
             ];
 
             const tableBody = document.querySelector('#bacTable tbody');
             tableBody.innerHTML = results.map(row => `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`).join('');
 
-            // BAC Chart over time
-            const times = Array.from({length: 13}, (_, i) => i);
+            // Enhanced BAC Chart over time with sober marker
+            const times = Array.from({length: Math.ceil(soberTime) + 1}, (_, i) => i);
             const bacLevels = times.map(t => Math.max(0, (totalAlcoholOz * 5.14 / (weightLbs * r)) - (0.015 * t)));
             const chartCtx = document.getElementById('bacChart').getContext('2d');
-            new Chart(chartCtx, {
+            if (window.bacChartInstance) window.bacChartInstance.destroy(); // Refresh chart
+            window.bacChartInstance = new Chart(chartCtx, {
                 type: 'line',
                 data: {
                     labels: times.map(t => `Hour ${t}`),
-                    datasets: [{ label: 'BAC Over Time', data: bacLevels, borderColor: 'rgba(0, 200, 200, 1)', fill: false }]
+                    datasets: [
+                        { label: 'BAC Over Time', data: bacLevels, borderColor: 'rgba(0, 200, 200, 1)', fill: false }
+                    ]
                 },
-                options: { scales: { y: { beginAtZero: true } } }
+                options: {
+                    scales: { y: { beginAtZero: true } },
+                    plugins: {
+                        annotation: {
+                            annotations: {
+                                soberLine: {
+                                    type: 'line',
+                                    xMin: soberTime,
+                                    xMax: soberTime,
+                                    borderColor: 'red',
+                                    borderWidth: 2,
+                                    label: {
+                                        content: 'Sober Time',
+                                        enabled: true,
+                                        position: 'top'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             });
 
             document.getElementById('results').style.display = 'block';
