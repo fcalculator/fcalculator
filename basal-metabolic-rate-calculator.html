@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script> <!-- Dodan CDN za jspdf-autotable za tablice u PDF-u, naglašeno u odgovoru -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="application/ld+json">
     {
@@ -322,14 +322,14 @@
                 ['BMR', document.getElementById('bmr-result').textContent + ' kcal/day'],
                 ['TDEE', document.getElementById('tdee-result').textContent + ' kcal/day']
             ];
-            // Summary tablica sa didDrawPage za footer
+            // Summary tablica sa ažuriranim stilom
             doc.autoTable({
                 head: [['Parameter', 'Value']],
                 body: summaryData,
                 startY: 25,
-                styles: { font: "helvetica", fontSize: 10, textColor: [0, 0, 0], lineColor: [0, 0, 0], lineWidth: 0.1, cellPadding: 3, halign: 'left', valign: 'middle' },
-                headStyles: { fillColor: [0, 128, 128], textColor: [255, 255, 255], halign: 'center' },
-                alternateRowStyles: { fillColor: [255, 255, 255] },
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
                 columnStyles: { 0: { cellWidth: 'auto', halign: 'left' }, 1: { halign: 'left' } },
                 margin: { top: 25, left: 14, right: 14 },
                 didDrawPage: function (data) { // Footer na svakoj stranici
@@ -338,7 +338,7 @@
                     doc.text("This document was generated using Fcalculator.com", 105, doc.internal.pageSize.height - 10, { align: 'center' });
                 }
             });
-            // Dodatna tablica za energy expenditure distribution (slično amortization schedule u primjeru)
+            // Dodatna tablica za energy expenditure distribution sa ažuriranim stilom
             const energyData = [
                 ['BMR', '60-75%', 'Energy for vital functions at rest.'],
                 ['Physical Activity', '15-30%', 'Calories burned through movement and exercise.'],
@@ -348,9 +348,9 @@
                 head: [['Component', 'Typical Percentage of TDEE', 'Description']],
                 body: energyData,
                 startY: doc.lastAutoTable.finalY + 10,
-                styles: { font: "helvetica", fontSize: 10, textColor: [0, 0, 0], lineColor: [0, 0, 0], lineWidth: 0.1, cellPadding: 3, halign: 'left', valign: 'middle', overflow: 'linebreak' },
-                headStyles: { fillColor: [0, 128, 128], textColor: [255, 255, 255], halign: 'center' },
-                alternateRowStyles: { fillColor: [255, 255, 255] },
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
                 columnStyles: { 0: { cellWidth: 40, halign: 'left' }, 1: { cellWidth: 50, halign: 'left' }, 2: { cellWidth: 'auto', halign: 'left' } },
                 margin: { left: 14, right: 14 },
                 didDrawPage: function (data) { // Footer i ovdje za multi-page
