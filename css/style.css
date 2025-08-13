@@ -250,6 +250,7 @@ footer {
             padding: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            max-width: 600px;
         }
         .input-row {
             display: flex;
