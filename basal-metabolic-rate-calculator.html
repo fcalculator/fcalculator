@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Dodan Chart.js CDN za pie chart, naglašeno u odgovoru -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Basal Metabolic Rate Calculator",
         "url": "https://fcalculator.com/basal-metabolic-rate-calculator.html",
-        "description": "A comprehensive tool to calculate your basal metabolic rate (BMR) using the Mifflin-St Jeor equation, providing insights into daily energy needs at rest. Includes detailed explanations, factors influencing BMR, mathematical formulas, and a pie chart for energy expenditure distribution.",
+        "description": "An advanced tool for calculating basal metabolic rate (BMR) using multiple formulas including Mifflin-St Jeor, Harris-Benedict, and Katch-McArdle, with options for body composition and activity levels to estimate total daily energy expenditure (TDEE). Features detailed mathematical equations, influencing factors, energy distribution charts, and comprehensive health insights.",
         "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -53,8 +53,8 @@
         },
         "mainEntity": {
             "@type": "Calculator",
-            "name": "BMR Calculator",
-            "description": "Estimates basal metabolic rate based on age, sex, height, and weight using Mifflin-St Jeor formula.",
+            "name": "BMR and TDEE Calculator",
+            "description": "Estimates basal metabolic rate using selected formulas and total daily energy expenditure based on activity levels, incorporating age, sex, height, weight, and optional body fat percentage.",
             "potentialAction": {
                 "@type": "CalculateAction",
                 "target": "https://fcalculator.com/basal-metabolic-rate-calculator.html",
@@ -74,7 +74,7 @@
             <a href="/">FCalculator.com</a> > <a href="/health-fitness.html">Health & Fitness</a> > <a href="/basal-metabolic-rate-calculator.html">Basal Metabolic Rate Calculator</a>
         </div>
         <h1>Basal Metabolic Rate Calculator</h1>
-        <p>Determine your body's energy expenditure at complete rest to better understand daily calorie needs and support health management strategies.</p>
+        <p>Accurately estimate your body's resting energy needs using advanced formulas, while factoring in personal metrics and activity levels to derive comprehensive daily calorie requirements for informed health and fitness decisions.</p>
     </header>
     <section class="tool-section">
         <form id="tool-form">
@@ -108,6 +108,34 @@
                             <option value="lbs">lbs</option>
                         </select>
                     </div>
+                    <div class="input-row" id="body-fat-row" style="display: none;">
+                        <label for="body-fat">Body Fat Percentage (%)</label>
+                        <input type="number" id="body-fat" min="0" max="100">
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Formula Selection</legend>
+                    <div class="input-row">
+                        <label for="formula">Choose Formula</label>
+                        <select id="formula" onchange="toggleBodyFat()">
+                            <option value="mifflin">Mifflin-St Jeor (Default)</option>
+                            <option value="harris">Harris-Benedict</option>
+                            <option value="katch">Katch-McArdle</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Activity Level</legend>
+                    <div class="input-row">
+                        <label for="activity">Daily Activity</label>
+                        <select id="activity" required>
+                            <option value="1.2">Sedentary (little or no exercise)</option>
+                            <option value="1.375">Lightly active (light exercise 1-3 days/week)</option>
+                            <option value="1.55">Moderately active (moderate exercise 3-5 days/week)</option>
+                            <option value="1.725">Very active (hard exercise 6-7 days/week)</option>
+                            <option value="1.9">Super active (very hard exercise & physical job)</option>
+                        </select>
+                    </div>
                 </fieldset>
             </div>
             <button type="button" onclick="calculateBMR()">Calculate</button>
@@ -116,66 +144,81 @@
     <section class="results-section" id="results" style="display: none;">
         <h2>Calculation Results</h2>
         <p>Your Basal Metabolic Rate (BMR): <span id="bmr-result"></span> kcal/day</p>
+        <p>Your Total Daily Energy Expenditure (TDEE): <span id="tdee-result"></span> kcal/day</p>
         <canvas id="energyChart" width="400" height="200"></canvas>
         <button onclick="saveAsPDF()">Save as PDF</button>
         <button class="share-button" onclick="sharePage()">Share this page</button>
     </section>
     <section>
         <h2>Understanding Basal Metabolic Rate</h2>
-        <p>Basal metabolic rate (BMR) represents the minimum amount of energy required by the body to maintain vital functions such as breathing, circulation, and cell production while at complete rest. This metric is crucial for assessing overall energy balance and can inform dietary and exercise plans aimed at weight management or health optimization.</p>
-        <p>The calculation relies on physiological parameters including age, sex, height, and weight. These factors account for differences in body composition and metabolic efficiency across individuals.</p>
+        <p>Basal metabolic rate (BMR) quantifies the energy expended by the body at rest to sustain essential physiological functions like respiration, circulation, and cellular maintenance. This foundational metric aids in evaluating energy equilibrium, facilitating tailored nutritional and physical activity strategies for weight regulation, athletic performance, or metabolic health enhancement.</p>
+        <p>Key inputs encompass sex, age, height, weight, and optional body fat percentage, alongside activity levels for deriving total daily energy expenditure (TDEE). These variables reflect variances in lean body mass, hormonal influences, and lifestyle demands.</p>
         <h3>How to Use This Calculator</h3>
-        <p>Enter your sex, age in years, height with the appropriate unit (centimeters or inches), and weight with the unit (kilograms or pounds). The tool automatically converts units to metric for computation. Click 'Calculate' to obtain your BMR in kilocalories per day. The result includes a pie chart illustrating typical energy expenditure distribution, where BMR often comprises 60-75% of total daily energy use.</p>
-        <h3>Mathematical Formula Used</h3>
-        <p>This calculator employs the Mifflin-St Jeor equation, recognized for its accuracy in estimating BMR for adults. The formulas are as follows:</p>
+        <p>Select your sex, input age in years, height with unit (cm or inches), weight with unit (kg or pounds), and choose a formula. For Katch-McArdle, provide body fat percentage for precision based on lean mass. Specify your activity level to compute TDEE. The tool converts units to metric internally. Press 'Calculate' to view BMR in kcal/day, TDEE, and a pie chart depicting energy allocation.</p>
+        <h3>Mathematical Formulas Used</h3>
+        <p>This calculator supports multiple validated equations for flexibility:</p>
+        <p><strong>Mifflin-St Jeor Equation:</strong> Widely regarded for accuracy in non-obese adults.</p>
         <p>For males: \( BMR = 10 \times weight (kg) + 6.25 \times height (cm) - 5 \times age (years) + 5 \)</p>
         <p>For females: \( BMR = 10 \times weight (kg) + 6.25 \times height (cm) - 5 \times age (years) - 161 \)</p>
-        <p>These equations provide a reliable baseline, though individual variations may occur due to genetic or environmental influences.</p>
+        <p><strong>Harris-Benedict Equation (Revised):</strong> A classic model, updated for modern populations.</p>
+        <p>For males: \( BMR = 88.362 + 13.397 \times weight (kg) + 4.799 \times height (cm) - 5.677 \times age (years) \)</p>
+        <p>For females: \( BMR = 447.593 + 9.247 \times weight (kg) + 3.098 \times height (cm) - 4.330 \times age (years) \)</p>
+        <p><strong>Katch-McArdle Formula:</strong> Incorporates lean body mass for athletes or those with known body composition.</p>
+        <p>\( BMR = 370 + 21.6 \times lean\ body\ mass (kg) \)</p>
+        <p>Where lean body mass = weight (kg) × (1 - body fat % / 100).</p>
+        <p>TDEE is derived by multiplying BMR by an activity factor, ranging from 1.2 (sedentary) to 1.9 (super active).</p>
         <h3>Factors Influencing BMR</h3>
         <ul>
-            <li><strong>Body Composition:</strong> Higher muscle mass elevates BMR as muscle tissue is metabolically active.</li>
-            <li><strong>Age:</strong> BMR typically decreases with age due to reduced muscle mass and hormonal changes.</li>
-            <li><strong>Sex:</strong> Males generally have higher BMR owing to greater muscle proportion.</li>
-            <li><strong>Hormonal Levels:</strong> Thyroid function plays a key role in regulating metabolism.</li>
-            <li><strong>Environmental Conditions:</strong> Extreme temperatures can temporarily alter BMR to maintain homeostasis.</li>
+            <li><strong>Body Composition:</strong> Elevated muscle mass boosts BMR due to higher metabolic activity in muscle tissue compared to fat.</li>
+            <li><strong>Age:</strong> Metabolic rate declines with advancing age, attributed to sarcopenia and hormonal shifts.</li>
+            <li><strong>Sex:</strong> Males typically exhibit higher BMR owing to greater average muscle mass and testosterone levels.</li>
+            <li><strong>Hormonal Regulation:</strong> Thyroid hormones, cortisol, and insulin significantly modulate basal energy use.</li>
+            <li><strong>Environmental and Genetic Factors:</strong> Climate extremes, altitude, and hereditary traits can alter BMR by up to 10-15%.</li>
+            <li><strong>Health Conditions:</strong> Illnesses like hyperthyroidism or malnutrition can respectively increase or decrease BMR.</li>
         </ul>
-        <p>For more on body composition, explore our <a href="/bmi-calculator.html">BMI Calculator</a> or <a href="/macro-nutrient-calculator.html">Macro Nutrient Calculator</a>.</p>
+        <p>For related assessments, consider our <a href="/bmi-calculator.html">BMI Calculator</a> or <a href="/macro-nutrient-calculator.html">Macro Nutrient Calculator</a>.</p>
         <h3>Energy Expenditure Distribution</h3>
-        <p>The accompanying chart visualizes how BMR fits into total daily energy expenditure (TDEE). Typically, BMR accounts for the majority, with physical activity and digestion making up the remainder.</p>
+        <p>The pie chart illustrates BMR as the core component of TDEE, with physical activity and thermic effect of food comprising the balance. This visualization aids in comprehending how lifestyle impacts overall calorie needs.</p>
         <table>
             <thead>
                 <tr>
                     <th>Component</th>
-                    <th>Percentage of TDEE</th>
+                    <th>Typical Percentage of TDEE</th>
+                    <th>Description</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>BMR</td>
                     <td>60-75%</td>
+                    <td>Energy for vital functions at rest.</td>
                 </tr>
                 <tr>
                     <td>Physical Activity</td>
                     <td>15-30%</td>
+                    <td>Calories burned through movement and exercise.</td>
                 </tr>
                 <tr>
                     <td>Thermic Effect of Food</td>
-                    <td>10%</td>
+                    <td>~10%</td>
+                    <td>Energy used in digestion and nutrient processing.</td>
                 </tr>
             </tbody>
         </table>
         <h3>Disclaimer</h3>
-        <p>This tool provides an estimate based on standard formulas and is for informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Consult a healthcare provider for personalized health guidance, especially if you have underlying conditions.</p>
+        <p>This calculator offers estimates derived from established formulas and is intended solely for educational purposes. It does not replace professional medical, nutritional, or fitness advice. Individuals with health conditions, pregnant women, or athletes should consult qualified healthcare providers for personalized evaluations.</p>
         <h3>Frequently Asked Questions</h3>
-        <p><strong>What is the difference between BMR and RMR?</strong> Resting metabolic rate (RMR) is similar but measured under less strict conditions and may include minor activities, often slightly higher than BMR.</p>
-        <p><strong>How can I increase my BMR?</strong> Building muscle through strength training, maintaining a balanced diet, and ensuring adequate sleep can help elevate BMR over time.</p>
-        <p><strong>Is BMR the same for everyone of the same size?</strong> No, variations arise from genetics, hormones, and lifestyle factors.</p>
-        <p><strong>Should I adjust my diet based on BMR?</strong> Use BMR as a starting point for calorie intake, but factor in activity levels for total needs.</p>
+        <p><strong>What distinguishes BMR from RMR?</strong> Resting metabolic rate (RMR) is akin to BMR but measured under relaxed conditions, potentially including minor post-absorptive effects, resulting in a slightly higher value.</p>
+        <p><strong>Which formula is most accurate?</strong> Mifflin-St Jeor is generally preferred for its validation in diverse populations, while Katch-McArdle excels for those with precise body composition data.</p>
+        <p><strong>How does activity level affect results?</strong> It scales BMR to TDEE, providing a realistic daily calorie estimate; higher activity multipliers reflect increased energy demands.</p>
+        <p><strong>Can I use this for weight loss planning?</strong> Yes, subtract 500-1000 kcal from TDEE for gradual deficit, but monitor with professional guidance to avoid metabolic adaptations.</p>
+        <p><strong>Why include body fat percentage?</strong> For Katch-McArdle, it enables calculation based on lean mass, offering superior accuracy for muscular or low-fat individuals.</p>
         <h3>Related Resources</h3>
         <ul>
-            <li><a href="https://www.niddk.nih.gov/health-information/weight-management" target="_blank">National Institute of Diabetes and Digestive and Kidney Diseases - Weight Management</a> - Comprehensive guides on metabolism and weight control from a government source.</li>
-            <li><a href="https://www.hsph.harvard.edu/nutritionsource/energy/" target="_blank">Harvard T.H. Chan School of Public Health - Energy and Metabolism</a> - Detailed explanations of energy balance and nutritional impacts.</li>
-            <li><a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" target="_blank">PubMed - Mifflin-St Jeor Equation Study</a> - Original research validating the formula used in this calculator.</li>
+            <li><a href="https://www.niddk.nih.gov/health-information/weight-management" target="_blank">National Institute of Diabetes and Digestive and Kidney Diseases - Weight Management</a> - In-depth resources on metabolism, energy balance, and sustainable weight control strategies from a U.S. government authority.</li>
+            <li><a href="https://www.hsph.harvard.edu/nutritionsource/energy/" target="_blank">Harvard T.H. Chan School of Public Health - Energy and Metabolism</a> - Explores scientific aspects of energy expenditure, nutritional influences, and practical applications for health optimization.</li>
+            <li><a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" target="_blank">PubMed - Mifflin-St Jeor Equation Study</a> - Access the original research validating the Mifflin-St Jeor formula, including comparative analyses with other methods.</li>
+            <li><a href="https://pubmed.ncbi.nlm.nih.gov/2307558/" target="_blank">PubMed - Harris-Benedict Revisions</a> - Details on updates to the classic Harris-Benedict equation for improved modern applicability.</li>
         </ul>
     </section>
     <footer>
@@ -183,6 +226,17 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
+        function toggleBodyFat() {
+            const formula = document.getElementById('formula').value;
+            const bodyFatRow = document.getElementById('body-fat-row');
+            bodyFatRow.style.display = formula === 'katch' ? 'flex' : 'none';
+            if (formula === 'katch') {
+                document.getElementById('body-fat').required = true;
+            } else {
+                document.getElementById('body-fat').required = false;
+            }
+        }
+
         function calculateBMR() {
             const sex = document.getElementById('sex').value;
             const age = parseFloat(document.getElementById('age').value);
@@ -190,9 +244,12 @@
             const heightUnit = document.getElementById('height-unit').value;
             let weight = parseFloat(document.getElementById('weight').value);
             const weightUnit = document.getElementById('weight-unit').value;
+            const formula = document.getElementById('formula').value;
+            const activity = parseFloat(document.getElementById('activity').value);
+            let bodyFat = parseFloat(document.getElementById('body-fat').value) || 0;
 
-            if (isNaN(age) || isNaN(height) || isNaN(weight)) {
-                alert('Please fill in all fields.');
+            if (isNaN(age) || isNaN(height) || isNaN(weight) || (formula === 'katch' && isNaN(bodyFat))) {
+                alert('Please fill in all required fields.');
                 return;
             }
 
@@ -201,31 +258,45 @@
             if (weightUnit === 'lbs') weight /= 2.20462;
 
             let bmr;
-            if (sex === 'male') {
-                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-            } else {
-                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            if (formula === 'mifflin') {
+                if (sex === 'male') {
+                    bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+                } else {
+                    bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+                }
+            } else if (formula === 'harris') {
+                if (sex === 'male') {
+                    bmr = 88.362 + 13.397 * weight + 4.799 * height - 5.677 * age;
+                } else {
+                    bmr = 447.593 + 9.247 * weight + 3.098 * height - 4.330 * age;
+                }
+            } else if (formula === 'katch') {
+                const lbm = weight * (1 - bodyFat / 100);
+                bmr = 370 + 21.6 * lbm;
             }
 
+            const tdee = bmr * activity;
+
             document.getElementById('bmr-result').textContent = bmr.toFixed(2);
+            document.getElementById('tdee-result').textContent = tdee.toFixed(2);
             document.getElementById('results').style.display = 'block';
 
-            // Pie chart
+            // Pie chart update for BMR vs. other components in TDEE
             const ctx = document.getElementById('energyChart').getContext('2d');
             new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: ['BMR', 'Physical Activity', 'Digestion'],
+                    labels: ['BMR', 'Physical Activity & Digestion'],
                     datasets: [{
-                        data: [70, 20, 10],
-                        backgroundColor: ['#36A2EB', '#FFCE56', '#FF6384']
+                        data: [bmr, tdee - bmr],
+                        backgroundColor: ['#36A2EB', '#FFCE56']
                     }]
                 },
                 options: {
                     responsive: true,
                     title: {
                         display: true,
-                        text: 'Typical Energy Expenditure Distribution (%)'
+                        text: 'BMR vs. Additional Energy Expenditure in TDEE (kcal)'
                     }
                 }
             });
@@ -263,7 +334,11 @@
                 ['Age', document.getElementById('age').value + ' years'],
                 ['Height', document.getElementById('height').value + ' ' + document.getElementById('height-unit').value],
                 ['Weight', document.getElementById('weight').value + ' ' + document.getElementById('weight-unit').value],
-                ['BMR', document.getElementById('bmr-result').textContent + ' kcal/day']
+                ['Formula', document.getElementById('formula').options[document.getElementById('formula').selectedIndex].text],
+                ['Activity Level', document.getElementById('activity').options[document.getElementById('activity').selectedIndex].text],
+                ['Body Fat % (if applicable)', document.getElementById('body-fat').value || 'N/A'],
+                ['BMR', document.getElementById('bmr-result').textContent + ' kcal/day'],
+                ['TDEE', document.getElementById('tdee-result').textContent + ' kcal/day']
             ];
 
             parameters.forEach((row) => {
@@ -279,7 +354,7 @@
 
             y += 10;
             doc.setFontSize(14);
-            doc.text('Formula Used: Mifflin-St Jeor Equation', margin + 5, y);
+            doc.text('Formulas and Activity Factors Applied', margin + 5, y);
             y += 10;
 
             // Footer
@@ -288,7 +363,7 @@
             doc.setTextColor(100, 100, 100);
             doc.text(footerText, pageWidth / 2, pageHeight - margin, { align: 'center' });
 
-            doc.save('bmr_results.pdf');
+            doc.save('bmr_tdee_results.pdf');
         }
 
         function sharePage() {
