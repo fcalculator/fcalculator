@@ -67,8 +67,7 @@ main {
     gap: var(--spacing-unit); /* Smaller gaps */
 }
 note-alert {
-    color: red; 
-    text-align: center;
+    color: red; font-weight: bold; text-align: center; margin: 10px 0;
 }
 
 /* Sections: Tight padding, minimal borders */
