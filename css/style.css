@@ -66,6 +66,10 @@ main {
     flex-direction: column;
     gap: var(--spacing-unit); /* Smaller gaps */
 }
+note-allert {
+    color: red; 
+    text-align: center;
+}
 
 /* Sections: Tight padding, minimal borders */
 section {
