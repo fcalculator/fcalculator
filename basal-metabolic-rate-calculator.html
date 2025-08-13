@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script> <!-- Dodan CDN za jspdf-autotable za bolje tablice, naglašeno u odgovoru -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="application/ld+json">
     {
@@ -303,68 +304,48 @@
         }
 
         function saveAsPDF() {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    const pageWidth = doc.internal.pageSize.width;
-    const pageHeight = doc.internal.pageSize.height;
-    const margin = 10;
-    let y = margin;
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(18);
-    doc.setTextColor(0, 128, 128); // Teal color
-    doc.text('Basal Metabolic Rate Calculation Results', pageWidth / 2, y, { align: 'center' });
-    y += 15;
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(12);
-    doc.setTextColor(0, 0, 0);
-
-    // Parameters table
-    doc.setFillColor(0, 128, 128);
-    doc.rect(margin, y, pageWidth - 2 * margin, 10, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.text('Parameter', margin + 5, y + 7);
-    doc.text('Value', pageWidth / 2 + 5, y + 7);
-    y += 10;
-    doc.setTextColor(0, 0, 0);
-
-    const parameters = [
-        ['Sex', document.getElementById('sex').value],
-        ['Age', document.getElementById('age').value + ' years'],
-        ['Height', document.getElementById('height').value + ' ' + document.getElementById('height-unit').value],
-        ['Weight', document.getElementById('weight').value + ' ' + document.getElementById('weight-unit').value],
-        ['Formula', document.getElementById('formula').options[document.getElementById('formula').selectedIndex].text],
-        ['Activity Level', document.getElementById('activity').options[document.getElementById('activity').selectedIndex].text],
-        ['Body Fat % (if applicable)', document.getElementById('body-fat').value || 'N/A'],
-        ['BMR', document.getElementById('bmr-result').textContent + ' kcal/day'],
-        ['TDEE', document.getElementById('tdee-result').textContent + ' kcal/day']
-    ];
-
-    parameters.forEach((row) => {
-        doc.text(row[0], margin + 5, y + 7);
-        doc.text(row[1], pageWidth / 2 + 5, y + 7);
-        doc.line(margin, y + 10, pageWidth - margin, y + 10);
-        y += 10;
-        if (y > pageHeight - 20) {
-            doc.addPage();
-            y = margin;
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            // Postavljanje fonta i naslova
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(18);
+            doc.text("Basal Metabolic Rate Calculation Results", 105, 15, { align: 'center' });
+            // Primjer podataka za summary tablicu (prilagoditi prema tool-u)
+            const summaryData = [
+                ['Sex', document.getElementById('sex').value],
+                ['Age', document.getElementById('age').value + ' years'],
+                ['Height', document.getElementById('height').value + ' ' + document.getElementById('height-unit').value],
+                ['Weight', document.getElementById('weight').value + ' ' + document.getElementById('weight-unit').value],
+                ['Formula', document.getElementById('formula').options[document.getElementById('formula').selectedIndex].text],
+                ['Activity Level', document.getElementById('activity').options[document.getElementById('activity').selectedIndex].text],
+                ['Body Fat % (if applicable)', document.getElementById('body-fat').value || 'N/A'],
+                ['BMR', document.getElementById('bmr-result').textContent + ' kcal/day'],
+                ['TDEE', document.getElementById('tdee-result').textContent + ' kcal/day']
+            ];
+            // Summary tablica
+            doc.autoTable({
+                head: [['Parameter', 'Value']],
+                body: summaryData,
+                startY: 25,
+                styles: { font: "helvetica", fontSize: 10, textColor: [0, 0, 0], lineColor: [0, 0, 0], lineWidth: 0.1, cellPadding: 3, halign: 'left', valign: 'middle' },
+                headStyles: { fillColor: [0, 128, 128], // Teal boja za header
+                    textColor: [255, 255, 255], halign: 'center' },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                columnStyles: { 0: { cellWidth: 'auto', halign: 'left' }, 1: { halign: 'left' } },
+                margin: { top: 25, left: 14, right: 14 }
+            });
+            // Bez amortizacijske tablice jer nije primjenjivo, ali ako treba dodati neku table rezultata, može se ovdje
+            // Footer na svakoj stranici
+            doc.autoTable({
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text("This document was generated using Fcalculator.com", 105, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+            // Spremanje PDF-a
+            doc.save('bmr_tdee_results.pdf');
         }
-    });
-
-    y += 10;
-    doc.setFontSize(14);
-    doc.text('Formulas and Activity Factors Applied', margin + 5, y);
-    y += 10;
-
-    // Footer
-    const footerText = 'This document was generated using Fcalculator.com';
-    doc.setFontSize(10);
-    doc.setTextColor(100, 100, 100);
-    doc.text(footerText, pageWidth / 2, pageHeight - margin, { align: 'center' });
-
-    doc.save('bmr_tdee_results.pdf');
-}
 
         function sharePage() {
             if (navigator.share) {
