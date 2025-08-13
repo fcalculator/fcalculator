@@ -243,8 +243,7 @@ footer {
             flex-wrap: wrap;
             justify-content: space-between;
             width: 100%;
-            max-width: 600px;
-        }
+           }
         fieldset {
             flex: 1 1 300px;
             margin: 10px;
