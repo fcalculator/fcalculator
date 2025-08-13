@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script> <!-- Dodan CDN za jspdf-autotable za bolje tablice, naglašeno u odgovoru -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script> <!-- Dodan CDN za jspdf-autotable za tablice u PDF-u, naglašeno u odgovoru -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="application/ld+json">
     {
@@ -310,7 +310,7 @@
             doc.setFont("helvetica", "normal");
             doc.setFontSize(18);
             doc.text("Basal Metabolic Rate Calculation Results", 105, 15, { align: 'center' });
-            // Primjer podataka za summary tablicu (prilagoditi prema tool-u)
+            // Summary data
             const summaryData = [
                 ['Sex', document.getElementById('sex').value],
                 ['Age', document.getElementById('age').value + ' years'],
@@ -322,22 +322,38 @@
                 ['BMR', document.getElementById('bmr-result').textContent + ' kcal/day'],
                 ['TDEE', document.getElementById('tdee-result').textContent + ' kcal/day']
             ];
-            // Summary tablica
+            // Summary tablica sa didDrawPage za footer
             doc.autoTable({
                 head: [['Parameter', 'Value']],
                 body: summaryData,
                 startY: 25,
                 styles: { font: "helvetica", fontSize: 10, textColor: [0, 0, 0], lineColor: [0, 0, 0], lineWidth: 0.1, cellPadding: 3, halign: 'left', valign: 'middle' },
-                headStyles: { fillColor: [0, 128, 128], // Teal boja za header
-                    textColor: [255, 255, 255], halign: 'center' },
+                headStyles: { fillColor: [0, 128, 128], textColor: [255, 255, 255], halign: 'center' },
                 alternateRowStyles: { fillColor: [255, 255, 255] },
                 columnStyles: { 0: { cellWidth: 'auto', halign: 'left' }, 1: { halign: 'left' } },
-                margin: { top: 25, left: 14, right: 14 }
+                margin: { top: 25, left: 14, right: 14 },
+                didDrawPage: function (data) { // Footer na svakoj stranici
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text("This document was generated using Fcalculator.com", 105, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
             });
-            // Bez amortizacijske tablice jer nije primjenjivo, ali ako treba dodati neku table rezultata, može se ovdje
-            // Footer na svakoj stranici
+            // Dodatna tablica za energy expenditure distribution (slično amortization schedule u primjeru)
+            const energyData = [
+                ['BMR', '60-75%', 'Energy for vital functions at rest.'],
+                ['Physical Activity', '15-30%', 'Calories burned through movement and exercise.'],
+                ['Thermic Effect of Food', '~10%', 'Energy used in digestion and nutrient processing.']
+            ];
             doc.autoTable({
-                didDrawPage: function (data) {
+                head: [['Component', 'Typical Percentage of TDEE', 'Description']],
+                body: energyData,
+                startY: doc.lastAutoTable.finalY + 10,
+                styles: { font: "helvetica", fontSize: 10, textColor: [0, 0, 0], lineColor: [0, 0, 0], lineWidth: 0.1, cellPadding: 3, halign: 'left', valign: 'middle', overflow: 'linebreak' },
+                headStyles: { fillColor: [0, 128, 128], textColor: [255, 255, 255], halign: 'center' },
+                alternateRowStyles: { fillColor: [255, 255, 255] },
+                columnStyles: { 0: { cellWidth: 40, halign: 'left' }, 1: { cellWidth: 50, halign: 'left' }, 2: { cellWidth: 'auto', halign: 'left' } },
+                margin: { left: 14, right: 14 },
+                didDrawPage: function (data) { // Footer i ovdje za multi-page
                     doc.setFontSize(10);
                     doc.setTextColor(100);
                     doc.text("This document was generated using Fcalculator.com", 105, doc.internal.pageSize.height - 10, { align: 'center' });
