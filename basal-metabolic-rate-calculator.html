@@ -303,68 +303,68 @@
         }
 
         function saveAsPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            const pageWidth = doc.internal.pageSize.width;
-            const pageHeight = doc.internal.pageSize.height;
-            const margin = 10;
-            let y = margin;
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.width;
+    const pageHeight = doc.internal.pageSize.height;
+    const margin = 10;
+    let y = margin;
 
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(18);
-            doc.setTextColor(0, 128, 128); // Teal color
-            doc.text('Basal Metabolic Rate Calculation Results', pageWidth / 2, y, { align: 'center' });
-            y += 15;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(18);
+    doc.setTextColor(0, 128, 128); // Teal color
+    doc.text('Basal Metabolic Rate Calculation Results', pageWidth / 2, y, { align: 'center' });
+    y += 15;
 
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(12);
-            doc.setTextColor(0, 0, 0);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
 
-            // Parameters table
-            doc.setFillColor(0, 128, 128);
-            doc.rect(margin, y, pageWidth - 2 * margin, 10, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.text('Parameter', margin + 5, y + 7);
-            doc.text('Value', pageWidth / 2 + 5, y + 7);
-            y += 10;
-            doc.setTextColor(0, 0, 0);
+    // Parameters table
+    doc.setFillColor(0, 128, 128);
+    doc.rect(margin, y, pageWidth - 2 * margin, 10, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.text('Parameter', margin + 5, y + 7);
+    doc.text('Value', pageWidth / 2 + 5, y + 7);
+    y += 10;
+    doc.setTextColor(0, 0, 0);
 
-            const parameters = [
-                ['Sex', document.getElementById('sex').value],
-                ['Age', document.getElementById('age').value + ' years'],
-                ['Height', document.getElementById('height').value + ' ' + document.getElementById('height-unit').value],
-                ['Weight', document.getElementById('weight').value + ' ' + document.getElementById('weight-unit').value],
-                ['Formula', document.getElementById('formula').options[document.getElementById('formula').selectedIndex].text],
-                ['Activity Level', document.getElementById('activity').options[document.getElementById('activity').selectedIndex].text],
-                ['Body Fat % (if applicable)', document.getElementById('body-fat').value || 'N/A'],
-                ['BMR', document.getElementById('bmr-result').textContent + ' kcal/day'],
-                ['TDEE', document.getElementById('tdee-result').textContent + ' kcal/day']
-            ];
+    const parameters = [
+        ['Sex', document.getElementById('sex').value],
+        ['Age', document.getElementById('age').value + ' years'],
+        ['Height', document.getElementById('height').value + ' ' + document.getElementById('height-unit').value],
+        ['Weight', document.getElementById('weight').value + ' ' + document.getElementById('weight-unit').value],
+        ['Formula', document.getElementById('formula').options[document.getElementById('formula').selectedIndex].text],
+        ['Activity Level', document.getElementById('activity').options[document.getElementById('activity').selectedIndex].text],
+        ['Body Fat % (if applicable)', document.getElementById('body-fat').value || 'N/A'],
+        ['BMR', document.getElementById('bmr-result').textContent + ' kcal/day'],
+        ['TDEE', document.getElementById('tdee-result').textContent + ' kcal/day']
+    ];
 
-            parameters.forEach((row) => {
-                doc.text(row[0], margin + 5, y + 7);
-                doc.text(row[1], pageWidth / 2 + 5, y + 7);
-                doc.line(margin, y + 10, pageWidth - margin, y + 10);
-                y += 10;
-                if (y > pageHeight - 20) {
-                    doc.addPage();
-                    y = margin;
-                }
-            });
-
-            y += 10;
-            doc.setFontSize(14);
-            doc.text('Formulas and Activity Factors Applied', margin + 5, y);
-            y += 10;
-
-            // Footer
-            const footerText = 'This document was generated using Fcalculator.com';
-            doc.setFontSize(10);
-            doc.setTextColor(100, 100, 100);
-            doc.text(footerText, pageWidth / 2, pageHeight - margin, { align: 'center' });
-
-            doc.save('bmr_tdee_results.pdf');
+    parameters.forEach((row) => {
+        doc.text(row[0], margin + 5, y + 7);
+        doc.text(row[1], pageWidth / 2 + 5, y + 7);
+        doc.line(margin, y + 10, pageWidth - margin, y + 10);
+        y += 10;
+        if (y > pageHeight - 20) {
+            doc.addPage();
+            y = margin;
         }
+    });
+
+    y += 10;
+    doc.setFontSize(14);
+    doc.text('Formulas and Activity Factors Applied', margin + 5, y);
+    y += 10;
+
+    // Footer
+    const footerText = 'This document was generated using Fcalculator.com';
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    doc.text(footerText, pageWidth / 2, pageHeight - margin, { align: 'center' });
+
+    doc.save('bmr_tdee_results.pdf');
+}
 
         function sharePage() {
             if (navigator.share) {
