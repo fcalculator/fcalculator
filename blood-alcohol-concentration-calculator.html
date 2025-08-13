@@ -3,61 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Alcohol Concentration Estimator</title>
-    <meta name="description" content="Estimate your blood alcohol concentration using personal factors like weight, gender, and alcohol consumption details. Understand BAC levels, effects, and safe drinking guidelines.">
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <meta name="description" content="Estimate your blood alcohol concentration (BAC) based on drinks consumed, body weight, gender, and time elapsed. Understand factors influencing BAC levels, legal limits, and health implications with detailed formulas and visualizations.">
+    <title>Blood Alcohol Concentration Calculator - Estimate BAC Levels Accurately</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Blood Alcohol Concentration Estimator",
-        "url": "https://fcalculator.com/blood-alcohol-concentration-calculator.html",
-        "description": "A detailed tool to estimate blood alcohol concentration based on gender, weight, alcohol intake, and time elapsed. Includes explanations of BAC calculation formulas, health implications, legal limits, and frequently asked questions for informed decision-making.",
-        "breadcrumb": {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "FCalculator.com",
-                    "item": "https://fcalculator.com/"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Health & Fitness",
-                    "item": "https://fcalculator.com/health-fitness.html"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": "Blood Alcohol Concentration Estimator",
-                    "item": "https://fcalculator.com/blood-alcohol-concentration-calculator.html"
-                }
-            ]
-        },
-        "publisher": {
-            "@type": "Organization",
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Blood Alcohol Concentration Calculator - Estimate BAC Levels Accurately",
+      "url": "https://fcalculator.com/blood-alcohol-concentration-calculator.html",
+      "description": "An online tool to calculate blood alcohol concentration using the Widmark formula, incorporating variables like drink types, body metrics, and time. Features interactive charts, mathematical explanations, and health insights for educational purposes.",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
             "name": "FCalculator.com",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://fcalculator.com/images/logo.png"
-            }
-        },
-        "datePublished": "2025-08-13",
-        "dateModified": "2025-08-13",
-        "mainEntity": {
-            "@type": "SoftwareApplication",
+            "item": "https://fcalculator.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Health & Fitness",
+            "item": "https://fcalculator.com/health-fitness.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
             "name": "Blood Alcohol Concentration Calculator",
-            "applicationCategory": "HealthApplication",
-            "operatingSystem": "Web",
-            "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-            }
+            "item": "https://fcalculator.com/blood-alcohol-concentration-calculator.html"
+          }
+        ]
+      },
+      "potentialAction": {
+        "@type": "CalculateAction",
+        "name": "BAC Estimation",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://fcalculator.com/blood-alcohol-concentration-calculator.html",
+          "actionPlatform": ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"]
+        },
+        "result": {
+          "@type": "Thing",
+          "name": "Blood Alcohol Concentration Levels and Trends"
         }
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "FCalculator.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://fcalculator.com/logo.png"
+        }
+      },
+      "datePublished": "2025-08-13",
+      "dateModified": "2025-08-13",
+      "author": {
+        "@type": "Person",
+        "name": "I.Brkic"
+      }
     }
     </script>
 </head>
@@ -65,246 +74,293 @@
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/health-fitness.html">Health & Fitness</a> > <a href="/blood-alcohol-concentration-calculator.html">Blood Alcohol Concentration Estimator</a>
+            <a href="/">FCalculator.com</a> > <a href="/health-fitness.html">Health & Fitness</a> > <a href="/blood-alcohol-concentration-calculator.html">Blood Alcohol Concentration Calculator</a>
         </div>
-        <h1>Blood Alcohol Concentration Estimator</h1>
-        <p>This estimator helps determine approximate blood alcohol concentration levels based on individual physiological factors and alcohol consumption patterns, providing insights into potential impairment and safety considerations.</p>
+        <h1>Blood Alcohol Concentration Calculator</h1>
+        <p>Input your drink details, body metrics, and time to estimate blood alcohol levels. This tool uses established formulas to provide insights into alcohol metabolism, helping assess impairment and safety.</p>
     </header>
-    <main>
-        <section class="tool-section">
-            <form id="tool-form">
-                <div class="sections-container-1">
-                    <fieldset>
-                        <legend>Personal and Consumption Details</legend>
-                        <div class="input-row">
-                            <label for="gender">Gender</label>
-                            <select id="gender" required>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Personal Details</legend>
+                    <div class="input-row">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" id="weight" value="70" required min="30" max="200">
+                    </div>
+                    <div class="input-row">
+                        <label for="gender">Gender</label>
+                        <select id="gender" required>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other (average)</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="age">Age (years)</label>
+                        <input type="number" id="age" value="30" required min="18" max="100">
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Drink Details (Add Multiple)</legend>
+                    <div id="drinks-container">
+                        <div class="drink-row">
+                            <label for="drink-type-1">Drink Type</label>
+                            <select id="drink-type-1" required>
+                                <option value="beer">Beer (5% ABV, 12 oz)</option>
+                                <option value="wine">Wine (12% ABV, 5 oz)</option>
+                                <option value="shot">Shot (40% ABV, 1.5 oz)</option>
+                                <option value="cocktail">Cocktail (mixed, ~1.5 oz spirits)</option>
+                                <option value="pint">Pint of Beer (5% ABV, 16 oz)</option>
+                                <option value="glass-wine">Large Glass Wine (12% ABV, 8 oz)</option>
+                                <option value="double-shot">Double Shot (40% ABV, 3 oz)</option>
                             </select>
+                            <label for="quantity-1">Quantity</label>
+                            <input type="number" id="quantity-1" value="1" required min="1">
+                            <label for="time-consumed-1">Time Consumed (hours ago)</label>
+                            <input type="number" id="time-consumed-1" value="0" required min="0" step="0.5">
                         </div>
-                        <div class="input-row">
-                            <label for="weight">Weight (lbs)</label>
-                            <input type="number" id="weight" value="180" min="50" required>
-                        </div>
-                        <div class="input-row">
-                            <label for="beer">Number of Beers (12 oz, 5% ABV)</label>
-                            <input type="number" id="beer" value="0" min="0" required>
-                        </div>
-                        <div class="input-row">
-                            <label for="wine">Number of Wine Glasses (5 oz, 12% ABV)</label>
-                            <input type="number" id="wine" value="0" min="0" required>
-                        </div>
-                        <div class="input-row">
-                            <label for="shots">Number of Shots (1.5 oz, 40% ABV)</label>
-                            <input type="number" id="shots" value="0" min="0" required>
-                        </div>
-                        <div class="input-row">
-                            <label for="hours">Hours Since First Drink</label>
-                            <input type="number" id="hours" value="1" min="0" step="0.1" required>
-                        </div>
-                    </fieldset>
-                </div>
-                <button type="button" onclick="calculateBAC()">Calculate</button>
-            </form>
-        </section>
-        <section class="results-section" id="results" style="display: none;">
-            <h2>Estimated Results</h2>
-            <p id="bac-result"></p>
-            <p id="effects-result"></p>
-            <canvas id="bacChart" width="400" height="200"></canvas>
-            <table id="bac-table">
-                <thead>
-                    <tr>
-                        <th>BAC Level</th>
-                        <th>Typical Effects</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>0.00% - 0.03%</td>
-                        <td>No noticeable effects; normal behavior.</td>
-                    </tr>
-                    <tr>
-                        <td>0.03% - 0.06%</td>
-                        <td>Mild euphoria, relaxation, increased sociability.</td>
-                    </tr>
-                    <tr>
-                        <td>0.06% - 0.10%</td>
-                        <td>Impaired judgment, reduced inhibitions, slight coordination loss.</td>
-                    </tr>
-                    <tr>
-                        <td>0.10% - 0.20%</td>
-                        <td>Obvious impairment, slurred speech, poor motor skills.</td>
-                    </tr>
-                    <tr>
-                        <td>0.20% - 0.30%</td>
-                        <td>Confusion, nausea, potential blackout.</td>
-                    </tr>
-                    <tr>
-                        <td>0.30% +</td>
-                        <td>Severe intoxication, risk of unconsciousness or death.</td>
-                    </tr>
-                </tbody>
-            </table>
-            <button onclick="sharePage()">Share This Page</button>
-        </section>
-        <section>
-            <h2>Understanding Blood Alcohol Concentration Estimation</h2>
-            <p>Blood alcohol concentration (BAC) represents the percentage of alcohol in a person's bloodstream, influencing cognitive and physical functions. This estimator uses established formulas to approximate BAC levels, aiding in awareness of alcohol's impact on the body.</p>
-            <h3>How to Use This Estimator</h3>
-            <p>Select your gender and enter your weight in pounds. Input the number of standard drinks consumed, categorized by type: beers (12 oz at 5% ABV), wine glasses (5 oz at 12% ABV), or shots (1.5 oz at 40% ABV). Specify the hours elapsed since your first drink. Click 'Calculate' to view the estimated BAC, potential effects, and a graphical representation of BAC over time.</p>
-            <p>Note: This tool provides estimates only and should not replace professional testing devices or medical advice.</p>
-            <h3>Mathematical Formula for BAC Estimation</h3>
-            <p>The calculation employs the Widmark formula:</p>
-            \[ \BAC = \frac{A}{r \times W} - \beta \times t \]
-            <p>Where:</p>
-            <ul>
-                <li>\( A \) is the total alcohol consumed in grams.</li>
-                <li>\( r \) is the gender-specific alcohol distribution ratio (0.68 for males, 0.55 for females).</li>
-                <li>\( W \) is body weight in grams.</li>
-                <li>\( \beta \) is the alcohol elimination rate (approximately 0.015 g/dL per hour).</li>
-                <li>\( t \) is time elapsed in hours.</li>
-            </ul>
-            <p>Alcohol in grams for each drink type is derived from volume, ABV, and alcohol density (0.789 g/mL).</p>
-            <h3>Factors Influencing BAC Levels</h3>
-            <p>BAC varies based on metabolism, food intake, hydration, and individual tolerance. Gender differences arise from body composition variations, with females generally having higher BAC for equivalent consumption due to lower water content.</p>
-            <h3>Legal and Health Implications</h3>
-            <p>In many jurisdictions, BAC above 0.08% is considered impaired for driving. Chronic high BAC can lead to health issues like liver damage. Always prioritize safety and designate a sober driver.</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Country</th>
-                        <th>Legal Driving Limit (BAC)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>USA</td>
-                        <td>0.08%</td>
-                    </tr>
-                    <tr>
-                        <td>UK</td>
-                        <td>0.08%</td>
-                    </tr>
-                    <tr>
-                        <td>Canada</td>
-                        <td>0.08%</td>
-                    </tr>
-                    <tr>
-                        <td>Australia</td>
-                        <td>0.05%</td>
-                    </tr>
-                    <tr>
-                        <td>Sweden</td>
-                        <td>0.02%</td>
-                    </tr>
-                </tbody>
-            </table>
-            <h3>Disclaimer</h3>
-            <p>This estimator is for informational purposes only and does not constitute medical or legal advice. Actual BAC may differ due to various factors. Do not rely on this tool to determine fitness to drive or operate machinery. Consult professionals for accurate assessments.</p>
-            <h2>Frequently Asked Questions</h2>
-            <p><strong>What is a standard drink?</strong><br>A standard drink contains about 14 grams of pure alcohol, equivalent to one 12 oz beer (5% ABV), 5 oz wine (12% ABV), or 1.5 oz spirits (40% ABV).</p>
-            <p><strong>How accurate is this BAC estimator?</strong><br>It provides a reasonable approximation using standard formulas but cannot account for all personal variables like metabolism rate or recent meals.</p>
-            <p><strong>Why does gender affect BAC?</strong><br>Males typically have higher body water content, diluting alcohol more effectively than in females.</p>
-            <p><strong>What if I consumed mixed drinks?</strong><br>Approximate by equating to the closest standard drink type or adjust inputs accordingly for better estimation.</p>
-            <p><strong>Can food lower BAC?</strong><br>Eating slows alcohol absorption, potentially lowering peak BAC, but total alcohol processed remains the same.</p>
-            <h2>Related Resources</h2>
-            <ul>
-                <li><a href="https://en.wikipedia.org/wiki/Blood_alcohol_content" target="_blank" rel="noopener noreferrer">Wikipedia: Blood Alcohol Content</a> - Comprehensive overview of BAC science, measurement methods, and global legal standards.</li>
-                <li><a href="https://www.nhtsa.gov/risky-driving/drunk-driving" target="_blank" rel="noopener noreferrer">NHTSA: Drunk Driving</a> - U.S. government resources on impaired driving risks, statistics, and prevention strategies.</li>
-                <li><a href="https://www.cdc.gov/alcohol/fact-sheets/binge-drinking.htm" target="_blank" rel="noopener noreferrer">CDC: Binge Drinking</a> - Health impacts of excessive alcohol use, including BAC-related effects and public health data.</li>
-                <li><a href="https://www.who.int/news-room/fact-sheets/detail/alcohol" target="_blank" rel="noopener noreferrer">WHO: Alcohol</a> - Global perspectives on alcohol consumption, health consequences, and policy recommendations.</li>
-            </ul>
-            <p>For related tools on our site, explore <a href="/bmi-calculator.html">BMI Calculator</a> or <a href="/calorie.html">Calorie Intake Estimator</a> in the Health & Fitness category.</p>
-        </section>
-    </main>
+                    </div>
+                    <button type="button" onclick="addDrinkRow()">Add Another Drink</button>
+                </fieldset>
+                <fieldset>
+                    <legend>Measurement Options</legend>
+                    <div class="input-row">
+                        <label for="bac-unit">BAC Unit</label>
+                        <select id="bac-unit" required>
+                            <option value="percent">Percentage (%)</option>
+                            <option value="promille">Promille (‰)</option>
+                            <option value="mgL">mg/L</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="elapsed-time">Total Time Elapsed (hours)</label>
+                        <input type="number" id="elapsed-time" value="1" required min="0" step="0.5">
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="calculateBAC()">Calculate</button>
+        </form>
+    </section>
+    <section class="results-section" id="results" style="display: none;">
+        <h2>Calculation Results</h2>
+        <table id="bacTable">
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Results will be populated here -->
+            </tbody>
+        </table>
+        <canvas id="bacChart" width="400" height="200"></canvas>
+        <button type="button" onclick="generatePDF()">Save as PDF</button>
+        <button class="share-button" onclick="sharePage()">Share this page</button>
+    </section>
+    <section>
+        <h2>How to Use the Blood Alcohol Concentration Calculator</h2>
+        <p>This tool estimates BAC using inputs like weight, gender, age, drink types, quantities, and time. Add multiple drinks for accuracy, select units, and click 'Calculate' to view results, including a chart showing BAC decline over time. For example, a 70kg male consuming two beers over 2 hours might show a BAC of 0.04%.</p>
+    </section>
+    <section>
+        <h2>Understanding Blood Alcohol Concentration</h2>
+        <h3>Widmark Formula for BAC Estimation</h3>
+        <p>The Widmark formula calculates BAC based on alcohol consumed, body weight, and distribution ratio.</p>
+        <p>\[BAC = \frac{A \times 5.14}{W \times r} - 0.015 \times H\]</p>
+        <p>Where \(A\) is alcohol in ounces, \(W\) is weight in pounds, \(r\) is gender constant (0.73 for males, 0.66 for females), \(H\) is hours elapsed.</p>
+        <h3>Factors Influencing BAC</h3>
+        <p>Gender affects distribution due to body composition; age impacts metabolism. Drink types vary in alcohol content, and time allows for elimination at ~0.015% per hour.</p>
+    </section>
+    <section>
+        <h2>Visualizing BAC Trends</h2>
+        <p>The chart displays BAC levels over time, illustrating peak and decline. This helps understand impairment duration, useful for safety planning.</p>
+        <h3>Comparison Table: Sample BAC Scenarios</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Weight (kg)</th>
+                    <th>Gender</th>
+                    <th>Drinks</th>
+                    <th>Time (hrs)</th>
+                    <th>BAC (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Light Drinking</td>
+                    <td>60</td>
+                    <td>Female</td>
+                    <td>1 Wine</td>
+                    <td>1</td>
+                    <td>0.03</td>
+                </tr>
+                <tr>
+                    <td>Moderate</td>
+                    <td>80</td>
+                    <td>Male</td>
+                    <td>3 Beers</td>
+                    <td>2</td>
+                    <td>0.05</td>
+                </tr>
+                <tr>
+                    <td>Heavy</td>
+                    <td>70</td>
+                    <td>Female</td>
+                    <td>4 Shots</td>
+                    <td>3</td>
+                    <td>0.12</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>These examples show how variables affect BAC. Link to related tools like our <a href="/heart-rate-calculator.html">Heart Rate Calculator</a> or <a href="/calorie.html">Calorie Calculator</a> for health insights.</p>
+    </section>
+    <section>
+        <h2>Applications in Real-World Scenarios</h2>
+        <p>BAC estimation aids in responsible drinking, legal compliance (e.g., driving limits of 0.08% in many regions), and health monitoring. It's used in medical, legal, and educational contexts to promote safety.</p>
+        <p>For data sources, refer to government sites like NHTSA or EU health portals.</p>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What factors affect BAC accuracy?</strong> Metabolism varies by food intake, medications, and health; this tool provides estimates only.</p>
+        <p><strong>Can I add custom drinks?</strong> Select types with standard ABV; for customs, adjust quantities accordingly.</p>
+        <p><strong>Why include age?</strong> Older adults metabolize slower, slightly adjusting elimination rates.</p>
+        <p><strong>What are legal BAC limits?</strong> Vary by country; e.g., 0.05% in many EU nations, 0.08% in US.</p>
+        <p><strong>How does the chart work?</strong> It plots BAC from consumption start to full elimination.</p>
+    </section>
+    <section>
+        <h2>Disclaimer</h2>
+        <p>This tool offers approximate BAC estimates for informational purposes and is not a substitute for professional medical or legal advice. Do not use for decisions on driving or health; consult experts and use breathalyzers for accuracy.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Blood_alcohol_content" target="_blank" rel="noopener noreferrer">Wikipedia: Blood alcohol content</a> - Detailed explanation of BAC measurement, formulas, and effects on the body, helping users understand physiological impacts.</li>
+            <li><a href="https://www.nhtsa.gov/risky-driving/drunk-driving" target="_blank" rel="noopener noreferrer">NHTSA: Drunk Driving</a> - Government resources on impaired driving laws, statistics, and prevention, aiding users in assessing risks and legal implications.</li>
+            <li><a href="https://www.who.int/news-room/fact-sheets/detail/alcohol" target="_blank" rel="noopener noreferrer">WHO: Alcohol Fact Sheet</a> - Global health insights on alcohol consumption effects, providing data and guidelines for safer habits.</li>
+            <li><a href="https://pubs.niaaa.nih.gov/publications/aa72/aa72.htm" target="_blank" rel="noopener noreferrer">NIAAA: Understanding Alcohol's Impact</a> - Research on metabolism and health risks, helping users learn about long-term consequences.</li>
+            <li><a href="https://ec.europa.eu/transport/road_safety/topics/behaviour/drink_driving_en" target="_blank" rel="noopener noreferrer">EU Road Safety: Drink Driving</a> - European policies, limits, and campaigns, supporting comparative analysis across regions.</li>
+        </ul>
+    </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        let drinkCount = 1;
+
+        function addDrinkRow() {
+            drinkCount++;
+            const container = document.getElementById('drinks-container');
+            const row = document.createElement('div');
+            row.className = 'drink-row';
+            row.innerHTML = `
+                <label for="drink-type-${drinkCount}">Drink Type</label>
+                <select id="drink-type-${drinkCount}" required>
+                    <option value="beer">Beer (5% ABV, 12 oz)</option>
+                    <option value="wine">Wine (12% ABV, 5 oz)</option>
+                    <option value="shot">Shot (40% ABV, 1.5 oz)</option>
+                    <option value="cocktail">Cocktail (mixed, ~1.5 oz spirits)</option>
+                    <option value="pint">Pint of Beer (5% ABV, 16 oz)</option>
+                    <option value="glass-wine">Large Glass Wine (12% ABV, 8 oz)</option>
+                    <option value="double-shot">Double Shot (40% ABV, 3 oz)</option>
+                </select>
+                <label for="quantity-${drinkCount}">Quantity</label>
+                <input type="number" id="quantity-${drinkCount}" value="1" required min="1">
+                <label for="time-consumed-${drinkCount}">Time Consumed (hours ago)</label>
+                <input type="number" id="time-consumed-${drinkCount}" value="0" required min="0" step="0.5">
+            `;
+            container.appendChild(row);
+        }
+
         function calculateBAC() {
+            const weightKg = parseFloat(document.getElementById('weight').value);
             const gender = document.getElementById('gender').value;
-            const weightLbs = parseFloat(document.getElementById('weight').value);
-            const beer = parseInt(document.getElementById('beer').value);
-            const wine = parseInt(document.getElementById('wine').value);
-            const shots = parseInt(document.getElementById('shots').value);
-            const hours = parseFloat(document.getElementById('hours').value);
+            const age = parseFloat(document.getElementById('age').value);
+            const bacUnit = document.getElementById('bac-unit').value;
+            const elapsedTime = parseFloat(document.getElementById('elapsed-time').value);
 
-            if (isNaN(weightLbs) || weightLbs <= 0 || isNaN(hours) || hours < 0) {
-                alert('Please enter valid inputs.');
-                return;
+            const r = gender === 'male' ? 0.73 : gender === 'female' ? 0.66 : 0.695;
+            const weightLbs = weightKg * 2.20462;
+            let totalAlcoholOz = 0;
+
+            for (let i = 1; i <= drinkCount; i++) {
+                const type = document.getElementById(`drink-type-${i}`).value;
+                const qty = parseFloat(document.getElementById(`quantity-${i}`).value);
+                let abv, volumeOz;
+                switch (type) {
+                    case 'beer': abv = 0.05; volumeOz = 12; break;
+                    case 'wine': abv = 0.12; volumeOz = 5; break;
+                    case 'shot': abv = 0.40; volumeOz = 1.5; break;
+                    case 'cocktail': abv = 0.40; volumeOz = 1.5; break;
+                    case 'pint': abv = 0.05; volumeOz = 16; break;
+                    case 'glass-wine': abv = 0.12; volumeOz = 8; break;
+                    case 'double-shot': abv = 0.40; volumeOz = 3; break;
+                }
+                totalAlcoholOz += qty * volumeOz * abv;
             }
 
-            // Convert weight to grams
-            const weightGrams = weightLbs * 453.592;
+            const bac = (totalAlcoholOz * 5.14 / (weightLbs * r)) - (0.015 * elapsedTime * (age > 50 ? 0.9 : 1));
+            let displayBac = bac > 0 ? bac : 0;
+            if (bacUnit === 'promille') displayBac *= 10;
+            else if (bacUnit === 'mgL') displayBac *= 1000;
 
-            // Alcohol in grams: beer (12oz=355ml, 5% ABV), wine (5oz=148ml, 12%), shot (1.5oz=44ml, 40%)
-            // Density 0.789 g/ml
-            const alcoholBeer = beer * (355 * 0.05 * 0.789);
-            const alcoholWine = wine * (148 * 0.12 * 0.789);
-            const alcoholShots = shots * (44 * 0.40 * 0.789);
-            const totalAlcohol = alcoholBeer + alcoholWine + alcoholShots;
+            const results = [
+                ['Estimated BAC', displayBac.toFixed(3) + (bacUnit === 'percent' ? '%' : bacUnit === 'promille' ? '‰' : ' mg/L')],
+                ['Impairment Level', bac < 0.03 ? 'Minimal' : bac < 0.08 ? 'Moderate' : 'High'],
+                ['Time to Sober (hrs)', ((bac / 0.015) + elapsedTime).toFixed(1)]
+            ];
 
-            // Distribution ratio
-            const r = gender === 'male' ? 0.68 : 0.55;
+            const tableBody = document.querySelector('#bacTable tbody');
+            tableBody.innerHTML = results.map(row => `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`).join('');
 
-            // Elimination rate: 0.015 per hour
-            const beta = 0.015;
-
-            // BAC calculation
-            let bac = (totalAlcohol / (r * weightGrams)) * 100 - (beta * hours);
-            bac = Math.max(0, bac.toFixed(3));
-
-            // Effects
-            let effects = '';
-            if (bac < 0.03) effects = 'No noticeable effects.';
-            else if (bac < 0.06) effects = 'Mild relaxation and sociability.';
-            else if (bac < 0.10) effects = 'Impaired judgment and coordination.';
-            else if (bac < 0.20) effects = 'Significant impairment, slurred speech.';
-            else if (bac < 0.30) effects = 'Confusion and potential blackout.';
-            else effects = 'Severe risk, possible unconsciousness.';
-
-            document.getElementById('bac-result').innerText = `Estimated BAC: ${bac}%`;
-            document.getElementById('effects-result').innerText = `Potential Effects: ${effects}`;
-            document.getElementById('results').style.display = 'block';
-
-            // Chart: BAC over time
-            const ctx = document.getElementById('bacChart').getContext('2d');
-            const initialBac = (totalAlcohol / (r * weightGrams)) * 100;
-            const dataPoints = [];
-            for (let t = 0; t <= hours; t += 0.5) {
-                dataPoints.push({x: t, y: Math.max(0, initialBac - beta * t)});
-            }
-            new Chart(ctx, {
+            // BAC Chart over time
+            const times = Array.from({length: 13}, (_, i) => i);
+            const bacLevels = times.map(t => Math.max(0, (totalAlcoholOz * 5.14 / (weightLbs * r)) - (0.015 * t)));
+            const chartCtx = document.getElementById('bacChart').getContext('2d');
+            new Chart(chartCtx, {
                 type: 'line',
                 data: {
-                    datasets: [{
-                        label: 'BAC Over Time',
-                        data: dataPoints,
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                    }]
+                    labels: times.map(t => `Hour ${t}`),
+                    datasets: [{ label: 'BAC Over Time', data: bacLevels, borderColor: 'rgba(0, 200, 200, 1)', fill: false }]
                 },
-                options: {
-                    scales: {
-                        x: { title: { display: true, text: 'Hours' } },
-                        y: { title: { display: true, text: 'BAC %' } }
-                    }
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+
+            document.getElementById('results').style.display = 'block';
+
+            // Store for PDF
+            window.bacResults = results;
+        }
+
+        async function generatePDF() {
+            if (!window.bacResults) return alert('Calculate first.');
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.text('Blood Alcohol Concentration Results', 105, 10, { align: 'center' });
+            doc.autoTable({
+                head: [['Metric', 'Value']],
+                body: window.bacResults.map(row => [row[0], row[1]]),
+                startY: 20,
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.',doc.internal.pageSize.width / 2,doc.internal.pageSize.height - 10, { align: 'center' });
                 }
             });
+            doc.save('bac-results.pdf');
         }
 
         function sharePage() {
+            const url = window.location.href;
             if (navigator.share) {
-                navigator.share({
-                    title: 'Blood Alcohol Concentration Estimator',
-                    url: window.location.href
-                }).catch(console.error);
+                navigator.share({ title: document.title, url });
             } else {
-                alert('Share not supported on this browser.');
+                alert('Share this page: ' + url);
             }
         }
     </script>
