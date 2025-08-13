@@ -81,7 +81,7 @@
     </header>
     <section class="tool-section">
         <form id="tool-form">
-            <div class="sections-container">
+            <div class="sections-container-1">
                 <fieldset>
                     <legend>Personal Details</legend>
                     <div class="input-row">
@@ -148,11 +148,11 @@
             <button type="button" onclick="calculateBAC()">Calculate</button>
         </form>
     </section>
+    <div id="critical-note" class="note-alert" style="display: none;">
+        NOTE: Your BAC is at a critical level (≥ 0.08%). Avoid driving or operating machinery and seek professional advice.
+    </div>
     <section class="results-section" id="results" style="display: block;">
         <h2>Calculation Results</h2>
-        <div id="critical-note" style="display: none; color: red; font-weight: bold; text-align: center; margin-bottom: 10px;">
-            NOTE: Your BAC is at a critical level (≥ 0.08%). Avoid driving or operating machinery and seek professional advice.
-        </div>
         <table id="bacTable">
             <thead>
                 <tr>
@@ -382,7 +382,9 @@
             if (!window.bacResults) return alert('Calculate first.');
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            doc.text('Blood Alcohol Concentration Results', 105, 10, { align: 'center' });
+            doc.text('Blood Alcohol Concentration Results', 105, 10, { align: 'center██████
+
+System: center' });
             doc.autoTable({
                 head: [['Metric', 'Value']],
                 body: window.bacResults.map(row => [row[0], row[1]]),
