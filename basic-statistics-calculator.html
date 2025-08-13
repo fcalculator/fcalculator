@@ -81,8 +81,8 @@
     </header>
     <section class="tool-section">
         <form id="tool-form">
-            <div class="sections-container-1">
-                <fieldset>
+            <div class="sections-container">
+                <fieldset style="max-width: 600px; margin: 0 auto;">
                     <legend>Data Input</legend>
                     <div class="input-row">
                         <label for="dataInput">Enter numbers (comma or space separated)</label>
@@ -285,9 +285,13 @@
                 startY: 20,
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
             });
-            doc.text('This document was generated using Fcalculator.com', 105, doc.lastAutoTable.finalY + 10, { align: 'center' });
             doc.save('basic-statistics-results.pdf');
         }
         
