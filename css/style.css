@@ -291,9 +291,12 @@ footer {
                 flex-wrap: wrap;
             }
         }
-        #pdf-button, .share-button {
+        .pdf-button{
             margin: 10px;
-        }
+            } 
+        .share-button {
+            margin: 10px;
+            }
         .results-section {
             text-align: center;
             font-size: 1.3em;
