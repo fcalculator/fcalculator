@@ -48,8 +48,8 @@
           "url": "https://fcalculator.com/logo.png"
         }
       },
-      "datePublished": "2025-08-14",
-      "dateModified": "2025-08-14",
+      "datePublished": "2022-01-14",
+      "dateModified": "2022-01-14",
       "author": {
         "@type": "Person",
         "name": "I.Brkic"
@@ -108,6 +108,7 @@
             <button class="share-button" onclick="sharePage()">Share</button>
             <div class="note-alert" id="alert-message" style="display: none;"></div>
         </section>
+        <p>Explore our related tools including the <a href="/safe-password-generator.html">Safe Password Generator</a>, <a href="/dice-roller.html">Dice Roller</a>, and <a href="/random-number-generator-wheel.html">Random Number Generator Wheel</a> for additional randomization features.</p>
         <section>
             <h2>How the Random Number Generator Works</h2>
             <p>This tool utilizes JavaScript's built-in pseudo-random number generation capabilities to produce sequences of numbers based on user-defined parameters. By specifying a minimum and maximum value, along with the desired quantity, users can generate lists that may include duplicates or be unique, and optionally sorted for better readability.</p>
@@ -209,7 +210,7 @@
 
         function displayNumbers(numbers) {
             const list = document.getElementById('numbers-list');
-            let tableHtml = '<table><thead><tr><th>Index</th><th>Number</th></tr></thead><tbody>';
+            let tableHtml = '<table class="results-table"><thead><tr><th>Index</th><th>Number</th></tr></thead><tbody>';
             numbers.forEach((num, index) => {
                 tableHtml += `<tr><td>${index + 1}</td><td>${num}</td></tr>`;
             });
@@ -256,7 +257,21 @@
                 didDrawPage: function (data) {
                     doc.setFontSize(10);
                     doc.setTextColor(100);
-                    doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                    const footerText1 = 'This document was generated using ';
+                    const linkText = 'Fcalculator.com';
+                    const footerText2 = ' – Calculations are provided “as is” without warranty. Use at your own risk.';
+                    const pageWidth = doc.internal.pageSize.width;
+                    const text1Width = doc.getTextWidth(footerText1);
+                    const linkWidth = doc.getTextWidth(linkText);
+                    const text2Width = doc.getTextWidth(footerText2);
+                    const totalWidth = text1Width + linkWidth + text2Width;
+                    const startX = (pageWidth - totalWidth) / 2;
+                    const y = doc.internal.pageSize.height - 10;
+                    doc.text(footerText1, startX, y);
+                    doc.setTextColor(0, 0, 255); // Blue for link
+                    doc.textWithLink(linkText, startX + text1Width, y, { url: 'https://fcalculator.com' });
+                    doc.setTextColor(100);
+                    doc.text(footerText2, startX + text1Width + linkWidth, y);
                 }
             });
 
