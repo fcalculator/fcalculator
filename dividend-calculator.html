@@ -58,6 +58,9 @@
             #amortization-table td:last-child {
                 border-bottom: 0;
             }
+            #dividend-frequency {
+                width: 100%;
+            }
         }
         .excel-button {
             background-color: #1f6f4f;
@@ -140,6 +143,14 @@
                     <option value="A$">AUD (A$)</option>
                 </select>
             </div>
+            <div class="input-row">
+                <label for="dividend-frequency">Dividend Frequency</label>
+                <select id="dividend-frequency">
+                    <option value="1">Annual</option>
+                    <option value="4">Quarterly</option>
+                    <option value="12" selected>Monthly</option>
+                </select>
+            </div>
             <div class="sections-container">
                 <fieldset>
                     <legend>Investment Details</legend>
@@ -196,14 +207,14 @@
             <table id="amortization-table">
                 <thead>
                     <tr>
-                        <th>Year</th>
+                        <th>Period</th>
                         <th>Starting Balance</th>
                         <th>Dividend</th>
                         <th>After Tax Dividend</th>
                         <th>Yield</th>
                         <th>Yield on Cost</th>
                         <th>Price Appreciation</th>
-                        <th>Annual Contribution</th>
+                        <th>Contribution</th>
                         <th>DRIP Addition</th>
                         <th>Ending Balance</th>
                         <th>Cumulative Dividends</th>
@@ -220,12 +231,12 @@
     </section>
     <section>
         <h2>How the Dividend Calculator Works</h2>
-        <p>This calculator simulates the growth of a dividend-paying stock investment over a specified period. It accounts for initial investment, annual contributions, dividend payments, taxes, reinvestment via DRIP, and separate growth rates for dividends and stock prices. The model tracks the number of shares owned, updating them annually based on contributions and reinvestments.</p>
+        <p>This calculator simulates the growth of a dividend-paying stock investment over a specified period. It accounts for initial investment, annual contributions, dividend payments, taxes, reinvestment via DRIP, and separate growth rates for dividends and stock prices. The model tracks the number of shares owned, updating them per period based on contributions and reinvestments.</p>
         <p>Key steps in the calculation:</p>
         <ol>
             <li>Determine initial shares: Initial Investment / Initial Stock Price.</li>
             <li>Calculate initial dividend per share: (Initial Dividend Yield / 100) * Initial Stock Price.</li>
-            <li>For each year: Appreciate stock price, calculate dividend based on current shares and dividend per share, apply taxes, add contributions and DRIP if selected, update shares and balances.</li>
+            <li>For each period: Appreciate stock price, calculate dividend based on current shares and dividend per share, apply taxes, add contributions and DRIP if selected, update shares and balances.</li>
         </ol>
     </section>
     <section>
@@ -233,12 +244,12 @@
         <p>The core formulas are as follows:</p>
         <p>Initial Shares: \( s_0 = \frac{P_0}{p_0} \), where \( P_0 \) is initial investment, \( p_0 \) is initial stock price.</p>
         <p>Initial Dividend per Share: \( dps_0 = y_0 \times p_0 \), where \( y_0 \) is initial yield (decimal).</p>
-        <p>Annual Dividend: \( d_t = s_t \times dps_t \).</p>
+        <p>Periodic Dividend: \( d_t = s_t \times dps_t / f \), where \( f \) is frequency.</p>
         <p>After Tax Dividend: \( d_{tax,t} = d_t \times (1 - r_{tax}) \), where \( r_{tax} \) is tax rate (decimal).</p>
-        <p>Stock Price Update: \( p_{t+1} = p_t \times (1 + r_p) \), where \( r_p \) is price appreciation (decimal).</p>
-        <p>Dividend per Share Update: \( dps_{t+1} = dps_t \times (1 + r_d) \), where \( r_d \) is dividend growth (decimal).</p>
+        <p>Stock Price Update: \( p_{t+1} = p_t \times (1 + r_p / f) \), where \( r_p \) is annual price appreciation (decimal), \( f \) is frequency.</p>
+        <p>Dividend per Share Update: \( dps_{t+1} = dps_t \times (1 + r_d / f) \), where \( r_d \) is annual dividend growth (decimal).</p>
         <p>If DRIP: Additional Shares = \( \frac{d_{tax,t}}{p_t} \).</p>
-        <p>Contribution Shares: \( \frac{c}{p_t} \), where \( c \) is annual contribution.</p>
+        <p>Contribution per Period: \( c / f \), where \( c \) is annual contribution.</p>
         <p>Total Return: \( \left( \frac{P_n - P_0}{P_0} \right) \times 100 \), where \( P_n \) is ending balance.</p>
         <p>Average Annual Return: \( \left( \left( \frac{P_n}{P_0} \right)^{1/n} - 1 \right) \times 100 \), where \( n \) is number of years.</p>
         <p>Yield on Cost: \( \frac{dps_n}{p_0} \times 100 \).</p>
@@ -293,8 +304,9 @@
         <p><strong>What is dividend yield?</strong> Dividend yield represents the annual dividend payment as a percentage of the stock's current price, indicating the income return on investment.</p>
         <p><strong>How does DRIP affect returns?</strong> DRIP reinvests dividends to buy more shares, compounding growth over time and potentially increasing total returns through additional dividend payments.</p>
         <p><strong>Why separate dividend growth and price appreciation?</strong> Dividend growth reflects company policy on increasing payouts, while price appreciation depends on market valuation and earnings growth.</p>
-        <p><strong>Are taxes considered?</strong> Yes, the calculator applies the specified tax rate to dividend income annually, but does not account for capital gains taxes on appreciation.</p>
+        <p><strong>Are taxes considered?</strong> Yes, the calculator applies the specified tax rate to dividend income periodically, but does not account for capital gains taxes on appreciation.</p>
         <p><strong>Can I use this for multiple stocks?</strong> This tool models a single stock or portfolio average; for diversified portfolios, aggregate average yields and rates.</p>
+        <p><strong>How does dividend frequency work?</strong> Select annual, quarterly, or monthly to adjust calculations for payout periods, useful for ETFs like MSTY with monthly dividends.</p>
     </section>
     <section>
         <h2>Related Resources</h2>
@@ -324,29 +336,34 @@
             const reinvestDividends = document.getElementById('reinvest-dividends').checked;
             const stockPriceAppreciation = parseFloat(document.getElementById('stock-price-appreciation').value) / 100;
             const numberOfYears = parseInt(document.getElementById('number-of-years').value);
+            const frequency = parseInt(document.getElementById('dividend-frequency').value);
 
-            if (isNaN(initialInvestment) || isNaN(initialStockPrice) || isNaN(annualContribution) || isNaN(initialDividendYield) || isNaN(dividendGrowthRate) || isNaN(dividendTaxRate) || isNaN(stockPriceAppreciation) || isNaN(numberOfYears)) {
+            if (isNaN(initialInvestment) || isNaN(initialStockPrice) || isNaN(annualContribution) || isNaN(initialDividendYield) || isNaN(dividendGrowthRate) || isNaN(dividendTaxRate) || isNaN(stockPriceAppreciation) || isNaN(numberOfYears) || isNaN(frequency)) {
                 alert('Please fill all fields with valid numbers.');
                 return;
             }
 
             let currentStockPrice = initialStockPrice;
-            let currentDps = initialDividendYield * initialStockPrice;
+            let currentDps = initialDividendYield * initialStockPrice / frequency;
             let currentShares = initialInvestment / initialStockPrice;
             let cumulativeDividends = 0;
             let tableBody = '';
             let chartData = { labels: [], values: [] };
             let yearlyData = [];
+            const totalPeriods = numberOfYears * frequency;
+            const periodContribution = annualContribution / frequency;
+            const periodPriceGrowth = stockPriceAppreciation / frequency;
+            const periodDividendGrowth = dividendGrowthRate / frequency;
 
-            for (let year = 1; year <= numberOfYears; year++) {
+            for (let period = 1; period <= totalPeriods; period++) {
                 let startingBalance = currentShares * currentStockPrice;
                 let dividend = currentShares * currentDps;
                 let afterTaxDividend = dividend * (1 - dividendTaxRate);
                 cumulativeDividends += dividend;
-                let currentYield = (currentDps / currentStockPrice) * 100;
-                let yieldOnCost = (currentDps / initialStockPrice) * 100;
-                let priceAppreciationAmount = startingBalance * stockPriceAppreciation;
-                let contributionShares = annualContribution / currentStockPrice;
+                let currentYield = (currentDps * frequency / currentStockPrice) * 100;
+                let yieldOnCost = (currentDps * frequency / initialStockPrice) * 100;
+                let priceAppreciationAmount = startingBalance * periodPriceGrowth;
+                let contributionShares = periodContribution / currentStockPrice;
                 let dripAddition = 0;
                 let dripShares = 0;
                 if (reinvestDividends) {
@@ -354,35 +371,35 @@
                     dripAddition = afterTaxDividend;
                 }
                 currentShares += contributionShares + dripShares;
-                currentStockPrice *= (1 + stockPriceAppreciation);
-                currentDps *= (1 + dividendGrowthRate);
+                currentStockPrice *= (1 + periodPriceGrowth);
+                currentDps *= (1 + periodDividendGrowth);
                 let endingBalance = currentShares * currentStockPrice;
 
                 tableBody += `<tr>
-                    <td data-label="Year">${year}</td>
+                    <td data-label="Period">${period}</td>
                     <td data-label="Starting Balance">${currencySymbol}${startingBalance.toFixed(2)}</td>
                     <td data-label="Dividend">${currencySymbol}${dividend.toFixed(2)}</td>
                     <td data-label="After Tax Dividend">${currencySymbol}${afterTaxDividend.toFixed(2)}</td>
                     <td data-label="Yield">${currentYield.toFixed(2)}%</td>
                     <td data-label="Yield on Cost">${yieldOnCost.toFixed(2)}%</td>
                     <td data-label="Price Appreciation">${currencySymbol}${priceAppreciationAmount.toFixed(2)}</td>
-                    <td data-label="Annual Contribution">${currencySymbol}${annualContribution.toFixed(2)}</td>
+                    <td data-label="Contribution">${currencySymbol}${periodContribution.toFixed(2)}</td>
                     <td data-label="DRIP Addition">${currencySymbol}${dripAddition.toFixed(2)}</td>
                     <td data-label="Ending Balance">${currencySymbol}${endingBalance.toFixed(2)}</td>
                     <td data-label="Cumulative Dividends">${currencySymbol}${cumulativeDividends.toFixed(2)}</td>
                 </tr>`;
 
-                chartData.labels.push(`Year ${year}`);
+                chartData.labels.push(`Period ${period}`);
                 chartData.values.push(endingBalance);
                 yearlyData.push({
-                    year,
+                    period,
                     startingBalance: startingBalance.toFixed(2),
                     dividend: dividend.toFixed(2),
                     afterTaxDividend: afterTaxDividend.toFixed(2),
                     currentYield: currentYield.toFixed(2),
                     yieldOnCost: yieldOnCost.toFixed(2),
                     priceAppreciation: priceAppreciationAmount.toFixed(2),
-                    annualContribution: annualContribution.toFixed(2),
+                    contribution: periodContribution.toFixed(2),
                     dripAddition: dripAddition.toFixed(2),
                     endingBalance: endingBalance.toFixed(2),
                     cumulativeDividends: cumulativeDividends.toFixed(2)
@@ -392,9 +409,9 @@
             let endingBalance = currentShares * currentStockPrice;
             let totalReturn = ((endingBalance - initialInvestment) / initialInvestment) * 100;
             let avgAnnualReturn = (Math.pow(endingBalance / initialInvestment, 1 / numberOfYears) - 1) * 100;
-            let finalAnnualDividend = currentShares * currentDps;
-            let finalYield = (currentDps / currentStockPrice) * 100;
-            let finalYieldOnCost = (currentDps / initialStockPrice) * 100;
+            let finalAnnualDividend = currentShares * currentDps * frequency;
+            let finalYield = (currentDps * frequency / currentStockPrice) * 100;
+            let finalYieldOnCost = (currentDps * frequency / initialStockPrice) * 100;
 
             document.getElementById('summary').innerHTML = `
                 Ending Balance: ${currencySymbol}${endingBalance.toFixed(2)}<br>
@@ -403,7 +420,8 @@
                 Final Annual Dividend Income: ${currencySymbol}${finalAnnualDividend.toFixed(2)}<br>
                 Total Dividend Payments: ${currencySymbol}${cumulativeDividends.toFixed(2)}<br>
                 Final Yield: ${finalYield.toFixed(2)}%<br>
-                Yield on Cost: ${finalYieldOnCost.toFixed(2)}%
+                Yield on Cost: ${finalYieldOnCost.toFixed(2)}%<br>
+                Total Periods: ${totalPeriods}
             `;
 
             document.querySelector('#amortization-table tbody').innerHTML = tableBody;
@@ -428,7 +446,7 @@
                     responsive: true,
                     scales: {
                         y: { beginAtZero: true, title: { display: true, text: 'Value (' + currencySymbol + ')' } },
-                        x: { title: { display: true, text: 'Years' } }
+                        x: { title: { display: true, text: 'Periods' } }
                     },
                     plugins: {
                         legend: { display: true },
@@ -461,16 +479,16 @@
             y += 10;
 
             doc.autoTable({
-                head: [['Year', 'Starting Balance', 'Dividend', 'After Tax Dividend', 'Yield', 'Yield on Cost', 'Price Appreciation', 'Annual Contribution', 'DRIP Addition', 'Ending Balance', 'Cumulative Dividends']],
+                head: [['Period', 'Starting Balance', 'Dividend', 'After Tax Dividend', 'Yield', 'Yield on Cost', 'Price Appreciation', 'Contribution', 'DRIP Addition', 'Ending Balance', 'Cumulative Dividends']],
                 body: window.yearlyData.map(row => [
-                    row.year,
+                    row.period,
                     window.currencySymbol + row.startingBalance,
                     window.currencySymbol + row.dividend,
                     window.currencySymbol + row.afterTaxDividend,
                     row.currentYield + '%',
                     row.yieldOnCost + '%',
                     window.currencySymbol + row.priceAppreciation,
-                    window.currencySymbol + row.annualContribution,
+                    window.currencySymbol + row.contribution,
                     window.currencySymbol + row.dripAddition,
                     window.currencySymbol + row.endingBalance,
                     window.currencySymbol + row.cumulativeDividends
@@ -492,17 +510,17 @@
 
         function saveExcel() {
             var wb = XLSX.utils.book_new();
-            var ws_data = [["Year", "Starting Balance", "Dividend", "After Tax Dividend", "Yield", "Yield on Cost", "Price Appreciation", "Annual Contribution", "DRIP Addition", "Ending Balance", "Cumulative Dividends"]];
+            var ws_data = [["Period", "Starting Balance", "Dividend", "After Tax Dividend", "Yield", "Yield on Cost", "Price Appreciation", "Contribution", "DRIP Addition", "Ending Balance", "Cumulative Dividends"]];
             window.yearlyData.forEach(row => {
                 ws_data.push([
-                    row.year,
+                    row.period,
                     window.currencySymbol + row.startingBalance,
                     window.currencySymbol + row.dividend,
                     window.currencySymbol + row.afterTaxDividend,
                     row.currentYield + '%',
                     row.yieldOnCost + '%',
                     window.currencySymbol + row.priceAppreciation,
-                    window.currencySymbol + row.annualContribution,
+                    window.currencySymbol + row.contribution,
                     window.currencySymbol + row.dripAddition,
                     window.currencySymbol + row.endingBalance,
                     window.currencySymbol + row.cumulativeDividends
