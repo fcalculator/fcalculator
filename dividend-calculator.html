@@ -27,8 +27,33 @@
             border: 1px solid #ddd;
         }
         @media screen and (max-width: 600px) {
-            #amortization-table {
-                min-width: 800px; /* Omogućuje scroll ako je potrebno */
+            #amortization-table thead {
+                display: none;
+            }
+            #amortization-table tbody tr {
+                display: block;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+            }
+            #amortization-table td {
+                display: block;
+                text-align: right;
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+            }
+            #amortization-table td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 45%;
+                padding-left: 10px;
+                font-weight: bold;
+                text-align: left;
+            }
+            #amortization-table td:last-child {
+                border-bottom: 0;
             }
         }
     </style>
@@ -318,17 +343,17 @@
                 let endingBalance = currentShares * currentStockPrice;
 
                 tableBody += `<tr>
-                    <td>${year}</td>
-                    <td>${currencySymbol}${startingBalance.toFixed(2)}</td>
-                    <td>${currencySymbol}${dividend.toFixed(2)}</td>
-                    <td>${currencySymbol}${afterTaxDividend.toFixed(2)}</td>
-                    <td>${currentYield.toFixed(2)}%</td>
-                    <td>${yieldOnCost.toFixed(2)}%</td>
-                    <td>${currencySymbol}${priceAppreciationAmount.toFixed(2)}</td>
-                    <td>${currencySymbol}${annualContribution.toFixed(2)}</td>
-                    <td>${currencySymbol}${dripAddition.toFixed(2)}</td>
-                    <td>${currencySymbol}${endingBalance.toFixed(2)}</td>
-                    <td>${currencySymbol}${cumulativeDividends.toFixed(2)}</td>
+                    <td data-label="Year">${year}</td>
+                    <td data-label="Starting Balance">${currencySymbol}${startingBalance.toFixed(2)}</td>
+                    <td data-label="Dividend">${currencySymbol}${dividend.toFixed(2)}</td>
+                    <td data-label="After Tax Dividend">${currencySymbol}${afterTaxDividend.toFixed(2)}</td>
+                    <td data-label="Yield">${currentYield.toFixed(2)}%</td>
+                    <td data-label="Yield on Cost">${yieldOnCost.toFixed(2)}%</td>
+                    <td data-label="Price Appreciation">${currencySymbol}${priceAppreciationAmount.toFixed(2)}</td>
+                    <td data-label="Annual Contribution">${currencySymbol}${annualContribution.toFixed(2)}</td>
+                    <td data-label="DRIP Addition">${currencySymbol}${dripAddition.toFixed(2)}</td>
+                    <td data-label="Ending Balance">${currencySymbol}${endingBalance.toFixed(2)}</td>
+                    <td data-label="Cumulative Dividends">${currencySymbol}${cumulativeDividends.toFixed(2)}</td>
                 </tr>`;
 
                 chartData.labels.push(`Year ${year}`);
