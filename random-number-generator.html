@@ -8,6 +8,8 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -102,6 +104,8 @@
         <section class="results-section" id="results" style="display: none;">
             <h2>Generated Numbers</h2>
             <div id="numbers-list"></div>
+            <button class="pdf-button" onclick="generatePDF()">Save as PDF</button>
+            <button class="share-button" onclick="sharePage()">Share</button>
             <div class="note-alert" id="alert-message" style="display: none;"></div>
         </section>
         <section>
@@ -142,7 +146,6 @@
             <p><strong>How large can the range be?</strong> Limited by browser capabilities, but suitable for most practical ranges up to billions.</p>
             <p><strong>Why sort the results?</strong> Sorting can help in analyzing the distribution or using the numbers in ordered contexts like simulations.</p>
         </section>
-        <button onclick="sharePage()">Share this page</button>
         <section>
             <h2>Related Resources</h2>
             <ul>
@@ -162,6 +165,8 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
+        let generatedNumbers = []; // To store generated numbers for PDF
+
         function generateNumbers() {
             const min = parseInt(document.getElementById('min-value').value);
             const max = parseInt(document.getElementById('max-value').value);
@@ -174,7 +179,7 @@
                 return;
             }
 
-            let numbers = [];
+            generatedNumbers = [];
             if (!allowDuplicates) {
                 const rangeSize = max - min + 1;
                 if (quantity > rangeSize) {
@@ -186,25 +191,30 @@
                     const j = Math.floor(Math.random() * (i + 1));
                     [pool[i], pool[j]] = [pool[j], pool[i]];
                 }
-                numbers = pool.slice(0, quantity);
+                generatedNumbers = pool.slice(0, quantity);
             } else {
                 for (let i = 0; i < quantity; i++) {
-                    numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+                    generatedNumbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
                 }
             }
 
             if (sortResults) {
-                numbers.sort((a, b) => a - b);
+                generatedNumbers.sort((a, b) => a - b);
             }
 
-            displayNumbers(numbers);
+            displayNumbers(generatedNumbers);
             hideAlert();
             document.getElementById('results').style.display = 'block';
         }
 
         function displayNumbers(numbers) {
             const list = document.getElementById('numbers-list');
-            list.innerHTML = '<ul>' + numbers.map(num => `<li>${num}</li>`).join('') + '</ul>';
+            let tableHtml = '<table><thead><tr><th>Index</th><th>Number</th></tr></thead><tbody>';
+            numbers.forEach((num, index) => {
+                tableHtml += `<tr><td>${index + 1}</td><td>${num}</td></tr>`;
+            });
+            tableHtml += '</tbody></table>';
+            list.innerHTML = tableHtml;
         }
 
         function showAlert(message) {
@@ -226,6 +236,31 @@
             } else {
                 alert('Share not supported on this browser.');
             }
+        }
+
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFontSize(16);
+            doc.text('Random Number Generator Results', doc.internal.pageSize.width / 2, 20, { align: 'center' });
+
+            const tableData = generatedNumbers.map((num, index) => [index + 1, num]);
+            doc.autoTable({
+                head: [['Number Index', 'Generated Number']],
+                body: tableData,
+                startY: 30,
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+
+            doc.save('random-numbers.pdf');
         }
     </script>
 </body>
