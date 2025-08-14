@@ -210,12 +210,7 @@
 
         function displayNumbers(numbers) {
             const list = document.getElementById('numbers-list');
-            let tableHtml = '<table class="results-table"><thead><tr><th>Index</th><th>Number</th></tr></thead><tbody>';
-            numbers.forEach((num, index) => {
-                tableHtml += `<tr><td>${index + 1}</td><td>${num}</td></tr>`;
-            });
-            tableHtml += '</tbody></table>';
-            list.innerHTML = tableHtml;
+            list.innerHTML = '<p>' + numbers.join(', ') + '</p>';
         }
 
         function showAlert(message) {
