@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An advanced tool for calculating basal metabolic rate (BMR) using multiple formulas including Mifflin-St Jeor, Harris-Benedict, and Katch-McArdle, with options for body composition and activity levels to estimate total daily energy expenditure (TDEE). Features detailed mathematical equations, influencing factors, energy distribution charts, and comprehensive health insights.">
+    <meta name="keywords" content="basal metabolic rate calculator, BMR estimation, TDEE calculator, metabolism formulas, daily energy expenditure, lean body mass calculation, resting energy needs">
     <title>Basal Metabolic Rate Calculator</title>
+    <link rel="canonical" href="https://fcalculator.com/basal-metabolic-rate-calculator.html">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
@@ -43,7 +47,7 @@
             "@type": "Person",
             "name": "I.Brkic"
         },
-        "datePublished": "2025-08-14",
+        "datePublished": "2022-01-14",
         "publisher": {
             "@type": "Organization",
             "name": "FCalculator.com",
@@ -141,13 +145,36 @@
             </div>
             <button type="button" onclick="calculateBMR()">Calculate</button>
         </form>
+        <p>Explore additional health tools such as our <a href="/bmi-calculator.html">BMI Calculator</a> and <a href="/macro-nutrient-calculator.html">Macro Nutrient Calculator</a> for deeper insights into your fitness journey.</p>
     </section>
     <section class="results-section" id="results" style="display: none;">
         <h2>Calculation Results</h2>
         <p>Your Basal Metabolic Rate (BMR): <span id="bmr-result"></span> kcal/day</p>
         <p>Your Total Daily Energy Expenditure (TDEE): <span id="tdee-result"></span> kcal/day</p>
         <canvas id="energyChart" width="400" height="200"></canvas>
-        <button onclick="saveAsPDF()">Save as PDF</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Value (kcal/day)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BMR</td>
+                    <td id="bmr-table-value"></td>
+                </tr>
+                <tr>
+                    <td>Additional Expenditure</td>
+                    <td id="additional-table-value"></td>
+                </tr>
+                <tr>
+                    <td>TDEE</td>
+                    <td id="tdee-table-value"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="pdf-button" onclick="saveAsPDF()">Save as PDF</button>
         <button class="share-button" onclick="sharePage()">Share this page</button>
     </section>
     <section>
@@ -157,6 +184,7 @@
         <p>Key inputs encompass sex, age, height, weight, and optional body fat percentage, alongside activity levels for deriving total daily energy expenditure (TDEE). These variables reflect variances in lean body mass, hormonal influences, and lifestyle demands.</p>
         <h4>Role in Daily Energy Balance</h4>
         <p>BMR serves as the baseline for understanding how the body manages energy intake versus expenditure, influencing strategies for maintaining, losing, or gaining weight effectively. By integrating BMR with activity multipliers, individuals can better align their caloric intake with metabolic demands, promoting sustainable health outcomes.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Metabolism.svg/600px-Metabolism.svg.png" alt="Diagram of human metabolism illustrating energy pathways" style="max-width: 600px; display: block; margin: 0 auto;">
     </section>
     <section>
         <h2>How to Use This Calculator</h2>
@@ -225,7 +253,7 @@
                 </tr>
             </tbody>
         </table>
-        <p>For related assessments, consider our <a href="/bmi-calculator.html">BMI Calculator</a> or <a href="/macro-nutrient-calculator.html">Macro Nutrient Calculator</a>.</p>
+        <p>For related assessments, consider our <a href="/heart-rate-calculator.html">Heart Rate Calculator</a> or <a href="/tdee-calculator.html">TDEE Calculator</a>.</p>
     </section>
     <section>
         <h2>Energy Expenditure Distribution</h2>
@@ -336,8 +364,12 @@
                 bmr = 370 + 21.6 * lbm;
             }
             const tdee = bmr * activity;
+            const additional = tdee - bmr;
             document.getElementById('bmr-result').textContent = bmr.toFixed(2);
             document.getElementById('tdee-result').textContent = tdee.toFixed(2);
+            document.getElementById('bmr-table-value').textContent = bmr.toFixed(2);
+            document.getElementById('additional-table-value').textContent = additional.toFixed(2);
+            document.getElementById('tdee-table-value').textContent = tdee.toFixed(2);
             document.getElementById('results').style.display = 'block';
             // Pie chart update for BMR vs. other components in TDEE
             const ctx = document.getElementById('energyChart').getContext('2d');
@@ -346,7 +378,7 @@
                 data: {
                     labels: ['BMR', 'Physical Activity & Digestion'],
                     datasets: [{
-                        data: [bmr, tdee - bmr],
+                        data: [bmr, additional],
                         backgroundColor: ['#36A2EB', '#FFCE56']
                     }]
                 },
@@ -356,6 +388,13 @@
                         title: {
                             display: true,
                             text: 'BMR vs. Additional Energy Expenditure in TDEE (kcal)'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw.toFixed(2) + ' kcal';
+                                }
+                            }
                         }
                     }
                 }
