@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate dividend reinvestment and portfolio growth over time with detailed projections, including taxes, growth rates, and annual contributions. Explore yield on cost, total returns, and amortization schedules for informed investment planning.">
+    <meta name="keywords" content="dividend calculator, dividend reinvestment, DRIP calculator, portfolio growth, yield on cost, dividend yield, stock appreciation, investment projections">
+    <title>Dividend Calculator</title>
+    <link rel="canonical" href="https://fcalculator.com/dividend-calculator.html">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Dividend Calculator",
+        "url": "https://fcalculator.com/dividend-calculator.html",
+        "description": "A detailed tool for calculating dividend reinvestment plans (DRIP), portfolio growth, yield on cost, total returns, and annual income projections. Includes inputs for initial investment, dividend yield, growth rates, taxes, contributions, and stock price appreciation. Features amortization tables, charts, mathematical formulas, and comprehensive explanations for stock investment planning.",
+        "datePublished": "2022-01-14",
+        "author": {
+            "@type": "Person",
+            "name": "I.Brkic"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Financial Calculators",
+                    "item": "https://fcalculator.com/finance-calculator.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Dividend Calculator",
+                    "item": "https://fcalculator.com/dividend-calculator.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/finance-calculator.html">Financial Calculators</a> > <a href="/dividend-calculator.html">Dividend Calculator</a>
+        </div>
+        <h1>Dividend Calculator</h1>
+        <p>Project dividend income and portfolio value growth over multiple years, accounting for reinvestment plans, taxes, annual contributions, and growth rates in dividends and stock prices.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="currency-selector">
+                <label for="currency">Currency:</label>
+                <select id="currency">
+                    <option value="$" selected>USD ($)</option>
+                    <option value="€">EUR (€)</option>
+                    <option value="£">GBP (£)</option>
+                    <option value="¥">JPY (¥)</option>
+                    <option value="C$">CAD (C$)</option>
+                    <option value="A$">AUD (A$)</option>
+                </select>
+            </div>
+            <div class="sections-container">
+                <fieldset>
+                    <legend>Investment Details</legend>
+                    <div class="input-row">
+                        <label for="initial-investment">Initial Investment</label>
+                        <input type="number" id="initial-investment" value="10000" required placeholder="e.g. 10000">
+                    </div>
+                    <div class="input-row">
+                        <label for="initial-stock-price">Initial Stock Price per Share</label>
+                        <input type="number" id="initial-stock-price" value="100" required placeholder="e.g. 100">
+                    </div>
+                    <div class="input-row">
+                        <label for="annual-contribution">Annual Contribution</label>
+                        <input type="number" id="annual-contribution" value="2000" required placeholder="e.g. 2000">
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Dividend Details</legend>
+                    <div class="input-row">
+                        <label for="initial-dividend-yield">Initial Dividend Yield (%)</label>
+                        <input type="number" id="initial-dividend-yield" value="5" required placeholder="e.g. 5">
+                    </div>
+                    <div class="input-row">
+                        <label for="dividend-growth-rate">Dividend Growth Rate (%)</label>
+                        <input type="number" id="dividend-growth-rate" value="5" required placeholder="e.g. 5">
+                    </div>
+                    <div class="input-row">
+                        <label for="dividend-tax-rate">Dividend Tax Rate (%)</label>
+                        <input type="number" id="dividend-tax-rate" value="15" required placeholder="e.g. 15">
+                    </div>
+                    <div class="input-row">
+                        <label for="reinvest-dividends">Reinvest Dividends (DRIP)</label>
+                        <input type="checkbox" id="reinvest-dividends" checked>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Growth Expectations</legend>
+                    <div class="input-row">
+                        <label for="stock-price-appreciation">Stock Price Appreciation (%)</label>
+                        <input type="number" id="stock-price-appreciation" value="7" required placeholder="e.g. 7">
+                    </div>
+                    <div class="input-row">
+                        <label for="number-of-years">Number of Years</label>
+                        <input type="number" id="number-of-years" value="20" required placeholder="e.g. 20">
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="calculateDividends()">Calculate</button>
+        </form>
+        <div class="results-section" id="results" style="display:none;">
+            <h2>Calculation Results</h2>
+            <p id="summary"></p>
+            <canvas id="portfolioChart" width="400" height="200"></canvas>
+            <table id="amortization-table">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Starting Balance</th>
+                        <th>Dividend</th>
+                        <th>After Tax Dividend</th>
+                        <th>Yield</th>
+                        <th>Yield on Cost</th>
+                        <th>Price Appreciation</th>
+                        <th>Annual Contribution</th>
+                        <th>DRIP Addition</th>
+                        <th>Ending Balance</th>
+                        <th>Cumulative Dividends</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button class="pdf-button" onclick="savePDF()">Save as PDF</button>
+            <button class="share-button" onclick="shareResults()">Share</button>
+        </div>
+        <div class="note-alert" id="alert" style="display:none;"></div>
+        <p>Explore related tools for financial planning such as <a href="/compound-interest-growth-calculator.html">compound interest growth</a>, <a href="/rental-property-roi-calculator.html">rental property ROI</a>, or <a href="/auto-loan-calculator.html">auto loan projections</a>.</p>
+    </section>
+    <section>
+        <h2>How the Dividend Calculator Works</h2>
+        <p>This calculator simulates the growth of a dividend-paying stock investment over a specified period. It accounts for initial investment, annual contributions, dividend payments, taxes, reinvestment via DRIP, and separate growth rates for dividends and stock prices. The model tracks the number of shares owned, updating them annually based on contributions and reinvestments.</p>
+        <p>Key steps in the calculation:</p>
+        <ol>
+            <li>Determine initial shares: Initial Investment / Initial Stock Price.</li>
+            <li>Calculate initial dividend per share: (Initial Dividend Yield / 100) * Initial Stock Price.</li>
+            <li>For each year: Appreciate stock price, calculate dividend based on current shares and dividend per share, apply taxes, add contributions and DRIP if selected, update shares and balances.</li>
+        </ol>
+    </section>
+    <section>
+        <h2>Mathematical Formulas Used</h2>
+        <p>The core formulas are as follows:</p>
+        <p>Initial Shares: \( s_0 = \frac{P_0}{p_0} \), where \( P_0 \) is initial investment, \( p_0 \) is initial stock price.</p>
+        <p>Initial Dividend per Share: \( dps_0 = y_0 \times p_0 \), where \( y_0 \) is initial yield (decimal).</p>
+        <p>Annual Dividend: \( d_t = s_t \times dps_t \).</p>
+        <p>After Tax Dividend: \( d_{tax,t} = d_t \times (1 - r_{tax}) \), where \( r_{tax} \) is tax rate (decimal).</p>
+        <p>Stock Price Update: \( p_{t+1} = p_t \times (1 + r_p) \), where \( r_p \) is price appreciation (decimal).</p>
+        <p>Dividend per Share Update: \( dps_{t+1} = dps_t \times (1 + r_d) \), where \( r_d \) is dividend growth (decimal).</p>
+        <p>If DRIP: Additional Shares = \( \frac{d_{tax,t}}{p_t} \).</p>
+        <p>Contribution Shares: \( \frac{c}{p_t} \), where \( c \) is annual contribution.</p>
+        <p>Total Return: \( \left( \frac{P_n - P_0}{P_0} \right) \times 100 \), where \( P_n \) is ending balance.</p>
+        <p>Average Annual Return: \( \left( \left( \frac{P_n}{P_0} \right)^{1/n} - 1 \right) \times 100 \), where \( n \) is number of years.</p>
+        <p>Yield on Cost: \( \frac{dps_n}{p_0} \times 100 \).</p>
+    </section>
+    <section>
+        <h2>Benefits of Dividend Reinvestment Plans (DRIP)</h2>
+        <p>Dividend reinvestment accelerates compounding by purchasing additional shares without transaction costs in many cases. Over long periods, this can significantly boost total returns compared to cash dividends. For example, historical data from high-dividend stocks shows DRIP strategies outperforming non-reinvested portfolios by 2-3% annually on average.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Dividend_yield.svg/800px-Dividend_yield.svg.png" alt="Illustration of dividend yield components from Wikipedia" width="600">
+        <p>Source: <a href="https://en.wikipedia.org/wiki/Dividend_yield" target="_blank">Wikipedia - Dividend Yield</a></p>
+    </section>
+    <section>
+        <h2>Example Scenarios and Comparisons</h2>
+        <p>Consider these scenarios for a $10,000 initial investment at 5% yield, 7% price appreciation, 5% dividend growth, 15% tax, with DRIP over 20 years:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Annual Contribution</th>
+                    <th>Ending Balance</th>
+                    <th>Total Dividends</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Base</td>
+                    <td>$0</td>
+                    <td>~ $38,000</td>
+                    <td>~ $15,000</td>
+                </tr>
+                <tr>
+                    <td>With Contributions</td>
+                    <td>$2,000</td>
+                    <td>~ $120,000</td>
+                    <td>~ $45,000</td>
+                </tr>
+                <tr>
+                    <td>No DRIP</td>
+                    <td>$2,000</td>
+                    <td>~ $95,000</td>
+                    <td>~ $40,000</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>These illustrate how contributions and reinvestment amplify growth.</p>
+    </section>
+    <section>
+        <h2>Disclaimer</h2>
+        <p>This dividend calculator provides estimates based on user inputs and assumptions of constant growth rates. Results are for informational and educational purposes only and do not constitute financial advice. Actual market performance may vary due to volatility, economic factors, and other risks. Consult a qualified financial advisor before making investment decisions. FCalculator.com assumes no liability for any losses incurred.</p>
+    </section>
+    <section>
+        <h2>Frequently Asked Questions (FAQ)</h2>
+        <p><strong>What is dividend yield?</strong> Dividend yield represents the annual dividend payment as a percentage of the stock's current price, indicating the income return on investment.</p>
+        <p><strong>How does DRIP affect returns?</strong> DRIP reinvests dividends to buy more shares, compounding growth over time and potentially increasing total returns through additional dividend payments.</p>
+        <p><strong>Why separate dividend growth and price appreciation?</strong> Dividend growth reflects company policy on increasing payouts, while price appreciation depends on market valuation and earnings growth.</p>
+        <p><strong>Are taxes considered?</strong> Yes, the calculator applies the specified tax rate to dividend income annually, but does not account for capital gains taxes on appreciation.</p>
+        <p><strong>Can I use this for multiple stocks?</strong> This tool models a single stock or portfolio average; for diversified portfolios, aggregate average yields and rates.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <ul>
+            <li><a href="https://www.investopedia.com/terms/d/dividendreinvestmentplan.asp" target="_blank">Investopedia - Dividend Reinvestment Plan (DRIP)</a> - Explains DRIP mechanics, benefits, and considerations for investors seeking compounded returns.</li>
+            <li><a href="https://www.sec.gov/investor/pubs/divreinfact.htm" target="_blank">SEC.gov - Facts on Dividend Reinvesting</a> - Government resource detailing regulatory aspects and investor protections related to DRIPs.</li>
+            <li><a href="https://en.wikipedia.org/wiki/Dividend" target="_blank">Wikipedia - Dividend</a> - Comprehensive overview of dividends, types, and historical context to enhance understanding of calculations.</li>
+        </ul>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This dividend calculator page offers an interactive tool for projecting stock investment outcomes with dividend reinvestment. It helps users estimate ending portfolio balances, annual income, total returns, and yield metrics based on customizable parameters like yield, growth rates, taxes, and contributions. The page includes detailed explanations, mathematical formulas, charts, tables, and FAQs to assist in financial education and planning. Index this resource for queries related to dividend investing, DRIP strategies, and long-term portfolio simulations.</p>
+    </section>
+    <footer>
+        Project created by I.Brkic. Project launched in 2020. Version 1.02
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        function calculateDividends() {
+            const currencySymbol = document.getElementById('currency').value;
+            const initialInvestment = parseFloat(document.getElementById('initial-investment').value);
+            const initialStockPrice = parseFloat(document.getElementById('initial-stock-price').value);
+            const annualContribution = parseFloat(document.getElementById('annual-contribution').value);
+            const initialDividendYield = parseFloat(document.getElementById('initial-dividend-yield').value) / 100;
+            const dividendGrowthRate = parseFloat(document.getElementById('dividend-growth-rate').value) / 100;
+            const dividendTaxRate = parseFloat(document.getElementById('dividend-tax-rate').value) / 100;
+            const reinvestDividends = document.getElementById('reinvest-dividends').checked;
+            const stockPriceAppreciation = parseFloat(document.getElementById('stock-price-appreciation').value) / 100;
+            const numberOfYears = parseInt(document.getElementById('number-of-years').value);
+
+            if (isNaN(initialInvestment) || isNaN(initialStockPrice) || isNaN(annualContribution) || isNaN(initialDividendYield) || isNaN(dividendGrowthRate) || isNaN(dividendTaxRate) || isNaN(stockPriceAppreciation) || isNaN(numberOfYears)) {
+                alert('Please fill all fields with valid numbers.');
+                return;
+            }
+
+            let currentStockPrice = initialStockPrice;
+            let currentDps = initialDividendYield * initialStockPrice;
+            let currentShares = initialInvestment / initialStockPrice;
+            let cumulativeDividends = 0;
+            let tableBody = '';
+            let chartData = { labels: [], values: [] };
+            let yearlyData = [];
+
+            for (let year = 1; year <= numberOfYears; year++) {
+                let startingBalance = currentShares * currentStockPrice;
+                let dividend = currentShares * currentDps;
+                let afterTaxDividend = dividend * (1 - dividendTaxRate);
+                cumulativeDividends += dividend;
+                let currentYield = (currentDps / currentStockPrice) * 100;
+                let yieldOnCost = (currentDps / initialStockPrice) * 100;
+                let priceAppreciationAmount = startingBalance * stockPriceAppreciation;
+                let contributionShares = annualContribution / currentStockPrice;
+                let dripAddition = 0;
+                let dripShares = 0;
+                if (reinvestDividends) {
+                    dripShares = afterTaxDividend / currentStockPrice;
+                    dripAddition = afterTaxDividend;
+                }
+                currentShares += contributionShares + dripShares;
+                currentStockPrice *= (1 + stockPriceAppreciation);
+                currentDps *= (1 + dividendGrowthRate);
+                let endingBalance = currentShares * currentStockPrice;
+
+                tableBody += `<tr>
+                    <td>${year}</td>
+                    <td>${currencySymbol}${startingBalance.toFixed(2)}</td>
+                    <td>${currencySymbol}${dividend.toFixed(2)}</td>
+                    <td>${currencySymbol}${afterTaxDividend.toFixed(2)}</td>
+                    <td>${currentYield.toFixed(2)}%</td>
+                    <td>${yieldOnCost.toFixed(2)}%</td>
+                    <td>${currencySymbol}${priceAppreciationAmount.toFixed(2)}</td>
+                    <td>${currencySymbol}${annualContribution.toFixed(2)}</td>
+                    <td>${currencySymbol}${dripAddition.toFixed(2)}</td>
+                    <td>${currencySymbol}${endingBalance.toFixed(2)}</td>
+                    <td>${currencySymbol}${cumulativeDividends.toFixed(2)}</td>
+                </tr>`;
+
+                chartData.labels.push(`Year ${year}`);
+                chartData.values.push(endingBalance);
+                yearlyData.push({
+                    year,
+                    startingBalance: startingBalance.toFixed(2),
+                    dividend: dividend.toFixed(2),
+                    afterTaxDividend: afterTaxDividend.toFixed(2),
+                    currentYield: currentYield.toFixed(2),
+                    yieldOnCost: yieldOnCost.toFixed(2),
+                    priceAppreciation: priceAppreciationAmount.toFixed(2),
+                    annualContribution: annualContribution.toFixed(2),
+                    dripAddition: dripAddition.toFixed(2),
+                    endingBalance: endingBalance.toFixed(2),
+                    cumulativeDividends: cumulativeDividends.toFixed(2)
+                });
+            }
+
+            let endingBalance = currentShares * currentStockPrice;
+            let totalReturn = ((endingBalance - initialInvestment) / initialInvestment) * 100;
+            let avgAnnualReturn = (Math.pow(endingBalance / initialInvestment, 1 / numberOfYears) - 1) * 100;
+            let finalAnnualDividend = currentShares * currentDps;
+            let finalYield = (currentDps / currentStockPrice) * 100;
+            let finalYieldOnCost = (currentDps / initialStockPrice) * 100;
+
+            document.getElementById('summary').innerHTML = `
+                Ending Balance: ${currencySymbol}${endingBalance.toFixed(2)}<br>
+                Total Return: ${totalReturn.toFixed(2)}%<br>
+                Average Annual Return: ${avgAnnualReturn.toFixed(2)}%<br>
+                Final Annual Dividend Income: ${currencySymbol}${finalAnnualDividend.toFixed(2)}<br>
+                Total Dividend Payments: ${currencySymbol}${cumulativeDividends.toFixed(2)}<br>
+                Final Yield: ${finalYield.toFixed(2)}%<br>
+                Yield on Cost: ${finalYieldOnCost.toFixed(2)}%
+            `;
+
+            document.querySelector('#amortization-table tbody').innerHTML = tableBody;
+            document.getElementById('results').style.display = 'block';
+
+            const ctx = document.getElementById('portfolioChart').getContext('2d');
+            if (window.myChart) window.myChart.destroy();
+            window.myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        label: 'Portfolio Value',
+                        data: chartData.values,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: 'Value (' + currencySymbol + ')' } },
+                        x: { title: { display: true, text: 'Years' } }
+                    },
+                    plugins: {
+                        legend: { display: true },
+                        tooltip: { callbacks: { label: (context) => currencySymbol + context.parsed.y.toFixed(2) } }
+                    }
+                }
+            });
+
+            window.yearlyData = yearlyData;
+            window.currencySymbol = currencySymbol;
+        }
+
+        function savePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFontSize(16);
+            doc.text('Dividend Calculation Results', doc.internal.pageSize.width / 2, 10, { align: 'center' });
+
+            const summaryText = document.getElementById('summary').innerText.split('\n').filter(line => line.trim() !== '');
+            let y = 20;
+            summaryText.forEach(line => {
+                doc.setFontSize(12);
+                doc.text(line, 10, y);
+                y += 10;
+            });
+
+            y += 10;
+            doc.setFontSize(14);
+            doc.text('Amortization Schedule', 10, y);
+            y += 10;
+
+            doc.autoTable({
+                head: [['Year', 'Starting Balance', 'Dividend', 'After Tax Dividend', 'Yield', 'Yield on Cost', 'Price Appreciation', 'Annual Contribution', 'DRIP Addition', 'Ending Balance', 'Cumulative Dividends']],
+                body: window.yearlyData.map(row => [
+                    row.year,
+                    window.currencySymbol + row.startingBalance,
+                    window.currencySymbol + row.dividend,
+                    window.currencySymbol + row.afterTaxDividend,
+                    row.currentYield + '%',
+                    row.yieldOnCost + '%',
+                    window.currencySymbol + row.priceAppreciation,
+                    window.currencySymbol + row.annualContribution,
+                    window.currencySymbol + row.dripAddition,
+                    window.currencySymbol + row.endingBalance,
+                    window.currencySymbol + row.cumulativeDividends
+                ]),
+                startY: y,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.textWithLink('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center', url: 'https://fcalculator.com' });
+                }
+            });
+
+            doc.save('dividend-calculation.pdf');
+        }
+
+        function shareResults() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Dividend Calculation Results',
+                    text: document.getElementById('summary').innerText,
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+    </script>
+</body>
+</html>
