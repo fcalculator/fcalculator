@@ -95,9 +95,7 @@
             </div>
             <button type="button" onclick="calculateBMI()">Calculate</button>
         </form>
-        <div class="results-section" id="bmi-results"></div>
-        <button class="pdf-button" onclick="generatePDF()">Save as PDF</button>
-        <button class="share-button" onclick="shareResults()">Share</button>
+        <div class="results-section" id="bmi-results" style="text-align: center;"></div>
         <p>Discover similar health tools like <a href="/calorie.html">calorie intake evaluator</a>, <a href="/tdee-calculator.html">total daily energy expenditure assessor</a>, or <a href="/heart-rate-calculator.html">heart rate monitor</a> for complete wellness tracking.</p>
     </section>
     <section>
@@ -195,6 +193,8 @@
             document.getElementById('bmi-results').innerHTML = `
                 <p>Your BMI: <span style="color: black;">${bmiValue}</span></p>
                 <p>Category: <span style="color: black;">${bmiCategory}</span></p>
+                <button class="pdf-button" onclick="generatePDF()" style="margin: 0 auto; display: block;">Save as PDF</button>
+                <button class="share-button" onclick="shareResults()" style="margin: 0 auto; display: block;">Share</button>
             `;
         }
         function generatePDF() {
