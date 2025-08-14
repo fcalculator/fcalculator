@@ -293,9 +293,11 @@ footer {
         }
         .pdf-button{
             margin: 10px;
+            margin-bottom: 10px;
             } 
         .share-button {
             margin: 10px;
+            margin-bottom: 10px;
             }
         .results-section {
             text-align: center;
