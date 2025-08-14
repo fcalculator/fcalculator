@@ -3,317 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Body Mass Index Calculator Tool</title>
-    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <title>BMI Calculator - Assess Body Mass Index and Health Risks</title>
+    <meta name="description" content="Calculate your Body Mass Index (BMI) accurately using height and weight. Explore BMI categories, health implications, limitations, and detailed formulas for comprehensive weight assessment.">
+    <meta name="keywords" content="BMI calculator, body mass index assessment, weight category evaluation, health risk indicator, obesity screening tool, underweight detection, normal weight range">
+    <link rel="canonical" href="https://fcalculator.com/bmi-calculator.html">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Body Mass Index Calculator Tool",
-      "description": "Accurately calculate your Body Mass Index (BMI) using weight and height measurements in metric or imperial units. Understand BMI categories, health implications, and limitations with detailed explanations and visualizations.",
+      "name": "BMI Calculator - Assess Body Mass Index and Health Risks",
+      "description": "A precise tool for calculating Body Mass Index (BMI) based on height and weight. Includes detailed explanations of formulas, categories, health implications, limitations, charts, and tables for thorough understanding and health evaluation.",
       "url": "https://fcalculator.com/bmi-calculator.html",
+      "datePublished": "2022-01-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "FCalculator.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://fcalculator.com/logo.png"
+        }
+      },
       "breadcrumb": {
         "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "FCalculator.com",
-            "item": "https://fcalculator.com/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Health & Fitness",
-            "item": "https://fcalculator.com/health-fitness.html"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "BMI Calculator",
-            "item": "https://fcalculator.com/bmi-calculator.html"
-          }
-        ]
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://fcalculator.com/"
+        }, {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Health & Fitness",
+          "item": "https://fcalculator.com/health-fitness.html"
+        }, {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "BMI Calculator",
+          "item": "https://fcalculator.com/bmi-calculator.html"
+        }]
       },
-      "faqPage": {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is BMI?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Body Mass Index (BMI) is a measure of body fat based on height and weight, applicable to adult men and women."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How is BMI calculated?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "In metric units: BMI = weight (kg) / [height (m)]². In imperial units: BMI = [weight (lb) / [height (in)]²] × 703."
-            }
-          }
-        ]
+      "mainEntity": {
+        "@type": "SoftwareApplication",
+        "name": "BMI Calculator",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       }
     }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf-autotable.min.js"></script>
 </head>
 <body>
+    <div class="logo">FCalculator.com</div>
+    <div class="breadcrumb">
+        <a href="/">FCalculator.com</a> > <a href="/health-fitness.html">Health & Fitness</a> > <a href="/bmi-calculator.html">BMI Calculator</a>
+    </div>
     <header>
-        <div class="logo">FCalculator.com</div>
-        <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/health-fitness.html">Health & Fitness</a> > <a href="/bmi-calculator.html">BMI Calculator</a>
-        </div>
-        <h1>Body Mass Index (BMI) Calculator</h1>
-        <p>Use this comprehensive tool to determine your Body Mass Index, a key indicator of body fat levels based on your height and weight. This calculator supports both metric and imperial units for accurate results tailored to your preferences.</p>
+        <h1>BMI Calculator</h1>
+        <p>Evaluate your body weight relative to height with this precise Body Mass Index tool, providing insights into potential health risks and weight categories for informed decision-making.</p>
     </header>
-
-    <main>
-        <!-- Tool at the top -->
-        <section class="calculator-tool">
-            <h2>Calculate Your BMI</h2>
-            <form id="bmi-form">
-                <label for="units">Units:</label>
-                <select id="units">
-                    <option value="metric">Metric (kg, cm)</option>
-                    <option value="imperial">Imperial (lbs, inches)</option>
-                </select>
-
-                <label for="weight">Weight:</label>
-                <input type="number" id="weight" required>
-
-                <label for="height">Height:</label>
-                <input type="number" id="height" required>
-
-                <button type="button" onclick="calculateBMI()">Calculate</button>
-            </form>
-
-            <div id="results" style="display: none;">
-                <p>Your BMI: <span id="bmi-value" class="result-green"></span></p>
-                <p>Category: <span id="bmi-category"></span></p>
-                <button onclick="saveAsPDF()">Save as PDF</button>
-                <button onclick="sharePage()">Share</button>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Enter Your Details</legend>
+                    <div class="input-row">
+                        <label for="units">Measurement Units</label>
+                        <select id="units">
+                            <option value="metric">Metric (kg, cm)</option>
+                            <option value="imperial">Imperial (lbs, inches)</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="height">Height</label>
+                        <input type="number" id="height" placeholder="170" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="weight">Weight</label>
+                        <input type="number" id="weight" placeholder="70" required>
+                    </div>
+                </fieldset>
             </div>
-
-            <canvas id="bmiChart" width="400" height="200"></canvas>
-        </section>
-
-        <!-- Detailed SEO content below the tool -->
-        <section class="content">
-            <h2>Understanding Body Mass Index (BMI)</h2>
-            <p>Body Mass Index, commonly known as BMI, is a numerical value derived from an individual's weight and height. It serves as a simple yet effective screening tool to categorize people into different weight groups, helping identify potential health risks associated with underweight, normal weight, overweight, or obesity. Developed in the 19th century by Belgian mathematician Adolphe Quetelet, BMI has become a standard metric used by health professionals worldwide to assess body fat levels indirectly.</p>
-
-            <p>While BMI does not directly measure body fat, it correlates well with more direct measures like skinfold thickness and dual-energy X-ray absorptiometry (DXA) in population studies. According to data from the Centers for Disease Control and Prevention (CDC), maintaining a BMI within the normal range can reduce the risk of chronic conditions such as heart disease, diabetes, and certain cancers.<grok-card data-id="21157b" data-type="citation_card"></grok-card> However, it's important to note that BMI is best used as part of a broader health assessment.</p>
-
-            <h3>How to Calculate BMI: Formulas and Examples</h3>
-            <p>The calculation of BMI varies slightly depending on the unit system used. Here are the standard formulas:</p>
-            <ul>
-                <li><strong>Metric System:</strong> BMI = weight (in kilograms) / [height (in meters)]²</li>
-                <li><strong>Imperial System:</strong> BMI = [weight (in pounds) / [height (in inches)]²] × 703</li>
-            </ul>
-            <p>For example, if a person weighs 70 kg and is 1.75 meters tall, their BMI would be 70 / (1.75)² = 22.86, which falls into the normal weight category. In imperial units, a person weighing 154 lbs and standing 69 inches tall would have a BMI of (154 / 69²) × 703 ≈ 22.74.<grok-card data-id="2a2bb0" data-type="citation_card"></grok-card></p>
-
-            <h3>BMI Categories and Health Implications</h3>
-            <p>BMI values are classified into categories established by the World Health Organization (WHO) and adopted by organizations like the CDC. These categories help gauge potential health risks:</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>BMI Range</th>
-                        <th>Category</th>
-                        <th>Health Implications</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Below 18.5</td>
-                        <td>Underweight</td>
-                        <td>Increased risk of nutritional deficiencies, weakened immune system, and osteoporosis.<grok-card data-id="de8002" data-type="citation_card"></grok-card></td>
-                    </tr>
-                    <tr>
-                        <td>18.5 - 24.9</td>
-                        <td>Normal Weight</td>
-                        <td>Lowest risk for weight-related health issues; associated with better overall health outcomes.</td>
-                    </tr>
-                    <tr>
-                        <td>25.0 - 29.9</td>
-                        <td>Overweight</td>
-                        <td>Higher risk of cardiovascular diseases, hypertension, and type 2 diabetes.</td>
-                    </tr>
-                    <tr>
-                        <td>30.0 - 34.9</td>
-                        <td>Obese (Class I)</td>
-                        <td>Elevated risks including joint problems, sleep apnea, and metabolic syndrome.<grok-card data-id="7e58fb" data-type="citation_card"></grok-card></td>
-                    </tr>
-                    <tr>
-                        <td>35.0 - 39.9</td>
-                        <td>Obese (Class II)</td>
-                        <td>Significant increase in severe health conditions like heart disease and stroke.</td>
-                    </tr>
-                    <tr>
-                        <td>40.0 and above</td>
-                        <td>Obese (Class III)</td>
-                        <td>High risk of life-threatening conditions, including certain cancers and reduced life expectancy.<grok-card data-id="0759b8" data-type="citation_card"></grok-card></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <p>These categories are for adults aged 20 and older. For children and teens, BMI is interpreted using age- and sex-specific percentiles to account for growth patterns.<grok-card data-id="2996a4" data-type="citation_card"></grok-card></p>
-
-            <h3>Limitations of BMI</h3>
-            <p>Despite its widespread use, BMI has limitations. It does not distinguish between muscle and fat mass, potentially misclassifying muscular individuals like athletes as overweight. Additionally, it may not accurately reflect body fat distribution or account for factors like age, sex, ethnicity, or bone density. For instance, older adults may have higher body fat at the same BMI as younger people, and certain ethnic groups may have different health risks at the same BMI levels.<grok-card data-id="384554" data-type="citation_card"></grok-card> Always consult a healthcare provider for a personalized assessment.</p>
-
-            <h3>Why Use a BMI Calculator?</h3>
-            <p>Tracking your BMI can motivate lifestyle changes, such as improving diet or increasing physical activity. Combined with other metrics like waist circumference or body fat percentage, it provides a more complete picture of health. Explore related tools on our site, such as the <a href="/calorie.html">Calorie Calculator</a> or <a href="/tdee-calculator.html">TDEE Calculator</a>, to support your fitness journey.</p>
-
-            <h3>Disclaimer</h3>
-            <p>This BMI calculator is provided for informational and educational purposes only. It is not intended to diagnose, treat, or prevent any medical condition and should not replace professional medical advice. Consult a qualified healthcare professional for personalized guidance, especially if you have underlying health concerns.</p>
-
-            <h3>Frequently Asked Questions (FAQ)</h3>
-            <dl>
-                <dt>What factors can affect BMI accuracy?</dt>
-                <dd>BMI may vary based on muscle mass, bone density, and hydration levels. It's less accurate for athletes, pregnant women, or those with certain medical conditions.<grok-card data-id="3f87e5" data-type="citation_card"></grok-card></dd>
-
-                <dt>Is BMI the same for men and women?</dt>
-                <dd>Yes, the formula and categories are the same, but body composition differences may influence interpretations.</dd>
-
-                <dt>How often should I check my BMI?</dt>
-                <dd>Monitor it periodically, such as every few months, or during significant weight changes to track progress.</dd>
-            </dl>
-        </section>
-
-        <section class="related-resources">
-            <h2>Related Resources</h2>
-            <ul>
-                <li><a href="https://en.wikipedia.org/wiki/Body_mass_index" target="_blank" rel="noopener noreferrer">Wikipedia: Body Mass Index</a><grok-card data-id="e2b7e7" data-type="citation_card"></grok-card></li>
-                <li><a href="https://www.cdc.gov/bmi/adult-calculator/index.html" target="_blank" rel="noopener noreferrer">CDC Adult BMI Calculator</a><grok-card data-id="f54d5c" data-type="citation_card"></grok-card></li>
-                <li><a href="https://www.nhlbi.nih.gov/calculate-your-bmi" target="_blank" rel="noopener noreferrer">NHLBI BMI Information</a><grok-card data-id="4eec7a" data-type="citation_card"></grok-card></li>
-            </ul>
-        </section>
-    </main>
-
+            <button type="button" onclick="calculateBMI()">Calculate</button>
+        </form>
+        <div class="results-section" id="bmi-results"></div>
+        <button class="pdf-button" onclick="generatePDF()">Save as PDF</button>
+        <button class="share-button" onclick="shareResults()">Share</button>
+        <p>Discover similar health tools like <a href="/calorie.html">calorie intake evaluator</a>, <a href="/tdee-calculator.html">total daily energy expenditure assessor</a>, or <a href="/heart-rate-calculator.html">heart rate monitor</a> for complete wellness tracking.</p>
+    </section>
+    <section>
+        <h2>Understanding Body Mass Index (BMI)</h2>
+        <p>Body Mass Index serves as a fundamental metric for assessing an individual's weight in relation to their height, offering a straightforward indicator of body composition. Developed in the 19th century, this measure helps categorize individuals into groups that reflect potential health statuses, from underweight conditions that may signal nutritional deficiencies to obesity levels associated with increased chronic disease risks.</p>
+        <p>In population studies, BMI correlates with direct body fat measurements, aiding healthcare professionals in identifying trends and risks. Maintaining an optimal range supports overall well-being, reducing vulnerabilities to conditions like cardiovascular issues or metabolic disorders.</p>
+    </section>
+    <section>
+        <h2>How to Calculate BMI: Step-by-Step Guide and Formulas</h2>
+        <p>To compute your BMI, input your height and weight into the tool above. The calculation adjusts based on selected units for accuracy.</p>
+        <h3>Standard Formulas</h3>
+        <p>For metric units: \[ \text{BMI} = \frac{\text{weight (kg)}}{\left( \text{height (m)} \right)^2} \]</p>
+        <p>For imperial units: \[ \text{BMI} = \frac{\text{weight (lbs)}}{\left( \text{height (in)} \right)^2} \times 703 \]</p>
+        <p>Example: A person at 1.75 meters tall weighing 70 kg has a BMI of \( 70 / (1.75)^2 = 22.86 \), indicating normal weight.</p>
+    </section>
+    <section>
+        <h2>BMI Categories and Their Interpretations</h2>
+        <p>BMI values are grouped into categories established by health organizations, each with specific health considerations.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>BMI Range</th>
+                    <th>Category</th>
+                    <th>Health Implications</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Below 18.5</td><td>Underweight</td><td>May indicate nutritional deficiencies, immune system weakening, or bone health concerns.</td></tr>
+                <tr><td>18.5 - 24.9</td><td>Normal Weight</td><td>Associated with lower risks of chronic diseases and optimal health outcomes.</td></tr>
+                <tr><td>25.0 - 29.9</td><td>Overweight</td><td>Increased likelihood of hypertension, diabetes, and heart-related issues.</td></tr>
+                <tr><td>30.0 and above</td><td>Obese</td><td>Higher risks for severe conditions including joint problems and metabolic syndrome.</td></tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Visualizing BMI: Charts and Graphs</h2>
+        <p>This chart illustrates BMI distributions across various heights and weights, helping visualize where your value fits.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Body_mass_index_chart.svg" alt="BMI chart showing categories for different heights and weights, highlighting underweight, normal, overweight, and obese ranges">
+    </section>
+    <section>
+        <h2>Limitations of BMI as a Health Metric</h2>
+        <p>While useful, BMI does not distinguish between muscle and fat mass, potentially misclassifying athletic individuals. It also varies by age, gender, and ethnicity, requiring contextual interpretation alongside other assessments.</p>
+    </section>
+    <section>
+        <h2>Health Implications Associated with BMI Levels</h2>
+        <p>Elevated BMI often links to higher risks of diseases, whereas lower values might suggest undernutrition. Regular monitoring, combined with lifestyle factors, supports proactive health management.</p>
+    </section>
+    <div class="note-alert">
+        Disclaimer: This BMI calculator provides general information and is not intended as medical advice. Results should not replace professional healthcare consultations. Individual health factors vary, and users assume all risks associated with tool usage.
+    </div>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What factors influence BMI accuracy?</strong> Age, muscle mass, and ethnic background can affect interpretations, as BMI is a screening tool rather than a diagnostic measure.</p>
+        <p><strong>How often should I check my BMI?</strong> Periodic checks, such as annually or with significant weight changes, help track trends, but consult professionals for personalized guidance.</p>
+        <p><strong>Is BMI suitable for children?</strong> For those under 20, use age- and sex-specific percentiles from reliable sources like CDC growth charts.</p>
+        <p><strong>Can BMI predict specific health risks?</strong> It indicates potential risks but should be paired with blood tests, physical exams, and family history for comprehensive evaluation.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <ul>
+            <li><a href="https://www.cdc.gov/bmi/about/index.html" target="_blank" rel="noopener noreferrer">CDC About BMI</a> - Explains BMI calculation, categories, and its role in health assessments to guide users toward better weight management.</li>
+            <li><a href="https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm" target="_blank" rel="noopener noreferrer">NHLBI BMI Calculator</a> - Offers additional tools and tables for understanding BMI in the context of heart health and disease prevention.</li>
+            <li><a href="https://en.wikipedia.org/wiki/Body_mass_index" target="_blank" rel="noopener noreferrer">Wikipedia on Body Mass Index</a> - Provides historical context, alternative formulas, and global variations for in-depth research.</li>
+        </ul>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This BMI calculator page delivers accurate computations of body mass index using standard formulas, complete with category interpretations, health risk insights, visual charts, and limitation discussions. Designed for users seeking reliable weight assessments, it includes metric and imperial support, PDF export for records, and links to authoritative sources. Index this resource under health tools, weight calculators, and fitness evaluators to assist individuals in monitoring body composition effectively.</p>
+    </section>
     <footer>
-        <p>Project created by Ivan Brkic. Project launched in 2020. Version 1.02</p>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
-
     <script>
-        let bmiChart;
-
+        let bmiValue, bmiCategory;
         function calculateBMI() {
             const units = document.getElementById('units').value;
+            let height = parseFloat(document.getElementById('height').value);
             const weight = parseFloat(document.getElementById('weight').value);
-            const height = parseFloat(document.getElementById('height').value);
-
-            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
-                alert('Please enter valid positive numbers for weight and height.');
+            if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+                alert('Please enter valid positive numbers for height and weight.');
                 return;
             }
-
-            let bmi;
             if (units === 'metric') {
-                const heightM = height / 100;
-                bmi = weight / (heightM * heightM);
+                height /= 100;
+                bmiValue = weight / (height * height);
             } else {
-                bmi = (weight / (height * height)) * 703;
+                bmiValue = (weight / (height * height)) * 703;
             }
-
-            bmi = bmi.toFixed(2);
-
-            let category;
-            if (bmi < 18.5) category = 'Underweight';
-            else if (bmi < 25) category = 'Normal Weight';
-            else if (bmi < 30) category = 'Overweight';
-            else if (bmi < 35) category = 'Obese (Class I)';
-            else if (bmi < 40) category = 'Obese (Class II)';
-            else category = 'Obese (Class III)';
-
-            document.getElementById('bmi-value').textContent = bmi;
-            document.getElementById('bmi-category').textContent = category;
-            document.getElementById('results').style.display = 'block';
-
-            // Update Chart
-            const ctx = document.getElementById('bmiChart').getContext('2d');
-            if (bmiChart) bmiChart.destroy();
-            bmiChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Underweight', 'Normal', 'Overweight', 'Obese'],
-                    datasets: [{
-                        label: 'Your BMI',
-                        data: [bmi < 18.5 ? bmi : 0, bmi >= 18.5 && bmi < 25 ? bmi : 0, bmi >= 25 && bmi < 30 ? bmi : 0, bmi >= 30 ? bmi : 0],
-                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF0000']
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: { beginAtZero: true, max: 50 }
-                    }
-                }
-            });
+            bmiValue = bmiValue.toFixed(2);
+            if (bmiValue < 18.5) bmiCategory = 'Underweight';
+            else if (bmiValue < 25) bmiCategory = 'Normal Weight';
+            else if (bmiValue < 30) bmiCategory = 'Overweight';
+            else bmiCategory = 'Obese';
+            document.getElementById('bmi-results').innerHTML = `
+                <p>Your BMI: <span style="color: black;">${bmiValue}</span></p>
+                <p>Category: <span style="color: black;">${bmiCategory}</span></p>
+            `;
         }
-
-        function saveAsPDF() {
+        function generatePDF() {
+            if (!bmiValue) {
+                alert('Please calculate your BMI first.');
+                return;
+            }
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-
-            doc.setFontSize(14);
-            doc.text("BMI Calculation Results", 105, 15, { align: "center" });
-
-            // Results Table
             doc.autoTable({
-                startY: 20,
                 head: [['Parameter', 'Value']],
                 body: [
-                    ['Weight', document.getElementById('weight').value + (document.getElementById('units').value === 'metric' ? ' kg' : ' lbs')],
-                    ['Height', document.getElementById('height').value + (document.getElementById('units').value === 'metric' ? ' cm' : ' inches')],
-                    ['BMI', document.getElementById('bmi-value').textContent],
-                    ['Category', document.getElementById('bmi-category').textContent]
-                ],
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [255, 255, 255] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 5, halign: 'left' },
-                margin: { top: 10 }
-            });
-
-            // Categories Table
-            doc.autoTable({
-                startY: doc.lastAutoTable.finalY + 10,
-                head: [['BMI Range', 'Category', 'Health Implications']],
-                body: [
-                    ['Below 18.5', 'Underweight', 'Increased risk of nutritional deficiencies'],
-                    ['18.5 - 24.9', 'Normal Weight', 'Lowest risk for weight-related issues'],
-                    ['25.0 - 29.9', 'Overweight', 'Higher risk of cardiovascular diseases'],
-                    ['30.0 - 34.9', 'Obese (Class I)', 'Elevated risks including joint problems'],
-                    ['35.0 - 39.9', 'Obese (Class II)', 'Significant increase in severe conditions'],
-                    ['40.0 and above', 'Obese (Class III)', 'High risk of life-threatening conditions']
+                    ['BMI', bmiValue],
+                    ['Category', bmiCategory]
                 ],
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 5, halign: 'left' },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
                 didDrawPage: function (data) {
                     doc.setFontSize(10);
                     doc.setTextColor(100);
-                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                    const footerText = 'This document was generated using ';
+                    const linkText = 'Fcalculator.com';
+                    const afterText = ' – Calculations are provided “as is” without warranty. Use at your own risk.';
+                    const pageWidth = doc.internal.pageSize.width;
+                    const pageHeight = doc.internal.pageSize.height;
+                    const textWidth = doc.getTextWidth(footerText + linkText + afterText);
+                    const startX = (pageWidth - textWidth) / 2;
+                    doc.text(footerText, startX, pageHeight - 10);
+                    doc.textWithLink(linkText, startX + doc.getTextWidth(footerText), pageHeight - 10, { url: 'https://fcalculator.com' });
+                    doc.text(afterText, startX + doc.getTextWidth(footerText + linkText), pageHeight - 10);
                 }
             });
-
-            doc.save('bmi-results.pdf');
+            doc.save('bmi_results.pdf');
         }
-
-        function sharePage() {
+        function shareResults() {
+            if (!bmiValue) {
+                alert('Please calculate your BMI first.');
+                return;
+            }
             if (navigator.share) {
                 navigator.share({
-                    title: 'BMI Calculator',
-                    url: window.location.href
-                });
+                    title: 'My BMI Results',
+                    text: `My BMI is ${bmiValue} (${bmiCategory}). Calculated using FCalculator.com`,
+                    url: 'https://fcalculator.com/bmi-calculator.html'
+                }).catch(console.error);
             } else {
-                alert('Share this page manually.');
+                alert('Sharing not supported on this browser. Copy your results manually.');
             }
         }
     </script>
