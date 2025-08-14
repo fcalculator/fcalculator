@@ -96,6 +96,10 @@
             <button type="button" onclick="calculateBMI()">Calculate</button>
         </form>
         <div class="results-section" id="bmi-results" style="text-align: center;"></div>
+        <div id="action-buttons" style="text-align: center; display: none;">
+            <button onclick="saveAsPDF()">Save as PDF</button>
+            <button onclick="sharePage()" style="margin-left: 10px;">Share this Page</button>
+        </div>
         <p>Discover similar health tools like <a href="/calorie.html">calorie intake evaluator</a>, <a href="/tdee-calculator.html">total daily energy expenditure assessor</a>, or <a href="/heart-rate-calculator.html">heart rate monitor</a> for complete wellness tracking.</p>
     </section>
     <section>
@@ -143,9 +147,10 @@
         <h2>Health Implications Associated with BMI Levels</h2>
         <p>Elevated BMI often links to higher risks of diseases, whereas lower values might suggest undernutrition. Regular monitoring, combined with lifestyle factors, supports proactive health management.</p>
     </section>
-    <div class="note-alert">
-        Disclaimer: This BMI calculator provides general information and is not intended as medical advice. Results should not replace professional healthcare consultations. Individual health factors vary, and users assume all risks associated with tool usage.
-    </div>
+    <section>
+        <h2>Disclaimer</h2>
+        <p>This BMI calculator provides general information and is not intended as medical advice. Results should not replace professional healthcare consultations. Individual health factors vary, and users assume all risks associated with tool usage.</p>
+    </section>
     <section>
         <h2>FAQ</h2>
         <p><strong>What factors influence BMI accuracy?</strong> Age, muscle mass, and ethnic background can affect interpretations, as BMI is a screening tool rather than a diagnostic measure.</p>
@@ -193,11 +198,10 @@
             document.getElementById('bmi-results').innerHTML = `
                 <p>Your BMI: <span style="color: black;">${bmiValue}</span></p>
                 <p>Category: <span style="color: black;">${bmiCategory}</span></p>
-                <button class="pdf-button" onclick="generatePDF()" style="margin: 0 auto; display: block;">Save as PDF</button>
-                <button class="share-button" onclick="shareResults()" style="margin: 0 auto; display: block;">Share</button>
             `;
+            document.getElementById('action-buttons').style.display = 'block';
         }
-        function generatePDF() {
+        function saveAsPDF() {
             if (!bmiValue) {
                 alert('Please calculate your BMI first.');
                 return;
@@ -231,19 +235,15 @@
             });
             doc.save('bmi_results.pdf');
         }
-        function shareResults() {
-            if (!bmiValue) {
-                alert('Please calculate your BMI first.');
-                return;
-            }
+        function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'My BMI Results',
-                    text: `My BMI is ${bmiValue} (${bmiCategory}). Calculated using FCalculator.com`,
-                    url: 'https://fcalculator.com/bmi-calculator.html'
+                    title: 'BMI Calculator',
+                    text: 'Check out this BMI Calculator on FCalculator.com for assessing body mass index and health risks.',
+                    url: window.location.href
                 }).catch(console.error);
             } else {
-                alert('Sharing not supported on this browser. Copy your results manually.');
+                alert('Sharing not supported on this browser. Copy the page URL manually.');
             }
         }
     </script>
