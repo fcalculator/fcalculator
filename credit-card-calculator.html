@@ -310,41 +310,60 @@
         function saveAsPDF() {
             const { months, totalPayments, totalInterest, payoffDate, currency } = window.resultsData;
             const schedule = window.scheduleData;
-            const paramTable = [
+            const paramTableBody = [
                 ['Parameter', 'Value'],
                 ['Months to Payoff', months],
                 ['Total Payments', `${currency}${totalPayments}`],
                 ['Total Interest', `${currency}${totalInterest}`],
                 ['Payoff Date', payoffDate]
             ];
+            paramTableBody[0].forEach((cell, index) => {
+                paramTableBody[0][index] = { text: cell, style: 'headerCell' };
+            });
             const scheduleTableBody = [['Month', 'Payment', 'Principal', 'Interest', 'Balance']];
             schedule.forEach(row => {
                 scheduleTableBody.push([row.month, `${currency}${row.payment}`, `${currency}${row.principal}`, `${currency}${row.interest}`, `${currency}${row.balance}`]);
+            });
+            scheduleTableBody[0].forEach((cell, index) => {
+                scheduleTableBody[0][index] = { text: cell, style: 'headerCell' };
             });
             const docDefinition = {
                 content: [
                     { text: 'Credit Card Payoff Results', style: 'header', margin: [0, 0, 0, 10] },
                     {
                         style: 'table',
-                        table: { widths: ['*', '*'], body: paramTable }
+                        table: { widths: ['*', '*'], body: paramTableBody },
+                        layout: 'custom'
                     },
                     { text: 'Amortization Schedule', style: 'subheader', margin: [0, 20, 0, 10] },
                     {
                         style: 'table',
-                        table: { widths: [50, '*', '*', '*', '*'], body: scheduleTableBody }
+                        table: { widths: [50, '*', '*', '*', '*'], body: scheduleTableBody },
+                        layout: 'custom'
                     }
                 ],
                 styles: {
                     header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
                     subheader: { fontSize: 14, bold: true },
-                    table: { margin: [0, 5, 0, 15] }
+                    table: { margin: [0, 5, 0, 15] },
+                    headerCell: { bold: true, color: 'white' }
                 },
                 defaultStyle: { font: 'helvetica', fontSize: 10 },
                 pageMargins: [40, 60, 40, 60],
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                table: {
-                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, halign: 'left' }
+                layouts: {
+                    custom: {
+                        fillColor: function (rowIndex, node, columnIndex) {
+                            return (rowIndex === 0) ? [0, 200, 200] : (rowIndex % 2 === 1) ? [245, 245, 245] : null;
+                        },
+                        hLineWidth: function (i, node) { return 0.1; },
+                        vLineWidth: function (i, node) { return 0.1; },
+                        hLineColor: function (i, node) { return [200, 200, 200]; },
+                        vLineColor: function (i, node) { return [200, 200, 200]; },
+                        paddingLeft: function(i, node) { return 3; },
+                        paddingRight: function(i, node) { return 3; },
+                        paddingTop: function(i, node) { return 3; },
+                        paddingBottom: function(i, node) { return 3; }
+                    }
                 }
             };
             docDefinition.footer = function (currentPage, pageCount) {
