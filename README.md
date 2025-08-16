@@ -1,64 +1,59 @@
-FCalculator - Free Online Calculators
-Welcome to FCalculator, your go-to platform for free, user-friendly online calculators! Visit us at fcalculator.com to explore a variety of tools designed to simplify your calculations, from basic math to specialized calculators.
-About
-FCalculator, accessible at fcalculator.com, is a collection of free online calculators built using HTML, CSS, and JavaScript. Hosted on GitHub Pages, it offers a fast and reliable way to perform calculations for everyday needs. Whether you're calculating your BMI, managing finances, or solving scientific equations, fcalculator.com has the tools you need.
-Features
 
-Basic Calculator: Perform addition, subtraction, multiplication, and division with ease.
-BMI Calculator: Quickly calculate your Body Mass Index using weight and height.
-More Coming Soon: Financial, scientific, and other calculators are in development! Check fcalculator.com for updates.
-Responsive Design: Use our calculators on any device—desktop, tablet, or mobile.
-Open Source: Contribute to the project to make fcalculator.com even better!
+FINANCIAL 
+/mortgage-calculator.html
+/loan-calculator.html
+/auto-loan-calculator.html
+/travel-itinerary-planner.html
+/cost-of-living-comparison.html
+/compound-interest-growth-calculator.html
+/salary-calculator.html
+/finance-calculator.html
+/credit-card-calculator.html
+/inflation-calculator.html
+/401k-calculator.html
+/rental-property-roi-calculator.html
+/what-if-i-bought-bitcoin-calculator.html
+/dividend-calculator.html
+/retirement-calculator.html
 
-Getting Started
-To try FCalculator locally or contribute to the project, follow these steps:
-Prerequisites
+HEALTH /healt-fitness.html
+/bmi-calculator.htmll
+/calorie-calculator.html
+/bra-size-calculator.html
+/heart-rate-calculator.html
+/tdee-calculator.html
+/blood-alcohol-concentration-calculator.html
+/ovulation-calculation.html
+/macro-nutrient-calculator.html
+/food-energy-converter.html
 
-A modern web browser (e.g., Chrome, Firefox, Safari)
-Git for cloning the repository
+MATH /math.html
+/percentage.html
+/triangle-side-calculator.html
+/pythagorean-theorem-calculator.html
+/basic-statistics-calculator.html
+/random-number-generator.html
+/random-number-generator-wheel.html
 
-Installation
+STATISTIC /statistic.html
+/worldpopulation.html
 
-Clone the repository:git clone https://github.com/your-username/fcalculator.git
+STUDENT /student.html
+/grade-calculator.html
+/gpa-calculator.html
 
+TIME /time.html
+/custom-event-countdown-timer.html
+/time-zone-calculator.html
+/time/timer-countdown.htm
+/time/current-time-in-india.html
+/time/current-time-in-australia.html
+/time/current-time-in-usa.html
+/time/current-time-in-singapore.html
+/time/work-hours-calculator.html
 
-Navigate to the project folder:cd fcalculator
-
-
-Open index.html in your browser or use a local server (e.g., Live Server) to test the calculators.
-Visit fcalculator.com to see the live version!
-
-Hosting on GitHub Pages
-
-Push your changes to the main branch of your repository.
-In your GitHub repository, go to Settings > Pages.
-Set the Source to the main branch and the root folder to / or /docs.
-Your site will be live at https://your-username.github.io/fcalculator.
-To use the custom domain fcalculator.com, add it in the Custom domain field and configure your DNS settings with your domain provider:
-A records:@ 185.199.108.153
-@ 185.199.109.153
-@ 185.199.110.153
-@ 185.199.111.153
-
-
-CNAME record (for https://fcalculator.com) :www your-username.github.io
-
-
-
-
-Access the live calculators at fcalculator.com.
-
-Contributing
-We’d love your help to improve fcalculator.com! To contribute:
-
-Fork the repository.
-Create a new branch (git checkout -b feature/new-calculator).
-Make your changes and commit (git commit -m "Add new calculator").
-Push to your branch (git push origin feature/new-calculator).
-Open a Pull Request.
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
-Contact
-Have questions or ideas? Visit fcalculator.com or open an issue on this repository.
-Project created by Ivan Brkic. Launched in 2020. Version 1.
+OTHER /other.html
+/age-calculator.html
+/time.html
+/safe-password-generator.html
+/dice-roller.html
