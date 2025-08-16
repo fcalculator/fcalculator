@@ -190,7 +190,7 @@
         <h2>Advanced Considerations in Debt Repayment</h2>
         <p>Incorporate budgeting techniques like the snowball or avalanche method. Visual charts help illustrate progress: the line graph shows balance reduction, while the pie chart breaks down principal versus interest portions.</p>
         <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Credit-cards.jpg" alt="Credit cards illustrating debt management" style="width:300px; display:block; margin:0 auto;">
-        <i>Credit cards as a common source of consumer debt, sourced from Wikipedia.</i>
+        <i style="display: block; text-align: center;">Credit cards as a common source of consumer debt, sourced from Wikipedia.</i>
         <p>For more on interest compounding, refer to <a href="https://en.wikipedia.org/wiki/Credit_card_interest" target="_blank">Wikipedia's credit card interest page</a>.</p>
     </section>
     <section>
@@ -331,38 +331,33 @@
                 content: [
                     { text: 'Credit Card Payoff Results', style: 'header', margin: [0, 0, 0, 10] },
                     {
-                        style: 'table',
                         table: { widths: ['*', '*'], body: paramTableBody },
                         layout: 'custom'
                     },
                     { text: 'Amortization Schedule', style: 'subheader', margin: [0, 20, 0, 10] },
                     {
-                        style: 'table',
                         table: { widths: [50, '*', '*', '*', '*'], body: scheduleTableBody },
                         layout: 'custom'
                     }
-                ],
+                },
                 styles: {
                     header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
                     subheader: { fontSize: 14, bold: true },
-                    table: { margin: [0, 5, 0, 15] },
                     headerCell: { bold: true, color: 'white' }
                 },
                 defaultStyle: { font: 'helvetica', fontSize: 10 },
                 pageMargins: [40, 60, 40, 60],
                 layouts: {
                     custom: {
-                        fillColor: function (rowIndex, node, columnIndex) {
-                            return (rowIndex === 0) ? [0, 200, 200] : (rowIndex % 2 === 1) ? [245, 245, 245] : null;
-                        },
-                        hLineWidth: function (i, node) { return 0.1; },
-                        vLineWidth: function (i, node) { return 0.1; },
-                        hLineColor: function (i, node) { return [200, 200, 200]; },
-                        vLineColor: function (i, node) { return [200, 200, 200]; },
-                        paddingLeft: function(i, node) { return 3; },
-                        paddingRight: function(i, node) { return 3; },
-                        paddingTop: function(i, node) { return 3; },
-                        paddingBottom: function(i, node) { return 3; }
+                        fillColor: function (rowIndex) { return (rowIndex === 0) ? [0, 200, 200] : (rowIndex % 2 === 1) ? [245, 245, 245] : null; },
+                        hLineWidth: function () { return 0.1; },
+                        vLineWidth: function () { return 0.1; },
+                        hLineColor: function () { return [200, 200, 200]; },
+                        vLineColor: function () { return [200, 200, 200]; },
+                        paddingLeft: function() { return 3; },
+                        paddingRight: function() { return 3; },
+                        paddingTop: function() { return 3; },
+                        paddingBottom: function() { return 3; }
                     }
                 }
             };
