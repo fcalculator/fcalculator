@@ -122,6 +122,10 @@
                             <span class="input-symbol" id="payment-symbol">$</span>
                         </div>
                     </div>
+                    <div class="input-row">
+                        <label for="start-date">Start Date</label>
+                        <input type="date" id="start-date">
+                    </div>
                 </fieldset>
             </div>
             <button type="button" onclick="calculatePayoff()">Calculate</button>
@@ -235,13 +239,18 @@
             document.getElementById('balance-symbol').innerText = currencySymbol;
             document.getElementById('payment-symbol').innerText = currencySymbol;
         }
-        window.onload = updateSymbols;
+        window.onload = function() {
+            updateSymbols();
+            document.getElementById('start-date').value = new Date().toISOString().split('T')[0];
+        };
         let balanceChart, pieChart;
         function calculatePayoff() {
             const currencySymbol = document.getElementById('currency').value.split(' ')[0];
             const balance = parseFloat(document.getElementById('balance').value);
             const apr = parseFloat(document.getElementById('apr').value) / 100 / 12;
             let fixedPayment = parseFloat(document.getElementById('payment').value);
+            const startDateStr = document.getElementById('start-date').value;
+            const startDate = startDateStr ? new Date(startDateStr) : new Date();
             if (isNaN(balance) || isNaN(apr) || isNaN(fixedPayment) || balance <= 0 || apr < 0 || fixedPayment <= 0) {
                 alert('Please enter valid positive numbers.');
                 return;
@@ -285,9 +294,9 @@
             document.getElementById('months').innerText = `Months to Payoff: ${month}`;
             document.getElementById('total-payments').innerText = `Total Payments: ${currencySymbol}${totalPayments.toFixed(2)}`;
             document.getElementById('total-interest').innerText = `Total Interest: ${currencySymbol}${totalInterest.toFixed(2)}`;
-            const today = new Date();
-            today.setMonth(today.getMonth() + month);
-            document.getElementById('payoff-date').innerText = `Estimated Payoff Date: ${today.toDateString()}`;
+            const payoffDate = new Date(startDate);
+            payoffDate.setMonth(payoffDate.getMonth() + month);
+            document.getElementById('payoff-date').innerText = `Estimated Payoff Date: ${payoffDate.toDateString()}`;
             const tbody = document.getElementById('schedule-table').querySelector('tbody');
             tbody.innerHTML = '';
             schedule.forEach(row => {
@@ -314,7 +323,7 @@
                 }
             });
             window.scheduleData = schedule;
-            window.resultsData = { months: month, totalPayments: totalPayments.toFixed(2), totalInterest: totalInterest.toFixed(2), payoffDate: today.toDateString(), currency: currencySymbol };
+            window.resultsData = { months: month, totalPayments: totalPayments.toFixed(2), totalInterest: totalInterest.toFixed(2), payoffDate: payoffDate.toDateString(), currency: currencySymbol };
         }
         function saveAsPDF() {
             const { months, totalPayments, totalInterest, payoffDate, currency } = window.resultsData;
