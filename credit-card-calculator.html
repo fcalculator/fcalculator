@@ -349,15 +349,15 @@
                 pageMargins: [40, 60, 40, 60],
                 layouts: {
                     custom: {
-                        fillColor: function (rowIndex) { return (rowIndex === 0) ? [0, 200, 200] : (rowIndex % 2 === 1) ? [245, 245, 245] : null; },
-                        hLineWidth: function () { return 0.1; },
-                        vLineWidth: function () { return 0.1; },
-                        hLineColor: function () { return [200, 200, 200]; },
-                        vLineColor: function () { return [200, 200, 200]; },
-                        paddingLeft: function() { return 3; },
-                        paddingRight: function() { return 3; },
-                        paddingTop: function() { return 3; },
-                        paddingBottom: function() { return 3; }
+                        fillColor: function (rowIndex, node, columnIndex) { return (rowIndex === 0) ? [0, 200, 200] : (rowIndex % 2 === 1) ? [245, 245, 245] : null; },
+                        hLineWidth: function (i, node) { return 0.1; },
+                        vLineWidth: function (i, node) { return 0.1; },
+                        hLineColor: function (i, node) { return [200, 200, 200]; },
+                        vLineColor: function (i, node) { return [200, 200, 200]; },
+                        paddingLeft: function(i, node) { return 3; },
+                        paddingRight: function(i, node) { return 3; },
+                        paddingTop: function(i, node) { return 3; },
+                        paddingBottom: function(i, node) { return 3; }
                     }
                 }
             };
