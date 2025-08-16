@@ -8,6 +8,23 @@
     <meta name="keywords" content="credit card payoff, debt repayment calculator, interest accumulation, amortization schedule, financial debt management">
     <link rel="canonical" href="https://fcalculator.com/credit-card-calculator.html" />
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <style>
+        .input-group {
+            position: relative;
+            width: 100%;
+        }
+        .input-group input {
+            padding-right: 30px; /* Space for symbol */
+        }
+        .input-symbol {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script src="https://cdn.jsdelivr.net/npm/pdfmake@latest/build/pdfmake.min.js"></script>
@@ -72,7 +89,7 @@
         <form id="tool-form">
             <div class="currency-selector">
                 <label for="currency">Currency:</label>
-                <select id="currency">
+                <select id="currency" onchange="updateSymbols()">
                     <option value="$ (USD)">$ (USD)</option>
                     <option value="€ (EUR)">€ (EUR)</option>
                     <option value="£ (GBP)">£ (GBP)</option>
@@ -86,15 +103,24 @@
                     <legend>Credit Card Details</legend>
                     <div class="input-row">
                         <label for="balance">Current Balance</label>
-                        <input type="number" id="balance" value="10000" placeholder="e.g. 5000" required>
+                        <div class="input-group">
+                            <input type="number" id="balance" value="10000" placeholder="e.g. 5000" required>
+                            <span class="input-symbol" id="balance-symbol">$</span>
+                        </div>
                     </div>
                     <div class="input-row">
                         <label for="apr">Annual Interest Rate (APR %)</label>
-                        <input type="number" id="apr" value="18" placeholder="e.g. 15" step="0.01" required>
+                        <div class="input-group">
+                            <input type="number" id="apr" value="18" placeholder="e.g. 15" step="0.01" required>
+                            <span class="input-symbol">%</span>
+                        </div>
                     </div>
                     <div class="input-row">
                         <label for="payment">Fixed Monthly Payment</label>
-                        <input type="number" id="payment" value="200" placeholder="e.g. 250" required>
+                        <div class="input-group">
+                            <input type="number" id="payment" value="200" placeholder="e.g. 250" required>
+                            <span class="input-symbol" id="payment-symbol">$</span>
+                        </div>
                     </div>
                 </fieldset>
             </div>
@@ -204,6 +230,12 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
+        function updateSymbols() {
+            const currencySymbol = document.getElementById('currency').value.split(' ')[0];
+            document.getElementById('balance-symbol').innerText = currencySymbol;
+            document.getElementById('payment-symbol').innerText = currencySymbol;
+        }
+        window.onload = updateSymbols;
         let balanceChart, pieChart;
         function calculatePayoff() {
             const currencySymbol = document.getElementById('currency').value.split(' ')[0];
@@ -219,7 +251,7 @@
             let totalInterest = 0;
             let totalPayments = 0;
             let schedule = [];
-            let balances = [balance.toFixed(2)]; // Start with initial balance for chart
+            let balances = [balance.toFixed(2)];
             const initialInterest = currentBalance * apr;
             if (fixedPayment <= initialInterest) {
                 document.getElementById('alert').innerText = 'Warning: Monthly payment is too low to cover interest; debt will not decrease.';
@@ -268,7 +300,7 @@
             balanceChart = new Chart(document.getElementById('balanceChart'), {
                 type: 'line',
                 data: {
-                    labels: [...Array(month + 1).keys()].slice(1), // Months 1 to n
+                    labels: [...Array(month + 1).keys()].slice(1),
                     datasets: [{ label: 'Balance Over Time', data: balances.slice(1), borderColor: 'blue', fill: false }]
                 },
                 options: { scales: { y: { beginAtZero: true } } }
