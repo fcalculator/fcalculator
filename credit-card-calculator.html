@@ -33,6 +33,9 @@
             justify-content: space-between;
             align-items: center;
         }
+        input::placeholder {
+            font-style: italic;
+        }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -376,10 +379,28 @@
             };
             docDefinition.footer = function (currentPage, pageCount) {
                 return {
-                    text: 'This document was generated using Fcalculator.com',
-                    alignment: 'center',
-                    fontSize: 10,
-                    color: 'gray',
+                    columns: [
+                        {
+                            text: 'This document was generated using ',
+                            alignment: 'center',
+                            fontSize: 10,
+                            color: 'gray'
+                        },
+                        {
+                            text: 'Fcalculator.com',
+                            link: 'https://fcalculator.com',
+                            alignment: 'center',
+                            fontSize: 10,
+                            color: 'blue',
+                            decoration: 'underline'
+                        },
+                        {
+                            text: ' – Calculations are provided “as is” without warranty. Use at your own risk.',
+                            alignment: 'center',
+                            fontSize: 10,
+                            color: 'gray'
+                        }
+                    ],
                     margin: [40, 0]
                 };
             };
