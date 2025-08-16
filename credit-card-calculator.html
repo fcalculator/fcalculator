@@ -175,6 +175,9 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
+        let balanceChart = null;
+        let piChart = null;
+
         function calculate() {
             const balanceInput = parseFloat(document.getElementById('balance').value);
             const apr = parseFloat(document.getElementById('apr').value);
@@ -200,27 +203,28 @@
                 }
                 remainingBalance -= principal;
                 totalInterest += interest;
-                schedule.push({ month, payment: payment.toFixed(2), principal: principal.toFixed(2), interest: interest.toFixed(2), balance: remainingBalance.toFixed(2) });
-                if (month > 1000) break;
+                schedule.push({ month, payment, principal, interest, balance: remainingBalance });
+                if (month > 3600) break;
             }
             const totalPayments = (balanceInput + totalInterest).toFixed(2);
             const months = month;
             const now = new Date();
-            const tz = 'America/New_York';
-            const payoffDate = new Date(now.setMonth(now.getMonth() + months)).toLocaleDateString('en-US', { timeZone: tz });
+            const payoffDate = new Date(now.setMonth(now.getMonth() + months));
+            const formattedPayoffDate = payoffDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
             document.getElementById('months').innerHTML = `Months to Pay Off: ${months}`;
             document.getElementById('total-payments').innerHTML = `Total Payments: ${currency}${totalPayments}`;
             document.getElementById('total-interest').innerHTML = `Total Interest: ${currency}${totalInterest.toFixed(2)}`;
-            document.getElementById('payoff-date').innerHTML = `Estimated Payoff Date: ${payoffDate}`;
+            document.getElementById('payoff-date').innerHTML = `Estimated Payoff Date: ${formattedPayoffDate}`;
             const tbody = document.querySelector('#amortization-table tbody');
             tbody.innerHTML = '';
             schedule.forEach(row => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${row.month}</td><td>${currency}${row.payment}</td><td>${currency}${row.principal}</td><td>${currency}${row.interest}</td><td>${currency}${row.balance}</td>`;
+                tr.innerHTML = `<td>${row.month}</td><td>${currency}${row.payment.toFixed(2)}</td><td>${currency}${row.principal.toFixed(2)}</td><td>${currency}${row.interest.toFixed(2)}</td><td>${currency}${row.balance.toFixed(2)}</td>`;
                 tbody.appendChild(tr);
             });
+            if (balanceChart) balanceChart.destroy();
             const balanceCtx = document.getElementById('balance-chart').getContext('2d');
-            new Chart(balanceCtx, {
+            balanceChart = new Chart(balanceCtx, {
                 type: 'line',
                 data: {
                     labels: schedule.map(row => `Month ${row.month}`),
@@ -236,11 +240,12 @@
                 options: {
                     responsive: true,
                     scales: { y: { beginAtZero: true, title: { display: true, text: 'Balance' } } },
-                    plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${currency}${context.parsed.y}` } } }
+                    plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${currency}${context.parsed.y.toFixed(2)}` } } }
                 }
             });
+            if (piChart) piChart.destroy();
             const piCtx = document.getElementById('principal-interest-chart').getContext('2d');
-            new Chart(piCtx, {
+            piChart = new Chart(piCtx, {
                 type: 'bar',
                 data: {
                     labels: schedule.map(row => `Month ${row.month}`),
@@ -257,7 +262,7 @@
                 options: {
                     responsive: true,
                     scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Amount' } } },
-                    plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${currency}${context.parsed.y}` } } }
+                    plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${currency}${context.parsed.y.toFixed(2)}` } } }
                 }
             });
             document.getElementById('results').style.display = 'block';
@@ -267,30 +272,23 @@
             const doc = new jsPDF();
             const currency = document.getElementById('currency').value;
             const pageWidth = doc.internal.pageSize.width;
-
-            // Loan Calculation Results
-            doc.setFontSize(16);
             doc.text('Credit Card Payoff Results', pageWidth / 2, 20, { align: 'center' });
-            const results = [
-                ['Parameter', 'Value'],
-                ['Monthly Payment', document.getElementById('monthly-payment').value],
-                ['Total Payments', document.getElementById('total-payments').textContent.split(': ')[1].replace(currency, '')],
-                ['Total Interest', document.getElementById('total-interest').textContent.split(': ')[1].replace(currency, '')],
-                ['Payoff Date', document.getElementById('payoff-date').textContent.split(': ')[1]]
+            const resultsBody = [
+                ['Monthly Payment', `${parseFloat(document.getElementById('monthly-payment').value).toFixed(2)}`],
+                ['Total Payments', document.getElementById('total-payments').textContent.split(': ')[1].replace(currency, '').trim()],
+                ['Total Interest', document.getElementById('total-interest').textContent.split(': ')[1].replace(currency, '').trim()],
+                ['Payoff Date', document.getElementById('payoff-date').textContent.split(': ')[1].trim()]
             ];
             doc.autoTable({
                 head: [['Parameter', 'Value']],
-                body: results,
+                body: resultsBody,
                 startY: 30,
                 theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255], fontSize: 12 },
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'center' },
-                margin: { horizontal: 10 }
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
             });
-
-            // Amortization Schedule
-            const finalY = doc.autoTable.previous.finalY;
+            const finalY = doc.lastAutoTable.finalY;
             doc.text('Amortization Schedule', pageWidth / 2, finalY + 10, { align: 'center' });
             const schedule = Array.from(document.querySelectorAll('#amortization-table tbody tr')).map(tr => {
                 const cells = tr.querySelectorAll('td');
@@ -307,18 +305,16 @@
                 body: schedule,
                 startY: finalY + 20,
                 theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255], fontSize: 12 },
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'center' },
-                margin: { horizontal: 10 },
-                didDrawPage: function(data) {
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                didDrawPage: function (data) {
                     doc.setFontSize(10);
                     doc.setTextColor(100);
-                    const footerText = 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk. Visit https://fcalculator.com for more tools.';
+                    const footerText = 'This document was generated using Fcalculator.com';
                     doc.text(footerText, pageWidth / 2, doc.internal.pageSize.height - 10, { align: 'center' });
                 }
             });
-
             doc.save('credit-card-payoff.pdf');
         }
         function sharePage() {
