@@ -206,11 +206,11 @@
     <script>
         let balanceChart, pieChart;
         function calculatePayoff() {
-            const currency = document.getElementById('currency').value.split(' ')[0];
+            const currencySymbol = document.getElementById('currency').value.split(' ')[0];
             const balance = parseFloat(document.getElementById('balance').value);
             const apr = parseFloat(document.getElementById('apr').value) / 100 / 12;
-            const payment = parseFloat(document.getElementById('payment').value);
-            if (isNaN(balance) || isNaN(apr) || isNaN(payment) || balance <= 0 || apr < 0 || payment <= 0) {
+            let fixedPayment = parseFloat(document.getElementById('payment').value);
+            if (isNaN(balance) || isNaN(apr) || isNaN(fixedPayment) || balance <= 0 || apr < 0 || fixedPayment <= 0) {
                 alert('Please enter valid positive numbers.');
                 return;
             }
@@ -219,30 +219,40 @@
             let totalInterest = 0;
             let totalPayments = 0;
             let schedule = [];
-            let balances = [];
+            let balances = [balance.toFixed(2)]; // Start with initial balance for chart
+            const initialInterest = currentBalance * apr;
+            if (fixedPayment <= initialInterest) {
+                document.getElementById('alert').innerText = 'Warning: Monthly payment is too low to cover interest; debt will not decrease.';
+                document.getElementById('alert').style.display = 'block';
+                document.getElementById('results').style.display = 'none';
+                return;
+            }
             while (currentBalance > 0 && month < 1200) {
                 month++;
                 let interest = currentBalance * apr;
-                if (payment <= interest) {
-                    document.getElementById('alert').innerText = 'Warning: Monthly payment is too low to cover interest; debt will not decrease.';
-                    document.getElementById('alert').style.display = 'block';
-                    return;
-                }
-                let principal = payment - interest;
+                let actualPayment = fixedPayment;
+                let principal = actualPayment - interest;
                 if (principal > currentBalance) {
                     principal = currentBalance;
-                    payment = principal + interest;
+                    actualPayment = principal + interest;
                 }
                 currentBalance -= principal;
+                if (currentBalance < 0) currentBalance = 0;
                 totalInterest += interest;
-                totalPayments += payment;
-                schedule.push({month, payment: payment.toFixed(2), principal: principal.toFixed(2), interest: interest.toFixed(2), balance: currentBalance.toFixed(2)});
+                totalPayments += actualPayment;
+                schedule.push({
+                    month,
+                    payment: actualPayment.toFixed(2),
+                    principal: principal.toFixed(2),
+                    interest: interest.toFixed(2),
+                    balance: currentBalance.toFixed(2)
+                });
                 balances.push(currentBalance.toFixed(2));
             }
             document.getElementById('alert').style.display = 'none';
             document.getElementById('months').innerText = `Months to Payoff: ${month}`;
-            document.getElementById('total-payments').innerText = `Total Payments: ${currency}${totalPayments.toFixed(2)}`;
-            document.getElementById('total-interest').innerText = `Total Interest: ${currency}${totalInterest.toFixed(2)}`;
+            document.getElementById('total-payments').innerText = `Total Payments: ${currencySymbol}${totalPayments.toFixed(2)}`;
+            document.getElementById('total-interest').innerText = `Total Interest: ${currencySymbol}${totalInterest.toFixed(2)}`;
             const today = new Date();
             today.setMonth(today.getMonth() + month);
             document.getElementById('payoff-date').innerText = `Estimated Payoff Date: ${today.toDateString()}`;
@@ -250,7 +260,7 @@
             tbody.innerHTML = '';
             schedule.forEach(row => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${row.month}</td><td>${currency}${row.payment}</td><td>${currency}${row.principal}</td><td>${currency}${row.interest}</td><td>${currency}${row.balance}</td>`;
+                tr.innerHTML = `<td>${row.month}</td><td>${currencySymbol}${row.payment}</td><td>${currencySymbol}${row.principal}</td><td>${currencySymbol}${row.interest}</td><td>${currencySymbol}${row.balance}</td>`;
                 tbody.appendChild(tr);
             });
             document.getElementById('results').style.display = 'block';
@@ -258,8 +268,8 @@
             balanceChart = new Chart(document.getElementById('balanceChart'), {
                 type: 'line',
                 data: {
-                    labels: schedule.map(r => r.month),
-                    datasets: [{ label: 'Balance Over Time', data: balances, borderColor: 'blue', fill: false }]
+                    labels: [...Array(month + 1).keys()].slice(1), // Months 1 to n
+                    datasets: [{ label: 'Balance Over Time', data: balances.slice(1), borderColor: 'blue', fill: false }]
                 },
                 options: { scales: { y: { beginAtZero: true } } }
             });
@@ -268,11 +278,11 @@
                 type: 'pie',
                 data: {
                     labels: ['Principal', 'Interest'],
-                    datasets: [{ data: [balance, totalInterest], backgroundColor: ['green', 'red'] }]
+                    datasets: [{ data: [balance.toFixed(2), totalInterest.toFixed(2)], backgroundColor: ['green', 'red'] }]
                 }
             });
             window.scheduleData = schedule;
-            window.resultsData = { months: month, totalPayments: totalPayments.toFixed(2), totalInterest: totalInterest.toFixed(2), payoffDate: today.toDateString(), currency };
+            window.resultsData = { months: month, totalPayments: totalPayments.toFixed(2), totalInterest: totalInterest.toFixed(2), payoffDate: today.toDateString(), currency: currencySymbol };
         }
         function saveAsPDF() {
             const { months, totalPayments, totalInterest, payoffDate, currency } = window.resultsData;
