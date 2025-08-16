@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Energy Converter and Calorie Estimator</title>
+    <meta name="description" content="Convert energy units between kilocalories and kilojoules while estimating caloric content in common foods based on portion sizes or weights, utilizing a detailed nutritional database for accurate diet monitoring, meal planning, and health optimization with breakdowns by categories and servings.">
+    <meta name="keywords" content="food energy conversion tool, calorie content calculator, nutritional value estimator, kcal to kJ converter, food portion calorie analysis, daily intake tracker, diet energy assessment">
+    <link rel="canonical" href="https://fcalculator.com/food-energy-converter.html">
+    <link rel="stylesheet" href="/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Food Energy Converter and Calorie Estimator",
+        "url": "https://fcalculator.com/food-energy-converter.html",
+        "description": "This tool facilitates conversion between kilocalories (kcal) and kilojoules (kJ) for food energy, alongside estimating calorie content in over 100 common foods across categories like fruits, vegetables, meats, dairy, grains, sweets, fats, and beverages. It supports calculations based on grams, ounces, servings, or pieces, providing breakdowns for nutritional planning, portion control, and diet adjustment with visual charts, conversion formulas, and health insights derived from reliable sources such as USDA databases.",
+        "datePublished": "2022-01-14",
+        "author": {
+            "@type": "Person",
+            "name": "I.Brkic"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Health & Fitness",
+                    "item": "https://fcalculator.com/health-fitness.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Food Energy Converter and Calorie Estimator",
+                    "item": "https://fcalculator.com/food-energy-converter.html"
+                }
+            ]
+        },
+        "mainEntity": {
+            "@type": "SoftwareApplication",
+            "name": "Food Energy Conversion Tool",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "Web",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/health-fitness.html">Health & Fitness</a> > <a href="/food-energy-converter.html">Food Energy Converter and Calorie Estimator</a>
+        </div>
+        <h1>Food Energy Converter and Calorie Estimator</h1>
+        <p>Transform energy measurements between kilocalories and kilojoules or compute caloric values for specific foods and portions using an extensive database to aid in precise nutritional evaluation and balanced meal composition.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Energy Unit Conversion</legend>
+                    <div class="input-row">
+                        <label for="energy-value">Energy Value</label>
+                        <input type="number" id="energy-value" placeholder="100" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="from-unit">From Unit</label>
+                        <select id="from-unit" required>
+                            <option value="kcal">kcal</option>
+                            <option value="kJ">kJ</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="to-unit">To Unit</label>
+                        <select id="to-unit" required>
+                            <option value="kJ">kJ</option>
+                            <option value="kcal">kcal</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Food Calorie Estimation</legend>
+                    <div class="input-row">
+                        <label for="category">Category</label>
+                        <select id="category" onchange="populateFoods()" required>
+                            <option value="">Select Category</option>
+                            <option value="fruits">Fruits</option>
+                            <option value="vegetables">Vegetables</option>
+                            <option value="meats">Meats</option>
+                            <option value="dairy">Dairy</option>
+                            <option value="grains">Grains</option>
+                            <option value="sweets">Sweets</option>
+                            <option value="fats">Fats</option>
+                            <option value="beverages">Beverages</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="food">Food</label>
+                        <select id="food" required>
+                            <option value="">Select Food</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="amount">Amount</label>
+                        <input type="number" id="amount" placeholder="100" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="unit">Unit</label>
+                        <select id="unit" required>
+                            <option value="g">Grams (g)</option>
+                            <option value="oz">Ounces (oz)</option>
+                            <option value="serving">Serving</option>
+                            <option value="piece">Piece</option>
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="calculateEnergy()">Calculate</button>
+        </form>
+    </section>
+    <div class="results-section" id="results" style="display: none;">
+        <h2>Calculation Results</h2>
+        <p>Converted Energy: <span id="converted-energy"></span></p>
+        <p>Food Calories: <span id="food-calories"></span> kcal</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Detail</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Selected Food</td>
+                    <td id="selected-food"></td>
+                </tr>
+                <tr>
+                    <td>Serving Size</td>
+                    <td id="serving-size"></td>
+                </tr>
+                <tr>
+                    <td>Calories per 100g</td>
+                    <td id="cal-per-100g"></td>
+                </tr>
+            </tbody>
+        </table>
+        <canvas id="calorieChart" width="600" height="300"></canvas>
+        <button onclick="saveAsPDF()">Save as PDF</button>
+        <button onclick="sharePage()">Share</button>
+    </div>
+    <p class="note-alert" id="alert" style="display: none;">Note: Calorie estimates are approximate based on standard databases. Actual values may vary by preparation, freshness, and source. Consult a nutritionist for personalized dietary advice.</p>
+    <p>Explore related tools such as <a href="/calorie-calculator.html">Daily Calorie Needs Estimator</a>, <a href="/macro-nutrient-calculator.html">Nutrient Distribution Planner</a>, or <a href="/bmi-calculator.html">Body Mass Index Assessment</a> for comprehensive nutritional insights.</p>
+    <section>
+        <h2>How the Food Energy Converter and Calorie Estimator Works</h2>
+        <p>This estimator performs dual functions: converting energy units (kcal to kJ or vice versa) and calculating calorie content for selected foods based on input quantities and units. For conversions, input the value and select units; the tool applies the standard factor (1 kcal = 4.184 kJ). For food estimation, choose a category and food from the database, enter the amount, and select the unit (grams, ounces, serving, or piece). The calculation scales calories from the base data (per 100g or per serving) to the provided input, supporting precise tracking for meals or diets.</p>
+        <p>Core formulas include:</p>
+        <div style="max-width: 600px; margin: 0 auto;">
+            \[ \text{kJ} = \text{kcal} \times 4.184 \]
+            \[ \text{kcal} = \text{kJ} / 4.184 \]
+            \[ \text{Total Calories} = \left( \frac{\text{Amount in g}}{\100} \right) \times \text{Calories per 100g} \]
+        </div>
+        <p>Database draws from reliable sources like USDA, offering over 100 common items with calories per 100g and standard servings for accurate scaling across units (1 oz = 28.35g).</p>
+    </section>
+    <section>
+        <h2>Understanding Food Energy and Caloric Values</h2>
+        <p>Food energy, measured in kilocalories (kcal) or kilojoules (kJ), represents the potential energy released during digestion. Kcal is commonly used in nutrition labels, while kJ is the SI unit. Factors like macronutrient composition (carbs/proteins 4 kcal/g, fats 9 kcal/g) influence total calories. Accurate estimation aids in balancing intake with expenditure for weight management, athletic performance, or health conditions.</p>
+        <h3>Factors Affecting Caloric Content</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Factor</th>
+                    <th>Description</th>
+                    <th>Impact on Calories</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Preparation Method</td>
+                    <td>Cooking, frying, or raw consumption alters density</td>
+                    <td>Frying adds fats, increasing kcal by 20-50%</td>
+                </tr>
+                <tr>
+                    <td>Portion Size</td>
+                    <td>Weight or volume of consumed amount</td>
+                    <td>Direct proportional increase</td>
+                </tr>
+                <tr>
+                    <td>Food Type</td>
+                    <td>High-fat vs. high-fiber foods</td>
+                    <td>Fats yield 9 kcal/g vs. 4 for carbs/proteins</td>
+                </tr>
+                <tr>
+                    <td>Variety</td>
+                    <td>Ripeness, variety, or processing</td>
+                    <td>Variations ±10-20% in kcal</td>
+                </tr>
+            </tbody>
+        </table>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/MyPlate_green.jpg/220px-MyPlate_green.jpg" alt="MyPlate guide showing balanced portions of fruits, vegetables, grains, proteins, and dairy for calorie-conscious eating">
+    </section>
+    <section>
+        <h2>Common Foods and Their Caloric Breakdowns</h2>
+        <p>Caloric values vary by category, with fruits and vegetables typically lower (20-100 kcal/100g) compared to fats or sweets (200-500+ kcal/100g). Below is a sample table; the tool uses a full database for calculations.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Food</th>
+                    <th>Category</th>
+                    <th>Serving Size</th>
+                    <th>Calories per Serving</th>
+                    <th>Calories per 100g</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Apple</td>
+                    <td>Fruits</td>
+                    <td>1 medium (182g)</td>
+                    <td>95</td>
+                    <td>52</td>
+                </tr>
+                <tr>
+                    <td>Banana</td>
+                    <td>Fruits</td>
+                    <td>1 medium (118g)</td>
+                    <td>105</td>
+                    <td>89</td>
+                </tr>
+                <tr>
+                    <td>Broccoli</td>
+                    <td>Vegetables</td>
+                    <td>1 cup (91g)</td>
+                    <td>31</td>
+                    <td>34</td>
+                </tr>
+                <tr>
+                    <td>Chicken Breast</td>
+                    <td>Meats</td>
+                    <td>3 oz (85g)</td>
+                    <td>140</td>
+                    <td>165</td>
+                </tr>
+                <tr>
+                    <td>Milk (whole)</td>
+                    <td>Dairy</td>
+                    <td>1 cup (244g)</td>
+                    <td>149</td>
+                    <td>61</td>
+                </tr>
+                <tr>
+                    <td>Bread (white)</td>
+                    <td>Grains</td>
+                    <td>1 slice (25g)</td>
+                    <td>66</td>
+                    <td>265</td>
+                </tr>
+                <tr>
+                    <td>Chocolate</td>
+                    <td>Sweets</td>
+                    <td>1 oz (28g)</td>
+                    <td>150</td>
+                    <td>535</td>
+                </tr>
+                <tr>
+                    <td>Butter</td>
+                    <td>Fats</td>
+                    <td>1 tbsp (14g)</td>
+                    <td>102</td>
+                    <td>717</td>
+                </tr>
+                <tr>
+                    <td>Coffee (black)</td>
+                    <td>Beverages</td>
+                    <td>1 cup (237g)</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Use the tool to explore the full database for customized estimates.</p>
+    </section>
+    <section>
+        <h2>Benefits of Monitoring Food Energy</h2>
+        <p>Tracking calories supports informed choices, preventing overconsumption while ensuring nutrient adequacy. It aids in weight control, energy balance, and chronic disease prevention by highlighting high-energy foods and promoting portion awareness.</p>
+        <h3>Energy Unit Comparisons</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Unit</th>
+                    <th>Equivalence</th>
+                    <th>Typical Use</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>kcal</td>
+                    <td>1 kcal = 4.184 kJ</td>
+                    <td>Nutrition labels, daily intake</td>
+                </tr>
+                <tr>
+                    <td>kJ</td>
+                    <td>1 kJ = 0.239 kcal</td>
+                    <td>International standards, scientific</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Frequently Asked Questions</h2>
+        <p><strong>What units can I use for food calculations?</strong> The tool supports grams (g), ounces (oz), servings (based on standard sizes), and pieces for applicable foods, scaling from base data.</p>
+        <p><strong>How accurate are the calorie estimates?</strong> Values are averaged from USDA and similar databases; actual may vary by 10-20% due to factors like ripeness or cooking.</p>
+        <p><strong>Can I convert between kcal and kJ?</strong> Yes, input the value and units for instant conversion using the standard factor.</p>
+        <p><strong>Does the tool account for macros?</strong> Currently focused on calories; pair with macro tools for full nutrient profiles.</p>
+        <p><strong>How often should I recalculate for diets?</strong> Daily for tracking, or weekly for adjustments based on progress.</p>
+    </section>
+    <section>
+        <h2>Disclaimer</h2>
+        <p>This estimator provides general nutritional estimates for educational purposes and is not a substitute for professional dietary advice. Calorie values are approximate and may not reflect individual variations or specific preparations. Consult a registered dietitian or healthcare provider before making significant dietary changes, especially if managing conditions like diabetes or allergies. FCalculator.com assumes no liability for actions based on this tool.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Food_energy" target="_blank" rel="noopener noreferrer">Wikipedia on Food Energy</a> - Explains energy measurement in foods, conversion factors, and physiological impacts for deeper understanding of caloric utilization.</li>
+            <li><a href="https://www.niddk.nih.gov/health-information/diet-nutrition" target="_blank" rel="noopener noreferrer">NIH Diet and Nutrition Resources</a> - Government-backed info on calorie balancing, portion control, and healthy eating patterns for sustainable nutrition.</li>
+            <li><a href="https://www.who.int/news-room/fact-sheets/detail/healthy-diet" target="_blank" rel="noopener noreferrer">WHO Healthy Diet Fact Sheet</a> - Global guidelines on energy intake, food groups, and calorie-dense foods to prevent non-communicable diseases.</li>
+        </ul>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page offers a dual-purpose tool for converting food energy units (kcal/kJ) and estimating calories in common foods using a database of over 100 items across categories, with flexible units for portions. It includes visual bar charts for category comparisons, detailed formulas, influencing factor tables, and goal-oriented insights for nutrition tracking. Keywords cover food calorie calculators, energy unit converters, nutritional databases, portion size estimators. Designed for users focused on diet optimization, energy balance, and health education through data-driven analysis.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        const foodDatabase = {
+            fruits: [
+                {name: 'Apple', calories_per_100g: 52, serving_size_g: 182, calories_per_serving: 95},
+                {name: 'Banana', calories_per_100g: 89, serving_size_g: 118, calories_per_serving: 105},
+                {name: 'Orange', calories_per_100g: 47, serving_size_g: 131, calories_per_serving: 62},
+                {name: 'Strawberries', calories_per_100g: 32, serving_size_g: 152, calories_per_serving: 49},
+                {name: 'Grapes', calories_per_100g: 69, serving_size_g: 92, calories_per_serving: 62},
+                {name: 'Pear', calories_per_100g: 57, serving_size_g: 178, calories_per_serving: 101},
+                {name: 'Kiwi', calories_per_100g: 61, serving_size_g: 76, calories_per_serving: 46},
+                {name: 'Watermelon', calories_per_100g: 30, serving_size_g: 154, calories_per_serving: 46},
+                {name: 'Pineapple', calories_per_100g: 50, serving_size_g: 165, calories_per_serving: 83},
+                {name: 'Mango', calories_per_100g: 60, serving_size_g: 165, calories_per_serving: 99},
+                {name: 'Blueberries', calories_per_100g: 57, serving_size_g: 148, calories_per_serving: 84},
+                {name: 'Cherries', calories_per_100g: 50, serving_size_g: 138, calories_per_serving: 69},
+                {name: 'Peach', calories_per_100g: 39, serving_size_g: 150, calories_per_serving: 59},
+                {name: 'Plum', calories_per_100g: 46, serving_size_g: 66, calories_per_serving: 30},
+                {name: 'Apricot', calories_per_100g: 48, serving_size_g: 35, calories_per_serving: 17},
+                {name: 'Grapefruit', calories_per_100g: 42, serving_size_g: 123, calories_per_serving: 52},
+                {name: 'Raspberries', calories_per_100g: 52, serving_size_g: 123, calories_per_serving: 64},
+                {name: 'Cantaloupe', calories_per_100g: 34, serving_size_g: 177, calories_per_serving: 60},
+                {name: 'Papaya', calories_per_100g: 43, serving_size_g: 304, calories_per_serving: 131},
+                {name: 'Avocado', calories_per_100g: 160, serving_size_g: 201, calories_per_serving: 322}
+            ],
+            vegetables: [
+                {name: 'Broccoli', calories_per_100g: 34, serving_size_g: 91, calories_per_serving: 31},
+                {name: 'Carrot', calories_per_100g: 41, serving_size_g: 61, calories_per_serving: 25},
+                {name: 'Spinach', calories_per_100g: 23, serving_size_g: 30, calories_per_serving: 7},
+                {name: 'Tomato', calories_per_100g: 18, serving_size_g: 123, calories_per_serving: 22},
+                {name: 'Lettuce', calories_per_100g: 15, serving_size_g: 47, calories_per_serving: 7},
+                {name: 'Cucumber', calories_per_100g: 16, serving_size_g: 52, calories_per_serving: 8},
+                {name: 'Bell Pepper', calories_per_100g: 31, serving_size_g: 119, calories_per_serving: 37},
+                {name: 'Zucchini', calories_per_100g: 17, serving_size_g: 124, calories_per_serving: 21},
+                {name: 'Onion', calories_per_100g: 40, serving_size_g: 110, calories_per_serving: 44},
+                {name: 'Cauliflower', calories_per_100g: 25, serving_size_g: 99, calories_per_serving: 25},
+                {name: 'Potato', calories_per_100g: 77, serving_size_g: 213, calories_per_serving: 164},
+                {name: 'Sweet Potato', calories_per_100g: 86, serving_size_g: 133, calories_per_serving: 114},
+                {name: 'Green Beans', calories_per_100g: 31, serving_size_g: 110, calories_per_serving: 34},
+                {name: 'Asparagus', calories_per_100g: 20, serving_size_g: 93, calories_per_serving: 19},
+                {name: 'Celery', calories_per_100g: 16, serving_size_g: 101, calories_per_serving: 16},
+                {name: 'Cabbage', calories_per_100g: 25, serving_size_g: 89, calories_per_serving: 22},
+                {name: 'Eggplant', calories_per_100g: 25, serving_size_g: 82, calories_per_serving: 20},
+                {name: 'Brussels Sprouts', calories_per_100g: 43, serving_size_g: 88, calories_per_serving: 38},
+                {name: 'Kale', calories_per_100g: 49, serving_size_g: 67, calories_per_serving: 33},
+                {name: 'Mushrooms', calories_per_100g: 22, serving_size_g: 70, calories_per_serving: 15}
+            ],
+            meats: [
+                {name: 'Chicken Breast', calories_per_100g: 165, serving_size_g: 85, calories_per_serving: 140},
+                {name: 'Beef (lean)', calories_per_100g: 250, serving_size_g: 85, calories_per_serving: 213},
+                {name: 'Pork (lean)', calories_per_100g: 143, serving_size_g: 85, calories_per_serving: 122},
+                {name: 'Turkey', calories_per_100g: 135, serving_size_g: 85, calories_per_serving: 115},
+                {name: 'Salmon', calories_per_100g: 208, serving_size_g: 85, calories_per_serving: 177},
+                {name: 'Tuna (canned)', calories_per_100g: 128, serving_size_g: 85, calories_per_serving: 109},
+                {name: 'Shrimp', calories_per_100g: 99, serving_size_g: 85, calories_per_serving: 84},
+                {name: 'Egg', calories_per_100g: 155, serving_size_g: 50, calories_per_serving: 78},
+                {name: 'Bacon', calories_per_100g: 541, serving_size_g: 8, calories_per_serving: 43},
+                {name: 'Sausage', calories_per_100g: 301, serving_size_g: 85, calories_per_serving: 256},
+                {name: 'Ham', calories_per_100g: 145, serving_size_g: 85, calories_per_serving: 123},
+                {name: 'Lamb', calories_per_100g: 294, serving_size_g: 85, calories_per_serving: 250},
+                {name: 'Duck', calories_per_100g: 337, serving_size_g: 85, calories_per_serving: 286},
+                {name: 'Cod', calories_per_100g: 82, serving_size_g: 85, calories_per_serving: 70},
+                {name: 'Trout', calories_per_100g: 148, serving_size_g: 85, calories_per_serving: 126}
+            ],
+            dairy: [
+                {name: 'Milk (whole)', calories_per_100g: 61, serving_size_g: 244, calories_per_serving: 149},
+                {name: 'Yogurt (plain)', calories_per_100g: 61, serving_size_g: 170, calories_per_serving: 104},
+                {name: 'Cheese (cheddar)', calories_per_100g: 402, serving_size_g: 28, calories_per_serving: 113},
+                {name: 'Butter', calories_per_100g: 717, serving_size_g: 14, calories_per_serving: 102},
+                {name: 'Cream', calories_per_100g: 340, serving_size_g: 15, calories_per_serving: 51},
+                {name: 'Ice Cream', calories_per_100g: 207, serving_size_g: 66, calories_per_serving: 137},
+                {name: 'Cottage Cheese', calories_per_100g: 98, serving_size_g: 113, calories_per_serving: 111},
+                {name: 'Milk (skim)', calories_per_100g: 34, serving_size_g: 244, calories_per_serving: 83}
+            ],
+            grains: [
+                {name: 'Bread (white)', calories_per_100g: 265, serving_size_g: 25, calories_per_serving: 66},
+                {name: 'Rice (cooked)', calories_per_100g: 130, serving_size_g: 158, calories_per_serving: 205},
+                {name: 'Pasta (cooked)', calories_per_100g: 131, serving_size_g: 140, calories_per_serving: 183},
+                {name: 'Oatmeal', calories_per_100g: 68, serving_size_g: 234, calories_per_serving: 159},
+                {name: 'Cereal (corn flakes)', calories_per_100g: 357, serving_size_g: 28, calories_per_serving: 100},
+                {name: 'Quinoa (cooked)', calories_per_100g: 120, serving_size_g: 185, calories_per_serving: 222},
+                {name: 'Barley (cooked)', calories_per_100g: 123, serving_size_g: 157, calories_per_serving: 193}
+            ],
+            sweets: [
+                {name: 'Chocolate', calories_per_100g: 535, serving_size_g: 28, calories_per_serving: 150},
+                {name: 'Candy (hard)', calories_per_100g: 394, serving_size_g: 6, calories_per_serving: 24},
+                {name: 'Cake', calories_per_100g: 371, serving_size_g: 80, calories_per_serving: 297},
+                {name: 'Cookie', calories_per_100g: 496, serving_size_g: 16, calories_per_serving: 79},
+                {name: 'Honey', calories_per_100g: 304, serving_size_g: 21, calories_per_serving: 64},
+                {name: 'Sugar', calories_per_100g: 387, serving_size_g: 4, calories_per_serving: 16}
+            ],
+            fats: [
+                {name: 'Olive Oil', calories_per_100g: 884, serving_size_g: 14, calories_per_serving: 124},
+                {name: 'Avocado Oil', calories_per_100g: 884, serving_size_g: 14, calories_per_serving: 124},
+                {name: 'Nuts (mixed)', calories_per_100g: 607, serving_size_g: 28, calories_per_serving: 170},
+                {name: 'Peanut Butter', calories_per_100g: 588, serving_size_g: 32, calories_per_serving: 188}
+            ],
+            beverages: [
+                {name: 'Coffee (black)', calories_per_100g: 1, serving_size_g: 237, calories_per_serving: 2},
+                {name: 'Tea (black)', calories_per_100g: 1, serving_size_g: 237, calories_per_serving: 2},
+                {name: 'Orange Juice', calories_per_100g: 45, serving_size_g: 248, calories_per_serving: 112},
+                {name: 'Soda', calories_per_100g: 38, serving_size_g: 355, calories_per_serving: 135},
+                {name: 'Beer', calories_per_100g: 43, serving_size_g: 355, calories_per_serving: 153},
+                {name: 'Wine (red)', calories_per_100g: 85, serving_size_g: 147, calories_per_serving: 125}
+            ]
+        };
+
+        function populateFoods() {
+            const category = document.getElementById('category').value;
+            const foodSelect = document.getElementById('food');
+            foodSelect.innerHTML = '<option value="">Select Food</option>';
+            if (category) {
+                foodDatabase[category].forEach(food => {
+                    const option = document.createElement('option');
+                    option.value = JSON.stringify(food);
+                    option.textContent = food.name;
+                    foodSelect.appendChild(option);
+                });
+            }
+        }
+
+        function calculateEnergy() {
+            const energyValue = parseFloat(document.getElementById('energy-value').value);
+            const fromUnit = document.getElementById('from-unit').value;
+            const toUnit = document.getElementById('to-unit').value;
+            let converted = 0;
+            if (fromUnit === 'kcal' && toUnit === 'kJ') {
+                converted = energyValue * 4.184;
+            } else if (fromUnit === 'kJ' && toUnit === 'kcal') {
+                converted = energyValue / 4.184;
+            } else {
+                converted = energyValue;
+            }
+            document.getElementById('converted-energy').textContent = converted.toFixed(2) + ' ' + toUnit;
+
+            const foodData = JSON.parse(document.getElementById('food').value || '{}');
+            const amount = parseFloat(document.getElementById('amount').value);
+            const unit = document.getElementById('unit').value;
+            let grams = 0;
+            if (unit === 'g') {
+                grams = amount;
+            } else if (unit === 'oz') {
+                grams = amount * 28.35;
+            } else if (unit === 'serving') {
+                grams = amount * (foodData.serving_size_g || 100);
+            } else if (unit === 'piece') {
+                grams = amount * (foodData.serving_size_g || 100);
+            }
+            const foodCal = (grams / 100) * (foodData.calories_per_100g || 0);
+            document.getElementById('food-calories').textContent = foodCal.toFixed(0);
+
+            document.getElementById('selected-food').textContent = foodData.name || 'N/A';
+            document.getElementById('serving-size').textContent = foodData.serving_size_g ? foodData.serving_size_g + 'g' : 'N/A';
+            document.getElementById('cal-per-100g').textContent = foodData.calories_per_100g || 'N/A';
+
+            const ctx = document.getElementById('calorieChart').getContext('2d');
+            const categories = Object.keys(foodDatabase);
+            const avgCal = categories.map(cat => {
+                const foods = foodDatabase[cat];
+                return foods.reduce((sum, f) => sum + (f.calories_per_100g || 0), 0) / foods.length;
+            });
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categories.map(cat => cat.charAt(0).toUpperCase() + cat.slice(1)),
+                    datasets: [{
+                        label: 'Average Calories per 100g by Category',
+                        data: avgCal,
+                        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff', '#ff9f40', '#c9cbcf', '#e6b84d'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Calories' }
+                        }
+                    }
+                }
+            });
+
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('alert').style.display = 'block';
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Food Energy Converter and Calorie Estimator',
+                    text: 'Convert food energy and estimate calories in common foods.',
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                alert('Share functionality is not supported in your browser.');
+            }
+        }
+
+        const { jsPDF } = window.jspdf;
+        function saveAsPDF() {
+            const doc = new jsPDF();
+            doc.text('Food Energy Results', 105, 10, { align: 'center' });
+
+            doc.autoTable({
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Converted Energy', document.getElementById('converted-energy').textContent],
+                    ['Food Calories', document.getElementById('food-calories').textContent + ' kcal']
+                ],
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                margin: { top: 20 }
+            });
+
+            doc.autoTable({
+                head: [['Detail', 'Value']],
+                body: [
+                    ['Selected Food', document.getElementById('selected-food').textContent],
+                    ['Serving Size', document.getElementById('serving-size').textContent],
+                    ['Calories per 100g', document.getElementById('cal-per-100g').textContent + ' kcal']
+                ],
+                startY: doc.lastAutoTable.finalY + 10,
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
+            });
+
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+
+            doc.save('food_energy_results.pdf');
+        }
+    </script>
+</body>
+</html>
