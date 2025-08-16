@@ -9,21 +9,6 @@
     <link rel="canonical" href="https://fcalculator.com/credit-card-calculator.html" />
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <style>
-        .input-group {
-            position: relative;
-            width: 100%;
-        }
-        .input-group input {
-            padding-right: 30px; /* Space for symbol */
-        }
-        .input-symbol {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #666;
-            font-size: 14px;
-        }
         .sections-container-1 {
             max-width: 600px;
             margin: 0 auto;
@@ -101,7 +86,7 @@
         <form id="tool-form">
             <div class="currency-selector">
                 <label for="currency">Currency:</label>
-                <select id="currency" onchange="updateSymbols()">
+                <select id="currency">
                     <option value="$ (USD)">$ (USD)</option>
                     <option value="€ (EUR)">€ (EUR)</option>
                     <option value="£ (GBP)">£ (GBP)</option>
@@ -115,24 +100,15 @@
                     <legend>Credit Card Details</legend>
                     <div class="input-row">
                         <label for="balance">Current Balance</label>
-                        <div class="input-group">
-                            <input type="number" id="balance" value="10000" placeholder="e.g. 5000" required>
-                            <span class="input-symbol" id="balance-symbol">$</span>
-                        </div>
+                        <input type="number" id="balance" value="10000" placeholder="e.g. 5000" required>
                     </div>
                     <div class="input-row">
                         <label for="apr">Annual Interest Rate (APR %)</label>
-                        <div class="input-group">
-                            <input type="number" id="apr" value="18" placeholder="e.g. 15" step="0.01" required>
-                            <span class="input-symbol">%</span>
-                        </div>
+                        <input type="number" id="apr" value="18" placeholder="e.g. 15" step="0.01" required>
                     </div>
                     <div class="input-row">
                         <label for="payment">Fixed Monthly Payment</label>
-                        <div class="input-group">
-                            <input type="number" id="payment" value="200" placeholder="e.g. 250" required>
-                            <span class="input-symbol" id="payment-symbol">$</span>
-                        </div>
+                        <input type="number" id="payment" value="200" placeholder="e.g. 250" required>
                     </div>
                     <div class="input-row">
                         <label for="start-date">Start Date</label>
@@ -246,13 +222,7 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        function updateSymbols() {
-            const currencySymbol = document.getElementById('currency').value.split(' ')[0];
-            document.getElementById('balance-symbol').innerText = currencySymbol;
-            document.getElementById('payment-symbol').innerText = currencySymbol;
-        }
         window.onload = function() {
-            updateSymbols();
             document.getElementById('start-date').value = new Date().toISOString().split('T')[0];
         };
         let balanceChart, pieChart;
@@ -379,28 +349,11 @@
             };
             docDefinition.footer = function (currentPage, pageCount) {
                 return {
-                    columns: [
-                        {
-                            text: 'This document was generated using ',
-                            alignment: 'center',
-                            fontSize: 10,
-                            color: 'gray'
-                        },
-                        {
-                            text: 'Fcalculator.com',
-                            link: 'https://fcalculator.com',
-                            alignment: 'center',
-                            fontSize: 10,
-                            color: 'blue',
-                            decoration: 'underline'
-                        },
-                        {
-                            text: ' – Calculations are provided “as is” without warranty. Use at your own risk.',
-                            alignment: 'center',
-                            fontSize: 10,
-                            color: 'gray'
-                        }
-                    ],
+                    text: 'This document was generated using Fcalculator.com',
+                    alignment: 'center',
+                    fontSize: 10,
+                    color: 'gray',
+                    link: 'https://fcalculator.com',
                     margin: [40, 0]
                 };
             };
