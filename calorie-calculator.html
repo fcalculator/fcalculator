@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Calorie Calculator</title>
-    <meta name="description" content="Precisely calculate basal metabolic rate (BMR) and total daily energy expenditure (TDEE) using Mifflin-St Jeor formula, supporting both metric (kg/cm) and imperial (lbs/inches) units for personalized weight management, fitness tracking, and nutritional guidance with activity adjustments and goal-oriented recommendations.">
-    <meta name="keywords" content="calorie needs calculator, BMR estimation tool, TDEE computation, daily energy expenditure, weight loss calorie deficit, Mifflin-St Jeor method, metric imperial units converter">
+    <title>Personalized Calorie Expenditure Estimator</title>
+    <meta name="description" content="Compute basal metabolic rate (BMR) and total daily energy expenditure (TDEE) using Mifflin-St Jeor, Harris-Benedict, or Katch-McArdle formulas, with metric/imperial unit support, body fat integration, activity adjustments, and customized recommendations for weight maintenance, gradual loss, or gain, including zigzag cycling insights and nutritional breakdowns.">
+    <meta name="keywords" content="calorie expenditure calculator, BMR formula comparison, TDEE estimation tool, weight goal calorie planner, body fat adjusted metabolism, activity level energy needs, zigzag diet scheduler">
     <link rel="canonical" href="https://fcalculator.com/calorie-calculator.html">
     <link rel="stylesheet" href="/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
@@ -17,9 +17,9 @@
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "Daily Calorie Needs Estimator",
+        "name": "Personalized Calorie Expenditure Estimator",
         "url": "https://fcalculator.com/calorie-calculator.html",
-        "description": "This advanced estimator computes basal metabolic rate (BMR) and total daily energy expenditure (TDEE) using Mifflin-St Jeor, Harris-Benedict, and optional Katch-McArdle formulas. It supports metric (kg/cm) and imperial (lbs/inches) units, providing customized calorie targets for maintenance, weight loss, or gain, with activity level multipliers, visual charts, and in-depth explanations for effective health and fitness planning.",
+        "description": "This estimator calculates basal metabolic rate (BMR) and total daily energy expenditure (TDEE) via Mifflin-St Jeor, Revised Harris-Benedict, and Katch-McArdle formulas, accommodating metric and imperial units, body fat percentage for precision, activity multipliers, and goal-based calorie adjustments for maintenance, weight loss (mild to extreme), or gain. It includes visual charts, zigzag cycling strategies, macronutrient suggestions, and educational content on energy metabolism, calorie types, and health considerations for informed fitness and nutrition planning.",
         "datePublished": "2022-01-14",
         "author": {
             "@type": "Person",
@@ -51,14 +51,14 @@
                 {
                     "@type": "ListItem",
                     "position": 3,
-                    "name": "Daily Calorie Needs Estimator",
+                    "name": "Personalized Calorie Expenditure Estimator",
                     "item": "https://fcalculator.com/calorie-calculator.html"
                 }
             ]
         },
         "mainEntity": {
             "@type": "SoftwareApplication",
-            "name": "Calorie Needs Estimation Tool",
+            "name": "Calorie Expenditure Estimation Tool",
             "applicationCategory": "HealthApplication",
             "operatingSystem": "Web",
             "offers": {
@@ -74,10 +74,10 @@
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/health-fitness.html">Health & Fitness</a> > <a href="/calorie-calculator.html">Daily Calorie Needs Estimator</a>
+            <a href="/">FCalculator.com</a> > <a href="/health-fitness.html">Health & Fitness</a> > <a href="/calorie-calculator.html">Personalized Calorie Expenditure Estimator</a>
         </div>
-        <h1>Daily Calorie Needs Estimator</h1>
-        <p>Assess your basal metabolic rate (BMR) and total daily energy expenditure (TDEE) with support for metric (kg/cm) and imperial (lbs/inches) measurements, incorporating activity levels for accurate calorie recommendations tailored to weight maintenance, loss, or gain goals.</p>
+        <h1>Personalized Calorie Expenditure Estimator</h1>
+        <p>Evaluate your basal metabolic rate (BMR) and total daily energy expenditure (TDEE) across multiple formulas, with flexible unit options, body composition factors, and activity profiles to generate tailored calorie targets for sustaining, reducing, or increasing body weight effectively.</p>
     </header>
     <section class="tool-section">
         <form id="tool-form">
@@ -93,7 +93,7 @@
                     </div>
                     <div class="input-row">
                         <label for="age">Age (years)</label>
-                        <input type="number" id="age" placeholder="30" required>
+                        <input type="number" id="age" placeholder="25" required>
                     </div>
                     <div class="input-row">
                         <label for="gender">Gender</label>
@@ -104,15 +104,15 @@
                     </div>
                     <div id="metric-weight" class="input-row">
                         <label for="weight-kg">Weight (kg)</label>
-                        <input type="number" id="weight-kg" placeholder="70" required>
+                        <input type="number" id="weight-kg" placeholder="65" required>
                     </div>
                     <div id="imperial-weight" class="input-row" style="display: none;">
                         <label for="weight-lbs">Weight (lbs)</label>
-                        <input type="number" id="weight-lbs" placeholder="154" required>
+                        <input type="number" id="weight-lbs" placeholder="143" required>
                     </div>
                     <div id="metric-height" class="input-row">
                         <label for="height-cm">Height (cm)</label>
-                        <input type="number" id="height-cm" placeholder="170" required>
+                        <input type="number" id="height-cm" placeholder="180" required>
                     </div>
                     <div id="imperial-height" class="input-row" style="display: none;">
                         <label for="height-feet">Height (feet)</label>
@@ -120,17 +120,30 @@
                     </div>
                     <div id="imperial-height-inches" class="input-row" style="display: none;">
                         <label for="height-inches">Inches</label>
-                        <input type="number" id="height-inches" placeholder="7" required>
+                        <input type="number" id="height-inches" placeholder="11" required>
                     </div>
                     <div class="input-row">
                         <label for="activity">Activity Level</label>
                         <select id="activity" required>
-                            <option value="1.2">Sedentary (little or no exercise)</option>
+                            <option value="1.2">Sedentary (little exercise, desk job)</option>
                             <option value="1.375">Lightly Active (light exercise 1-3 days/week)</option>
-                            <option value="1.55">Moderately Active (moderate exercise 3-5 days/week)</option>
-                            <option value="1.725">Very Active (hard exercise 6-7 days/week)</option>
-                            <option value="1.9">Extra Active (very hard exercise & physical job)</option>
+                            <option value="1.465">Moderately Active (moderate exercise 3-5 days/week, e.g., 15-30 min elevated heart rate)</option>
+                            <option value="1.55">Active (intense exercise 3-5 days/week, 45-120 min)</option>
+                            <option value="1.725">Very Active (hard exercise 6-7 days/week, 2+ hours)</option>
+                            <option value="1.9">Extra Active (professional athlete or heavy labor)</option>
                         </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="formula">BMR Formula</label>
+                        <select id="formula" onchange="toggleBodyFat()">
+                            <option value="mifflin">Mifflin-St Jeor (General Use)</option>
+                            <option value="harris">Revised Harris-Benedict (Traditional)</option>
+                            <option value="katch">Katch-McArdle (Body Fat Adjusted)</option>
+                        </select>
+                    </div>
+                    <div id="body-fat-row" class="input-row" style="display: none;">
+                        <label for="body-fat">Body Fat (%)</label>
+                        <input type="number" id="body-fat" placeholder="20" required>
                     </div>
                 </fieldset>
             </div>
@@ -139,6 +152,7 @@
     </section>
     <div class="results-section" id="results" style="display: none;">
         <h2>Calculation Results</h2>
+        <p>Selected Formula: <span id="selected-formula"></span></p>
         <p>Basal Metabolic Rate (BMR): <span id="bmr"></span> calories/day</p>
         <p>Total Daily Energy Expenditure (TDEE): <span id="tdee"></span> calories/day</p>
         <table>
@@ -146,187 +160,387 @@
                 <tr>
                     <th>Goal</th>
                     <th>Recommended Calories</th>
+                    <th>Weekly Change</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Maintenance</td>
                     <td id="maintenance"></td>
+                    <td>0 kg/week</td>
                 </tr>
                 <tr>
-                    <td>Mild Weight Loss (0.5 kg/week)</td>
+                    <td>Mild Weight Loss</td>
                     <td id="mild-loss"></td>
+                    <td>-0.25 kg/week</td>
                 </tr>
                 <tr>
-                    <td>Weight Loss (1 kg/week)</td>
+                    <td>Weight Loss</td>
                     <td id="loss"></td>
+                    <td>-0.5 kg/week</td>
                 </tr>
                 <tr>
-                    <td>Mild Weight Gain (0.5 kg/week)</td>
+                    <td>Extreme Weight Loss</td>
+                    <td id="extreme-loss"></td>
+                    <td>-1 kg/week</td>
+                </tr>
+                <tr>
+                    <td>Mild Weight Gain</td>
                     <td id="mild-gain"></td>
+                    <td>+0.25 kg/week</td>
                 </tr>
                 <tr>
-                    <td>Weight Gain (1 kg/week)</td>
+                    <td>Weight Gain</td>
                     <td id="gain"></td>
+                    <td>+0.5 kg/week</td>
+                </tr>
+                <tr>
+                    <td>Extreme Weight Gain</td>
+                    <td id="extreme-gain"></td>
+                    <td>+1 kg/week</td>
                 </tr>
             </tbody>
         </table>
+        <h3>Suggested Macronutrient Breakdown (for Maintenance)</h3>
+        <canvas id="macroChart" width="300" height="300"></canvas>
         <canvas id="calorieChart" width="600" height="300"></canvas>
         <button onclick="saveAsPDF()">Save as PDF</button>
         <button onclick="sharePage()">Share</button>
     </div>
-    <p class="note-alert" id="alert" style="display: none;">Note: Results are estimates based on standard formulas. Individual variations may occur; consult a healthcare provider for precise advice, especially if pregnant, athletic, or with medical conditions.</p>
-    <p>Explore related tools such as <a href="/bmi-calculator.html">Body Mass Index Assessment</a>, <a href="/tdee-calculator.html">Advanced Energy Expenditure Tool</a>, or <a href="/macro-nutrient-calculator.html">Nutrient Distribution Planner</a> for comprehensive health insights.</p>
+    <p class="note-alert" id="alert" style="display: none;">Note: These estimates are based on standard equations and may vary individually. Minimum safe intake: 1,200 calories for women, 1,500 for men. Consult a healthcare professional before significant changes, especially for extreme goals.</p>
+    <p>Explore related tools such as <a href="/bmi-calculator.html">Body Mass Index Assessment</a>, <a href="/tdee-calculator.html">Advanced Energy Expenditure Tool</a>, or <a href="/macro-nutrient-calculator.html">Nutrient Distribution Planner</a> for enhanced metabolic and nutritional analysis.</p>
     <section>
-        <h2>How the Daily Calorie Needs Estimator Works</h2>
-        <p>This tool utilizes the Mifflin-St Jeor equation as the primary method for calculating basal metabolic rate (BMR), adjusting for total daily energy expenditure (TDEE) via activity multipliers. Users can select metric (kg/cm) or imperial (lbs/inches) units, with automatic conversions applied for accuracy. Input your age, gender, measurements, and activity level; the estimator computes BMR and applies the selected multiplier for TDEE, then suggests calorie intakes for various goals.</p>
-        <p>Core formulas include:</p>
+        <h2>How the Personalized Calorie Expenditure Estimator Works</h2>
+        <p>This tool assesses BMR using one of three formulas—Mifflin-St Jeor for general accuracy, Revised Harris-Benedict for traditional estimates, or Katch-McArdle for body composition focus—then multiplies by an activity factor to derive TDEE. Enter age, gender, measurements (with unit conversion), activity level, and optionally body fat percentage if selecting Katch-McArdle. The estimator computes BMR, applies the multiplier, and adjusts for goals like mild loss (250-calorie deficit for 0.25 kg/week) up to extreme (1,000-calorie surplus/deficit for 1 kg/week).</p>
+        <p>Formulas employed:</p>
         <div style="max-width: 600px; margin: 0 auto;">
-            \[ \text{BMR (Male)} = 10 \times \text{weight (kg)} + 6.25 \times \text{height (cm)} - 5 \times \text{age (years)} + 5 \]
-            \[ \text{BMR (Female)} = 10 \times \text{weight (kg)} + 6.25 \times \text{height (cm)} - 5 \times \text{age (years)} - 161 \]
+            \[ \text{Mifflin-St Jeor (Male)} = 10W + 6.25H - 5A + 5 \]
+            \[ \text{Mifflin-St Jeor (Female)} = 10W + 6.25H - 5A - 161 \]
+            \[ \text{Revised Harris-Benedict (Male)} = 13.397W + 4.799H - 5.677A + 88.362 \]
+            \[ \text{Revised Harris-Benedict (Female)} = 9.247W + 3.098H - 4.330A + 447.593 \]
+            \[ \text{Katch-McArdle} = 370 + 21.6(1 - F/100)W \]
             \[ \text{TDEE} = \text{BMR} \times \text{Activity Multiplier} \]
         </div>
-        <p>For imperial units, weight in lbs is converted to kg (lbs × 0.453592), and height in inches to cm (inches × 2.54). Alternative formulas like Harris-Benedict (revised): Male BMR = 13.397W + 4.799H - 5.677A + 88.362; Female = 9.247W + 3.098H - 4.330A + 447.593, or Katch-McArdle for lean mass focus: BMR = 370 + 21.6 × (1 - body fat %) × W, can be considered for advanced users.</p>
+        <p>Where W is weight (kg), H is height (cm), A is age (years), F is body fat (%). Conversions: lbs to kg (×0.453592), inches to cm (×2.54).</p>
     </section>
     <section>
-        <h2>Understanding Basal Metabolic Rate (BMR) and Influencing Factors</h2>
-        <p>BMR represents the energy required for basic bodily functions at rest, typically 60-75% of TDEE. It varies by muscle mass, hormones, and genetics. Accurate estimation aids in sustainable dieting without compromising health.</p>
-        <h3>Key Factors Affecting BMR</h3>
+        <h2>Basal Metabolic Rate (BMR) and Key Influencing Factors</h2>
+        <p>BMR quantifies calories needed for vital functions at rest, comprising 60-75% of TDEE. It declines with age, varies by gender due to muscle differences, and scales with body size. Body composition plays a role—muscle tissue demands more energy than fat.</p>
+        <h3>Factors Impacting BMR</h3>
         <table>
             <thead>
                 <tr>
                     <th>Factor</th>
                     <th>Description</th>
-                    <th>Impact</th>
+                    <th>Typical Effect</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Age</td>
-                    <td>Metabolism slows with age due to muscle loss</td>
-                    <td>Decreases 1-2% per decade after 20</td>
+                    <td>Metabolic efficiency decreases over time</td>
+                    <td>-1-2% per decade post-20</td>
                 </tr>
                 <tr>
                     <td>Gender</td>
-                    <td>Men often have higher muscle mass</td>
-                    <td>Higher BMR in males</td>
+                    <td>Higher muscle in males elevates rate</td>
+                    <td>Men: +5-10% vs. women</td>
                 </tr>
                 <tr>
-                    <td>Weight/Height</td>
-                    <td>Larger bodies require more energy</td>
-                    <td>Direct positive correlation</td>
+                    <td>Body Size</td>
+                    <td>Larger mass requires more energy</td>
+                    <td>Proportional increase</td>
                 </tr>
                 <tr>
-                    <td>Body Composition</td>
-                    <td>Muscle burns more calories than fat</td>
-                    <td>Higher muscle mass increases BMR</td>
+                    <td>Body Fat %</td>
+                    <td>Lean mass boosts metabolism</td>
+                    <td>Lower % = higher BMR</td>
+                </tr>
+                <tr>
+                    <td>Hormones/Health</td>
+                    <td>Thyroid, stress affect rate</td>
+                    <td>Variations ±10-20%</td>
                 </tr>
             </tbody>
         </table>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/MyPlate_green.jpg/220px-MyPlate_green.jpg" alt="MyPlate nutritional guide depicting balanced food groups for effective calorie management and health optimization">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/MyPlate_green.jpg/220px-MyPlate_green.jpg" alt="MyPlate diagram illustrating balanced dietary components to align with calculated calorie needs for optimal health outcomes">
     </section>
     <section>
-        <h2>Activity Levels, Multipliers, and Adjustments</h2>
-        <p>Activity multipliers scale BMR to TDEE, reflecting daily energy use. Select the level closest to your routine for precision.</p>
+        <h2>Activity Levels and Multiplier Adjustments</h2>
+        <p>Multipliers scale BMR to TDEE, reflecting lifestyle energy demands. Select based on exercise intensity and duration for accuracy.</p>
         <table>
             <thead>
                 <tr>
                     <th>Level</th>
                     <th>Multiplier</th>
-                    <th>Example Activities</th>
-                    <th>Weekly Exercise</th>
+                    <th>Description</th>
+                    <th>Example Routine</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Sedentary</td>
                     <td>1.2</td>
-                    <td>Desk work, minimal movement</td>
-                    <td>Little or none</td>
+                    <td>Minimal movement</td>
+                    <td>Office work, no exercise</td>
                 </tr>
                 <tr>
                     <td>Lightly Active</td>
                     <td>1.375</td>
-                    <td>Light walking, casual tasks</td>
-                    <td>1-3 days light exercise</td>
+                    <td>Occasional light activity</td>
+                    <td>Walking 1-3 days/week</td>
                 </tr>
                 <tr>
                     <td>Moderately Active</td>
+                    <td>1.465</td>
+                    <td>Regular moderate sessions</td>
+                    <td>15-30 min elevated heart rate, 3-5 days</td>
+                </tr>
+                <tr>
+                    <td>Active</td>
                     <td>1.55</td>
-                    <td>Brisk walking, moderate gym</td>
-                    <td>3-5 days moderate</td>
+                    <td>Intense weekly training</td>
+                    <td>45-120 min vigorous, 3-5 days</td>
                 </tr>
                 <tr>
                     <td>Very Active</td>
                     <td>1.725</td>
-                    <td>Intense training, sports</td>
-                    <td>6-7 days hard</td>
+                    <td>Daily hard efforts</td>
+                    <td>2+ hours intense, 6-7 days</td>
                 </tr>
                 <tr>
                     <td>Extra Active</td>
                     <td>1.9</td>
-                    <td>Professional athlete, labor</td>
-                    <td>Daily intense + job</td>
+                    <td>Elite or labor-intensive</td>
+                    <td>Professional sports or manual jobs</td>
                 </tr>
             </tbody>
         </table>
-        <p>Adjustments for goals: 250-500 calorie deficit for mild loss (0.5 kg/week), up to 1000 for faster, but avoid extremes to prevent muscle loss or metabolic slowdown.</p>
+        <p>For goals, deficits/surpluses of 250-1,000 calories target 0.25-1 kg weekly changes, promoting sustainable progress.</p>
     </section>
     <section>
-        <h2>Benefits of Accurate Calorie Estimation</h2>
-        <p>Precise tracking supports balanced macronutrient intake (e.g., 45-65% carbs, 20-35% fats, 10-35% proteins), prevents deficiencies, and optimizes energy levels. Long-term use reveals metabolic adaptations, aiding in plateaus during weight management.</p>
-        <h3>Comparing Formulas for Estimation</h3>
+        <h2>Zigzag Calorie Cycling to Overcome Plateaus</h2>
+        <p>Zigzag cycling alternates higher and lower calorie days around your average target to prevent metabolic adaptation and boredom. For example, vary by 200-500 calories, scheduling higher intake on training days or weekends. This method supports adherence while maintaining deficits.</p>
+        <h3>Sample Zigzag Schedule for Weight Loss (0.5 kg/week)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Calorie Intake</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Monday</td>
+                    <td>TDEE - 300</td>
+                    <td>Lower for recovery</td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>TDEE - 700</td>
+                    <td>Deficit focus</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>TDEE - 500</td>
+                    <td>Balanced</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>TDEE - 300</td>
+                    <td>Lower</td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td>TDEE - 700</td>
+                    <td>Deficit</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>TDEE</td>
+                    <td>Maintenance for social</td>
+                </tr>
+                <tr>
+                    <td>Sunday</td>
+                    <td>TDEE - 500</td>
+                    <td>Balanced reset</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Average weekly deficit: ~500 calories/day. Adjust based on progress monitoring.</p>
+    </section>
+    <section>
+        <h2>Calorie Types and Counting Strategies</h2>
+        <p>Calories derive from macronutrients: carbohydrates (4 cal/g), proteins (4 cal/g), fats (9 cal/g), and alcohol (7 cal/g). High-fiber foods require more digestion energy, while empty calories (e.g., sugary drinks) provide little nutrition. Effective counting involves logging intake, balancing macros (45-65% carbs, 10-35% protein, 20-35% fat), and periodic reassessment to avoid plateaus.</p>
+        <h3>Calories in Common Foods</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Food</th>
+                    <th>Portion</th>
+                    <th>Calories</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Apple</td>
+                    <td>1 medium</td>
+                    <td>95</td>
+                </tr>
+                <tr>
+                    <td>Chicken Breast</td>
+                    <td>100g grilled</td>
+                    <td>165</td>
+                </tr>
+                <tr>
+                    <td>Broccoli</td>
+                    <td>1 cup</td>
+                    <td>55</td>
+                </tr>
+                <tr>
+                    <td>Pizza Slice</td>
+                    <td>1 medium</td>
+                    <td>285</td>
+                </tr>
+                <tr>
+                    <td>Soda</td>
+                    <td>12 oz</td>
+                    <td>150</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Calories Burned from Exercises (for 70kg Person)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Exercise</th>
+                    <th>Duration</th>
+                    <th>Calories Burned</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Walking (brisk)</td>
+                    <td>30 min</td>
+                    <td>150</td>
+                </tr>
+                <tr>
+                    <td>Running (8 km/h)</td>
+                    <td>30 min</td>
+                    <td>300</td>
+                </tr>
+                <tr>
+                    <td>Swimming</td>
+                    <td>30 min</td>
+                    <td>250</td>
+                </tr>
+                <tr>
+                    <td>Cycling</td>
+                    <td>30 min</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>Yoga</td>
+                    <td>30 min</td>
+                    <td>120</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Sample Meal Plan (1,800 Calories/Day)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Meal</th>
+                    <th>Foods</th>
+                    <th>Calories</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Breakfast</td>
+                    <td>Oatmeal with fruits</td>
+                    <td>400</td>
+                </tr>
+                <tr>
+                    <td>Snack</td>
+                    <td>Yogurt and nuts</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>Lunch</td>
+                    <td>Grilled chicken salad</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>Snack</td>
+                    <td>Apple with peanut butter</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>Dinner</td>
+                    <td>Fish and vegetables</td>
+                    <td>500</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Benefits of Precise Calorie Estimation</h2>
+        <p>Accurate tracking facilitates macronutrient optimization, prevents deficiencies, and supports long-term metabolic health. It helps identify plateaus, enabling adjustments like zigzag cycling or activity increases for continued progress.</p>
+        <h3>Formula Comparison</h3>
         <table>
             <thead>
                 <tr>
                     <th>Formula</th>
-                    <th>Best For</th>
-                    <th>Accuracy Notes</th>
+                    <th>Strengths</th>
+                    <th>Best Suited For</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Mifflin-St Jeor</td>
-                    <td>General population</td>
-                    <td>Within 10% for most; modern standard</td>
+                    <td>Modern, accurate within 10%</td>
+                    <td>General adults</td>
                 </tr>
                 <tr>
                     <td>Harris-Benedict</td>
-                    <td>Traditional use</td>
-                    <td>Less accurate for obese; revised version better</td>
+                    <td>Established, revised for better fit</td>
+                    <td>Traditional assessments</td>
                 </tr>
                 <tr>
                     <td>Katch-McArdle</td>
-                    <td>Lean individuals</td>
-                    <td>Accounts for body fat; requires measurement</td>
+                    <td>Incorporates lean mass</td>
+                    <td>Athletes with known body fat</td>
                 </tr>
             </tbody>
         </table>
     </section>
     <section>
         <h2>Frequently Asked Questions</h2>
-        <p><strong>What units should I choose?</strong> Select metric for EU-style (kg/cm) or imperial for USA-style (lbs/inches); conversions are automatic for consistent calculations.</p>
-        <p><strong>How does BMR differ from TDEE?</strong> BMR is rest-only energy; TDEE adds activity, digestion, and movement for full daily needs.</p>
-        <p><strong>Is Mifflin-St Jeor the most accurate?</strong> Yes for general use, per studies; Harris-Benedict suits traditional comparisons, Katch-McArdle for body composition focus.</p>
-        <p><strong>Can I use this for weight loss?</strong> Yes, with deficits up to 1000 calories, but monitor progress and adjust; combine with exercise for best results.</p>
-        <p><strong>What if results don't match my experience?</strong> Factors like thyroid issues or medications may skew; recalculate periodically and seek professional input.</p>
-        <p><strong>How often to update inputs?</strong> Every 4-6 weeks or after 5-10% body weight change for ongoing accuracy.</p>
+        <p><strong>Which formula should I choose?</strong> Mifflin-St Jeor for most; Katch-McArdle if you know body fat % for precision; Harris-Benedict for comparisons to older studies.</p>
+        <p><strong>How do units affect calculations?</strong> Inputs convert automatically (lbs to kg, inches to cm) ensuring consistent metric-based formulas.</p>
+        <p><strong>What is zigzag cycling?</strong> Alternating calorie days to avoid adaptation; e.g., higher on workout days, lower on rest, averaging your target deficit.</p>
+        <p><strong>Is extreme weight loss safe?</strong> Not recommended (>1 kg/week) as it risks muscle loss and slowdown; aim for gradual with medical oversight.</p>
+        <p><strong>How to incorporate body fat %?</strong> Enter it for Katch-McArdle; estimate via calipers or scales for better lean mass focus.</p>
+        <p><strong>When to recalculate?</strong> Every 4-8 weeks or after 5% body change to account for metabolic shifts.</p>
+        <p><strong>Can this support muscle gain?</strong> Yes, via surpluses; combine with protein-rich diets and strength training for optimal results.</p>
     </section>
     <section>
         <h2>Disclaimer</h2>
-        <p>This estimator offers general guidance based on standard equations and is not medical advice. Results may vary; it may overestimate/underestimate for athletes, pregnant individuals, or those with conditions like diabetes. Consult a doctor or nutritionist before dietary changes. FCalculator.com disclaims liability for use of this tool.</p>
+        <p>This tool provides educational estimates using established formulas and is not a substitute for professional medical or nutritional advice. Results may differ due to genetics, health conditions, or inaccuracies in inputs. Avoid deficits below 1,200 (women)/1,500 (men) calories without supervision. Extreme changes can lead to health risks; consult a doctor before altering diet or exercise, particularly if pregnant, elderly, or with chronic issues. FCalculator.com bears no responsibility for outcomes from tool use.</p>
     </section>
     <section>
         <h2>Related Resources</h2>
         <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate" target="_blank" rel="noopener noreferrer">Wikipedia on Basal Metabolic Rate</a> - Comprehensive overview of BMR science, historical equations, and physiological factors influencing energy use.</li>
-            <li><a href="https://www.niddk.nih.gov/health-information/weight-management" target="_blank" rel="noopener noreferrer">NIH Weight Management Resources</a> - Evidence-based strategies for calorie balancing, activity integration, and sustainable weight control from U.S. government health experts.</li>
-            <li><a href="https://www.who.int/news-room/fact-sheets/detail/healthy-diet" target="_blank" rel="noopener noreferrer">WHO Healthy Diet Fact Sheet</a> - Global guidelines on calorie-appropriate, nutrient-dense diets to prevent diseases and support metabolic health.</li>
+            <li><a href="https://en.wikipedia.org/wiki/Basal_metabolic_rate" target="_blank" rel="noopener noreferrer">Wikipedia on Basal Metabolic Rate</a> - Detailed exploration of BMR concepts, formula derivations, and physiological influences on energy expenditure.</li>
+            <li><a href="https://www.niddk.nih.gov/health-information/weight-management" target="_blank" rel="noopener noreferrer">NIH Weight Management Resources</a> - Comprehensive guides on calorie balancing, safe weight strategies, and integrating activity for sustainable health from U.S. National Institutes of Health.</li>
+            <li><a href="https://www.who.int/news-room/fact-sheets/detail/healthy-diet" target="_blank" rel="noopener noreferrer">WHO Healthy Diet Fact Sheet</a> - International standards for calorie-appropriate, balanced nutrition to combat obesity and promote metabolic well-being.</li>
         </ul>
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This resource provides an interactive calorie needs estimator supporting metric and imperial units, using Mifflin-St Jeor for BMR/TDEE calculations with activity adjustments. It includes visual bars for goal comparisons, PDF exports, detailed formula breakdowns, influencing factor tables, and goal recommendations for weight management. Keywords encompass calorie calculation tools, energy expenditure estimators, metabolic rate assessments, fitness nutrition planners. Ideal for users pursuing data-driven diet optimization, health monitoring, and lifestyle improvements.</p>
+        <p>This estimator delivers personalized BMR and TDEE calculations across Mifflin-St Jeor, Harris-Benedict, and Katch-McArdle formulas, with unit flexibility, body fat adjustments, activity scaling, and goal-oriented calorie plans including zigzag cycling. It features bar/pie charts for visuals, PDF summaries, extensive tables on foods/exercises/meals, and in-depth sections on metabolism factors, calorie types, and strategies. Keywords include metabolic rate tools, energy needs planners, weight adjustment calculators, nutrition cycling guides. Suited for fitness enthusiasts seeking evidence-based insights into diet optimization, plateau breaking, and health monitoring.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
@@ -335,18 +549,21 @@
     <script>
         function toggleUnits() {
             const units = document.getElementById('units').value;
-            if (units === 'metric') {
-                document.getElementById('metric-weight').style.display = 'block';
-                document.getElementById('imperial-weight').style.display = 'none';
-                document.getElementById('metric-height').style.display = 'block';
-                document.getElementById('imperial-height').style.display = 'none';
-                document.getElementById('imperial-height-inches').style.display = 'none';
+            document.getElementById('metric-weight').style.display = units === 'metric' ? 'block' : 'none';
+            document.getElementById('imperial-weight').style.display = units === 'imperial' ? 'block' : 'none';
+            document.getElementById('metric-height').style.display = units === 'metric' ? 'block' : 'none';
+            document.getElementById('imperial-height').style.display = units === 'imperial' ? 'block' : 'none';
+            document.getElementById('imperial-height-inches').style.display = units === 'imperial' ? 'block' : 'none';
+        }
+
+        function toggleBodyFat() {
+            const formula = document.getElementById('formula').value;
+            const bodyFatRow = document.getElementById('body-fat-row');
+            bodyFatRow.style.display = formula === 'katch' ? 'block' : 'none';
+            if (formula !== 'katch') {
+                document.getElementById('body-fat').required = false;
             } else {
-                document.getElementById('metric-weight').style.display = 'none';
-                document.getElementById('imperial-weight').style.display = 'block';
-                document.getElementById('metric-height').style.display = 'none';
-                document.getElementById('imperial-height').style.display = 'block';
-                document.getElementById('imperial-height-inches').style.display = 'block';
+                document.getElementById('body-fat').required = true;
             }
         }
 
@@ -354,7 +571,8 @@
             const age = parseFloat(document.getElementById('age').value);
             const gender = document.getElementById('gender').value;
             const units = document.getElementById('units').value;
-            let weight, height;
+            const formula = document.getElementById('formula').value;
+            let weight, height, bodyFat = 0;
             if (units === 'metric') {
                 weight = parseFloat(document.getElementById('weight-kg').value);
                 height = parseFloat(document.getElementById('height-cm').value);
@@ -366,38 +584,55 @@
                 height = (feet * 12 + inches) * 2.54;
             }
             const activity = parseFloat(document.getElementById('activity').value);
+            if (formula === 'katch') {
+                bodyFat = parseFloat(document.getElementById('body-fat').value) / 100;
+            }
 
-            if (isNaN(age) || isNaN(weight) || isNaN(height) || !gender) {
+            if (isNaN(age) || isNaN(weight) || isNaN(height) || !gender || (formula === 'katch' && isNaN(bodyFat))) {
                 alert('Please fill all required fields with valid numbers.');
                 return;
             }
 
             let bmr;
-            if (gender === 'male') {
-                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-            } else {
-                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            if (formula === 'mifflin') {
+                if (gender === 'male') {
+                    bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+                } else {
+                    bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+                }
+            } else if (formula === 'harris') {
+                if (gender === 'male') {
+                    bmr = 13.397 * weight + 4.799 * height - 5.677 * age + 88.362;
+                } else {
+                    bmr = 9.247 * weight + 3.098 * height - 4.330 * age + 447.593;
+                }
+            } else if (formula === 'katch') {
+                const lbm = weight * (1 - bodyFat);
+                bmr = 370 + 21.6 * lbm;
             }
             const tdee = bmr * activity;
 
+            document.getElementById('selected-formula').textContent = formula.charAt(0).toUpperCase() + formula.slice(1) + (formula === 'katch' ? ' (Body Fat: ' + (bodyFat * 100).toFixed(0) + '%)' : '');
             document.getElementById('bmr').textContent = bmr.toFixed(0);
             document.getElementById('tdee').textContent = tdee.toFixed(0);
             document.getElementById('maintenance').textContent = tdee.toFixed(0);
             document.getElementById('mild-loss').textContent = (tdee - 250).toFixed(0);
             document.getElementById('loss').textContent = (tdee - 500).toFixed(0);
+            document.getElementById('extreme-loss').textContent = (tdee - 1000).toFixed(0);
             document.getElementById('mild-gain').textContent = (tdee + 250).toFixed(0);
             document.getElementById('gain').textContent = (tdee + 500).toFixed(0);
+            document.getElementById('extreme-gain').textContent = (tdee + 1000).toFixed(0);
 
-            const ctx = document.getElementById('calorieChart').getContext('2d');
-            new Chart(ctx, {
+            const ctxBar = document.getElementById('calorieChart').getContext('2d');
+            new Chart(ctxBar, {
                 type: 'bar',
                 data: {
-                    labels: ['BMR', 'TDEE', 'Mild Loss (0.5kg/wk)', 'Loss (1kg/wk)', 'Mild Gain (0.5kg/wk)', 'Gain (1kg/wk)'],
+                    labels: ['BMR', 'TDEE', 'Mild Loss (-0.25kg/wk)', 'Loss (-0.5kg/wk)', 'Extreme Loss (-1kg/wk)', 'Mild Gain (+0.25kg/wk)', 'Gain (+0.5kg/wk)', 'Extreme Gain (+1kg/wk)'],
                     datasets: [{
                         label: 'Calories per Day',
-                        data: [bmr, tdee, tdee - 250, tdee - 500, tdee + 250, tdee + 500],
-                        backgroundColor: ['#36a2eb', '#ff6384', '#ffce56', '#ff9f40', '#4bc0c0', '#9966ff'],
-                        borderColor: ['#2a8cc7', '#e05577', '#e6b84d', '#e68f37', '#3ba0a0', '#8a5ce6'],
+                        data: [bmr, tdee, tdee - 250, tdee - 500, tdee - 1000, tdee + 250, tdee + 500, tdee + 1000],
+                        backgroundColor: ['#36a2eb', '#ff6384', '#ffce56', '#ff9f40', '#ff5733', '#4bc0c0', '#9966ff', '#6a1b9a'],
+                        borderColor: ['#2a8cc7', '#e05577', '#e6b84d', '#e68f37', '#e64c2e', '#3ba0a0', '#8a5ce6', '#5c0d85'],
                         borderWidth: 1
                     }]
                 },
@@ -405,24 +640,32 @@
                     scales: {
                         y: {
                             beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Calories'
-                            }
+                            title: { display: true, text: 'Calories' }
                         }
                     },
                     plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return context.label + ': ' + context.parsed.y.toFixed(0) + ' calories/day';
-                                }
-                            }
-                        }
+                        legend: { display: true, position: 'top' },
+                        tooltip: { callbacks: { label: (context) => context.label + ': ' + context.parsed.y.toFixed(0) + ' calories/day' } }
+                    }
+                }
+            });
+
+            const ctxPie = document.getElementById('macroChart').getContext('2d');
+            new Chart(ctxPie, {
+                type: 'pie',
+                data: {
+                    labels: ['Carbohydrates (50%)', 'Proteins (25%)', 'Fats (25%)'],
+                    datasets: [{
+                        data: [tdee * 0.5 / 4, tdee * 0.25 / 4, tdee * 0.25 / 9],
+                        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56'],
+                        borderColor: ['#e05577', '#2a8cc7', '#e6b84d'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: { callbacks: { label: (context) => context.label + ': ' + context.parsed.toFixed(0) + ' grams/day' } }
                     }
                 }
             });
@@ -434,8 +677,8 @@
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Daily Calorie Needs Estimator',
-                    text: 'Estimate your daily calorie needs with metric or imperial units.',
+                    title: 'Personalized Calorie Expenditure Estimator',
+                    text: 'Assess your daily calorie needs with advanced formulas and units.',
                     url: window.location.href
                 }).catch(console.error);
             } else {
@@ -446,11 +689,12 @@
         const { jsPDF } = window.jspdf;
         function saveAsPDF() {
             const doc = new jsPDF();
-            doc.text('Daily Calorie Needs Results', 105, 10, { align: 'center' });
+            doc.text('Calorie Expenditure Results', 105, 10, { align: 'center' });
 
             doc.autoTable({
                 head: [['Parameter', 'Value']],
                 body: [
+                    ['Selected Formula', document.getElementById('selected-formula').textContent],
                     ['Basal Metabolic Rate (BMR)', document.getElementById('bmr').textContent + ' calories/day'],
                     ['Total Daily Energy Expenditure (TDEE)', document.getElementById('tdee').textContent + ' calories/day']
                 ],
@@ -461,13 +705,28 @@
             });
 
             doc.autoTable({
-                head: [['Goal', 'Recommended Calories']],
+                head: [['Goal', 'Recommended Calories', 'Weekly Change']],
                 body: [
-                    ['Maintenance', document.getElementById('maintenance').textContent + ' calories/day'],
-                    ['Mild Weight Loss (0.5 kg/week)', document.getElementById('mild-loss').textContent + ' calories/day'],
-                    ['Weight Loss (1 kg/week)', document.getElementById('loss').textContent + ' calories/day'],
-                    ['Mild Weight Gain (0.5 kg/week)', document.getElementById('mild-gain').textContent + ' calories/day'],
-                    ['Weight Gain (1 kg/week)', document.getElementById('gain').textContent + ' calories/day']
+                    ['Maintenance', document.getElementById('maintenance').textContent + ' calories/day', '0 kg/week'],
+                    ['Mild Weight Loss', document.getElementById('mild-loss').textContent + ' calories/day', '-0.25 kg/week'],
+                    ['Weight Loss', document.getElementById('loss').textContent + ' calories/day', '-0.5 kg/week'],
+                    ['Extreme Weight Loss', document.getElementById('extreme-loss').textContent + ' calories/day', '-1 kg/week'],
+                    ['Mild Weight Gain', document.getElementById('mild-gain').textContent + ' calories/day', '+0.25 kg/week'],
+                    ['Weight Gain', document.getElementById('gain').textContent + ' calories/day', '+0.5 kg/week'],
+                    ['Extreme Weight Gain', document.getElementById('extreme-gain').textContent + ' calories/day', '+1 kg/week']
+                ],
+                startY: doc.lastAutoTable.finalY + 10,
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
+            });
+
+            doc.autoTable({
+                head: [['Macronutrient', 'Grams per Day (for Maintenance)']],
+                body: [
+                    ['Carbohydrates (50%)', (parseFloat(document.getElementById('tdee').textContent) * 0.5 / 4).toFixed(0) + ' g'],
+                    ['Proteins (25%)', (parseFloat(document.getElementById('tdee').textContent) * 0.25 / 4).toFixed(0) + ' g'],
+                    ['Fats (25%)', (parseFloat(document.getElementById('tdee').textContent) * 0.25 / 9).toFixed(0) + ' g']
                 ],
                 startY: doc.lastAutoTable.finalY + 10,
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
@@ -479,7 +738,7 @@
             doc.setTextColor(100);
             doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
 
-            doc.save('calorie_needs_results.pdf');
+            doc.save('calorie_expenditure_results.pdf');
         }
     </script>
 </body>
