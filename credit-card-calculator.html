@@ -349,11 +349,12 @@
             };
             docDefinition.footer = function (currentPage, pageCount) {
                 return {
-                    text: 'This document was generated using Fcalculator.com',
+                    columns: [
+                        { text: 'This document was generated using ', fontSize: 10, color: 'gray' },
+                        { text: 'Fcalculator.com', link: 'https://fcalculator.com', fontSize: 10, color: 'blue', decoration: 'underline' },
+                        { text: ' – Calculations are provided “as is” without warranty. Use at your own risk.', fontSize: 10, color: 'gray' }
+                    ],
                     alignment: 'center',
-                    fontSize: 10,
-                    color: 'gray',
-                    link: 'https://fcalculator.com',
                     margin: [40, 0]
                 };
             };
