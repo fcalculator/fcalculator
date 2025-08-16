@@ -142,9 +142,9 @@
             <p>Bra Size: <span id="bra-size"></span></p>
             <button onclick="sharePage()">Share</button>
         </div>
-          
+         
     <p>Explore related tools like <a href="/bmi-calculator.html">BMI Calculator</a> or <a href="/calorie.html">Calorie Intake Calculator</a> for more health insights.</p>
-  
+ 
         <h2>How the Bra Size Calculator Works</h2>
         <p>This calculator determines your bra size using two key measurements: underbust (around the ribcage below the breasts) and overbust (around the fullest part of the breasts). The band size is calculated by rounding the underbust measurement and adding 4 inches if even or 5 if odd, following standard US conventions. The cup size is derived from the difference between overbust and band size.</p>
         <p>For example, the formula for band size is:</p>
@@ -207,18 +207,18 @@
         <p>Use this tool for US sizes, but adjust for international brands.</p>
     </section>
     <section>
-        <h2>Health Disclaimer</h2>
-        <div class="note-alert">
-            This bra size calculator is for informational and educational purposes only. It does not replace professional fitting advice from a certified bra specialist or healthcare provider. Bra sizes can vary by brand, body changes, and individual anatomy. If you experience pain or discomfort, consult a doctor. Results are estimates and not guaranteed for perfect fit.
-        </div>
-    </section>
-    <section>
         <h2>Frequently Asked Questions</h2>
         <p><strong>How do I measure my underbust correctly?</strong> Wrap a measuring tape snugly around your ribcage just below your breasts, keeping it level. Exhale and record the measurement in inches.</p>
         <p><strong>What if my measurements are in centimeters?</strong> The tool allows cm input and converts to inches automatically for US sizing. For precise fit, use inches if possible.</p>
         <p><strong>Why does my calculated size differ from store labels?</strong> Bra sizing varies by brand and country. This tool uses standard US methods, but always try on bras for the best fit.</p>
         <p><strong>How often should I recalculate my bra size?</strong> Recheck every 6-12 months or after significant body changes like weight loss, pregnancy, or hormonal shifts.</p>
         <p><strong>What is sister sizing in bras?</strong> Sister sizes are equivalent volumes but different bands/cups, e.g., 34B is similar to 32C or 36A. Use for flexibility in fitting.</p>
+    </section>
+    <section>
+        <h2>Health Disclaimer</h2>
+        <div class="note-alert">
+            This bra size calculator is for informational and educational purposes only. It does not replace professional fitting advice from a certified bra specialist or healthcare provider. Bra sizes can vary by brand, body changes, and individual anatomy. If you experience pain or discomfort, consult a doctor. Results are estimates and not guaranteed for perfect fit.
+        </div>
     </section>
     <section>
         <h2>Related Resources</h2>
@@ -241,22 +241,22 @@
             const unit = document.getElementById('unit').value;
             let underbust = parseFloat(document.getElementById('underbust').value);
             let overbust = parseFloat(document.getElementById('overbust').value);
-            
+           
             if (unit === 'cm') {
                 underbust /= 2.54;
                 overbust /= 2.54;
             }
-            
+           
             if (isNaN(underbust) || isNaN(overbust) || underbust <= 0 || overbust <= 0 || overbust <= underbust) {
                 alert('Please enter valid measurements. Overbust must be greater than underbust.');
                 return;
             }
-            
+           
             const measuredUnder = Math.round(underbust);
             const bandSize = (measuredUnder % 2 === 0) ? measuredUnder + 4 : measuredUnder + 5;
-            
+           
             const difference = Math.round(overbust - bandSize);
-            
+           
             let cupSize;
             if (difference < 1) cupSize = 'AA';
             else if (difference === 1) cupSize = 'A';
@@ -271,14 +271,14 @@
             else if (difference === 10) cupSize = 'J';
             else if (difference === 11) cupSize = 'K';
             else cupSize = 'Beyond standard sizes - consult a specialist';
-            
+           
             document.getElementById('band-size').textContent = bandSize;
             document.getElementById('cup-size').textContent = cupSize;
             document.getElementById('bra-size').textContent = bandSize + cupSize;
-            
+           
             document.getElementById('results').style.display = 'block';
         }
-        
+       
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
