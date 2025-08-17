@@ -197,6 +197,24 @@
             document.getElementById('start-date').value = today;
         }
 
+        function getTimezoneOffsetInMinutes(date, timeZone) {
+            const tzString = date.toLocaleString('en-US', {
+                timeZone,
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hourCycle: 'h23'
+            });
+            const match = /(\d+)\/(\d+)\/(\d+), (\d+):(\d+):(\d+)/.exec(tzString);
+            if (!match) return 0;
+            const [_, month, day, year, hour, min, sec] = match.map(Number);
+            const tzTime = Date.UTC(year, month - 1, day, hour, min, sec);
+            return (tzTime - date.getTime()) / (1000 * 60);
+        }
+
         function calculate() {
             const balanceInput = parseFloat(document.getElementById('balance').value);
             const apr = parseFloat(document.getElementById('apr').value);
@@ -231,9 +249,21 @@
             }
             const totalPayments = (balanceInput + totalInterest).toFixed(2);
             const months = month;
-            const startDate = new Date(startDateStr + 'T00:00:00');
+
+            // Parse startDateStr as midnight local in 'America/New_York'
+            const [yearStr, monthStr, dayStr] = startDateStr.split('-');
+            const year = parseInt(yearStr);
+            const monthIndex = parseInt(monthStr) - 1;
+            const day = parseInt(dayStr);
+            const provisionalUTC = Date.UTC(year, monthIndex, day, 0, 0, 0);
+            const provisionalDate = new Date(provisionalUTC);
+            const offsetMinutes = getTimezoneOffsetInMinutes(provisionalDate, 'America/New_York');
+            const msPerMin = 60000;
+            const actualUTC = provisionalUTC - offsetMinutes * msPerMin;
+            const startDate = new Date(actualUTC);
+
             const payoffDate = new Date(startDate);
-            payoffDate.setMonth(payoffDate.getMonth() + months);
+            payoffDate.setUTCMonth(payoffDate.getUTCMonth() + months);
             const formattedPayoffDate = payoffDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
             document.getElementById('months').innerText = `Months to Pay Off: ${months}`;
             document.getElementById('total-payments').innerText = `Total Payments: ${currency}${totalPayments}`;
