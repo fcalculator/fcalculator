@@ -226,6 +226,7 @@
                 tr.innerHTML = `<td>${row.month}</td><td>${currency}${row.payment.toFixed(2)}</td><td>${currency}${row.principal.toFixed(2)}</td><td>${currency}${row.interest.toFixed(2)}</td><td>${currency}${row.balance.toFixed(2)}</td>`;
                 tbody.appendChild(tr);
             });
+            document.getElementById('results').style.display = 'block';
             if (balanceChart) balanceChart.destroy();
             const balanceCtx = document.getElementById('balanceChart').getContext('2d');
             balanceChart = new Chart(balanceCtx, {
@@ -271,7 +272,10 @@
                     plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${currency}${context.parsed.y.toFixed(2)}` } } }
                 }
             });
-            document.getElementById('results').style.display = 'block';
+            setTimeout(() => {
+                balanceChart.update();
+                piChart.update();
+            }, 0);
         }
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
