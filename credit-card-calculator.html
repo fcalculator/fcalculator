@@ -171,93 +171,143 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        let myChart = null;
-        function calculateCreditCard() {
-            const currencySymbol = document.getElementById('currency').value;
-            let balance = parseFloat(document.getElementById('balance').value);
-            const apr = parseFloat(document.getElementById('apr').value) / 100 / 12;
-            let payment = parseFloat(document.getElementById('payment').value);
-            if (isNaN(balance) || isNaN(apr) || isNaN(payment) || balance <= 0 || apr <= 0 || payment <= 0) {
-                alert('Please enter valid positive numbers.');
-                return;
-            }
-            if (payment <= balance * apr) {
-                alert('Monthly payment is too low to pay off the debt as it does not cover the interest.');
-                return;
-            }
-            let originalBalance = balance;
-            let totalInterest = 0;
-            let totalPayments = 0;
-            let months = 0;
-            let schedule = [];
-            while (balance > 0 && months < 10000) {
-                let interest = balance * apr;
-                let principal = payment - interest;
-                if (principal > balance) {
-                    principal = balance;
-                    payment = principal + interest;
-                }
-                balance -= principal;
-                if (balance < 0) balance = 0;
-                totalInterest += interest;
-                totalPayments += payment;
-                months++;
-                schedule.push({
-                    month: months,
-                    payment: payment.toFixed(2),
-                    principal: principal.toFixed(2),
-                    interest: interest.toFixed(2),
-                    balance: balance.toFixed(2)
-                });
-            }
-            document.getElementById('months').innerText = months;
-            document.getElementById('totalPayments').innerText = currencySymbol + totalPayments.toFixed(2);
-            document.getElementById('totalInterest').innerText = currencySymbol + totalInterest.toFixed(2);
-            const today = new Date(2025, 7, 17);
-            const payoff = new Date(today.getFullYear(), today.getMonth() + months, today.getDate());
-            document.getElementById('payoffDate').innerText = payoff.toDateString();
-            const tableBody = document.getElementById('scheduleTable').querySelector('tbody');
-            tableBody.innerHTML = '';
-            schedule.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${row.month}</td><td>${currencySymbol}${row.payment}</td><td>${currencySymbol}${row.principal}</td><td>${currencySymbol}${row.interest}</td><td>${currencySymbol}${row.balance}</td>`;
-                tableBody.appendChild(tr);
-            });
-            if (myChart) myChart.destroy();
-            const ctx = document.getElementById('creditCardChart').getContext('2d');
-            myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: schedule.map(s => `Month ${s.month}`),
-                    datasets: [{
-                        label: 'Balance Over Time',
-                        data: schedule.map(s => s.balance),
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        fill: true,
-                        tension: 0.1
-                    }]
+let myChart = null;
+function calculateCreditCard() {
+    const currencySymbol = document.getElementById('currency').value;
+    let balance = parseFloat(document.getElementById('balance').value);
+    const apr = parseFloat(document.getElementById('apr').value) / 100 / 12;
+    let payment = parseFloat(document.getElementById('payment').value);
+
+    if (isNaN(balance) || isNaN(apr) || isNaN(payment) || balance <= 0 || apr <= 0 || payment <= 0) {
+        alert('Please enter valid positive numbers.');
+        return;
+    }
+    if (payment <= balance * apr) {
+        alert('Monthly payment is too low to pay off the debt as it does not cover the interest.');
+        return;
+    }
+
+    let totalInterest = 0;
+    let totalPayments = 0;
+    let months = 0;
+    let schedule = [];
+
+    while (balance > 0 && months < 10000) {
+        let interest = balance * apr;
+        let principal = payment - interest;
+        if (principal > balance) {
+            principal = balance;
+            payment = principal + interest;
+        }
+        balance -= principal;
+        if (balance < 0) balance = 0;
+
+        totalInterest += interest;
+        totalPayments += payment;
+        months++;
+
+        schedule.push({
+            month: months,
+            payment: payment.toFixed(2),
+            principal: principal.toFixed(2),
+            interest: interest.toFixed(2),
+            balance: balance.toFixed(2)
+        });
+    }
+
+    // Rezultati
+    document.getElementById('months').innerText = months;
+    document.getElementById('totalPayments').innerText = currencySymbol + totalPayments.toFixed(2);
+    document.getElementById('totalInterest').innerText = currencySymbol + totalInterest.toFixed(2);
+
+    const today = new Date(2025, 7, 17);
+    const payoff = new Date(today.getFullYear(), today.getMonth() + months, today.getDate());
+    document.getElementById('payoffDate').innerText = payoff.toDateString();
+
+    // Tabela
+    const tableBody = document.getElementById('scheduleTable').querySelector('tbody');
+    tableBody.innerHTML = '';
+    schedule.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${row.month}</td><td>${currencySymbol}${row.payment}</td><td>${currencySymbol}${row.principal}</td><td>${currencySymbol}${row.interest}</td><td>${currencySymbol}${row.balance}</td>`;
+        tableBody.appendChild(tr);
+    });
+
+    // Chart
+    if (myChart) myChart.destroy();
+    const ctx = document.getElementById('creditCardChart').getContext('2d');
+    myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: schedule.map(s => `Month ${s.month}`),
+            datasets: [
+                {
+                    label: 'Balance Over Time',
+                    data: schedule.map(s => s.balance),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                    tension: 0.1
                 },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: { beginAtZero: true, title: { display: true, text: 'Balance' } },
-                        x: { title: { display: true, text: 'Months' } }
-                    },
-                    plugins: {
-                        legend: { display: true },
-                        tooltip: { callbacks: { label: (context) => `Balance: ${currencySymbol}${context.parsed.y}` } }
+                {
+                    label: 'Principal Paid',
+                    data: schedule.map(s => s.principal),
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    fill: false,
+                    tension: 0.1
+                },
+                {
+                    label: 'Interest Paid',
+                    data: schedule.map(s => s.interest),
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    fill: false,
+                    tension: 0.1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: { display: true, text: 'Amount' }
+                },
+                x: {
+                    title: { display: true, text: 'Months' }
+                }
+            },
+            plugins: {
+                legend: { position: 'top' },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => `${context.dataset.label}: ${currencySymbol}${context.parsed.y}`
                     }
                 }
-            });
-            document.getElementById('results').style.display = 'block';
-            window.scheduleData = schedule;
-            window.currencySymbol = currencySymbol;
-            window.months = months;
-            window.totalPayments = totalPayments.toFixed(2);
-            window.totalInterest = totalInterest.toFixed(2);
-            window.payoffDate = payoff.toDateString();
+            }
         }
+    });
+
+    // Forsiraj render da se izbjegne bug s prikazom
+    setTimeout(() => {
+        myChart.resize();
+        myChart.update();
+    }, 100);
+
+    // Prikaži rezultate
+    document.getElementById('results').style.display = 'block';
+
+    // Spremljeni podaci
+    window.scheduleData = schedule;
+    window.currencySymbol = currencySymbol;
+    window.months = months;
+    window.totalPayments = totalPayments.toFixed(2);
+    window.totalInterest = totalInterest.toFixed(2);
+    window.payoffDate = payoff.toDateString();
+}
+
         function saveAsPDF() {
             const schedule = window.scheduleData;
             const currency = window.currencySymbol;
