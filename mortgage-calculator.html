@@ -6,12 +6,12 @@
     <meta name="description" content="Estimate monthly mortgage payments, analyze amortization schedules, and explore interest breakdowns with detailed charts and formulas for informed home financing decisions.">
     <meta name="keywords" content="mortgage payment estimator, amortization schedule, home loan calculator, interest rate analysis, property tax inclusion, mortgage breakdown charts">
     <link rel="canonical" href="https://fcalculator.com/mortgage-calculator.html">
-    <title>Mortgage Payment Calculator</title>
+    <title>Mortgage Payment Estimator</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="application/ld+json">
@@ -152,8 +152,8 @@
         <div id="summary-table">
             <!-- Summary table will be inserted here -->
         </div>
-        <canvas id="pieChart" width="400" height="400"></canvas>
-        <canvas id="lineChart" width="600" height="400"></canvas>
+        <canvas id="pieChart" width="400" height="200"></canvas>
+        <canvas id="lineChart" width="400" height="200"></canvas>
         <table id="amortization-table">
             <thead>
                 <tr>
@@ -247,130 +247,132 @@
     <script>
         let pieChartInstance = null;
         let lineChartInstance = null;
+        let amortizationData = [];
+        let currencySymbol = '';
+        let monthlyPaymentValue = '';
+        let totalPaymentsValue = '';
+        let totalInterestValue = '';
+        let payoffDateValue = '';
 
         function calculateMortgage() {
+            currencySymbol = document.getElementById('currency').value;
             const homePrice = parseFloat(document.getElementById('home-price').value);
             const downPaymentPercent = parseFloat(document.getElementById('down-payment').value);
             const loanTerm = parseInt(document.getElementById('loan-term').value);
-            const interestRate = parseFloat(document.getElementById('interest-rate').value);
+            const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12;
             const startDate = new Date(document.getElementById('start-date').value);
-            const propertyTaxPercent = parseFloat(document.getElementById('property-tax').value);
-            const homeInsurance = parseFloat(document.getElementById('home-insurance').value);
-            const pmiPercent = parseFloat(document.getElementById('pmi').value);
-            const hoaFee = parseFloat(document.getElementById('hoa-fee').value);
-            const otherCosts = parseFloat(document.getElementById('other-costs').value);
-            const currency = document.getElementById('currency').value;
-
-            if (isNaN(homePrice) || isNaN(downPaymentPercent) || isNaN(loanTerm) || isNaN(interestRate) || isNaN(startDate) || isNaN(propertyTaxPercent) || isNaN(homeInsurance) || isNaN(pmiPercent) || isNaN(hoaFee) || isNaN(otherCosts)) {
-                alert('Please fill all fields correctly.');
-                return;
-            }
+            const propertyTaxPercent = parseFloat(document.getElementById('property-tax').value) / 100;
+            const homeInsurance = parseFloat(document.getElementById('home-insurance').value) / 12;
+            const pmiPercent = parseFloat(document.getElementById('pmi').value) / 100 / 12;
+            const hoaFee = parseFloat(document.getElementById('hoa-fee').value) / 12;
+            const otherCosts = parseFloat(document.getElementById('other-costs').value) / 12;
 
             const downPayment = (downPaymentPercent / 100) * homePrice;
             const principal = homePrice - downPayment;
-            const monthlyRate = (interestRate / 100) / 12;
             const numPayments = loanTerm * 12;
-            const monthlyPI = principal * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+            const monthlyPI = principal * (interestRate * Math.pow(1 + interestRate, numPayments)) / (Math.pow(1 + interestRate, numPayments) - 1);
 
-            const monthlyTax = (propertyTaxPercent / 100 * homePrice) / 12;
-            const monthlyInsurance = homeInsurance / 12;
-            const monthlyHOA = hoaFee / 12;
-            const monthlyOther = otherCosts / 12;
+            const monthlyTax = propertyTaxPercent * homePrice / 12;
             let monthlyPMI = 0;
             if (downPaymentPercent < 20) {
-                monthlyPMI = (pmiPercent / 100 * principal) / 12;
+                monthlyPMI = pmiPercent * principal;
             }
-            const totalMonthly = monthlyPI + monthlyTax + monthlyInsurance + monthlyPMI + monthlyHOA + monthlyOther;
+            const totalMonthly = monthlyPI + monthlyTax + homeInsurance + monthlyPMI + hoaFee + otherCosts;
 
             const totalPayments = totalMonthly * numPayments;
-            const totalInterest = totalPayments - principal - (monthlyTax * numPayments) - (monthlyInsurance * numPayments) - (monthlyPMI * numPayments) - (monthlyHOA * numPayments) - (monthlyOther * numPayments);
+            const totalInterest = totalPayments - principal;
 
             const payoffDate = new Date(startDate);
             payoffDate.setMonth(payoffDate.getMonth() + numPayments);
-            payoffDate.setTime(payoffDate.getTime() - new Date().getTimezoneOffset() * 60 * 1000); // Adjust to New York time (UTC-4 or -5)
+            payoffDate.setUTCHours(payoffDate.getUTCHours() - 4); // Adjust to New York time
 
-            // Summary Table
+            monthlyPaymentValue = totalMonthly.toFixed(2);
+            totalPaymentsValue = totalPayments.toFixed(2);
+            totalInterestValue = totalInterest.toFixed(2);
+            payoffDateValue = payoffDate.toDateString();
+
             const summaryHTML = `
                 <table>
                     <tr><th>Parameter</th><th>Value</th></tr>
-                    <tr><td>Monthly Payment</td><td>${currency}${totalMonthly.toFixed(2)}</td></tr>
-                    <tr><td>Total Payments</td><td>${currency}${totalPayments.toFixed(2)}</td></tr>
-                    <tr><td>Total Interest</td><td>${currency}${totalInterest.toFixed(2)}</td></tr>
-                    <tr><td>Payoff Date</td><td>${payoffDate.toDateString()}</td></tr>
+                    <tr><td>Monthly Payment</td><td>${currencySymbol}${monthlyPaymentValue}</td></tr>
+                    <tr><td>Total Payments</td><td>${currencySymbol}${totalPaymentsValue}</td></tr>
+                    <tr><td>Total Interest</td><td>${currencySymbol}${totalInterestValue}</td></tr>
+                    <tr><td>Payoff Date</td><td>${payoffDateValue}</td></tr>
                 </table>
             `;
             document.getElementById('summary-table').innerHTML = summaryHTML;
 
             // Amortization Schedule
+            amortizationData = [];
             let balance = principal;
-            let amortizationData = [];
-            let chartLabels = [];
-            let balanceData = [];
-            let interestData = [];
-            let principalData = [];
+            let totalPrincipalPaid = 0;
+            let totalInterestPaid = 0;
             const tableBody = document.querySelector('#amortization-table tbody');
             tableBody.innerHTML = '';
 
             for (let month = 1; month <= numPayments; month++) {
-                const interest = balance * monthlyRate;
+                const interest = balance * interestRate;
                 const principalPaid = monthlyPI - interest;
                 balance -= principalPaid;
+                if (balance < 0) balance = 0;
 
-                amortizationData.push({
-                    month,
-                    payment: monthlyPI.toFixed(2),
-                    principal: principalPaid.toFixed(2),
-                    interest: interest.toFixed(2),
-                    balance: balance.toFixed(2)
-                });
+                amortizationData.push([month, monthlyPI.toFixed(2), principalPaid.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
 
-                const row = `<tr><td>${month}</td><td>${currency}${monthlyPI.toFixed(2)}</td><td>${currency}${principalPaid.toFixed(2)}</td><td>${currency}${interest.toFixed(2)}</td><td>${currency}${balance.toFixed(2)}</td></tr>`;
+                const row = `<tr><td>${month}</td><td>${currencySymbol}${monthlyPI.toFixed(2)}</td><td>${currencySymbol}${principalPaid.toFixed(2)}</td><td>${currencySymbol}${interest.toFixed(2)}</td><td>${currencySymbol}${balance.toFixed(2)}</td></tr>`;
                 tableBody.insertAdjacentHTML('beforeend', row);
 
-                if (month % 12 === 0 || month === numPayments) {
-                    chartLabels.push(`Year ${month / 12}`);
-                    balanceData.push(balance);
-                    interestData.push(interest * 12); // Annualized for chart
-                    principalData.push(principalPaid * 12);
-                }
+                totalPrincipalPaid += principalPaid;
+                totalInterestPaid += interest;
             }
 
-            // Pie Chart
+            // Charts (prekopirano i prilagođeno iz auto-loan primjera)
             if (pieChartInstance) pieChartInstance.destroy();
-            pieChartInstance = new Chart(document.getElementById('pieChart'), {
+            if (lineChartInstance) lineChartInstance.destroy();
+
+            const ctx1 = document.getElementById('pieChart').getContext('2d');
+            pieChartInstance = new Chart(ctx1, {
                 type: 'pie',
                 data: {
-                    labels: ['Principal & Interest', 'Taxes', 'Insurance', 'PMI', 'HOA', 'Other'],
+                    labels: ['Principal', 'Interest'],
                     datasets: [{
-                        data: [monthlyPI, monthlyTax, monthlyInsurance, monthlyPMI, monthlyHOA, monthlyOther],
-                        backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
+                        data: [totalPrincipalPaid, totalInterestPaid],
+                        backgroundColor: ['#36A2EB', '#FF6384'],
+                        borderColor: ['#FFFFFF', '#FFFFFF'],
+                        borderWidth: 1
                     }]
                 },
                 options: {
                     responsive: true,
                     plugins: {
                         legend: { position: 'top' },
-                        title: { display: true, text: 'Monthly Payment Breakdown' }
+                        title: { display: true, text: 'Principal vs Interest Breakdown' },
+                        tooltip: { callbacks: { label: function(context) { return context.label + ': ' + context.parsed + ' (' + ((context.parsed / (totalPrincipalPaid + totalInterestPaid)) * 100).toFixed(2) + '%)'; } } }
                     }
                 }
             });
 
-            // Line Chart
-            if (lineChartInstance) lineChartInstance.destroy();
-            lineChartInstance = new Chart(document.getElementById('lineChart'), {
+            const ctx2 = document.getElementById('lineChart').getContext('2d');
+            const balances = amortizationData.map(row => parseFloat(row[4]));
+            balances.unshift(principal); // Start with initial balance
+            lineChartInstance = new Chart(ctx2, {
                 type: 'line',
                 data: {
-                    labels: chartLabels,
-                    datasets: [
-                        { label: 'Balance', data: balanceData, borderColor: '#36A2EB', fill: false },
-                        { label: 'Annual Interest', data: interestData, borderColor: '#FF6384', fill: false },
-                        { label: 'Annual Principal', data: principalData, borderColor: '#FFCE56', fill: false }
-                    ]
+                    labels: [...Array(numPayments + 1).keys()],
+                    datasets: [{
+                        label: 'Loan Balance Over Time',
+                        data: balances,
+                        borderColor: '#4BC0C0',
+                        fill: false,
+                        tension: 0.1,
+                        pointBackgroundColor: '#FFCE56',
+                        pointRadius: 3
+                    }]
                 },
                 options: {
                     responsive: true,
                     plugins: {
-                        title: { display: true, text: 'Loan Balance Over Time' }
+                        title: { display: true, text: 'Balance Reduction Chart' },
+                        tooltip: { mode: 'index', intersect: false }
                     },
                     scales: {
                         y: { beginAtZero: true }
@@ -379,57 +381,67 @@
             });
 
             document.getElementById('results').style.display = 'block';
-            window.amortizationData = amortizationData; // For PDF
-            window.currency = currency;
-            window.totalMonthly = totalMonthly;
         }
 
         function saveAsPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            doc.setFontSize(16);
-            doc.text('Mortgage Calculation Results', doc.internal.pageSize.width / 2, 20, { align: 'center' });
-
-            // Summary
-            doc.autoTable({
-                head: [['Parameter', 'Value']],
-                body: [
-                    ['Monthly Payment', `${window.currency}${window.totalMonthly.toFixed(2)}`],
-                    ['Total Payments', `${window.currency}${(window.totalMonthly * window.amortizationData.length).toFixed(2)}`],
-                    ['Total Interest', `${window.currency}${window.amortizationData.reduce((sum, row) => sum + parseFloat(row.interest), 0).toFixed(2)}`],
-                    ['Payoff Date', new Date(document.getElementById('start-date').value).toDateString()] // Simplified
-                ],
-                startY: 30,
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
-            });
-
-            // Amortization
-            const amortizationBody = window.amortizationData.map(row => [
-                row.month,
-                `${window.currency}${row.payment}`,
-                `${window.currency}${row.principal}`,
-                `${window.currency}${row.interest}`,
-                `${window.currency}${row.balance}`
-            ]);
-            doc.autoTable({
-                head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
-                body: amortizationBody,
-                startY: doc.lastAutoTable.finalY + 10,
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
-            });
-
-            doc.addPage(); // If needed for multiple pages, but autoTable handles it
-
-            doc.setFontSize(10);
-            doc.setTextColor(100);
-            doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-            doc.link(doc.internal.pageSize.width / 2 - 50, doc.internal.pageSize.height - 15, 100, 10, { url: 'https://fcalculator.com' });
-
-            doc.save('mortgage-results.pdf');
+            if (!amortizationData.length) {
+                alert('Please calculate the loan first!');
+                return;
+            }
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.setFontSize(14);
+                doc.text("Mortgage Calculation Results", 105, 15, { align: "center" });
+                doc.autoTable({
+                    startY: 20,
+                    head: [['Parameter', 'Value']],
+                    body: [
+                        ['Monthly Payment', monthlyPaymentValue],
+                        ['Total Payments', totalPaymentsValue],
+                        ['Total Interest', totalInterestValue],
+                        ['Payoff Date', payoffDateValue]
+                    ],
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                    margin: { top: 10 }
+                });
+                doc.autoTable({
+                    startY: doc.lastAutoTable.finalY + 10,
+                    head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
+                    body: amortizationData,
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        const footerText = 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.';
+                        const pageWidth = doc.internal.pageSize.width;
+                        const pageHeight = doc.internal.pageSize.height;
+                        const y = pageHeight - 10;
+                        const textWidth = doc.getTextWidth(footerText);
+                        const startX = (pageWidth - textWidth) / 2;
+                        const linkText = 'Fcalculator.com';
+                        const linkStart = footerText.indexOf(linkText);
+                        const beforeLink = footerText.substring(0, linkStart);
+                        const afterLink = footerText.substring(linkStart + linkText.length);
+                        const linkX = startX + doc.getTextWidth(beforeLink);
+                        const afterX = linkX + doc.getTextWidth(linkText);
+                        doc.text(beforeLink, startX, y);
+                        doc.setTextColor(0, 0, 255); // Blue for link
+                        doc.textWithLink(linkText, linkX, y, { url: 'https://fcalculator.com' });
+                        doc.setTextColor(100); // Back to gray
+                        doc.text(afterLink, afterX, y);
+                    }
+                });
+                doc.save('mortgage-results.pdf');
+            } catch (e) {
+                alert('Error generating PDF: ' + e.message);
+            }
         }
 
         function sharePage() {
