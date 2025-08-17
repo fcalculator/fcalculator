@@ -54,8 +54,7 @@
     </header>
     <section class="tool-section">
         <form id="tool-form">
-            <div class="currency-selector">
-                <label for="currency">Select Currency:</label>
+            <div style="text-align: center; margin-bottom: 20px;">
                 <select id="currency">
                     <option value="$" selected>USD ($)</option>
                     <option value="€">EUR (€)</option>
@@ -70,111 +69,116 @@
                     <legend>Credit Card Debt Details</legend>
                     <div class="input-row">
                         <label for="balance">Current Balance</label>
-                        <input type="number" id="balance" placeholder="e.g. 5000" value="5000" required>
+                        <input type="number" id="balance" placeholder="e.g. 10000" value="10000" required>
                     </div>
                     <div class="input-row">
                         <label for="apr">Annual Interest Rate (APR %)</label>
-                        <input type="number" id="apr" step="0.01" placeholder="e.g. 18" value="18" required>
+                        <input type="number" id="apr" step="0.01" placeholder="e.g. 5" value="5" required>
                     </div>
                     <div class="input-row">
                         <label for="monthly-payment">Monthly Payment</label>
-                        <input type="number" id="monthly-payment" placeholder="e.g. 200" value="200" required>
+                        <input type="number" id="monthly-payment" placeholder="e.g. 188.71" value="188.71" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="start-date">Debt Start Date</label>
+                        <input type="date" id="start-date" required>
                     </div>
                 </fieldset>
             </div>
             <button type="button" onclick="calculate()">Calculate</button>
         </form>
-        <div class="results-section" id="results" style="display:none;">
-            <h2>Calculation Results</h2>
-            <p id="months"></p>
-            <p id="total-payments"></p>
-            <p id="total-interest"></p>
-            <p id="payoff-date"></p>
-            <canvas id="balance-chart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
-            <canvas id="principal-interest-chart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
-            <table id="amortization-table">
-                <thead>
-                    <tr>
-                        <th>Month</th>
-                        <th>Payment</th>
-                        <th>Principal</th>
-                        <th>Interest</th>
-                        <th>Balance</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+    </section>
+    <div class="results-section" id="results" style="display: none;">
+        <h2>Calculation Results</h2>
+        <p id="months"></p>
+        <p id="total-payments"></p>
+        <p id="total-interest"></p>
+        <p id="payoff-date"></p>
+        <canvas id="balanceChart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
+        <table id="amortization-table" style="max-width: 600px; margin: 20px auto;">
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Payment</th>
+                    <th>Principal</th>
+                    <th>Interest</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div style="text-align: center;">
             <button onclick="saveAsPDF()">Save as PDF</button>
             <button onclick="sharePage()">Share</button>
         </div>
-    </section>
-    <p>Explore similar tools for managing finances, such as our <a href="/auto-loan-calculator.html">auto loan planner</a> or <a href="/rental-property-roi-simulator.html">rental investment analyzer</a>.</p>
+    </div>
+    <p>Consider exploring similar financial tools like the <a href="/auto-loan-calculator.html">Auto Loan Calculator</a> or <a href="/rental-property-roi-simulator.html">Rental Property ROI Simulator</a> to enhance your budgeting strategies.</p>
     <section>
         <h2>How the Credit Card Payoff Calculator Functions</h2>
-        <p>This calculator simulates the repayment process by iterating through each month, applying interest to the remaining balance, and deducting the principal from your fixed monthly payment. It starts with your current balance, applies the monthly interest rate (derived from the annual APR divided by 12), and tracks how the balance decreases over time until it reaches zero. The tool assumes no additional charges or fees, focusing solely on the provided inputs for a clear projection.</p>
-        <p>To use it, enter your current credit card balance, the annual percentage rate (APR), and your intended monthly payment amount. The results will display the number of months needed to pay off the debt, total payments made, interest accrued, and an estimated payoff date based on today's date in New York time zone. Additionally, a detailed amortization table breaks down each month's allocation, and charts visualize the balance reduction and principal versus interest distribution for a comprehensive view.</p>
-        <h3>Key Mathematical Formulas Used</h3>
-        <p>The monthly interest rate \( r \) is calculated as:</p>
-        \[ r = \frac{\text{APR}}{12 \times 100} \]
-        <p>The number of months \( n \) to pay off the debt with a fixed monthly payment \( M \) and initial balance \( P \) is estimated using:</p>
-        \[ n = -\frac{\ln\left(1 - \frac{r P}{M}\right)}{\ln(1 + r)} \]
-        <p>For the amortization schedule, each month's interest is \( i = \text{balance} \times r \), principal is \( p = M - i \), and new balance is \( \text{balance} - p \). This process repeats until the balance is zero, ensuring accurate total interest calculation as the sum of all \( i \).</p>
+        <p>This calculator evaluates your debt repayment by simulating monthly payments against accruing interest. Start by selecting a currency and entering your current balance, the annual percentage rate (APR), your intended monthly payment amount, and the debt start date. The tool then computes the number of months needed to clear the debt, total payments made, interest incurred, and a projected payoff date. It generates an amortization table detailing each month's allocation between principal and interest, alongside a line chart visualizing balance reduction over time for better insight into progress.</p>
+        <p>The core computation relies on iterative interest application and principal reduction. Monthly interest is derived from the APR divided by 12, applied to the outstanding balance. Payments exceeding interest reduce the principal, continuing until the balance reaches zero.</p>
     </section>
     <section>
-        <h2>Understanding Credit Card Debt and Interest Accumulation</h2>
-        <p>Credit card debt operates on a revolving basis, where interest compounds monthly on unpaid balances, often leading to prolonged repayment if only minimum payments are made. High APRs, typically ranging from 15% to 25%, can significantly increase the total cost of borrowing. For instance, a $5,000 balance at 18% APR with $100 monthly payments could take over 8 years to clear, accruing substantial interest.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Credit-cards.jpg" alt="Assortment of credit cards illustrating different types and designs" style="width:300px; display:block; margin:0 auto;">
-        <i style="display:block; text-align:center;">Image showing various credit cards, symbolizing debt management options (Source: Wikipedia).</i>
-        <h3>Impact of APR on Repayment</h3>
-        <p>A lower APR reduces interest charges, shortening the payoff period. Consider comparing scenarios: at 12% APR, a $10,000 balance with $300 payments might clear in 40 months, versus 50 months at 20% APR. Use the tool to model these variations and plan accordingly.</p>
-        <h4>Comparison Table: Payoff Scenarios by APR</h4>
-        <table>
+        <h2>Mathematical Formulas Behind Credit Card Debt Repayment</h2>
+        <p>The payoff period is determined using the formula for the number of payments in a loan scenario adapted for revolving credit:</p>
+        <div style="max-width: 600px; margin: 0 auto;">
+            \[ n = -\frac{\ln\left(1 - \frac{r \cdot P}{M}\right)}{\ln(1 + r)} \]
+        </div>
+        <p>where \( n \) is the number of months, \( P \) is the initial balance, \( r \) is the monthly interest rate (APR/12/100), and \( M \) is the monthly payment. This assumes payments exceed monthly interest to ensure convergence.</p>
+        <p>For the amortization schedule, each month's interest \( i \) is \( r \cdot \text{current balance} \), principal paid is \( M - i \), and the new balance is updated accordingly.</p>
+    </section>
+    <section>
+        <h2>Strategies to Accelerate Credit Card Debt Payoff</h2>
+        <p>Increasing monthly payments beyond the minimum can significantly shorten the repayment timeline and minimize interest costs. For instance, on a $5,000 balance at 18% APR, paying $200 monthly might take over 3 years, while $300 could clear it in under 2 years, saving hundreds in interest. Balance transfers to lower-APR cards or debt consolidation loans are additional tactics, though they may involve fees.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Credit-cards.jpg" alt="Various credit cards illustrating debt instruments" style="width: 300px; display: block; margin: 20px auto;">
+        <i style="text-align: center; display: block;">Credit cards as common debt tools, sourced from Wikipedia.</i>
+        <p>Compare scenarios: A table below outlines payoff times for different payment levels on a $10,000 balance at 20% APR.</p>
+        <table style="max-width: 600px; margin: 20px auto;">
             <thead>
-                <tr><th>Balance</th><th>APR (%)</th><th>Monthly Payment</th><th>Months to Payoff</th><th>Total Interest</th></tr>
+                <tr><th>Monthly Payment</th><th>Months to Payoff</th><th>Total Interest</th></tr>
             </thead>
             <tbody>
-                <tr><td>$10,000</td><td>15</td><td>$250</td><td>54</td><td>$3,250</td></tr>
-                <tr><td>$10,000</td><td>18</td><td>$250</td><td>58</td><td>$4,000</td></tr>
-                <tr><td>$10,000</td><td>22</td><td>$250</td><td>64</td><td>$5,000</td></tr>
+                <tr><td>$300</td><td>47</td><td>$3,987</td></tr>
+                <tr><td>$400</td><td>32</td><td>$2,578</td></tr>
+                <tr><td>$500</td><td>25</td><td>$1,987</td></tr>
             </tbody>
         </table>
-        <p>These examples highlight how even small APR differences affect long-term costs, emphasizing the value of balance transfers or rate negotiations.</p>
     </section>
     <section>
-        <h2>Strategies for Faster Debt Repayment</h2>
-        <p>Accelerate payoff by increasing monthly payments or targeting high-interest cards first (debt avalanche method). For example, adding $50 to payments on a $8,000 balance at 20% APR can save months and hundreds in interest. The tool's charts illustrate these savings visually, showing steeper balance declines with higher payments.</p>
-        <h3>Debt Avalanche vs. Debt Snowball</h3>
-        <p>In the avalanche approach, prioritize debts by APR; snowball focuses on smallest balances for motivational wins. Simulate both in the calculator to see interest savings.</p>
+        <h2>Impact of Interest Rates on Debt Accumulation</h2>
+        <p>High APRs, often ranging from 15% to 25%, compound monthly, leading to exponential growth if only minimum payments are made. Government data from sources like the Federal Reserve indicate average credit card rates hover around 21%, emphasizing the need for proactive repayment. Linking to reliable sources, such as the <a href="https://www.federalreserve.gov/releases/g19/current/" target="_blank">Federal Reserve's consumer credit report</a>, highlights trends in debt levels.</p>
     </section>
     <section>
         <h2>Frequently Asked Questions</h2>
-        <p><strong>What factors influence credit card payoff time?</strong> Primarily the balance, APR, and monthly payment amount. Higher payments or lower rates shorten the timeline, while additional fees can extend it.</p>
-        <p><strong>How is interest calculated on credit cards?</strong> Most issuers use a daily periodic rate (APR/365) applied to the average daily balance, but this tool simplifies to monthly for projection purposes.</p>
-        <p><strong>Can I include minimum payments in the calculation?</strong> Yes, but fixed payments are recommended for accuracy; minimums vary and often prolong debt.</p>
-        <p><strong>What if my payment is too low?</strong> The tool alerts if payments don't cover interest, preventing infinite loops in real scenarios.</p>
-        <p><strong>Does the calculator account for fees?</strong> No, it focuses on principal and interest; add estimated fees to your balance for a more precise estimate.</p>
+        <p><strong>What factors influence the payoff timeline?</strong> The balance, APR, payment amount, and start date are key; higher payments or lower rates shorten the period.</p>
+        <p><strong>How is interest calculated on credit cards?</strong> Typically using average daily balance method, with daily periodic rate applied monthly.</p>
+        <p><strong>Can I include additional payments?</strong> Adjust the monthly payment input to simulate extra contributions for updated projections.</p>
+        <p><strong>What if my payment is too low?</strong> The tool alerts if payments don't cover interest, preventing infinite loops in calculations.</p>
+        <p><strong>Does this account for fees?</strong> No, it focuses on principal and interest; add fees manually to the balance for accuracy.</p>
     </section>
     <section class="disclaimer">
         <h2>Disclaimer</h2>
-        <p>This credit card payoff calculator provides estimates for educational and planning purposes only. It does not constitute financial advice, and actual repayment may vary due to fees, variable rates, or additional purchases. Consult a financial professional for personalized guidance. Calculations are based on fixed inputs and assume no changes in terms or behavior.</p>
+        <p>This credit card payoff calculator provides estimates based on user inputs and standard formulas. It is not financial advice, and results may vary due to changes in interest rates, fees, or additional charges. Consult a professional advisor for personalized guidance. Calculations are offered "as is" without warranty.</p>
     </section>
     <section>
         <h2>Related Resources</h2>
-        <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Credit_card_interest" target="_blank">Wikipedia - Credit Card Interest</a> - In-depth explanation of how interest is computed and compounded on credit cards, helping users understand APR mechanics.</li>
-            <li><a href="https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-card-interest-rate-what-does-apr-mean-en-44/" target="_blank">Consumer Financial Protection Bureau - APR Explanation</a> - Government resource detailing APR types and their impact on debt, with tips for consumers.</li>
-            <li><a href="https://www.dallasfed.org/educate/calculators/open-calc" target="_blank">Dallas Fed - Payment Calculator for Credit Cards</a> - Official tool for calculating credit card and revolving loan repayments, useful for validating estimates from this calculator.</li>
-        </ul>
+        <p><a href="https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-card-interest-rate-what-does-apr-mean-en-46/" target="_blank">Consumer Financial Protection Bureau - Understanding APR</a> - Detailed explanation of how APR works and its impact on debt repayment.</p>
+        <p><a href="https://www.federalreserve.gov/releases/g19/current/" target="_blank">Federal Reserve - Consumer Credit Statistics</a> - Current data on credit card interest rates and outstanding balances for contextual analysis.</p>
+        <p><a href="https://en.wikipedia.org/wiki/Credit_card" target="_blank">Wikipedia - Credit Card Overview</a> - Comprehensive history and mechanics of credit cards to aid understanding of debt dynamics.</p>
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This webpage features an interactive credit card debt repayment simulator that computes payoff timelines, interest totals, amortization tables, and charts based on user inputs like balance, APR, and payments. It includes educational sections on debt strategies, formulas, and comparisons to aid in financial literacy and decision-making. Index this page under financial calculators, debt management tools, and credit education resources for users seeking debt reduction insights.</p>
+        <p>This resource offers an interactive credit card debt repayment simulator with amortization tables, interest forecasts, and visual timelines. Designed for users seeking to manage high-interest debt, it includes formulas, charts, and strategic insights to support financial literacy and planning.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
+        // Set default start date to today in New York time zone
+        const todayNY = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+        document.getElementById('start-date').value = todayNY;
+
         let balanceChart = null;
         let piChart = null;
 
@@ -183,6 +187,7 @@
             const apr = parseFloat(document.getElementById('apr').value);
             const monthlyPaymentInput = parseFloat(document.getElementById('monthly-payment').value);
             const currency = document.getElementById('currency').value;
+            const startDateStr = document.getElementById('start-date').value;
             const monthlyRate = apr / 12 / 100;
             if (monthlyPaymentInput <= balanceInput * monthlyRate) {
                 alert('Monthly payment is too low to cover interest and pay off the debt.');
@@ -208,8 +213,8 @@
             }
             const totalPayments = (balanceInput + totalInterest).toFixed(2);
             const months = month;
-            const now = new Date();
-            const payoffDate = new Date(now.setMonth(now.getMonth() + months));
+            const startDate = new Date(startDateStr);
+            const payoffDate = new Date(startDate.setMonth(startDate.getMonth() + months));
             const formattedPayoffDate = payoffDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
             document.getElementById('months').innerHTML = `Months to Pay Off: ${months}`;
             document.getElementById('total-payments').innerHTML = `Total Payments: ${currency}${totalPayments}`;
