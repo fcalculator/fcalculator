@@ -236,8 +236,8 @@
                     datasets: [{
                         label: 'Remaining Balance',
                         data: schedule.map(row => row.balance),
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: '#00b3b3',
+                        backgroundColor: 'rgba(0, 179, 179, 0.2)',
                         fill: true,
                         tension: 0.1
                     }]
@@ -245,8 +245,20 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: { y: { beginAtZero: true, title: { display: true, text: 'Balance' } } },
-                    plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${currency}${context.parsed.y.toFixed(2)}` } } }
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Balance' },
+                            grid: { color: '#e6e6e6' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: true, position: 'top' },
+                        tooltip: { callbacks: { label: (context) => `${currency}${context.parsed.y.toFixed(2)}` } }
+                    }
                 }
             });
             if (piChart) piChart.destroy();
@@ -255,21 +267,30 @@
                 type: 'bar',
                 data: {
                     labels: schedule.map(row => `Month ${row.month}`),
-                    datasets: [{
-                        label: 'Principal',
-                        data: schedule.map(row => row.principal),
-                        backgroundColor: 'rgba(54, 162, 235, 0.8)'
-                    }, {
-                        label: 'Interest',
-                        data: schedule.map(row => row.interest),
-                        backgroundColor: 'rgba(255, 99, 132, 0.8)'
-                    }]
+                    datasets: [
+                        {
+                            label: 'Principal',
+                            data: schedule.map(row => row.principal),
+                            backgroundColor: '#00b3b3'
+                        },
+                        {
+                            label: 'Interest',
+                            data: schedule.map(row => row.interest),
+                            backgroundColor: '#ff6666'
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Amount' } } },
-                    plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${currency}${context.parsed.y.toFixed(2)}` } } }
+                    scales: {
+                        x: { stacked: true, grid: { display: false } },
+                        y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Amount' }, grid: { color: '#e6e6e6' } }
+                    },
+                    plugins: {
+                        legend: { display: true, position: 'top' },
+                        tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${currency}${context.parsed.y.toFixed(2)}` } }
+                    }
                 }
             });
             setTimeout(() => {
