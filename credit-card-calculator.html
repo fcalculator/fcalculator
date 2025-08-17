@@ -94,8 +94,8 @@
         <p id="total-payments"></p>
         <p id="total-interest"></p>
         <p id="payoff-date"></p>
-        <canvas id="balance-chart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
-        <canvas id="principal-interest-chart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
+        <canvas id="balanceChart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
+        <canvas id="principalInterestChart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
         <table id="amortization-table">
             <thead>
                 <tr>
@@ -211,8 +211,9 @@
             }
             const totalPayments = (balanceInput + totalInterest).toFixed(2);
             const months = month;
-            const startDate = new Date(startDateStr + 'T00:00:00Z');
-            const payoffDate = new Date(startDate.setMonth(startDate.getMonth() + months));
+            const startDate = new Date(startDateStr + 'T00:00:00');
+            const payoffDate = new Date(startDate);
+            payoffDate.setMonth(payoffDate.getMonth() + months);
             const formattedPayoffDate = payoffDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
             document.getElementById('months').innerText = `Months to Pay Off: ${months}`;
             document.getElementById('total-payments').innerText = `Total Payments: ${currency}${totalPayments}`;
@@ -226,7 +227,7 @@
                 tbody.appendChild(tr);
             });
             if (balanceChart) balanceChart.destroy();
-            const balanceCtx = document.getElementById('balance-chart').getContext('2d');
+            const balanceCtx = document.getElementById('balanceChart').getContext('2d');
             balanceChart = new Chart(balanceCtx, {
                 type: 'line',
                 data: {
@@ -242,12 +243,13 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     scales: { y: { beginAtZero: true, title: { display: true, text: 'Balance' } } },
                     plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${currency}${context.parsed.y.toFixed(2)}` } } }
                 }
             });
             if (piChart) piChart.destroy();
-            const piCtx = document.getElementById('principal-interest-chart').getContext('2d');
+            const piCtx = document.getElementById('principalInterestChart').getContext('2d');
             piChart = new Chart(piCtx, {
                 type: 'bar',
                 data: {
@@ -264,6 +266,7 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Amount' } } },
                     plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${currency}${context.parsed.y.toFixed(2)}` } } }
                 }
