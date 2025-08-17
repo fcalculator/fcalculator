@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script type="application/ld+json">
@@ -42,7 +43,7 @@
     }
     </script>
 </head>
-<body>
+<body onload="setTodayDate()">
     <div class="logo">FCalculator.com</div>
     <div class="breadcrumb">
         <a href="/">FCalculator.com</a> > <a href="/finance.html">Finance</a> > <a href="/credit-card-calculator.html">Credit Card Payoff Calculator</a>
@@ -105,13 +106,17 @@
             </thead>
             <tbody></tbody>
         </table>
+        <h3>Balance Over Time</h3>
+        <canvas id="balanceChart" width="400" height="200"></canvas>
+        <h3>Payment Breakdown</h3>
+        <canvas id="paymentBreakdownChart" width="400" height="200"></canvas>
         <button onclick="saveAsPDF()">Save as PDF</button>
         <button onclick="sharePage()">Share</button>
     </div>
     <p>Consider exploring similar financial tools like the <a href="/auto-loan-calculator.html">Auto Loan Calculator</a> or <a href="/rental-property-roi-simulator.html">Rental Property ROI Simulator</a> to enhance your budgeting strategies.</p>
     <section>
         <h2>How the Credit Card Payoff Calculator Functions</h2>
-        <p>This calculator evaluates your debt repayment by simulating monthly payments against accruing interest. Start by selecting a currency and entering your current balance, the annual percentage rate (APR), your intended monthly payment amount, and the debt start date (optional, defaults to today). The tool then computes the number of months needed to clear the debt, total payments made, interest incurred, and a projected payoff date. It generates an amortization table detailing each month's allocation between principal and interest, alongside line and bar charts visualizing balance reduction and payment breakdown over time for better insight into progress.</p>
+        <p>This calculator evaluates your debt repayment by simulating monthly payments against accruing interest. Start by selecting a currency and entering your current balance, the annual percentage rate (APR), your intended monthly payment amount, and the debt start date (automatically set to today but adjustable). The tool then computes the number of months needed to clear the debt, total payments made, interest incurred, and a projected payoff date. It generates an amortization table detailing each month's allocation between principal and interest, alongside line and bar charts visualizing balance reduction and payment breakdown over time for better insight into progress.</p>
         <p>The core computation relies on iterative interest application and principal reduction. Monthly interest is derived from the APR divided by 12, applied to the outstanding balance. Payments exceeding interest reduce the principal, continuing until the balance reaches zero.</p>
     </section>
     <section>
@@ -137,12 +142,26 @@
                 <tr><td>$300</td><td>47</td><td>$3,987</td></tr>
                 <tr><td>$400</td><td>32</td><td>$2,578</td></tr>
                 <tr><td>$500</td><td>25</td><td>$1,987</td></tr>
+                <tr><td>$600</td><td>20</td><td>$1,567</td></tr>
+                <tr><td>$700</td><td>17</td><td>$1,289</td></tr>
             </tbody>
         </table>
+        <p>Utilizing avalanche or snowball methods—prioritizing high-interest debts or smallest balances—can further optimize multiple card repayments.</p>
     </section>
     <section>
         <h2>Impact of Interest Rates on Debt Accumulation</h2>
         <p>High APRs, often ranging from 15% to 25%, compound monthly, leading to exponential growth if only minimum payments are made. Government data from sources like the Federal Reserve indicate average credit card rates hover around 21%, emphasizing the need for proactive repayment. Linking to reliable sources, such as the <a href="https://www.federalreserve.gov/releases/g19/current/" target="_blank">Federal Reserve's consumer credit report</a>, highlights trends in debt levels.</p>
+        <p>Consider this comparison table for a $8,000 balance with varying APRs and a fixed $250 monthly payment:</p>
+        <table style="max-width: 600px; margin: 20px auto;">
+            <thead>
+                <tr><th>APR (%)</th><th>Months to Payoff</th><th>Total Interest Paid</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>12</td><td>38</td><td>$1,256</td></tr>
+                <tr><td>18</td><td>43</td><td>$2,034</td></tr>
+                <tr><td>24</td><td>50</td><td>$2,987</td></tr>
+            </tbody>
+        </table>
     </section>
     <section>
         <h2>Frequently Asked Questions</h2>
@@ -151,6 +170,7 @@
         <p><strong>Can I include additional payments?</strong> Adjust the monthly payment input to simulate extra contributions for updated projections.</p>
         <p><strong>What if my payment is too low?</strong> The tool alerts if payments don't cover interest, preventing infinite loops in calculations.</p>
         <p><strong>Does this account for fees?</strong> No, it focuses on principal and interest; add fees manually to the balance for accuracy.</p>
+        <p><strong>How do charts help in understanding repayment?</strong> The line chart shows balance reduction trends, while the bar chart breaks down principal vs. interest per month, aiding in visualizing progress.</p>
     </section>
     <section class="disclaimer">
         <h2>Disclaimer</h2>
@@ -161,16 +181,22 @@
         <p><a href="https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-card-interest-rate-what-does-apr-mean-en-46/" target="_blank">Consumer Financial Protection Bureau - Understanding APR</a> - Detailed explanation of how APR works and its impact on debt repayment.</p>
         <p><a href="https://www.federalreserve.gov/releases/g19/current/" target="_blank">Federal Reserve - Consumer Credit Statistics</a> - Current data on credit card interest rates and outstanding balances for contextual analysis.</p>
         <p><a href="https://en.wikipedia.org/wiki/Credit_card" target="_blank">Wikipedia - Credit Card Overview</a> - Comprehensive history and mechanics of credit cards to aid understanding of debt dynamics.</p>
+        <p><a href="https://www.nerdwallet.com/article/credit-cards/credit-card-debt" target="_blank">NerdWallet - Managing Credit Card Debt</a> - Practical tips and strategies for reducing credit card debt effectively.</p>
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This resource offers an interactive credit card debt repayment simulator with amortization tables, interest forecasts, and visual timelines. Designed for users seeking to manage high-interest debt, it includes formulas, charts, and strategic insights to support financial literacy and planning.</p>
+        <p>This resource offers an interactive credit card debt repayment simulator with amortization tables, interest forecasts, visual timelines via charts, and strategic insights. Designed for users managing high-interest debt, it promotes financial literacy through detailed formulas, scenario comparisons, and educational content on repayment methods.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
+        function setTodayDate() {
+            const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+            document.getElementById('start-date').value = today;
+        }
+
         function calculate() {
             const balanceInput = parseFloat(document.getElementById('balance').value);
             const apr = parseFloat(document.getElementById('apr').value);
@@ -220,13 +246,80 @@
                 tr.innerHTML = `<td>${row.month}</td><td>${currency}${row.payment.toFixed(2)}</td><td>${currency}${row.principal.toFixed(2)}</td><td>${currency}${row.interest.toFixed(2)}</td><td>${currency}${row.balance.toFixed(2)}</td>`;
                 tbody.appendChild(tr);
             });
+            createCharts(schedule);
             document.getElementById('results').style.visibility = 'visible';
         }
+
+        function createCharts(schedule) {
+            if (window.balanceChart) window.balanceChart.destroy();
+            if (window.paymentBreakdownChart) window.paymentBreakdownChart.destroy();
+
+            const ctxBalance = document.getElementById('balanceChart').getContext('2d');
+            window.balanceChart = new Chart(ctxBalance, {
+                type: 'line',
+                data: {
+                    labels: schedule.map(row => `Month ${row.month}`),
+                    datasets: [{
+                        label: 'Remaining Balance',
+                        data: schedule.map(row => row.balance),
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: 'Balance' } },
+                        x: { title: { display: true, text: 'Months' } }
+                    },
+                    plugins: {
+                        legend: { display: true },
+                        tooltip: { callbacks: { label: function(context) { return `Balance: $${context.parsed.y.toFixed(2)}`; } } }
+                    }
+                }
+            });
+
+            const ctxPayment = document.getElementById('paymentBreakdownChart').getContext('2d');
+            window.paymentBreakdownChart = new Chart(ctxPayment, {
+                type: 'bar',
+                data: {
+                    labels: schedule.map(row => `Month ${row.month}`),
+                    datasets: [{
+                        label: 'Principal Paid',
+                        data: schedule.map(row => row.principal),
+                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Interest Paid',
+                        data: schedule.map(row => row.interest),
+                        backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: { stacked: true, title: { display: true, text: 'Months' } },
+                        y: { stacked: true, title: { display: true, text: 'Amount' }, beginAtZero: true }
+                    },
+                    plugins: {
+                        legend: { display: true },
+                        tooltip: { callbacks: { label: function(context) { return `${context.dataset.label}: $${context.parsed.y.toFixed(2)}`; } } }
+                    }
+                }
+            });
+        }
+
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const currency = document.getElementById('currency').value;
             const pageWidth = doc.internal.pageSize.width;
+            const pageHeight = doc.internal.pageSize.height;
             doc.text('Credit Card Payoff Results', pageWidth / 2, 20, { align: 'center' });
             const resultsBody = [
                 ['Monthly Payment', parseFloat(document.getElementById('monthly-payment').value).toFixed(2)],
@@ -267,12 +360,24 @@
                 didDrawPage: function (data) {
                     doc.setFontSize(10);
                     doc.setTextColor(100);
-                    const footerText = 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.';
-                    doc.text(footerText, pageWidth / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                    const footerY = pageHeight - 10;
+                    const textPart1 = 'This document was generated using ';
+                    const textPart2 = 'Fcalculator.com';
+                    const textPart3 = ' – Calculations are provided “as is” without warranty. Use at your own risk.';
+                    const widthPart1 = doc.getTextWidth(textPart1);
+                    const widthPart2 = doc.getTextWidth(textPart2);
+                    const totalWidth = doc.getTextWidth(textPart1 + textPart2 + textPart3);
+                    const startX = (pageWidth - totalWidth) / 2;
+                    doc.text(textPart1, startX, footerY);
+                    doc.setTextColor(0, 0, 255);
+                    doc.textWithLink(textPart2, startX + widthPart1, footerY, { url: 'https://fcalculator.com' });
+                    doc.setTextColor(100);
+                    doc.text(textPart3, startX + widthPart1 + widthPart2, footerY);
                 }
             });
             doc.save('credit-card-payoff.pdf');
         }
+
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
