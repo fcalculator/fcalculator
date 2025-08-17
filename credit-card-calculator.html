@@ -196,12 +196,14 @@
                 month++;
                 const interest = Math.floor(remainingBalance * monthlyRate * 100) / 100;
                 let principal = monthlyPaymentInput - interest;
+                let payment = monthlyPaymentInput;
                 if (principal > remainingBalance) {
                     principal = remainingBalance;
+                    payment = principal + interest;
                 }
                 remainingBalance -= principal;
                 totalInterest += interest;
-                schedule.push({ month, payment: monthlyPaymentInput, principal, interest, balance: remainingBalance });
+                schedule.push({ month, payment, principal, interest, balance: remainingBalance });
                 if (month > 3600) break;
             }
             const totalPayments = (balanceInput + totalInterest).toFixed(2);
@@ -309,16 +311,7 @@
                 didDrawPage: function (data) {
                     doc.setFontSize(10);
                     doc.setTextColor(100);
-                    const leftText = 'This document was generated using ';
-                    const linkText = 'Fcalculator.com';
-                    const leftWidth = doc.getTextWidth(leftText);
-                    const linkWidth = doc.getTextWidth(linkText);
-                    const totalWidth = leftWidth + linkWidth;
-                    const x = (pageWidth - totalWidth) / 2;
-                    const y = doc.internal.pageSize.height - 10;
-                    doc.text(leftText, x, y);
-                    doc.setTextColor(0, 0, 255);
-                    doc.textWithLink(linkText, x + leftWidth, y, { url: 'https://fcalculator.com' });
+                    doc.text('This document was generated using Fcalculator.com', pageWidth / 2, doc.internal.pageSize.height - 10, { align: 'center' });
                 }
             });
             doc.save('credit-card-payoff.pdf');
