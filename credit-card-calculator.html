@@ -88,14 +88,14 @@
             <button type="button" onclick="calculate()">Calculate</button>
         </form>
     </section>
-    <div class="results-section" id="results" style="display: none;">
+    <div class="results-section" id="results" style="visibility: hidden;">
         <h2>Calculation Results</h2>
         <p id="months"></p>
         <p id="total-payments"></p>
         <p id="total-interest"></p>
         <p id="payoff-date"></p>
-        <canvas id="balanceChart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
-        <canvas id="principalInterestChart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
+        <canvas id="balanceChart" style="max-width: 600px; min-height: 400px; margin: 0 auto; display: block;"></canvas>
+        <canvas id="principalInterestChart" style="max-width: 600px; min-height: 400px; margin: 0 auto; display: block;"></canvas>
         <table id="amortization-table">
             <thead>
                 <tr>
@@ -226,7 +226,7 @@
                 tr.innerHTML = `<td>${row.month}</td><td>${currency}${row.payment.toFixed(2)}</td><td>${currency}${row.principal.toFixed(2)}</td><td>${currency}${row.interest.toFixed(2)}</td><td>${currency}${row.balance.toFixed(2)}</td>`;
                 tbody.appendChild(tr);
             });
-            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').style.visibility = 'visible';
             if (balanceChart) balanceChart.destroy();
             const balanceCtx = document.getElementById('balanceChart').getContext('2d');
             balanceChart = new Chart(balanceCtx, {
