@@ -94,8 +94,8 @@
         <p id="total-payments"></p>
         <p id="total-interest"></p>
         <p id="payoff-date"></p>
-        <canvas id="balanceChart" style="max-width: 600px; height: 400px; margin: 0 auto; display: block;"></canvas>
-        <canvas id="principalInterestChart" style="max-width: 600px; height: 400px; margin: 0 auto; display: block;"></canvas>
+        <canvas id="balanceChart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
+        <canvas id="principalInterestChart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
         <table id="amortization-table">
             <thead>
                 <tr>
@@ -236,8 +236,8 @@
                     datasets: [{
                         label: 'Remaining Balance',
                         data: schedule.map(row => row.balance),
-                        borderColor: '#00b3b3',
-                        backgroundColor: 'rgba(0, 179, 179, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         fill: true,
                         tension: 0.1
                     }]
@@ -245,20 +245,8 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: { display: true, text: 'Balance' },
-                            grid: { color: '#e6e6e6' }
-                        },
-                        x: {
-                            grid: { display: false }
-                        }
-                    },
-                    plugins: {
-                        legend: { display: true, position: 'top' },
-                        tooltip: { callbacks: { label: (context) => `${currency}${context.parsed.y.toFixed(2)}` } }
-                    }
+                    scales: { y: { beginAtZero: true, title: { display: true, text: 'Balance' } } },
+                    plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${currency}${context.parsed.y.toFixed(2)}` } } }
                 }
             });
             if (piChart) piChart.destroy();
@@ -267,36 +255,23 @@
                 type: 'bar',
                 data: {
                     labels: schedule.map(row => `Month ${row.month}`),
-                    datasets: [
-                        {
-                            label: 'Principal',
-                            data: schedule.map(row => row.principal),
-                            backgroundColor: '#00b3b3'
-                        },
-                        {
-                            label: 'Interest',
-                            data: schedule.map(row => row.interest),
-                            backgroundColor: '#ff6666'
-                        }
-                    ]
+                    datasets: [{
+                        label: 'Principal',
+                        data: schedule.map(row => row.principal),
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)'
+                    }, {
+                        label: 'Interest',
+                        data: schedule.map(row => row.interest),
+                        backgroundColor: 'rgba(255, 99, 132, 0.8)'
+                    }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: {
-                        x: { stacked: true, grid: { display: false } },
-                        y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Amount' }, grid: { color: '#e6e6e6' } }
-                    },
-                    plugins: {
-                        legend: { display: true, position: 'top' },
-                        tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${currency}${context.parsed.y.toFixed(2)}` } }
-                    }
+                    scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Amount' } } },
+                    plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${currency}${context.parsed.y.toFixed(2)}` } } }
                 }
             });
-            setTimeout(() => {
-                balanceChart.resize();
-                piChart.resize();
-            }, 0);
         }
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
