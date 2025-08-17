@@ -94,8 +94,8 @@
         <p id="total-payments"></p>
         <p id="total-interest"></p>
         <p id="payoff-date"></p>
-        <canvas id="balanceChart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
-        <canvas id="principalInterestChart" style="max-width: 600px; margin: 0 auto; display: block;"></canvas>
+        <canvas id="balanceChart" style="max-width: 600px; height: 400px; margin: 0 auto; display: block;"></canvas>
+        <canvas id="principalInterestChart" style="max-width: 600px; height: 400px; margin: 0 auto; display: block;"></canvas>
         <table id="amortization-table">
             <thead>
                 <tr>
@@ -273,8 +273,8 @@
                 }
             });
             setTimeout(() => {
-                balanceChart.update();
-                piChart.update();
+                balanceChart.resize();
+                piChart.resize();
             }, 0);
         }
         function saveAsPDF() {
