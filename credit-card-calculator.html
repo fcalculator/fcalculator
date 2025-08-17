@@ -8,7 +8,6 @@
     <meta name="keywords" content="credit card payoff calculator, debt repayment timeline, credit card interest calculation, amortization schedule for credit cards, financial debt simulator, APR impact on debt, monthly payment planner">
     <link rel="canonical" href="https://fcalculator.com/credit-card-calculator.html">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
@@ -94,8 +93,6 @@
         <p id="total-payments"></p>
         <p id="total-interest"></p>
         <p id="payoff-date"></p>
-        <canvas id="balanceChart" style="max-width: 600px; min-height: 400px; margin: 0 auto; display: block;"></canvas>
-        <canvas id="principalInterestChart" style="max-width: 600px; min-height: 400px; margin: 0 auto; display: block;"></canvas>
         <table id="amortization-table">
             <thead>
                 <tr>
@@ -174,9 +171,6 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        let balanceChart = null;
-        let piChart = null;
-
         function calculate() {
             const balanceInput = parseFloat(document.getElementById('balance').value);
             const apr = parseFloat(document.getElementById('apr').value);
@@ -227,51 +221,6 @@
                 tbody.appendChild(tr);
             });
             document.getElementById('results').style.visibility = 'visible';
-            if (balanceChart) balanceChart.destroy();
-            const balanceCtx = document.getElementById('balanceChart').getContext('2d');
-            balanceChart = new Chart(balanceCtx, {
-                type: 'line',
-                data: {
-                    labels: schedule.map(row => `Month ${row.month}`),
-                    datasets: [{
-                        label: 'Remaining Balance',
-                        data: schedule.map(row => row.balance),
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        fill: true,
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: { y: { beginAtZero: true, title: { display: true, text: 'Balance' } } },
-                    plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${currency}${context.parsed.y.toFixed(2)}` } } }
-                }
-            });
-            if (piChart) piChart.destroy();
-            const piCtx = document.getElementById('principalInterestChart').getContext('2d');
-            piChart = new Chart(piCtx, {
-                type: 'bar',
-                data: {
-                    labels: schedule.map(row => `Month ${row.month}`),
-                    datasets: [{
-                        label: 'Principal',
-                        data: schedule.map(row => row.principal),
-                        backgroundColor: 'rgba(54, 162, 235, 0.8)'
-                    }, {
-                        label: 'Interest',
-                        data: schedule.map(row => row.interest),
-                        backgroundColor: 'rgba(255, 99, 132, 0.8)'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Amount' } } },
-                    plugins: { legend: { display: true }, tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${currency}${context.parsed.y.toFixed(2)}` } } }
-                }
-            });
         }
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
