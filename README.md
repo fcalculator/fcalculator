@@ -10,6 +10,7 @@ FINANCIAL
 /finance-calculator.html
 /credit-card-calculator.html
 /inflation-calculator.html
+/inflation-impact-calculator.html
 /401k-calculator.html
 /rental-property-roi-calculator.html
 /what-if-i-bought-bitcoin-calculator.html
