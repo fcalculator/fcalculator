@@ -105,7 +105,7 @@
             <p>Future Purchasing Power: <span id="future-value"></span></p>
             <p>Total Inflation Impact (Loss): <span id="loss"></span></p>
             <div id="chart-container">
-                <canvas id="inflationChart" width="540" height="400"></canvas>
+                <canvas id="inflationChart" width="540" height="300"></canvas>
             </div>
             <h3>Yearly Breakdown</h3>
             <table id="breakdown-table">
@@ -130,7 +130,7 @@
     <section>
         <h2>Mathematical Formulas and Derivations</h2>
         <p>The primary formula for calculating future purchasing power under inflation is derived from the compound interest principle but inverted for devaluation:</p>
-        <div style="max-width:600px; margin:0 auto;">
+        <div style="max-width:650px; margin:0 auto;">
             \[ FV = PV \times (1 + r)^{-n} \]
         </div>
         <p>Where \( FV \) represents the future purchasing power, \( PV \) is the present value (current savings), \( r \) is the annual inflation rate as a decimal, and \( n \) is the number of years. This equation accounts for the exponential decay in value. Cumulative inflation over the period is computed as \( (1 + r)^n - 1 \), expressed as a percentage to show total price increase. For yearly breakdowns, the value is iteratively adjusted each year, providing a granular view suitable for long-term forecasting.</p>
