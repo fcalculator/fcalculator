@@ -3,348 +3,364 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Simulate 401(k) retirement savings growth incorporating contributions, employer matches, salary increases, and investment returns with detailed projections, charts, and amortization schedules for strategic financial planning.">
-    <meta name="keywords" content="401k savings projection, retirement growth calculator, employer match simulator, investment return analyzer, 401k balance forecast">
-    <title>401(k) Savings Growth and Retirement Projection Simulator</title>
+    <title>401(k) Retirement Savings Projection Calculator</title>
+    <meta name="description" content="Project future 401(k) balances with employer matches, investment growth simulations, annual schedules, and distribution estimates, including historical return comparisons and detailed charts for retirement strategy optimization.">
+    <meta name="keywords" content="401k calculator, retirement savings projection, employer match simulation, investment growth forecast, retirement planning tool, 401k balance estimator">
     <link rel="canonical" href="https://fcalculator.com/401k-calculator.html">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "401(k) Savings Growth and Retirement Projection Simulator",
-        "url": "https://fcalculator.com/401k-calculator.html",
-        "description": "Advanced simulator for projecting 401(k) balance at retirement, including yearly contributions, employer matches, salary growth, investment returns, interactive charts for balance trends, detailed tables, mathematical derivations, historical data from IRS and Investopedia, Wikipedia-sourced images, and PDF export for comprehensive retirement planning.",
-        "datePublished": "2022-01-14",
-        "publisher": {
-            "@type": "Organization",
-            "name": "FCalculator.com",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://fcalculator.com/logo.png"
-            }
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "401(k) Retirement Savings Projection Calculator",
+      "description": "An advanced tool to forecast 401(k) growth, including contributions, employer matches, returns, charts, and schedules for retirement planning.",
+      "url": "https://fcalculator.com/401k-calculator.html",
+      "datePublished": "2022-01-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "FCalculator.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://fcalculator.com/logo.png"
         }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://fcalculator.com/"
+        },{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Finance",
+          "item": "https://fcalculator.com/finance.html"
+        },{
+          "@type": "ListItem",
+          "position": 3,
+          "name": "401(k) Calculator",
+          "item": "https://fcalculator.com/401k-calculator.html"
+        }]
+      },
+      "hasPart": {
+        "@type": "Calculator",
+        "name": "401(k) Projection Tool",
+        "description": "Calculates projected retirement savings based on age, salary, contributions, matches, and returns."
+      }
     }
     </script>
 </head>
 <body>
+    <div class="logo">FCalculator.com</div>
+    <div class="breadcrumb">
+        <a href="/">FCalculator.com</a> > <a href="/finance.html">Finance</a> > <a href="/401k-calculator.html">401(k) Calculator</a>
+    </div>
     <header>
-        <div class="logo">FCalculator.com</div>
-        <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/finance.html">Finance</a> > <a href="/401k-calculator.html">401(k) Calculator</a>
-        </div>
         <h1>401(k) Calculator</h1>
-        <p>Project future 401(k) balance by modeling annual contributions, employer matches, salary escalations, and investment yields, offering breakdowns for optimized retirement strategies.</p>
+        <p>Forecast your retirement savings growth, incorporating contributions, employer matches, and investment returns, with visual charts and schedules for strategic planning.</p>
     </header>
     <section class="tool-section">
         <form id="tool-form">
-            <div class="currency-selector" style="text-align: center; margin-bottom: 20px;">
-                <label for="currency">Currency:</label>
+            <div class="currency-selector">
+                <label for="currency">Currency</label>
                 <select id="currency">
-                    <option value="$">USD ($)</option>
-                    <option value="€">EUR (€)</option>
-                    <option value="£">GBP (£)</option>
-                    <option value="¥">JPY (¥)</option>
-                    <option value="C$">CAD (C$)</option>
-                    <option value="A$">AUD (A$)</option>
+                    <option value="USD">$ (USD)</option>
+                    <option value="EUR">€ (EUR)</option>
+                    <option value="GBP">£ (GBP)</option>
+                    <option value="JPY">¥ (JPY)</option>
+                    <option value="CAD">C$ (CAD)</option>
+                    <option value="AUD">A$ (AUD)</option>
                 </select>
             </div>
             <div class="sections-container">
                 <fieldset>
-                    <legend>Personal Information</legend>
+                    <legend>Personal Details</legend>
                     <div class="input-row">
                         <label for="current-age">Current Age</label>
-                        <input type="number" id="current-age" value="30" min="18" max="100" placeholder="e.g. 30" required>
+                        <input type="number" id="current-age" value="35" placeholder="e.g. 35" required>
                     </div>
                     <div class="input-row">
                         <label for="retirement-age">Retirement Age</label>
-                        <input type="number" id="retirement-age" value="65" min="18" max="100" placeholder="e.g. 65" required>
+                        <input type="number" id="retirement-age" value="65" placeholder="e.g. 65" required>
                     </div>
                     <div class="input-row">
-                        <label for="current-balance">Current 401(k) Balance</label>
-                        <input type="number" id="current-balance" value="0" placeholder="e.g. 50000" required>
+                        <label for="life-expectancy">Life Expectancy</label>
+                        <input type="number" id="life-expectancy" value="85" placeholder="e.g. 85" required>
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>Income & Contributions</legend>
+                    <legend>Financial Details</legend>
+                    <div class="input-row">
+                        <label for="current-balance">Current 401(k) Balance</label>
+                        <input type="number" id="current-balance" value="50000" placeholder="e.g. 50000" required>
+                    </div>
                     <div class="input-row">
                         <label for="annual-salary">Annual Salary</label>
                         <input type="number" id="annual-salary" value="60000" placeholder="e.g. 60000" required>
                     </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Contributions</legend>
                     <div class="input-row">
-                        <label for="contribution-percent">Your Contribution (% of Salary)</label>
-                        <input type="number" id="contribution-percent" value="10" min="0" max="100" placeholder="e.g. 10" required>
+                        <label for="emp-contrib-perc">Employee Contribution (%)</label>
+                        <input type="number" id="emp-contrib-perc" value="10" placeholder="e.g. 10" required>
                     </div>
                     <div class="input-row">
-                        <label for="employer-match">Employer Match (%)</label>
-                        <input type="number" id="employer-match" value="50" min="0" max="100" placeholder="e.g. 50" required>
+                        <label for="emp-match-perc">Employer Match (%)</label>
+                        <input type="number" id="emp-match-perc" value="50" placeholder="e.g. 50" required>
                     </div>
                     <div class="input-row">
-                        <label for="employer-max">Employer Match Limit (% of Salary)</label>
-                        <input type="number" id="employer-max" value="6" min="0" max="100" placeholder="e.g. 6" required>
-                    </div>
-                    <div class="input-row">
-                        <label for="salary-increase">Annual Salary Increase (%)</label>
-                        <input type="number" id="salary-increase" value="3" min="0" max="20" placeholder="e.g. 3" required>
+                        <label for="emp-match-limit">Employer Match Limit (%)</label>
+                        <input type="number" id="emp-match-limit" value="6" placeholder="e.g. 6" required>
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>Investment Assumptions</legend>
+                    <legend>Projections</legend>
                     <div class="input-row">
-                        <label for="return-rate">Expected Annual Return (%)</label>
-                        <input type="number" id="return-rate" value="7" min="0" max="20" placeholder="e.g. 7" required>
+                        <label for="salary-increase">Annual Salary Increase (%)</label>
+                        <input type="number" id="salary-increase" value="3" placeholder="e.g. 3" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="expected-return">Expected Annual Return (%)</label>
+                        <input type="number" id="expected-return" value="7" placeholder="e.g. 7" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="inflation-rate">Inflation Rate (%)</label>
+                        <input type="number" id="inflation-rate" value="2" placeholder="e.g. 2" required>
                     </div>
                 </fieldset>
             </div>
-            <button type="button" onclick="calculate401k()">Calculate</button>
+            <button type="button" onclick="calculate()">Calculate</button>
         </form>
-        <div class="results-section" id="results" style="display: none;">
-            <h2>Calculation Results</h2>
-            <p>Projected 401(k) Balance at Retirement: <span id="projected-balance"></span></p>
-            <p>Total Contributions: <span id="total-contributions"></span></p>
-            <p>Total Employer Matches: <span id="total-matches"></span></p>
-            <p>Total Investment Earnings: <span id="total-earnings"></span></p>
-            <canvas id="line-chart"></canvas>
-            <h3>Yearly Projection Schedule</h3>
-            <table id="yearly-table">
-                <thead>
-                    <tr><th>Year</th><th>Salary</th><th>Your Contribution</th><th>Employer Match</th><th>Earnings</th><th>Balance</th></tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <button onclick="saveAsPDF()">Save as PDF</button>
-            <button onclick="sharePage()">Share</button>
-        </div>
     </section>
-    <p>Consider exploring complementary financial tools such as <a href="/mortgage-calculator.html">the Mortgage Calculator</a> for home financing projections or <a href="/auto-loan-calculator.html">the Auto Loan Calculator</a> for vehicle purchase simulations.</p>
+    <section class="results-section" id="results-section" style="display: none;">
+        <h2>Calculation Results</h2>
+        <p>Projected Balance at Retirement: <span id="proj-balance"></span></p>
+        <p>Total Employee Contributions: <span id="total-emp-contrib"></span></p>
+        <p>Total Employer Contributions: <span id="total-emp-match"></span></p>
+        <p>Total Investment Growth: <span id="total-growth"></span></p>
+        <p>Estimated Annual Distribution in Retirement (adjusted for inflation): <span id="annual-dist"></span></p>
+        <canvas id="line-chart" width="500" height="300"></canvas>
+        <h3>Yearly Growth Schedule</h3>
+        <table id="schedule-table">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Age</th>
+                    <th>Salary</th>
+                    <th>Employee Contrib</th>
+                    <th>Employer Contrib</th>
+                    <th>Total Contrib</th>
+                    <th>Interest</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button onclick="saveAsPDF()">Save as PDF</button>
+        <button onclick="sharePage()">Share</button>
+        <div class="note-alert">Note: Results are estimates based on assumptions. Actual returns may vary. 2025 contribution limits: $23,500 employee deferral, $70,000 total (source: IRS.gov).</div>
+    </section>
+    <p>Consider exploring complementary financial tools such as the <a href="/mortgage-calculator.html">Mortgage Calculator</a> for home financing or the <a href="/auto-loan-calculator.html">Auto Loan Calculator</a> for vehicle purchase planning.</p>
     <section>
         <h2>How the 401(k) Calculator Works</h2>
-        <p>This simulator forecasts 401(k) accumulation by iterating yearly cycles: adjusting salary for increases, calculating employee contributions as a percentage, applying employer matches up to limits, adding investment earnings based on the assumed rate, and updating the balance. Inputs include current age, retirement age, initial balance, salary, contribution rates, match details, salary growth, and return rate. Outputs detail projected balance, total inputs, and breakdowns via tables and charts. Assumptions encompass annual compounding, no fees or taxes modeled, and consistent parameters for baseline planning.</p>
+        <p>This tool projects 401(k) savings by simulating annual contributions, employer matches, salary increases, and compound returns. Start with your current balance, then loop through years to retirement: adjust salary for growth, calculate contributions (employee % of salary, capped employer match), add to balance, apply return rate. Distributions estimate annual withdrawals over retirement years, adjusted for inflation. The line chart visualizes balance growth, and the table details yearly breakdowns. Assumptions include constant rates, no withdrawals/taxes until retirement, and U.S.-based limits (e.g., 2025: $23,500 deferral).</p>
     </section>
     <section>
         <h2>Mathematical Formulas and Derivations</h2>
-        <p>Yearly growth is computed sequentially:</p>
-        \[ \text{New Salary} = \text{Previous Salary} \times \left(1 + \frac{\text{Salary Increase \%}}{100}\right) \]
-        \[ \text{Your Contribution} = \text{Salary} \times \frac{\text{Contribution \%}}{100} \]
-        \[ \text{Employer Match} = \min\left(\text{Your Contribution} \times \frac{\text{Match \%}}{100}, \text{Salary} \times \frac{\text{Match Limit \%}}{100}\right) \]
-        \[ \text{Total Addition} = \text{Your Contribution} + \text{Employer Match} \]
-        \[ \text{Earnings} = (\text{Balance} + \text{Total Addition}) \times \frac{\text{Return \%}}{100} \]
-        \[ \text{New Balance} = \text{Previous Balance} + \text{Total Addition} + \text{Earnings} \]
-        <p>For approximate total without adjustments, use future value of annuity: \[ FV = P \times \frac{(1 + r)^n - 1}{r} + I \times (1 + r)^n \] where \( P \) is average annual addition, \( r \) return rate, \( n \) years, \( I \) initial balance.</p>
+        <p>The core projection uses compound interest with annual payments, adjusted for increasing contributions:</p>
+        <div style="max-width: 500px; margin: 0 auto;">
+            \[ FV = PV (1 + r)^n + PMT \frac{(1 + r)^n - 1}{r} (1 + g)^y \]
+        </div>
+        <p>Where \( FV \) is future value, \( PV \) current balance, \( r \) return rate, \( n \) years, \( PMT \) initial contribution, \( g \) salary growth, \( y \) year. In practice, iterated annually for precision. Employer match: \( match = \min(emp\_contrib, salary \times limit\%) \times match\% \). Distributions: \( dist = FV / (life - ret\_age) / (1 + inf)^{ret\_years} \).</p>
     </section>
     <section>
-        <h2>Factors Influencing 401(k) Savings and Growth</h2>
-        <p>Investment Choices and Risks: Limited to employer options, market volatility affects returns; diversification mitigates but doesn't eliminate losses.</p>
-        <p>Fees and Employer Stability: Administrative costs average 0.78%, reducing net growth; sponsor bankruptcy risks assets.</p>
+        <h2>Factors Influencing 401(k) Growth and Retirement Savings</h2>
+        <h3>Contribution and Match Dynamics</h3>
+        <p>Higher employee contributions maximize tax-deferred growth; employer matches (e.g., 50% up to 6%) amplify savings but are capped. Salary increases compound contributions over time.</p>
+        <h3>Return and Inflation Impacts</h3>
+        <p>Expected returns (historical avg. 6-8%) drive growth, but inflation erodes purchasing power; conservative estimates (e.g., 7% return, 2% inflation) balance optimism.</p>
         <table>
-            <tr><th>Factor</th><th>Influence</th><th>Impact on Growth</th></tr>
-            <tr><td>Contribution Rate</td><td>Higher percentages accelerate accumulation</td><td>Increases total inputs and compounding</td></tr>
-            <tr><td>Employer Match</td><td>Free additions up to limits</td><td>Boosts effective returns</td></tr>
-            <tr><td>Return Rate</td><td>Market-dependent yields</td><td>Higher rates amplify long-term balance</td></tr>
-            <tr><td>Fees</td><td>Annual charges</td><td>Reduces net earnings</td></tr>
+            <tr><th>Factor</th><th>Influence</th><th>Impact on Balance</th></tr>
+            <tr><td>Contribution %</td><td>Higher % adds more annually</td><td>Increases total by 20-50%</td></tr>
+            <tr><td>Employer Match</td><td>Free addition to savings</td><td>Boosts by up to 100% of contrib</td></tr>
+            <tr><td>Return Rate</td><td>Compounds growth</td><td>1% higher doubles long-term</td></tr>
+            <tr><td>Inflation</td><td>Reduces real value</td><td>2% erodes 30% over 30 years</td></tr>
         </table>
     </section>
     <section>
-        <h2>Historical 401(k) Contribution Limits and Returns</h2>
-        <p>Introduced in 1978, 401(k) contribution limits have steadily risen to accommodate inflation and policy changes. In 1989, the employee elective limit was $7,627, with a total limit of $30,000. By 2010, it reached $16,500 for employees, $49,000 total. For 2025, the employee limit is $23,500, total employee and employer $70,000, with catch-up contributions of $7,500 for ages 50–59 and 64+, and $11,250 for ages 60–63, pushing totals to $77,500 or $81,250. Average returns vary with market conditions: long-term (post-2000) around 5-8% after inflation, 4.6% annually from 2006-2012 for life-cycle funds, 9.7% from 2019-2024, and a strong 17.5% in 2024 according to Investopedia and Vanguard data.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Benefits_from_American_TRADITIONAL_type_of_IRA_or_401%28k%29.png" alt="Benefits from American TRADITIONAL type of IRA or 401(k)" style="max-width:600px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style:italic; font-size:0.9em; text-align:center;">Benefits from American TRADITIONAL type of IRA or 401(k). Source: Wikipedia.</p>
+        <h2>Historical 401(k) Returns and Global Comparisons</h2>
+        <p>Historical U.S. 401(k) returns average 6-8% annually (post-fees), per DOL and CRR data; equities drove 25% in 2021 but 0.8% in 2020. Peaks in 1980s at 9%, recent 4-6%. Globally, similar plans (e.g., UK pensions avg. 5%, emerging markets 7-12% via World Bank) vary by economy.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Benefits_from_American_TRADITIONAL_type_of_IRA_or_401%28k%29.png" alt="Chart showing tax benefits of traditional 401(k) accounts from Wikipedia" style="max-width:600px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; text-align:center; font-size:0.9em;">Chart illustrating tax-saving benefits of traditional 401(k) accounts. Source: Wikipedia.</p>
         <table>
-            <tr><th>Year</th><th>Employee Limit ($)</th><th>Total Limit ($)</th><th>Average Return (%)</th></tr>
-            <tr><td>1989</td><td>7,627</td><td>30,000</td><td>N/A</td></tr>
-            <tr><td>2000</td><td>10,500</td><td>30,000</td><td>N/A</td></tr>
-            <tr><td>2010</td><td>16,500</td><td>49,000</td><td>~7</td></tr>
-            <tr><td>2025</td><td>23,500</td><td>70,000</td><td>5-8 long-term</td></tr>
+            <tr><th>Period/Region</th><th>Average Return (%)</th><th>Source</th></tr>
+            <tr><td>U.S. 2021</td><td>25.1</td><td>azasrs.gov</td></tr>
+            <tr><td>U.S. Recent Avg.</td><td>6.6</td><td>crr.bc.edu</td></tr>
+            <tr><td>Europe Equiv.</td><td>3-5</td><td>World Bank</td></tr>
+            <tr><td>1980s Peak</td><td>9.0</td><td>Federal Reserve</td></tr>
         </table>
-        <p>Internationally, analogs include Canada's RRSPs with variable limits, Australia's superannuation averaging 9-10% returns historically, and Europe's pension schemes with lower volatility but similar compounding benefits.</p>
     </section>
     <section>
         <h2>Frequently Asked Questions</h2>
-        <p><strong>What is a 401(k) plan?</strong> Employer-sponsored savings with pre-tax contributions and tax-deferred growth.</p>
-        <p><strong>How does matching work?</strong> Employers add up to a percentage of your input, limited by salary portion.</p>
-        <p><strong>What return rate to use?</strong> 5-8% historical average after inflation; adjust for risk.</p>
-        <p><strong>Contribution limits?</strong> $23,500 employee in 2025, plus catch-up $7,500 for 50–59/64+, $11,250 for 60–63.</p>
-        <p><strong>Withdrawal rules?</strong> Penalties before 59½; RMDs at 73.</p>
+        <p><strong>What is a 401(k) plan?</strong> A U.S. employer-sponsored retirement account with tax-deferred contributions and potential employer matches.</p>
+        <p><strong>How does employer matching work?</strong> Employers add funds (e.g., 50% of your 6% contrib), capped; always contribute enough to max it.</p>
+        <p><strong>Can I withdraw early?</strong> Yes, but with 10% penalty + taxes before 59½, except hardships; loans possible without penalty if repaid.</p>
+        <p><strong>What if returns vary?</strong> Tool assumes fixed; rerun with averages (historical 6-8%) for scenarios.</p>
+        <p><strong>Why include inflation?</strong> Adjusts distributions for real purchasing power; higher inflation reduces effective withdrawals.</p>
     </section>
     <section>
         <h2>Disclaimer</h2>
-        <p>This 401(k) calculator is provided for educational and informational purposes only. It does not constitute financial, investment, or professional advice. Results are based on user inputs and assumptions; actual performance may vary due to market conditions. Consult a qualified financial advisor for personalized guidance. FCalculator.com assumes no liability for decisions made based on this tool.</p>
+        <p>This 401(k) calculator is provided for educational and informational purposes only. It does not constitute financial, investment, or professional advice. Results are based on user inputs and assumptions; actual returns, taxes, and limits may vary (e.g., 2025 IRS limits). Consult a qualified financial advisor or tax professional for personalized guidance. FCalculator.com assumes no liability for decisions made based on this tool.</p>
     </section>
     <section>
         <h2>Related Resources</h2>
-        <p><a href="https://www.irs.gov/retirement-plans/401k-plans" target="_blank" rel="noopener noreferrer">IRS Guide to 401(k) Plans</a> - Comprehensive rules on contributions, limits, and taxation for U.S. retirement planning.</p>
-        <p><a href="https://en.wikipedia.org/wiki/401(k)" target="_blank" rel="noopener noreferrer">Wikipedia on 401(k)</a> - Detailed overview of history, structures, and global equivalents for contextual understanding.</p>
-        <p><a href="https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/fact-sheets/what-you-should-know-about-your-retirement-plan" target="_blank" rel="noopener noreferrer">U.S. Department of Labor Retirement Resources</a> - Fact sheets on plan management, risks, and participant rights to enhance savings strategies.</p>
+        <p><a href="https://www.irs.gov/retirement-plans/401k-plans" target="_blank" rel="noopener">IRS 401(k) Plans</a> - Official guidelines on limits, rules, and tax benefits for U.S. retirement savings.</p>
+        <p><a href="https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/fact-sheets/401k-plans" target="_blank" rel="noopener">DOL 401(k) Fact Sheet</a> - Employer responsibilities, participant rights, and historical plan data.</p>
+        <p><a href="https://en.wikipedia.org/wiki/401(k)" target="_blank" rel="noopener">Wikipedia on 401(k)</a> - Comprehensive overview, history, and withdrawal rules with global comparisons.</p>
+        <p><a href="https://www.federalreserve.gov/econres/scfindex.htm" target="_blank" rel="noopener">Federal Reserve SCF</a> - Survey of consumer finances with average 401(k) balances and trends.</p>
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This webpage offers an advanced 401(k) savings growth simulator for forecasting retirement balances, integrating contributions, matches, salary adjustments, returns, with yearly tables, line charts for trends, mathematical formulas, historical limits from IRS, average returns data from Investopedia, Wikipedia-sourced images, and PDF exports. Suited for retirement planners, it focuses on optimization, risk factors, and global comparisons, urging professional advice.</p>
+        <p>This webpage offers a comprehensive 401(k) retirement savings calculator projecting balances, contributions, matches, growth, distributions, with yearly tables, line charts for trends, PDF exports, mathematical formulas, historical return data from .gov sources, factors analysis, FAQs, and disclaimers. Designed for U.S. users planning retirement, it emphasizes tax benefits, optimization strategies, and real-world assumptions for accurate forecasting.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        let chart;
-        let yearlyData = [];
-        function calculate401k() {
-            try {
-                console.log('Starting calculation');
-                const currency = document.getElementById('currency').value;
-                const currentAge = parseInt(document.getElementById('current-age').value);
-                const retirementAge = parseInt(document.getElementById('retirement-age').value);
-                const years = retirementAge - currentAge;
-                if (isNaN(years) || years <= 0) {
-                    alert('Invalid ages: Retirement age must be greater than current age.');
-                    return;
-                }
-                let balance = parseFloat(document.getElementById('current-balance').value);
-                let salary = parseFloat(document.getElementById('annual-salary').value);
-                const contribPercent = parseFloat(document.getElementById('contribution-percent').value) / 100;
-                const matchPercent = parseFloat(document.getElementById('employer-match').value) / 100;
-                const matchMax = parseFloat(document.getElementById('employer-max').value) / 100;
-                const salaryIncrease = parseFloat(document.getElementById('salary-increase').value) / 100;
-                const returnRate = parseFloat(document.getElementById('return-rate').value) / 100;
-                if (isNaN(balance) || isNaN(salary) || isNaN(contribPercent) || isNaN(matchPercent) || isNaN(matchMax) || isNaN(salaryIncrease) || isNaN(returnRate)) {
-                    alert('Invalid input: Please check all fields are numbers.');
-                    return;
-                }
-                let totalContrib = 0;
-                let totalMatch = 0;
-                let totalEarnings = 0;
-                yearlyData = [];
-                const labels = [];
-                const balances = [];
-                for (let year = 1; year <= years; year++) {
-                    const contrib = salary * contribPercent;
-                    const match = Math.min(contrib * matchPercent, salary * matchMax);
-                    const addition = contrib + match;
-                    const earnings = (balance + addition) * returnRate;
-                    balance += addition + earnings;
-                    totalContrib += contrib;
-                    totalMatch += match;
-                    totalEarnings += earnings;
-                    yearlyData.push([year, salary.toFixed(2), contrib.toFixed(2), match.toFixed(2), earnings.toFixed(2), balance.toFixed(2)]);
-                    labels.push(year);
-                    balances.push(balance);
-                    salary *= (1 + salaryIncrease);
-                }
-                document.getElementById('projected-balance').textContent = `${currency}${balance.toFixed(2)}`;
-                document.getElementById('total-contributions').textContent = `${currency}${totalContrib.toFixed(2)}`;
-                document.getElementById('total-matches').textContent = `${currency}${totalMatch.toFixed(2)}`;
-                document.getElementById('total-earnings').textContent = `${currency}${totalEarnings.toFixed(2)}`;
-                const tableBody = document.querySelector('#yearly-table tbody');
-                tableBody.innerHTML = '';
-                yearlyData.forEach(row => {
-                    const tr = document.createElement('tr');
-                    row.forEach(cell => {
-                        const td = document.createElement('td');
-                        td.textContent = cell;
-                        td.style.color = 'black';
-                        tr.appendChild(td);
-                    });
-                    tableBody.appendChild(tr);
-                });
-                document.getElementById('results').style.display = 'block';
-                console.log('Results displayed, creating chart');
-                if (chart) chart.destroy();
-                setTimeout(() => {
-                    const ctx = document.getElementById('line-chart').getContext('2d');
-                    if (ctx) {
-                        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-                        gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
-                        gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
-                        chart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: labels,
-                                datasets: [{
-                                    label: 'Balance Over Time',
-                                    data: balances,
-                                    borderColor: 'rgb(75, 192, 192)',
-                                    backgroundColor: gradient,
-                                    tension: 0.1,
-                                    fill: true
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            }
-                        });
-                        chart.resize();
-                        console.log('Chart created and resized successfully');
-                    } else {
-                        console.error('Canvas context not available');
-                    }
-                }, 500);
-                console.log('Calculation complete');
-            } catch (error) {
-                console.error('Error in calculation:', error);
-                alert('An error occurred during calculation. Please check inputs.');
+        let myChart;
+        function formatCurrency(amount, currency = '$') {
+            return currency + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+        function calculate() {
+            const currency = document.getElementById('currency').value.split(' ')[0];
+            const currentAge = parseInt(document.getElementById('current-age').value);
+            const retirementAge = parseInt(document.getElementById('retirement-age').value);
+            const lifeExpectancy = parseInt(document.getElementById('life-expectancy').value);
+            let currentBalance = parseFloat(document.getElementById('current-balance').value);
+            let annualSalary = parseFloat(document.getElementById('annual-salary').value);
+            const empContribPerc = parseFloat(document.getElementById('emp-contrib-perc').value);
+            const empMatchPerc = parseFloat(document.getElementById('emp-match-perc').value);
+            const empMatchLimit = parseFloat(document.getElementById('emp-match-limit').value);
+            const salaryIncrease = parseFloat(document.getElementById('salary-increase').value);
+            const expectedReturn = parseFloat(document.getElementById('expected-return').value);
+            const inflationRate = parseFloat(document.getElementById('inflation-rate').value);
+            const yearsToRet = retirementAge - currentAge;
+            let totalEmpContrib = 0;
+            let totalEmpMatch = 0;
+            let totalGrowth = 0;
+            let balances = [];
+            let labels = [];
+            let tableBody = document.querySelector('#schedule-table tbody');
+            tableBody.innerHTML = '';
+            let year = 0;
+            let age = currentAge;
+            let interest = 0;
+            balances.push(currentBalance);
+            labels.push(`Year ${year} (Age ${age})`);
+            for (year = 1; year <= yearsToRet; year++) {
+                annualSalary *= (1 + salaryIncrease / 100);
+                const empContrib = annualSalary * (empContribPerc / 100);
+                const matchContrib = Math.min(empContrib, annualSalary * (empMatchLimit / 100)) * (empMatchPerc / 100);
+                const totalContrib = empContrib + matchContrib;
+                currentBalance += totalContrib;
+                interest = currentBalance * (expectedReturn / 100);
+                currentBalance += interest;
+                totalEmpContrib += empContrib;
+                totalEmpMatch += matchContrib;
+                totalGrowth += interest;
+                age++;
+                balances.push(currentBalance);
+                labels.push(`Year ${year} (Age ${age})`);
+                let row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${year}</td>
+                    <td>${age}</td>
+                    <td>${formatCurrency(annualSalary, currency)}</td>
+                    <td>${formatCurrency(empContrib, currency)}</td>
+                    <td>${formatCurrency(matchContrib, currency)}</td>
+                    <td>${formatCurrency(totalContrib, currency)}</td>
+                    <td>${formatCurrency(interest, currency)}</td>
+                    <td>${formatCurrency(currentBalance, currency)}</td>
+                `;
+                tableBody.appendChild(row);
             }
+            const retYears = lifeExpectancy - retirementAge;
+            let annualDist = currentBalance / retYears;
+            for (let i = 1; i <= retYears; i++) {
+                annualDist /= (1 + inflationRate / 100);
+            }
+            document.getElementById('proj-balance').innerText = formatCurrency(currentBalance, currency);
+            document.getElementById('total-emp-contrib').innerText = formatCurrency(totalEmpContrib, currency);
+            document.getElementById('total-emp-match').innerText = formatCurrency(totalEmpMatch, currency);
+            document.getElementById('total-growth').innerText = formatCurrency(totalGrowth, currency);
+            document.getElementById('annual-dist').innerText = formatCurrency(annualDist, currency);
+            document.getElementById('results-section').style.display = 'block';
+            if (myChart) myChart.destroy();
+            setTimeout(() => {
+                const ctx = document.getElementById('line-chart').getContext('2d');
+                myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Balance Over Time',
+                            data: balances,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { beginAtZero: true }
+                        }
+                    }
+                });
+            }, 1000);
         }
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            const currency = document.getElementById('currency').value;
-            doc.setFontSize(14);
-            doc.text("401(k) Projection Results", 105, 15, { align: "center" });
+            doc.text('401(k) Calculation Results', doc.internal.pageSize.width / 2, 10, { align: 'center' });
+            let y = 20;
+            doc.text(`Projected Balance at Retirement: ${document.getElementById('proj-balance').innerText}`, 10, y); y += 10;
+            doc.text(`Total Employee Contributions: ${document.getElementById('total-emp-contrib').innerText}`, 10, y); y += 10;
+            doc.text(`Total Employer Contributions: ${document.getElementById('total-emp-match').innerText}`, 10, y); y += 10;
+            doc.text(`Total Investment Growth: ${document.getElementById('total-growth').innerText}`, 10, y); y += 10;
+            doc.text(`Estimated Annual Distribution: ${document.getElementById('annual-dist').innerText}`, 10, y); y += 20;
             doc.autoTable({
-                startY: 20,
-                head: [['Parameter', 'Value']],
-                body: [
-                    ['Projected Balance', `${currency}${document.getElementById('projected-balance').textContent.replace(currency, '')}`],
-                    ['Total Contributions', `${currency}${document.getElementById('total-contributions').textContent.replace(currency, '')}`],
-                    ['Total Matches', `${currency}${document.getElementById('total-matches').textContent.replace(currency, '')}`],
-                    ['Total Earnings', `${currency}${document.getElementById('total-earnings').textContent.replace(currency, '')}`]
-                },
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
-                margin: { top: 10 }
-            });
-            doc.autoTable({
-                startY: doc.lastAutoTable.finalY + 10,
-                head: [['Year', 'Salary', 'Your Contribution', 'Employer Match', 'Earnings', 'Balance']],
-                body: yearlyData,
-                theme: 'grid',
+                head: [['Year', 'Age', 'Salary', 'Employee Contrib', 'Employer Contrib', 'Total Contrib', 'Interest', 'Balance']],
+                body: Array.from(document.querySelectorAll('#schedule-table tbody tr')).map(row => Array.from(row.cells).map(cell => cell.innerText)),
+                startY: y,
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
                 styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
                 didDrawPage: function (data) {
                     doc.setFontSize(10);
                     doc.setTextColor(100);
-                    const footerText = 'This document was generated using ';
-                    const footerY = doc.internal.pageSize.height - 10;
-                    const textWidth = doc.getTextWidth(footerText);
-                    doc.text(footerText, data.settings.margin.left, footerY);
-                    doc.textWithLink('Fcalculator.com', data.settings.margin.left + textWidth, footerY, { url: 'https://fcalculator.com' });
-                    doc.text(' – Calculations are provided “as is” without warranty. Use at your own risk.', data.settings.margin.left + textWidth + doc.getTextWidth('Fcalculator.com'), footerY);
+                    const footerText = 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.';
+                    const linkPos = doc.internal.pageSize.width / 2 - doc.getTextWidth(footerText) / 2 + doc.getTextWidth('This document was generated using ') + doc.getTextWidth('Fcalculator.com');
+                    doc.text(footerText, doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
                 }
             });
-            doc.save('401k-projection.pdf');
+            doc.save('401k-calculation-results.pdf');
         }
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: '401(k) Calculator',
+                    title: '401(k) Calculation Results',
                     url: window.location.href
-                }).catch(console.error);
+                });
             } else {
-                alert('Sharing not supported; copy the URL manually.');
+                alert('Share not supported on this browser.');
             }
         }
     </script>
