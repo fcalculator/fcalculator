@@ -156,7 +156,7 @@
     <section>
         <h2>Historical Inflation Rates and Global Comparisons</h2>
         <p>Inflation varies by country and era. According to World Bank data, global average consumer price inflation was around 4.3% in recent years, with emerging economies at 5.5% and advanced at 2.5% per IMF reports. In the US, historical rates peaked at over 13% in the 1970s due to oil shocks, as shown in the graph below.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/US_Inflation_by_year.svg/300px-US_Inflation_by_year.svg" alt="Graph of historical US inflation rates over time" style="width:300px; display:block; margin:0 auto;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/US_Inflation_by_year.svg/300px-US_Inflation_by_year.svg.png" alt="Graph of historical US inflation rates over time" style="width:300px; display:block; margin:0 auto;">
         <i>Graph illustrating annual US inflation rates from historical data. Source: Wikipedia.</i>
         <p>Countries like Venezuela experienced hyperinflation exceeding 50% monthly, while Japan often sees deflation. Use these benchmarks to input realistic rates for accurate projections.</p>
         <table>
@@ -199,7 +199,7 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        let chart;
+        let chart = null;
         function calculate() {
             const savings = parseFloat(document.getElementById('savings').value);
             const years = parseInt(document.getElementById('years').value);
@@ -271,12 +271,15 @@
                     {
                         table: {
                             body: [
-                                ['Parameter', 'Value'],
+                                [{ text: 'Parameter', style: 'tableHeader' }, { text: 'Value', style: 'tableHeader' }],
                                 ['Future Purchasing Power', currency + futureValue],
                                 ['Total Inflation Impact (Loss)', currency + loss]
                             ]
                         },
                         layout: {
+                            fillColor: function (rowIndex) {
+                                return (rowIndex === 0) ? [0, 200, 200] : (rowIndex % 2 === 1 ? [245, 245, 245] : null);
+                            },
                             hLineColor: [200, 200, 200],
                             vLineColor: [200, 200, 200],
                             hLineWidth: function () { return 0.1; },
@@ -288,9 +291,17 @@
                         table: {
                             headerRows: 1,
                             widths: ['*', '*', '*'],
-                            body: rows
+                            body: rows.map((row, index) => {
+                                if (index === 0) {
+                                    return row.map(cell => ({ text: cell, style: 'tableHeader' }));
+                                }
+                                return row;
+                            })
                         },
                         layout: {
+                            fillColor: function (rowIndex) {
+                                return (rowIndex === 0) ? [0, 200, 200] : (rowIndex % 2 === 1 ? [245, 245, 245] : null);
+                            },
                             hLineColor: [200, 200, 200],
                             vLineColor: [200, 200, 200],
                             hLineWidth: function () { return 0.1; },
@@ -300,13 +311,14 @@
                 ],
                 styles: {
                     header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
-                    subheader: { fontSize: 14, bold: true, margin: [0, 10, 0, 5] }
+                    subheader: { fontSize: 14, bold: true, margin: [0, 10, 0, 5] },
+                    tableHeader: { bold: true, fontSize: 10, color: 'white', alignment: 'left' }
                 },
                 defaultStyle: {
                     font: 'helvetica',
                     fontSize: 10,
                     cellPadding: 3,
-                    halign: 'left'
+                    alignment: 'left'
                 },
                 pageSize: 'A4',
                 footer: function (currentPage, pageCount) {
@@ -319,12 +331,6 @@
                     };
                 }
             };
-            docDefinition.content[1].table.styles = { lineColor: [200, 200, 200], lineWidth: 0.1 };
-            docDefinition.content[1].table.headStyles = { fillColor: [0, 200, 200], textColor: [255, 255, 255] };
-            docDefinition.content[1].table.alternateRowStyles = { fillColor: [245, 245, 245] };
-            docDefinition.content[3].table.styles = { lineColor: [200, 200, 200], lineWidth: 0.1 };
-            docDefinition.content[3].table.headStyles = { fillColor: [0, 200, 200], textColor: [255, 255, 255] };
-            docDefinition.content[3].table.alternateRowStyles = { fillColor: [245, 245, 245] };
             pdfMake.createPdf(docDefinition).download('inflation_impact_results.pdf');
         }
         function sharePage() {
