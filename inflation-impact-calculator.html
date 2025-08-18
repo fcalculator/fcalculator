@@ -11,8 +11,8 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pdfmake@latest/build/pdfmake.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pdfmake@latest/build/vfs_fonts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.3/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -200,6 +200,9 @@
     </footer>
     <script>
         let chart = null;
+        let yearlyBreakdown = [];
+        let futureValueValue = '';
+        let lossValue = '';
         function calculate() {
             const savings = parseFloat(document.getElementById('savings').value);
             const years = parseInt(document.getElementById('years').value);
@@ -209,16 +212,20 @@
             const yearlyValues = [savings];
             const cumulativeInflation = [0];
             let cumInf = 0;
+            yearlyBreakdown = [];
             for (let y = 1; y <= years; y++) {
                 currentValue = currentValue / (1 + inflation);
                 cumInf = (1 + cumInf) * (1 + inflation) - 1;
                 yearlyValues.push(currentValue);
                 cumulativeInflation.push(cumInf * 100);
+                yearlyBreakdown.push([y, currency + currentValue.toFixed(2), cumulativeInflation[y].toFixed(2) + '%']);
             }
             const futureValue = yearlyValues[years].toFixed(2);
             const loss = (savings - futureValue).toFixed(2);
-            document.getElementById('future-value').innerText = currency + futureValue;
-            document.getElementById('loss').innerText = currency + loss;
+            futureValueValue = currency + futureValue;
+            lossValue = currency + loss;
+            document.getElementById('future-value').innerText = futureValueValue;
+            document.getElementById('loss').innerText = lossValue;
             const tbody = document.getElementById('breakdown-table').querySelector('tbody');
             tbody.innerHTML = '';
             for (let y = 1; y <= years; y++) {
@@ -259,88 +266,83 @@
             }, 100);
         }
         function saveAsPDF() {
-            const currency = document.getElementById('currency').value;
-            const futureValue = document.getElementById('future-value').innerText.replace(currency, '');
-            const loss = document.getElementById('loss').innerText.replace(currency, '');
-            const rows = [['Year', 'Purchasing Power', 'Cumulative Inflation (%)']];
-            const tbodyRows = document.getElementById('breakdown-table').querySelector('tbody').rows;
-            for (let row of tbodyRows) {
-                rows.push([row.cells[0].innerText, currency + row.cells[1].innerText.replace(currency, ''), row.cells[2].innerText]);
+            if (!yearlyBreakdown.length) {
+                alert('Please calculate first!');
+                return;
             }
-            var docDefinition = {
-                content: [
-                    { text: 'Inflation Impact Results', style: 'header' },
-                    {
-                        table: {
-                            body: [
-                                [{ text: 'Parameter', style: 'tableHeader' }, { text: 'Value', style: 'tableHeader' }],
-                                ['Future Purchasing Power', currency + futureValue],
-                                ['Total Inflation Impact (Loss)', currency + loss]
-                            ]
-                        },
-                        layout: {
-                            fillColor: function (rowIndex) {
-                                return (rowIndex === 0) ? [0, 200, 200] : (rowIndex % 2 === 1 ? [245, 245, 245] : null);
-                            },
-                            hLineColor: [200, 200, 200],
-                            vLineColor: [200, 200, 200],
-                            hLineWidth: function () { return 0.1; },
-                            vLineWidth: function () { return 0.1; },
-                            paddingLeft: function() { return 3; },
-                            paddingRight: function() { return 3; },
-                            paddingTop: function() { return 3; },
-                            paddingBottom: function() { return 3; }
-                        }
-                    },
-                    { text: 'Yearly Breakdown', style: 'subheader' },
-                    {
-                        table: {
-                            headerRows: 1,
-                            widths: ['*', '*', '*'],
-                            body: rows.map((row, index) => {
-                                if (index === 0) {
-                                    return row.map(cell => ({ text: cell, style: 'tableHeader' }));
-                                }
-                                return row;
-                            })
-                        },
-                        layout: {
-                            fillColor: function (rowIndex) {
-                                return (rowIndex === 0) ? [0, 200, 200] : (rowIndex % 2 === 1 ? [245, 245, 245] : null);
-                            },
-                            hLineColor: [200, 200, 200],
-                            vLineColor: [200, 200, 200],
-                            hLineWidth: function () { return 0.1; },
-                            vLineWidth: function () { return 0.1; },
-                            paddingLeft: function() { return 3; },
-                            paddingRight: function() { return 3; },
-                            paddingTop: function() { return 3; },
-                            paddingBottom: function() { return 3; }
-                        }
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.setFontSize(14);
+                doc.text("Inflation Impact Results", 105, 15, { align: "center" });
+                doc.autoTable({
+                    startY: 20,
+                    head: [['Parameter', 'Value']],
+                    body: [
+                        ['Future Purchasing Power', futureValueValue],
+                        ['Total Inflation Impact (Loss)', lossValue]
+                    ],
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                    margin: { top: 10 },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        const footerText = 'This document was generated using Fcalculator.com';
+                        const pageWidth = doc.internal.pageSize.width;
+                        const pageHeight = doc.internal.pageSize.height;
+                        const y = pageHeight - 10;
+                        const textWidth = doc.getTextWidth(footerText);
+                        const startX = (pageWidth - textWidth) / 2;
+                        const linkText = 'Fcalculator.com';
+                        const linkStart = footerText.indexOf(linkText);
+                        const beforeLink = footerText.substring(0, linkStart);
+                        const afterLink = footerText.substring(linkStart + linkText.length);
+                        const linkX = startX + doc.getTextWidth(beforeLink);
+                        const afterX = linkX + doc.getTextWidth(linkText);
+                        doc.text(beforeLink, startX, y);
+                        doc.setTextColor(0, 0, 255); // Blue for link
+                        doc.textWithLink(linkText, linkX, y, { url: 'https://fcalculator.com' });
+                        doc.setTextColor(100); // Back to gray
+                        doc.text(afterLink, afterX, y);
                     }
-                ],
-                styles: {
-                    header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
-                    subheader: { fontSize: 14, bold: true, margin: [0, 10, 0, 5] },
-                    tableHeader: { bold: true, fontSize: 10, color: 'white', alignment: 'left' }
-                },
-                defaultStyle: {
-                    font: 'helvetica',
-                    fontSize: 10,
-                    alignment: 'left'
-                },
-                pageSize: 'A4',
-                footer: function (currentPage, pageCount) {
-                    return {
-                        text: 'This document was generated using Fcalculator.com',
-                        alignment: 'center',
-                        fontSize: 10,
-                        color: 'gray',
-                        link: 'https://fcalculator.com'
-                    };
-                }
-            };
-            pdfMake.createPdf(docDefinition).download('inflation_impact_results.pdf');
+                });
+                doc.autoTable({
+                    startY: doc.lastAutoTable.finalY + 10,
+                    head: [['Year', 'Purchasing Power', 'Cumulative Inflation (%)']],
+                    body: yearlyBreakdown,
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        const footerText = 'This document was generated using Fcalculator.com';
+                        const pageWidth = doc.internal.pageSize.width;
+                        const pageHeight = doc.internal.pageSize.height;
+                        const y = pageHeight - 10;
+                        const textWidth = doc.getTextWidth(footerText);
+                        const startX = (pageWidth - textWidth) / 2;
+                        const linkText = 'Fcalculator.com';
+                        const linkStart = footerText.indexOf(linkText);
+                        const beforeLink = footerText.substring(0, linkStart);
+                        const afterLink = footerText.substring(linkStart + linkText.length);
+                        const linkX = startX + doc.getTextWidth(beforeLink);
+                        const afterX = linkX + doc.getTextWidth(linkText);
+                        doc.text(beforeLink, startX, y);
+                        doc.setTextColor(0, 0, 255); // Blue for link
+                        doc.textWithLink(linkText, linkX, y, { url: 'https://fcalculator.com' });
+                        doc.setTextColor(100); // Back to gray
+                        doc.text(afterLink, afterX, y);
+                    }
+                });
+                doc.save('inflation-impact-results.pdf');
+            } catch (e) {
+                alert('Error generating PDF: ' + e.message);
+            }
         }
         function sharePage() {
             if (navigator.share) {
