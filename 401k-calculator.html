@@ -70,12 +70,12 @@
             <div class="currency-selector">
                 <label for="currency">Currency</label>
                 <select id="currency">
-                    <option value="USD">$ (USD)</option>
-                    <option value="EUR">€ (EUR)</option>
-                    <option value="GBP">£ (GBP)</option>
-                    <option value="JPY">¥ (JPY)</option>
-                    <option value="CAD">C$ (CAD)</option>
-                    <option value="AUD">A$ (AUD)</option>
+                    <option value="$">$ (USD)</option>
+                    <option value="€">€ (EUR)</option>
+                    <option value="£">£ (GBP)</option>
+                    <option value="¥">¥ (JPY)</option>
+                    <option value="C$">C$ (CAD)</option>
+                    <option value="A$">A$ (AUD)</option>
                 </select>
             </div>
             <div class="sections-container">
@@ -235,11 +235,12 @@
     </footer>
     <script>
         let myChart;
-        function formatCurrency(amount, currency = '$') {
+        let currencySymbol = '';
+        function formatCurrency(amount, currency) {
             return currency + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
         }
         function calculate() {
-            const currency = document.getElementById('currency').value.split(' ')[0];
+            currencySymbol = document.getElementById('currency').value;
             const currentAge = parseInt(document.getElementById('current-age').value);
             const retirementAge = parseInt(document.getElementById('retirement-age').value);
             const lifeExpectancy = parseInt(document.getElementById('life-expectancy').value);
@@ -281,12 +282,12 @@
                 let row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${age}</td>
-                    <td>${formatCurrency(annualSalary, currency)}</td>
-                    <td>${formatCurrency(empContrib, currency)}</td>
-                    <td>${formatCurrency(matchContrib, currency)}</td>
-                    <td>${formatCurrency(totalContrib, currency)}</td>
-                    <td>${formatCurrency(interest, currency)}</td>
-                    <td>${formatCurrency(currentBalance, currency)}</td>
+                    <td>${formatCurrency(annualSalary, currencySymbol)}</td>
+                    <td>${formatCurrency(empContrib, currencySymbol)}</td>
+                    <td>${formatCurrency(matchContrib, currencySymbol)}</td>
+                    <td>${formatCurrency(totalContrib, currencySymbol)}</td>
+                    <td>${formatCurrency(interest, currencySymbol)}</td>
+                    <td>${formatCurrency(currentBalance, currencySymbol)}</td>
                 `;
                 tableBody.appendChild(row);
             }
@@ -295,11 +296,11 @@
             for (let i = 1; i <= retYears; i++) {
                 annualDist /= (1 + inflationRate / 100);
             }
-            document.getElementById('proj-balance').innerText = formatCurrency(currentBalance, currency);
-            document.getElementById('total-emp-contrib').innerText = formatCurrency(totalEmpContrib, currency);
-            document.getElementById('total-emp-match').innerText = formatCurrency(totalEmpMatch, currency);
-            document.getElementById('total-growth').innerText = formatCurrency(totalGrowth, currency);
-            document.getElementById('annual-dist').innerText = formatCurrency(annualDist, currency);
+            document.getElementById('proj-balance').innerText = formatCurrency(currentBalance, currencySymbol);
+            document.getElementById('total-emp-contrib').innerText = formatCurrency(totalEmpContrib, currencySymbol);
+            document.getElementById('total-emp-match').innerText = formatCurrency(totalEmpMatch, currencySymbol);
+            document.getElementById('total-growth').innerText = formatCurrency(totalGrowth, currencySymbol);
+            document.getElementById('annual-dist').innerText = formatCurrency(annualDist, currencySymbol);
             document.getElementById('results-section').style.display = 'block';
             if (myChart) myChart.destroy();
             setTimeout(() => {
@@ -333,11 +334,11 @@
             doc.autoTable({
                 head: [['Parameter', 'Value']],
                 body: [
-                    ['Projected Balance at Retirement', document.getElementById('proj-balance').innerText],
-                    ['Total Employee Contributions', document.getElementById('total-emp-contrib').innerText],
-                    ['Total Employer Contributions', document.getElementById('total-emp-match').innerText],
-                    ['Total Investment Growth', document.getElementById('total-growth').innerText],
-                    ['Estimated Annual Distribution in Retirement (adjusted for inflation)', document.getElementById('annual-dist').innerText]
+                    ['Projected Balance at Retirement', document.getElementById('proj-balance').innerText.replace(currencySymbol, '')],
+                    ['Total Employee Contributions', document.getElementById('total-emp-contrib').innerText.replace(currencySymbol, '')],
+                    ['Total Employer Contributions', document.getElementById('total-emp-match').innerText.replace(currencySymbol, '')],
+                    ['Total Investment Growth', document.getElementById('total-growth').innerText.replace(currencySymbol, '')],
+                    ['Estimated Annual Distribution in Retirement (adjusted for inflation)', document.getElementById('annual-dist').innerText.replace(currencySymbol, '')]
                 ],
                 startY: 20,
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
@@ -362,7 +363,7 @@
             let y = doc.lastAutoTable.finalY + 20;
             doc.autoTable({
                 head: [['Age', 'Salary', 'Employee Contrib', 'Employer Contrib', 'Total Contrib', 'Interest', 'Balance']],
-                body: Array.from(document.querySelectorAll('#schedule-table tbody tr')).map(row => Array.from(row.cells).map(cell => cell.innerText)),
+                body: Array.from(document.querySelectorAll('#schedule-table tbody tr')).map(row => Array.from(row.cells).map(cell => cell.innerText.replace(currencySymbol, ''))),
                 startY: y,
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
