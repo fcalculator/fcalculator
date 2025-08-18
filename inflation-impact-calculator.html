@@ -121,7 +121,9 @@
             <button onclick="saveAsPDF()">Save as PDF</button>
             <button onclick="sharePage()">Share</button>
         </div>
+    </section>
     <p>Consider exploring complementary financial tools such as the <a href="/auto-loan-calculator.html">Auto Loan Calculator</a> for borrowing projections or the <a href="/rental-property-roi-simulator.html">Rental Property ROI Simulator</a> for investment returns analysis.</p>
+    <section>
         <h2>How the Inflation Impact Calculator Works</h2>
         <p>This calculator simulates the degradation of savings' purchasing power by applying compound inflation annually. Start by selecting your currency, entering the current savings amount, specifying the time horizon in years, and providing an estimated annual inflation rate based on historical or projected data. Upon calculation, it generates a future value adjusted for inflation, total loss in real terms, an interactive line chart depicting the decline over time, and a table with yearly details including cumulative inflation percentages. The tool assumes constant inflation without growth factors like interest earnings, focusing purely on erosion effects for conservative planning.</p>
     </section>
@@ -154,8 +156,8 @@
     <section>
         <h2>Historical Inflation Rates and Global Comparisons</h2>
         <p>Inflation varies by country and era. According to World Bank data, global average consumer price inflation was around 4.3% in recent years, with emerging economies at 5.5% and advanced at 2.5% per IMF reports. In the US, historical rates peaked at over 13% in the 1970s due to oil shocks, as shown in the graph below.</p>
-        <img src="https://en.wikipedia.org/wiki/Inflation#/media/File:US_Historical_Inflation_Ancient.svg" alt="Graph of historical US inflation rates over time" style="width:300px; display:block; margin:0 auto;">
-        <i>Graph illustrating annual US inflation rates from historical data. Source: Wikipedia.</i>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/US_Historical_Inflation_Ancient.svg/300px-US_Historical_Inflation_Ancient.svg.png" alt="Graph of historical US inflation rates from ancient times to present" style="width:300px; display:block; margin:0 auto;">
+        <i style="display:block; text-align:center; font-size:smaller;">Graph illustrating US inflation rates from historical data including ancient periods. Source: Wikipedia.</i>
         <p>Countries like Venezuela experienced hyperinflation exceeding 50% monthly, while Japan often sees deflation. Use these benchmarks to input realistic rates for accurate projections.</p>
         <table>
             <thead>
@@ -283,7 +285,11 @@
                             hLineColor: [200, 200, 200],
                             vLineColor: [200, 200, 200],
                             hLineWidth: function () { return 0.1; },
-                            vLineWidth: function () { return 0.1; }
+                            vLineWidth: function () { return 0.1; },
+                            paddingLeft: function() { return 3; },
+                            paddingRight: function() { return 3; },
+                            paddingTop: function() { return 3; },
+                            paddingBottom: function() { return 3; }
                         }
                     },
                     { text: 'Yearly Breakdown', style: 'subheader' },
@@ -305,7 +311,11 @@
                             hLineColor: [200, 200, 200],
                             vLineColor: [200, 200, 200],
                             hLineWidth: function () { return 0.1; },
-                            vLineWidth: function () { return 0.1; }
+                            vLineWidth: function () { return 0.1; },
+                            paddingLeft: function() { return 3; },
+                            paddingRight: function() { return 3; },
+                            paddingTop: function() { return 3; },
+                            paddingBottom: function() { return 3; }
                         }
                     }
                 ],
@@ -317,7 +327,6 @@
                 defaultStyle: {
                     font: 'helvetica',
                     fontSize: 10,
-                    cellPadding: 3,
                     alignment: 'left'
                 },
                 pageSize: 'A4',
@@ -326,7 +335,7 @@
                         text: 'This document was generated using Fcalculator.com',
                         alignment: 'center',
                         fontSize: 10,
-                        color: 100,
+                        color: 'gray',
                         link: 'https://fcalculator.com'
                     };
                 }
