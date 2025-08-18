@@ -254,36 +254,38 @@
                 document.getElementById('results').style.display = 'block';
                 console.log('Results displayed, creating chart');
                 if (chart) chart.destroy();
-                const ctx = document.getElementById('line-chart').getContext('2d');
-                if (ctx) {
-                    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-                    gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
-                    gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
-                    chart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Balance Over Time',
-                                data: balances,
-                                borderColor: 'rgb(75, 192, 192)',
-                                backgroundColor: gradient,
-                                tension: 0.1,
-                                fill: true
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
+                setTimeout(() => {
+                    const ctx = document.getElementById('line-chart').getContext('2d');
+                    if (ctx) {
+                        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+                        gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
+                        gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
+                        chart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Balance Over Time',
+                                    data: balances,
+                                    borderColor: 'rgb(75, 192, 192)',
+                                    backgroundColor: gradient,
+                                    tension: 0.1,
+                                    fill: true
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
                                 }
                             }
-                        }
-                    });
-                    console.log('Chart created successfully');
-                } else {
-                    console.error('Canvas context not available');
-                }
+                        });
+                        console.log('Chart created successfully');
+                    } else {
+                        console.error('Canvas context not available');
+                    }
+                }, 100);
                 console.log('Calculation complete');
             } catch (error) {
                 console.error('Error in calculation:', error);
