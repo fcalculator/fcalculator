@@ -334,11 +334,11 @@
             doc.autoTable({
                 head: [['Parameter', 'Value']],
                 body: [
-                    ['Projected Balance at Retirement', document.getElementById('proj-balance').innerText.replace(currencySymbol, '')],
-                    ['Total Employee Contributions', document.getElementById('total-emp-contrib').innerText.replace(currencySymbol, '')],
-                    ['Total Employer Contributions', document.getElementById('total-emp-match').innerText.replace(currencySymbol, '')],
-                    ['Total Investment Growth', document.getElementById('total-growth').innerText.replace(currencySymbol, '')],
-                    ['Estimated Annual Distribution in Retirement (adjusted for inflation)', document.getElementById('annual-dist').innerText.replace(currencySymbol, '')]
+                    ['Projected Balance at Retirement', document.getElementById('proj-balance').innerText],
+                    ['Total Employee Contributions', document.getElementById('total-emp-contrib').innerText],
+                    ['Total Employer Contributions', document.getElementById('total-emp-match').innerText],
+                    ['Total Investment Growth', document.getElementById('total-growth').innerText],
+                    ['Estimated Annual Distribution in Retirement (adjusted for inflation)', document.getElementById('annual-dist').innerText]
                 ],
                 startY: 20,
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
@@ -363,7 +363,7 @@
             let y = doc.lastAutoTable.finalY + 20;
             doc.autoTable({
                 head: [['Age', 'Salary', 'Employee Contrib', 'Employer Contrib', 'Total Contrib', 'Interest', 'Balance']],
-                body: Array.from(document.querySelectorAll('#schedule-table tbody tr')).map(row => Array.from(row.cells).map(cell => cell.innerText.replace(currencySymbol, ''))),
+                body: Array.from(document.querySelectorAll('#schedule-table tbody tr')).map(row => Array.from(row.cells).map(cell => cell.innerText)),
                 startY: y,
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
