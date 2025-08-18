@@ -11,8 +11,8 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake@latest/build/pdfmake.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake@latest/build/vfs_fonts.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -86,15 +86,15 @@
                     <legend>Savings Details</legend>
                     <div class="input-row">
                         <label for="savings">Current Savings Amount</label>
-                        <input type="number" id="savings" placeholder="e.g. 10000" value="150000" required>
+                        <input type="number" id="savings" placeholder="e.g. 10000" value="10000" required>
                     </div>
                     <div class="input-row">
                         <label for="years">Number of Years</label>
-                        <input type="number" id="years" placeholder="e.g. 10" value="15" required>
+                        <input type="number" id="years" placeholder="e.g. 10" value="10" required>
                     </div>
                     <div class="input-row">
                         <label for="inflation">Annual Inflation Rate (%)</label>
-                        <input type="number" step="0.1" id="inflation" placeholder="e.g. 3" value="2.5" required>
+                        <input type="number" step="0.1" id="inflation" placeholder="e.g. 3" value="3" required>
                     </div>
                 </fieldset>
             </div>
@@ -121,9 +121,9 @@
             <button onclick="saveAsPDF()">Save as PDF</button>
             <button onclick="sharePage()">Share</button>
         </div>
-
-    <p>Consider exploring complementary financial tools such as the <a href="/auto-loan-calculator.html">Auto Loan Calculator</a> for borrowing projections or the <a href="/rental-property-roi-calculator.html">Rental Property ROI Simulator</a> for investment returns analysis.</p>
-   
+    </section>
+    <p>Consider exploring complementary financial tools such as the <a href="/auto-loan-calculator.html">Auto Loan Calculator</a> for borrowing projections or the <a href="/rental-property-roi-simulator.html">Rental Property ROI Simulator</a> for investment returns analysis.</p>
+    <section>
         <h2>How the Inflation Impact Calculator Works</h2>
         <p>This calculator simulates the degradation of savings' purchasing power by applying compound inflation annually. Start by selecting your currency, entering the current savings amount, specifying the time horizon in years, and providing an estimated annual inflation rate based on historical or projected data. Upon calculation, it generates a future value adjusted for inflation, total loss in real terms, an interactive line chart depicting the decline over time, and a table with yearly details including cumulative inflation percentages. The tool assumes constant inflation without growth factors like interest earnings, focusing purely on erosion effects for conservative planning.</p>
     </section>
