@@ -151,7 +151,6 @@
         <table id="schedule-table">
             <thead>
                 <tr>
-                    <th>Year</th>
                     <th>Age</th>
                     <th>Salary</th>
                     <th>Employee Contrib</th>
@@ -264,7 +263,7 @@
             let age = currentAge;
             let interest = 0;
             balances.push(currentBalance);
-            labels.push(`Year ${year} (Age ${age})`);
+            labels.push(`Age ${age}`);
             for (year = 1; year <= yearsToRet; year++) {
                 annualSalary *= (1 + salaryIncrease / 100);
                 const empContrib = annualSalary * (empContribPerc / 100);
@@ -278,10 +277,9 @@
                 totalGrowth += interest;
                 age++;
                 balances.push(currentBalance);
-                labels.push(`Year ${year} (Age ${age})`);
+                labels.push(`Age ${age}`);
                 let row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${year}</td>
                     <td>${age}</td>
                     <td>${formatCurrency(annualSalary, currency)}</td>
                     <td>${formatCurrency(empContrib, currency)}</td>
@@ -329,15 +327,41 @@
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            doc.text('401(k) Calculation Results', doc.internal.pageSize.width / 2, 10, { align: 'center' });
-            let y = 20;
-            doc.text(`Projected Balance at Retirement: ${document.getElementById('proj-balance').innerText}`, 10, y); y += 10;
-            doc.text(`Total Employee Contributions: ${document.getElementById('total-emp-contrib').innerText}`, 10, y); y += 10;
-            doc.text(`Total Employer Contributions: ${document.getElementById('total-emp-match').innerText}`, 10, y); y += 10;
-            doc.text(`Total Investment Growth: ${document.getElementById('total-growth').innerText}`, 10, y); y += 10;
-            doc.text(`Estimated Annual Distribution: ${document.getElementById('annual-dist').innerText}`, 10, y); y += 20;
+            const pageWidth = doc.internal.pageSize.width;
+            const pageHeight = doc.internal.pageSize.height;
+            doc.text('401(k) Calculation Results', pageWidth / 2, 10, { align: 'center' });
             doc.autoTable({
-                head: [['Year', 'Age', 'Salary', 'Employee Contrib', 'Employer Contrib', 'Total Contrib', 'Interest', 'Balance']],
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Projected Balance at Retirement', document.getElementById('proj-balance').innerText],
+                    ['Total Employee Contributions', document.getElementById('total-emp-contrib').innerText],
+                    ['Total Employer Contributions', document.getElementById('total-emp-match').innerText],
+                    ['Total Investment Growth', document.getElementById('total-growth').innerText],
+                    ['Estimated Annual Distribution in Retirement (adjusted for inflation)', document.getElementById('annual-dist').innerText]
+                ],
+                startY: 20,
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    const footerText = 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.';
+                    const footerY = pageHeight - 10;
+                    const textWidth = doc.getTextWidth(footerText);
+                    const startX = (pageWidth - textWidth) / 2;
+                    doc.text(footerText, startX, footerY);
+                    const prefix = 'This document was generated using ';
+                    const linkText = 'Fcalculator.com';
+                    const prefixWidth = doc.getTextWidth(prefix);
+                    const linkWidth = doc.getTextWidth(linkText);
+                    const linkX = startX + prefixWidth;
+                    doc.link(linkX, footerY - 8, linkWidth, 10, { url: 'https://fcalculator.com' });
+                }
+            });
+            let y = doc.lastAutoTable.finalY + 20;
+            doc.autoTable({
+                head: [['Age', 'Salary', 'Employee Contrib', 'Employer Contrib', 'Total Contrib', 'Interest', 'Balance']],
                 body: Array.from(document.querySelectorAll('#schedule-table tbody tr')).map(row => Array.from(row.cells).map(cell => cell.innerText)),
                 startY: y,
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
@@ -347,8 +371,16 @@
                     doc.setFontSize(10);
                     doc.setTextColor(100);
                     const footerText = 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.';
-                    const linkPos = doc.internal.pageSize.width / 2 - doc.getTextWidth(footerText) / 2 + doc.getTextWidth('This document was generated using ') + doc.getTextWidth('Fcalculator.com');
-                    doc.text(footerText, doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                    const footerY = pageHeight - 10;
+                    const textWidth = doc.getTextWidth(footerText);
+                    const startX = (pageWidth - textWidth) / 2;
+                    doc.text(footerText, startX, footerY);
+                    const prefix = 'This document was generated using ';
+                    const linkText = 'Fcalculator.com';
+                    const prefixWidth = doc.getTextWidth(prefix);
+                    const linkWidth = doc.getTextWidth(linkText);
+                    const linkX = startX + prefixWidth;
+                    doc.link(linkX, footerY - 8, linkWidth, 10, { url: 'https://fcalculator.com' });
                 }
             });
             doc.save('401k-calculation-results.pdf');
