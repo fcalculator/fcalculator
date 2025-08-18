@@ -20,7 +20,7 @@
         "@type": "WebPage",
         "name": "401(k) Savings Growth and Retirement Projection Simulator",
         "url": "https://fcalculator.com/401k-calculator.html",
-        "description": "Advanced simulator for projecting 401(k) balance at retirement, including yearly contributions, employer matches, salary growth, investment returns, interactive charts for balance trends, detailed tables, mathematical derivations, historical data from IRS and Investopedia, and PDF export for comprehensive retirement planning.",
+        "description": "Advanced simulator for projecting 401(k) balance at retirement, including yearly contributions, employer matches, salary growth, investment returns, interactive charts for balance trends, detailed tables, mathematical derivations, historical data from IRS and Investopedia, Wikipedia-sourced images, and PDF export for comprehensive retirement planning.",
         "datePublished": "2022-01-14",
         "publisher": {
             "@type": "Organization",
@@ -245,6 +245,9 @@
             if (chart) chart.destroy();
             setTimeout(() => {
                 const ctx = document.getElementById('line-chart').getContext('2d');
+                const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+                gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
+                gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
                 chart = new Chart(ctx, {
                     type: 'line',
                     data: {
@@ -253,7 +256,9 @@
                             label: 'Balance Over Time',
                             data: balances,
                             borderColor: 'rgb(75, 192, 192)',
-                            tension: 0.1
+                            backgroundColor: gradient,
+                            tension: 0.1,
+                            fill: true
                         }]
                     },
                     options: {
@@ -270,7 +275,10 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             const currency = document.getElementById('currency').value;
+            doc.setFontSize(14);
+            doc.text("401(k) Projection Results", 105, 15, { align: "center" });
             doc.autoTable({
+                startY: 20,
                 head: [['Parameter', 'Value']],
                 body: [
                     ['Projected Balance', `${currency}${document.getElementById('projected-balance').textContent.replace(currency, '')}`],
@@ -278,13 +286,17 @@
                     ['Total Matches', `${currency}${document.getElementById('total-matches').textContent.replace(currency, '')}`],
                     ['Total Earnings', `${currency}${document.getElementById('total-earnings').textContent.replace(currency, '')}`]
                 ],
+                theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
                 styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                margin: { top: 10 }
             });
             doc.autoTable({
+                startY: doc.lastAutoTable.finalY + 10,
                 head: [['Year', 'Salary', 'Your Contribution', 'Employer Match', 'Earnings', 'Balance']],
                 body: yearlyData,
+                theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
                 styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
