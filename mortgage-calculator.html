@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Estimate monthly mortgage payments, analyze amortization schedules, and explore interest breakdowns with detailed charts and formulas for informed home financing decisions.">
-    <meta name="keywords" content="mortgage payment estimator, amortization schedule, home loan calculator, interest rate analysis, property tax inclusion, mortgage breakdown charts">
+    <title>Mortgage Calculator</title>
+    <meta name="description" content="Calculate monthly mortgage payments, amortization schedules, and total interest costs, factoring in down payments, property taxes, insurance, and fees. This tool provides detailed breakdowns, interactive charts, mathematical formulas, and historical mortgage rate insights for effective home financing planning.">
+    <meta name="keywords" content="mortgage calculator, home loan payment estimator, amortization schedule generator, interest cost projection, property tax inclusion, mortgage payoff forecaster">
     <link rel="canonical" href="https://fcalculator.com/mortgage-calculator.html">
-    <title>Mortgage Payment Estimator</title>
-    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-    <script src="https://unpkg.com/jspdf-autotable"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.3/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Mortgage Payment Estimator",
+      "name": "Mortgage Calculator",
       "url": "https://fcalculator.com/mortgage-calculator.html",
-      "description": "A comprehensive tool for estimating mortgage payments, including amortization schedules, interest breakdowns, and visual charts to aid in home financing planning. Features detailed formulas, property tax and insurance inclusions, and customizable currency options.",
+      "description": "A comprehensive online tool for estimating mortgage payments, generating amortization schedules with principal and interest breakdowns, visualizing balance reduction and interest accumulation via interactive line charts, detailing mathematical formulas with explanations, historical mortgage rate data from reliable sources like the Federal Reserve and ECB, FAQ section addressing common queries, and downloadable PDF reports for easy sharing and record-keeping. Designed for home buyers, borrowers, and financial planners to assess affordability, compare terms, and optimize long-term costs.",
       "datePublished": "2022-01-14",
       "author": {
         "@type": "Person",
@@ -40,7 +39,7 @@
           {
             "@type": "ListItem",
             "position": 1,
-            "name": "FCalculator.com",
+            "name": "Home",
             "item": "https://fcalculator.com/"
           },
           {
@@ -52,21 +51,10 @@
           {
             "@type": "ListItem",
             "position": 3,
-            "name": "Mortgage Payment Estimator",
+            "name": "Mortgage Calculator",
             "item": "https://fcalculator.com/mortgage-calculator.html"
           }
         ]
-      },
-      "mainEntity": {
-        "@type": "SoftwareApplication",
-        "name": "Mortgage Calculator Tool",
-        "applicationCategory": "FinancialApplication",
-        "operatingSystem": "Web",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        }
       }
     }
     </script>
@@ -75,17 +63,17 @@
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/finance.html">Finance</a> > <a href="/mortgage-calculator.html">Mortgage Payment Estimator</a>
+            <a href="/">FCalculator.com</a> > <a href="/finance.html">Finance</a> > <a href="/mortgage-calculator.html">Mortgage Calculator</a>
         </div>
-        <h1>Mortgage Payment Estimator</h1>
-        <p>This estimator helps you determine monthly mortgage payments by factoring in home price, down payment, loan term, interest rate, and additional costs like property taxes and insurance. It provides a full amortization schedule, visual breakdowns, and total cost projections for better financial planning in home ownership.</p>
+        <h1>Mortgage Calculator</h1>
+        <p>Determine monthly payments, total interest, and amortization details for home loans, offering projections and visualizations to support smart financing choices.</p>
     </header>
     <section class="tool-section">
         <form id="tool-form">
-            <div class="currency-select">
-                <label for="currency">Currency:</label>
+            <div class="input-row">
+                <label for="currency">Currency</label>
                 <select id="currency">
-                    <option value="$" selected>USD ($)</option>
+                    <option value="$">USD ($)</option>
                     <option value="€">EUR (€)</option>
                     <option value="£">GBP (£)</option>
                     <option value="¥">JPY (¥)</option>
@@ -98,294 +86,245 @@
                     <legend>Purchase</legend>
                     <div class="input-row">
                         <label for="home-price">Home Price</label>
-                        <input type="number" id="home-price" placeholder="e.g. 400000" required>
+                        <input type="number" id="home-price" placeholder="e.g. 400000" value="400000" required>
                     </div>
                     <div class="input-row">
                         <label for="down-payment">Down Payment (%)</label>
-                        <input type="number" id="down-payment" placeholder="e.g. 20" required>
+                        <input type="number" id="down-payment" placeholder="e.g. 20" value="20" required>
                     </div>
                 </fieldset>
                 <fieldset>
                     <legend>Loan Details</legend>
                     <div class="input-row">
                         <label for="loan-term">Loan Term (Years)</label>
-                        <input type="number" id="loan-term" placeholder="e.g. 30" required>
+                        <input type="number" id="loan-term" placeholder="e.g. 30" value="30" required>
                     </div>
                     <div class="input-row">
-                        <label for="interest-rate">Interest Rate (%)</label>
-                        <input type="number" id="interest-rate" step="0.01" placeholder="e.g. 4.5" required>
-                    </div>
-                    <div class="input-row">
-                        <label for="start-date">Start Date</label>
-                        <input type="date" id="start-date" required>
+                        <label for="interest-rate">Annual Interest Rate (%)</label>
+                        <input type="number" step="0.1" id="interest-rate" placeholder="e.g. 4.5" value="4.5" required>
                     </div>
                 </fieldset>
                 <fieldset>
                     <legend>Additional Costs (Annual)</legend>
                     <div class="input-row">
                         <label for="property-tax">Property Tax (% of Home Price)</label>
-                        <input type="number" id="property-tax" step="0.01" placeholder="e.g. 1.2" required>
+                        <input type="number" step="0.1" id="property-tax" placeholder="e.g. 1.2" value="1.2" required>
                     </div>
                     <div class="input-row">
                         <label for="home-insurance">Home Insurance</label>
-                        <input type="number" id="home-insurance" placeholder="e.g. 1500" required>
+                        <input type="number" id="home-insurance" placeholder="e.g. 1500" value="1500" required>
                     </div>
                     <div class="input-row">
                         <label for="pmi">PMI (% if Down Payment <20%)</label>
-                        <input type="number" id="pmi" step="0.01" placeholder="e.g. 0.5" required>
+                        <input type="number" step="0.1" id="pmi" placeholder="e.g. 0.5" value="0.5" required>
                     </div>
                     <div class="input-row">
                         <label for="hoa-fee">HOA Fee</label>
-                        <input type="number" id="hoa-fee" placeholder="e.g. 0" required>
+                        <input type="number" id="hoa-fee" placeholder="e.g. 0" value="0" required>
                     </div>
                     <div class="input-row">
                         <label for="other-costs">Other Costs</label>
-                        <input type="number" id="other-costs" placeholder="e.g. 4000" required>
+                        <input type="number" id="other-costs" placeholder="e.g. 0" value="0" required>
                     </div>
                 </fieldset>
             </div>
-            <button type="button" onclick="calculateMortgage()">Calculate</button>
+            <button type="button" onclick="calculate()">Calculate</button>
         </form>
-    </section>
-    <section class="results-section" id="results" style="display: none;">
-        <h2>Calculation Results</h2>
-        <div id="summary-table">
-            <!-- Summary table will be inserted here -->
+        <div class="results-section" id="results" style="display:none;">
+            <h2>Calculation Results</h2>
+            <p>Loan Amount: <span id="loan-amount"></span></p>
+            <p>Monthly Payment: <span id="monthly-payment"></span></p>
+            <p>Total Payments: <span id="total-payments"></span></p>
+            <p>Total Interest: <span id="total-interest"></span></p>
+            <div id="chart-container">
+                <canvas id="mortgageChart" width="600" height="400"></canvas>
+            </div>
+            <h3>Amortization Schedule</h3>
+            <table id="amortization-table">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Payment</th>
+                        <th>Principal</th>
+                        <th>Interest</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button onclick="saveAsPDF()">Save as PDF</button>
+            <button onclick="sharePage()">Share</button>
         </div>
-        <canvas id="pieChart" width="400" height="200"></canvas>
-        <canvas id="lineChart" width="400" height="200"></canvas>
-        <table id="amortization-table">
-            <thead>
-                <tr>
-                    <th>Month</th>
-                    <th>Payment</th>
-                    <th>Principal</th>
-                    <th>Interest</th>
-                    <th>Balance</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Rows will be inserted here -->
-            </tbody>
-        </table>
-        <button class="pdf-button" onclick="saveAsPDF()">Save as PDF</button>
-        <button class="share-button" onclick="sharePage()">Share</button>
-        <p class="note-alert">Note: PMI is applied if down payment is less than 20%. All calculations are estimates; consult a financial advisor for precise advice.</p>
-        <p>Explore related tools like our <a href="/auto-loan-calculator.html">auto loan estimator</a> or <a href="/rental-property-roi-simulator.html">rental ROI simulator</a> for comprehensive financial planning.</p>
+    </section>
+    <p>Consider exploring complementary financial tools such as the <a href="/auto-loan-calculator.html">Auto Loan Calculator</a> for vehicle financing or the <a href="/inflation-impact-calculator.html">Inflation Impact Calculator</a> for savings erosion analysis.</p>
+    <section>
+        <h2>How the Mortgage Calculator Works</h2>
+        <p>This calculator simulates mortgage payments by calculating the loan principal after down payment, then applying the amortization formula for monthly principal and interest (PI). Additional escrow costs like property tax, insurance, PMI (if applicable), HOA, and other fees are added to the total monthly payment. Enter the home price, down payment percentage, term in years, interest rate, and annual costs. The tool generates the net loan amount, monthly payment, total interest, and a schedule detailing principal and interest per month. An interactive line chart shows balance reduction and cumulative interest over time. Assumptions include fixed rates and constant escrow costs for conservative estimates.</p>
     </section>
     <section>
-        <h2>How the Mortgage Payment Estimator Works</h2>
-        <p>This tool calculates your monthly mortgage payment by considering the principal loan amount, interest rate, and additional expenses. Start by entering the home price and down payment to determine the loan amount. The loan term and interest rate influence the repayment schedule, while annual costs like property taxes and insurance are prorated monthly.</p>
-        <p>To use it: Input all fields, select your currency, and click Calculate. Results include a summary, charts, and a full amortization table showing how payments reduce the balance over time.</p>
+        <h2>Mathematical Formulas and Derivations</h2>
+        <p>The monthly PI payment is calculated using the standard mortgage formula:</p>
+        <div style="max-width:600px; margin:0 auto;">
+            \[ M = P \times \frac{r (1 + r)^n}{(1 + r)^n - 1} \]
+        </div>
+        <p>Where \( M \) is the monthly PI, \( P \) is the loan principal (home price - down payment), \( r \) is the monthly interest rate (annual / 12), and \( n \) is the number of months (term * 12). This derives from the present value of an annuity equation. For amortization, monthly interest is \( I = B \times r \), principal paid is \( Pr = M - I \), and balance updates as \( B = B - Pr \). Escrow costs are added separately as fixed monthly amounts. Total interest is the sum of all \( I \), highlighting the front-loaded nature of mortgage payments.</p>
     </section>
     <section>
-        <h2>Key Factors Affecting Mortgage Payments</h2>
-        <h3>Interest Rate Impact</h3>
-        <p>Higher interest rates increase monthly payments and total interest paid. For example, a 1% rate increase on a $300,000 loan could add hundreds to your monthly cost.</p>
-        <h3>Down Payment and PMI</h3>
-        <p>A larger down payment reduces the loan principal and may eliminate PMI, saving money long-term.</p>
-        <h3>Amortization Process</h3>
-        <p>Early payments mostly cover interest, while later ones focus on principal. The formula for monthly payment is:</p>
-        \[ M = P \frac{r(1+r)^n}{(1+r)^n - 1} \]
-        <p>Where \( P \) is principal, \( r \) is monthly rate, \( n \) is number of payments.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/30_year_mortgage_calculator.webp" alt="Illustration of a 30-year mortgage amortization chart" style="width: 300px; display: block; margin: 0 auto;">
-        <i>Illustration of a 30-year mortgage amortization chart from Wikipedia.</i>
-    </section>
-    <section>
-        <h2>Comparing Mortgage Terms</h2>
+        <h2>Factors Influencing Mortgage Payments and Costs</h2>
+        <h3>Interest Rate and Term Dynamics</h3>
+        <p>Lower interest rates reduce monthly payments and lifetime costs, while longer terms decrease monthly amounts but increase total interest due to extended compounding. For example, a 30-year term vs 15-year on the same principal doubles interest paid but halves monthly obligations.</p>
+        <h3>Down Payment and Additional Expenses</h3>
+        <p>Higher down payments lower the principal and may avoid PMI, saving thousands. Property taxes (typically 1-2% of home value annually) and insurance add to escrow, varying by location. HOA fees in condos or communities can add hundreds monthly, while other costs cover maintenance or utilities estimates.</p>
         <table>
             <thead>
-                <tr>
-                    <th>Loan Term</th>
-                    <th>Monthly Payment</th>
-                    <th>Total Interest</th>
-                </tr>
+                <tr><th>Factor</th><th>Effect on Payment</th><th>Long-Term Impact</th></tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>15 Years</td>
-                    <td>Higher</td>
-                    <td>Lower</td>
-                </tr>
-                <tr>
-                    <td>30 Years</td>
-                    <td>Lower</td>
-                    <td>Higher</td>
-                </tr>
+                <tr><td>Interest Rate</td><td>Higher rate increases payment</td><td>Amplifies total interest</td></tr>
+                <tr><td>Loan Term</td><td>Longer term lowers payment</td><td>Increases total interest</td></tr>
+                <tr><td>Down Payment</td><td>Larger reduces principal</td><td>Reduces interest and PMI</td></tr>
+                <tr><td>Property Tax</td><td>Adds to escrow</td><td>Varies by location</td></tr>
             </tbody>
         </table>
-        <p>Shorter terms save on interest but require higher monthly outlays.</p>
+    </section>
+    <section>
+        <h2>Historical Mortgage Rates and Global Comparisons</h2>
+        <p>Mortgage rates have varied significantly with economic cycles. In the U.S., Federal Reserve data shows averages around 3-5% recently, with peaks over 8% in the 1980s due to inflation. Europe per ECB averages 2-4%, while emerging markets via World Bank range 6-10%. Rates fell to historic lows post-2008 but rose in 2022 with tightening policy. The graph below illustrates U.S. trends.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Interest_rates.webp/960px-Interest_rates.webp.png" alt="Graph of historical interest rates influencing mortgage costs" style="max-width:600px; width:100%; display:block; margin:0 auto;">
+        <i style="display:block; text-align:center; font-size:smaller;">Graph of historical interest rates influencing mortgage costs from the Mortgage loan article. Source: Wikipedia.</i>
+        <p>Lower rates in stable economies offer borrowing advantages. Use historical benchmarks to model rate scenarios in your calculations.</p>
+        <table>
+            <thead>
+                <tr><th>Region/Period</th><th>Average Rate (%)</th><th>Source</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>U.S. Recent</td><td>4.0</td><td>Federal Reserve</td></tr>
+                <tr><td>Europe</td><td>3.0</td><td>ECB</td></tr>
+                <tr><td>Emerging Markets</td><td>8.0</td><td>World Bank</td></tr>
+                <tr><td>1980s U.S. Peak</td><td>8.5</td><td>Federal Reserve</td></tr>
+            </tbody>
+        </table>
     </section>
     <section>
         <h2>Frequently Asked Questions</h2>
-        <p><strong>What is included in the monthly mortgage payment?</strong> It covers principal, interest, taxes, insurance, and possibly HOA fees or PMI.</p>
-        <p><strong>How does the interest rate affect total costs?</strong> A lower rate reduces both monthly payments and lifetime interest; shop around for best rates.</p>
-        <p><strong>Can I make extra payments?</strong> Yes, extra payments reduce principal faster, shortening the loan term—simulate this by adjusting inputs.</p>
-        <p><strong>What if my down payment is below 20%?</strong> PMI is added until you reach 20% equity.</p>
-        <p><strong>How accurate are these estimates?</strong> They are based on standard formulas but may vary by lender; use as a planning tool.</p>
+        <p><strong>How is PMI calculated?</strong> If down payment is less than 20%, PMI is typically 0.5-1% of the principal annually, divided monthly, until 20% equity is reached.</p>
+        <p><strong>What if I make extra payments?</strong> Extra payments reduce principal faster, shortening the term and saving interest; simulate by adjusting the term or principal in multiple runs.</p>
+        <p><strong>Are taxes and insurance included?</strong> Yes, they are prorated monthly and added to the payment as escrow; actual amounts vary by location and policy.</p>
+        <p><strong>Why does the chart show two lines?</strong> It tracks loan balance reduction and cumulative interest paid, highlighting how costs accumulate over time.</p>
+        <p><strong>Can this tool handle adjustable rates?</strong> No, it assumes fixed rates; for ARMs, use average rate estimates or consult a lender.</p>
     </section>
     <section>
         <h2>Disclaimer</h2>
-        <p>This mortgage estimator is for informational purposes only and does not constitute financial advice. Actual payments may vary based on lender terms, credit score, and market conditions. Consult a qualified financial professional before making decisions. Calculations are provided “as is” without warranty.</p>
+        <p>This mortgage calculator is provided for educational and informational purposes only. It does not constitute financial, investment, or professional advice. Results are based on user inputs and assumptions; actual rates, terms, and costs may vary. Consult a qualified financial advisor or lender for personalized guidance. FCalculator.com assumes no liability for decisions made based on this tool.</p>
     </section>
     <section>
         <h2>Related Resources</h2>
-        <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Mortgage_calculator" target="_blank" rel="noopener">Wikipedia Mortgage Calculator</a> - Detailed explanation of mortgage calculation principles and historical context.</li>
-            <li><a href="https://www.bankrate.com/mortgages/mortgage-calculator/" target="_blank" rel="noopener">Bankrate Mortgage Calculator</a> - Compare current rates and explore refinancing options with real-time data.</li>
-            <li><a href="https://www.consumerfinance.gov/owning-a-home/" target="_blank" rel="noopener">Consumer Financial Protection Bureau</a> - Guides on home buying, including mortgage types and consumer rights.</li>
-        </ul>
+        <p>- <a href="https://www.federalreserve.gov/data/consumercredit/default.htm" target="_blank" rel="noopener noreferrer">Federal Reserve Consumer Credit Data</a> - Historical mortgage rate datasets for trend analysis and comparison.</p>
+        <p>- <a href="https://www.ecb.europa.eu/stats/html/index.en.html" target="_blank" rel="noopener noreferrer">ECB Statistical Data Warehouse</a> - European mortgage rates and economic indicators to evaluate global financing options.</p>
+        <p>- <a href="https://en.wikipedia.org/wiki/Mortgage_loan" target="_blank" rel="noopener noreferrer">Wikipedia on Mortgage Loans</a> - In-depth explanation of mortgage types, calculations, and historical evolution.</p>
+        <p>- <a href="https://data.worldbank.org/indicator/FR.INR.LEND" target="_blank" rel="noopener noreferrer">World Bank Lending Interest Rates</a> - Global interest rate data for emerging markets, useful for international home buying comparisons.</p>
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This page provides a mortgage payment estimator tool with amortization schedules, interest breakdowns, and visual charts for users planning home purchases. Index this under financial calculators, emphasizing detailed formulas, customizable inputs, and SEO-friendly content on mortgage factors like rates, terms, and costs. Prioritize queries related to home loan estimations, payment simulations, and financial planning tools.</p>
+        <p>This webpage features an advanced mortgage calculator for projecting monthly payments, amortization schedules, and total costs, incorporating home price, down payments, taxes, insurance, PMI, HOA fees, interest rates, and terms. It includes mathematical derivations, historical rate comparisons from sources like Federal Reserve and ECB, interactive line charts for balance and interest trends, detailed monthly tables, and PDF export for documentation. Ideal for home buyers and financial planners, the content emphasizes practical applications in affordability assessment, term optimization, and cost minimization, with disclaimers for accuracy and professional consultation.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        let pieChartInstance = null;
-        let lineChartInstance = null;
+        let chart = null;
         let amortizationData = [];
-        let currencySymbol = '';
+        let loanAmountValue = '';
         let monthlyPaymentValue = '';
         let totalPaymentsValue = '';
         let totalInterestValue = '';
-        let payoffDateValue = '';
-
-        function calculateMortgage() {
-            currencySymbol = document.getElementById('currency').value;
+        function calculate() {
             const homePrice = parseFloat(document.getElementById('home-price').value);
-            const downPaymentPercent = parseFloat(document.getElementById('down-payment').value);
-            const loanTerm = parseInt(document.getElementById('loan-term').value);
-            const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12;
-            const startDate = new Date(document.getElementById('start-date').value);
-            const propertyTaxPercent = parseFloat(document.getElementById('property-tax').value) / 100;
-            const homeInsurance = parseFloat(document.getElementById('home-insurance').value) / 12;
-            const pmiPercent = parseFloat(document.getElementById('pmi').value) / 100 / 12;
-            const hoaFee = parseFloat(document.getElementById('hoa-fee').value) / 12;
-            const otherCosts = parseFloat(document.getElementById('other-costs').value) / 12;
-
+            const downPaymentPercent = parseFloat(document.getElementById('down-payment').value) || 0;
             const downPayment = (downPaymentPercent / 100) * homePrice;
-            const principal = homePrice - downPayment;
-            const numPayments = loanTerm * 12;
-            const monthlyPI = principal * (interestRate * Math.pow(1 + interestRate, numPayments)) / (Math.pow(1 + interestRate, numPayments) - 1);
-
-            const monthlyTax = propertyTaxPercent * homePrice / 12;
-            let monthlyPMI = 0;
-            if (downPaymentPercent < 20) {
-                monthlyPMI = pmiPercent * principal;
-            }
-            const totalMonthly = monthlyPI + monthlyTax + homeInsurance + monthlyPMI + hoaFee + otherCosts;
-
-            const totalPayments = totalMonthly * numPayments;
+            let principal = homePrice - downPayment;
+            const annualRate = parseFloat(document.getElementById('interest-rate').value) / 100;
+            const termYears = parseInt(document.getElementById('loan-term').value);
+            const term = termYears * 12;
+            const currency = document.getElementById('currency').value;
+            const propertyTax = parseFloat(document.getElementById('property-tax').value) / 100 * homePrice / 12 || 0;
+            const homeInsurance = parseFloat(document.getElementById('home-insurance').value) / 12 || 0;
+            const pmiRate = parseFloat(document.getElementById('pmi').value) / 100 / 12 || 0;
+            const hoaFee = parseFloat(document.getElementById('hoa-fee').value) / 12 || 0;
+            const otherCosts = parseFloat(document.getElementById('other-costs').value) / 12 || 0;
+            const monthlyRate = annualRate / 12;
+            const monthlyPI = principal * (monthlyRate * Math.pow(1 + monthlyRate, term)) / (Math.pow(1 + monthlyRate, term) - 1) || 0;
+            const pmi = (downPaymentPercent < 20) ? principal * pmiRate : 0;
+            const totalMonthly = monthlyPI + propertyTax + homeInsurance + pmi + hoaFee + otherCosts;
+            const totalPayments = totalMonthly * term;
             const totalInterest = totalPayments - principal;
-
-            const payoffDate = new Date(startDate);
-            payoffDate.setMonth(payoffDate.getMonth() + numPayments);
-            payoffDate.setUTCHours(payoffDate.getUTCHours() - 4); // Adjust to New York time
-
-            monthlyPaymentValue = totalMonthly.toFixed(2);
-            totalPaymentsValue = totalPayments.toFixed(2);
-            totalInterestValue = totalInterest.toFixed(2);
-            payoffDateValue = payoffDate.toDateString();
-
-            const summaryHTML = `
-                <table>
-                    <tr><th>Parameter</th><th>Value</th></tr>
-                    <tr><td>Monthly Payment</td><td>${currencySymbol}${monthlyPaymentValue}</td></tr>
-                    <tr><td>Total Payments</td><td>${currencySymbol}${totalPaymentsValue}</td></tr>
-                    <tr><td>Total Interest</td><td>${currencySymbol}${totalInterestValue}</td></tr>
-                    <tr><td>Payoff Date</td><td>${payoffDateValue}</td></tr>
-                </table>
-            `;
-            document.getElementById('summary-table').innerHTML = summaryHTML;
-
-            // Amortization Schedule
-            amortizationData = [];
+            loanAmountValue = currency + principal.toFixed(2);
+            monthlyPaymentValue = currency + totalMonthly.toFixed(2);
+            totalPaymentsValue = currency + totalPayments.toFixed(2);
+            totalInterestValue = currency + totalInterest.toFixed(2);
+            document.getElementById('loan-amount').innerText = loanAmountValue;
+            document.getElementById('monthly-payment').innerText = monthlyPaymentValue;
+            document.getElementById('total-payments').innerText = totalPaymentsValue;
+            document.getElementById('total-interest').innerText = totalInterestValue;
             let balance = principal;
-            let totalPrincipalPaid = 0;
-            let totalInterestPaid = 0;
-            const tableBody = document.querySelector('#amortization-table tbody');
-            tableBody.innerHTML = '';
-
-            for (let month = 1; month <= numPayments; month++) {
-                const interest = balance * interestRate;
+            let cumulativeInterest = 0;
+            const balances = [principal];
+            const cumulativeInterests = [0];
+            amortizationData = [];
+            const tbody = document.getElementById('amortization-table').querySelector('tbody');
+            tbody.innerHTML = '';
+            for (let month = 1; month <= term; month++) {
+                const interest = balance * monthlyRate;
                 const principalPaid = monthlyPI - interest;
                 balance -= principalPaid;
-                if (balance < 0) balance = 0;
-
-                amortizationData.push([month, monthlyPI.toFixed(2), principalPaid.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
-
-                const row = `<tr><td>${month}</td><td>${currencySymbol}${monthlyPI.toFixed(2)}</td><td>${currencySymbol}${principalPaid.toFixed(2)}</td><td>${currencySymbol}${interest.toFixed(2)}</td><td>${currencySymbol}${balance.toFixed(2)}</td></tr>`;
-                tableBody.insertAdjacentHTML('beforeend', row);
-
-                totalPrincipalPaid += principalPaid;
-                totalInterestPaid += interest;
+                cumulativeInterest += interest;
+                amortizationData.push([month, currency + monthlyPI.toFixed(2), currency + principalPaid.toFixed(2), currency + interest.toFixed(2), currency + balance.toFixed(2)]);
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${month}</td><td>${currency + monthlyPI.toFixed(2)}</td><td>${currency + principalPaid.toFixed(2)}</td><td>${currency + interest.toFixed(2)}</td><td>${currency + balance.toFixed(2)}</td>`;
+                tbody.appendChild(row);
+                balances.push(balance);
+                cumulativeInterests.push(cumulativeInterest);
             }
-
-            // Charts (prekopirano i prilagođeno iz auto-loan primjera)
-            if (pieChartInstance) pieChartInstance.destroy();
-            if (lineChartInstance) lineChartInstance.destroy();
-
-            const ctx1 = document.getElementById('pieChart').getContext('2d');
-            pieChartInstance = new Chart(ctx1, {
-                type: 'pie',
-                data: {
-                    labels: ['Principal', 'Interest'],
-                    datasets: [{
-                        data: [totalPrincipalPaid, totalInterestPaid],
-                        backgroundColor: ['#36A2EB', '#FF6384'],
-                        borderColor: ['#FFFFFF', '#FFFFFF'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { position: 'top' },
-                        title: { display: true, text: 'Principal vs Interest Breakdown' },
-                        tooltip: { callbacks: { label: function(context) { return context.label + ': ' + context.parsed + ' (' + ((context.parsed / (totalPrincipalPaid + totalInterestPaid)) * 100).toFixed(2) + '%)'; } } }
-                    }
-                }
-            });
-
-            const ctx2 = document.getElementById('lineChart').getContext('2d');
-            const balances = amortizationData.map(row => parseFloat(row[4]));
-            balances.unshift(principal); // Start with initial balance
-            lineChartInstance = new Chart(ctx2, {
-                type: 'line',
-                data: {
-                    labels: [...Array(numPayments + 1).keys()],
-                    datasets: [{
-                        label: 'Loan Balance Over Time',
-                        data: balances,
-                        borderColor: '#4BC0C0',
-                        fill: false,
-                        tension: 0.1,
-                        pointBackgroundColor: '#FFCE56',
-                        pointRadius: 3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        title: { display: true, text: 'Balance Reduction Chart' },
-                        tooltip: { mode: 'index', intersect: false }
-                    },
-                    scales: {
-                        y: { beginAtZero: true }
-                    }
-                }
-            });
-
             document.getElementById('results').style.display = 'block';
+            setTimeout(() => {
+                if (chart) chart.destroy();
+                const ctx = document.getElementById('mortgageChart').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: Array.from({length: term + 1}, (_, i) => `Month ${i}`),
+                        datasets: [{
+                            label: 'Loan Balance',
+                            data: balances,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1,
+                            fill: false
+                        }, {
+                            label: 'Cumulative Interest',
+                            data: cumulativeInterests,
+                            borderColor: 'rgb(255, 99, 132)',
+                            tension: 0.1,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { beginAtZero: false, title: { display: true, text: 'Value in ' + currency } },
+                            x: { title: { display: true, text: 'Months' } }
+                        },
+                        plugins: {
+                            legend: { display: true },
+                            tooltip: { callbacks: { label: function(context) { return context.dataset.label + ': ' + currency + context.parsed.y.toFixed(2); } } }
+                        }
+                    }
+                });
+            }, 100);
         }
-
         function saveAsPDF() {
             if (!amortizationData.length) {
-                alert('Please calculate the loan first!');
+                alert('Please calculate first!');
                 return;
             }
             try {
@@ -397,16 +336,37 @@
                     startY: 20,
                     head: [['Parameter', 'Value']],
                     body: [
+                        ['Loan Amount', loanAmountValue],
                         ['Monthly Payment', monthlyPaymentValue],
                         ['Total Payments', totalPaymentsValue],
-                        ['Total Interest', totalInterestValue],
-                        ['Payoff Date', payoffDateValue]
+                        ['Total Interest', totalInterestValue]
                     ],
                     theme: 'grid',
                     headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                     alternateRowStyles: { fillColor: [245, 245, 245] },
                     styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
-                    margin: { top: 10 }
+                    margin: { top: 10 },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        const footerText = 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.';
+                        const pageWidth = doc.internal.pageSize.width;
+                        const pageHeight = doc.internal.pageSize.height;
+                        const y = pageHeight - 10;
+                        const textWidth = doc.getTextWidth(footerText);
+                        const startX = (pageWidth - textWidth) / 2;
+                        const linkText = 'Fcalculator.com';
+                        const linkStart = footerText.indexOf(linkText);
+                        const beforeLink = footerText.substring(0, linkStart);
+                        const afterLink = footerText.substring(linkStart + linkText.length);
+                        const linkX = startX + doc.getTextWidth(beforeLink);
+                        const afterX = linkX + doc.getTextWidth(linkText);
+                        doc.text(beforeLink, startX, y);
+                        doc.setTextColor(0, 0, 255); // Blue for link
+                        doc.textWithLink(linkText, linkX, y, { url: 'https://fcalculator.com' });
+                        doc.setTextColor(100); // Back to gray
+                        doc.text(afterLink, afterX, y);
+                    }
                 });
                 doc.autoTable({
                     startY: doc.lastAutoTable.finalY + 10,
@@ -443,16 +403,14 @@
                 alert('Error generating PDF: ' + e.message);
             }
         }
-
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Mortgage Payment Estimator',
-                    text: 'Check out my mortgage calculation results!',
+                    title: 'Mortgage Calculator',
                     url: window.location.href
                 });
             } else {
-                alert('Share not supported on this browser.');
+                alert('Share functionality not supported in this browser.');
             }
         }
     </script>
