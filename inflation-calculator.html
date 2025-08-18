@@ -3,347 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inflation Purchasing Power Converter: Dollar Value Timeline</title>
-    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <title>Inflation Impact Calculator</title>
+    <meta name="description" content="Assess the erosion of your savings' purchasing power due to inflation over multiple years. This tool provides detailed year-by-year breakdowns, interactive charts, mathematical formulas, and historical context for informed financial planning.">
+    <meta name="keywords" content="inflation impact calculator, purchasing power erosion, savings devaluation over time, inflation effect on money, financial inflation projection, annual inflation rate simulation">
+    <link rel="canonical" href="https://fcalculator.com/inflation-impact-calculator.html">
+    <link rel="stylesheet" href="/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.20/jspdf.plugin.autotable.min.js"></script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.3/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Inflation Purchasing Power Converter",
-      "url": "https://fcalculator.com/inflation-calculator.html",
-      "applicationCategory": "FinancialApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
+      "@type": "WebPage",
+      "name": "Inflation Impact Calculator",
+      "url": "https://fcalculator.com/inflation-impact-calculator.html",
+      "description": "A comprehensive online tool for calculating the impact of inflation on savings, featuring year-by-year purchasing power projections, interactive line charts for visualizing value erosion, detailed mathematical formulas with explanations, historical inflation data from reliable sources like the World Bank and IMF, FAQ section addressing common queries, and a downloadable PDF report for easy sharing and record-keeping. Designed for financial planners, investors, and individuals seeking to understand long-term money devaluation.",
+      "datePublished": "2022-01-14",
+      "author": {
+        "@type": "Person",
+        "name": "I.Brkic"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "FCalculator.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://fcalculator.com/logo.png"
+        }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://fcalculator.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Finance",
+            "item": "https://fcalculator.com/finance.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Inflation Impact Calculator",
+            "item": "https://fcalculator.com/inflation-impact-calculator.html"
+          }
+        ]
       }
     }
     </script>
 </head>
-<body onload="calculateInflation()">
+<body>
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/finance-calculator.html">Finance</a> > <a href="/inflation-calculator.html">Inflation Purchasing Power Converter</a>
+            <a href="/">FCalculator.com</a> > <a href="/finance.html">Finance</a> > <a href="/inflation-impact-calculator.html">Inflation Impact Calculator</a>
         </div>
-        <h1>Inflation Purchasing Power Converter: Tracing Dollar Adjustments Across Years</h1>
-        <p>Evaluate inflation's role in altering the U.S. dollar's effectiveness over time through Consumer Price Index (CPI) analysis. This converter provides precise transformations of monetary values between historical periods, essential for economic hindsight and forward planning in finance.</p>
+        <h1>Inflation Impact Calculator</h1>
+        <p>Evaluate how ongoing inflation diminishes the real value of your savings across future years, offering projections, visualizations, and insights to aid in strategic financial decisions.</p>
     </header>
-    <main>
-        <section id="calculator-section">
-            <h2>Inflation Value Transformation Utility</h2>
-            <p>Leverage this utility to ascertain the inflation-compensated counterpart of a dollar sum across designated years. Input the baseline amount in dollars, accompanied by the origin and destination years (spanning 1913 to 2025). The utility yields the transformed value, aggregate inflation percentage, and annualized compound rate. Comprehensive directives for each entry ensure optimal application.</p>
-            <form id="inflation-form">
-                <label for="amount">Baseline Amount in $ (e.g., 100):</label>
-                <input type="number" id="amount" min="0" step="0.01" value="100">
-                <p class="input-explain">Input the foundational dollar quantity from the origin year subject to inflation correction. This denotes the primal purchasing capability under review.</p>
-                
-                <label for="startYear">Origin Year (1913-2024):</label>
-                <input type="number" id="startYear" min="1913" max="2024" value="2010">
-                <p class="input-explain">Designate the benchmark year for the baseline amount. Credible CPI documentation initiates in 1913.</p>
-                
-                <label for="endYear">Destination Year (1914-2025):</label>
-                <input type="number" id="endYear" min="1914" max="2025" value="2025">
-                <p class="input-explain">Specify the year targeted for the corrected value. Computations for 2025 incorporate information up to the most recent mid-year disclosures.</p>
-                
-                <button type="button" onclick="calculateInflation()">Execute Inflation Corrections</button>
-            </form>
-            <div id="results" class="result green" style="text-align: center; font-size: 1.2em;"></div>
-            <canvas id="inflationChart" width="400" height="200"></canvas>
-            <canvas id="valueChart" width="400" height="200"></canvas>
-            <button onclick="saveAsPDF()">Save as PDF</button>
-            <button onclick="sharePage()">Share this page</button>
-        </section>
-        
-        <section id="historical-data">
-            <h2>Historical U.S. CPI Means and Inflation Metrics</h2>
-            <p>This compilation outlines annual CPI means and inflation metrics from 1913 to 2025, compiled from Bureau of Labor Statistics archives. It facilitates the examination of inflationary trajectories over extended durations.</p>
-            <table>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="input-row">
+                <label for="currency">Currency</label>
+                <select id="currency">
+                    <option value="$">USD ($)</option>
+                    <option value="€">EUR (€)</option>
+                    <option value="£">GBP (£)</option>
+                    <option value="¥">JPY (¥)</option>
+                    <option value="C$">CAD (C$)</option>
+                    <option value="A$">AUD (A$)</option>
+                </select>
+            </div>
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Savings Details</legend>
+                    <div class="input-row">
+                        <label for="savings">Current Savings Amount</label>
+                        <input type="number" id="savings" placeholder="e.g. 10000" value="10000" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="years">Number of Years</label>
+                        <input type="number" id="years" placeholder="e.g. 10" value="10" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="inflation">Annual Inflation Rate (%)</label>
+                        <input type="number" step="0.1" id="inflation" placeholder="e.g. 3" value="3" required>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="calculate()">Calculate</button>
+        </form>
+        <div class="results-section" id="results" style="display:none;">
+            <h2>Calculation Results</h2>
+            <p>Future Purchasing Power: <span id="future-value"></span></p>
+            <p>Total Inflation Impact (Loss): <span id="loss"></span></p>
+            <div id="chart-container">
+                <canvas id="inflationChart" width="600" height="400"></canvas>
+            </div>
+            <h3>Yearly Breakdown</h3>
+            <table id="breakdown-table">
                 <thead>
                     <tr>
                         <th>Year</th>
-                        <th>Average CPI</th>
-                        <th>Inflation Rate (%)</th>
+                        <th>Purchasing Power</th>
+                        <th>Cumulative Inflation (%)</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr><td>1913</td><td>9.883</td><td>-</td></tr>
-                    <tr><td>1914</td><td>10.017</td><td>1.0</td></tr>
-                    <tr><td>1915</td><td>10.108</td><td>1.0</td></tr>
-                    <tr><td>1916</td><td>10.883</td><td>7.9</td></tr>
-                    <tr><td>1917</td><td>12.825</td><td>17.4</td></tr>
-                    <tr><td>1918</td><td>15.042</td><td>18.0</td></tr>
-                    <tr><td>1919</td><td>17.333</td><td>14.6</td></tr>
-                    <tr><td>1920</td><td>20.042</td><td>15.6</td></tr>
-                    <tr><td>1921</td><td>17.850</td><td>-10.5</td></tr>
-                    <tr><td>1922</td><td>16.750</td><td>-6.1</td></tr>
-                    <tr><td>1923</td><td>17.050</td><td>1.8</td></tr>
-                    <tr><td>1924</td><td>17.125</td><td>0.0</td></tr>
-                    <tr><td>1925</td><td>17.542</td><td>2.3</td></tr>
-                    <!-- Abbreviated; complete in JS -->
-                    <tr><td>2020</td><td>258.811</td><td>1.2</td></tr>
-                    <tr><td>2021</td><td>270.970</td><td>4.7</td></tr>
-                    <tr><td>2022</td><td>292.655</td><td>8.0</td></tr>
-                    <tr><td>2023</td><td>304.702</td><td>4.1</td></tr>
-                    <tr><td>2024</td><td>313.689</td><td>2.9</td></tr>
-                    <tr><td>2025</td><td>322.561</td><td>2.7</td></tr>
-                </tbody>
+                <tbody></tbody>
             </table>
-        </section>
-        
-        <section id="explanation">
-            <h2>Investigating Inflation Frameworks and Consequences</h2>
-            <p>Inflation embodies the persistent augmentation in aggregate price tiers, thereby eroding monetary acquisition strength. Elements encompass demand-pull, where expenditure surpasses output; cost-push, from escalated input expenditures; and inherent inflation via wage-cost cycles. Prominent historical cases include Germany's 1920s hyperinflation and U.S. 1970s energy-induced inflation, underscoring its capacity to destabilize fiscal structures and societal welfare.</p>
-            <p>The CPI assesses fluctuations in the outlay for a typical array of commodities and amenities, functioning as a chief inflation barometer. This converter harnesses CPI to elucidate value diminution, vital for prudent fiscal management, portfolio diversification, and macroeconomic insight. Elevated inflation phases, for instance, require adaptive measures in capital preservation to uphold genuine yields.</p>
-            <p>Fundamental transformation equation: \( \text{Transformed Sum} = \text{Baseline Sum} \times \frac{\text{CPI}_{destination}}{\text{CPI}_{origin}} \)</p>
-            <p>For annualized compound metric: \( \text{Annualized Compound Inflation} = \left( \left( \frac{\text{CPI}_{destination}}{\text{CPI}_{origin}} \right)^{ \frac{1}{\text{duration}} } - 1 \right) \times 100\% \)</p>
-            <p>Synergize this with allied utilities on our domain, such as the <a href="/compound-interest-growth-calculator.html">Compound Interest Growth Calculator</a> or <a href="/loan-calculator.html">Loan Calculator</a>, to bolster fiscal governance.</p>
-            <p>Supplementary scrutiny of inflationary doctrines is accessible through esteemed compendia.</p>
-        </section>
-        
-        <section id="faq">
-            <h2>Prevalent Questions on Inflation</h2>
-            <dl>
-                <dt>How does CPI contrast with the Producer Price Index (PPI)?</dt>
-                <dd>CPI concentrates on terminal buyer disbursements, while PPI surveys antecedent costs at the bulk phase before consumer access.</dd>
-                <dt>What computation yields aggregate inflation?</dt>
-                <dd>\( \left( \left( \frac{\text{CPI}_{destination}}{\text{CPI}_{origin}} \right) - 1 \right) \times 100 \)</dd>
-                <dt>Is deflation perpetually detrimental?</dt>
-                <dd>It might herald downturns, dissuading outlays as patrons anticipate additional reductions.</dd>
-                <dt>What rationalizes a 2% inflation benchmark?</dt>
-                <dd>It promotes progression whilst upholding equilibrium, averting deflationary perils.</dd>
-                <dt>How reliable are 2025 estimations?</dt>
-                <dd>They stem from June 2025 metrics; ensuing publications may marginally amend figures.</dd>
-            </dl>
-        </section>
-        
-        <section id="disclaimer">
-            <h2>Advisory on Fiscal Instruments</h2>
-            <p>This instrument furnishes scholastic content grounded in antecedent data and does not supplant specialized fiscal guidance. Results may diverge amid shifting fiscal landscapes. FCalculator.com renounces accountability for determinations predicated on this converter.</p>
-        </section>
-        
-        <section id="related-resources">
-            <h2>Related Resources</h2>
-            <ul>
-                <li><a href="https://www.bls.gov/cpi/" target="_blank" rel="noopener noreferrer">Bureau of Labor Statistics - CPI Exposition</a></li>
-                <li><a href="https://www.federalreserve.gov/faqs/economy_14419.htm" target="_blank" rel="noopener noreferrer">Federal Reserve - Inflation Essentials</a></li>
-                <li><a href="https://en.wikipedia.org/wiki/Consumer_price_index" target="_blank" rel="noopener noreferrer">Wikipedia - Consumer Price Index Article</a></li>
-                <li><a href="https://data.oecd.org/price/inflation-cpi.htm" target="_blank" rel="noopener noreferrer">OECD - Global CPI Metrics</a></li>
-            </ul>
-        </section>
-    </main>
+            <button onclick="saveAsPDF()">Save as PDF</button>
+            <button onclick="sharePage()">Share</button>
+        </div>
+    </section>
+    <p>Consider exploring complementary financial tools such as the <a href="/auto-loan-calculator.html">Auto Loan Calculator</a> for borrowing projections or the <a href="/rental-property-roi-simulator.html">Rental Property ROI Simulator</a> for investment returns analysis.</p>
+    <section>
+        <h2>How the Inflation Impact Calculator Works</h2>
+        <p>This calculator simulates the degradation of savings' purchasing power by applying compound inflation annually. Start by selecting your currency, entering the current savings amount, specifying the time horizon in years, and providing an estimated annual inflation rate based on historical or projected data. Upon calculation, it generates a future value adjusted for inflation, total loss in real terms, an interactive line chart depicting the decline over time, and a table with yearly details including cumulative inflation percentages. The tool assumes constant inflation without growth factors like interest earnings, focusing purely on erosion effects for conservative planning.</p>
+    </section>
+    <section>
+        <h2>Mathematical Formulas and Derivations</h2>
+        <p>The primary formula for calculating future purchasing power under inflation is derived from the compound interest principle but inverted for devaluation:</p>
+        <div style="max-width:600px; margin:0 auto;">
+            \[ FV = PV \times (1 + r)^{-n} \]
+        </div>
+        <p>Where \( FV \) represents the future purchasing power, \( PV \) is the present value (current savings), \( r \) is the annual inflation rate as a decimal, and \( n \) is the number of years. This equation accounts for the exponential decay in value. Cumulative inflation over the period is computed as \( (1 + r)^n - 1 \), expressed as a percentage to show total price increase. For yearly breakdowns, the value is iteratively adjusted each year, providing a granular view suitable for long-term forecasting.</p>
+        <p>Additionally, the Rule of 72 offers a quick approximation: divide 72 by the inflation rate to estimate years until savings halve in value, useful for mental checks alongside precise computations.</p>
+    </section>
+    <section>
+        <h2>Factors Influencing Inflation and Its Effects on Savings</h2>
+        <h3>Demand-Pull and Cost-Push Dynamics</h3>
+        <p>Inflation arises from imbalances like demand-pull, where excessive consumer spending outpaces supply, or cost-push, driven by rising production costs such as energy prices. These factors accelerate money devaluation, making savings less effective for future purchases. Central banks mitigate this through interest rate adjustments, but persistent inflation can erode wealth significantly over decades.</p>
+        <h3>Impact on Different Asset Classes</h3>
+        <p>Savings in cash or low-yield accounts suffer most, while investments in stocks or real estate may hedge against inflation. Understanding these dynamics helps in diversifying portfolios to preserve real wealth.</p>
+        <table>
+            <thead>
+                <tr><th>Inflation Type</th><th>Cause</th><th>Effect on Savings</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Demand-Pull</td><td>High consumer demand</td><td>Increased prices reduce buying power</td></tr>
+                <tr><td>Cost-Push</td><td>Rising input costs</td><td>Higher goods prices devalue money</td></tr>
+                <tr><td>Built-In</td><td>Wage-price spirals</td><td>Persistent erosion over time</td></tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Historical Inflation Rates and Global Comparisons</h2>
+        <p>Inflation varies by country and era. According to World Bank data, global average consumer price inflation was around 4.3% in recent years, with emerging economies at 5.5% and advanced at 2.5% per IMF reports. In the US, historical rates peaked at over 13% in the 1970s due to oil shocks, as shown in the graph below.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/US_Historical_Inflation_Ancient.svg/300px-US_Historical_Inflation_Ancient.svg.png" alt="Graph of historical US inflation rates from ancient times to present" style="width:300px; display:block; margin:0 auto;">
+        <i style="display:block; text-align:center; font-size:smaller;">Graph illustrating US inflation rates from historical data including ancient periods. Source: Wikipedia.</i>
+        <p>Countries like Venezuela experienced hyperinflation exceeding 50% monthly, while Japan often sees deflation. Use these benchmarks to input realistic rates for accurate projections.</p>
+        <table>
+            <thead>
+                <tr><th>Region</th><th>Average Annual Inflation (Recent)</th><th>Source</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>World</td><td>4.3%</td><td>IMF</td></tr>
+                <tr><td>US</td><td>2.5%</td><td>World Bank</td></tr>
+                <tr><td>EU</td><td>2.0%</td><td>ECB</td></tr>
+                <tr><td>Emerging Markets</td><td>5.5%</td><td>IMF</td></tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Frequently Asked Questions</h2>
+        <p><strong>What is the difference between nominal and real value in savings?</strong> Nominal value is the face amount, while real value adjusts for inflation, reflecting actual purchasing power.</p>
+        <p><strong>How does hyperinflation differ from regular inflation?</strong> Hyperinflation exceeds 50% monthly, leading to rapid currency collapse, as seen in historical cases like Zimbabwe or Weimar Germany.</p>
+        <p><strong>Can I use this tool for investment planning?</strong> Yes, it highlights the need for returns exceeding inflation; combine with other tools for comprehensive analysis.</p>
+        <p><strong>What if inflation rates change over time?</strong> The tool assumes constant rates; for variable scenarios, run multiple simulations with average estimates.</p>
+        <p><strong>Why include a chart and table?</strong> Visuals aid in understanding trends, while tables provide precise data for budgeting or reporting.</p>
+    </section>
+    <section>
+        <h2>Disclaimer</h2>
+        <p>This inflation impact calculator is provided for educational and informational purposes only. It does not constitute financial, investment, or professional advice. Results are based on user inputs and assumptions; actual inflation may vary. Consult a qualified financial advisor for personalized guidance. FCalculator.com assumes no liability for decisions made based on this tool.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p>- <a href="https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG" target="_blank" rel="noopener noreferrer">World Bank Inflation Data</a> - Comprehensive dataset on annual consumer price inflation by country, useful for historical analysis and trend forecasting.</p>
+        <p>- <a href="https://www.imf.org/external/datamapper/PCPIPCH@WEO/OEMDC/ADVEC/WEOWORLD" target="_blank" rel="noopener noreferrer">IMF World Economic Outlook Inflation Rates</a> - Global and regional inflation projections, helping users input realistic rates for long-term planning.</p>
+        <p>- <a href="https://en.wikipedia.org/wiki/Inflation" target="_blank" rel="noopener noreferrer">Wikipedia on Inflation</a> - In-depth explanation of inflation causes, effects, and historical examples to deepen understanding of economic principles.</p>
+        <p>- <a href="https://tradingeconomics.com/country-list/inflation-rate" target="_blank" rel="noopener noreferrer">Trading Economics Inflation Rates</a> - Real-time statistics and charts on inflation across countries, ideal for comparing global economic conditions.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This webpage features an advanced inflation impact calculator designed to project the devaluation of savings due to inflation, incorporating user-selected currency, time periods up to decades, and customizable rates. It includes mathematical derivations, historical inflation comparisons from sources like IMF and World Bank, interactive visualizations via line charts showing purchasing power decline, detailed yearly tables, and PDF export functionality for documentation. Ideal for financial education, the content emphasizes practical applications in budgeting, retirement planning, and investment strategies, with disclaimers for accuracy and professional consultation.</p>
+    </section>
     <footer>
-        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        // Author: Ivan Brkic
-        const cpiData = {
-            1913: 9.883, 1914: 10.017, 1915: 10.108, 1916: 10.883, 1917: 12.825, 1918: 15.042, 1919: 17.333, 1920: 20.042,
-            1921: 17.850, 1922: 16.750, 1923: 17.050, 1924: 17.125, 1925: 17.542, 1926: 17.700, 1927: 17.358, 1928: 17.158,
-            1929: 17.158, 1930: 16.700, 1931: 15.208, 1932: 13.642, 1933: 12.933, 1934: 13.383, 1935: 13.725, 1936: 13.867,
-            1937: 14.383, 1938: 14.092, 1939: 13.908, 1940: 14.008, 1941: 14.725, 1942: 16.333, 1943: 17.308, 1944: 17.592,
-            1945: 17.992, 1946: 19.517, 1947: 22.325, 1948: 24.042, 1949: 23.808, 1950: 24.067, 1951: 25.958, 1952: 26.550,
-            1953: 26.767, 1954: 26.850, 1955: 26.775, 1956: 27.183, 1957: 28.092, 1958: 28.858, 1959: 29.150, 1960: 29.575,
-            1961: 29.892, 1962: 30.250, 1963: 30.625, 1964: 31.017, 1965: 31.508, 1966: 32.458, 1967: 33.358, 1968: 34.783,
-            1969: 36.683, 1970: 38.825, 1971: 40.492, 1972: 41.817, 1973: 44.400, 1974: 49.308, 1975: 53.817, 1976: 56.908,
-            1977: 60.608, 1978: 65.233, 1979: 72.575, 1980: 82.408, 1981: 90.925, 1982: 96.500, 1983: 99.600, 1984: 103.883,
-            1985: 107.567, 1986: 109.608, 1987: 113.625, 1988: 118.258, 1989: 123.967, 1990: 130.658, 1991: 136.192, 1992: 140.317,
-            1993: 144.458, 1994: 148.225, 1995: 152.383, 1996: 156.850, 1997: 160.517, 1998: 163.008, 1999: 166.575, 2000: 172.200,
-            2001: 177.067, 2002: 179.875, 2003: 183.958, 2004: 188.883, 2005: 195.292, 2006: 201.592, 2007: 207.342, 2008: 215.303,
-            2009: 214.537, 2010: 218.056, 2011: 224.939, 2012: 229.594, 2013: 232.957, 2014: 236.736, 2015: 237.017, 2016: 240.011,
-            2017: 245.120, 2018: 251.107, 2019: 255.657, 2020: 258.811, 2021: 270.970, 2022: 292.655, 2023: 304.702, 2024: 313.689,
-            2025: 322.561
-        };
-        const inflationRates = {
-            1914: 1.0, 1915: 1.0, 1916: 7.9, 1917: 17.4, 1918: 18.0, 1919: 14.6, 1920: 15.6, 1921: -10.5, 1922: -6.1, 1923: 1.8,
-            1924: 0.0, 1925: 2.3, 1926: 1.1, 1927: -1.7, 1928: -1.7, 1929: 0.0, 1930: -2.3, 1931: -9.0, 1932: -9.9, 1933: -5.1,
-            1934: 3.1, 1935: 2.2, 1936: 1.5, 1937: 3.6, 1938: -2.1, 1939: -1.4, 1940: 0.7, 1941: 5.0, 1942: 10.9, 1943: 6.1,
-            1944: 1.7, 1945: 2.3, 1946: 8.3, 1947: 14.4, 1948: 8.1, 1949: -1.2, 1950: 1.3, 1951: 7.9, 1952: 1.9, 1953: 0.8,
-            1954: 0.7, 1955: -0.4, 1956: 1.5, 1957: 3.3, 1958: 2.8, 1959: 0.7, 1960: 1.7, 1961: 1.0, 1962: 1.0, 1963: 1.3,
-            1964: 1.3, 1965: 1.6, 1966: 2.9, 1967: 3.1, 1968: 4.2, 1969: 5.5, 1970: 5.7, 1971: 4.4, 1972: 3.2, 1973: 6.2,
-            1974: 11.0, 1975: 9.1, 1976: 5.8, 1977: 6.5, 1978: 7.6, 1979: 11.3, 1980: 13.5, 1981: 10.3, 1982: 6.2, 1983: 3.2,
-            1984: 4.3, 1985: 3.6, 1986: 1.9, 1987: 3.6, 1988: 4.1, 1989: 4.8, 1990: 5.4, 1991: 4.2, 1992: 3.0, 1993: 3.0,
-            1994: 2.6, 1995: 2.8, 1996: 3.0, 1997: 2.3, 1998: 1.6, 1999: 2.2, 2000: 3.4, 2001: 2.8, 2002: 1.6, 2003: 2.3,
-            2004: 2.7, 2005: 3.4, 2006: 3.2, 2007: 2.8, 2008: 3.8, 2009: -0.4, 2010: 1.6, 2011: 3.2, 2012: 2.1, 2013: 1.5,
-            2014: 1.6, 2015: 0.1, 2016: 1.3, 2017: 2.1, 2018: 2.4, 2019: 1.8, 2020: 1.2, 2021: 4.7, 2022: 8.0, 2023: 4.1,
-            2024: 2.9, 2025: 2.7
-        };
-        
-        let chart;
-        let valueChart;
-        
-        function calculateInflation() {
-            const amount = parseFloat(document.getElementById('amount').value);
-            const startYear = parseInt(document.getElementById('startYear').value);
-            const endYear = parseInt(document.getElementById('endYear').value);
-            
-            if (isNaN(amount) || isNaN(startYear) || isNaN(endYear) || startYear >= endYear || !cpiData[startYear] || !cpiData[endYear]) {
-                document.getElementById('results').innerHTML = '<p>Please enter valid values.</p>';
+        let chart = null;
+        let yearlyBreakdown = [];
+        let futureValueValue = '';
+        let lossValue = '';
+        function calculate() {
+            const savings = parseFloat(document.getElementById('savings').value);
+            const years = parseInt(document.getElementById('years').value);
+            const inflation = parseFloat(document.getElementById('inflation').value) / 100;
+            const currency = document.getElementById('currency').value;
+            let currentValue = savings;
+            const yearlyValues = [savings];
+            const cumulativeInflation = [0];
+            let cumInf = 0;
+            yearlyBreakdown = [];
+            for (let y = 1; y <= years; y++) {
+                currentValue = currentValue / (1 + inflation);
+                cumInf = (1 + cumInf) * (1 + inflation) - 1;
+                yearlyValues.push(currentValue);
+                cumulativeInflation.push(cumInf * 100);
+                yearlyBreakdown.push([y, currency + currentValue.toFixed(2), cumulativeInflation[y].toFixed(2) + '%']);
+            }
+            const futureValue = yearlyValues[years].toFixed(2);
+            const loss = (savings - futureValue).toFixed(2);
+            futureValueValue = currency + futureValue;
+            lossValue = currency + loss;
+            document.getElementById('future-value').innerText = futureValueValue;
+            document.getElementById('loss').innerText = lossValue;
+            const tbody = document.getElementById('breakdown-table').querySelector('tbody');
+            tbody.innerHTML = '';
+            for (let y = 1; y <= years; y++) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${y}</td><td>${currency}${yearlyValues[y].toFixed(2)}</td><td>${cumulativeInflation[y].toFixed(2)}%</td>`;
+                tbody.appendChild(row);
+            }
+            document.getElementById('results').style.display = 'block';
+            setTimeout(() => {
+                if (chart) chart.destroy();
+                const ctx = document.getElementById('inflationChart').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: Array.from({length: years + 1}, (_, i) => `Year ${i}`),
+                        datasets: [{
+                            label: 'Purchasing Power',
+                            data: yearlyValues,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1,
+                            pointRadius: 4,
+                            pointBackgroundColor: 'rgb(255, 99, 132)',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { beginAtZero: false, title: { display: true, text: 'Value in ' + currency } },
+                            x: { title: { display: true, text: 'Years' } }
+                        },
+                        plugins: {
+                            legend: { display: true },
+                            tooltip: { callbacks: { label: function(context) { return 'Value: ' + currency + context.parsed.y.toFixed(2); } } }
+                        }
+                    }
+                });
+            }, 100);
+        }
+        function saveAsPDF() {
+            if (!yearlyBreakdown.length) {
+                alert('Please calculate first!');
                 return;
             }
-            
-            const cpiStart = cpiData[startYear];
-            const cpiEnd = cpiData[endYear];
-            const adjustedAmount = amount * (cpiEnd / cpiStart);
-            const totalInflation = ((cpiEnd / cpiStart) - 1) * 100;
-            const years = endYear - startYear;
-            const averageAnnual = (Math.pow(cpiEnd / cpiStart, 1 / years) - 1) * 100;
-            
-            document.getElementById('results').innerHTML = `
-                <h3>Inflation Transformation Findings</h3>
-                <p>Comparable Value in ${endYear}: $${adjustedAmount.toFixed(2)}</p>
-                <p>Aggregate Inflation Percentage: ${totalInflation.toFixed(2)}%</p>
-                <p>Annualized Compound Inflation: ${averageAnnual.toFixed(2)}%</p>
-            `;
-            
-            updateChart(startYear, endYear, amount, cpiStart);
-            updateValueChart(amount, adjustedAmount, startYear, endYear);
-        }
-        
-        function updateChart(start, end, amount, cpiStart) {
-            const ctx = document.getElementById('inflationChart').getContext('2d');
-            const years = [];
-            const rates = [];
-            const values = [];
-            for (let y = start; y <= end; y++) {
-                years.push(y);
-                rates.push(inflationRates[y] || 0);
-                const cpiYear = cpiData[y];
-                const purchasingPower = amount * (cpiStart / cpiYear);
-                values.push(purchasingPower);
-            }
-            
-            if (chart) chart.destroy();
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: years,
-                    datasets: [
-                        {
-                            label: 'Inflation Rate (%)',
-                            data: rates,
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            yAxisID: 'y1',
-                            fill: false
-                        },
-                        {
-                            label: 'Purchasing Power ($)',
-                            data: values,
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            yAxisID: 'y2',
-                            fill: false
-                        }
-                    ]
-                },
-                options: {
-                    scales: {
-                        y1: {
-                            type: 'linear',
-                            position: 'left',
-                            title: { display: true, text: 'Inflation Rate (%)' }
-                        },
-                        y2: {
-                            type: 'linear',
-                            position: 'right',
-                            title: { display: true, text: 'Purchasing Power ($)' },
-                            grid: { drawOnChartArea: false }
-                        }
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.setFontSize(14);
+                doc.text("Inflation Impact Results", 105, 15, { align: "center" });
+                doc.autoTable({
+                    startY: 20,
+                    head: [['Parameter', 'Value']],
+                    body: [
+                        ['Future Purchasing Power', futureValueValue],
+                        ['Total Inflation Impact (Loss)', lossValue]
+                    ],
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                    margin: { top: 10 }
+                });
+                doc.autoTable({
+                    startY: doc.lastAutoTable.finalY + 10,
+                    head: [['Year', 'Purchasing Power', 'Cumulative Inflation (%)']],
+                    body: yearlyBreakdown,
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        const footerText = 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.';
+                        const pageWidth = doc.internal.pageSize.width;
+                        const pageHeight = doc.internal.pageSize.height;
+                        const y = pageHeight - 10;
+                        const textWidth = doc.getTextWidth(footerText);
+                        const startX = (pageWidth - textWidth) / 2;
+                        const linkText = 'Fcalculator.com';
+                        const linkStart = footerText.indexOf(linkText);
+                        const beforeLink = footerText.substring(0, linkStart);
+                        const afterLink = footerText.substring(linkStart + linkText.length);
+                        const linkX = startX + doc.getTextWidth(beforeLink);
+                        const afterX = linkX + doc.getTextWidth(linkText);
+                        doc.text(beforeLink, startX, y);
+                        doc.setTextColor(0, 0, 255); // Blue for link
+                        doc.textWithLink(linkText, linkX, y, { url: 'https://fcalculator.com' });
+                        doc.setTextColor(100); // Back to gray
+                        doc.text(afterLink, afterX, y);
                     }
-                }
-            });
-        }
-        
-        function updateValueChart(initial, adjusted, start, end) {
-            const ctx = document.getElementById('valueChart').getContext('2d');
-            const data = [initial, adjusted];
-            const labels = [`Initial in ${start}`, `Comparable in ${end}`];
-            
-            if (valueChart) valueChart.destroy();
-            valueChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Dollar Value Comparison',
-                        data: data,
-                        backgroundColor: ['rgba(54, 162, 235, 0.2)', 'rgba(75, 192, 192, 0.2)'],
-                        borderColor: ['rgba(54, 162, 235, 1)', 'rgba(75, 192, 192, 1)'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: { display: true, text: 'Amount ($)' }
-                        }
-                    }
-                }
-            });
-        }
-        
-        function saveAsPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            doc.setFontSize(14);
-            doc.text("Inflation Calculation Results", 105, 15, { align: "center" });
-            
-            // Parameters Table
-            const resultsDiv = document.getElementById('results');
-            const params = [
-                ['Equivalent Value', resultsDiv.querySelector('p:nth-child(2)').textContent],
-                ['Total Inflation', resultsDiv.querySelector('p:nth-child(3)').textContent],
-                ['Average Annual Inflation', resultsDiv.querySelector('p:nth-child(4)').textContent]
-            ];
-            doc.autoTable({
-                startY: 20,
-                head: [['Parameter', 'Value']],
-                body: params,
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [255, 255, 255] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica' },
-                margin: { top: 10 }
-            });
-            
-            // Historical Table
-            const histData = [];
-            for (let year in cpiData) {
-                histData.push([year, cpiData[year], inflationRates[year] || '-']);
+                });
+                doc.save('inflation-impact-results.pdf');
+            } catch (e) {
+                alert('Error generating PDF: ' + e.message);
             }
-            doc.autoTable({
-                startY: doc.lastAutoTable.finalY + 10,
-                head: [['Year', 'Average CPI', 'Inflation Rate (%)']],
-                body: histData,
-                theme: 'grid',
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', halign: 'left' },
-                didDrawPage: function (data) {
-                    doc.setFontSize(10);
-                    doc.setTextColor(100);
-                    doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-                }
-            });
-            
-            doc.save('inflation-results.pdf');
         }
-        
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Inflation Purchasing Power Converter',
+                    title: 'Inflation Impact Calculator',
                     url: window.location.href
                 });
             } else {
-                alert('Share this page manually.');
+                alert('Share functionality not supported in this browser.');
             }
         }
     </script>
