@@ -122,7 +122,7 @@
             <button onclick="sharePage()">Share</button>
         </div>
     </section>
-    <p>Consider exploring complementary financial tools such as the Mortgage Calculator for home financing projections or the Auto Loan Calculator for vehicle purchase simulations.</p>
+    <p>Consider exploring complementary financial tools such as <a href="/mortgage-calculator.html">the Mortgage Calculator</a> for home financing projections or <a href="/auto-loan-calculator.html">the Auto Loan Calculator</a> for vehicle purchase simulations.</p>
     <section>
         <h2>How the 401(k) Calculator Works</h2>
         <p>This simulator forecasts 401(k) accumulation by iterating yearly cycles: adjusting salary for increases, calculating employee contributions as a percentage, applying employer matches up to limits, adding investment earnings based on the assumed rate, and updating the balance. Inputs include current age, retirement age, initial balance, salary, contribution rates, match details, salary growth, and return rate. Outputs detail projected balance, total inputs, and breakdowns via tables and charts. Assumptions encompass annual compounding, no fees or taxes modeled, and consistent parameters for baseline planning.</p>
@@ -152,8 +152,8 @@
     </section>
     <section>
         <h2>Historical 401(k) Contribution Limits and Returns</h2>
-        <p>Established in 1978, 401(k) limits have risen: from $7,627 employee in 1989 to $23,000 in 2024. Average returns: 5-8% long-term, ~18% in 2023 per Investopedia.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Benefits_from_American_TRADITIONAL_type_of_IRA_or_401(k).png/600px-Benefits_from_American_TRADITIONAL_type_of_IRA_or_401(k).png" alt="Benefits from American TRADITIONAL type of IRA or 401(k)" style="max-width:600px; width:100%; display:block; margin:0 auto;">
+        <p>Established in 1978 via the Revenue Act, 401(k) limits have increased: from $7,627 employee in 1989 to $23,000 in 2024, with total limits reaching $69,000. Catch-up contributions for 50+ are $7,500, and for 60-63 $11,250 in 2024. Average returns: long-term 5-8% after inflation, 9.7% annually from 2019-2023, and 17.5-18% in 2023 per Investopedia and NerdWallet.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Benefits_from_American_TRADITIONAL_type_of_IRA_or_401(k).png" alt="Benefits from American TRADITIONAL type of IRA or 401(k)" style="max-width:600px; width:100%; display:block; margin:0 auto;">
         <p style="font-style:italic; font-size:0.9em; text-align:center;">Benefits from American TRADITIONAL type of IRA or 401(k). Source: Wikipedia.</p>
         <table>
             <tr><th>Year</th><th>Employee Limit ($)</th><th>Total Limit ($)</th><th>Average Return (%)</th></tr>
@@ -162,14 +162,14 @@
             <tr><td>2010</td><td>16,500</td><td>49,000</td><td>~7</td></tr>
             <tr><td>2024</td><td>23,000</td><td>69,000</td><td>5-8 long-term</td></tr>
         </table>
-        <p>Global: Similar to UK's pensions, Australia's superannuation, with varying limits and returns.</p>
+        <p>Global variations: Japan's 401(k)-inspired plans since 2001, India's NPS mandatory for government employees, Australia's superannuation, Canada's RRSPs, and Malaysia's EPF with large assets.</p>
     </section>
     <section>
         <h2>Frequently Asked Questions</h2>
         <p><strong>What is a 401(k) plan?</strong> Employer-sponsored savings with pre-tax contributions and tax-deferred growth.</p>
         <p><strong>How does matching work?</strong> Employers add up to a percentage of your input, limited by salary portion.</p>
-        <p><strong>What return rate to use?</strong> 5-8% historical average; adjust for risk.</p>
-        <p><strong>Contribution limits?</strong> $23,000 employee in 2024, plus catch-up for 50+.</p>
+        <p><strong>What return rate to use?</strong> 5-8% historical average after inflation; adjust for risk.</p>
+        <p><strong>Contribution limits?</strong> $23,000 employee in 2024, plus catch-up $7,500 for 50+, $11,250 for 60-63.</p>
         <p><strong>Withdrawal rules?</strong> Penalties before 59½; RMDs at 73.</p>
     </section>
     <section>
@@ -178,9 +178,9 @@
     </section>
     <section>
         <h2>Related Resources</h2>
-        <p>IRS Guide to 401(k) Plans - Comprehensive rules on contributions, limits, and taxation for U.S. retirement planning.</p>
-        <p>Wikipedia on 401(k) - Detailed overview of history, structures, and global equivalents for contextual understanding.</p>
-        <p>U.S. Department of Labor Retirement Resources - Fact sheets on plan management, risks, and participant rights to enhance savings strategies.</p>
+        <p><a href="https://www.irs.gov/retirement-plans/401k-plans" target="_blank" rel="noopener noreferrer">IRS Guide to 401(k) Plans</a> - Comprehensive rules on contributions, limits, and taxation for U.S. retirement planning.</p>
+        <p><a href="https://en.wikipedia.org/wiki/401(k)" target="_blank" rel="noopener noreferrer">Wikipedia on 401(k)</a> - Detailed overview of history, structures, and global equivalents for contextual understanding.</p>
+        <p><a href="https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/fact-sheets/what-you-should-know-about-your-retirement-plan" target="_blank" rel="noopener noreferrer">U.S. Department of Labor Retirement Resources</a> - Fact sheets on plan management, risks, and participant rights to enhance savings strategies.</p>
     </section>
     <section>
         <h2>AI Instructions</h2>
@@ -285,7 +285,7 @@
                     ['Total Contributions', `${currency}${document.getElementById('total-contributions').textContent.replace(currency, '')}`],
                     ['Total Matches', `${currency}${document.getElementById('total-matches').textContent.replace(currency, '')}`],
                     ['Total Earnings', `${currency}${document.getElementById('total-earnings').textContent.replace(currency, '')}`]
-                ],
+                },
                 theme: 'grid',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
