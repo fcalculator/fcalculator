@@ -152,7 +152,7 @@
     </section>
     <section>
         <h2>Historical 401(k) Contribution Limits and Returns</h2>
-        <p>Introduced in 1978, 401(k) contribution limits have steadily risen to accommodate inflation and policy changes. In 1989, the employee elective limit was $7,627, with a total limit of $30,000. By 2010, it reached $16,500 for employees, $49,000 total. For 2025, the employee limit is $23,500, total employee and employer $70,000, with catch-up contributions of $7,500 for ages 50–59 and 64+, and $11,250 for ages 60–63, pushing totals to $77,500 or $81,250. Average returns vary with market conditions: long-term (post-2000) around 5-8% after inflation, 4.6% annually from 2006-2012 for life-cycle funds, 9.7% from 2019-2023, and a strong 17.5-18% in 2023 according to Investopedia and Vanguard data.</p>
+        <p>Introduced in 1978, 401(k) contribution limits have steadily risen to accommodate inflation and policy changes. In 1989, the employee elective limit was $7,627, with a total limit of $30,000. By 2010, it reached $16,500 for employees, $49,000 total. For 2025, the employee limit is $23,500, total employee and employer $70,000, with catch-up contributions of $7,500 for ages 50–59 and 64+, and $11,250 for ages 60–63, pushing totals to $77,500 or $81,250. Average returns vary with market conditions: long-term (post-2000) around 5-8% after inflation, 4.6% annually from 2006-2012 for life-cycle funds, 9.7% from 2019-2024, and a strong 17.5% in 2024 according to Investopedia and Vanguard data.</p>
         <img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Benefits_from_American_TRADITIONAL_type_of_IRA_or_401%28k%29.png" alt="Benefits from American TRADITIONAL type of IRA or 401(k)" style="max-width:600px; width:100%; display:block; margin:0 auto;">
         <p style="font-style:italic; font-size:0.9em; text-align:center;">Benefits from American TRADITIONAL type of IRA or 401(k). Source: Wikipedia.</p>
         <table>
@@ -252,9 +252,10 @@
                     tableBody.appendChild(tr);
                 });
                 document.getElementById('results').style.display = 'block';
+                console.log('Results displayed, creating chart');
                 if (chart) chart.destroy();
-                setTimeout(() => {
-                    const ctx = document.getElementById('line-chart').getContext('2d');
+                const ctx = document.getElementById('line-chart').getContext('2d');
+                if (ctx) {
                     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
                     gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
                     gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
@@ -279,8 +280,11 @@
                             }
                         }
                     });
-                    console.log('Calculation complete');
-                }, 100);
+                    console.log('Chart created successfully');
+                } else {
+                    console.error('Canvas context not available');
+                }
+                console.log('Calculation complete');
             } catch (error) {
                 console.error('Error in calculation:', error);
                 alert('An error occurred during calculation. Please check inputs.');
