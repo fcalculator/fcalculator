@@ -3,46 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Loan Payment Estimator</title>
-    <meta name="description" content="Estimate auto loan payments with detailed breakdowns, including monthly installments, total interest, amortization schedules, payoff dates, and visual charts for better vehicle financing planning.">
-    <meta name="keywords" content="auto loan estimator, car payment calculation, vehicle financing breakdown, amortization schedule, interest accumulation, payoff timeline">
-    <link rel="canonical" href="https://fcalculator.com/auto-loan-calculator.html">
-    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <title>Inflation Impact Calculator</title>
+    <meta name="description" content="Assess the erosion of your savings' purchasing power due to inflation over multiple years. This tool provides detailed year-by-year breakdowns, interactive charts, mathematical formulas, and historical context for informed financial planning.">
+    <meta name="keywords" content="inflation impact calculator, purchasing power erosion, savings devaluation over time, inflation effect on money, financial inflation projection, annual inflation rate simulation">
+    <link rel="canonical" href="https://fcalculator.com/inflation-impact-calculator.html">
+    <link rel="stylesheet" href="/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-    <script src="https://unpkg.com/jspdf-autotable"></script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.3/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Auto Loan Payment Estimator",
-      "url": "https://fcalculator.com/auto-loan-calculator.html",
-      "description": "A detailed estimator for auto loan payments, offering breakdowns of monthly costs, interest accumulation, amortization schedules, visual representations through charts, and export options to aid in vehicle purchase decisions.",
+      "name": "Inflation Impact Calculator",
+      "url": "https://fcalculator.com/inflation-impact-calculator.html",
+      "description": "A comprehensive online tool for calculating the impact of inflation on savings, featuring year-by-year purchasing power projections, interactive line charts for visualizing value erosion, detailed mathematical formulas with explanations, historical inflation data from reliable sources like the World Bank and IMF, FAQ section addressing common queries, and a downloadable PDF report for easy sharing and record-keeping. Designed for financial planners, investors, and individuals seeking to understand long-term money devaluation.",
       "datePublished": "2022-01-14",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "FCalculator.com",
-            "item": "https://fcalculator.com/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Financial Calculators",
-            "item": "https://fcalculator.com/financial.html"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Auto Loan Payment Estimator",
-            "item": "https://fcalculator.com/auto-loan-calculator.html"
-          }
-        ]
+      "author": {
+        "@type": "Person",
+        "name": "I.Brkic"
       },
       "publisher": {
         "@type": "Organization",
@@ -52,48 +33,26 @@
           "url": "https://fcalculator.com/logo.png"
         }
       },
-      "mainEntity": {
-        "@type": "FAQPage",
-        "mainEntity": [
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
           {
-            "@type": "Question",
-            "name": "What key elements determine auto loan monthly costs?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Monthly costs depend on the financed amount, annual interest rate, term duration, initial down payment, trade-in credits, applicable taxes, and extra charges such as registration."
-            }
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://fcalculator.com/"
           },
           {
-            "@type": "Question",
-            "name": "How does increasing the down payment affect overall financing?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Higher down payments decrease the borrowed principal, resulting in reduced monthly installments and lower cumulative interest expenses throughout the term."
-            }
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Finance",
+            "item": "https://fcalculator.com/finance.html"
           },
           {
-            "@type": "Question",
-            "name": "What does an amortization table reveal about the loan?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "It illustrates the division of each installment into principal reduction and interest charges, tracking the declining balance until complete repayment."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Why include taxes and fees in estimations?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Incorporating sales taxes and registration fees ensures realistic projections of the total financed sum and subsequent payments."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What strategies can optimize auto financing terms?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Enhance credit ratings, compare lender offers for competitive rates, choose manageable shorter terms, and leverage negotiations for better vehicle pricing or rebates."
-            }
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Inflation Impact Calculator",
+            "item": "https://fcalculator.com/inflation-impact-calculator.html"
           }
         ]
       }
@@ -104,344 +63,220 @@
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/financial.html">Financial Calculators</a> > <a href="/auto-loan-calculator.html">Auto Loan Payment Estimator</a>
+            <a href="/">FCalculator.com</a> > <a href="/finance.html">Finance</a> > <a href="/inflation-impact-calculator.html">Inflation Impact Calculator</a>
         </div>
-        <h1>Auto Loan Payment Estimator</h1>
-        <p>Determine precise estimates for vehicle financing, covering monthly payments, interest totals, detailed schedules, and timelines to support informed purchasing choices.</p>
+        <h1>Inflation Impact Calculator</h1>
+        <p>Evaluate how ongoing inflation diminishes the real value of your savings across future years, offering projections, visualizations, and insights to aid in strategic financial decisions.</p>
     </header>
     <section class="tool-section">
         <form id="tool-form">
-            <div class="currency-selector">
-                <label for="currency">Currency:</label>
+            <div class="input-row">
+                <label for="currency">Currency</label>
                 <select id="currency">
-                    <option value="$">$ - USD</option>
-                    <option value="€">€ - EUR</option>
-                    <option value="£">£ - GBP</option>
-                    <option value="¥">¥ - JPY</option>
-                    <option value="C$">C$ - CAD</option>
-                    <option value="A$">A$ - AUD</option>
+                    <option value="$">USD ($)</option>
+                    <option value="€">EUR (€)</option>
+                    <option value="£">GBP (£)</option>
+                    <option value="¥">JPY (¥)</option>
+                    <option value="C$">CAD (C$)</option>
+                    <option value="A$">AUD (A$)</option>
                 </select>
             </div>
-            <div class="sections-container">
+            <div class="sections-container-1">
                 <fieldset>
-                    <legend>Vehicle Purchase</legend>
+                    <legend>Savings Details</legend>
                     <div class="input-row">
-                        <label for="vehicle-price">Vehicle Price</label>
-                        <input type="number" id="vehicle-price" value="50000" placeholder="50000" required>
+                        <label for="savings">Current Savings Amount</label>
+                        <input type="number" id="savings" placeholder="e.g. 10000" value="10000" required>
                     </div>
                     <div class="input-row">
-                        <label for="down-payment">Down Payment</label>
-                        <input type="number" id="down-payment" value="10000" placeholder="10000" required>
+                        <label for="years">Number of Years</label>
+                        <input type="number" id="years" placeholder="e.g. 10" value="10" required>
                     </div>
                     <div class="input-row">
-                        <label for="trade-in-value">Trade-In Value</label>
-                        <input type="number" id="trade-in-value" value="0" placeholder="0" required>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>Loan Details</legend>
-                    <div class="input-row">
-                        <label for="interest-rate">Annual Interest Rate (%)</label>
-                        <input type="number" id="interest-rate" value="5" step="0.01" placeholder="5" required>
-                    </div>
-                    <div class="input-row">
-                        <label for="loan-term">Loan Term (Months)</label>
-                        <input type="number" id="loan-term" value="60" placeholder="60" required>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>Taxes and Fees</legend>
-                    <div class="input-row">
-                        <label for="sales-tax">Sales Tax (%)</label>
-                        <input type="number" id="sales-tax" value="7" step="0.01" placeholder="7" required>
-                    </div>
-                    <div class="input-row">
-                        <label for="title-reg-fees">Title & Registration Fees</label>
-                        <input type="number" id="title-reg-fees" value="2000" placeholder="2000" required>
-                    </div>
-                    <div class="input-row">
-                        <label for="incentives">Incentives/Rebates</label>
-                        <input type="number" id="incentives" value="0" placeholder="0" required>
+                        <label for="inflation">Annual Inflation Rate (%)</label>
+                        <input type="number" step="0.1" id="inflation" placeholder="e.g. 3" value="3" required>
                     </div>
                 </fieldset>
             </div>
-            <button type="button" onclick="calculateAutoLoan()">Calculate</button>
+            <button type="button" onclick="calculate()">Calculate</button>
         </form>
-    </section>
-    <section class="results-section">
-        <h2>Loan Results</h2>
-        <p id="monthly-payment"></p>
-        <p id="total-payments"></p>
-        <p id="total-interest"></p>
-        <p id="payoff-date"></p>
-        <div id="amortization-table-container">
-            <h3>Amortization Schedule</h3>
-            <table id="amortization-table">
+        <div class="results-section" id="results" style="display:none;">
+            <h2>Calculation Results</h2>
+            <p>Future Purchasing Power: <span id="future-value"></span></p>
+            <p>Total Inflation Impact (Loss): <span id="loss"></span></p>
+            <div id="chart-container">
+                <canvas id="inflationChart" width="600" height="400"></canvas>
+            </div>
+            <h3>Yearly Breakdown</h3>
+            <table id="breakdown-table">
                 <thead>
                     <tr>
-                        <th>Month</th>
-                        <th>Payment</th>
-                        <th>Principal</th>
-                        <th>Interest</th>
-                        <th>Balance</th>
+                        <th>Year</th>
+                        <th>Purchasing Power</th>
+                        <th>Cumulative Inflation (%)</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
+            <button onclick="saveAsPDF()">Save as PDF</button>
+            <button onclick="sharePage()">Share</button>
         </div>
-        <canvas id="interest-principal-chart" width="400" height="200"></canvas>
-        <canvas id="balance-chart" width="400" height="200"></canvas>
-        <button class="pdf-button" onclick="saveAsPDF()">Save as PDF</button>
-        <button class="share-button" onclick="sharePage()">Share this Page</button>
     </section>
-    <p>Explore similar financial tools such as the <a href="/loan-calculator.html">general loan estimator</a> or <a href="/mortgage-calculator.html">mortgage payment planner</a> for broader comparisons.</p>
+    <p>Consider exploring complementary financial tools such as the <a href="/auto-loan-calculator.html">Auto Loan Calculator</a> for borrowing projections or the <a href="/rental-property-roi-simulator.html">Rental Property ROI Simulator</a> for investment returns analysis.</p>
     <section>
-        <h2>How Auto Loan Estimations Work</h2>
-        <p>Vehicle financing involves distributing the cost of a car over a set period through regular payments. This estimator allows simulation of different scenarios by adjusting inputs like purchase price, initial contributions, rates, and extras to reveal potential outcomes.</p>
-        <p>The primary calculation for installment amounts uses the amortizing loan equation:</p>
-        \[ M = P \frac{r(1 + r)^n}{(1 + r)^n - 1} \]
-        <p>Here, \( M \) represents the monthly installment, \( P \) the financed principal (adjusted for down payments, trades, taxes, fees, and rebates), \( r \) the monthly rate (annual divided by 12), and \( n \) the total months. Cumulative interest derives from summing interest components across all periods, while the final date projects from today's New York time onward by adding the term.</p>
-        <h3>Step-by-Step Usage Guide</h3>
-        <p>Begin with the vehicle cost, then modify down payment and trade-in to lessen the base amount. Enter anticipated rates and durations. Factor in regional taxes and charges for accuracy, deducting any promotions. Choose currency, compute, and review outputs including visuals and tables. Experiment with variations, such as extending terms for smaller installments at higher interest totals, or boosting initials for savings.</p>
-        <p>For instance, a $50,000 vehicle with 20% down at 5% over 60 months yields specific payments; shortening to 48 months elevates installments but curtails interest.</p>
+        <h2>How the Inflation Impact Calculator Works</h2>
+        <p>This calculator simulates the degradation of savings' purchasing power by applying compound inflation annually. Start by selecting your currency, entering the current savings amount, specifying the time horizon in years, and providing an estimated annual inflation rate based on historical or projected data. Upon calculation, it generates a future value adjusted for inflation, total loss in real terms, an interactive line chart depicting the decline over time, and a table with yearly details including cumulative inflation percentages. The tool assumes constant inflation without growth factors like interest earnings, focusing purely on erosion effects for conservative planning.</p>
     </section>
     <section>
-        <h2>Key Influences on Vehicle Financing</h2>
-        <p>Rates fluctuate with borrower profiles, economic trends, and providers. U.S. Federal Reserve statistics indicate averages of 4-7% for new vehicles among qualified applicants. Tax percentages vary regionally—e.g., around 6-8% in many states—impacting the taxable base post-trade.</p>
+        <h2>Mathematical Formulas and Derivations</h2>
+        <p>The primary formula for calculating future purchasing power under inflation is derived from the compound interest principle but inverted for devaluation:</p>
+        <div style="max-width:600px; margin:0 auto;">
+            \[ FV = PV \times (1 + r)^{-n} \]
+        </div>
+        <p>Where \( FV \) represents the future purchasing power, \( PV \) is the present value (current savings), \( r \) is the annual inflation rate as a decimal, and \( n \) is the number of years. This equation accounts for the exponential decay in value. Cumulative inflation over the period is computed as \( (1 + r)^n - 1 \), expressed as a percentage to show total price increase. For yearly breakdowns, the value is iteratively adjusted each year, providing a granular view suitable for long-term forecasting.</p>
+        <p>Additionally, the Rule of 72 offers a quick approximation: divide 72 by the inflation rate to estimate years until savings halve in value, useful for mental checks alongside precise computations.</p>
+    </section>
+    <section>
+        <h2>Factors Influencing Inflation and Its Effects on Savings</h2>
+        <h3>Demand-Pull and Cost-Push Dynamics</h3>
+        <p>Inflation arises from imbalances like demand-pull, where excessive consumer spending outpaces supply, or cost-push, driven by rising production costs such as energy prices. These factors accelerate money devaluation, making savings less effective for future purchases. Central banks mitigate this through interest rate adjustments, but persistent inflation can erode wealth significantly over decades.</p>
+        <h3>Impact on Different Asset Classes</h3>
+        <p>Savings in cash or low-yield accounts suffer most, while investments in stocks or real estate may hedge against inflation. Understanding these dynamics helps in diversifying portfolios to preserve real wealth.</p>
         <table>
             <thead>
-                <tr>
-                    <th>Variable</th>
-                    <th>Effect on Financing</th>
-                    <th>Example Impact (on $40,000 Loan)</th>
-                </tr>
+                <tr><th>Inflation Type</th><th>Cause</th><th>Effect on Savings</th></tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Elevated Rate</td>
-                    <td>Boosts installments and totals</td>
-                    <td>5% to 7%: +$50/month, +$3,000 interest</td>
-                </tr>
-                <tr>
-                    <td>Extended Duration</td>
-                    <td>Reduces monthly but increases interest</td>
-                    <td>48 to 72 months: -$100/month, +$2,500 interest</td>
-                </tr>
-                <tr>
-                    <td>Increased Initial Payment</td>
-                    <td>Lowers all costs</td>
-                    <td>$5,000 to $10,000: -$80/month, -$1,200 interest</td>
-                </tr>
-                <tr>
-                    <td>Trade Credit</td>
-                    <td>Diminishes effective price</td>
-                    <td>$5,000 credit: -$40/month, -$1,000 interest</td>
-                </tr>
-                <tr>
-                    <td>Taxes/Fees</td>
-                    <td>Adds to principal</td>
-                    <td>7% tax + $2,000: +$50/month, +$1,500 total</td>
-                </tr>
+                <tr><td>Demand-Pull</td><td>High consumer demand</td><td>Increased prices reduce buying power</td></tr>
+                <tr><td>Cost-Push</td><td>Rising input costs</td><td>Higher goods prices devalue money</td></tr>
+                <tr><td>Built-In</td><td>Wage-price spirals</td><td>Persistent erosion over time</td></tr>
             </tbody>
         </table>
-        <p>Visual aids like pie charts highlight principal-interest splits, while line graphs depict balance declines, aiding comprehension. Compare with internal resources such as the <a href="/credit-card-calculator.html">credit card payoff planner</a> for alternative funding insights.</p>
-        <h3>Comparative Analysis of Loan Terms</h3>
-        <p>Shorter terms minimize interest but demand higher cash flow; longer ones ease budgets yet inflate expenses. Balancing affordability with cost efficiency is crucial, often informed by credit health and market rates.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Car_finance_diagram.svg/600px-Car_finance_diagram.svg.png" alt="Diagram illustrating car finance components including principal, interest, and payments" style="max-width: 600px; display: block; margin: 0 auto;">
-        <p>Source: Adapted from Wikipedia's car finance overview.</p>
     </section>
     <section>
-        <h2>Advanced Considerations in Auto Financing</h2>
-        <p>Beyond basics, factor in depreciation—vehicles lose value rapidly, potentially leading to negative equity if financed long-term. Incentives like manufacturer rebates can offset costs, while pre-approvals strengthen negotiations.</p>
-        <h3>Interest Accumulation Dynamics</h3>
-        <p>Interest applies to remaining balances, front-loading costs in early periods. The formula for period interest is \( I = B \times r \), with principal payment as \( PP = M - I \), reducing \( B \) iteratively.</p>
+        <h2>Historical Inflation Rates and Global Comparisons</h2>
+        <p>Inflation varies by country and era. According to World Bank data, global average consumer price inflation was around 4.3% in recent years, with emerging economies at 5.5% and advanced at 2.5% per IMF reports. In the US, historical rates peaked at over 13% in the 1970s due to oil shocks, as shown in the graph below.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/US_Historical_Inflation_Ancient.svg/300px-US_Historical_Inflation_Ancient.svg.png" alt="Graph of historical US inflation rates from ancient times to present" style="width:300px; display:block; margin:0 auto;">
+        <i style="display:block; text-align:center; font-size:smaller;">Graph illustrating US inflation rates from historical data including ancient periods. Source: Wikipedia.</i>
+        <p>Countries like Venezuela experienced hyperinflation exceeding 50% monthly, while Japan often sees deflation. Use these benchmarks to input realistic rates for accurate projections.</p>
         <table>
             <thead>
-                <tr>
-                    <th>Term Length</th>
-                    <th>Avg. Monthly</th>
-                    <th>Total Interest (% of Principal)</th>
-                    <th>Pros/Cons</th>
-                </tr>
+                <tr><th>Region</th><th>Average Annual Inflation (Recent)</th><th>Source</th></tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>36 Months</td>
-                    <td>Higher</td>
-                    <td>Lower (e.g., 8%)</td>
-                    <td>Quick payoff; less interest but strains budget</td>
-                </tr>
-                <tr>
-                    <td>60 Months</td>
-                    <td>Moderate</td>
-                    <td>Medium (e.g., 13%)</td>
-                    <td>Balanced; common for affordability</td>
-                </tr>
-                <tr>
-                    <td>84 Months</td>
-                    <td>Lower</td>
-                    <td>Higher (e.g., 18%)</td>
-                    <td>Easier payments; risks upside-down loans</td>
-                </tr>
+                <tr><td>World</td><td>4.3%</td><td>IMF</td></tr>
+                <tr><td>US</td><td>2.5%</td><td>World Bank</td></tr>
+                <tr><td>EU</td><td>2.0%</td><td>ECB</td></tr>
+                <tr><td>Emerging Markets</td><td>5.5%</td><td>IMF</td></tr>
             </tbody>
         </table>
-        <p>Data drawn from general trends; consult sources like the <a href="https://www.federalreserve.gov/releases/g19/current/" target="_blank" rel="noopener noreferrer">Federal Reserve's consumer credit reports</a> for current figures.</p>
     </section>
-    <section class="faq-section">
+    <section>
         <h2>Frequently Asked Questions</h2>
-        <p><strong>What key elements determine auto loan monthly costs?</strong> Monthly costs depend on the financed amount, annual interest rate, term duration, initial down payment, trade-in credits, applicable taxes, and extra charges such as registration.</p>
-        <p><strong>How does increasing the down payment affect overall financing?</strong> Higher down payments decrease the borrowed principal, resulting in reduced monthly installments and lower cumulative interest expenses throughout the term.</p>
-        <p><strong>What does an amortization table reveal about the loan?</strong> It illustrates the division of each installment into principal reduction and interest charges, tracking the declining balance until complete repayment.</p>
-        <p><strong>Why include taxes and fees in estimations?</strong> Incorporating sales taxes and registration fees ensures realistic projections of the total financed sum and subsequent payments.</p>
-        <p><strong>What strategies can optimize auto financing terms?</strong> Enhance credit ratings, compare lender offers for competitive rates, choose manageable shorter terms, and leverage negotiations for better vehicle pricing or rebates.</p>
+        <p><strong>What is the difference between nominal and real value in savings?</strong> Nominal value is the face amount, while real value adjusts for inflation, reflecting actual purchasing power.</p>
+        <p><strong>How does hyperinflation differ from regular inflation?</strong> Hyperinflation exceeds 50% monthly, leading to rapid currency collapse, as seen in historical cases like Zimbabwe or Weimar Germany.</p>
+        <p><strong>Can I use this tool for investment planning?</strong> Yes, it highlights the need for returns exceeding inflation; combine with other tools for comprehensive analysis.</p>
+        <p><strong>What if inflation rates change over time?</strong> The tool assumes constant rates; for variable scenarios, run multiple simulations with average estimates.</p>
+        <p><strong>Why include a chart and table?</strong> Visuals aid in understanding trends, while tables provide precise data for budgeting or reporting.</p>
     </section>
-    <section class="disclaimer-section">
+    <section>
         <h2>Disclaimer</h2>
-        <p>This estimator serves educational purposes, providing approximations based on user inputs. It is not financial advice, and actual terms may differ due to lender evaluations, credit assessments, or economic shifts. Seek professional consultation from financial experts or institutions prior to commitments.</p>
+        <p>This inflation impact calculator is provided for educational and informational purposes only. It does not constitute financial, investment, or professional advice. Results are based on user inputs and assumptions; actual inflation may vary. Consult a qualified financial advisor for personalized guidance. FCalculator.com assumes no liability for decisions made based on this tool.</p>
     </section>
-    <section class="related-resources">
+    <section>
         <h2>Related Resources</h2>
-        <ul>
-            <li><a href="https://www.consumerfinance.gov/ask-cfpb/what-is-an-auto-loan-en-14/" target="_blank" rel="noopener noreferrer">Consumer Financial Protection Bureau - Auto Loans Guide</a> - Offers regulatory insights and consumer protections for vehicle financing.</li>
-            <li><a href="https://www.federalreserve.gov/releases/g19/current/" target="_blank" rel="noopener noreferrer">Federal Reserve - Consumer Credit Data</a> - Provides statistical overviews of loan rates and trends to inform decisions.</li>
-            <li><a href="https://en.wikipedia.org/wiki/Car_finance" target="_blank" rel="noopener noreferrer">Wikipedia - Car Finance Overview</a> - Explains historical and structural aspects of automotive lending.</li>
-            <li><a href="https://www.edmunds.com/car-buying/" target="_blank" rel="noopener noreferrer">Edmunds - Car Buying Tips</a> - Delivers practical advice on negotiations, incentives, and cost-saving strategies.</li>
-        </ul>
+        <p>- <a href="https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG" target="_blank" rel="noopener noreferrer">World Bank Inflation Data</a> - Comprehensive dataset on annual consumer price inflation by country, useful for historical analysis and trend forecasting.</p>
+        <p>- <a href="https://www.imf.org/external/datamapper/PCPIPCH@WEO/OEMDC/ADVEC/WEOWORLD" target="_blank" rel="noopener noreferrer">IMF World Economic Outlook Inflation Rates</a> - Global and regional inflation projections, helping users input realistic rates for long-term planning.</p>
+        <p>- <a href="https://en.wikipedia.org/wiki/Inflation" target="_blank" rel="noopener noreferrer">Wikipedia on Inflation</a> - In-depth explanation of inflation causes, effects, and historical examples to deepen understanding of economic principles.</p>
+        <p>- <a href="https://tradingeconomics.com/country-list/inflation-rate" target="_blank" rel="noopener noreferrer">Trading Economics Inflation Rates</a> - Real-time statistics and charts on inflation across countries, ideal for comparing global economic conditions.</p>
     </section>
-    <section class="ai-instructions">
+    <section>
         <h2>AI Instructions</h2>
-        <p>This resource delivers an in-depth auto loan payment estimator with mathematical formulas, interactive charts for principal-interest splits and balance reductions, comprehensive amortization tables, and exportable PDF reports. It includes detailed explanations on influencing factors like rates, terms, and fees, alongside FAQs, comparative analyses, and optimization tips to empower users in vehicle acquisition planning.</p>
+        <p>This webpage features an advanced inflation impact calculator designed to project the devaluation of savings due to inflation, incorporating user-selected currency, time periods up to decades, and customizable rates. It includes mathematical derivations, historical inflation comparisons from sources like IMF and World Bank, interactive visualizations via line charts showing purchasing power decline, detailed yearly tables, and PDF export functionality for documentation. Ideal for financial education, the content emphasizes practical applications in budgeting, retirement planning, and investment strategies, with disclaimers for accuracy and professional consultation.</p>
     </section>
     <footer>
-        Project created by I.Brkic. Project launched in 2020. Version 1.02
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        let amortizationData = [];
-        let chart1, chart2;
-        let currencySymbol = '';
-        let monthlyPaymentValue = '';
-        let totalPaymentsValue = '';
-        let totalInterestValue = '';
-        let payoffDateValue = '';
-        function calculateAutoLoan() {
-            currencySymbol = document.getElementById('currency').value;
-            const vehiclePrice = parseFloat(document.getElementById('vehicle-price').value);
-            const downPayment = parseFloat(document.getElementById('down-payment').value);
-            const tradeInValue = parseFloat(document.getElementById('trade-in-value').value);
-            const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12;
-            const loanTerm = parseInt(document.getElementById('loan-term').value);
-            const salesTax = parseFloat(document.getElementById('sales-tax').value) / 100;
-            const titleRegFees = parseFloat(document.getElementById('title-reg-fees').value);
-            const incentives = parseFloat(document.getElementById('incentives').value);
-            const taxableAmount = vehiclePrice - tradeInValue;
-            const taxAmount = taxableAmount * salesTax;
-            const principal = vehiclePrice - downPayment - tradeInValue + taxAmount + titleRegFees - incentives;
-            const monthlyPayment = principal * (interestRate * Math.pow(1 + interestRate, loanTerm)) / (Math.pow(1 + interestRate, loanTerm) - 1);
-            const totalPayments = monthlyPayment * loanTerm;
-            const totalInterest = totalPayments - principal;
-            const today = new Date();
-            today.setUTCHours(today.getUTCHours() - 4); // New York time (EDT/EST adjustment)
-            const payoffDate = new Date(today);
-            payoffDate.setMonth(payoffDate.getMonth() + loanTerm);
-            monthlyPaymentValue = monthlyPayment.toFixed(2);
-            totalPaymentsValue = totalPayments.toFixed(2);
-            totalInterestValue = totalInterest.toFixed(2);
-            payoffDateValue = payoffDate.toDateString();
-            document.getElementById('monthly-payment').textContent = `Monthly Payment: ${currencySymbol}${monthlyPaymentValue}`;
-            document.getElementById('total-payments').textContent = `Total Payments: ${currencySymbol}${totalPaymentsValue}`;
-            document.getElementById('total-interest').textContent = `Total Interest: ${currencySymbol}${totalInterestValue}`;
-            document.getElementById('payoff-date').textContent = `Payoff Date: ${payoffDateValue}`;
-            // Amortization Schedule
-            amortizationData = [];
-            let balance = principal;
-            let totalPrincipalPaid = 0;
-            let totalInterestPaid = 0;
-            const tableBody = document.querySelector('#amortization-table tbody');
-            tableBody.innerHTML = '';
-            for (let month = 1; month <= loanTerm; month++) {
-                const interest = balance * interestRate;
-                const principalPaid = monthlyPayment - interest;
-                balance -= principalPaid;
-                if (balance < 0) balance = 0;
-                amortizationData.push([month, monthlyPayment.toFixed(2), principalPaid.toFixed(2), interest.toFixed(2), balance.toFixed(2)]);
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>${month}</td><td style="color: black;">${currencySymbol}${monthlyPayment.toFixed(2)}</td><td style="color: black;">${currencySymbol}${principalPaid.toFixed(2)}</td><td style="color: black;">${currencySymbol}${interest.toFixed(2)}</td><td style="color: black;">${currencySymbol}${balance.toFixed(2)}</td>`;
-                tableBody.appendChild(row);
-                totalPrincipalPaid += principalPaid;
-                totalInterestPaid += interest;
+        let chart = null;
+        let yearlyBreakdown = [];
+        function calculate() {
+            const savings = parseFloat(document.getElementById('savings').value);
+            const years = parseInt(document.getElementById('years').value);
+            const inflation = parseFloat(document.getElementById('inflation').value) / 100;
+            const currency = document.getElementById('currency').value;
+            let currentValue = savings;
+            const yearlyValues = [savings];
+            const cumulativeInflation = [0];
+            let cumInf = 0;
+            yearlyBreakdown = [];
+            for (let y = 1; y <= years; y++) {
+                currentValue = currentValue / (1 + inflation);
+                cumInf = (1 + cumInf) * (1 + inflation) - 1;
+                yearlyValues.push(currentValue);
+                cumulativeInflation.push(cumInf * 100);
+                yearlyBreakdown.push([y, currency + currentValue.toFixed(2), cumulativeInflation[y].toFixed(2) + '%']);
             }
-            // Charts
-            if (chart1) chart1.destroy();
-            if (chart2) chart2.destroy();
-            const ctx1 = document.getElementById('interest-principal-chart').getContext('2d');
-            chart1 = new Chart(ctx1, {
-                type: 'pie',
-                data: {
-                    labels: ['Principal', 'Interest'],
-                    datasets: [{ 
-                        data: [totalPrincipalPaid, totalInterestPaid], 
-                        backgroundColor: ['#36A2EB', '#FF6384'],
-                        borderColor: ['#FFFFFF', '#FFFFFF'],
-                        borderWidth: 1 
-                    }]
-                },
-                options: { 
-                    responsive: true, 
-                    plugins: { 
-                        legend: { position: 'top' }, 
-                        title: { display: true, text: 'Principal vs Interest Breakdown' },
-                        tooltip: { callbacks: { label: function(context) { return context.label + ': ' + context.parsed + ' (' + ((context.parsed / (totalPrincipalPaid + totalInterestPaid)) * 100).toFixed(2) + '%)'; } } }
-                    } 
-                }
-            });
-            const ctx2 = document.getElementById('balance-chart').getContext('2d');
-            const balances = amortizationData.map(row => parseFloat(row[4]));
-            balances.unshift(principal); // Start with initial balance
-            chart2 = new Chart(ctx2, {
-                type: 'line',
-                data: {
-                    labels: [...Array(loanTerm + 1).keys()],
-                    datasets: [{ 
-                        label: 'Loan Balance Over Time', 
-                        data: balances, 
-                        borderColor: '#4BC0C0', 
-                        fill: false,
-                        tension: 0.1,
-                        pointBackgroundColor: '#FFCE56',
-                        pointRadius: 3 
-                    }]
-                },
-                options: { 
-                    responsive: true, 
-                    plugins: { 
-                        title: { display: true, text: 'Balance Reduction Chart' },
-                        tooltip: { mode: 'index', intersect: false }
+            const futureValue = yearlyValues[years].toFixed(2);
+            const loss = (savings - futureValue).toFixed(2);
+            document.getElementById('future-value').innerText = currency + futureValue;
+            document.getElementById('loss').innerText = currency + loss;
+            const tbody = document.getElementById('breakdown-table').querySelector('tbody');
+            tbody.innerHTML = '';
+            for (let y = 1; y <= years; y++) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${y}</td><td>${currency}${yearlyValues[y].toFixed(2)}</td><td>${cumulativeInflation[y].toFixed(2)}%</td>`;
+                tbody.appendChild(row);
+            }
+            document.getElementById('results').style.display = 'block';
+            setTimeout(() => {
+                if (chart) chart.destroy();
+                const ctx = document.getElementById('inflationChart').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: Array.from({length: years + 1}, (_, i) => `Year ${i}`),
+                        datasets: [{
+                            label: 'Purchasing Power',
+                            data: yearlyValues,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1,
+                            pointRadius: 4,
+                            pointBackgroundColor: 'rgb(255, 99, 132)',
+                            fill: false
+                        }]
                     },
-                    scales: {
-                        y: { beginAtZero: true }
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { beginAtZero: false, title: { display: true, text: 'Value in ' + currency } },
+                            x: { title: { display: true, text: 'Years' } }
+                        },
+                        plugins: {
+                            legend: { display: true },
+                            tooltip: { callbacks: { label: function(context) { return 'Value: ' + currency + context.parsed.y.toFixed(2); } } }
+                        }
                     }
-                }
-            });
+                });
+            }, 100);
         }
         function saveAsPDF() {
-            if (!amortizationData.length) {
-                alert('Please calculate the loan first!');
+            if (!yearlyBreakdown.length) {
+                alert('Please calculate first!');
                 return;
             }
             try {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 doc.setFontSize(14);
-                doc.text("Auto Loan Calculation Results", 105, 15, { align: "center" });
+                doc.text("Inflation Impact Results", 105, 15, { align: "center" });
                 doc.autoTable({
                     startY: 20,
                     head: [['Parameter', 'Value']],
                     body: [
-                        ['Monthly Payment', monthlyPaymentValue],
-                        ['Total Payments', totalPaymentsValue],
-                        ['Total Interest', totalInterestValue],
-                        ['Payoff Date', payoffDateValue]
+                        ['Future Purchasing Power', document.getElementById('future-value').innerText],
+                        ['Total Inflation Impact (Loss)', document.getElementById('loss').innerText]
                     ],
                     theme: 'grid',
                     headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
@@ -451,8 +286,8 @@
                 });
                 doc.autoTable({
                     startY: doc.lastAutoTable.finalY + 10,
-                    head: [['Month', 'Payment', 'Principal', 'Interest', 'Balance']],
-                    body: amortizationData,
+                    head: [['Year', 'Purchasing Power', 'Cumulative Inflation (%)']],
+                    body: yearlyBreakdown,
                     theme: 'grid',
                     headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                     alternateRowStyles: { fillColor: [245, 245, 245] },
@@ -479,7 +314,7 @@
                         doc.text(afterLink, afterX, y);
                     }
                 });
-                doc.save('auto-loan-results.pdf');
+                doc.save('inflation-impact-results.pdf');
             } catch (e) {
                 alert('Error generating PDF: ' + e.message);
             }
@@ -487,11 +322,11 @@
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Auto Loan Payment Estimator',
+                    title: 'Inflation Impact Calculator',
                     url: window.location.href
                 });
             } else {
-                alert('Share this page manually.');
+                alert('Share functionality not supported in this browser.');
             }
         }
     </script>
