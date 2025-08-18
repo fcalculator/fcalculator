@@ -105,22 +105,22 @@
             <button type="button" onclick="calculate401k()">Calculate</button>
         </form>
         <div class="results-section" id="results" style="display: none;">
-            <h2>Calculation Results</h2>
-            <p>Projected 401(k) Balance at Retirement: <span id="projected-balance"></span></p>
-            <p>Total Contributions: <span id="total-contributions"></span></p>
-            <p>Total Employer Matches: <span id="total-matches"></span></p>
-            <p>Total Investment Earnings: <span id="total-earnings"></span></p>
-            <canvas id="line-chart" width="500" height="300"></canvas>
-            <h3>Yearly Projection Schedule</h3>
-            <table id="yearly-table">
-                <thead>
-                    <tr><th>Year</th><th>Salary</th><th>Your Contribution</th><th>Employer Match</th><th>Earnings</th><th>Balance</th></tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <button onclick="saveAsPDF()">Save as PDF</button>
-            <button onclick="sharePage()">Share</button>
-        </div>
+    <h2>Calculation Results</h2>
+    <p>Projected 401(k) Balance at Retirement: <span id="projected-balance"></span></p>
+    <p>Total Contributions: <span id="total-contributions"></span></p>
+    <p>Total Employer Matches: <span id="total-matches"></span></p>
+    <p>Total Investment Earnings: <span id="total-earnings"></span></p>
+    <canvas id="line-chart"></canvas> <!-- Removed fixed width/height for responsiveness -->
+    <h3>Yearly Projection Schedule</h3>
+    <table id="yearly-table">
+        <thead>
+            <tr><th>Year</th><th>Salary</th><th>Your Contribution</th><th>Employer Match</th><th>Earnings</th><th>Balance</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <button onclick="saveAsPDF()">Save as PDF</button>
+    <button onclick="sharePage()">Share</button>
+</div>
     </section>
     <p>Consider exploring complementary financial tools such as <a href="/mortgage-calculator.html">the Mortgage Calculator</a> for home financing projections or <a href="/auto-loan-calculator.html">the Auto Loan Calculator</a> for vehicle purchase simulations.</p>
     <section>
@@ -191,107 +191,113 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        let chart;
-        let yearlyData = [];
-        function calculate401k() {
-            try {
-                console.log('Starting calculation');
-                const currency = document.getElementById('currency').value;
-                const currentAge = parseInt(document.getElementById('current-age').value);
-                const retirementAge = parseInt(document.getElementById('retirement-age').value);
-                const years = retirementAge - currentAge;
-                if (isNaN(years) || years <= 0) {
-                    alert('Invalid ages: Retirement age must be greater than current age.');
-                    return;
-                }
-                let balance = parseFloat(document.getElementById('current-balance').value);
-                let salary = parseFloat(document.getElementById('annual-salary').value);
-                const contribPercent = parseFloat(document.getElementById('contribution-percent').value) / 100;
-                const matchPercent = parseFloat(document.getElementById('employer-match').value) / 100;
-                const matchMax = parseFloat(document.getElementById('employer-max').value) / 100;
-                const salaryIncrease = parseFloat(document.getElementById('salary-increase').value) / 100;
-                const returnRate = parseFloat(document.getElementById('return-rate').value) / 100;
-                if (isNaN(balance) || isNaN(salary) || isNaN(contribPercent) || isNaN(matchPercent) || isNaN(matchMax) || isNaN(salaryIncrease) || isNaN(returnRate)) {
-                    alert('Invalid input: Please check all fields are numbers.');
-                    return;
-                }
-                let totalContrib = 0;
-                let totalMatch = 0;
-                let totalEarnings = 0;
-                yearlyData = [];
-                const labels = [];
-                const balances = [];
-                for (let year = 1; year <= years; year++) {
-                    const contrib = salary * contribPercent;
-                    const match = Math.min(contrib * matchPercent, salary * matchMax);
-                    const addition = contrib + match;
-                    const earnings = (balance + addition) * returnRate;
-                    balance += addition + earnings;
-                    totalContrib += contrib;
-                    totalMatch += match;
-                    totalEarnings += earnings;
-                    yearlyData.push([year, salary.toFixed(2), contrib.toFixed(2), match.toFixed(2), earnings.toFixed(2), balance.toFixed(2)]);
-                    labels.push(year);
-                    balances.push(balance);
-                    salary *= (1 + salaryIncrease);
-                }
-                document.getElementById('projected-balance').textContent = `${currency}${balance.toFixed(2)}`;
-                document.getElementById('total-contributions').textContent = `${currency}${totalContrib.toFixed(2)}`;
-                document.getElementById('total-matches').textContent = `${currency}${totalMatch.toFixed(2)}`;
-                document.getElementById('total-earnings').textContent = `${currency}${totalEarnings.toFixed(2)}`;
-                const tableBody = document.querySelector('#yearly-table tbody');
-                tableBody.innerHTML = '';
-                yearlyData.forEach(row => {
-                    const tr = document.createElement('tr');
-                    row.forEach(cell => {
-                        const td = document.createElement('td');
-                        td.textContent = cell;
-                        td.style.color = 'black';
-                        tr.appendChild(td);
-                    });
-                    tableBody.appendChild(tr);
+      let chart;
+    let yearlyData = [];
+    function calculate401k() {
+        try {
+            console.log('Starting calculation');
+            const currency = document.getElementById('currency').value;
+            const currentAge = parseInt(document.getElementById('current-age').value);
+            const retirementAge = parseInt(document.getElementById('retirement-age').value);
+            const years = retirementAge - currentAge;
+            if (isNaN(years) || years <= 0) {
+                alert('Invalid ages: Retirement age must be greater than current age.');
+                return;
+            }
+            let balance = parseFloat(document.getElementById('current-balance').value);
+            let salary = parseFloat(document.getElementById('annual-salary').value);
+            const contribPercent = parseFloat(document.getElementById('contribution-percent').value) / 100;
+            const matchPercent = parseFloat(document.getElementById('employer-match').value) / 100;
+            const matchMax = parseFloat(document.getElementById('employer-max').value) / 100;
+            const salaryIncrease = parseFloat(document.getElementById('salary-increase').value) / 100;
+            const returnRate = parseFloat(document.getElementById('return-rate').value) / 100;
+            if (isNaN(balance) || isNaN(salary) || isNaN(contribPercent) || isNaN(matchPercent) || isNaN(matchMax) || isNaN(salaryIncrease) || isNaN(returnRate)) {
+                alert('Invalid input: Please check all fields are numbers.');
+                return;
+            }
+            let totalContrib = 0;
+            let totalMatch = 0;
+            let totalEarnings = 0;
+            yearlyData = [];
+            const labels = [];
+            const balances = [];
+            for (let year = 1; year <= years; year++) {
+                const contrib = salary * contribPercent;
+                const match = Math.min(contrib * matchPercent, salary * matchMax);
+                const addition = contrib + match;
+                const earnings = (balance + addition) * returnRate;
+                balance += addition + earnings;
+                totalContrib += contrib;
+                totalMatch += match;
+                totalEarnings += earnings;
+                yearlyData.push([year, salary.toFixed(2), contrib.toFixed(2), match.toFixed(2), earnings.toFixed(2), balance.toFixed(2)]);
+                labels.push(year);
+                balances.push(balance);
+                salary *= (1 + salaryIncrease);
+            }
+            document.getElementById('projected-balance').textContent = `${currency}${balance.toFixed(2)}`;
+            document.getElementById('total-contributions').textContent = `${currency}${totalContrib.toFixed(2)}`;
+            document.getElementById('total-matches').textContent = `${currency}${totalMatch.toFixed(2)}`;
+            document.getElementById('total-earnings').textContent = `${currency}${totalEarnings.toFixed(2)}`;
+            const tableBody = document.querySelector('#yearly-table tbody');
+            tableBody.innerHTML = '';
+            yearlyData.forEach(row => {
+                const tr = document.createElement('tr');
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    td.style.color = 'black';
+                    tr.appendChild(td);
                 });
-                document.getElementById('results').style.display = 'block';
-                console.log('Results displayed, creating chart');
-                if (chart) chart.destroy();
-                setTimeout(() => {
-                    const ctx = document.getElementById('line-chart').getContext('2d');
-                    if (ctx) {
-                        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-                        gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
-                        gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
-                        chart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: labels,
-                                datasets: [{
-                                    label: 'Balance Over Time',
-                                    data: balances,
-                                    borderColor: 'rgb(75, 192, 192)',
-                                    backgroundColor: gradient,
-                                    tension: 0.1,
-                                    fill: true
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
+                tableBody.appendChild(tr);
+            });
+            document.getElementById('results').style.display = 'block';
+            console.log('Results displayed, preparing chart');
+            if (chart) {
+                chart.destroy();
+                console.log('Old chart destroyed');
+            }
+            setTimeout(() => {
+                const ctx = document.getElementById('line-chart').getContext('2d');
+                if (ctx) {
+                    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+                    gradient.addColorStop(0, 'rgba(75, 192, 192, 0.8)');
+                    gradient.addColorStop(1, 'rgba(75, 192, 192, 0.2)');
+                    chart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Balance Over Time',
+                                data: balances,
+                                borderColor: 'rgb(75, 192, 192)',
+                                backgroundColor: gradient,
+                                tension: 0.1,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
                                 }
                             }
-                        });
-                        console.log('Chart created successfully');
-                    } else {
-                        console.error('Canvas context not available');
-                    }
-                }, 100);
-                console.log('Calculation complete');
-            } catch (error) {
-                console.error('Error in calculation:', error);
-                alert('An error occurred during calculation. Please check inputs.');
-            }
+                        }
+                    });
+                    chart.resize();
+                    console.log('Chart created and resized successfully');
+                } else {
+                    console.error('Canvas context not available');
+                }
+            }, 500); // Increased timeout for DOM reflow
+            console.log('Calculation complete');
+        } catch (error) {
+            console.error('Error in calculation:', error);
+            alert('An error occurred during calculation. Please check inputs and console for details.');
         }
+    }
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
