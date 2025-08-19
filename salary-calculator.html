@@ -72,12 +72,27 @@
                         <label for="salary-type">Salary Type</label>
                         <select id="salary-type">
                             <option value="hourly" selected>Hourly</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
                             <option value="annual">Annual</option>
                         </select>
                     </div>
                     <div class="input-row" id="annual-salary-row" style="display: none;">
                         <label for="annual-salary">Annual Salary</label>
                         <input type="number" id="annual-salary" placeholder="e.g. 50000" min="0" step="0.01">
+                    </div>
+                    <div class="input-row" id="monthly-rate-row" style="display: none;">
+                        <label for="monthly-rate">Monthly Rate</label>
+                        <input type="number" id="monthly-rate" placeholder="e.g. 4000" min="0" step="0.01">
+                    </div>
+                    <div class="input-row" id="weekly-rate-row" style="display: none;">
+                        <label for="weekly-rate">Weekly Rate</label>
+                        <input type="number" id="weekly-rate" placeholder="e.g. 1000" min="0" step="0.01">
+                    </div>
+                    <div class="input-row" id="daily-rate-row" style="display: none;">
+                        <label for="daily-rate">Daily Rate</label>
+                        <input type="number" id="daily-rate" placeholder="e.g. 200" min="0" step="0.01">
                     </div>
                     <div class="input-row" id="hourly-rate-row">
                         <label for="hourly-rate">Hourly Rate</label>
@@ -104,7 +119,7 @@
                         <input type="number" id="vacation-days-per-year" placeholder="e.g. 15" min="0" step="1" value="15">
                     </div>
                     <div class="input-row" id="overtime-hours-row">
-                        <label for="overtime-hours">Overtime Hours per Week</label>
+                        <label for="overtime-hours">Overtime Hours</label>
                         <input type="number" id="overtime-hours" placeholder="e.g. 0" min="0" step="0.1" value="0">
                     </div>
                     <div class="input-row" id="overtime-rate-row">
@@ -158,17 +173,23 @@
     <p>Consider exploring complementary financial tools such as the Loan Calculator for borrowing assessments or the Inflation Impact Calculator for purchasing power evaluations.</p>
     <section>
         <h2>How the Salary Calculator Works</h2>
-        <p>This salary calculator processes base earnings—hourly or annual—by integrating adjustments for real-world variables like overtime, non-working days (holidays and vacations), taxes, and deductions. Select the salary type, input relevant details including hours, rates, and annual weeks, then specify deductions and tax rates. The tool computes unadjusted and adjusted gross salaries, applies pre-tax deductions to determine taxable income, calculates taxes, subtracts post-tax deductions for net pay, and provides breakdowns across frequencies. Visualizations include a polar area chart for pay component distribution and a line chart for cumulative net pay trends over the year. Assumptions include consistent rates without variable bonuses, focusing on core earnings for planning purposes.</p>
+        <p>This salary calculator processes base earnings—hourly, daily, weekly, monthly, or annual—by integrating adjustments for real-world variables like overtime, non-working days (holidays and vacations), taxes, and deductions. Select the salary type, input relevant details including rates, hours/days/weeks, and annual weeks, then specify deductions and tax rates. The tool computes unadjusted and adjusted gross salaries, applies pre-tax deductions to determine taxable income, calculates taxes, subtracts post-tax deductions for net pay, and provides breakdowns across frequencies. Visualizations include a polar area chart for pay component distribution and a line chart for cumulative net pay trends over the year. Assumptions include consistent rates without variable bonuses, focusing on core earnings for planning purposes.</p>
     </section>
     <section>
         <h2>Mathematical Formulas and Derivations</h2>
         <p>The calculations rely on structured formulas to ensure accuracy in earnings projections:</p>
         <div style="max-width: 500px; margin: 0 auto;">
-            \[ \text{Unadjusted Annual Gross} = (\text{Hourly Rate} \times \text{Hours/Week} \times \text{Weeks/Year}) + (\text{Overtime Hours} \times \text{Overtime Rate} \times \text{Hourly Rate} \times \text{Weeks/Year}) \]
+            \[ \text{Unadjusted Annual Gross} = \begin{cases} 
+            (\text{Hourly Rate} \times \text{Hours/Week} \times \text{Weeks/Year}) + (\text{Overtime Hours} \times \text{Overtime Rate} \times \text{Hourly Rate} \times \text{Weeks/Year}) & \text{for hourly} \\
+            (\text{Daily Rate} \times \text{Days/Week} \times \text{Weeks/Year}) + (\text{Overtime Hours per Day} \times \text{Overtime Rate} \times \text{Daily Rate} \times \text{Days/Week} \times \text{Weeks/Year}) / \text{Days/Week} & \text{for daily} \\
+            (\text{Weekly Rate} \times \text{Weeks/Year}) + (\text{Overtime Hours per Week} \times \text{Overtime Rate} \times \text{Weekly Rate} \times \text{Weeks/Year}) / \text{Weeks/Year} & \text{for weekly} \\
+            \text{Monthly Rate} \times 12 + (\text{Overtime Hours per Month} \times \text{Overtime Rate} \times \text{Monthly Rate} \times 12) / 12 & \text{for monthly} \\
+            \text{Annual Salary} & \text{for annual}
+            \end{cases} \]
         </div>
-        <p>For annual inputs, this is directly the provided value. Adjustments account for non-working days:</p>
+        <p>Adjustments account for non-working days:</p>
         <div style="max-width: 500px; margin: 0 auto;">
-            \[ \text{Adjusted Annual Gross} = \text{Unadjusted Gross} \times \frac{\text{Working Days}}{\text{Total Possible Days}} \]
+            \[ \text{Adjusted Annual Gross} = \text{Unadjusted Gross} \times \frac{\text{Working Days}}{\text{Total Possible Days}} \] (for hourly and daily; fixed for others)
         </div>
         <p>Where Working Days = (Days/Week × Weeks/Year) - (Holidays + Vacations). Net pay derives from:</p>
         <div style="max-width: 500px; margin: 0 auto;">
@@ -257,10 +278,11 @@
     <section>
         <h2>Frequently Asked Questions</h2>
         <p><strong>What differentiates gross from net salary?</strong> Gross is total earnings before subtractions, net is after taxes and deductions, representing actual disposable income.</p>
-        <p><strong>How do holidays and vacations affect calculations?</strong> They decrease working days, proportionally reducing adjusted gross for hourly roles, simulating unpaid time off.</p>
+        <p><strong>How do holidays and vacations affect calculations?</strong> They decrease working days, proportionally reducing adjusted gross for hourly and daily roles, simulating unpaid time off.</p>
         <p><strong>Does overtime substantially alter results?</strong> Yes, multipliers amplify gross, beneficial for variable-hour jobs, though increased taxes may temper net gains.</p>
         <p><strong>How to account for regional taxes?</strong> Input an effective rate combining federal, state, and local; refer to authorities like IRS or HMRC for brackets.</p>
         <p><strong>Why separate pre- and post-tax deductions?</strong> Pre-tax reduces taxable income, enhancing net efficiency; post-tax subtracts directly from after-tax pay.</p>
+        <p><strong>How are daily, weekly, and monthly salaries handled?</strong> They convert to annual gross using respective periods (e.g., monthly × 12), with adjustments for non-working days applied to daily like hourly, and fixed for weekly/monthly assuming paid time off.</p>
     </section>
     <section class="disclaimer">
         <h2>Disclaimer</h2>
@@ -274,7 +296,7 @@
         <p><a href="https://www.ilo.org/global/research/global-reports/global-wage-report/lang--en/index.htm" target="_blank" rel="noopener noreferrer">ILO Global Wage Report</a> - Annual analysis of worldwide wage trends, inequalities, and economic impacts for global perspective.</p>
     </section>
     <section class="ai-instructions">
-        This webpage delivers a sophisticated salary calculator for estimating gross and net pay, integrating overtime, holidays, vacations, taxes, and deductions across pay frequencies. It incorporates mathematical formulas, historical wage growth analyses from sources like ILO and BLS, interactive polar and line charts for component breakdowns and trends, monthly tables, and PDF export. Tailored for job seekers, employees, and planners, it supports budgeting, negotiation, and tax estimation with detailed explanations and disclaimers urging professional advice.
+        This webpage delivers a sophisticated salary calculator for estimating gross and net pay, integrating overtime, holidays, vacations, taxes, and deductions across pay frequencies including hourly, daily, weekly, monthly, and annual. It incorporates mathematical formulas, historical wage growth analyses from sources like ILO and BLS, interactive polar and line charts for component breakdowns and trends, monthly tables, and PDF export. Tailored for job seekers, employees, and planners, it supports budgeting, negotiation, and tax estimation with detailed explanations and disclaimers urging professional advice.
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
@@ -286,33 +308,77 @@
         let monthlyData = [];
         document.getElementById('salary-type').addEventListener('change', function() {
             const type = this.value;
-            document.getElementById('annual-salary-row').style.display = type === 'annual' ? 'flex' : 'none';
-            document.getElementById('hourly-rate-row').style.display = type === 'hourly' ? 'flex' : 'none';
-            document.getElementById('hours-per-week-row').style.display = type === 'hourly' ? 'flex' : 'none';
-            document.getElementById('overtime-hours-row').style.display = type === 'hourly' ? 'flex' : 'none';
-            document.getElementById('overtime-rate-row').style.display = type === 'hourly' ? 'flex' : 'none';
+            const showHourly = type === 'hourly';
+            const showDaily = type === 'daily';
+            const showWeekly = type === 'weekly';
+            const showMonthly = type === 'monthly';
+            const showAnnual = type === 'annual';
+
+            document.getElementById('hourly-rate-row').style.display = showHourly ? 'flex' : 'none';
+            document.getElementById('daily-rate-row').style.display = showDaily ? 'flex' : 'none';
+            document.getElementById('weekly-rate-row').style.display = showWeekly ? 'flex' : 'none';
+            document.getElementById('monthly-rate-row').style.display = showMonthly ? 'flex' : 'none';
+            document.getElementById('annual-salary-row').style.display = showAnnual ? 'flex' : 'none';
+
+            document.getElementById('hours-per-week-row').style.display = showHourly ? 'flex' : 'none';
+
+            document.getElementById('overtime-hours-row').style.display = !showAnnual ? 'flex' : 'none';
+            document.getElementById('overtime-rate-row').style.display = !showAnnual ? 'flex' : 'none';
+
+            const overtimeLabel = document.querySelector('#overtime-hours-row label');
+            if (showHourly || showWeekly) {
+                overtimeLabel.textContent = 'Overtime Hours per Week';
+            } else if (showDaily) {
+                overtimeLabel.textContent = 'Overtime Hours per Day';
+            } else if (showMonthly) {
+                overtimeLabel.textContent = 'Overtime Hours per Month';
+            }
         });
         function calculateSalary() {
             const salaryType = document.getElementById('salary-type').value;
             const currencySymbol = document.getElementById('currency').value;
-            let unadjustedAnnualGross;
-            if (salaryType === 'annual') {
-                unadjustedAnnualGross = parseFloat(document.getElementById('annual-salary').value) || 0;
-            } else {
-                const hourlyRate = parseFloat(document.getElementById('hourly-rate').value) || 0;
-                const hoursPerWeek = parseFloat(document.getElementById('hours-per-week').value) || 0;
-                const overtimeHours = parseFloat(document.getElementById('overtime-hours').value) || 0;
-                const overtimeRate = parseFloat(document.getElementById('overtime-rate').value) || 1;
-                const weeksPerYear = parseInt(document.getElementById('weeks-per-year').value) || 52;
-                unadjustedAnnualGross = (hourlyRate * hoursPerWeek * weeksPerYear) + (overtimeHours * overtimeRate * hourlyRate * weeksPerYear);
-            }
+            let unadjustedAnnualGross = 0;
+            const overtimeHours = parseFloat(document.getElementById('overtime-hours').value) || 0;
+            const overtimeRate = parseFloat(document.getElementById('overtime-rate').value) || 1;
+            const weeksPerYear = parseInt(document.getElementById('weeks-per-year').value) || 52;
             const daysPerWeek = parseFloat(document.getElementById('days-per-week').value) || 5;
+
+            switch (salaryType) {
+                case 'hourly':
+                    const hourlyRate = parseFloat(document.getElementById('hourly-rate').value) || 0;
+                    const hoursPerWeek = parseFloat(document.getElementById('hours-per-week').value) || 0;
+                    unadjustedAnnualGross = (hourlyRate * hoursPerWeek * weeksPerYear) + (overtimeHours * overtimeRate * hourlyRate * weeksPerYear);
+                    break;
+                case 'daily':
+                    const dailyRate = parseFloat(document.getElementById('daily-rate').value) || 0;
+                    unadjustedAnnualGross = (dailyRate * daysPerWeek * weeksPerYear) + (overtimeHours * overtimeRate * dailyRate * daysPerWeek * weeksPerYear);
+                    break;
+                case 'weekly':
+                    const weeklyRate = parseFloat(document.getElementById('weekly-rate').value) || 0;
+                    unadjustedAnnualGross = (weeklyRate * weeksPerYear) + (overtimeHours * overtimeRate * weeklyRate * weeksPerYear);
+                    break;
+                case 'monthly':
+                    const monthlyRate = parseFloat(document.getElementById('monthly-rate').value) || 0;
+                    unadjustedAnnualGross = (monthlyRate * 12) + (overtimeHours * overtimeRate * monthlyRate * 12);
+                    break;
+                case 'annual':
+                    unadjustedAnnualGross = parseFloat(document.getElementById('annual-salary').value) || 0;
+                    break;
+            }
+
             const holidays = parseInt(document.getElementById('holidays-per-year').value) || 0;
             const vacationDays = parseInt(document.getElementById('vacation-days-per-year').value) || 0;
             const totalPossibleDays = daysPerWeek * 52;
             let workingDays = totalPossibleDays - holidays - vacationDays;
             if (workingDays <= 0) workingDays = 1;
-            let adjustedAnnualGross = salaryType === 'annual' ? unadjustedAnnualGross : unadjustedAnnualGross * (workingDays / totalPossibleDays);
+
+            let adjustedAnnualGross;
+            if (salaryType === 'hourly' || salaryType === 'daily') {
+                adjustedAnnualGross = unadjustedAnnualGross * (workingDays / totalPossibleDays);
+            } else {
+                adjustedAnnualGross = unadjustedAnnualGross;
+            }
+
             const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
             const preTaxDeductions = parseFloat(document.getElementById('pre-tax-deductions').value) || 0;
             const postTaxDeductions = parseFloat(document.getElementById('post-tax-deductions').value) || 0;
