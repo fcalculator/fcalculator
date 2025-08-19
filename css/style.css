@@ -333,7 +333,7 @@ footer {
   color: #007bff;
   width: 15px;
   height: 15px;
-  top: 2px;
+  top: 5px;
 }
 
 .tooltiptext {
@@ -368,6 +368,6 @@ footer {
   margin-right: 2px;
   width: 15px;
   height: 15px;
-   top: 2px;
+   top: 5px;
 }
 }
