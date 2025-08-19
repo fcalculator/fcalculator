@@ -328,9 +328,10 @@ footer {
 .info-icon {
   cursor: help;
   margin-left: 2px;
+  margin-top: 2px;
   color: #007bff;
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
 }
 
 .tooltiptext {
