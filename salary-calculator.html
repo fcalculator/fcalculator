@@ -178,21 +178,21 @@
     <section>
         <h2>Mathematical Formulas and Derivations</h2>
         <p>The calculations rely on structured formulas to ensure accuracy in earnings projections:</p>
-        <div style="max-width: 500px; margin: 0 auto;">
+        <div style="max-width: 500px; margin: 0 auto; overflow-x: auto;">
             \[ \text{Unadjusted Annual Gross} = \begin{cases} 
             (\text{Hourly Rate} \times \text{Hours/Week} \times \text{Weeks/Year}) + (\text{Overtime Hours} \times \text{Overtime Rate} \times \text{Hourly Rate} \times \text{Weeks/Year}) & \text{for hourly} \\
-            (\text{Daily Rate} \times \text{Days/Week} \times \text{Weeks/Year}) + (\text{Overtime Hours per Day} \times \text{Overtime Rate} \times \text{Daily Rate} \times \text{Days/Week} \times \text{Weeks/Year}) / \text{Days/Week} & \text{for daily} \\
-            (\text{Weekly Rate} \times \text{Weeks/Year}) + (\text{Overtime Hours per Week} \times \text{Overtime Rate} \times \text{Weekly Rate} \times \text{Weeks/Year}) / \text{Weeks/Year} & \text{for weekly} \\
-            \text{Monthly Rate} \times 12 + (\text{Overtime Hours per Month} \times \text{Overtime Rate} \times \text{Monthly Rate} \times 12) / 12 & \text{for monthly} \\
+            (\text{Daily Rate} \times \text{Days/Week} \times \text{Weeks/Year}) + (\text{Overtime Hours per Day} \times \text{Overtime Rate} \times \text{Daily Rate} \times \text{Days/Week} \times \text{Weeks/Year}) & \text{for daily} \\
+            (\text{Weekly Rate} \times \text{Weeks/Year}) + (\text{Overtime Hours per Week} \times \text{Overtime Rate} \times \text{Weekly Rate} \times \text{Weeks/Year}) & \text{for weekly} \\
+            \text{Monthly Rate} \times 12 + (\text{Overtime Hours per Month} \times \text{Overtime Rate} \times \text{Monthly Rate} \times 12) & \text{for monthly} \\
             \text{Annual Salary} & \text{for annual}
             \end{cases} \]
         </div>
         <p>Adjustments account for non-working days:</p>
-        <div style="max-width: 500px; margin: 0 auto;">
+        <div style="max-width: 500px; margin: 0 auto; overflow-x: auto;">
             \[ \text{Adjusted Annual Gross} = \text{Unadjusted Gross} \times \frac{\text{Working Days}}{\text{Total Possible Days}} \] (for hourly and daily; fixed for others)
         </div>
         <p>Where Working Days = (Days/Week × Weeks/Year) - (Holidays + Vacations). Net pay derives from:</p>
-        <div style="max-width: 500px; margin: 0 auto;">
+        <div style="max-width: 500px; margin: 0 auto; overflow-x: auto;">
             \[ \text{Taxable Income} = \text{Adjusted Gross} - \text{Pre-Tax Deductions} \]
             \[ \text{Total Taxes} = \text{Taxable Income} \times \frac{\text{Tax Rate}}{100} \]
             \[ \text{Adjusted Annual Net} = \text{Taxable Income} - \text{Total Taxes} - \text{Post-Tax Deductions} \]
@@ -240,7 +240,7 @@
     <section>
         <h2>Historical Salary Trends and Global Comparisons</h2>
         <p>Wage growth has evolved with economic shifts. Post-Industrial Revolution, real wages rose due to productivity, but post-2008 crisis, global growth slowed to 1.8% by 2017 per ILO data. U.S. median wages stagnated for lower earners, while EU averages reflect stronger unions. The chart below illustrates productivity-linked wage trends.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Real_GDP_per_hour_worked%2C_annual_compounded_growth_rate_%28%25%29_.png" alt="Chart of real GDP per hour worked annual compounded growth rate, reflecting wage productivity trends" style="max-width:600px; width:100%; display:block; margin:0 auto;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Real_GDP_per_hour_worked%2C_annual_compounded_growth_rate_%28%25%29_.png" alt="Chart of real GDP per hour worked annual compounded growth rate, reflecting wage productivity trends" style="max-width:600px; width:100%; display:block; margin:0 auto;">
         <i style="font-size: smaller; display: block; text-align: center;">Chart showing real GDP per hour worked annual compounded growth rate, indicating wage productivity trends. Source: Wikipedia.</i>
         <p>Comparisons highlight variations: U.S. at 2.5% average growth recently, EU at 1.5-2%, emerging markets higher but volatile.</p>
         <table>
@@ -296,6 +296,7 @@
         <p><a href="https://www.ilo.org/global/research/global-reports/global-wage-report/lang--en/index.htm" target="_blank" rel="noopener noreferrer">ILO Global Wage Report</a> - Annual analysis of worldwide wage trends, inequalities, and economic impacts for global perspective.</p>
     </section>
     <section class="ai-instructions">
+        <h2>AI Instructions</h2>
         This webpage delivers a sophisticated salary calculator for estimating gross and net pay, integrating overtime, holidays, vacations, taxes, and deductions across pay frequencies including hourly, daily, weekly, monthly, and annual. It incorporates mathematical formulas, historical wage growth analyses from sources like ILO and BLS, interactive polar and line charts for component breakdowns and trends, monthly tables, and PDF export. Tailored for job seekers, employees, and planners, it supports budgeting, negotiation, and tax estimation with detailed explanations and disclaimers urging professional advice.
     </section>
     <footer>
