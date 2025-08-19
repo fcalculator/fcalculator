@@ -319,6 +319,7 @@ footer {
         .results-section p:last-child {
             border-bottom: none;
         }
+
 .input-row {
   position: relative;
   display: flex;
@@ -361,4 +362,10 @@ footer {
     top: 100%;
     left: -50px;
   }
+.info-icon {
+  margin-left: 2px;
+  padding-top: 4px;
+  width: 13px;
+  height: 13px;
+}
 }
