@@ -107,7 +107,7 @@
                     </div>
                     <div class="input-row">
                         <label for="start-date">Loan Start Date</label>
-                        <input type="date" id="start-date" value="2025-08-19">
+                        <input type="date" id="start-date">
                     </div>
                 </fieldset>
             </div>
@@ -456,6 +456,13 @@
                 alert('Share not supported on this browser.');
             }
         }
+        function setTodayDate(inputId) {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById(inputId).value = today;
+    }
+    window.onload = function() {
+        setTodayDate("start-date");
+    };
     </script>
 </body>
 </html>
