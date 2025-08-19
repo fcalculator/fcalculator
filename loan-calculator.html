@@ -11,8 +11,8 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/vfs_fonts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -255,6 +255,11 @@
     </footer>
     <script>
         let chartInstance = null;
+        let amortizationData = [];
+        let loanAmountValue = '';
+        let monthlyPaymentValue = '';
+        let totalPaymentsValue = '';
+        let totalInterestValue = '';
         function calculateLoan() {
             const currency = document.getElementById('currency').value;
             const principal = parseFloat(document.getElementById('loan-amount').value);
@@ -301,10 +306,15 @@
                 cumInterest.push(currentCumInterest);
                 if (balance <= 0) break;
             }
-            document.getElementById('loan-amount-result').textContent = `Loan Amount: ${currencySymbol(currency)}${principal.toFixed(2)}`;
-            document.getElementById('monthly-payment-result').textContent = `Payment Amount: ${currencySymbol(currency)}${(payment + extra).toFixed(2)} (${frequency})`;
-            document.getElementById('total-payments-result').textContent = `Total Payments: ${currencySymbol(currency)}${totalPayments.toFixed(2)}`;
-            document.getElementById('total-interest-result').textContent = `Total Interest: ${currencySymbol(currency)}${totalInterest.toFixed(2)}`;
+            loanAmountValue = principal.toFixed(2);
+            monthlyPaymentValue = (payment + extra).toFixed(2);
+            totalPaymentsValue = totalPayments.toFixed(2);
+            totalInterestValue = totalInterest.toFixed(2);
+            document.getElementById('loan-amount-result').textContent = `Loan Amount: ${currencySymbol(currency)}${loanAmountValue}`;
+            document.getElementById('monthly-payment-result').textContent = `Payment Amount: ${currencySymbol(currency)}${monthlyPaymentValue} (${frequency})`;
+            document.getElementById('total-payments-result').textContent = `Total Payments: ${currencySymbol(currency)}${totalPaymentsValue}`;
+            document.getElementById('total-interest-result').textContent = `Total Interest: ${currencySymbol(currency)}${totalInterestValue}`;
+            amortizationData = schedule.map(row => [row.period, row.payment, row.principal, row.interest, row.balance]);
             const tableBody = document.querySelector('#amortization-table tbody');
             tableBody.innerHTML = '';
             schedule.forEach(row => {
@@ -346,68 +356,85 @@
             return symbols[curr] || '$';
         }
         function saveAsPDF() {
-            const currency = document.getElementById('currency').value;
-            const rows = Array.from(document.querySelectorAll('#amortization-table tbody tr')).map(tr => Array.from(tr.cells).map(td => td.textContent.replace(currencySymbol(currency), '')));
-            const docDefinition = {
-                content: [
-                    { text: 'Loan Calculation Results', style: 'header' },
-                    {
-                        table: {
-                            body: [
-                                ['Parameter', 'Value'],
-                                ['Loan Amount', document.getElementById('loan-amount-result').textContent.split(': ')[1].replace(currencySymbol(currency), '')],
-                                ['Payment Amount', document.getElementById('monthly-payment-result').textContent.split(': ')[1].replace(currencySymbol(currency), '')],
-                                ['Total Payments', document.getElementById('total-payments-result').textContent.split(': ')[1].replace(currencySymbol(currency), '')],
-                                ['Total Interest', document.getElementById('total-interest-result').textContent.split(': ')[1].replace(currencySymbol(currency), '')]
-                            ]
-                        },
-                        layout: 'lightHorizontalLines'
-                    },
-                    { text: 'Amortization Schedule', style: 'subheader' },
-                    {
-                        table: {
-                            headerRows: 1,
-                            body: [['Period', 'Payment', 'Principal', 'Interest', 'Balance'], ...rows]
-                        },
-                        layout: {
-                            hLineWidth: function() { return 0.1; },
-                            vLineWidth: function() { return 0.1; },
-                            hLineColor: [200, 200, 200],
-                            vLineColor: [200, 200, 200],
-                            paddingLeft: function() { return 3; },
-                            paddingRight: function() { return 3; },
-                            paddingTop: function() { return 3; },
-                            paddingBottom: function() { return 3; }
-                        }
+            if (!amortizationData.length) {
+                alert('Please calculate first!');
+                return;
+            }
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.setFontSize(14);
+                doc.text("Loan Calculation Results", 105, 15, { align: "center" });
+                doc.autoTable({
+                    startY: 20,
+                    head: [['Parameter', 'Value']],
+                    body: [
+                        ['Loan Amount', loanAmountValue],
+                        ['Payment Amount', monthlyPaymentValue],
+                        ['Total Payments', totalPaymentsValue],
+                        ['Total Interest', totalInterestValue]
+                    ],
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                    margin: { top: 10 },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        const footerText = 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.';
+                        const pageWidth = doc.internal.pageSize.width;
+                        const pageHeight = doc.internal.pageSize.height;
+                        const y = pageHeight - 10;
+                        const textWidth = doc.getTextWidth(footerText);
+                        const startX = (pageWidth - textWidth) / 2;
+                        const linkText = 'Fcalculator.com';
+                        const linkStart = footerText.indexOf(linkText);
+                        const beforeLink = footerText.substring(0, linkStart);
+                        const afterLink = footerText.substring(linkStart + linkText.length);
+                        const linkX = startX + doc.getTextWidth(beforeLink);
+                        const afterX = linkX + doc.getTextWidth(linkText);
+                        doc.text(beforeLink, startX, y);
+                        doc.setTextColor(0, 0, 255); // Blue for link
+                        doc.textWithLink(linkText, linkX, y, { url: 'https://fcalculator.com' });
+                        doc.setTextColor(100); // Back to gray
+                        doc.text(afterLink, afterX, y);
                     }
-                ],
-                styles: {
-                    header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
-                    subheader: { fontSize: 14, bold: true, margin: [0, 10, 0, 5] },
-                    lineColor: [200, 200, 200],
-                    lineWidth: 0.1,
-                    font: 'helvetica',
-                    cellPadding: 3,
-                    fontSize: 10,
-                    halign: 'left'
-                },
-                defaultStyle: { font: 'helvetica' },
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                pageBreak: 'auto',
-                footer: function(currentPage, pageCount) {
-                    return {
-                        columns: [{
-                            text: 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.',
-                            alignment: 'center',
-                            fontSize: 10,
-                            color: '#646464',
-                            link: 'https://fcalculator.com'
-                        }]
-                    };
-                }
-            };
-            pdfMake.createPdf(docDefinition).download('loan-calculation-results.pdf');
+                });
+                doc.autoTable({
+                    startY: doc.lastAutoTable.finalY + 10,
+                    head: [['Period', 'Payment', 'Principal', 'Interest', 'Balance']],
+                    body: amortizationData,
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                    alternateRowStyles: { fillColor: [245, 245, 245] },
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        const footerText = 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.';
+                        const pageWidth = doc.internal.pageSize.width;
+                        const pageHeight = doc.internal.pageSize.height;
+                        const y = pageHeight - 10;
+                        const textWidth = doc.getTextWidth(footerText);
+                        const startX = (pageWidth - textWidth) / 2;
+                        const linkText = 'Fcalculator.com';
+                        const linkStart = footerText.indexOf(linkText);
+                        const beforeLink = footerText.substring(0, linkStart);
+                        const afterLink = footerText.substring(linkStart + linkText.length);
+                        const linkX = startX + doc.getTextWidth(beforeLink);
+                        const afterX = linkX + doc.getTextWidth(linkText);
+                        doc.text(beforeLink, startX, y);
+                        doc.setTextColor(0, 0, 255); // Blue for link
+                        doc.textWithLink(linkText, linkX, y, { url: 'https://fcalculator.com' });
+                        doc.setTextColor(100); // Back to gray
+                        doc.text(afterLink, afterX, y);
+                    }
+                });
+                doc.save('loan-results.pdf');
+            } catch (e) {
+                alert('Error generating PDF: ' + e.message);
+            }
         }
         function sharePage() {
             if (navigator.share) {
