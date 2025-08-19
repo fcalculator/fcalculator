@@ -319,3 +319,44 @@ footer {
         .results-section p:last-child {
             border-bottom: none;
         }
+.input-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  cursor: help;
+  margin-left: 5px;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 220px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  top: 120%;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.info-icon:hover + .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .tooltiptext {
+    width: 180px;
+    top: 100%;
+    left: -50px;
+  }
+}
