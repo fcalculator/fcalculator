@@ -64,7 +64,6 @@
         <h1>Loan Calculator</h1>
         <p>Determine monthly payments, total interest, and amortization details for various loans, enabling precise financial planning and comparison.</p>
     </header>
-
     <section class="tool-section">
         <form id="tool-form">
             <div class="currency-select">
@@ -78,7 +77,6 @@
                     <option value="AUD">AUD (A$)</option>
                 </select>
             </div>
-
             <div class="sections-container-1">
                 <fieldset>
                     <legend>Loan Details</legend>
@@ -111,20 +109,16 @@
                     </div>
                 </fieldset>
             </div>
-
             <button type="button" onclick="calculateLoan()">Calculate</button>
         </form>
     </section>
-
     <section class="results-section" id="results" style="display: none;">
         <h2>Calculation Results</h2>
         <p id="loan-amount-result">Loan Amount: </p>
         <p id="monthly-payment-result">Payment Amount: </p>
         <p id="total-payments-result">Total Payments: </p>
         <p id="total-interest-result">Total Interest: </p>
-
         <canvas id="line-chart" width="500" height="300"></canvas>
-
         <h3>Amortization Schedule</h3>
         <table id="amortization-table">
             <thead>
@@ -138,18 +132,14 @@
             </thead>
             <tbody></tbody>
         </table>
-
         <button onclick="saveAsPDF()">Save as PDF</button>
         <button onclick="sharePage()">Share</button>
     </section>
-
     <p>Consider exploring complementary financial tools such as the Mortgage Calculator for home financing details or the Auto Loan Calculator for vehicle purchase simulations.</p>
-
     <section>
         <h2>How the Loan Calculator Works</h2>
         <p>This comprehensive loan calculator evaluates general loan structures by computing the net loan amount and applying amortization principles to determine periodic payments. Enter the loan amount, annual interest rate, term in months, optional extra payments, payment frequency (monthly or bi-weekly), and start date. The tool calculates the payment amount, total payments, total interest, and a detailed schedule showing principal and interest allocation per period. An interactive line chart visualizes balance reduction and cumulative interest over time. For bi-weekly payments, the term is adjusted accordingly (e.g., 26 payments per year). Assumptions include fixed rates without prepayment penalties, focusing on core loan dynamics for planning.</p>
     </section>
-
     <section>
         <h2>Mathematical Formulas and Derivations</h2>
         <p>The periodic payment is derived from the annuity formula for fixed-rate loans:</p>
@@ -158,7 +148,6 @@
         </div>
         <p>Where \( M \) is the periodic payment, \( P \) is the loan principal, \( r \) is the periodic interest rate (annual / 12 for monthly, annual / 26 for bi-weekly), and \( n \) is the number of periods. For amortization, periodic interest is \( I = B \times r \), principal paid is \( Pr = M - I + extra \), and balance updates as \( B = B - Pr \). Total interest sums all \( I \), providing cost insights. Extra payments accelerate payoff, reducing interest.</p>
     </section>
-
     <section>
         <h2>Factors Influencing Loans and Their Costs</h2>
         <h3>Credit and Security Dynamics</h3>
@@ -197,7 +186,6 @@
             </tbody>
         </table>
     </section>
-
     <section>
         <h2>Historical Loan Rates and Global Comparisons</h2>
         <p>Loan interest rates have fluctuated with economic policies. In the U.S., Federal Reserve data indicates averages of 4-6% for consumer loans recently, with peaks over 8% in the 1980s due to inflation. Europe via ECB shows household loan rates at 3-7%, while World Bank data for emerging markets averages 6-10%. Rates dipped post-2008 but rose in 2022. The graph below depicts U.S. federal funds rate trends, influencing loan rates.</p>
@@ -238,7 +226,6 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Petrevene_18.jpg/600px-Petrevene_18.jpg" alt="Historical loan document issued by the Bank of Petrevene, Bulgaria, dated 1936." style="max-width:600px; width:100%; display:block; margin:0 auto;">
         <p style="font-style:italic; font-size:0.9em; text-align:center;">Historical loan document from 1936, illustrating early loan practices. Source: Wikipedia.</p>
     </section>
-
     <section>
         <h2>Frequently Asked Questions</h2>
         <p><strong>What factors affect payments?</strong> Principal, rate, term, frequency, and extras influence payments; higher rates or longer terms raise costs.</p>
@@ -247,12 +234,10 @@
         <p><strong>Why include start date?</strong> It dates the schedule for real-world planning, though calculations are period-based.</p>
         <p><strong>What if rates vary?</strong> Tool assumes fixed; rerun with averages for variables.</p>
     </section>
-
     <section>
         <h2>Disclaimer</h2>
         <p>This loan calculator is provided for educational and informational purposes only. It does not constitute financial, investment, or professional advice. Results are based on user inputs and assumptions; actual terms, rates, and costs may vary. Consult a qualified financial advisor or lender for personalized guidance. FCalculator.com assumes no liability for decisions made based on this tool.</p>
     </section>
-
     <section>
         <h2>Related Resources</h2>
         <p><a href="https://www.federalreserve.gov/releases/h15/" target="_blank" rel="noopener noreferrer">Federal Reserve Selected Interest Rates (H.15)</a> - Historical datasets on U.S. loan rates for trend analysis and benchmarking.</p>
@@ -260,20 +245,16 @@
         <p><a href="https://en.wikipedia.org/wiki/Loan" target="_blank" rel="noopener noreferrer">Wikipedia on Loans</a> - Overview of loan types, history, and factors for in-depth understanding.</p>
         <p><a href="https://data.worldbank.org/indicator/FR.INR.RINR" target="_blank" rel="noopener noreferrer">World Bank Real Interest Rates</a> - Global data on lending rates for international comparisons and emerging markets.</p>
     </section>
-
     <section>
         <h2>AI Instructions</h2>
         <p>This webpage offers an advanced loan calculator for projecting periodic payments, amortization schedules, and total costs, supporting monthly/bi-weekly frequencies, extra payments, start dates, interest rates, and terms. It features mathematical derivations, historical rate comparisons from Federal Reserve, ECB, and World Bank, interactive line charts for balance and interest trends, detailed tables, and PDF export. Suited for borrowers and planners, it focuses on affordability, optimization, and risk assessment, with disclaimers for professional advice.</p>
     </section>
-
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
-
     <script>
         let chartInstance = null;
-
         function calculateLoan() {
             const currency = document.getElementById('currency').value;
             const principal = parseFloat(document.getElementById('loan-amount').value);
@@ -282,14 +263,11 @@
             const extra = parseFloat(document.getElementById('extra-payment').value) || 0;
             const frequency = document.getElementById('payment-frequency').value;
             const startDate = new Date(document.getElementById('start-date').value);
-
             let periodsPerYear = frequency === 'monthly' ? 12 : 26;
             let ratePerPeriod = annualRate / periodsPerYear;
             let numPeriods = term * (periodsPerYear / 12); // Adjust for bi-weekly
-
             let payment = principal * (ratePerPeriod * Math.pow(1 + ratePerPeriod, numPeriods)) / (Math.pow(1 + ratePerPeriod, numPeriods) - 1);
             if (isNaN(payment)) payment = 0;
-
             let balance = principal;
             let totalInterest = 0;
             let totalPayments = 0;
@@ -297,24 +275,20 @@
             let balances = [];
             let cumInterest = [];
             let currentCumInterest = 0;
-
             for (let i = 1; i <= numPeriods; i++) {
                 let interest = balance * ratePerPeriod;
                 let principalPaid = payment - interest;
                 if (extra > 0) principalPaid += extra;
                 balance -= principalPaid;
                 if (balance < 0) balance = 0;
-
                 totalInterest += interest;
                 totalPayments += payment + extra;
-
                 let periodDate = new Date(startDate);
                 if (frequency === 'monthly') {
                     periodDate.setMonth(startDate.getMonth() + i - 1);
                 } else {
                     periodDate.setDate(startDate.getDate() + (i - 1) * 14);
                 }
-
                 schedule.push({
                     period: periodDate.toLocaleDateString(),
                     payment: (payment + extra).toFixed(2),
@@ -322,19 +296,15 @@
                     interest: interest.toFixed(2),
                     balance: balance.toFixed(2)
                 });
-
                 balances.push(balance);
                 currentCumInterest += interest;
                 cumInterest.push(currentCumInterest);
-
                 if (balance <= 0) break;
             }
-
             document.getElementById('loan-amount-result').textContent = `Loan Amount: ${currencySymbol(currency)}${principal.toFixed(2)}`;
             document.getElementById('monthly-payment-result').textContent = `Payment Amount: ${currencySymbol(currency)}${(payment + extra).toFixed(2)} (${frequency})`;
             document.getElementById('total-payments-result').textContent = `Total Payments: ${currencySymbol(currency)}${totalPayments.toFixed(2)}`;
             document.getElementById('total-interest-result').textContent = `Total Interest: ${currencySymbol(currency)}${totalInterest.toFixed(2)}`;
-
             const tableBody = document.querySelector('#amortization-table tbody');
             tableBody.innerHTML = '';
             schedule.forEach(row => {
@@ -342,9 +312,7 @@
                 tr.innerHTML = `<td>${row.period}</td><td>${currencySymbol(currency)}${row.payment}</td><td>${currencySymbol(currency)}${row.principal}</td><td>${currencySymbol(currency)}${row.interest}</td><td>${currencySymbol(currency)}${row.balance}</td>`;
                 tableBody.appendChild(tr);
             });
-
             document.getElementById('results').style.display = 'block';
-
             if (chartInstance) chartInstance.destroy();
             const ctx = document.getElementById('line-chart').getContext('2d');
             setTimeout(() => {
@@ -373,16 +341,13 @@
                 });
             }, 100);
         }
-
         function currencySymbol(curr) {
             const symbols = { USD: '$', EUR: '€', GBP: '£', JPY: '¥', CAD: 'C$', AUD: 'A$' };
             return symbols[curr] || '$';
         }
-
         function saveAsPDF() {
             const currency = document.getElementById('currency').value;
             const rows = Array.from(document.querySelectorAll('#amortization-table tbody tr')).map(tr => Array.from(tr.cells).map(td => td.textContent.replace(currencySymbol(currency), '')));
-
             const docDefinition = {
                 content: [
                     { text: 'Loan Calculation Results', style: 'header' },
@@ -444,7 +409,6 @@
             };
             pdfMake.createPdf(docDefinition).download('loan-calculation-results.pdf');
         }
-
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
@@ -457,12 +421,12 @@
             }
         }
         function setTodayDate(inputId) {
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById(inputId).value = today;
-    }
-    window.onload = function() {
-        setTodayDate("start-date");
-    };
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById(inputId).value = today;
+        }
+        window.onload = function() {
+            setTodayDate("start-date");
+        };
     </script>
 </body>
 </html>
