@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -180,7 +179,7 @@
         <h2>Mathematical Formulas and Derivations</h2>
         <p>The calculations rely on structured formulas to ensure accuracy in earnings projections:</p>
         <div style="max-width: 500px; margin: 0 auto; overflow-x: auto;">
-            \[ \text{Unadjusted Annual Gross} = \begin{cases} 
+            \[ \text{Unadjusted Annual Gross} = \begin{cases}
             (\text{Hourly Rate} \times \text{Hours/Week} \times \text{Weeks/Year}) + (\text{Overtime Hours} \times \text{Overtime Rate} \times \text{Hourly Rate} \times \text{Weeks/Year}) & \text{for hourly} \\
             (\text{Daily Rate} \times \text{Days/Week} \times \text{Weeks/Year}) + (\text{Overtime Hours per Day} \times \text{Overtime Rate} \times \text{Daily Rate} \times \text{Days/Week} \times \text{Weeks/Year}) & \text{for daily} \\
             (\text{Weekly Rate} \times \text{Weeks/Year}) + (\text{Overtime Hours per Week} \times \text{Overtime Rate} \times \text{Weekly Rate} \times \text{Weeks/Year}) & \text{for weekly} \\
@@ -304,7 +303,6 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        Chart.register(ChartDataLabels);
         let polarChart;
         let lineChart;
         let monthlyData = [];
@@ -315,18 +313,14 @@
             const showWeekly = type === 'weekly';
             const showMonthly = type === 'monthly';
             const showAnnual = type === 'annual';
-
             document.getElementById('hourly-rate-row').style.display = showHourly ? 'flex' : 'none';
             document.getElementById('daily-rate-row').style.display = showDaily ? 'flex' : 'none';
             document.getElementById('weekly-rate-row').style.display = showWeekly ? 'flex' : 'none';
             document.getElementById('monthly-rate-row').style.display = showMonthly ? 'flex' : 'none';
             document.getElementById('annual-salary-row').style.display = showAnnual ? 'flex' : 'none';
-
             document.getElementById('hours-per-week-row').style.display = showHourly ? 'flex' : 'none';
-
             document.getElementById('overtime-hours-row').style.display = !showAnnual ? 'flex' : 'none';
             document.getElementById('overtime-rate-row').style.display = !showAnnual ? 'flex' : 'none';
-
             const overtimeLabel = document.querySelector('#overtime-hours-row label');
             if (showHourly || showWeekly) {
                 overtimeLabel.textContent = 'Overtime Hours per Week';
@@ -344,7 +338,6 @@
             const overtimeRate = parseFloat(document.getElementById('overtime-rate').value) || 1;
             const weeksPerYear = parseInt(document.getElementById('weeks-per-year').value) || 52;
             const daysPerWeek = parseFloat(document.getElementById('days-per-week').value) || 5;
-
             switch (salaryType) {
                 case 'hourly':
                     const hourlyRate = parseFloat(document.getElementById('hourly-rate').value) || 0;
@@ -367,20 +360,17 @@
                     unadjustedAnnualGross = parseFloat(document.getElementById('annual-salary').value) || 0;
                     break;
             }
-
             const holidays = parseInt(document.getElementById('holidays-per-year').value) || 0;
             const vacationDays = parseInt(document.getElementById('vacation-days-per-year').value) || 0;
             const totalPossibleDays = daysPerWeek * 52;
             let workingDays = totalPossibleDays - holidays - vacationDays;
             if (workingDays <= 0) workingDays = 1;
-
             let adjustedAnnualGross;
             if (salaryType === 'hourly' || salaryType === 'daily') {
                 adjustedAnnualGross = unadjustedAnnualGross * (workingDays / totalPossibleDays);
             } else {
                 adjustedAnnualGross = unadjustedAnnualGross;
             }
-
             const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
             const preTaxDeductions = parseFloat(document.getElementById('pre-tax-deductions').value) || 0;
             const postTaxDeductions = parseFloat(document.getElementById('post-tax-deductions').value) || 0;
@@ -423,11 +413,14 @@
             }
             document.getElementById('results').style.display = 'block';
 
-            // Delay chart creation by 1 second
+            // Delay chart creation by 1 second after displaying results
             setTimeout(() => {
-                // Charts
-                const polarCtx = document.getElementById('polar-chart').getContext('2d');
+                // Destroy existing charts if they exist
                 if (polarChart) polarChart.destroy();
+                if (lineChart) lineChart.destroy();
+
+                // Create new charts
+                const polarCtx = document.getElementById('polar-chart').getContext('2d');
                 polarChart = new Chart(polarCtx, {
                     type: 'polarArea',
                     data: {
@@ -440,32 +433,17 @@
                     options: {
                         responsive: true,
                         plugins: {
-                            title: { display: true, text: 'Pay Components Breakdown' },
-                            datalabels: {
-                                color: '#fff',
-                                anchor: 'end',
-                                align: 'start',
-                                formatter: (value, ctx) => {
-                                    return ctx.chart.data.labels[ctx.dataIndex] + '\n' + value.toFixed(0);
-                                },
-                                font: {
-                                    weight: 'bold'
-                                }
-                            }
+                            title: { display: true, text: 'Pay Components Breakdown' }
                         }
                     }
                 });
                 const lineCtx = document.getElementById('line-chart').getContext('2d');
-                if (lineChart) lineChart.destroy();
-                const gradient = lineCtx.createLinearGradient(0, 0, 0, 400);
-                gradient.addColorStop(0, 'rgba(75,192,192,0.5)');
-                gradient.addColorStop(1, 'rgba(75,192,192,0)');
                 lineChart = new Chart(lineCtx, {
                     type: 'line',
                     data: {
                         labels: months,
                         datasets: [
-                            { label: 'Monthly Net Pay', data: netPays, borderColor: 'rgb(75,192,192)', tension: 0.1, backgroundColor: gradient, fill: true },
+                            { label: 'Monthly Net Pay', data: netPays, borderColor: 'rgb(75,192,192)', tension: 0.1 },
                             { label: 'Cumulative Net Pay', data: cumulativeNets, borderColor: 'rgb(255,99,132)', tension: 0.1 }
                         ]
                     },
