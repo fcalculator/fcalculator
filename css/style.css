@@ -329,10 +329,11 @@ footer {
 .info-icon {
   cursor: help;
   margin-right: 2px;
-  
+  vertical-align: middle;
   color: #007bff;
-    width: 15px;
-    height: 15px;
+  width: 15px;
+  height: 15px;
+  top: 2px;
 }
 
 .tooltiptext {
@@ -363,8 +364,10 @@ footer {
     left: -50px;
   }
 .info-icon {
+ vertical-align: middle;
   margin-right: 2px;
   width: 15px;
   height: 15px;
+   top: 2px;
 }
 }
