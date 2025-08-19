@@ -224,7 +224,7 @@
             </tbody>
         </table>
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Loan_contract_%281936%29_-_Petrevene%2C_Bulgaria.jpg/600px-Loan_contract_%281936%29_-_Petrevene%2C_Bulgaria.jpg" alt="Historical loan contract from 1936 issued in Petrevene, Bulgaria." style="max-width:600px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style:italic; font-size:0.9em; text-align:center;">Historical loan contract from 1936, showcasing early lending practices. Source: Wikipedia.</p>
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">Historical loan contract from 1936, illustrating early loan practices. Source: Wikipedia.</p>
     </section>
     <section>
         <h2>Frequently Asked Questions</h2>
@@ -350,64 +350,63 @@
                 alert('PDF generation library failed to load. Please check your internet connection or try refreshing the page.');
                 return;
             }
+            pdfMake.tableLayouts = {
+                customLayout: {
+                    fillColor: function (rowIndex, node, columnIndex) {
+                        if (rowIndex === 0) return '#00c8c8'; // cyan header
+                        return (rowIndex % 2 === 0) ? '#f5f5f5' : null; // alternating gray
+                    },
+                    hLineWidth: function (i, node) { return 0.1; },
+                    vLineWidth: function (i, node) { return 0.1; },
+                    hLineColor: function (i, node) { return '#c8c8c8'; },
+                    vLineColor: function (i, node) { return '#c8c8c8'; },
+                    paddingLeft: function(i, node) { return 3; },
+                    paddingRight: function(i, node) { return 3; },
+                    paddingTop: function(i, node) { return 3; },
+                    paddingBottom: function(i, node) { return 3; }
+                }
+            };
             const currency = document.getElementById('currency').value;
             const rows = Array.from(document.querySelectorAll('#amortization-table tbody tr')).map(tr => Array.from(tr.cells).map(td => td.textContent.replace(currencySymbol(currency), '')));
             const docDefinition = {
                 content: [
                     { text: 'Loan Calculation Results', style: 'header' },
                     {
+                        layout: 'customLayout',
                         table: {
                             body: [
-                                ['Parameter', 'Value'],
+                                [{ text: 'Parameter', color: 'white' }, { text: 'Value', color: 'white' }],
                                 ['Loan Amount', document.getElementById('loan-amount-result').textContent.split(': ')[1].replace(currencySymbol(currency), '')],
                                 ['Payment Amount', document.getElementById('monthly-payment-result').textContent.split(': ')[1].replace(currencySymbol(currency), '')],
                                 ['Total Payments', document.getElementById('total-payments-result').textContent.split(': ')[1].replace(currencySymbol(currency), '')],
                                 ['Total Interest', document.getElementById('total-interest-result').textContent.split(': ')[1].replace(currencySymbol(currency), '')]
                             ]
-                        },
-                        layout: 'lightHorizontalLines'
+                        }
                     },
                     { text: 'Amortization Schedule', style: 'subheader' },
                     {
+                        layout: 'customLayout',
                         table: {
                             headerRows: 1,
-                            body: [['Period', 'Payment', 'Principal', 'Interest', 'Balance'], ...rows]
-                        },
-                        layout: {
-                            hLineWidth: function() { return 0.1; },
-                            vLineWidth: function() { return 0.1; },
-                            hLineColor: [200, 200, 200],
-                            vLineColor: [200, 200, 200],
-                            paddingLeft: function() { return 3; },
-                            paddingRight: function() { return 3; },
-                            paddingTop: function() { return 3; },
-                            paddingBottom: function() { return 3; }
+                            body: [
+                                [{ text: 'Period', color: 'white' }, { text: 'Payment', color: 'white' }, { text: 'Principal', color: 'white' }, { text: 'Interest', color: 'white' }, { text: 'Balance', color: 'white' }],
+                                ...rows
+                            ]
                         }
                     }
                 ],
                 styles: {
                     header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
-                    subheader: { fontSize: 14, bold: true, margin: [0, 10, 0, 5] },
-                    lineColor: [200, 200, 200],
-                    lineWidth: 0.1,
-                    font: 'helvetica',
-                    cellPadding: 3,
-                    fontSize: 10,
-                    halign: 'left'
+                    subheader: { fontSize: 14, bold: true, margin: [0, 10, 0, 5] }
                 },
-                defaultStyle: { font: 'helvetica' },
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                pageBreak: 'auto',
+                defaultStyle: { font: 'helvetica', fontSize: 10 },
                 footer: function(currentPage, pageCount) {
                     return {
-                        columns: [{
-                            text: 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.',
-                            alignment: 'center',
-                            fontSize: 10,
-                            color: '#646464',
-                            link: 'https://fcalculator.com'
-                        }]
+                        text: 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.',
+                        alignment: 'center',
+                        fontSize: 10,
+                        color: '#646464',
+                        link: 'https://fcalculator.com'
                     };
                 }
             };
