@@ -3,191 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Accurately calculate your gross and net salary, including adjustments for taxes, deductions, overtime, holidays, and vacation days. Explore breakdowns across pay frequencies like annual, monthly, weekly, and daily for better financial planning and budgeting.">
-    <meta name="keywords" content="salary calculator, paycheck estimator, gross to net pay, overtime calculator, tax deductions, take-home pay, pay frequency converter">
-    <title>Salary Calculator - FCalculator.com</title>
+    <meta name="description" content="Precisely compute gross and net salary figures, incorporating taxes, deductions, overtime hours, holidays, and vacation periods. Access comprehensive breakdowns by annual, monthly, weekly, and daily intervals to enhance financial forecasting and decision-making.">
+    <meta name="keywords" content="salary computation, net pay estimator, gross salary adjustment, overtime inclusion, deduction calculator, pay period analysis, employment cost evaluation">
+    <title>Salary Calculator</title>
+    <link rel="canonical" href="https://fcalculator.com/salary-calculator.html">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Salary Calculator",
+      "description": "Advanced tool for calculating gross and net salaries with considerations for overtime, taxes, deductions, holidays, and vacations. Includes detailed breakdowns, visualizations via charts, monthly tables, historical comparisons, and PDF export for thorough financial analysis.",
+      "url": "https://fcalculator.com/salary-calculator.html",
+      "datePublished": "2022-01-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "FCalculator.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://fcalculator.com/logo.png"
+        }
+      },
+      "mainEntity": {
+        "@type": "SoftwareApplication",
+        "name": "Salary Calculator",
+        "applicationCategory": "FinancialApplication",
+        "operatingSystem": "Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    }
+    </script>
 </head>
 <body>
     <header>
         <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/finance.html">Finance</a> > <a href="/salary-calculator.html">Salary Calculator</a>
+        </div>
         <h1>Salary Calculator</h1>
-        <p>Estimate your take-home pay by factoring in hourly or annual rates, overtime, taxes, pre-tax and post-tax deductions, holidays, and vacation days. This tool provides detailed breakdowns across various pay frequencies to help with budgeting, job negotiations, and understanding employment costs.</p>
+        <p>Assess your earnings by calculating gross and net pay, adjusting for overtime, taxes, deductions, holidays, and vacations, with breakdowns across multiple pay frequencies for effective budgeting and employment evaluation.</p>
     </header>
-
-    <main>
-        <section class="calculator-tool">
-            <h2>Enter Your Salary Details</h2>
-            <form id="salary-form">
-                <label for="salary-type">Salary Type:</label>
-                <select id="salary-type">
-                    <option value="hourly">Hourly</option>
-                    <option value="annual">Annual</option>
-                </select>
-
-                <label for="annual-salary" style="display: none;">Annual Salary:</label>
-                <input type="number" id="annual-salary" style="display: none;" min="0" step="0.01">
-
-                <label for="hourly-rate" style="display: block;">Hourly Rate:</label>
-                <input type="number" id="hourly-rate" min="0" step="0.01" value="20">
-
-                <label for="hours-per-week">Hours per Week:</label>
-                <input type="number" id="hours-per-week" min="0" step="0.1" value="40">
-
-                <label for="days-per-week">Days per Week:</label>
-                <input type="number" id="days-per-week" min="0" step="0.1" value="5">
-
-                <label for="weeks-per-year">Weeks per Year:</label>
-                <input type="number" id="weeks-per-year" min="0" step="1" value="52">
-
-                <label for="holidays-per-year">Holidays per Year:</label>
-                <input type="number" id="holidays-per-year" min="0" step="1" value="10">
-
-                <label for="vacation-days-per-year">Vacation Days per Year:</label>
-                <input type="number" id="vacation-days-per-year" min="0" step="1" value="15">
-
-                <label for="overtime-hours">Overtime Hours per Week:</label>
-                <input type="number" id="overtime-hours" min="0" step="0.1" value="0">
-
-                <label for="overtime-rate">Overtime Rate Multiplier (e.g., 1.5):</label>
-                <input type="number" id="overtime-rate" min="1" step="0.1" value="1.5">
-
-                <label for="tax-rate">Tax Rate (%):</label>
-                <input type="number" id="tax-rate" min="0" max="100" step="0.1" value="20">
-
-                <label for="pre-tax-deductions">Pre-Tax Deductions (e.g., pension, annual amount):</label>
-                <input type="number" id="pre-tax-deductions" min="0" step="0.01" value="0">
-
-                <label for="post-tax-deductions">Post-Tax Deductions (annual amount):</label>
-                <input type="number" id="post-tax-deductions" min="0" step="0.01" value="0">
-
-                <label for="currency">Currency:</label>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="currency-selector">
+                Currency
                 <select id="currency">
-                    <option value="$">$ (USD)</option>
-                    <option value="€">€ (EUR)</option>
+                    <option value="$" selected>USD ($)</option>
+                    <option value="€">EUR (€)</option>
+                    <option value="£">GBP (£)</option>
+                    <option value="¥">JPY (¥)</option>
+                    <option value="C$">CAD (C$)</option>
+                    <option value="A$">AUD (A$)</option>
                 </select>
-
-                <button type="button" onclick="calculateSalary()">Calculate</button>
-            </form>
-
-            <div id="results" style="display: none;">
-                <h2>Salary Results</h2>
-                <p>Unadjusted Annual Gross Salary: <span id="unadjusted-annual-gross" class="result-green"></span></p>
-                <p>Adjusted Annual Gross Salary (after holidays/vacation): <span id="adjusted-annual-gross" class="result-green"></span></p>
-                <p>Unadjusted Annual Net Salary: <span id="unadjusted-annual-net" class="result-green"></span></p>
-                <p>Adjusted Annual Net Salary: <span id="adjusted-annual-net" class="result-green"></span></p>
-                <p>Monthly Net Salary: <span id="monthly-net" class="result-green"></span></p>
-                <p>Weekly Net Salary: <span id="weekly-net" class="result-green"></span></p>
-                <p>Daily Net Salary: <span id="daily-net" class="result-green"></span></p>
-                <p>Total Deductions: <span id="total-deductions" class="result-green"></span></p>
-
-                <canvas id="salary-chart" width="400" height="200"></canvas>
-
-                <h3>Monthly Breakdown Table</h3>
-                <table id="monthly-table">
-                    <thead>
-                        <tr>
-                            <th>Month</th>
-                            <th>Gross Pay (Adjusted)</th>
-                            <th>Deductions</th>
-                            <th>Net Pay</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-
-                <button onclick="saveAsPDF()">Save as PDF</button>
-                <button onclick="sharePage()">Share This Page</button>
             </div>
-        </section>
-
-        <section class="explanation">
-            <h2>Understanding Salary Calculations</h2>
-            <p>Salary calculations transform base rates into comprehensive earnings profiles, accounting for variables like overtime, non-working days, and deductions. This tool starts with your input—either hourly or annual—and adjusts for real-world factors such as holidays and vacations, which reduce effective working days. Overtime is factored in at a multiplier rate, enhancing gross earnings. Taxes are applied as a percentage on taxable income after pre-tax deductions (like pensions or health contributions), while post-tax deductions are subtracted from net pay.</p>
-            <p>Outputs include both unadjusted (assuming full-year work) and adjusted figures, displayed across frequencies for flexibility. This helps in comparing job offers, planning expenses, or estimating tax liabilities. Regional variations, such as US FICA taxes or UK National Insurance, can influence results—use the tax rate field to approximate these. For precision, consider consulting tax authorities or adjusting based on local brackets.</p>
-            <p>Example: An hourly rate of $20, 40 hours/week, with 10 holidays and 15 vacation days, 20% tax, and $1,000 pre-tax deductions yields an adjusted annual gross of around $38,400 (after 25 non-working days), with net pay reflecting deductions.</p>
-        </section>
-
-        <section class="formulas">
-            <h2>Detailed Formulas</h2>
-            <ul>
-                <li>Unadjusted Annual Gross = (Hourly Rate × Hours/Week × Weeks/Year) + (Overtime Hours × Overtime Rate × Hourly Rate × Weeks/Year) or direct Annual Salary input.</li>
-                <li>Adjusted Annual Gross = Unadjusted Gross × (Working Days / Total Possible Days), where Working Days = (Days/Week × Weeks/Year) - (Holidays + Vacations).</li>
-                <li>Taxable Income = Adjusted Gross - Pre-Tax Deductions.</li>
-                <li>Total Taxes = (Taxable Income × Tax Rate) / 100.</li>
-                <li>Adjusted Annual Net = Taxable Income - Total Taxes - Post-Tax Deductions.</li>
-                <li>Monthly/Weekly/Daily Net = Adjusted Annual Net divided by 12/52/260 (adjusted for non-working days).</li>
-            </ul>
-            <p>These formulas ensure a transparent view of earnings, adaptable to personal or regional scenarios like overtime premiums or benefit contributions.</p>
-        </section>
-
-        <section class="faq">
-            <h2>Frequently Asked Questions</h2>
-            <dl>
-                <dt>What distinguishes gross from net salary?</dt>
-                <dd>Gross represents total earnings before any subtractions, while net is the amount received after taxes and deductions, reflecting actual take-home pay.</dd>
-                <dt>How are holidays and vacations incorporated?</dt>
-                <dd>They reduce effective working days, lowering adjusted gross salary proportionally to account for unpaid time off.</dd>
-                <dt>Can overtime significantly impact calculations?</dt>
-                <dd>Yes, by applying a multiplier to extra hours, it boosts gross earnings, though taxes may offset some gains—ideal for shift workers or seasonal roles.</dd>
-                <dt>What about location-specific taxes?</dt>
-                <dd>Use the tax rate to estimate combined federal/state rates; for detailed brackets, reference local guidelines like US IRS or UK HMRC.</dd>
-                <dt>Why include pre- and post-tax deductions?</dt>
-                <dd>Pre-tax lowers taxable income (e.g., retirement savings), while post-tax affects net pay directly (e.g., union dues), providing a holistic view.</dd>
-            </dl>
-        </section>
-
-        <section class="additional-info">
-            <h2>Salary Trends and Insights</h2>
-            <p>Global salary structures vary by industry, location, and regulations. In the US, median household income hovers around $70,000, influenced by factors like education and experience, per labor statistics. European averages emphasize work-life balance with more vacation days. Use this calculator to benchmark against trends, incorporating overtime for high-demand fields like tech or healthcare. Internal links: Align your budget with our <a href="/mortgage-calculator.html">Mortgage Calculator</a> or <a href="/compound-interest-growth-calculator.html">Compound Interest Growth Calculator</a> for long-term planning.</p>
-            <p>For reliable data, consult sources like the U.S. Bureau of Labor Statistics or Eurostat on wage distributions and employment costs.</p>
-        </section>
-    </main>
-
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Salary Details</legend>
+                    <div class="input-row">
+                        <label for="salary-type">Salary Type</label>
+                        <select id="salary-type">
+                            <option value="hourly" selected>Hourly</option>
+                            <option value="annual">Annual</option>
+                        </select>
+                    </div>
+                    <div class="input-row" id="annual-salary-row" style="display: none;">
+                        <label for="annual-salary">Annual Salary</label>
+                        <input type="number" id="annual-salary" placeholder="e.g. 50000" min="0" step="0.01">
+                    </div>
+                    <div class="input-row" id="hourly-rate-row">
+                        <label for="hourly-rate">Hourly Rate</label>
+                        <input type="number" id="hourly-rate" placeholder="e.g. 20" min="0" step="0.01" value="20">
+                    </div>
+                    <div class="input-row" id="hours-per-week-row">
+                        <label for="hours-per-week">Hours per Week</label>
+                        <input type="number" id="hours-per-week" placeholder="e.g. 40" min="0" step="0.1" value="40">
+                    </div>
+                    <div class="input-row">
+                        <label for="days-per-week">Days per Week</label>
+                        <input type="number" id="days-per-week" placeholder="e.g. 5" min="0" step="0.1" value="5">
+                    </div>
+                    <div class="input-row">
+                        <label for="weeks-per-year">Weeks per Year</label>
+                        <input type="number" id="weeks-per-year" placeholder="e.g. 52" min="0" step="1" value="52">
+                    </div>
+                    <div class="input-row">
+                        <label for="holidays-per-year">Holidays per Year</label>
+                        <input type="number" id="holidays-per-year" placeholder="e.g. 10" min="0" step="1" value="10">
+                    </div>
+                    <div class="input-row">
+                        <label for="vacation-days-per-year">Vacation Days per Year</label>
+                        <input type="number" id="vacation-days-per-year" placeholder="e.g. 15" min="0" step="1" value="15">
+                    </div>
+                    <div class="input-row" id="overtime-hours-row">
+                        <label for="overtime-hours">Overtime Hours per Week</label>
+                        <input type="number" id="overtime-hours" placeholder="e.g. 0" min="0" step="0.1" value="0">
+                    </div>
+                    <div class="input-row" id="overtime-rate-row">
+                        <label for="overtime-rate">Overtime Rate Multiplier</label>
+                        <input type="number" id="overtime-rate" placeholder="e.g. 1.5" min="1" step="0.1" value="1.5">
+                    </div>
+                    <div class="input-row">
+                        <label for="tax-rate">Tax Rate (%)</label>
+                        <input type="number" id="tax-rate" placeholder="e.g. 20" min="0" max="100" step="0.1" value="20">
+                    </div>
+                    <div class="input-row">
+                        <label for="pre-tax-deductions">Pre-Tax Deductions (annual)</label>
+                        <input type="number" id="pre-tax-deductions" placeholder="e.g. 0" min="0" step="0.01" value="0">
+                    </div>
+                    <div class="input-row">
+                        <label for="post-tax-deductions">Post-Tax Deductions (annual)</label>
+                        <input type="number" id="post-tax-deductions" placeholder="e.g. 0" min="0" step="0.01" value="0">
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="calculateSalary()">Calculate</button>
+        </form>
+    </section>
+    <div class="results-section" id="results" style="display: none;">
+        <h2>Calculation Results</h2>
+        <p>Unadjusted Annual Gross Salary: <span id="unadjusted-annual-gross"></span></p>
+        <p>Adjusted Annual Gross Salary: <span id="adjusted-annual-gross"></span></p>
+        <p>Unadjusted Annual Net Salary: <span id="unadjusted-annual-net"></span></p>
+        <p>Adjusted Annual Net Salary: <span id="adjusted-annual-net"></span></p>
+        <p>Monthly Net Salary: <span id="monthly-net"></span></p>
+        <p>Weekly Net Salary: <span id="weekly-net"></span></p>
+        <p>Daily Net Salary: <span id="daily-net"></span></p>
+        <p>Total Deductions: <span id="total-deductions"></span></p>
+        <canvas id="polar-chart" width="300" height="300"></canvas>
+        <canvas id="line-chart" width="500" height="300"></canvas>
+        <h3>Monthly Breakdown</h3>
+        <table id="monthly-table">
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Gross Pay (Adjusted)</th>
+                    <th>Deductions</th>
+                    <th>Net Pay</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button onclick="saveAsPDF()">Save as PDF</button>
+        <button onclick="sharePage()">Share</button>
+    </div>
+    <p>Consider exploring complementary financial tools such as the Loan Calculator for borrowing assessments or the Inflation Impact Calculator for purchasing power evaluations.</p>
+    <section>
+        <h2>How the Salary Calculator Works</h2>
+        <p>This salary calculator processes base earnings—hourly or annual—by integrating adjustments for real-world variables like overtime, non-working days (holidays and vacations), taxes, and deductions. Select the salary type, input relevant details including hours, rates, and annual weeks, then specify deductions and tax rates. The tool computes unadjusted and adjusted gross salaries, applies pre-tax deductions to determine taxable income, calculates taxes, subtracts post-tax deductions for net pay, and provides breakdowns across frequencies. Visualizations include a polar area chart for pay component distribution and a line chart for cumulative net pay trends over the year. Assumptions include consistent rates without variable bonuses, focusing on core earnings for planning purposes.</p>
+    </section>
+    <section>
+        <h2>Mathematical Formulas and Derivations</h2>
+        <p>The calculations rely on structured formulas to ensure accuracy in earnings projections:</p>
+        <div style="max-width: 500px; margin: 0 auto;">
+            \[ \text{Unadjusted Annual Gross} = (\text{Hourly Rate} \times \text{Hours/Week} \times \text{Weeks/Year}) + (\text{Overtime Hours} \times \text{Overtime Rate} \times \text{Hourly Rate} \times \text{Weeks/Year}) \]
+        </div>
+        <p>For annual inputs, this is directly the provided value. Adjustments account for non-working days:</p>
+        <div style="max-width: 500px; margin: 0 auto;">
+            \[ \text{Adjusted Annual Gross} = \text{Unadjusted Gross} \times \frac{\text{Working Days}}{\text{Total Possible Days}} \]
+        </div>
+        <p>Where Working Days = (Days/Week × Weeks/Year) - (Holidays + Vacations). Net pay derives from:</p>
+        <div style="max-width: 500px; margin: 0 auto;">
+            \[ \text{Taxable Income} = \text{Adjusted Gross} - \text{Pre-Tax Deductions} \]
+            \[ \text{Total Taxes} = \text{Taxable Income} \times \frac{\text{Tax Rate}}{100} \]
+            \[ \text{Adjusted Annual Net} = \text{Taxable Income} - \text{Total Taxes} - \text{Post-Tax Deductions} \]
+        </div>
+        <p>Frequency breakdowns divide the adjusted net accordingly, with daily using working days for precision.</p>
+    </section>
+    <section>
+        <h2>Factors Influencing Salary and Net Pay</h2>
+        <h3>Employment Structure and Adjustments</h3>
+        <p>Salary levels are shaped by market rates, education, experience, and negotiation. Overtime multipliers boost gross for extended hours, while holidays and vacations reduce effective work time, impacting adjusted earnings. Pre-tax deductions like retirement contributions lower taxable income, optimizing net pay.</p>
+        <h3>Tax and Deduction Impacts</h3>
+        <p>Progressive taxes vary by bracket, with higher rates eroding larger portions of income. Post-tax deductions, such as garnishments, directly cut take-home pay. Regional factors, like U.S. Social Security or EU contributions, add layers—approximate via the tax field.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Factor</th>
+                    <th>Influence</th>
+                    <th>Net Pay Effect</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Overtime</td>
+                    <td>Increases gross via multiplier</td>
+                    <td>Boosts net, but taxed</td>
+                </tr>
+                <tr>
+                    <td>Non-Working Days</td>
+                    <td>Reduces adjusted gross</td>
+                    <td>Lowers net proportionally</td>
+                </tr>
+                <tr>
+                    <td>Pre-Tax Deductions</td>
+                    <td>Lowers taxable base</td>
+                    <td>Increases net relative to gross</td>
+                </tr>
+                <tr>
+                    <td>Tax Rate</td>
+                    <td>Direct percentage cut</td>
+                    <td>Reduces net significantly</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Historical Salary Trends and Global Comparisons</h2>
+        <p>Wage growth has evolved with economic shifts. Post-Industrial Revolution, real wages rose due to productivity, but post-2008 crisis, global growth slowed to 1.8% by 2017 per ILO data. U.S. median wages stagnated for lower earners, while EU averages reflect stronger unions. The chart below illustrates productivity-linked wage trends.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Real_GDP_per_hour_worked%2C_annual_compounded_growth_rate_%28%25%29_.png" alt="Chart of real GDP per hour worked annual compounded growth rate, reflecting wage productivity trends" style="max-width:600px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Chart showing real GDP per hour worked annual compounded growth rate, indicating wage productivity trends. Source: Wikipedia.</i>
+        <p>Comparisons highlight variations: U.S. at 2.5% average growth recently, EU at 1.5-2%, emerging markets higher but volatile.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Region/Period</th>
+                    <th>Average Wage Growth (%)</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>U.S. Recent</td>
+                    <td>2.5</td>
+                    <td>Bureau of Labor Statistics</td>
+                </tr>
+                <tr>
+                    <td>EU (Average)</td>
+                    <td>1.8</td>
+                    <td>Eurostat</td>
+                </tr>
+                <tr>
+                    <td>Global Post-2008</td>
+                    <td>1.8</td>
+                    <td>ILO</td>
+                </tr>
+                <tr>
+                    <td>Emerging Markets</td>
+                    <td>4.0</td>
+                    <td>World Bank</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Frequently Asked Questions</h2>
+        <p><strong>What differentiates gross from net salary?</strong> Gross is total earnings before subtractions, net is after taxes and deductions, representing actual disposable income.</p>
+        <p><strong>How do holidays and vacations affect calculations?</strong> They decrease working days, proportionally reducing adjusted gross for hourly roles, simulating unpaid time off.</p>
+        <p><strong>Does overtime substantially alter results?</strong> Yes, multipliers amplify gross, beneficial for variable-hour jobs, though increased taxes may temper net gains.</p>
+        <p><strong>How to account for regional taxes?</strong> Input an effective rate combining federal, state, and local; refer to authorities like IRS or HMRC for brackets.</p>
+        <p><strong>Why separate pre- and post-tax deductions?</strong> Pre-tax reduces taxable income, enhancing net efficiency; post-tax subtracts directly from after-tax pay.</p>
+    </section>
+    <section class="disclaimer">
+        <h2>Disclaimer</h2>
+        <p>This salary calculator is provided for educational and informational purposes only. It does not constitute financial, tax, or professional advice. Results depend on user inputs and assumptions; actual earnings, taxes, and deductions may differ based on laws and circumstances. Consult a qualified tax advisor or financial professional for personalized guidance. FCalculator.com assumes no liability for decisions based on this tool.</p>
+    </section>
     <section class="related-resources">
         <h2>Related Resources</h2>
-        <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Salary" target="_blank" rel="noopener noreferrer">Wikipedia: Salary Overview</a></li>
-            <li><a href="https://www.bls.gov/oes/current/oes_nat.htm" target="_blank" rel="noopener noreferrer">U.S. Bureau of Labor Statistics: Occupational Employment and Wages</a></li>
-            <li><a href="https://ec.europa.eu/eurostat/web/lfs/data/database" target="_blank" rel="noopener noreferrer">Eurostat: Labour Force Survey</a></li>
-            <li><a href="https://www.irs.gov/taxtopics/tc551" target="_blank" rel="noopener noreferrer">IRS: Wage and Salary Information</a></li>
-        </ul>
+        <p><a href="https://en.wikipedia.org/wiki/Salary" target="_blank" rel="noopener noreferrer">Wikipedia on Salary</a> - Comprehensive overview of salary definitions, history, and influencing factors for foundational understanding.</p>
+        <p><a href="https://www.bls.gov/oes/current/oes_nat.htm" target="_blank" rel="noopener noreferrer">U.S. Bureau of Labor Statistics Occupational Employment and Wages</a> - Detailed data on U.S. wage trends and occupational salaries to benchmark earnings.</p>
+        <p><a href="https://ec.europa.eu/eurostat/web/lfs/data/database" target="_blank" rel="noopener noreferrer">Eurostat Labour Force Survey</a> - European wage and employment statistics for regional comparisons and labor market insights.</p>
+        <p><a href="https://www.ilo.org/global/research/global-reports/global-wage-report/lang--en/index.htm" target="_blank" rel="noopener noreferrer">ILO Global Wage Report</a> - Annual analysis of worldwide wage trends, inequalities, and economic impacts for global perspective.</p>
     </section>
-
-	<footer>
-        Project created by Ivan Brkic. Project launched in 2020. Version 1.02
+    <section class="ai-instructions">
+        This webpage delivers a sophisticated salary calculator for estimating gross and net pay, integrating overtime, holidays, vacations, taxes, and deductions across pay frequencies. It incorporates mathematical formulas, historical wage growth analyses from sources like ILO and BLS, interactive polar and line charts for component breakdowns and trends, monthly tables, and PDF export. Tailored for job seekers, employees, and planners, it supports budgeting, negotiation, and tax estimation with detailed explanations and disclaimers urging professional advice.
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
-
     <script>
-        let salaryChart;
+        let polarChart;
+        let lineChart;
         let monthlyData = [];
-
         document.getElementById('salary-type').addEventListener('change', function() {
             const type = this.value;
-            if (type === 'annual') {
-                document.getElementById('annual-salary').style.display = 'block';
-                document.getElementById('hourly-rate').style.display = 'none';
-                document.getElementById('hours-per-week').style.display = 'none';
-                document.getElementById('overtime-hours').style.display = 'none';
-                document.getElementById('overtime-rate').style.display = 'none';
-            } else {
-                document.getElementById('annual-salary').style.display = 'none';
-                document.getElementById('hourly-rate').style.display = 'block';
-                document.getElementById('hours-per-week').style.display = 'block';
-                document.getElementById('overtime-hours').style.display = 'block';
-                document.getElementById('overtime-rate').style.display = 'block';
-            }
+            document.getElementById('annual-salary-row').style.display = type === 'annual' ? 'flex' : 'none';
+            document.getElementById('hourly-rate-row').style.display = type === 'hourly' ? 'flex' : 'none';
+            document.getElementById('hours-per-week-row').style.display = type === 'hourly' ? 'flex' : 'none';
+            document.getElementById('overtime-hours-row').style.display = type === 'hourly' ? 'flex' : 'none';
+            document.getElementById('overtime-rate-row').style.display = type === 'hourly' ? 'flex' : 'none';
         });
-
         function calculateSalary() {
             const salaryType = document.getElementById('salary-type').value;
-            const currency = document.getElementById('currency').value;
+            const currencySymbol = document.getElementById('currency').value;
             let unadjustedAnnualGross;
-
             if (salaryType === 'annual') {
                 unadjustedAnnualGross = parseFloat(document.getElementById('annual-salary').value) || 0;
             } else {
@@ -198,141 +306,150 @@
                 const weeksPerYear = parseInt(document.getElementById('weeks-per-year').value) || 52;
                 unadjustedAnnualGross = (hourlyRate * hoursPerWeek * weeksPerYear) + (overtimeHours * overtimeRate * hourlyRate * weeksPerYear);
             }
-
             const daysPerWeek = parseFloat(document.getElementById('days-per-week').value) || 5;
             const holidays = parseInt(document.getElementById('holidays-per-year').value) || 0;
             const vacationDays = parseInt(document.getElementById('vacation-days-per-year').value) || 0;
             const totalPossibleDays = daysPerWeek * 52;
             let workingDays = totalPossibleDays - holidays - vacationDays;
-            if (workingDays <= 0) workingDays = 1; // Prevent division by zero
-
-            let adjustedAnnualGross;
-            if (salaryType === 'annual') {
-                adjustedAnnualGross = unadjustedAnnualGross; // No adjustment for annual salaries (paid time off assumed)
-            } else {
-                adjustedAnnualGross = unadjustedAnnualGross * (workingDays / totalPossibleDays);
-            }
-
+            if (workingDays <= 0) workingDays = 1;
+            let adjustedAnnualGross = salaryType === 'annual' ? unadjustedAnnualGross : unadjustedAnnualGross * (workingDays / totalPossibleDays);
             const taxRate = parseFloat(document.getElementById('tax-rate').value) || 0;
             const preTaxDeductions = parseFloat(document.getElementById('pre-tax-deductions').value) || 0;
             const postTaxDeductions = parseFloat(document.getElementById('post-tax-deductions').value) || 0;
-
             const taxableIncome = adjustedAnnualGross - preTaxDeductions;
             const totalTaxes = (taxableIncome * taxRate) / 100;
             const totalDeductions = totalTaxes + preTaxDeductions + postTaxDeductions;
             const adjustedAnnualNet = taxableIncome - totalTaxes - postTaxDeductions;
             const unadjustedAnnualNet = unadjustedAnnualGross - preTaxDeductions - ((unadjustedAnnualGross - preTaxDeductions) * taxRate / 100) - postTaxDeductions;
-
             const monthlyNet = adjustedAnnualNet / 12;
             const weeklyNet = adjustedAnnualNet / 52;
             const dailyNet = adjustedAnnualNet / workingDays;
-
-            document.getElementById('unadjusted-annual-gross').textContent = `${currency}${unadjustedAnnualGross.toFixed(2)}`;
-            document.getElementById('adjusted-annual-gross').textContent = `${currency}${adjustedAnnualGross.toFixed(2)}`;
-            document.getElementById('unadjusted-annual-net').textContent = `${currency}${unadjustedAnnualNet.toFixed(2)}`;
-            document.getElementById('adjusted-annual-net').textContent = `${currency}${adjustedAnnualNet.toFixed(2)}`;
-            document.getElementById('monthly-net').textContent = `${currency}${monthlyNet.toFixed(2)}`;
-            document.getElementById('weekly-net').textContent = `${currency}${weeklyNet.toFixed(2)}`;
-            document.getElementById('daily-net').textContent = `${currency}${dailyNet.toFixed(2)}`;
-            document.getElementById('total-deductions').textContent = `${currency}${totalDeductions.toFixed(2)}`;
-
+            document.getElementById('unadjusted-annual-gross').textContent = `${currencySymbol}${unadjustedAnnualGross.toFixed(2)}`;
+            document.getElementById('adjusted-annual-gross').textContent = `${currencySymbol}${adjustedAnnualGross.toFixed(2)}`;
+            document.getElementById('unadjusted-annual-net').textContent = `${currencySymbol}${unadjustedAnnualNet.toFixed(2)}`;
+            document.getElementById('adjusted-annual-net').textContent = `${currencySymbol}${adjustedAnnualNet.toFixed(2)}`;
+            document.getElementById('monthly-net').textContent = `${currencySymbol}${monthlyNet.toFixed(2)}`;
+            document.getElementById('weekly-net').textContent = `${currencySymbol}${weeklyNet.toFixed(2)}`;
+            document.getElementById('daily-net').textContent = `${currencySymbol}${dailyNet.toFixed(2)}`;
+            document.getElementById('total-deductions').textContent = `${currencySymbol}${totalDeductions.toFixed(2)}`;
             // Monthly Breakdown
             monthlyData = [];
             const tableBody = document.querySelector('#monthly-table tbody');
             tableBody.innerHTML = '';
             const monthlyGross = adjustedAnnualGross / 12;
+            let cumulativeNet = 0;
+            let months = [];
+            let netPays = [];
+            let cumulativeNets = [];
             for (let month = 1; month <= 12; month++) {
                 const monthlyDeductions = totalDeductions / 12;
                 const monthlyNetPay = monthlyGross - monthlyDeductions;
-                monthlyData.push([month, `${currency}${monthlyGross.toFixed(2)}`, `${currency}${monthlyDeductions.toFixed(2)}`, `${currency}${monthlyNetPay.toFixed(2)}`]);
-
+                cumulativeNet += monthlyNetPay;
+                monthlyData.push([month, `${currencySymbol}${monthlyGross.toFixed(2)}`, `${currencySymbol}${monthlyDeductions.toFixed(2)}`, `${currencySymbol}${monthlyNetPay.toFixed(2)}`]);
                 const row = document.createElement('tr');
-                row.innerHTML = `<td>${month}</td><td>${currency}${monthlyGross.toFixed(2)}</td><td>${currency}${monthlyDeductions.toFixed(2)}</td><td>${currency}${monthlyNetPay.toFixed(2)}</td>`;
+                row.innerHTML = `<td>${month}</td><td>${currencySymbol}${monthlyGross.toFixed(2)}</td><td>${currencySymbol}${monthlyDeductions.toFixed(2)}</td><td>${currencySymbol}${monthlyNetPay.toFixed(2)}</td>`;
                 tableBody.appendChild(row);
+                months.push(month);
+                netPays.push(monthlyNetPay);
+                cumulativeNets.push(cumulativeNet);
             }
-
-            // Chart
-            const ctx = document.getElementById('salary-chart').getContext('2d');
-            if (salaryChart) salaryChart.destroy();
-            salaryChart = new Chart(ctx, {
-                type: 'pie',
+            // Charts
+            const polarCtx = document.getElementById('polar-chart').getContext('2d');
+            if (polarChart) polarChart.destroy();
+            polarChart = new Chart(polarCtx, {
+                type: 'polarArea',
                 data: {
                     labels: ['Net Salary', 'Taxes', 'Pre-Tax Deductions', 'Post-Tax Deductions'],
                     datasets: [{
                         data: [adjustedAnnualNet, totalTaxes, preTaxDeductions, postTaxDeductions],
-                        backgroundColor: ['#4CAF50', '#FF9800', '#F44336', '#2196F3']
+                        backgroundColor: ['rgba(75,192,192,0.5)', 'rgba(255,159,64,0.5)', 'rgba(255,99,132,0.5)', 'rgba(54,162,235,0.5)']
                     }]
                 },
-                options: { responsive: true }
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: { display: true, text: 'Pay Components Breakdown' }
+                    }
+                }
             });
-
+            const lineCtx = document.getElementById('line-chart').getContext('2d');
+            if (lineChart) lineChart.destroy();
+            lineChart = new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [
+                        { label: 'Monthly Net Pay', data: netPays, borderColor: 'rgb(75,192,192)', tension: 0.1 },
+                        { label: 'Cumulative Net Pay', data: cumulativeNets, borderColor: 'rgb(255,99,132)', tension: 0.1 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: { display: true, text: 'Monthly and Cumulative Net Pay Trends' }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
             document.getElementById('results').style.display = 'block';
         }
-
         function saveAsPDF() {
-            if (monthlyData.length === 0) {
-                alert('Please calculate the salary first.');
-                return;
-            }
-            try {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-
-                doc.setFont("helvetica");
-                doc.setFontSize(14);
-                doc.text("Salary Calculation Results", 105, 15, { align: "center" });
-
-                // Results Table
-                doc.autoTable({
-                    startY: 20,
-                    head: [['Parameter', 'Value']],
-                    body: [
-                        ['Unadjusted Annual Gross Salary', document.getElementById('unadjusted-annual-gross').textContent],
-                        ['Adjusted Annual Gross Salary', document.getElementById('adjusted-annual-gross').textContent],
-                        ['Unadjusted Annual Net Salary', document.getElementById('unadjusted-annual-net').textContent],
-                        ['Adjusted Annual Net Salary', document.getElementById('adjusted-annual-net').textContent],
-                        ['Monthly Net Salary', document.getElementById('monthly-net').textContent],
-                        ['Weekly Net Salary', document.getElementById('weekly-net').textContent],
-                        ['Daily Net Salary', document.getElementById('daily-net').textContent],
-                        ['Total Deductions', document.getElementById('total-deductions').textContent]
-                    ],
-                    theme: 'grid',
-                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                    alternateRowStyles: { fillColor: [255, 255, 255] },
-                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
-                    margin: { top: 10 }
-                });
-
-                // Monthly Breakdown Table
-                doc.autoTable({
-                    startY: doc.lastAutoTable.finalY + 10,
-                    head: [['Month', 'Gross Pay (Adjusted)', 'Deductions', 'Net Pay']],
-                    body: monthlyData,
-                    theme: 'grid',
-                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                    alternateRowStyles: { fillColor: [245, 245, 245] },
-                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, cellPadding: 3, font: "helvetica", halign: 'left' },
-                    didDrawPage: function (data) {
-                        doc.setFontSize(10);
-                        doc.setTextColor(100);
-                        doc.text('This document was generated using Fcalculator.com', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-                    }
-                });
-
-                doc.save('salary-results.pdf');
-            } catch (e) {
-                alert('Error generating PDF: ' + e.message);
-            }
+            if (monthlyData.length === 0) return alert('Please perform a calculation first.');
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFontSize(14);
+            doc.text('Salary Calculation Results', doc.internal.pageSize.width / 2, 15, { align: 'center' });
+            doc.autoTable({
+                head: [['Parameter', 'Value']],
+                body: [
+                    ['Unadjusted Annual Gross Salary', document.getElementById('unadjusted-annual-gross').textContent],
+                    ['Adjusted Annual Gross Salary', document.getElementById('adjusted-annual-gross').textContent],
+                    ['Unadjusted Annual Net Salary', document.getElementById('unadjusted-annual-net').textContent],
+                    ['Adjusted Annual Net Salary', document.getElementById('adjusted-annual-net').textContent],
+                    ['Monthly Net Salary', document.getElementById('monthly-net').textContent],
+                    ['Weekly Net Salary', document.getElementById('weekly-net').textContent],
+                    ['Daily Net Salary', document.getElementById('daily-net').textContent],
+                    ['Total Deductions', document.getElementById('total-deductions').textContent]
+                ],
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
+            });
+            doc.autoTable({
+                head: [['Month', 'Gross Pay (Adjusted)', 'Deductions', 'Net Pay']],
+                body: monthlyData,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    const pageWidth = doc.internal.pageSize.width;
+                    const pageHeight = doc.internal.pageSize.height;
+                    const textPart1 = 'This document was generated using ';
+                    const textPart2 = ' – Calculations are provided “as is” without warranty. Use at your own risk.';
+                    const text1Width = doc.getTextWidth(textPart1);
+                    const linkWidth = doc.getTextWidth('Fcalculator.com');
+                    const x1 = (pageWidth - (text1Width + linkWidth + doc.getTextWidth(textPart2))) / 2;
+                    doc.text(textPart1, x1, pageHeight - 10);
+                    doc.textWithLink('Fcalculator.com', x1 + text1Width, pageHeight - 10, { url: 'https://fcalculator.com' });
+                    doc.text(textPart2, x1 + text1Width + linkWidth, pageHeight - 10);
+                }
+            });
+            doc.save('salary-results.pdf');
         }
-
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
                     title: 'Salary Calculator',
                     url: window.location.href
-                });
+                }).catch(console.error);
             } else {
-                alert('Share this page manually.');
+                alert('Sharing not supported; copy the URL manually.');
             }
         }
     </script>
