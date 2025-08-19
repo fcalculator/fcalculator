@@ -283,7 +283,7 @@ footer {
                 flex-direction: column;
             }
             .input-row label {
-                text-align: left;
+                text-align: right;
                 margin-right: 10px;
                 margin-bottom: 0;
             }
