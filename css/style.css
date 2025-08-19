@@ -327,10 +327,10 @@ footer {
 }
 
 .info-icon {
-  cursor: help;
+  
   margin-left: 3px;
   vertical-align: middle;
-  color: #007bff;
+  
   width: 14px;
   height: 14px;
   bottom: 5px;
@@ -366,8 +366,8 @@ footer {
 .info-icon {
  vertical-align: middle;
   margin-left: 3px;
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
    bottom: 4px;
 }
 }
