@@ -36,6 +36,13 @@
         }
     }
     </script>
+    <style>
+        .chart-container {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -97,7 +104,9 @@
     <section class="results-section">
         <h2>Calculation Results</h2>
         <div id="result"></div>
-        <canvas id="polar-chart" width="300" height="300"></canvas>
+        <div class="chart-container">
+            <canvas id="polar-chart"></canvas>
+        </div>
         <table id="results-table" style="display: none;">
             <thead>
                 <tr>
@@ -365,7 +374,7 @@
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: false,
+                        maintainAspectRatio: true,
                         plugins: {
                             legend: { position: 'top' },
                             title: { display: true, text: 'Sample Size Parameters' }
