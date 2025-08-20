@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Calculate the required sample size for your statistical study with our Sample Size Calculator. Input confidence level, margin of error, and population proportion to get accurate results, charts, and downloadable PDF reports.">
-    <meta name="keywords" content="sample size calculator, statistical sample size, confidence level, margin of error, population proportion, statistics calculator, research sample size">
+    <meta name="description" content="Determine the optimal sample size for your statistical analysis using our advanced Sample Size Calculator. Supports calculations for proportions and means, with options for finite populations, confidence levels, margins of error, and more. Includes charts, tables, and downloadable PDF reports for comprehensive insights.">
+    <meta name="keywords" content="sample size calculator, sample size for proportions, sample size for means, statistical sample size determination, confidence interval calculator, margin of error, z-score table, statistics tool for students">
     <meta name="author" content="I.Brkic">
     <link rel="canonical" href="https://fcalculator.com/sample-size-calculator.html">
     <title>Sample Size Calculator</title>
@@ -19,7 +19,7 @@
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Sample Size Calculator",
-        "description": "A tool to calculate the required sample size for statistical studies, considering confidence level, margin of error, and population proportion.",
+        "description": "An advanced tool for calculating sample sizes in statistical studies, supporting estimations for proportions and means. Includes adjustments for finite populations, detailed formulas, z-score references, charts, and PDF exports.",
         "url": "https://fcalculator.com/sample-size-calculator.html",
         "datePublished": "2022-01-14",
         "author": {
@@ -44,29 +44,49 @@
             <a href="/">FCalculator.com</a> > <a href="/math.html">Math</a> > <a href="/sample-size-calculator.html">Sample Size Calculator</a>
         </div>
         <h1>Sample Size Calculator</h1>
-        <p>Use this tool to determine the required sample size for your statistical study based on confidence level, margin of error, and population proportion.</p>
+        <p>Calculate the required sample size for estimating population proportions or means, considering confidence levels, margins of error, and finite populations for accurate statistical analysis.</p>
     </header>
 
     <section class="tool-section">
         <form id="tool-form">
             <div class="sections-container-1">
                 <fieldset>
-                    <legend>Input Parameters</legend>
+                    <legend>Calculation Type</legend>
                     <div class="input-row">
-                        <label for="confidence-level">Confidence Level (%)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Percentage representing the certainty of your results, e.g., 95%.</span></label>
+                        <label for="calc-type">Select Type<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Choose between sample size for proportions or means.</span></label>
+                        <select id="calc-type" required>
+                            <option value="proportions">Proportions</option>
+                            <option value="means">Means</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset id="common-params">
+                    <legend>Common Parameters</legend>
+                    <div class="input-row">
+                        <label for="confidence-level">Confidence Level (%)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">The certainty level for your results, e.g., 95%.</span></label>
                         <input type="number" id="confidence-level" placeholder="e.g. 95" value="95" step="0.1" required>
                     </div>
                     <div class="input-row">
-                        <label for="margin-error">Margin of Error (%)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">The range of error in your results, e.g., 5%.</span></label>
+                        <label for="margin-error">Margin of Error (%)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Acceptable error range, e.g., 5%.</span></label>
                         <input type="number" id="margin-error" placeholder="e.g. 5" value="5" step="0.1" required>
                     </div>
                     <div class="input-row">
-                        <label for="population-proportion">Population Proportion (%)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Estimated proportion of the population with the characteristic, e.g., 50% if unknown.</span></label>
+                        <label for="population-size">Population Size (Optional)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Total population; leave blank for infinite.</span></label>
+                        <input type="number" id="population-size" placeholder="e.g. 10000">
+                    </div>
+                </fieldset>
+                <fieldset id="proportions-params">
+                    <legend>Proportions Parameters</legend>
+                    <div class="input-row">
+                        <label for="population-proportion">Population Proportion (%)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Estimated proportion, e.g., 50% if unknown.</span></label>
                         <input type="number" id="population-proportion" placeholder="e.g. 50" value="50" step="0.1" required>
                     </div>
+                </fieldset>
+                <fieldset id="means-params" style="display: none;">
+                    <legend>Means Parameters</legend>
                     <div class="input-row">
-                        <label for="population-size">Population Size (Optional)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Total population size. Leave blank for infinite population.</span></label>
-                        <input type="number" id="population-size" placeholder="e.g. 10000">
+                        <label for="standard-deviation">Standard Deviation<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Population standard deviation.</span></label>
+                        <input type="number" id="standard-deviation" placeholder="e.g. 15" value="15" step="0.1" required>
                     </div>
                 </fieldset>
             </div>
@@ -85,13 +105,17 @@
                     <th>Value</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr><td>Sample Size</td><td id="table-sample-size"></td></tr>
-                <tr><td>Confidence Level</td><td id="table-confidence-level"></td></tr>
-                <tr><td>Margin of Error</td><td id="table-margin-error"></td></tr>
-                <tr><td>Population Proportion</td><td id="table-population-proportion"></td></tr>
-                <tr><td>Population Size</td><td id="table-population-size"></td></tr>
-            </tbody>
+            <tbody id="results-tbody"></tbody>
+        </table>
+        <h3>Alternate Scenarios</h3>
+        <table id="alternate-table" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Sample Size</th>
+                </tr>
+            </thead>
+            <tbody id="alternate-tbody"></tbody>
         </table>
         <button onclick="saveAsPDF()">Save as PDF</button>
         <button onclick="sharePage()">Share</button>
@@ -100,68 +124,81 @@
 
     <section>
         <h2>How to Use the Sample Size Calculator</h2>
-        <p>This calculator helps researchers, students, and professionals determine the appropriate sample size for a statistical study. Follow these steps:</p>
+        <p>This advanced calculator assists in determining the appropriate sample size for statistical estimations of proportions or means. Select the calculation type and follow these steps:</p>
         <ol>
-            <li>Enter the <strong>Confidence Level</strong> (e.g., 95%) to specify the certainty of your results.</li>
-            <li>Input the <strong>Margin of Error</strong> (e.g., 5%) to define the acceptable error range.</li>
-            <li>Provide the <strong>Population Proportion</strong> (e.g., 50% if unknown) to estimate the characteristic prevalence.</li>
-            <li>Optionally, enter the <strong>Population Size</strong> for finite populations; leave blank for infinite populations.</li>
-            <li>Click "Calculate" to view the required sample size, a detailed chart, and a downloadable PDF report.</li>
+            <li>Choose the <strong>Calculation Type</strong>: Proportions for categorical data or Means for continuous data.</li>
+            <li>Enter the <strong>Confidence Level</strong> (e.g., 95%) for result certainty.</li>
+            <li>Input the <strong>Margin of Error</strong> (e.g., 5%) for acceptable deviation.</li>
+            <li>For proportions, provide the <strong>Population Proportion</strong> (e.g., 50% if unknown).</li>
+            <li>For means, enter the <strong>Standard Deviation</strong> of the population.</li>
+            <li>Optionally, specify the <strong>Population Size</strong> for finite populations.</li>
+            <li>Click "Calculate" to obtain the sample size, polar chart visualization, alternate scenarios, and PDF download option.</li>
         </ol>
-        <p>The tool uses standard statistical formulas to ensure accurate results, which are displayed alongside a polar chart for visual representation.</p>
+        <p>The tool applies standard statistical formulas, adjusting for finite populations, and displays results with visual aids for better understanding.</p>
     </section>
 
     <section>
-        <h2>Understanding Sample Size Calculation</h2>
-        <h3>Formula for Sample Size</h3>
-        <p>The sample size for an infinite population is calculated using the formula:</p>
+        <h2>Understanding Sample Size Determination</h2>
+        <h3>Formulas for Proportions</h3>
+        <p>The sample size for estimating a population proportion is given by:</p>
         <div style="max-width: 500px; width: 100%; margin: 0 auto;">
             \[ n = \frac{Z^2 \cdot p \cdot (1 - p)}{E^2} \]
         </div>
-        <p>Where:</p>
-        <ul>
-            <li>\( n \): Sample size</li>
-            <li>\( Z \): Z-score corresponding to the confidence level (e.g., 1.96 for 95%)</li>
-            <li>\( p \): Population proportion (e.g., 0.5 for 50%)</li>
-            <li>\( E \): Margin of error (e.g., 0.05 for 5%)</li>
-        </ul>
-        <p>For finite populations, the adjusted sample size is:</p>
+        <p>Where \( Z \) is the z-score, \( p \) is the proportion, and \( E \) is the margin of error. For finite populations:</p>
         <div style="max-width: 500px; width: 100%; margin: 0 auto;">
             \[ n_{\text{adjusted}} = \frac{n}{1 + \frac{n - 1}{N}} \]
         </div>
-        <p>Where \( N \) is the population size.</p>
 
-        <h3>Why Sample Size Matters</h3>
-        <p>A correctly calculated sample size ensures that your study results are statistically significant and representative of the population. Too small a sample may lead to unreliable results, while an overly large sample can waste resources.</p>
-
-        <h3>Example Calculation</h3>
-        <p>Suppose you want a 95% confidence level, a 5% margin of error, and a 50% population proportion for an infinite population:</p>
-        <ul>
-            <li>Z-score for 95% confidence = 1.96</li>
-            <li>Population proportion (\( p \)) = 0.5</li>
-            <li>Margin of error (\( E \)) = 0.05</li>
-        </ul>
-        <p>Plugging into the formula:</p>
+        <h3>Formulas for Means</h3>
+        <p>For estimating a population mean:</p>
         <div style="max-width: 500px; width: 100%; margin: 0 auto;">
-            \[ n = \frac{1.96^2 \cdot 0.5 \cdot (1 - 0.5)}{0.05^2} = \frac{3.8416 \cdot 0.25}{0.0025} = 384.16 \]
+            \[ n = \frac{Z^2 \cdot \sigma^2}{E^2} \]
         </div>
-        <p>Thus, a sample size of approximately 385 is required.</p>
+        <p>With finite population adjustment as above. Here, \( \sigma \) is the standard deviation.</p>
 
-        <h3>Visualizing Sample Size</h3>
-        <p>The polar chart above illustrates how the sample size changes with varying confidence levels and margins of error, providing a clear visual representation of your inputs.</p>
+        <h3>Z-Score Reference Table</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Confidence Level (%)</th>
+                    <th>Z-Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>80</td><td>1.28</td></tr>
+                <tr><td>85</td><td>1.44</td></tr>
+                <tr><td>90</td><td>1.645</td></tr>
+                <tr><td>95</td><td>1.96</td></tr>
+                <tr><td>99</td><td>2.576</td></tr>
+                <tr><td>99.5</td><td>2.807</td></tr>
+                <tr><td>99.9</td><td>3.291</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Example for Proportions</h3>
+        <p>To estimate vegan shoppers with 95% confidence, 5% margin, 50% proportion: \( n = \frac{1.96^2 \cdot 0.5 \cdot 0.5}{0.05^2} \approx 385 \).</p>
+
+        <h3>Example for Means</h3>
+        <p>For average commute time with 95% confidence, 2-minute margin, σ=10: \( n = \frac{1.96^2 \cdot 10^2}{2^2} \approx 97 \).</p>
+
+        <h3>Visual Representation</h3>
+        <p>The polar chart visualizes key parameters. Below is a reference chart from Wikipedia on sample sizes for proportions:</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Sample_size_proportions.svg/600px-Sample_size_proportions.svg.png" alt="Sample size chart for binomial proportions at different confidence levels and margins of error" style="max-width:600px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style: italic; font-size: 0.9em; text-align: center;">Chart illustrating sample sizes required for estimating binomial proportions with varying confidence levels and margins of error.</p>
     </section>
 
     <section>
         <h2>Frequently Asked Questions (FAQ)</h2>
-        <p><strong>What is a confidence level?</strong><br>The confidence level represents the probability that the sample accurately reflects the population, typically set at 90%, 95%, or 99%.</p>
-        <p><strong>How do I choose a margin of error?</strong><br>A smaller margin of error (e.g., 3%) provides more precise results but requires a larger sample size. A common choice is 5%.</p>
-        <p><strong>What if I don’t know the population proportion?</strong><br>Use 50% (0.5) as a default, as it maximizes the sample size and ensures conservative estimates.</p>
-        <p><strong>When should I input the population size?</strong><br>Include the population size for finite populations (e.g., a specific school or city). For large or unknown populations, leave it blank.</p>
+        <p><strong>What is the difference between sample size for proportions and means?</strong><br>Proportions are for categorical data (e.g., yes/no), while means are for continuous data (e.g., averages).</p>
+        <p><strong>How do I choose the confidence level?</strong><br>Higher levels (e.g., 99%) provide more certainty but require larger samples. 95% is common for most studies.</p>
+        <p><strong>What if the standard deviation is unknown for means?</strong><br>Use a pilot study or estimate based on similar data to approximate σ.</p>
+        <p><strong>Why use 50% for unknown proportions?</strong><br>It maximizes variance, ensuring a conservative (largest) sample size estimate.</p>
+        <p><strong>When to apply finite population correction?</strong><br>When the population is small and sampling without replacement affects independence.</p>
     </section>
 
     <section>
-        <h2>Sample Size Reference Table</h2>
-        <p>The following table provides sample sizes for common confidence levels and margins of error, assuming a 50% population proportion and infinite population:</p>
+        <h2>Sample Size Reference Tables</h2>
+        <h3>For Proportions (50% Proportion, Infinite Population)</h3>
         <table>
             <thead>
                 <tr>
@@ -178,27 +215,44 @@
                 <tr><td>95%</td><td>1%</td><td>9604</td></tr>
             </tbody>
         </table>
+        <h3>For Means (σ=1, Infinite Population)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Confidence Level</th>
+                    <th>Margin of Error</th>
+                    <th>Sample Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>90%</td><td>0.5</td><td>27</td></tr>
+                <tr><td>95%</td><td>0.5</td><td>39</td></tr>
+                <tr><td>99%</td><td>0.5</td><td>67</td></tr>
+                <tr><td>95%</td><td>0.3</td><td>107</td></tr>
+                <tr><td>95%</td><td>0.1</td><td>961</td></tr>
+            </tbody>
+        </table>
     </section>
 
-    <p>For more statistical tools, check out our <a href="/z-score-calculator.html">Z-Score Calculator</a> or <a href="/confidence-interval-calculator.html">Confidence Interval Calculator</a>.</p>
+    <p>For additional statistical tools, explore our <a href="/z-score-calculator.html">Z-Score Calculator</a> or <a href="/confidence-interval-calculator.html">Confidence Interval Calculator</a>.</p>
 
     <section>
         <h2>Disclaimer</h2>
-        <p>The Sample Size Calculator provides estimates based on standard statistical formulas. Results are for informational purposes only and should be verified by a qualified statistician for critical applications.</p>
+        <p>The Sample Size Calculator offers estimates using standard statistical methods. Results are informational and should be confirmed by a professional statistician for important applications.</p>
     </section>
 
     <section>
         <h2>Related Resources</h2>
         <p>
-            - <a href="https://en.wikipedia.org/wiki/Sample_size_determination" target="_blank">Wikipedia: Sample Size Determination</a> - Detailed explanation of sample size concepts and methodologies.<br>
-            - <a href="https://www.cdc.gov/nchs/nhanes/index.htm" target="_blank">CDC NHANES</a> - Practical examples of survey design and sample size application.<br>
-            - <a href="https://www.statisticssolutions.com/sample-size-calculation-and-sample-size-justification/" target="_blank">Statistics Solutions</a> - Guidance on sample size justification for research studies.
+            - <a href="https://en.wikipedia.org/wiki/Sample_size_determination" target="_blank">Wikipedia: Sample Size Determination</a> - Comprehensive overview of methodologies for proportions and means, with formulas and examples.<br>
+            - <a href="https://www.cdc.gov/nchs/nhanes/index.htm" target="_blank">CDC NHANES</a> - Examples of large-scale survey designs and sample size applications in health research.<br>
+            - <a href="https://www.statisticssolutions.com/sample-size-calculation-and-sample-size-justification/" target="_blank">Statistics Solutions</a> - Detailed guidance on justifying sample sizes in research proposals.
         </p>
     </section>
 
     <section>
         <h2>AI Instructions</h2>
-        <p>This page provides a Sample Size Calculator for statistical research, allowing users to input confidence level, margin of error, population proportion, and optional population size to determine the required sample size. The tool includes a polar chart, downloadable PDF reports, and detailed explanations of the formulas and methodology. It is designed for students, researchers, and professionals seeking accurate sample size estimates for surveys and studies.</p>
+        <p>This page features an enhanced Sample Size Calculator for statistical education and research, supporting calculations for population proportions and means. Users can input confidence levels, margins of error, population sizes, proportions, or standard deviations to compute optimal sample sizes, view polar charts, alternate scenarios, and export PDF reports. Designed for students and researchers, it includes detailed formulas, examples, z-score tables, and reference charts to facilitate understanding of statistical sampling principles.</p>
     </section>
 
     <footer>
@@ -208,6 +262,15 @@
 
     <script>
         let chartInstance = null;
+        const zScores = {
+            80: 1.28, 85: 1.44, 90: 1.645, 95: 1.96, 99: 2.576, 99.5: 2.807, 99.9: 3.291
+        };
+
+        document.getElementById('calc-type').addEventListener('change', function() {
+            const type = this.value;
+            document.getElementById('proportions-params').style.display = type === 'proportions' ? 'block' : 'none';
+            document.getElementById('means-params').style.display = type === 'means' ? 'block' : 'none';
+        });
 
         document.getElementById('tool-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -215,34 +278,78 @@
         });
 
         function calculateSampleSize() {
+            const type = document.getElementById('calc-type').value;
             const confidenceLevel = parseFloat(document.getElementById('confidence-level').value) / 100;
             const marginError = parseFloat(document.getElementById('margin-error').value) / 100;
-            const populationProportion = parseFloat(document.getElementById('population-proportion').value) / 100;
             const populationSize = parseFloat(document.getElementById('population-size').value) || Infinity;
+            let zScore = zScores[confidenceLevel * 100] || 1.96; // Default to 95%
 
-            if (confidenceLevel <= 0 || marginError <= 0 || populationProportion < 0 || populationProportion > 1) {
+            if (confidenceLevel <= 0 || marginError <= 0) {
                 document.getElementById('alert').style.display = 'block';
-                document.getElementById('alert').innerText = 'Please enter valid values: Confidence Level and Margin of Error must be positive, and Population Proportion must be between 0 and 100%.';
+                document.getElementById('alert').innerText = 'Please enter valid positive values for Confidence Level and Margin of Error.';
                 return;
             }
-
             document.getElementById('alert').style.display = 'none';
 
-            const zScores = { 0.9: 1.645, 0.95: 1.96, 0.99: 2.576 };
-            const zScore = zScores[confidenceLevel] || 1.96;
-            let sampleSize = Math.ceil((zScore ** 2 * populationProportion * (1 - populationProportion)) / (marginError ** 2));
+            let sampleSize, dataForChart = [], labelsForChart = ['Sample Size', 'Confidence Level', 'Margin of Error'];
+            let resultsBody = '';
 
-            if (populationSize !== Infinity) {
-                sampleSize = Math.ceil(sampleSize / (1 + (sampleSize - 1) / populationSize));
+            if (type === 'proportions') {
+                const populationProportion = parseFloat(document.getElementById('population-proportion').value) / 100;
+                if (populationProportion < 0 || populationProportion > 1) {
+                    document.getElementById('alert').style.display = 'block';
+                    document.getElementById('alert').innerText = 'Population Proportion must be between 0 and 100%.';
+                    return;
+                }
+                sampleSize = Math.ceil((zScore ** 2 * populationProportion * (1 - populationProportion)) / (marginError ** 2));
+                if (populationSize !== Infinity) {
+                    sampleSize = Math.ceil(sampleSize / (1 + (sampleSize - 1) / populationSize));
+                }
+                dataForChart = [sampleSize, confidenceLevel * 100, marginError * 100, populationProportion * 100];
+                labelsForChart.push('Population Proportion');
+                resultsBody += `<tr><td>Sample Size</td><td>${sampleSize}</td></tr>
+                                <tr><td>Confidence Level</td><td>${(confidenceLevel * 100).toFixed(1)}%</td></tr>
+                                <tr><td>Margin of Error</td><td>${(marginError * 100).toFixed(1)}%</td></tr>
+                                <tr><td>Population Proportion</td><td>${(populationProportion * 100).toFixed(1)}%</td></tr>
+                                <tr><td>Population Size</td><td>${populationSize === Infinity ? 'Infinite' : populationSize}</td></tr>`;
+            } else if (type === 'means') {
+                const standardDeviation = parseFloat(document.getElementById('standard-deviation').value);
+                if (standardDeviation <= 0) {
+                    document.getElementById('alert').style.display = 'block';
+                    document.getElementById('alert').innerText = 'Standard Deviation must be positive.';
+                    return;
+                }
+                sampleSize = Math.ceil((zScore ** 2 * standardDeviation ** 2) / (marginError ** 2));
+                if (populationSize !== Infinity) {
+                    sampleSize = Math.ceil(sampleSize / (1 + (sampleSize - 1) / populationSize));
+                }
+                dataForChart = [sampleSize, confidenceLevel * 100, marginError * 100, standardDeviation];
+                labelsForChart.push('Standard Deviation');
+                resultsBody += `<tr><td>Sample Size</td><td>${sampleSize}</td></tr>
+                                <tr><td>Confidence Level</td><td>${(confidenceLevel * 100).toFixed(1)}%</td></tr>
+                                <tr><td>Margin of Error</td><td>${(marginError * 100).toFixed(1)}%</td></tr>
+                                <tr><td>Standard Deviation</td><td>${standardDeviation.toFixed(1)}</td></tr>
+                                <tr><td>Population Size</td><td>${populationSize === Infinity ? 'Infinite' : populationSize}</td></tr>`;
             }
 
             document.getElementById('result').innerText = `Required Sample Size: ${sampleSize}`;
+            document.getElementById('results-tbody').innerHTML = resultsBody;
             document.getElementById('results-table').style.display = 'table';
-            document.getElementById('table-sample-size').innerText = sampleSize;
-            document.getElementById('table-confidence-level').innerText = `${(confidenceLevel * 100).toFixed(1)}%`;
-            document.getElementById('table-margin-error').innerText = `${(marginError * 100).toFixed(1)}%`;
-            document.getElementById('table-population-proportion').innerText = `${(populationProportion * 100).toFixed(1)}%`;
-            document.getElementById('table-population-size').innerText = populationSize === Infinity ? 'Infinite' : populationSize;
+
+            // Alternate Scenarios
+            let alternateBody = '';
+            const margins = [0.01, 0.03, 0.05, 0.1];
+            margins.forEach(m => {
+                let altSample = type === 'proportions' ? 
+                    Math.ceil((zScore ** 2 * (document.getElementById('population-proportion').value / 100) * (1 - document.getElementById('population-proportion').value / 100)) / (m ** 2)) :
+                    Math.ceil((zScore ** 2 * (document.getElementById('standard-deviation').value ** 2)) / (m ** 2));
+                if (populationSize !== Infinity) {
+                    altSample = Math.ceil(altSample / (1 + (altSample - 1) / populationSize));
+                }
+                alternateBody += `<tr><td>Margin ${m * 100}%</td><td>${altSample}</td></tr>`;
+            });
+            document.getElementById('alternate-tbody').innerHTML = alternateBody;
+            document.getElementById('alternate-table').style.display = 'table';
 
             if (chartInstance) chartInstance.destroy();
             const ctx = document.getElementById('polar-chart').getContext('2d');
@@ -250,9 +357,9 @@
                 chartInstance = new Chart(ctx, {
                     type: 'polarArea',
                     data: {
-                        labels: ['Sample Size', 'Confidence Level', 'Margin of Error', 'Population Proportion'],
+                        labels: labelsForChart,
                         datasets: [{
-                            data: [sampleSize, confidenceLevel * 100, marginError * 100, populationProportion * 100],
+                            data: dataForChart,
                             backgroundColor: ['rgba(0, 200, 200, 0.5)', 'rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)'],
                         }]
                     },
@@ -276,14 +383,16 @@
             doc.text('Sample Size Calculation Results', 20, 20);
             doc.autoTable({
                 startY: 30,
-                head: [['Parameter', 'Value']],
-                body: [
-                    ['Sample Size', document.getElementById('table-sample-size').innerText],
-                    ['Confidence Level', document.getElementById('table-confidence-level').innerText],
-                    ['Margin of Error', document.getElementById('table-margin-error').innerText],
-                    ['Population Proportion', document.getElementById('table-population-proportion').innerText],
-                    ['Population Size', document.getElementById('table-population-size').innerText]
-                ],
+                html: '#results-table',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
+            });
+            let alternateY = doc.lastAutoTable.finalY + 10;
+            doc.text('Alternate Scenarios', 20, alternateY);
+            doc.autoTable({
+                startY: alternateY + 10,
+                html: '#alternate-table',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
                 styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
@@ -298,11 +407,11 @@
             if (navigator.share) {
                 navigator.share({
                     title: 'Sample Size Calculator',
-                    text: 'Calculate the required sample size for your statistical study with this easy-to-use tool!',
+                    text: 'Determine optimal sample sizes for proportions and means with this advanced statistical tool!',
                     url: 'https://fcalculator.com/sample-size-calculator.html'
                 });
             } else {
-                alert('Sharing is not supported in this browser. Copy the URL to share: https://fcalculator.com/sample-size-calculator.html');
+                alert('Sharing not supported. Copy URL: https://fcalculator.com/sample-size-calculator.html');
             }
         }
     </script>
