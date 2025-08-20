@@ -225,10 +225,9 @@
     </section>
     <section>
         <h2>Related Resources</h2>
-        <p><a href="https://www.irs.gov/retirement-plans/401k-plans" target="_blank" rel="noopener">IRS 401(k) Plans</a> - Detailed official rules, contribution limits, and tax advantages to guide compliance and maximization of benefits.</p>
-        <p><a href="https://www.dol.gov/agencies/ebsa/about-ebsa/our-activities/resource-center/fact-sheets/401k-plans" target="_blank" rel="noopener">DOL 401(k) Fact Sheet</a> - Insights on participant rights, employer duties, and plan data for informed decision-making.</p>
-        <p><a href="https://en.wikipedia.org/wiki/401(k)" target="_blank" rel="noopener">Wikipedia on 401(k)</a> - Historical context, types, and global equivalents to broaden understanding of retirement vehicles.</p>
-        <p><a href="https://www.federalreserve.gov/econres/scfindex.htm" target="_blank" rel="noopener">Federal Reserve SCF</a> - Consumer finance surveys with average balances and trends for benchmarking personal progress.</p>
+        <p>- <a href="https://www.irs.gov/retirement-plans/401k-plans" target="_blank" rel="noopener">IRS 401(k) Plans</a> - Detailed official rules, contribution limits, and tax advantages to guide compliance and maximization of benefits.</p>
+        <p>- <a href="https://en.wikipedia.org/wiki/401(k)" target="_blank" rel="noopener">Wikipedia on 401(k)</a> - Historical context, types, and global equivalents to broaden understanding of retirement vehicles.</p>
+        <p>- <a href="https://www.federalreserve.gov/econres/scfindex.htm" target="_blank" rel="noopener">Federal Reserve SCF</a> - Consumer finance surveys with average balances and trends for benchmarking personal progress.</p>
     </section>
     <section>
         <h2>AI Instructions</h2>
@@ -382,17 +381,16 @@
                     doc.setFontSize(10);
                     doc.setTextColor(100);
                     const footerText = 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.';
-                    const footerY = pageHeight - 10;
                     const textWidth = doc.getTextWidth(footerText);
                     const startX = (pageWidth - textWidth) / 2;
-                    doc.text(footerText, startX, footerY, { align: 'center' });
+                    doc.text(footerText, startX, pageHeight - 10);
                     const prefix = 'This document was generated using ';
                     const linkText = 'Fcalculator.com';
                     const prefixWidth = doc.getTextWidth(prefix);
                     const linkWidth = doc.getTextWidth(linkText);
                     const linkX = startX + prefixWidth;
                     doc.setTextColor(0, 0, 255);
-                    doc.textWithLink(linkText, linkX, footerY - 8, { url: 'https://fcalculator.com/401k-calculator.html' });
+                    doc.textWithLink(linkText, linkX, pageHeight - 10, { url: 'https://fcalculator.com/401k-calculator.html' });
                 }
             });
             doc.save('401k-calculation-results.pdf');
