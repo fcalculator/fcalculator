@@ -58,10 +58,10 @@
                         <label for="basic-value">Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the base number for percentage calculation.</span></label>
                         <input type="number" id="basic-value" placeholder="e.g. 200" required>
                     </div>
-                    <button type="button" onclick="calculateBasic()">Calculate</button>
+                    <button type="button" class="calculate-button" onclick="calculateBasic()">Calculate</button>
                     <p id="basic-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="basic-chart" width="80" height="80"></canvas>
+                        <canvas id="basic-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -82,10 +82,10 @@
                         <label for="phrase-value2">Value 2<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Second value for the phrase calculation.</span></label>
                         <input type="number" id="phrase-value2" placeholder="e.g. 200" required>
                     </div>
-                    <button type="button" onclick="calculatePhrase()">Calculate</button>
+                    <button type="button" class="calculate-button" onclick="calculatePhrase()">Calculate</button>
                     <p id="phrase-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="phrase-chart" width="80" height="80"></canvas>
+                        <canvas id="phrase-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -98,10 +98,10 @@
                         <label for="diff-value2">Value 2<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Second value for difference comparison.</span></label>
                         <input type="number" id="diff-value2" placeholder="e.g. 80" required>
                     </div>
-                    <button type="button" onclick="calculateDifference()">Calculate</button>
+                    <button type="button" class="calculate-button" onclick="calculateDifference()">Calculate</button>
                     <p id="diff-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="diff-chart" width="80" height="80"></canvas>
+                        <canvas id="diff-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -114,10 +114,10 @@
                         <label for="change-new">New Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Value after change.</span></label>
                         <input type="number" id="change-new" placeholder="e.g. 550" required>
                     </div>
-                    <button type="button" onclick="calculateChange()">Calculate</button>
+                    <button type="button" class="calculate-button" onclick="calculateChange()">Calculate</button>
                     <p id="change-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="change-chart" width="80" height="80"></canvas>
+                        <canvas id="change-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -130,10 +130,10 @@
                         <label for="increase-new">New Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Value after increase.</span></label>
                         <input type="number" id="increase-new" placeholder="e.g. 120" required>
                     </div>
-                    <button type="button" onclick="calculateIncrease()">Calculate</button>
+                    <button type="button" class="calculate-button" onclick="calculateIncrease()">Calculate</button>
                     <p id="increase-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="increase-chart" width="80" height="80"></canvas>
+                        <canvas id="increase-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -146,10 +146,10 @@
                         <label for="decrease-new">New Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Value after decrease.</span></label>
                         <input type="number" id="decrease-new" placeholder="e.g. 80" required>
                     </div>
-                    <button type="button" onclick="calculateDecrease()">Calculate</button>
+                    <button type="button" class="calculate-button" onclick="calculateDecrease()">Calculate</button>
                     <p id="decrease-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="decrease-chart" width="80" height="80"></canvas>
+                        <canvas id="decrease-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -162,10 +162,10 @@
                         <label for="discount-percent">Discount %<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Discount percentage applied.</span></label>
                         <input type="number" id="discount-percent" placeholder="e.g. 20" required>
                     </div>
-                    <button type="button" onclick="calculateDiscount()">Calculate</button>
+                    <button type="button" class="calculate-button" onclick="calculateDiscount()">Calculate</button>
                     <p id="discount-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="discount-chart" width="80" height="80"></canvas>
+                        <canvas id="discount-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -178,10 +178,10 @@
                         <label for="markup-percent">Markup %<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Markup percentage added.</span></label>
                         <input type="number" id="markup-percent" placeholder="e.g. 25" required>
                     </div>
-                    <button type="button" onclick="calculateMarkup()">Calculate</button>
+                    <button type="button" class="calculate-button" onclick="calculateMarkup()">Calculate</button>
                     <p id="markup-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="markup-chart" width="80" height="80"></canvas>
+                        <canvas id="markup-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -194,10 +194,10 @@
                         <label for="margin-selling">Selling Price<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Price at which sold.</span></label>
                         <input type="number" id="margin-selling" placeholder="e.g. 100" required>
                     </div>
-                    <button type="button" onclick="calculateProfitMargin()">Calculate</button>
+                    <button type="button" class="calculate-button" onclick="calculateProfitMargin()">Calculate</button>
                     <p id="margin-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="margin-chart" width="80" height="80"></canvas>
+                        <canvas id="margin-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -210,10 +210,10 @@
                         <label for="error-true">True Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Exact or accepted value.</span></label>
                         <input type="number" id="error-true" placeholder="e.g. 100" required>
                     </div>
-                    <button type="button" onclick="calculateError()">Calculate</button>
+                    <button type="button" class="calculate-button" onclick="calculateError()">Calculate</button>
                     <p id="error-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="error-chart" width="80" height="80"></canvas>
+                        <canvas id="error-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
             </div>
@@ -300,13 +300,18 @@
                 options: {
                     cutout: '80%',
                     responsive: true,
+                    elements: {
+                        arc: {
+                            borderWidth: 0
+                        }
+                    },
                     plugins: {
                         legend: { display: false },
                         tooltip: { enabled: false },
                         afterDatasetsDraw: function(chart) {
                             const { ctx, chartArea: { width, height } } = chart;
                             ctx.save();
-                            ctx.font = 'bold 20px Arial';
+                            ctx.font = 'bold 12px Arial';
                             ctx.fillStyle = '#000';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
