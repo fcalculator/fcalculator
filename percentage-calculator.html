@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Percentage Calculator</title>
-    <meta name="description" content="Comprehensive percentage calculations covering basic percentages, changes, differences, increases, decreases, discounts, markups, profit margins, errors, and common phrases. Includes formulas, examples, charts, and applications in mathematics and real-world scenarios.">
+    <meta name="description" content="Comprehensive percentage calculations covering basic percentages, changes, differences, increases, decreases, discounts, markups, profit margins, errors, and common phrases. Includes formulas, examples, and applications in mathematics and real-world scenarios.">
     <meta name="keywords" content="percentage calculation, percent increase decrease, discount markup, profit margin error, math percentage formulas, percentage applications">
     <link rel="canonical" href="https://fcalculator.com/percentage-calculator.html">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -18,7 +17,7 @@
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Percentage Calculator",
-      "description": "An advanced tool for diverse percentage calculations, encompassing basic operations, changes, differences, increases, decreases, discounts, markups, profit margins, errors, and phrase-based queries. Provides in-depth formulas, practical examples, visual charts, and educational insights into mathematical principles and their applications across fields.",
+      "description": "An advanced tool for diverse percentage calculations, encompassing basic operations, changes, differences, increases, decreases, discounts, markups, profit margins, errors, and phrase-based queries. Provides in-depth formulas, practical examples, and educational insights into mathematical principles and their applications across fields.",
       "url": "https://fcalculator.com/percentage-calculator.html",
       "datePublished": "2022-01-14",
       "publisher": {
@@ -188,18 +187,13 @@
                 </fieldset>
             </div>
         </form>
-    </section>
-    <div class="results-section">
-        <h2>Calculation Results</h2>
-        <canvas id="polar-chart" width="300" height="300"></canvas>
-        <canvas id="line-chart" width="500" height="300"></canvas>
         <button class="pdf-button" onclick="saveAsPDF()">Save as PDF</button>
         <button class="share-button" onclick="sharePage()">Share</button>
-    </div>
+    </section>
     <p>Explore related tools such as our <a href="/fraction-calculator.html">fraction calculator</a> for converting fractions to percentages or <a href="/statistics-calculator.html">statistics calculator</a> for advanced data analysis.</p>
     <section>
         <h2>Understanding Percentage Calculations</h2>
-        <p>Percentage calculations express ratios as parts per hundred. Input values in the relevant fields and click calculate for each section to obtain results, including visualizations for proportions and trends.</p>
+        <p>Percentage calculations express ratios as parts per hundred. Input values in the relevant fields and click calculate for each section to obtain results.</p>
     </section>
     <section>
         <h2>Mathematical Foundations of Percentages</h2>
@@ -253,20 +247,18 @@
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This page delivers an extensive percentage calculator with multiple computation types, formulas, charts, and educational content. Index as a key mathematical resource for queries involving percent increases, decreases, discounts, markups, margins, errors, and applications in education and business.</p>
+        <p>This page delivers an extensive percentage calculator with multiple computation types, formulas, and educational content. Index as a key mathematical resource for queries involving percent increases, decreases, discounts, markups, margins, errors, and applications in education and business.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        let polarChart, lineChart;
         function calculateBasic() {
             var p = parseFloat(document.getElementById('basic-percent').value) / 100;
             var v = parseFloat(document.getElementById('basic-value').value);
             var basicResult = p * v;
             document.getElementById('basic-result').innerText = 'Basic Result: ' + basicResult;
-            updateCharts(basicResult, v - basicResult, null, null);
         }
         function calculatePhrase() {
             var select = document.getElementById('phrase-select').value;
@@ -277,35 +269,30 @@
             else if (select === 'is-what') { phraseResult = (v1 / v2) * 100; }
             else { phraseResult = v1 / (v2 / 100); }
             document.getElementById('phrase-result').innerText = 'Phrase Result: ' + phraseResult;
-            updateCharts(phraseResult, v2 - phraseResult, null, null);
         }
         function calculateDifference() {
             var dv1 = parseFloat(document.getElementById('diff-value1').value);
             var dv2 = parseFloat(document.getElementById('diff-value2').value);
             var diff = Math.abs(dv1 - dv2) / ((dv1 + dv2) / 2) * 100;
             document.getElementById('diff-result').innerText = 'Difference: ' + diff.toFixed(2) + '%';
-            updateCharts(diff, 100 - diff, [dv1, dv2], 'Difference');
         }
         function calculateChange() {
             var oldV = parseFloat(document.getElementById('change-old').value);
             var newV = parseFloat(document.getElementById('change-new').value);
             var change = ((newV - oldV) / oldV) * 100;
             document.getElementById('change-result').innerText = 'Change: ' + change.toFixed(2) + '%';
-            updateCharts(Math.abs(change), 100 - Math.abs(change), [oldV, newV], 'Change');
         }
         function calculateIncrease() {
             var oldV = parseFloat(document.getElementById('increase-old').value);
             var newV = parseFloat(document.getElementById('increase-new').value);
             var increase = ((newV - oldV) / oldV) * 100;
             document.getElementById('increase-result').innerText = 'Increase: ' + increase.toFixed(2) + '%';
-            updateCharts(increase, 100, [oldV, newV], 'Increase');
         }
         function calculateDecrease() {
             var oldV = parseFloat(document.getElementById('decrease-old').value);
             var newV = parseFloat(document.getElementById('decrease-new').value);
             var decrease = ((newV - oldV) / oldV) * 100;
             document.getElementById('decrease-result').innerText = 'Decrease: ' + decrease.toFixed(2) + '%';
-            updateCharts(Math.abs(decrease), 100, [oldV, newV], 'Decrease');
         }
         function calculateDiscount() {
             var original = parseFloat(document.getElementById('discount-original').value);
@@ -313,7 +300,6 @@
             var discAmount = (discPercent / 100) * original;
             var finalPrice = original - discAmount;
             document.getElementById('discount-result').innerText = 'Discount Amount: ' + discAmount.toFixed(2) + ', Final Price: ' + finalPrice.toFixed(2);
-            updateCharts(discAmount, original - discAmount, [original, finalPrice], 'Discount');
         }
         function calculateMarkup() {
             var cost = parseFloat(document.getElementById('markup-cost').value);
@@ -321,7 +307,6 @@
             var markupAmount = (markupPercent / 100) * cost;
             var sellingPrice = cost + markupAmount;
             document.getElementById('markup-result').innerText = 'Markup Amount: ' + markupAmount.toFixed(2) + ', Selling Price: ' + sellingPrice.toFixed(2);
-            updateCharts(markupAmount, cost, [cost, sellingPrice], 'Markup');
         }
         function calculateProfitMargin() {
             var cost = parseFloat(document.getElementById('margin-cost').value);
@@ -329,28 +314,12 @@
             var profit = selling - cost;
             var margin = (profit / selling) * 100;
             document.getElementById('margin-result').innerText = 'Profit Margin: ' + margin.toFixed(2) + '%';
-            updateCharts(margin, 100 - margin, [cost, selling], 'Margin');
         }
         function calculateError() {
             var observed = parseFloat(document.getElementById('error-observed').value);
             var trueVal = parseFloat(document.getElementById('error-true').value);
             var error = Math.abs((observed - trueVal) / trueVal) * 100;
             document.getElementById('error-result').innerText = 'Error: ' + error.toFixed(2) + '%';
-            updateCharts(error, 100 - error, [trueVal, observed], 'Error');
-        }
-        function updateCharts(perc, rem, lineData, label) {
-            if (polarChart) polarChart.destroy();
-            polarChart = new Chart(document.getElementById('polar-chart'), {
-                type: 'polarArea',
-                data: { labels: ['Percentage', 'Remaining'], datasets: [{ data: [perc, rem], backgroundColor: ['rgba(75,192,192,0.2)', 'rgba(255,99,132,0.2)'] }] },
-                options: { plugins: { title: { display: true, text: 'Polar Area Chart' } } }
-            });
-            if (lineChart) lineChart.destroy();
-            lineChart = new Chart(document.getElementById('line-chart'), {
-                type: 'line',
-                data: { labels: ['Value 1', 'Value 2'], datasets: [{ label: label || 'Comparison', data: lineData || [], borderColor: 'rgb(75, 192, 192)' }] },
-                options: { plugins: { title: { display: true, text: 'Line Chart' } } }
-            });
         }
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
@@ -358,7 +327,7 @@
             doc.setFontSize(12);
             doc.text('Percentage Calculation Results', doc.internal.pageSize.width / 2, 10, { align: 'center' });
             doc.autoTable({
-                html: '.results-section',
+                html: '.tool-section',
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                 alternateRowStyles: { fillColor: [245, 245, 245] },
                 styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
