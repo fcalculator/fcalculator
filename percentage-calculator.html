@@ -59,7 +59,6 @@
                         <input type="number" id="basic-value" placeholder="e.g. 200" required>
                     </div>
                     <button type="button" onclick="calculateBasic()">Calculate</button>
-                    <p id="basic-result"></p>
                 </fieldset>
                 <fieldset>
                     <legend>Common Phrases</legend>
@@ -80,7 +79,6 @@
                         <input type="number" id="phrase-value2" placeholder="e.g. 200" required>
                     </div>
                     <button type="button" onclick="calculatePhrase()">Calculate</button>
-                    <p id="phrase-result"></p>
                 </fieldset>
                 <fieldset>
                     <legend>Percentage Difference</legend>
@@ -93,7 +91,6 @@
                         <input type="number" id="diff-value2" placeholder="e.g. 80" required>
                     </div>
                     <button type="button" onclick="calculateDifference()">Calculate</button>
-                    <p id="diff-result"></p>
                 </fieldset>
                 <fieldset>
                     <legend>Percentage Change</legend>
@@ -106,7 +103,6 @@
                         <input type="number" id="change-new" placeholder="e.g. 550" required>
                     </div>
                     <button type="button" onclick="calculateChange()">Calculate</button>
-                    <p id="change-result"></p>
                 </fieldset>
                 <fieldset>
                     <legend>Percentage Increase</legend>
@@ -119,7 +115,6 @@
                         <input type="number" id="increase-new" placeholder="e.g. 120" required>
                     </div>
                     <button type="button" onclick="calculateIncrease()">Calculate</button>
-                    <p id="increase-result"></p>
                 </fieldset>
                 <fieldset>
                     <legend>Percentage Decrease</legend>
@@ -132,7 +127,6 @@
                         <input type="number" id="decrease-new" placeholder="e.g. 80" required>
                     </div>
                     <button type="button" onclick="calculateDecrease()">Calculate</button>
-                    <p id="decrease-result"></p>
                 </fieldset>
                 <fieldset>
                     <legend>Discount Calculator</legend>
@@ -145,7 +139,6 @@
                         <input type="number" id="discount-percent" placeholder="e.g. 20" required>
                     </div>
                     <button type="button" onclick="calculateDiscount()">Calculate</button>
-                    <p id="discount-result"></p>
                 </fieldset>
                 <fieldset>
                     <legend>Markup Calculator</legend>
@@ -158,7 +151,6 @@
                         <input type="number" id="markup-percent" placeholder="e.g. 25" required>
                     </div>
                     <button type="button" onclick="calculateMarkup()">Calculate</button>
-                    <p id="markup-result"></p>
                 </fieldset>
                 <fieldset>
                     <legend>Profit Margin</legend>
@@ -171,7 +163,6 @@
                         <input type="number" id="margin-selling" placeholder="e.g. 100" required>
                     </div>
                     <button type="button" onclick="calculateProfitMargin()">Calculate</button>
-                    <p id="margin-result"></p>
                 </fieldset>
                 <fieldset>
                     <legend>Percentage Error</legend>
@@ -184,13 +175,22 @@
                         <input type="number" id="error-true" placeholder="e.g. 100" required>
                     </div>
                     <button type="button" onclick="calculateError()">Calculate</button>
-                    <p id="error-result"></p>
                 </fieldset>
             </div>
         </form>
     </section>
     <div class="results-section">
         <h2>Calculation Results</h2>
+        <p id="basic-result"></p>
+        <p id="phrase-result"></p>
+        <p id="diff-result"></p>
+        <p id="change-result"></p>
+        <p id="increase-result"></p>
+        <p id="decrease-result"></p>
+        <p id="discount-result"></p>
+        <p id="markup-result"></p>
+        <p id="margin-result"></p>
+        <p id="error-result"></p>
         <canvas id="polar-chart" width="300" height="300"></canvas>
         <canvas id="line-chart" width="500" height="300"></canvas>
         <button class="pdf-button" onclick="saveAsPDF()">Save as PDF</button>
