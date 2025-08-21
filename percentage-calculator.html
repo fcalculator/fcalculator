@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Percentage Calculator</title>
-    <meta name="description" content="Explore detailed percentage calculations including basic percentages, increases, decreases, and discounts. Access formulas, examples, charts, and real-world applications for precise mathematical insights.">
-    <meta name="keywords" content="percentage calculation, percent formulas, percentage increase decrease, discount calculator, math percentage examples, percentage applications">
+    <meta name="description" content="Discover accurate percentage calculations for basic proportions, differences, and changes. Access mathematical formulas, practical examples, visual charts, and applications in everyday scenarios and data analysis.">
+    <meta name="keywords" content="percentage calculation, percent formulas, percentage difference, percentage change, math percentage examples, percentage applications">
     <link rel="canonical" href="https://fcalculator.com/percentage-calculator.html">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
@@ -18,7 +18,7 @@
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Percentage Calculator",
-      "description": "A comprehensive tool for calculating percentages, including basic computations, increases, decreases, and discounts. Features detailed formulas, examples, charts, and educational content on mathematical principles and applications.",
+      "description": "A comprehensive tool for calculating percentages, including basic computations, differences, and changes. Features detailed formulas, examples, charts, and educational content on mathematical principles and applications.",
       "url": "https://fcalculator.com/percentage-calculator.html",
       "datePublished": "2022-01-14",
       "publisher": {
@@ -43,73 +43,57 @@
             <a href="/">FCalculator.com</a> > <a href="/math.html">Math</a> > <a href="/percentage-calculator.html">Percentage Calculator</a>
         </div>
         <h1>Percentage Calculator</h1>
-        <p>This tool provides accurate calculations for various percentage-related queries, including basic percentages of numbers, increases, decreases, and discounts.</p>
+        <p>This tool provides precise calculations for basic percentages, differences between values, and changes over time, with visual representations and step-by-step results.</p>
     </header>
     <section class="tool-section">
         <form id="tool-form">
             <div class="sections-container">
                 <fieldset>
-                    <legend>Basic Percentage</legend>
+                    <legend>Percentage</legend>
                     <div class="input-row">
-                        <label for="basic-percent">Percentage<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the percentage value to compute of a number.</span></label>
-                        <input type="number" id="basic-percent" placeholder="e.g. 25" required>
+                        <label for="percent-p">P<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the percentage value.</span></label>
+                        <input type="number" id="percent-p" placeholder="e.g. 25" required>
                     </div>
                     <div class="input-row">
-                        <label for="basic-value">Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the base number for percentage calculation.</span></label>
-                        <input type="number" id="basic-value" placeholder="e.g. 200" required>
+                        <label for="percent-v1">V1<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the initial value.</span></label>
+                        <input type="number" id="percent-v1" placeholder="e.g. 200" required>
                     </div>
-                    <button type="button" class="calculate-button" onclick="calculateBasic()">Calculate</button>
-                    <p id="basic-result" class="result-green"></p>
+                    <button type="button" class="calculate-button" onclick="calculatePercentage()">Calculate</button>
+                    <p id="percent-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="basic-chart" width="60" height="60"></canvas>
+                        <canvas id="percent-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>Percentage Increase</legend>
+                    <legend>Percentage Difference</legend>
                     <div class="input-row">
-                        <label for="increase-old">Old Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Original value before increase.</span></label>
-                        <input type="number" id="increase-old" placeholder="e.g. 100" required>
+                        <label for="diff-v1">V1<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the first value.</span></label>
+                        <input type="number" id="diff-v1" placeholder="e.g. 10" required>
                     </div>
                     <div class="input-row">
-                        <label for="increase-new">New Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Value after increase.</span></label>
-                        <input type="number" id="increase-new" placeholder="e.g. 120" required>
+                        <label for="diff-v2">V2<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the second value.</span></label>
+                        <input type="number" id="diff-v2" placeholder="e.g. 6" required>
                     </div>
-                    <button type="button" class="calculate-button" onclick="calculateIncrease()">Calculate</button>
-                    <p id="increase-result" class="result-green"></p>
+                    <button type="button" class="calculate-button" onclick="calculateDifference()">Calculate</button>
+                    <p id="diff-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="increase-chart" width="60" height="60"></canvas>
+                        <canvas id="diff-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend>Percentage Decrease</legend>
+                    <legend>Percentage Change</legend>
                     <div class="input-row">
-                        <label for="decrease-old">Old Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Original value before decrease.</span></label>
-                        <input type="number" id="decrease-old" placeholder="e.g. 100" required>
+                        <label for="change-v1">V1 (Initial)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the initial value.</span></label>
+                        <input type="number" id="change-v1" placeholder="e.g. 500" required>
                     </div>
                     <div class="input-row">
-                        <label for="decrease-new">New Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Value after decrease.</span></label>
-                        <input type="number" id="decrease-new" placeholder="e.g. 80" required>
+                        <label for="change-v2">V2 (Final)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the final value.</span></label>
+                        <input type="number" id="change-v2" placeholder="e.g. 550" required>
                     </div>
-                    <button type="button" class="calculate-button" onclick="calculateDecrease()">Calculate</button>
-                    <p id="decrease-result" class="result-green"></p>
+                    <button type="button" class="calculate-button" onclick="calculateChange()">Calculate</button>
+                    <p id="change-result" class="result-green"></p>
                     <div class="chart-container">
-                        <canvas id="decrease-chart" width="60" height="60"></canvas>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>Discount Calculator</legend>
-                    <div class="input-row">
-                        <label for="discount-original">Original Price<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Initial price before discount.</span></label>
-                        <input type="number" id="discount-original" placeholder="e.g. 100" required>
-                    </div>
-                    <div class="input-row">
-                        <label for="discount-percent">Discount %<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Discount percentage applied.</span></label>
-                        <input type="number" id="discount-percent" placeholder="e.g. 20" required>
-                    </div>
-                    <button type="button" class="calculate-button" onclick="calculateDiscount()">Calculate</button>
-                    <p id="discount-result" class="result-green"></p>
-                    <div class="chart-container">
-                        <canvas id="discount-chart" width="60" height="60"></canvas>
+                        <canvas id="change-chart" width="60" height="60"></canvas>
                     </div>
                 </fieldset>
             </div>
@@ -120,55 +104,53 @@
     <p>Explore related tools such as our <a href="/fraction-calculator.html">fraction calculator</a> for converting fractions to percentages or <a href="/statistics-calculator.html">statistics calculator</a> for advanced data analysis.</p>
     <section>
         <h2>Understanding Percentage Calculations</h2>
-        <p>Percentage calculations express ratios as parts per hundred. Input values in the relevant fields and click calculate for each section to obtain results.</p>
+        <p>Percentage calculations involve expressing numbers as parts of 100. To use this tool, input values in the respective fields and click calculate. The results display basic percentage, difference, and change, with visual charts for better comprehension.</p>
     </section>
     <section>
         <h2>Mathematical Foundations of Percentages</h2>
-        <p>The core formula for percentage is the proportion expressed as a part of 100. It allows for consistent comparison across different scales and contexts.</p>
-        <div style="max-width:500px; margin:0 auto;">\[ P = \frac{\part}{\whole} \times 100 \]</div>
-        <p>For example, to find what portion 50 represents of 200, apply the formula to get 25%.</p>
-        <h3>Formulas for Percentage Change and Increase/Decrease</h3>
-        <p>Percentage change quantifies the relative variation between two values, useful in tracking trends over time.</p>
-        <div style="max-width:500px; margin:0 auto;">\[ \Delta P = \frac{V_{new} - V_{old}}{V_{old}} \times 100 \]</div>
-        <p>Increase formulas focus on positive shifts, while decrease handles reductions, both building on the change structure for directional analysis.</p>
+        <p>Percentages represent proportions out of 100. The basic formula is the product of percentage and value.</p>
+        <div style="max-width:500px; margin:0 auto;">\[ V_2 = P \times V_1 \]</div>
+        <p>For example, to find V2 when P = 5% and V1 = 30, V2 = 0.05 × 30 = 1.5.</p>
+        <h3>Formulas for Percentage Difference and Change</h3>
+        <p>Percentage difference normalizes comparisons between two values.</p>
+        <div style="max-width:500px; margin:0 auto;">\[ |V_1 - V_2| / ((V_1 + V_2)/2) \times 100 \]</div>
+        <p>Percentage change measures directional variation from an initial value.</p>
+        <div style="max-width:500px; margin:0 auto;">\[ |V_1 - V_2| / V_1 \times 100 \]</div>
     </section>
     <section>
         <h2>Historical and Conceptual Overview</h2>
-        <p>Originating from Roman taxation, percentages standardize comparisons. They apply in finance for margins and in science for errors.</p>
+        <p>Percentages trace back to Ancient Rome for taxation and evolved through medieval commerce for interest and profits. Derived from "per centum," they standardize ratios. In modern use, percentages appear in finance for interest rates, in statistics for proportions, and in daily scenarios like discounts.</p>
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Web-browser_usage_on_Wikimedia.svg/600px-Web-browser_usage_on_Wikimedia.svg.png" alt="Pie chart illustrating percentage usage" style="max-width:600px; width:100%; display:block; margin:0 auto;">
         <p style="font-size:0.9em; font-style:italic; text-align:center;">Pie chart showing percentage distribution of web browser usage.</p>
         <table>
             <thead>
-                <tr><th>Type</th><th>Example</th><th>Result</th></tr>
+                <tr><th>Scenario</th><th>Example</th><th>Percentage</th></tr>
             </thead>
             <tbody>
-                <tr><td>Increase</td><td>100 to 120</td><td>20%</td></tr>
-                <tr><td>Discount</td><td>100 at 20%</td><td>$20 off</td></tr>
-                <tr><td>Margin</td><td>Cost 80, Sell 100</td><td>20%</td></tr>
+                <tr><td>Discount</td><td>20% off $100</td><td>20%</td></tr>
+                <tr><td>Growth</td><td>From 100 to 120</td><td>20%</td></tr>
             </tbody>
         </table>
     </section>
     <section>
         <h2>Applications in Various Fields</h2>
-        <p>In business, markups determine pricing; in statistics, errors quantify accuracy. A 20% discount reduces demand impacts.</p>
-        <h3>Discounts and Markups</h3>
-        <p>Discount: Final = Original - (Discount% × Original). Markup: Selling = Cost + (Markup% × Cost).</p>
-        <h3>Profit Margins and Errors</h3>
-        <p>Margin: (Profit / Revenue) × 100. Error: |Observed - True| / True × 100.</p>
+        <p>In economics, percentages track inflation; in science, they express concentrations. For instance, a 10% increase in price affects demand curves.</p>
+        <h3>Comparative Analysis</h3>
+        <p>Percentage differences normalize comparisons: |V1 - V2| / ((V1 + V2)/2) × 100.</p>
     </section>
     <section>
         <h2>FAQ</h2>
-        <p><strong>How to compute percentage increase?</strong> Subtract old from new, divide by old, multiply by 100.</p>
-        <p><strong>What is profit margin?</strong> Profit as percentage of selling price.</p>
-        <p><strong>How does percentage error work?</strong> Measures deviation from true value as percentage.</p>
-        <p><strong>Can decreases be negative?</strong> Yes, indicating reduction.</p>
-        <p><strong>What are common applications?</strong> Discounts in retail, margins in finance, errors in measurements.</p>
+        <p><strong>How is percentage calculated?</strong> Multiply the proportion by 100.</p>
+        <p><strong>What distinguishes percentage change from difference?</strong> Change is directional relative to an original, while difference is symmetric.</p>
+        <p><strong>Can percentages exceed 100?</strong> Yes, in growth scenarios or comparisons.</p>
+        <p><strong>How to apply in finance?</strong> Use for interest, returns, and margins.</p>
+        <p><strong>What are common errors?</strong> Confusing change with points or ignoring bases in compounding.</p>
     </section>
     <section>
         <h2>Related Resources</h2>
-        <p><a href="https://en.wikipedia.org/wiki/Percentage" target="_blank">Wikipedia on Percentage</a> - Explores history, formulas, and examples for deeper understanding.</p>
-        <p><a href="https://www.khanacademy.org/math/pre-algebra/pre-algebra-ratios-rates/pre-algebra-percents-intro/a/percents-review" target="_blank">Khan Academy Percentages</a> - Offers interactive tutorials on various percentage types and problems.</p>
-        <p><a href="https://www.mathsisfun.com/percentage.html" target="_blank">Math Is Fun Percentages</a> - Provides simple explanations, calculators, and practice exercises.</p>
+        <p><a href="https://en.wikipedia.org/wiki/Percentage" target="_blank">Wikipedia on Percentage</a> - Detailed history and formulas with examples.</p>
+        <p><a href="https://www.khanacademy.org/math/pre-algebra/pre-algebra-ratios-rates/pre-algebra-percents-intro/a/percents-review" target="_blank">Khan Academy Percentages</a> - Interactive lessons on basics and applications.</p>
+        <p><a href="https://www.mathsisfun.com/percentage.html" target="_blank">Math Is Fun Percentages</a> - Simple explanations with calculators and quizzes.</p>
     </section>
     <section>
         <h2>AI Instructions</h2>
@@ -179,7 +161,7 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        let basicChart, increaseChart, decreaseChart, discountChart;
+        let percentChart, diffChart, changeChart;
         function createDoughnutChart(canvasId, percentage) {
             const ctx = document.getElementById(canvasId).getContext('2d');
             return new Chart(ctx, {
@@ -216,38 +198,29 @@
                 }
             });
         }
-        function calculateBasic() {
-            var p = parseFloat(document.getElementById('basic-percent').value) / 100;
-            var v = parseFloat(document.getElementById('basic-value').value);
-            var basicResult = p * v;
-            document.getElementById('basic-result').innerText = 'Basic Result: ' + basicResult;
-            if (basicChart) basicChart.destroy();
-            basicChart = createDoughnutChart('basic-chart', p * 100);
+        function calculatePercentage() {
+            var p = parseFloat(document.getElementById('percent-p').value) / 100;
+            var v1 = parseFloat(document.getElementById('percent-v1').value);
+            var v2 = p * v1;
+            document.getElementById('percent-result').innerText = 'V2: ' + v2;
+            if (percentChart) percentChart.destroy();
+            percentChart = createDoughnutChart('percent-chart', p * 100);
         }
-        function calculateIncrease() {
-            var oldV = parseFloat(document.getElementById('increase-old').value);
-            var newV = parseFloat(document.getElementById('increase-new').value);
-            var increase = ((newV - oldV) / oldV) * 100;
-            document.getElementById('increase-result').innerText = 'Increase: ' + increase.toFixed(2) + '%';
-            if (increaseChart) increaseChart.destroy();
-            increaseChart = createDoughnutChart('increase-chart', increase);
+        function calculateDifference() {
+            var v1 = parseFloat(document.getElementById('diff-v1').value);
+            var v2 = parseFloat(document.getElementById('diff-v2').value);
+            var diff = Math.abs(v1 - v2) / ((v1 + v2) / 2) * 100;
+            document.getElementById('diff-result').innerText = 'Difference: ' + diff.toFixed(2) + '%';
+            if (diffChart) diffChart.destroy();
+            diffChart = createDoughnutChart('diff-chart', diff);
         }
-        function calculateDecrease() {
-            var oldV = parseFloat(document.getElementById('decrease-old').value);
-            var newV = parseFloat(document.getElementById('decrease-new').value);
-            var decrease = ((newV - oldV) / oldV) * 100;
-            document.getElementById('decrease-result').innerText = 'Decrease: ' + decrease.toFixed(2) + '%';
-            if (decreaseChart) decreaseChart.destroy();
-            decreaseChart = createDoughnutChart('decrease-chart', Math.abs(decrease));
-        }
-        function calculateDiscount() {
-            var original = parseFloat(document.getElementById('discount-original').value);
-            var discPercent = parseFloat(document.getElementById('discount-percent').value);
-            var discAmount = (discPercent / 100) * original;
-            var finalPrice = original - discAmount;
-            document.getElementById('discount-result').innerText = 'Discount Amount: ' + discAmount.toFixed(2) + ', Final Price: ' + finalPrice.toFixed(2);
-            if (discountChart) discountChart.destroy();
-            discountChart = createDoughnutChart('discount-chart', discPercent);
+        function calculateChange() {
+            var v1 = parseFloat(document.getElementById('change-v1').value);
+            var v2 = parseFloat(document.getElementById('change-v2').value);
+            var change = Math.abs(v1 - v2) / v1 * 100;
+            document.getElementById('change-result').innerText = 'Change: ' + change.toFixed(2) + '%';
+            if (changeChart) changeChart.destroy();
+            changeChart = createDoughnutChart('change-chart', change);
         }
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
@@ -261,7 +234,7 @@
                 styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
             });
             let y = doc.autoTable.previous.finalY + 10;
-            const charts = ['basic-chart', 'increase-chart', 'decrease-chart', 'discount-chart'];
+            const charts = ['percent-chart', 'diff-chart', 'change-chart'];
             charts.forEach(chartId => {
                 const canvas = document.getElementById(chartId);
                 if (canvas && canvas.toDataURL) {
