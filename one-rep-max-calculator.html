@@ -3,43 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Calculate your One Rep Max (1RM) with our accurate and easy-to-use One Rep Max Calculator. Estimate your maximum lifting strength based on weight and repetitions, with detailed formulas, charts, and explanations.">
-    <meta name="keywords" content="one rep max calculator, 1RM calculator, strength training, weightlifting calculator, fitness calculator, maximum lift estimator">
-    <meta name="author" content="I.Brkic">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="canonical" href="https://fcalculator.com/one-rep-max-calculator.html">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" crossorigin="anonymous"></script>
     <title>One Rep Max Calculator</title>
+    <meta name="description" content="Accurately estimate your one-repetition maximum (1RM) to optimize strength training programs. Input lifted weight and reps for precise calculations using proven formulas like Epley and Brzycki.">
+    <meta name="keywords" content="one rep max calculator, 1RM estimation, strength training formulas, weightlifting max estimator, muscular strength assessment">
+    <link rel="canonical" href="https://fcalculator.com/one-rep-max-calculator.html">
+    <link rel="stylesheet" href="/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "One Rep Max Calculator",
-        "description": "Calculate your One Rep Max (1RM) to estimate the maximum weight you can lift for one repetition. Includes detailed formulas, charts, and explanations for strength training enthusiasts.",
-        "url": "https://fcalculator.com/one-rep-max-calculator.html",
-        "datePublished": "2022-01-14",
-        "author": {
-            "@type": "Person",
-            "name": "I.Brkic"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "FCalculator.com",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://fcalculator.com/images/logo.png"
-            }
-        },
-        "inLanguage": "en",
-        "isPartOf": {
-            "@type": "WebSite",
-            "url": "https://fcalculator.com",
-            "name": "FCalculator.com"
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "One Rep Max Calculator",
+      "description": "A comprehensive tool for estimating one-repetition maximum (1RM) in strength training. Users input weight and repetitions to receive calculations based on established formulas, along with percentage tables and progress charts for training optimization.",
+      "url": "https://fcalculator.com/one-rep-max-calculator.html",
+      "datePublished": "2022-01-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "FCalculator.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://fcalculator.com/logo.png"
         }
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "FCalculator.com",
+          "item": "https://fcalculator.com/"
+        },{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Health",
+          "item": "https://fcalculator.com/health.html"
+        },{
+          "@type": "ListItem",
+          "position": 3,
+          "name": "One Rep Max Calculator",
+          "item": "https://fcalculator.com/one-rep-max-calculator.html"
+        }]
+      }
     }
     </script>
 </head>
@@ -47,311 +52,190 @@
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/fitness.html">Fitness</a> > <a href="/one-rep-max-calculator.html">One Rep Max Calculator</a>
+            <a href="/">FCalculator.com</a> > <a href="/health.html">Health</a> > <a href="/one-rep-max-calculator.html">One Rep Max Calculator</a>
         </div>
         <h1>One Rep Max Calculator</h1>
-        <p>Estimate your maximum lifting strength with our One Rep Max (1RM) Calculator, designed for weightlifters and fitness enthusiasts.</p>
+        <p>Determine your maximum strength capacity for a single repetition by entering the weight lifted and number of repetitions performed, using reliable estimation formulas.</p>
     </header>
-
     <section class="tool-section">
         <form id="tool-form">
             <div class="sections-container-1">
                 <fieldset>
-                    <legend>Input Parameters</legend>
+                    <legend>Input Data</legend>
                     <div class="input-row">
-                        <label for="weight">Weight Lifted (kg)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the weight you lifted in kilograms.</span></label>
+                        <label for="weight">Weight Lifted (lbs)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the weight you lifted in pounds for the given repetitions.</span></label>
                         <input type="number" id="weight" placeholder="e.g. 100" required>
                     </div>
                     <div class="input-row">
-                        <label for="reps">Number of Repetitions<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the number of repetitions performed with the weight.</span></label>
-                        <input type="number" id="reps" placeholder="e.g. 5" required>
+                        <label for="reps">Repetitions Performed<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the number of reps completed (1-30 for accurate estimation).</span></label>
+                        <input type="number" id="reps" placeholder="e.g. 10" required min="1" max="30">
                     </div>
                 </fieldset>
             </div>
-            <button type="submit" id="calculate-btn">Calculate</button>
+            <button type="button" onclick="calculate1RM()">Calculate</button>
         </form>
+        <div class="results-section" id="results" style="display:none;">
+            <h2>Calculation Results</h2>
+            <p id="epley"></p>
+            <p id="brzycki"></p>
+            <p id="average"></p>
+            <table id="percent-table">
+                <thead>
+                    <tr><th>Reps</th><th>Percentage of 1RM</th><th>Weight (lbs)</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <canvas id="line-chart" width="500" height="300"></canvas>
+            <button onclick="saveAsPDF()">Save as PDF</button> <button onclick="sharePage()">Share</button>
+        </div>
     </section>
-
-    <section class="results-section" id="results" style="display: none;">
-        <h2>Calculation Results</h2>
-        <p>Your estimated One Rep Max (1RM) is: <span id="one-rep-max"></span> kg</p>
-        <canvas id="polar-chart" width="300" height="300"></canvas>
-        <table>
-            <thead>
-                <tr>
-                    <th>Percentage of 1RM</th>
-                    <th>Estimated Weight (kg)</th>
-                </tr>
-            </thead>
-            <tbody id="percentage-table"></tbody>
-        </table>
-        <button onclick="saveAsPDF()">Save as PDF</button>
-        <button onclick="sharePage()">Share</button>
-        <div class="note-alert">Note: The One Rep Max calculation is an estimate and should be used with caution. Always consult a fitness professional before attempting maximal lifts.</div>
-    </section>
-
-    <p>Explore other fitness tools like our <a href="/calorie-calculator.html">Calorie Calculator</a> or <a href="/bmi-calculator.html">BMI Calculator</a> for a comprehensive fitness assessment.</p>
-
+    <p>Explore related health tools such as our <a href="/bmi-calculator.html">BMI Calculator</a> or <a href="/calorie-burn-estimator.html">Calorie Burn Estimator</a> for comprehensive fitness tracking.</p>
     <section>
         <h2>How to Use the One Rep Max Calculator</h2>
-        <p>The One Rep Max (1RM) Calculator helps you estimate the maximum weight you can lift for one repetition based on a submaximal lift. Enter the weight you lifted and the number of repetitions performed, and the calculator will use the Epley formula to estimate your 1RM. This tool is ideal for weightlifters, powerlifters, and fitness enthusiasts looking to gauge their strength progress.</p>
-        <p><strong>Steps to Use:</strong></p>
-        <ol>
-            <li>Enter the weight lifted in kilograms in the "Weight Lifted" field.</li>
-            <li>Enter the number of repetitions performed in the "Number of Repetitions" field.</li>
-            <li>Click the "Calculate" button to see your estimated 1RM and a breakdown of percentages of your 1RM for training purposes.</li>
-        </ol>
+        <p>To effectively utilize this calculator, start by entering the weight you successfully lifted and the number of repetitions you completed with proper form. The tool employs established formulas to estimate your 1RM, providing insights into your strength levels. This estimation helps in programming workouts by setting loads as percentages of your 1RM, ensuring progressive overload for goals like strength building or hypertrophy. For best results, use submaximal loads (e.g., 5-10 reps) as inputs, as higher reps may reduce accuracy. Regularly retest every 6-8 weeks to track progress and adjust training intensity.</p>
     </section>
-
     <section>
-        <h2>Understanding the One Rep Max Formula</h2>
-        <p>The calculator uses the Epley formula, one of the most widely recognized methods for estimating 1RM. The formula is:</p>
-        <div style="max-width: 500px; width: 100%; margin: 0 auto;">
-            \[ \text{1RM} = w \times \left(1 + \frac{r}{30}\right) \]
-        </div>
-        <p>Where:</p>
-        <ul>
-            <li>\( w \) = Weight lifted (in kilograms)</li>
-            <li>\( r \) = Number of repetitions</li>
-        </ul>
-        <p>This formula provides a reliable estimate for most lifters, though individual results may vary due to factors like fatigue, technique, and muscle fiber composition.</p>
+        <h2>Understanding One-Repetition Maximum (1RM)</h2>
+        <p>One-repetition maximum (1RM) represents the heaviest weight an individual can lift for exactly one repetition in a given exercise, serving as a key indicator of maximal muscular strength. It is foundational in strength sports like powerlifting and weightlifting, where it determines competition outcomes and guides training loads. By calculating 1RM, athletes can prescribe exercise intensities as percentages, promoting adaptations in strength, endurance, or muscle size. Direct measurement involves progressive loading until failure, but estimation via submaximal efforts is safer and more practical, especially for beginners.</p>
+        <h3>Benefits of Knowing Your 1RM</h3>
+        <p>Tracking 1RM allows for precise workout programming, enabling users to target specific adaptations: lower percentages (50-60%) for power, moderate (70-80%) for hypertrophy, and higher (85-95%) for pure strength. It also facilitates progress monitoring, motivating consistent training while reducing injury risk through appropriate load selection. In rehabilitation or general fitness, 1RM estimation supports safe progression, ensuring exercises challenge without overwhelming the musculoskeletal system.</p>
     </section>
-
     <section>
-        <h2>Benefits of Knowing Your 1RM</h2>
-        <p>Understanding your 1RM is crucial for structuring effective strength training programs. Here are some key benefits:</p>
-        <ul>
-            <li><strong>Training Program Design:</strong> Use your 1RM to calculate appropriate weights for different rep ranges (e.g., 70% of 1RM for hypertrophy).</li>
-            <li><strong>Progress Tracking:</strong> Monitor strength gains over time by recalculating your 1RM periodically.</li>
-            <li><strong>Safe Lifting:</strong> Avoid overloading by knowing your limits and training within safe percentages of your 1RM.</li>
-        </ul>
-        <h3>Training Percentages Table</h3>
-        <p>The table below shows common percentages of 1RM used in strength training programs:</p>
+        <h2>Formulas for Estimating 1RM</h2>
+        <p>Several validated formulas estimate 1RM from submaximal lifts. The Epley formula is: \[ 1RM = w \left(1 + \frac{r}{30}\right) \], where \( w \) is weight and \( r \) is reps (assuming \( r > 1 \)). The Brzycki formula is: \[ 1RM = w \cdot \frac{36}{37 - r} \]. These provide close approximations, with Epley slightly higher for fewer reps. Other formulas like Baechle (\( w (1 + 0.033r) \)) or Lombardi (\( w \cdot r^{0.10} \)) offer variations, but accuracy improves with exercise-specific use and experienced lifters.</p>
         <table>
             <thead>
-                <tr>
-                    <th>Percentage of 1RM</th>
-                    <th>Training Goal</th>
-                    <th>Rep Range</th>
-                </tr>
+                <tr><th>Formula Name</th><th>Equation</th></tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>90-100%</td>
-                    <td>Maximal Strength</td>
-                    <td>1-3 reps</td>
-                </tr>
-                <tr>
-                    <td>70-85%</td>
-                    <td>Hypertrophy</td>
-                    <td>6-12 reps</td>
-                </tr>
-                <tr>
-                    <td>50-70%</td>
-                    <td>Endurance</td>
-                    <td>12-20 reps</td>
-                </tr>
+                <tr><td>Adams</td><td>\( w \cdot \frac{1}{1 - 0.02r} \)</td></tr>
+                <tr><td>Berger</td><td>\( w \cdot \frac{1}{1.0261e^{-0.0262r}} \)</td></tr>
+                <tr><td>Brown</td><td>\( w \cdot (0.9849 + 0.0328r) \)</td></tr>
+                <tr><td>Kemmler et al.</td><td>\( w \cdot (0.988 + 0.0104r + 0.00190r^2 - 0.0000584r^3) \)</td></tr>
+                <tr><td>Landers</td><td>\( w \cdot \frac{1}{1.013 - 0.0267123r} \)</td></tr>
+                <tr><td>Mayhew et al.</td><td>\( w \cdot \frac{1}{0.522 + 0.419e^{-0.055r}} \)</td></tr>
+                <tr><td>O'Conner et al.</td><td>\( w \cdot (1 + 0.025r) \)</td></tr>
+                <tr><td>Wathen</td><td>\( w \cdot \frac{1}{0.4880 + 0.538e^{-0.075r}} \)</td></tr>
             </tbody>
         </table>
+        <p>Formulas diverge beyond 10 reps, so limit inputs for reliability. Always prioritize form to avoid overestimation.</p>
     </section>
-
     <section>
-        <h2>Visualizing Your 1RM</h2>
-        <p>The polar area chart above displays your estimated 1RM alongside percentages (50%, 70%, 85%, 90%, 100%) to help you visualize how different weights correspond to your maximum lift. This can guide your training by showing appropriate weights for various goals, such as endurance, hypertrophy, or maximal strength.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/One-repetition_maximum_chart.svg/600px-One-repetition_maximum_chart.svg.png" alt="One-repetition maximum chart" style="max-width:600px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style: italic; font-size: 0.9em; text-align: center;">A chart comparing different formulas used to estimate one-repetition maximum (1RM), showing how the estimates diverge after about 10 repetitions (Source: Wikipedia).</p>
+        <h2>Training Applications and Best Practices</h2>
+        <p>Incorporate 1RM into training by using percentages: 85-95% for 3-5 reps builds strength, 70-80% for 8-12 reps promotes muscle growth, and 50-60% for 3-5 reps enhances power. Retest periodically to ensure progressive overload, adjusting weights as strength improves. For beginners, focus on technique before max testing; advanced users can integrate direct 1RM attempts sparingly to minimize injury risk. Combine with periodization for long-term gains.</p>
+        <h3>Progress Tracking with Charts and Tables</h3>
+        <p>Visualize your strength curve with line charts showing weight projections across rep ranges. Tables of 1RM percentages aid in workout planning, ensuring balanced intensity. For example, a 200 lbs 1RM suggests 170 lbs (85%) for 4-6 reps in hypertrophy sets.</p>
     </section>
-
     <section>
-        <h2>Frequently Asked Questions</h2>
-        <p><strong>What is a One Rep Max (1RM)?</strong></p>
-        <p>Your 1RM is the maximum weight you can lift for one repetition with proper form. It’s a key metric for assessing strength and planning workouts.</p>
-        <p><strong>How accurate is the 1RM Calculator?</strong></p>
-        <p>The Epley formula provides a reliable estimate, but actual 1RM may vary due to individual factors like experience, fatigue, or technique. Always test your 1RM cautiously with a spotter.</p>
-        <p><strong>Can I use this calculator for any exercise?</strong></p>
-        <p>Yes, the calculator works for any compound or isolation exercise (e.g., bench press, squat, deadlift) as long as you input accurate weight and rep data.</p>
+        <h2>FAQ</h2>
+        <p><strong>What is the most accurate way to measure 1RM?</strong> Direct testing with progressive loads is most precise, but estimation formulas are safer for frequent use.</p>
+        <p><strong>How often should I calculate my 1RM?</strong> Every 6-8 weeks or after a training cycle to track progress without overexertion.</p>
+        <p><strong>Can beginners use this calculator?</strong> Yes, but start with lighter loads and focus on form; novices may underestimate due to neural adaptations.</p>
+        <p><strong>Why do formulas differ?</strong> They account for varying fatigue rates across rep ranges and exercises, with some better for low reps.</p>
+        <p><strong>Is 1RM testing safe?</strong> With proper warm-up, spotter, and form, yes; avoid if injured or inexperienced.</p>
     </section>
-
     <section>
         <h2>Disclaimer</h2>
-        <p>The One Rep Max Calculator provides estimates based on the Epley formula and should not be considered professional advice. Consult a certified fitness professional before attempting maximal lifts or designing a training program. Use this tool at your own risk.</p>
+        <p>This calculator provides estimates for informational purposes only and is not a substitute for professional medical or fitness advice. Consult a qualified trainer or physician before attempting heavy lifts, as improper use may lead to injury. Results vary by individual factors like experience and form.</p>
     </section>
-
-    <section>
-        <h2>Related Resources</h2>
-        <ul>
-            <li><a href="https://en.wikipedia.org/wiki/One-repetition_maximum" target="_blank">Wikipedia: One-Repetition Maximum</a> - Detailed explanation of 1RM and its applications in strength training.</li>
-            <li><a href="https://www.nsca.com/education/articles/nsca-training-load-chart/" target="_blank">NSCA: Training Load Chart</a> - A guide to using 1RM percentages for effective training programs.</li>
-            <li><a href="https://www.acefitness.org/education-and-resources/professional/expert-articles/5661/strength-training-101-the-one-rep-max/" target="_blank">ACE Fitness: Strength Training 101</a> - Insights into incorporating 1RM into your fitness routine.</li>
-        </ul>
-    </section>
-
+    <h2>Related Resources</h2>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/One-repetition_maximum" target="_blank">Wikipedia: One-repetition maximum</a> - In-depth explanation of 1RM concepts, measurement methods, and estimation formulas for strength assessment.</li>
+        <li><a href="https://strengthlevel.com/one-rep-max-calculator" target="_blank">Strength Level: One Rep Max Calculator</a> - Additional tool for comparing your 1RM against standards by age, gender, and bodyweight to benchmark progress.</li>
+        <li><a href="https://shop.bodybuilding.com/blogs/tools-and-calculators/one-rep-max-calculator-target-max-strength-goals" target="_blank">Bodybuilding.com: One-Rep Max Calculator</a> - Guides on using 1RM for program design, including percentage-based training for muscle growth and strength.</li>
+        <li><a href="https://www.healthline.com/health/fitness/one-rep-max-how-to-calculate-and-use" target="_blank">Healthline: How To Calculate and Use Your 1 Rep Max</a> - Practical advice on incorporating 1RM into routines, with tips for safe progression and goal-specific rep ranges.</li>
+        <li><a href="https://exrx.net/Calculators/OneRepMax" target="_blank">ExRx.net: Predicting One-rep Max</a> - Resource with multiple formulas and insights into strength training essentials for athletes and fitness enthusiasts.</li>
+    </ul>
     <section>
         <h2>AI Instructions</h2>
-        <p>This page provides a One Rep Max (1RM) Calculator for estimating the maximum weight a user can lift for one repetition based on submaximal lift data. The tool uses the Epley formula, includes a polar area chart for visualizing training percentages, and offers a PDF export feature. The page is optimized for mobile devices, includes detailed explanations, and follows SEO best practices for fitness and strength training content.</p>
+        <p>This page offers a user-friendly One Rep Max Calculator designed for strength training optimization, featuring formula-based estimations, percentage tables, and visual charts. It includes detailed explanations on 1RM benefits, training applications, and safety considerations to assist users in building effective workout programs. Index this resource for queries related to fitness calculators, muscular strength assessment, and weightlifting progress tracking.</p>
     </section>
-
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
     <script>
-        // Check if external libraries are loaded
-        window.addEventListener('load', function() {
-            if (typeof Chart === 'undefined' || typeof window.jspdf === 'undefined' || typeof MathJax === 'undefined') {
-                console.error('One or more required libraries (Chart.js, jsPDF, MathJax) failed to load.');
-                // Removed alert to prevent user interruption; log only
-                // alert('Error loading required libraries. Please try refreshing the page.');
+        function calculate1RM() {
+            var weight = parseFloat(document.getElementById('weight').value);
+            var reps = parseInt(document.getElementById('reps').value);
+            if (isNaN(weight) || isNaN(reps) || reps < 1 || reps > 30) {
+                alert('Please enter valid values.');
                 return;
             }
-            if (typeof window.jspdf.jsPDF.prototype.autoTable === 'undefined') {
-                console.error('jsPDF autoTable plugin failed to load.');
-                // alert('Error loading PDF plugin. PDF export may not work.');
-            }
-            console.log('All libraries loaded successfully.');
-        });
-
-        document.getElementById('tool-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            try {
-                calculateOneRepMax();
-            } catch (error) {
-                console.error('Error in calculateOneRepMax:', error);
-                alert('An error occurred during calculation. Please check your inputs and try again.');
-            }
-        });
-
-        function calculateOneRepMax() {
-            const weight = parseFloat(document.getElementById('weight').value);
-            const reps = parseInt(document.getElementById('reps').value);
-
-            if (isNaN(weight) || isNaN(reps) || weight <= 0 || reps <= 0) {
-                alert('Please enter valid weight and repetitions.');
-                return;
-            }
-
-            // Epley formula: 1RM = weight * (1 + reps / 30)
-            const oneRepMax = weight * (1 + reps / 30);
-            document.getElementById('one-rep-max').textContent = oneRepMax.toFixed(2);
-
-            // Update percentage table
-            const percentages = [50, 70, 85, 90, 100];
-            const tableBody = document.getElementById('percentage-table');
+            var epley = weight * (1 + reps / 30);
+            var brzycki = weight * (36 / (37 - reps));
+            var average = (epley + brzycki) / 2;
+            document.getElementById('epley').innerText = 'Epley Formula: ' + epley.toFixed(2) + ' lbs';
+            document.getElementById('brzycki').innerText = 'Brzycki Formula: ' + brzycki.toFixed(2) + ' lbs';
+            document.getElementById('average').innerText = 'Average 1RM: ' + average.toFixed(2) + ' lbs';
+            var tableBody = document.querySelector('#percent-table tbody');
             tableBody.innerHTML = '';
-            percentages.forEach(perc => {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td>${perc}%</td><td>${(oneRepMax * perc / 100).toFixed(2)}</td>`;
+            var percentages = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50];
+            var repsEst = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20];
+            for (var i = 0; i < percentages.length; i++) {
+                var row = document.createElement('tr');
+                row.innerHTML = '<td>' + repsEst[i] + '</td><td>' + percentages[i] + '%</td><td>' + (average * percentages[i] / 100).toFixed(2) + ' lbs</td>';
                 tableBody.appendChild(row);
-            });
-
-            // Show results section
-            const resultsSection = document.getElementById('results');
-            resultsSection.style.display = 'block';
-
-            // Destroy previous chart instance if exists
-            if (window.polarChart) {
-                window.polarChart.destroy();
             }
-
-            // Create polar area chart - no setTimeout, as section is now visible
-            const canvas = document.getElementById('polar-chart');
-            if (!canvas) {
-                console.error('Canvas element not found.');
-                return;
-            }
-            const ctx = canvas.getContext('2d');
-            if (!ctx) {
-                console.error('Unable to get canvas context.');
-                return;
-            }
-            try {
-                window.polarChart = new Chart(ctx, {
-                    type: 'polarArea',
+            var ctx = document.getElementById('line-chart').getContext('2d');
+            if (window.myChart) window.myChart.destroy();
+            setTimeout(function() {
+                window.myChart = new Chart(ctx, {
+                    type: 'line',
                     data: {
-                        labels: percentages.map(p => `${p}%`),
+                        labels: repsEst,
                         datasets: [{
-                            label: '1RM Percentages',
-                            data: percentages.map(p => oneRepMax * p / 100), // Use numbers, not strings
-                            backgroundColor: ['#FF6F61', '#6B7280', '#3B82F6', '#10B981', '#F59E0B']
+                            label: 'Weight for Reps (% of 1RM)',
+                            data: percentages.map(p => average * p / 100),
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1,
+                            fill: false
                         }]
                     },
                     options: {
+                        scales: {
+                            y: { beginAtZero: true }
+                        },
                         responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { position: 'top' },
-                            title: { display: true, text: '1RM Percentage Breakdown' }
-                        }
+                        maintainAspectRatio: false
                     }
                 });
-                console.log('Chart rendered successfully.');
-            } catch (error) {
-                console.error('Error rendering chart:', error);
-                alert('An error occurred while rendering the chart. Please try again.');
-            }
+            }, 1000);
+            document.getElementById('results').style.display = 'block';
         }
-
         function saveAsPDF() {
-            try {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                // Check if autoTable is available
-                if (typeof doc.autoTable !== 'function') {
-                    throw new Error('autoTable plugin not available.');
-                }
-                const weight = document.getElementById('weight').value;
-                const reps = document.getElementById('reps').value;
-                const oneRepMax = document.getElementById('one-rep-max').textContent;
-
-                doc.setFont('helvetica', 'normal');
-                doc.setFontSize(16);
-                doc.text('One Rep Max Calculation Results', doc.internal.pageSize.width / 2, 20, { align: 'center' });
-
-                doc.setFontSize(12);
-                doc.text(`Weight Lifted: ${weight} kg`, 20, 40);
-                doc.text(`Repetitions: ${reps}`, 20, 50);
-                doc.text(`Estimated 1RM: ${oneRepMax} kg`, 20, 60);
-
-                doc.autoTable({
-                    startY: 70,
-                    head: [['Percentage of 1RM', 'Estimated Weight (kg)']],
-                    body: Array.from(document.getElementById('percentage-table').rows).map(row => [
-                        row.cells[0].textContent,
-                        row.cells[1].textContent
-                    ]),
-                    theme: 'grid',
-                    headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                    alternateRowStyles: { fillColor: [245, 245, 245] },
-                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
-                });
-
-                doc.setFontSize(10);
-                doc.setTextColor(100);
-                doc.textWithLink('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center', url: 'https://fcalculator.com/one-rep-max-calculator.html' });
-
-                doc.save('one-rep-max-results.pdf');
-                console.log('PDF generated successfully.');
-            } catch (error) {
-                console.error('Error generating PDF:', error);
-                alert('An error occurred while generating the PDF. Please ensure all libraries are loaded and try again.');
-            }
+            const { jsPDF } = window.jspdf;
+            var doc = new jsPDF();
+            doc.setFontSize(16);
+            doc.text('One Rep Max Calculation Results', 105, 20, { align: 'center' });
+            doc.setFontSize(12);
+            doc.text(document.getElementById('epley').innerText, 20, 40);
+            doc.text(document.getElementById('brzycki').innerText, 20, 50);
+            doc.text(document.getElementById('average').innerText, 20, 60);
+            doc.autoTable({
+                head: [['Reps', '% of 1RM', 'Weight (lbs)']],
+                body: Array.from(document.querySelectorAll('#percent-table tbody tr')).map(row => Array.from(row.cells).map(cell => cell.innerText)),
+                startY: 70,
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
+            });
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+            doc.save('one-rep-max-results.pdf');
         }
-
         function sharePage() {
-            try {
-                if (navigator.share) {
-                    navigator.share({
-                        title: 'One Rep Max Calculator',
-                        url: 'https://fcalculator.com/one-rep-max-calculator.html'
-                    }).then(() => console.log('Page shared successfully.'));
-                } else {
-                    console.warn('Share API not supported.');
-                    alert('Share feature is not supported in this browser. Copy the URL to share: https://fcalculator.com/one-rep-max-calculator.html');
-                }
-            } catch (error) {
-                console.error('Error sharing page:', error);
-                alert('An error occurred while sharing. Please try again.');
+            if (navigator.share) {
+                navigator.share({
+                    title: 'One Rep Max Calculator',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
             }
         }
     </script>
