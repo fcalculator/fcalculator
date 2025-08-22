@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +9,10 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="canonical" href="https://fcalculator.com/one-rep-max-calculator.html">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous"></script>
     <title>One Rep Max Calculator</title>
     <script type="application/ld+json">
     {
@@ -159,8 +158,8 @@
     <section>
         <h2>Visualizing Your 1RM</h2>
         <p>The polar area chart above displays your estimated 1RM alongside percentages (50%, 70%, 85%, 90%, 100%) to help you visualize how different weights correspond to your maximum lift. This can guide your training by showing appropriate weights for various goals, such as endurance, hypertrophy, or maximal strength.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Strength_training_diagram.png/600px-Strength_training_diagram.png" alt="Strength Training Diagram" style="max-width:600px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style: italic; font-size: 0.9em; text-align: center;">Diagram illustrating strength training principles, including 1RM percentages (Source: Wikipedia).</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Small_group_fitness_sessions_bundall.jpg/600px-Small_group_fitness_sessions_bundall.jpg" alt="Small group fitness sessions" style="max-width:600px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style: italic; font-size: 0.9em; text-align: center;">Image of small group fitness sessions illustrating strength training (Source: Wikipedia).</p>
     </section>
 
     <section>
@@ -286,7 +285,7 @@
         function saveAsPDF() {
             try {
                 const { jsPDF } = window.jspdf;
-                if (!jsPDF || !window.autoTable) {
+                if (!jsPDF || !window.jspdf.autoTable) {
                     throw new Error('jsPDF or autoTable not loaded.');
                 }
                 const doc = new jsPDF();
@@ -347,4 +346,3 @@
     </script>
 </body>
 </html>
-```
