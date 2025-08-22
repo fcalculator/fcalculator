@@ -7,9 +7,10 @@
     <meta name="description" content="Calculate percentages quickly and easily. Find what percentage of one number equals another number, perfect for calculating discounts, tips, or proportions. Determine percentage change and difference with precise mathematical computations and real-world examples.">
     <meta name="keywords" content="percentage calculator, calculate percentage, percent calculator, online percentage calculator, percentage change calculator, percentage difference calculator, how to calculate percentage, percent calc free, percentage increase calculator, percentage decrease calculator">
     <link rel="canonical" href="https://fcalculator.com/percentage-calculator.html">
-    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css" media="all">
+    <link rel="preload" href="https://fcalculator.com/css/style.css" as="style">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -48,18 +49,18 @@
                 <fieldset>
                     <legend>Basic Percentage Calculator</legend>
                     <div class="input-row">
-                        <label for="percent-p">Percentage<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the percentage value.</span></label>
+                        <label for="percent-p">Percentage<img src="/info.png" alt="Info" class="info-icon" loading="lazy"><span class="tooltiptext">Enter the percentage value.</span></label>
                         <input type="number" id="percent-p" placeholder="e.g. 25" oninput="calculatePercentage()">
                     </div>
                     <div class="input-row">
-                        <label for="percent-v1">Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the value.</span></label>
+                        <label for="percent-v1">Value<img src="/info.png" alt="Info" class="info-icon" loading="lazy"><span class="tooltiptext">Enter the value.</span></label>
                         <input type="number" id="percent-v1" placeholder="e.g. 200" oninput="calculatePercentage()">
                     </div>
                     <div class="input-row">
                     <label for="percent-p">
                     <p>
                     <p id="percent-result" class="result-green">Enter values to calculate</p>
-                    </p>   
+                    </p>
                     </label>
                     </div>
                     <button class="copy-button" onclick="copyResult('percent-result')">Copy</button>
@@ -67,11 +68,11 @@
                 <fieldset>
                     <legend>Percentage Finder</legend>
                     <div class="input-row">
-                        <label for="finder-v1">Value 1<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the first value.</span></label>
+                        <label for="finder-v1">Value 1<img src="/info.png" alt="Info" class="info-icon" loading="lazy"><span class="tooltiptext">Enter the first value.</span></label>
                         <input type="number" id="finder-v1" placeholder="e.g. 40" oninput="calculateFinder()">
                     </div>
                     <div class="input-row">
-                        <label for="finder-v2">Value 2<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the second value.</span></label>
+                        <label for="finder-v2">Value 2<img src="/info.png" alt="Info" class="info-icon" loading="lazy"><span class="tooltiptext">Enter the second value.</span></label>
                         <input type="number" id="finder-v2" placeholder="e.g. 50" oninput="calculateFinder()">
                     </div>
                     <div class="input-row">
@@ -80,17 +81,17 @@
                     <p id="finder-result" class="result-green">Enter values to calculate</p>
                     </p>
                     </label>
-                    </div>   
+                    </div>
                     <button class="copy-button" onclick="copyResult('finder-result')">Copy</button>
                 </fieldset>
                 <fieldset>
                     <legend>Percentage Change Calculator</legend>
                     <div class="input-row">
-                        <label for="change-v1">Old Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the old value.</span></label>
+                        <label for="change-v1">Old Value<img src="/info.png" alt="Info" class="info-icon" loading="lazy"><span class="tooltiptext">Enter the old value.</span></label>
                         <input type="number" id="change-v1" placeholder="e.g. 100" oninput="calculateChange()">
                     </div>
                     <div class="input-row">
-                        <label for="change-v2">New Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the new value.</span></label>
+                        <label for="change-v2">New Value<img src="/info.png" alt="Info" class="info-icon" loading="lazy"><span class="tooltiptext">Enter the new value.</span></label>
                         <input type="number" id="change-v2" placeholder="e.g. 150" oninput="calculateChange()">
                     </div>
                     <div class="input-row">
@@ -122,7 +123,7 @@
     <section>
         <h2>Historical and Conceptual Overview</h2>
         <p>Percentages trace back to Ancient Rome for taxation and evolved through medieval commerce for interest and profits. Derived from "per centum," they standardize ratios. In modern use, percentages appear in finance for interest rates, in statistics for proportions, and in daily scenarios like discounts.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Visualisation_parts_per_1_block.svg/1024px-Visualisation_parts_per_1_block.svg.png" alt="Visualisation of 1%, 1‰, 1‱, 1 pcm and 1 ppm as fractions of the large block" style="max-width:250px; width:60%; display:block; margin:0 auto;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Visualisation_parts_per_1_block.svg/1024px-Visualisation_parts_per_1_block.svg.png" alt="Visualisation of 1%, 1‰, 1‱, 1 pcm and 1 ppm as fractions of the large block" style="max-width:250px; width:60%; display:block; margin:0 auto;" loading="lazy">
         <p style="font-size:0.9em; font-style:italic; text-align:center;">Visualisation of 1%, 1‰, 1‱, 1 pcm and 1 ppm as fractions of the large block</p>
         <table>
             <thead>
@@ -155,9 +156,9 @@
     </section>
     <section>
         <h2>Related Resources</h2>
-        <p><a href="https://en.wikipedia.org/wiki/Percentage" target="_blank">Wikipedia on Percentage</a> - Detailed history and formulas with examples.</p>
-        <p><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages" target="_blank">Khan Academy Percentages</a> - Interactive lessons on basics and applications.</p>
-        <p><a href="https://www.mathsisfun.com/percentage.html" target="_blank">Math Is Fun Percentages</a> - Simple explanations with calculators and quizzes.</p>
+        <p><a href="https://en.wikipedia.org/wiki/Percentage" target="_blank" rel="noopener noreferrer">Wikipedia on Percentage</a> - Detailed history and formulas with examples.</p>
+        <p><a href="https://www.khanacademy.org/math/pre-algebra/xb4832e56:percentages" target="_blank" rel="noopener noreferrer">Khan Academy Percentages</a> - Interactive lessons on basics and applications.</p>
+        <p><a href="https://www.mathsisfun.com/percentage.html" target="_blank" rel="noopener noreferrer">Math Is Fun Percentages</a> - Simple explanations with calculators and quizzes.</p>
     </section>
     <section>
         <h2>AI Instructions</h2>
@@ -167,40 +168,6 @@
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
-    <script>
-        function calculatePercentage() {
-            var p = parseFloat(document.getElementById('percent-p').value) || 0;
-            var v1 = parseFloat(document.getElementById('percent-v1').value) || 0;
-            var v2 = (p / 100) * v1;
-            document.getElementById('percent-result').innerText = p + '% of ' + v1 + ' is ' + v2.toFixed(2);
-        }
-        function calculateFinder() {
-            var v1 = parseFloat(document.getElementById('finder-v1').value) || 0;
-            var v2 = parseFloat(document.getElementById('finder-v2').value) || 0;
-            var perc = (v1 / v2) * 100 || 0;
-            document.getElementById('finder-result').innerText = v1 + ' is ' + perc.toFixed(2) + '% of ' + v2;
-        }
-        function calculateChange() {
-            var v1 = parseFloat(document.getElementById('change-v1').value) || 0;
-            var v2 = parseFloat(document.getElementById('change-v2').value) || 0;
-            var change = ((v2 - v1) / v1) * 100 || 0;
-            var direction = change > 0 ? 'increase' : 'decrease';
-            document.getElementById('change-result').innerText = 'Change from ' + v1 + ' to ' + v2 + ' is ' + Math.abs(change).toFixed(2) + '% ' + direction;
-        }
-        function copyResult(id) {
-            var text = document.getElementById(id).innerText;
-            navigator.clipboard.writeText(text).then(function() {
-                alert('Copied to clipboard!');
-            });
-        }
-
-        function sharePage() {
-            if (navigator.share) {
-                navigator.share({ title: 'Percentage Calculator', url: window.location.href });
-            } else {
-                alert('Share this page: ' + window.location.href);
-            }
-        }
-    </script>
+    <script>function calculatePercentage(){var p=parseFloat(document.getElementById("percent-p").value)||0;var v1=parseFloat(document.getElementById("percent-v1").value)||0;var v2=p/100*v1;document.getElementById("percent-result").innerText=p+"% of "+v1+" is "+v2.toFixed(2)}function calculateFinder(){var v1=parseFloat(document.getElementById("finder-v1").value)||0;var v2=parseFloat(document.getElementById("finder-v2").value)||0;var perc=v1/v2*100||0;document.getElementById("finder-result").innerText=v1+" is "+perc.toFixed(2)+"% of "+v2}function calculateChange(){var v1=parseFloat(document.getElementById("change-v1").value)||0;var v2=parseFloat(document.getElementById("change-v2").value)||0;var change=(v2-v1)/v1*100||0;var direction=change>0?"increase":"decrease";document.getElementById("change-result").innerText="Change from "+v1+" to "+v2+" is "+Math.abs(change).toFixed(2)+"% "+direction}function copyResult(id){var text=document.getElementById(id).innerText;navigator.clipboard.writeText(text).then(function(){alert("Copied to clipboard!")})}function sharePage(){if(navigator.share){navigator.share({title:"Percentage Calculator",url:window.location.href})}else{alert("Share this page: "+window.location.href)}}</script>
 </body>
 </html>
