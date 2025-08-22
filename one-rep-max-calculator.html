@@ -63,8 +63,15 @@
                 <fieldset>
                     <legend>Input Data</legend>
                     <div class="input-row">
-                        <label for="weight">Weight Lifted (lbs)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the weight you lifted in pounds for the given repetitions.</span></label>
+                        <label for="weight">Weight Lifted<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the weight you lifted in the selected unit for the given repetitions.</span></label>
                         <input type="number" id="weight" placeholder="e.g. 100" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="unit">Unit<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Select the unit of measurement for the weight.</span></label>
+                        <select id="unit">
+                            <option value="lbs" selected>Pounds (lbs)</option>
+                            <option value="kg">Kilograms (kg)</option>
+                        </select>
                     </div>
                     <div class="input-row">
                         <label for="reps">Repetitions Performed<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the number of reps completed (1-30 for accurate estimation).</span></label>
@@ -81,7 +88,7 @@
             <p id="average"></p>
             <table id="percent-table">
                 <thead>
-                    <tr><th>Reps</th><th>Percentage of 1RM</th><th>Weight (lbs)</th></tr>
+                    <tr><th>Reps</th><th>Percentage of 1RM</th><th id="weight-header">Weight (lbs)</th></tr>
                 </thead>
                 <tbody></tbody>
             </table>
@@ -140,14 +147,16 @@
         <h2>Disclaimer</h2>
         <p>This calculator provides estimates for informational purposes only and is not a substitute for professional medical or fitness advice. Consult a qualified trainer or physician before attempting heavy lifts, as improper use may lead to injury. Results vary by individual factors like experience and form.</p>
     </section>
-    <h2>Related Resources</h2>
-    <ul>
-        <li><a href="https://en.wikipedia.org/wiki/One-repetition_maximum" target="_blank">Wikipedia: One-repetition maximum</a> - In-depth explanation of 1RM concepts, measurement methods, and estimation formulas for strength assessment.</li>
-        <li><a href="https://strengthlevel.com/one-rep-max-calculator" target="_blank">Strength Level: One Rep Max Calculator</a> - Additional tool for comparing your 1RM against standards by age, gender, and bodyweight to benchmark progress.</li>
-        <li><a href="https://shop.bodybuilding.com/blogs/tools-and-calculators/one-rep-max-calculator-target-max-strength-goals" target="_blank">Bodybuilding.com: One-Rep Max Calculator</a> - Guides on using 1RM for program design, including percentage-based training for muscle growth and strength.</li>
-        <li><a href="https://www.healthline.com/health/fitness/one-rep-max-how-to-calculate-and-use" target="_blank">Healthline: How To Calculate and Use Your 1 Rep Max</a> - Practical advice on incorporating 1RM into routines, with tips for safe progression and goal-specific rep ranges.</li>
-        <li><a href="https://exrx.net/Calculators/OneRepMax" target="_blank">ExRx.net: Predicting One-rep Max</a> - Resource with multiple formulas and insights into strength training essentials for athletes and fitness enthusiasts.</li>
-    </ul>
+    <section>
+        <h2>Related Resources</h2>
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/One-repetition_maximum" target="_blank">Wikipedia: One-repetition maximum</a> - In-depth explanation of 1RM concepts, measurement methods, and estimation formulas for strength assessment.</li>
+            <li><a href="https://strengthlevel.com/one-rep-max-calculator" target="_blank">Strength Level: One Rep Max Calculator</a> - Additional tool for comparing your 1RM against standards by age, gender, and bodyweight to benchmark progress.</li>
+            <li><a href="https://shop.bodybuilding.com/blogs/tools-and-calculators/one-rep-max-calculator-target-max-strength-goals" target="_blank">Bodybuilding.com: One-Rep Max Calculator</a> - Guides on using 1RM for program design, including percentage-based training for muscle growth and strength.</li>
+            <li><a href="https://www.healthline.com/health/fitness/one-rep-max-how-to-calculate-and-use" target="_blank">Healthline: How To Calculate and Use Your 1 Rep Max</a> - Practical advice on incorporating 1RM into routines, with tips for safe progression and goal-specific rep ranges.</li>
+            <li><a href="https://exrx.net/Calculators/OneRepMax" target="_blank">ExRx.net: Predicting One-rep Max</a> - Resource with multiple formulas and insights into strength training essentials for athletes and fitness enthusiasts.</li>
+        </ul>
+    </section>
     <section>
         <h2>AI Instructions</h2>
         <p>This page offers a user-friendly One Rep Max Calculator designed for strength training optimization, featuring formula-based estimations, percentage tables, and visual charts. It includes detailed explanations on 1RM benefits, training applications, and safety considerations to assist users in building effective workout programs. Index this resource for queries related to fitness calculators, muscular strength assessment, and weightlifting progress tracking.</p>
@@ -163,6 +172,7 @@
         function calculate1RM() {
             var weight = parseFloat(document.getElementById('weight').value);
             var reps = parseInt(document.getElementById('reps').value);
+            var unit = document.getElementById('unit').value;
             if (isNaN(weight) || isNaN(reps) || reps < 1 || reps > 30) {
                 alert('Please enter valid values.');
                 return;
@@ -170,16 +180,17 @@
             var epley = weight * (1 + reps / 30);
             var brzycki = weight * (36 / (37 - reps));
             var average = (epley + brzycki) / 2;
-            document.getElementById('epley').innerText = 'Epley Formula: ' + epley.toFixed(2) + ' lbs';
-            document.getElementById('brzycki').innerText = 'Brzycki Formula: ' + brzycki.toFixed(2) + ' lbs';
-            document.getElementById('average').innerText = 'Average 1RM: ' + average.toFixed(2) + ' lbs';
+            document.getElementById('epley').innerText = 'Epley Formula: ' + epley.toFixed(2) + ' ' + unit;
+            document.getElementById('brzycki').innerText = 'Brzycki Formula: ' + brzycki.toFixed(2) + ' ' + unit;
+            document.getElementById('average').innerText = 'Average 1RM: ' + average.toFixed(2) + ' ' + unit;
+            document.getElementById('weight-header').innerText = 'Weight (' + unit + ')';
             var tableBody = document.querySelector('#percent-table tbody');
             tableBody.innerHTML = '';
             var percentages = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50];
             var repsEst = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20];
             for (var i = 0; i < percentages.length; i++) {
                 var row = document.createElement('tr');
-                row.innerHTML = '<td>' + repsEst[i] + '</td><td>' + percentages[i] + '%</td><td>' + (average * percentages[i] / 100).toFixed(2) + ' lbs</td>';
+                row.innerHTML = '<td>' + repsEst[i] + '</td><td>' + percentages[i] + '%</td><td>' + (average * percentages[i] / 100).toFixed(2) + ' ' + unit + '</td>';
                 tableBody.appendChild(row);
             }
             var ctx = document.getElementById('line-chart').getContext('2d');
@@ -211,6 +222,7 @@
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
             var doc = new jsPDF();
+            var unit = document.getElementById('unit').value;
             doc.setFontSize(16);
             doc.text('One Rep Max Calculation Results', 105, 20, { align: 'center' });
             doc.setFontSize(12);
@@ -218,7 +230,7 @@
             doc.text(document.getElementById('brzycki').innerText, 20, 50);
             doc.text(document.getElementById('average').innerText, 20, 60);
             doc.autoTable({
-                head: [['Reps', '% of 1RM', 'Weight (lbs)']],
+                head: [['Reps', '% of 1RM', 'Weight (' + unit + ')']],
                 body: Array.from(document.querySelectorAll('#percent-table tbody tr')).map(row => Array.from(row.cells).map(cell => cell.innerText)),
                 startY: 70,
                 headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
