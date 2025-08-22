@@ -17,7 +17,7 @@
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Percentage Calculator",
-      "description": "A comprehensive tool for calculating percentages, including basic computations, changes, and differences. Features detailed formulas, examples, and educational content on mathematical principles and applications.",
+      "description": "A comprehensive tool for calculating percentages, including basic computations, changes, and differences. Features detailed formulas, examples, charts, and educational content on mathematical principles and applications.",
       "url": "https://fcalculator.com/percentage-calculator.html",
       "datePublished": "2022-01-14",
       "publisher": {
@@ -42,7 +42,7 @@
             <a href="/">FCalculator.com</a> > <a href="/math.html">Math</a> > <a href="/percentage-calculator.html">Percentage Calculator</a>
         </div>
         <h1>Percentage Calculator</h1>
-        <p>Calculate percentages quickly and easily. Find what percentage of one number equals another number, perfect for calculating discounts, tips, or proportions. Determine percentage change and difference with precise mathematical computations and real-world examples.</p>
+        <p>This tool provides precise calculations for basic percentages, differences between values, and changes over time.</p>
     </header>
     <section class="tool-section">
         <form id="tool-form">
@@ -50,40 +50,38 @@
                 <fieldset>
                     <legend>Basic Percentage Calculator</legend>
                     <div class="input-row">
-                        <label for="percent-p">Percentage</label>
+                        <label for="percent-p">Percentage<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the percentage value.</span></label>
                         <input type="number" id="percent-p" placeholder="e.g. 25" oninput="calculatePercentage()">
                     </div>
                     <div class="input-row">
-                        <label for="percent-v1">Value</label>
+                        <label for="percent-v1">Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the value.</span></label>
                         <input type="number" id="percent-v1" placeholder="e.g. 200" oninput="calculatePercentage()">
                     </div>
-                    <div class="input-row">
-                    <p id="percent-result" class="result-green">0</p>
-                    </div>
+                    <p id="percent-result" class="result-green">Enter values to calculate</p>
                 </fieldset>
                 <fieldset>
                     <legend>Percentage Finder</legend>
                     <div class="input-row">
-                        <label for="finder-v1">Value 1</label>
+                        <label for="finder-v1">Value 1<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the first value.</span></label>
                         <input type="number" id="finder-v1" placeholder="e.g. 40" oninput="calculateFinder()">
                     </div>
                     <div class="input-row">
-                        <label for="finder-v2">Value 2</label>
+                        <label for="finder-v2">Value 2<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the second value.</span></label>
                         <input type="number" id="finder-v2" placeholder="e.g. 50" oninput="calculateFinder()">
                     </div>
-                    <p id="finder-result" class="result-green">0%</p>
+                    <p id="finder-result" class="result-green">Enter values to calculate</p>
                 </fieldset>
                 <fieldset>
                     <legend>Percentage Change Calculator</legend>
                     <div class="input-row">
-                        <label for="change-v1">Old Value</label>
+                        <label for="change-v1">Old Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the old value.</span></label>
                         <input type="number" id="change-v1" placeholder="e.g. 100" oninput="calculateChange()">
                     </div>
                     <div class="input-row">
-                        <label for="change-v2">New Value</label>
+                        <label for="change-v2">New Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the new value.</span></label>
                         <input type="number" id="change-v2" placeholder="e.g. 150" oninput="calculateChange()">
                     </div>
-                    <p id="change-result" class="result-green">0%</p>
+                    <p id="change-result" class="result-green">Enter values to calculate</p>
                 </fieldset>
             </div>
         </form>
@@ -129,11 +127,16 @@
     </section>
     <section>
         <h2>FAQ</h2>
-        <p><strong>How is percentage calculated?</strong> Multiply the proportion by 100.</p>
-        <p><strong>What distinguishes percentage change from difference?</strong> Change is directional relative to an original, while difference is symmetric.</p>
-        <p><strong>Can percentages exceed 100?</strong> Yes, in growth scenarios or comparisons.</p>
-        <p><strong>How to apply in finance?</strong> Use for interest, returns, and margins.</p>
-        <p><strong>What are common errors?</strong> Confusing change with points or ignoring bases in compounding.</p>
+        <p><strong>What is a Percentage Calculator?</strong> A percentage calculator is a tool that helps you quickly perform percentage-related calculations, such as finding a percentage of a number, determining percentage increases or decreases, and calculating percentage differences.</p>
+        <p><strong>How do I calculate a percentage of a number?</strong> To calculate a percentage of a number, multiply the number by the percentage and divide by 100. Example: To find 25% of 200: (25 × 200) ÷ 100 = 50.</p>
+        <p><strong>What is the Percentage Finder used for?</strong> The Percentage Finder helps you determine what percentage one number is of another. Example: If you scored 40 out of 50 in a test, the percentage would be: (40 ÷ 50) × 100 = 80%.</p>
+        <p><strong>How do I calculate Percentage Change?</strong> The Percentage Change Calculator finds the percentage increase or decrease between two numbers. Formula: ((New Value - Old Value) / Old Value) × 100 Example: If a product's price increases from $50 to $75: ((75 - 50) / 50) × 100 = 50% increase.</p>
+        <p><strong>Can I use this calculator to calculate discounts and sales prices?</strong> Yes! If you want to calculate discounts, use the Basic Percentage Calculator: Example: If a $100 item is on sale for 20% off, the discount amount is: (100 × 20) ÷ 100 = 20. The final price is $80.</p>
+        <p><strong>What are common real-world uses of percentage calculations?</strong> 🛍️ Shopping Discounts 💰 Taxes & Tips 📈 Finance & Investments 📊 Data & Analytics 🏋️ Health & Fitness</p>
+        <p><strong>How accurate is this calculator?</strong> Our percentage calculator uses precise mathematical formulas to ensure accuracy. However, minor rounding differences may occur in some cases.</p>
+        <p><strong>Is this tool mobile-friendly?</strong> Yes! This percentage calculator works seamlessly on phones, tablets, and desktops.</p>
+        <p><strong>Do I need to download any software?</strong> No, you can use this calculator directly from your browser without installing anything.</p>
+        <p><strong>Is this calculator free?</strong> Yes! Our percentage calculator is 100% free and does not require registration or payment.</p>
     </section>
     <section>
         <h2>Related Resources</h2>
@@ -154,19 +157,20 @@
             var p = parseFloat(document.getElementById('percent-p').value) || 0;
             var v1 = parseFloat(document.getElementById('percent-v1').value) || 0;
             var v2 = (p / 100) * v1;
-            document.getElementById('percent-result').innerText = v2;
+            document.getElementById('percent-result').innerText = 'Percentage ' + p + '% of ' + v1 + ' is ' + v2.toFixed(2);
         }
         function calculateFinder() {
             var v1 = parseFloat(document.getElementById('finder-v1').value) || 0;
             var v2 = parseFloat(document.getElementById('finder-v2').value) || 0;
             var perc = (v1 / v2) * 100 || 0;
-            document.getElementById('finder-result').innerText = perc.toFixed(2) + '%';
+            document.getElementById('finder-result').innerText = v1 + ' is ' + perc.toFixed(2) + '% of ' + v2;
         }
         function calculateChange() {
             var v1 = parseFloat(document.getElementById('change-v1').value) || 0;
             var v2 = parseFloat(document.getElementById('change-v2').value) || 0;
             var change = ((v2 - v1) / v1) * 100 || 0;
-            document.getElementById('change-result').innerText = change.toFixed(2) + '%';
+            var direction = change > 0 ? 'increase' : 'decrease';
+            document.getElementById('change-result').innerText = 'Change from ' + v1 + ' to ' + v2 + ' is ' + Math.abs(change).toFixed(2) + '% ' + direction;
         }
         function saveAsPDF() {
             const { jsPDF } = window.jspdf;
