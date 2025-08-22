@@ -85,7 +85,9 @@
                 </thead>
                 <tbody></tbody>
             </table>
-            <canvas id="line-chart" width="500" height="300"></canvas>
+            <div style="width: 100%; max-width: 500px; height: 300px; margin: 0 auto;">
+                <canvas id="line-chart" width="500" height="300"></canvas>
+            </div>
             <button onclick="saveAsPDF()">Save as PDF</button> <button onclick="sharePage()">Share</button>
         </div>
     </section>
@@ -200,7 +202,7 @@
                             y: { beginAtZero: true }
                         },
                         responsive: true,
-                        maintainAspectRatio: false
+                        maintainAspectRatio: true
                     }
                 });
             }, 1000);
