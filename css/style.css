@@ -209,14 +209,14 @@ ul, ol {
 /* Links: Simple hover */
 a {
     color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.2s ease;
     text-decoration: underline;
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+    text-decoration-color: transparent;
 }
 
 a:hover {
     color: #000000;
-    text-decoration: underline;
+    text-decoration-color: currentColor;
 }
 
 /* Footer: Compact at bottom */
