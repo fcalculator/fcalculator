@@ -211,6 +211,7 @@ a {
     color: var(--primary-color);
     text-decoration: none;
     transition: color 0.2s ease;
+    text-decoration: underline;
 }
 
 a:hover {
