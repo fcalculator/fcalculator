@@ -105,6 +105,7 @@ section h3 {
     color: var(--secondary-color);
     margin-bottom: calc(var(--spacing-unit) * 0.25);
     font-weight: normal;
+    text-decoration: underline;
 }
 
 /* Forms: Compact grid, small elements */
