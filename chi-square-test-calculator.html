@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Perform Chi-Square tests for independence or goodness-of-fit with detailed calculations, formulas, and interpretations. Analyze categorical data to determine relationships between variables using observed and expected frequencies.">
-    <meta name="keywords" content="chi-square test, statistical hypothesis testing, contingency table analysis, goodness-of-fit test, test of independence, categorical data statistics, p-value calculation">
-    <link rel="canonical" href="https://fcalculator.com/chi-square-test-calculator.html">
-    <title>Chi-Square Test Calculator</title>
+    <meta name="description" content="Conduct Chi-Square tests for goodness-of-fit or independence with precise calculations, including chi-square statistic, degrees of freedom, p-value, and Yates' correction for 2x2 tables. Analyze categorical data to assess distributions or variable relationships using observed and expected frequencies.">
+    <meta name="keywords" content="chi-square calculator, goodness-of-fit test, test of independence, contingency table analysis, statistical hypothesis testing, p-value interpretation, Yates correction">
+    <link rel="canonical" href="https://fcalculator.com/chi-square-calculator.html">
+    <title>Chi-Square Calculator</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
@@ -18,9 +18,9 @@
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Chi-Square Test Calculator",
-      "description": "A comprehensive tool for conducting Chi-Square tests on categorical data, including calculations for test statistic, degrees of freedom, and p-value. Supports contingency tables for independence tests and provides detailed explanations, formulas, and visualizations.",
-      "url": "https://fcalculator.com/chi-square-test-calculator.html",
+      "name": "Chi-Square Calculator",
+      "description": "An advanced tool for performing Chi-Square tests, supporting goodness-of-fit and independence analyses on categorical data. Calculates test statistic, degrees of freedom, p-value with optional Yates' correction for 2x2 tables, and provides interpretations, formulas, visualizations, and detailed examples for researchers and analysts.",
+      "url": "https://fcalculator.com/chi-square-calculator.html",
       "datePublished": "2022-01-14",
       "publisher": {
         "@type": "Organization",
@@ -48,8 +48,8 @@
           {
             "@type": "ListItem",
             "position": 3,
-            "name": "Chi-Square Test Calculator",
-            "item": "https://fcalculator.com/chi-square-test-calculator.html"
+            "name": "Chi-Square Calculator",
+            "item": "https://fcalculator.com/chi-square-calculator.html"
           }
         ]
       },
@@ -58,10 +58,18 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is a Chi-Square Test?",
+            "name": "What is the difference between Chi-Square goodness-of-fit and independence tests?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The Chi-Square test is a statistical method used to determine if there is a significant association between categorical variables by comparing observed frequencies to expected frequencies."
+              "text": "The goodness-of-fit test compares observed data to an expected distribution for a single variable, while the independence test assesses if two categorical variables are related using a contingency table."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "When should Yates' correction be applied?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yates' correction is recommended for 2x2 contingency tables with small expected frequencies to adjust for continuity and improve accuracy in the chi-square approximation."
             }
           },
           {
@@ -69,15 +77,15 @@
             "name": "How do you interpret the p-value in a Chi-Square test?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A p-value less than 0.05 typically indicates a significant relationship between the variables, leading to rejection of the null hypothesis."
+              "text": "A p-value less than the significance level (e.g., 0.05) suggests rejecting the null hypothesis, indicating a significant deviation or association in the data."
             }
           },
           {
             "@type": "Question",
-            "name": "What are the assumptions for a Chi-Square test?",
+            "name": "What are the assumptions for Chi-Square tests?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Assumptions include large sample sizes, mutually exclusive categories, and expected frequencies of at least 5 in most cells."
+              "text": "Key assumptions include independent observations, mutually exclusive categories, and expected frequencies of at least 5 in most cells for reliable results."
             }
           }
         ]
@@ -89,10 +97,10 @@
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/math.html">Math</a> > <a href="/chi-square-test-calculator.html">Chi-Square Test Calculator</a>
+            <a href="/">FCalculator.com</a> > <a href="/math.html">Math</a> > <a href="/chi-square-calculator.html">Chi-Square Calculator</a>
         </div>
-        <h1>Chi-Square Test Calculator</h1>
-        <p>This calculator performs Chi-Square tests for independence using contingency tables. Enter observed frequencies in CSV format to compute the test statistic, degrees of freedom, and p-value.</p>
+        <h1>Chi-Square Calculator</h1>
+        <p>Perform Chi-Square tests for goodness-of-fit or independence. Enter data to compute the statistic, degrees of freedom, p-value, and interpretations, with optional Yates' correction for 2x2 tables.</p>
     </header>
     <section class="tool-section">
         <form id="tool-form">
@@ -100,8 +108,23 @@
                 <fieldset>
                     <legend>Input Data</legend>
                     <div class="input-row">
-                        <label for="observed-data">Observed Frequencies (CSV, e.g., 90,60,104,95\n30,50,51,20\n30,40,45,35)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter observed counts as comma-separated rows for the contingency table. e.g. 90,60,104,95 for first row.</span></label>
+                        <label for="test-type">Test Type<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Choose Goodness-of-Fit for single variable distribution or Independence for contingency tables.</span></label>
+                        <select id="test-type" required>
+                            <option value="independence">Test of Independence</option>
+                            <option value="goodness">Goodness-of-Fit</option>
+                        </select>
+                    </div>
+                    <div class="input-row" id="observed-row">
+                        <label for="observed-data">Observed Frequencies<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">For Independence: CSV rows (e.g., 90,60,104,95\n30,50,51,20\n30,40,45,35). For Goodness: Comma-separated (e.g., 60,40,40,60).</span></label>
                         <textarea id="observed-data" placeholder="e.g. 90,60,104,95\n30,50,51,20\n30,40,45,35" required></textarea>
+                    </div>
+                    <div class="input-row" id="expected-row" style="display:none;">
+                        <label for="expected-data">Expected Frequencies<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Comma-separated, matching observed (e.g., 50,50,50,50). Must sum to total observed.</span></label>
+                        <textarea id="expected-data" placeholder="e.g. 50,50,50,50"></textarea>
+                    </div>
+                    <div class="input-row" id="yates-row" style="display:none;">
+                        <label for="yates-correction">Apply Yates' Correction (for 2x2 tables)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Adjusts for continuity in small samples.</span></label>
+                        <input type="checkbox" id="yates-correction">
                     </div>
                     <div class="input-row">
                         <label for="significance-level">Significance Level (α)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Common values: 0.05 for 5% significance.</span></label>
@@ -125,63 +148,65 @@
         <button class="share-button" onclick="sharePage()">Share</button>
         <div class="note-alert" id="alert-note" style="display:none;"></div>
     </section>
-    <p>Explore related tools like our <a href="/t-test-calculator.html">T-Test Calculator</a> or <a href="/anova-calculator.html">ANOVA Calculator</a> for further statistical analysis.</p>
+    <p>Explore related tools like our <a href="/t-test-calculator.html">T-Test Calculator</a> or <a href="/anova-calculator.html">ANOVA Calculator</a> for advanced statistical comparisons.</p>
     <section>
-        <h2>How the Chi-Square Test Calculator Works</h2>
-        <p>This tool computes the Chi-Square statistic for tests of independence using user-provided observed frequencies in a contingency table. It calculates expected frequencies based on row and column totals, then applies the formula to derive the test statistic. The p-value is determined using the chi-square distribution to assess significance.</p>
-        <p>To use: Input observed data as CSV rows, set significance level, and click Calculate. Results include the test statistic, degrees of freedom, p-value, and visualizations.</p>
+        <h2>How the Chi-Square Calculator Works</h2>
+        <p>This calculator supports two primary Chi-Square tests: goodness-of-fit for comparing observed data to an expected distribution and independence for analyzing relationships in contingency tables. Select the test type, input frequencies, set the significance level, and click Calculate to obtain results including visualizations.</p>
+        <p>For goodness-of-fit, provide observed and expected values as comma-separated lists. For independence, enter observed data as CSV rows. The tool computes expected values automatically for independence and applies Yates' correction if selected for 2x2 tables.</p>
     </section>
     <section>
-        <h2>Understanding the Chi-Square Test</h2>
-        <p>The Chi-Square test evaluates whether observed categorical data deviates significantly from expected values. It is commonly applied in hypothesis testing for independence between variables or goodness-of-fit to a distribution.</p>
-        <h3>Key Formula</h3>
-        <p>The Chi-Square statistic is calculated as:</p>
+        <h2>Understanding Chi-Square Tests</h2>
+        <p>Chi-Square tests are essential in statistics for evaluating categorical data. The goodness-of-fit test assesses if observed frequencies align with a theoretical distribution, while the independence test determines if two variables are associated.</p>
+        <h3>Key Formulas</h3>
+        <p>The core statistic is:</p>
         \[ \chi^2 = \sum \frac{(O_i - E_i)^2}{E_i} \]
-        <p>Where \(O_i\) is the observed frequency and \(E_i\) is the expected frequency for each cell.</p>
-        <p>Degrees of freedom (df) for a contingency table: \(df = (r-1)(c-1)\), with r rows and c columns.</p>
+        <p>Where \(O_i\) is observed and \(E_i\) is expected. For Yates' correction in 2x2 tables:</p>
+        \[ \chi^2 = \sum \frac{(|O_i - E_i| - 0.5)^2}{E_i} \]
+        <p>Degrees of freedom: For goodness-of-fit, \(k-1\) (k categories); for independence, \((r-1)(c-1)\) (r rows, c columns).</p>
         <h3>Assumptions and Limitations</h3>
-        <p>Ensure expected frequencies are at least 5 in 80% of cells. For small samples, consider alternatives like Fisher's exact test.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Chi-square_pdf.svg" alt="Chi-square distribution PDF" style="max-width:600px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style:italic; font-size:0.9em; text-align:center;">Probability density function of the chi-square distribution for various degrees of freedom.</p>
+        <p>Assumptions include independent observations and expected frequencies ≥5 in at least 80% of cells. For small samples, use alternatives like Fisher's exact test.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Chi-square_distributionCDF-English.png/600px-Chi-square_distributionCDF-English.png" alt="Chi-square distribution CDF" style="max-width:600px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">Cumulative distribution function of the chi-square distribution for various degrees of freedom.</p>
     </section>
     <section>
-        <h2>Step-by-Step Example</h2>
-        <p>Consider a study on neighborhood and occupation:</p>
+        <h2>Step-by-Step Examples</h2>
+        <p>For goodness-of-fit: Suppose observed frequencies are 60,40,40,60 with expected 50 each (total 200). The calculator yields χ²=8, df=3, p≈0.046, suggesting significance at α=0.05.</p>
+        <p>For independence: Using neighborhood-occupation data:</p>
         <table>
             <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
             <tr><td>White collar</td><td>90</td><td>60</td><td>104</td><td>95</td></tr>
             <tr><td>Blue collar</td><td>30</td><td>50</td><td>51</td><td>20</td></tr>
             <tr><td>No collar</td><td>30</td><td>40</td><td>45</td><td>35</td></tr>
         </table>
-        <p>Expected values are computed from margins, yielding χ² ≈ 24.57, df=6, p<0.001, indicating dependence.</p>
-        <h3>Comparison Table: Observed vs Expected</h3>
-        <p>Use the tool to input data and view detailed tables.</p>
+        <p>Results: χ²≈24.57, df=6, p<0.001, indicating dependence.</p>
+        <h3>Comparison: Observed vs Expected</h3>
+        <p>Input data to view detailed tables and charts highlighting deviations.</p>
     </section>
     <section>
-        <h2>Applications in Research</h2>
-        <p>Chi-Square tests are vital in fields like sociology for analyzing survey data, biology for genetic distributions, and marketing for consumer preferences. For more on statistical methods, visit <a href="https://en.wikipedia.org/wiki/Chi-squared_test" target="_blank">Wikipedia's Chi-Squared Test page</a>.</p>
-        <h3>Visualizing Results</h3>
-        <p>Charts help compare observed and expected frequencies, highlighting deviations.</p>
+        <h2>Applications in Statistical Analysis</h2>
+        <p>These tests are widely used in research: goodness-of-fit in genetics for Mendelian ratios, independence in surveys for variable associations. For in-depth guidance, refer to resources like <a href="https://en.wikipedia.org/wiki/Chi-squared_test" target="_blank">Wikipedia's Chi-Squared Test</a>.</p>
+        <h3>Visualizing Test Results</h3>
+        <p>Line charts compare observed and expected frequencies, while polar area charts show per-category contributions to the statistic, aiding in identifying key deviations.</p>
     </section>
     <section>
         <h2>FAQ</h2>
-        <p><strong>What is the difference between goodness-of-fit and independence tests?</strong> Goodness-of-fit compares one variable to a distribution, while independence checks relationships between two variables.</p>
-        <p><strong>When should I use Yates' correction?</strong> Apply it for 2x2 tables with small expected frequencies to improve accuracy.</p>
-        <p><strong>How does sample size affect the test?</strong> Larger samples improve reliability, but very large samples may detect trivial differences.</p>
+        <p><strong>How does sample size impact Chi-Square results?</strong> Larger samples enhance power but may detect minor differences; small samples risk violating assumptions.</p>
+        <p><strong>Can this calculator handle unequal expected proportions?</strong> Yes, for goodness-of-fit, enter custom expected values that sum to the total observed.</p>
+        <p><strong>What if expected frequencies are low?</strong> The tool alerts if >20% are below 5; consider pooling categories or alternative tests.</p>
     </section>
     <section>
         <h2>Disclaimer</h2>
-        <p>This tool provides educational calculations and is not a substitute for professional statistical advice. Results depend on input accuracy; consult experts for critical applications.</p>
+        <p>This calculator offers educational insights and is not a replacement for professional statistical consultation. Verify inputs for accuracy; results are for informational purposes only.</p>
     </section>
     <section>
         <h2>Related Resources</h2>
-        <p><a href="https://www.scribbr.com/statistics/chi-square-tests/" target="_blank">Scribbr: Chi-Square Tests Guide</a> - Detailed steps and examples for performing Chi-Square tests manually or with software.</p>
-        <p><a href="https://www.graphpad.com/quickcalcs/chisquared1/" target="_blank">GraphPad Chi-Square Calculator</a> - Interactive tool for quick computations with explanations on interpretation.</p>
-        <p><a href="https://en.wikipedia.org/wiki/Chi-squared_test" target="_blank">Wikipedia: Chi-Squared Test</a> - Comprehensive overview including history, formulas, and advanced variants.</p>
+        <p><a href="https://www.scribbr.com/statistics/chi-square-goodness-of-fit/" target="_blank">Scribbr: Chi-Square Goodness of Fit Test</a> - Step-by-step guide with formulas, examples, and critical value tables for manual or tool-based calculations.</p>
+        <p><a href="https://www.jmp.com/en/statistics-knowledge-portal/chi-square-test/chi-square-goodness-of-fit-test" target="_blank">JMP: Chi-Square Goodness of Fit Test</a> - Knowledge portal with real-world examples, like candy bag distributions, and integration tips for statistical software.</p>
+        <p><a href="https://www.simplilearn.com/tutorials/statistics-tutorial/chi-square-test" target="_blank">Simplilearn: Chi-Square Test Tutorial</a> - Comprehensive overview of types, formulas, and hypothesis testing applications in data analysis.</p>
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This page offers a Chi-Square Test Calculator for analyzing categorical data relationships. It computes test statistics, p-values, and visualizations for hypothesis testing in statistics. Ideal for researchers, students, and data analysts exploring independence or goodness-of-fit. Index this under math tools, statistical calculators, and hypothesis testing resources.</p>
+        <p>This page provides a versatile Chi-Square Calculator for goodness-of-fit and independence tests in categorical data analysis. It includes formulas, examples, visualizations, and interpretations for hypothesis testing in statistics. Suitable for students, researchers, and analysts in fields like sociology, biology, and marketing. Index under statistical tools, math calculators, and data analysis resources.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
@@ -191,54 +216,112 @@
         let lineChartInstance = null;
         let polarChartInstance = null;
 
+        document.getElementById('test-type').addEventListener('change', function() {
+            const type = this.value;
+            document.getElementById('expected-row').style.display = type === 'goodness' ? 'block' : 'none';
+            document.getElementById('observed-row').querySelector('span.tooltiptext').textContent = type === 'goodness' ? 'Comma-separated (e.g., 60,40,40,60).' : 'CSV rows (e.g., 90,60,104,95\n30,50,51,20\n30,40,45,35).';
+        });
+
         function calculateChiSquare() {
+            const type = document.getElementById('test-type').value;
             const observedText = document.getElementById('observed-data').value.trim();
             const alpha = parseFloat(document.getElementById('significance-level').value);
             if (!observedText) return;
 
-            const observed = observedText.split('\n').map(row => row.split(',').map(Number));
-            const rows = observed.length;
-            const cols = observed[0].length;
-            let total = 0;
-            const rowSums = new Array(rows).fill(0);
-            const colSums = new Array(cols).fill(0);
+            let observed, rows, cols, expected, chi2 = 0, df, pValue, lowExpected = 0, contributions = [];
+            let isYates = false;
 
-            for (let i = 0; i < rows; i++) {
+            if (type === 'independence') {
+                observed = observedText.split('\n').map(row => row.split(',').map(Number));
+                rows = observed.length;
+                cols = observed[0].length;
+                let total = 0;
+                const rowSums = new Array(rows).fill(0);
+                const colSums = new Array(cols).fill(0);
+
+                for (let i = 0; i < rows; i++) {
+                    for (let j = 0; j < cols; j++) {
+                        rowSums[i] += observed[i][j];
+                        colSums[j] += observed[i][j];
+                        total += observed[i][j];
+                    }
+                }
+
+                expected = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
+                for (let i = 0; i < rows; i++) {
+                    for (let j = 0; j < cols; j++) {
+                        expected[i][j] = (rowSums[i] * colSums[j]) / total;
+                    }
+                }
+
+                df = (rows - 1) * (cols - 1);
+
+                if (rows === 2 && cols === 2) {
+                    document.getElementById('yates-row').style.display = 'block';
+                    isYates = document.getElementById('yates-correction').checked;
+                } else {
+                    document.getElementById('yates-row').style.display = 'none';
+                }
+
+                contributions = new Array(rows).fill(0);
+                for (let i = 0; i < rows; i++) {
+                    for (let j = 0; j < cols; j++) {
+                        const diff = isYates ? Math.abs(observed[i][j] - expected[i][j]) - 0.5 : observed[i][j] - expected[i][j];
+                        const contrib = Math.pow(diff, 2) / expected[i][j];
+                        chi2 += contrib;
+                        contributions[i] += contrib;
+                        if (expected[i][j] < 5) lowExpected++;
+                    }
+                }
+            } else { // goodness
+                observed = observedText.split(',').map(Number);
+                const expectedText = document.getElementById('expected-data').value.trim();
+                if (!expectedText) return;
+                expected = expectedText.split(',').map(Number);
+                if (observed.length !== expected.length) {
+                    alert('Observed and expected must have the same length.');
+                    return;
+                }
+                rows = 1;
+                cols = observed.length;
+                df = cols - 1;
+
+                document.getElementById('yates-row').style.display = 'none';
+
+                contributions = new Array(cols).fill(0);
                 for (let j = 0; j < cols; j++) {
-                    rowSums[i] += observed[i][j];
-                    colSums[j] += observed[i][j];
-                    total += observed[i][j];
+                    const diff = observed[j] - expected[j];
+                    const contrib = Math.pow(diff, 2) / expected[j];
+                    chi2 += contrib;
+                    contributions[j] = contrib;
+                    if (expected[j] < 5) lowExpected++;
                 }
             }
 
-            const expected = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
-            let chi2 = 0;
-            let lowExpected = 0;
-            for (let i = 0; i < rows; i++) {
-                for (let j = 0; j < cols; j++) {
-                    expected[i][j] = (rowSums[i] * colSums[j]) / total;
-                    if (expected[i][j] < 5) lowExpected++;
-                    chi2 += Math.pow(observed[i][j] - expected[i][j], 2) / expected[i][j];
-                }
-            }
-
-            const df = (rows - 1) * (cols - 1);
-            const pValue = 1 - jStat.chisquare.cdf(chi2, df);
+            pValue = 1 - jStat.chisquare.cdf(chi2, df);
             const isSignificant = pValue < alpha ? 'significant (reject null hypothesis)' : 'not significant (fail to reject null hypothesis)';
 
-            document.getElementById('chi2-result').textContent = `Chi-Square Statistic: ${chi2.toFixed(4)}`;
+            document.getElementById('chi2-result').textContent = `Chi-Square Statistic: ${chi2.toFixed(4)}${isYates ? ' (with Yates correction)' : ''}`;
             document.getElementById('df-result').textContent = `Degrees of Freedom: ${df}`;
             document.getElementById('p-result').textContent = `P-Value: ${pValue.toFixed(4)}`;
             document.getElementById('interpretation').textContent = `At α = ${alpha}, the result is ${isSignificant}.`;
 
             const table = document.getElementById('contingency-table');
-            table.innerHTML = '<caption>Observed vs Expected Frequencies</caption><tr><th></th>' + Array.from({length: cols}, (_, i) => `<th>Col ${i+1}</th>`).join('') + '</tr>';
-            for (let i = 0; i < rows; i++) {
-                let rowHtml = `<tr><th>Row ${i+1}</th>`;
-                for (let j = 0; j < cols; j++) {
-                    rowHtml += `<td>${observed[i][j]} / ${expected[i][j].toFixed(2)}</td>`;
+            table.innerHTML = '<caption>Observed vs Expected Frequencies</caption>';
+            if (type === 'independence') {
+                table.innerHTML += '<tr><th></th>' + Array.from({length: cols}, (_, i) => `<th>Col ${i+1}</th>`).join('') + '</tr>';
+                for (let i = 0; i < rows; i++) {
+                    let rowHtml = `<tr><th>Row ${i+1}</th>`;
+                    for (let j = 0; j < cols; j++) {
+                        rowHtml += `<td>${observed[i][j]} / ${expected[i][j].toFixed(2)}</td>`;
+                    }
+                    table.innerHTML += rowHtml + '</tr>';
                 }
-                table.innerHTML += rowHtml + '</tr>';
+            } else {
+                table.innerHTML += '<tr><th>Category</th><th>Observed</th><th>Expected</th></tr>';
+                for (let j = 0; j < cols; j++) {
+                    table.innerHTML += `<tr><td>${j+1}</td><td>${observed[j]}</td><td>${expected[j].toFixed(2)}</td></tr>`;
+                }
             }
 
             if (lowExpected / (rows * cols) > 0.2) {
@@ -254,12 +337,12 @@
 
             // Line Chart: Observed vs Expected (flattened)
             const ctxLine = document.getElementById('line-chart').getContext('2d');
-            const flatObserved = observed.flat();
-            const flatExpected = expected.flat();
+            const flatObserved = type === 'independence' ? observed.flat() : observed;
+            const flatExpected = type === 'independence' ? expected.flat() : expected;
             lineChartInstance = new Chart(ctxLine, {
                 type: 'line',
                 data: {
-                    labels: Array.from({length: rows*cols}, (_, i) => `Cell ${i+1}`),
+                    labels: Array.from({length: flatObserved.length}, (_, i) => `Cell ${i+1}`),
                     datasets: [{
                         label: 'Observed',
                         data: flatObserved,
@@ -278,23 +361,16 @@
                 }
             });
 
-            // Polar Area Chart: Contribution to Chi-Square per row
+            // Polar Area Chart: Contributions
             const ctxPolar = document.getElementById('polar-chart').getContext('2d');
-            const rowContributions = rowSums.map((_, i) => {
-                let contrib = 0;
-                for (let j = 0; j < cols; j++) {
-                    contrib += Math.pow(observed[i][j] - expected[i][j], 2) / expected[i][j];
-                }
-                return contrib;
-            });
             polarChartInstance = new Chart(ctxPolar, {
                 type: 'polarArea',
                 data: {
-                    labels: Array.from({length: rows}, (_, i) => `Row ${i+1}`),
+                    labels: type === 'independence' ? Array.from({length: rows}, (_, i) => `Row ${i+1}`) : Array.from({length: cols}, (_, i) => `Cat ${i+1}`),
                     datasets: [{
                         label: 'Chi-Square Contribution',
-                        data: rowContributions,
-                        backgroundColor: ['rgba(255,99,132,0.2)', 'rgba(75,192,192,0.2)', 'rgba(255,205,86,0.2)', 'rgba(54,162,235,0.2)']
+                        data: contributions,
+                        backgroundColor: ['rgba(255,99,132,0.2)', 'rgba(75,192,192,0.2)', 'rgba(255,205,86,0.2)', 'rgba(54,162,235,0.2)', 'rgba(153,102,255,0.2)']
                     }]
                 },
                 options: {
@@ -348,15 +424,15 @@
             doc.setFontSize(10);
             doc.setTextColor(100);
             doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-            doc.link(doc.internal.pageSize.width / 2 - 50, doc.internal.pageSize.height - 15, 100, 10, { url: 'https://fcalculator.com/chi-square-test-calculator.html' });
+            doc.link(doc.internal.pageSize.width / 2 - 50, doc.internal.pageSize.height - 15, 100, 10, { url: 'https://fcalculator.com/chi-square-calculator.html' });
 
-            doc.save('chi-square-test-results.pdf');
+            doc.save('chi-square-results.pdf');
         }
 
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Chi-Square Test Calculator',
+                    title: 'Chi-Square Calculator',
                     url: window.location.href
                 });
             } else {
