@@ -114,11 +114,11 @@
                             <option value="goodness">Goodness-of-Fit</option>
                         </select>
                     </div>
-                    <div class="input-row" id="observed-row">
+                    <div class="input-row frequency-input" id="observed-row">
                         <label for="observed-data">Observed Frequencies<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">For Independence: CSV rows (e.g., 90,60,104,95\n30,50,51,20\n30,40,45,35). For Goodness: Comma-separated (e.g., 60,40,40,60).</span></label>
                         <textarea id="observed-data" placeholder="e.g. 90,60,104,95\n30,50,51,20\n30,40,45,35" required></textarea>
                     </div>
-                    <div class="input-row" id="expected-row" style="display:none;">
+                    <div class="input-row frequency-input" id="expected-row" style="display:none;">
                         <label for="expected-data">Expected Frequencies<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Comma-separated, matching observed (e.g., 50,50,50,50). Must sum to total observed.</span></label>
                         <textarea id="expected-data" placeholder="e.g. 50,50,50,50"></textarea>
                     </div>
@@ -148,7 +148,6 @@
         <button class="share-button" onclick="sharePage()">Share</button>
         <div class="note-alert" id="alert-note" style="display:none;"></div>
     </section>
-    <p>Explore related tools like our <a href="/t-test-calculator.html">T-Test Calculator</a> or <a href="/anova-calculator.html">ANOVA Calculator</a> for advanced statistical comparisons.</p>
     <section>
         <h2>How the Chi-Square Calculator Works</h2>
         <p>This calculator supports two primary Chi-Square tests: goodness-of-fit for comparing observed data to an expected distribution and independence for analyzing relationships in contingency tables. Select the test type, input frequencies, set the significance level, and click Calculate to obtain results including visualizations.</p>
@@ -165,8 +164,8 @@
         <p>Degrees of freedom: For goodness-of-fit, \(k-1\) (k categories); for independence, \((r-1)(c-1)\) (r rows, c columns).</p>
         <h3>Assumptions and Limitations</h3>
         <p>Assumptions include independent observations and expected frequencies ≥5 in at least 80% of cells. For small samples, use alternatives like Fisher's exact test.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Chi-square_distributionCDF-English.png/600px-Chi-square_distributionCDF-English.png" alt="Chi-square distribution CDF" style="max-width:600px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style:italic; font-size:0.9em; text-align:center;">Cumulative distribution function of the chi-square distribution for various degrees of freedom.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Chi-square_cdf.svg/600px-Chi-square_cdf.svg.png" alt="Chi-square distribution CDF" style="max-width:600px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">Cumulative distribution function of the chi-squared distribution.</p>
     </section>
     <section>
         <h2>Step-by-Step Examples</h2>
@@ -193,10 +192,6 @@
         <p><strong>How does sample size impact Chi-Square results?</strong> Larger samples enhance power but may detect minor differences; small samples risk violating assumptions.</p>
         <p><strong>Can this calculator handle unequal expected proportions?</strong> Yes, for goodness-of-fit, enter custom expected values that sum to the total observed.</p>
         <p><strong>What if expected frequencies are low?</strong> The tool alerts if >20% are below 5; consider pooling categories or alternative tests.</p>
-    </section>
-    <section>
-        <h2>Disclaimer</h2>
-        <p>This calculator offers educational insights and is not a replacement for professional statistical consultation. Verify inputs for accuracy; results are for informational purposes only.</p>
     </section>
     <section>
         <h2>Related Resources</h2>
