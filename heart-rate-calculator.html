@@ -93,7 +93,7 @@
                     </thead>
                     <tbody></tbody>
                 </table>
-                <canvas id="polar-chart" width="500" height="300" style="max-width:500px; margin:0 auto; display:block;"></canvas>
+                <canvas id="polar-chart" style="width:100%; max-width:500px; height:auto; margin:0 auto; display:block;"></canvas>
                 <div style="text-align:center; margin-top:20px;">
                     <button onclick="saveAsPDF()">Save as PDF</button>
                     <button onclick="sharePage()">Share</button>
@@ -238,21 +238,20 @@
                 alternateRowStyles: { fillColor: [245, 245, 245] },
                 styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
             });
-            doc.addPageHook('didDrawPage', (data) => {
-                doc.setFontSize(10);
-                doc.setTextColor(100);
-                const text = 'This document was generated using ';
-                const fullText = text + 'Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.';
-                const x = doc.internal.pageSize.width / 2 - doc.getTextWidth(fullText) / 2;
-                doc.text(text, x, doc.internal.pageSize.height - 10);
-                const linkX = x + doc.getTextWidth(text);
-                doc.setTextColor(0, 0, 255);
-                doc.text('Fcalculator.com', linkX, doc.internal.pageSize.height - 10);
-                doc.link(linkX - 5, doc.internal.pageSize.height - 15, doc.getTextWidth('Fcalculator.com') + 10, 10, 'https://fcalculator.com/heart-rate-calculator.html');
-                const remainingText = ' – Calculations are provided “as is” without warranty. Use at your own risk.';
-                doc.setTextColor(100);
-                doc.text(remainingText, linkX + doc.getTextWidth('Fcalculator.com'), doc.internal.pageSize.height - 10);
-            });
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const text = 'This document was generated using ';
+            const fullText = text + 'Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.';
+            const x = doc.internal.pageSize.width / 2 - doc.getTextWidth(fullText) / 2;
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text(text, x, pageHeight - 10);
+            const linkX = x + doc.getTextWidth(text);
+            doc.setTextColor(0, 0, 255);
+            doc.text('Fcalculator.com', linkX, pageHeight - 10);
+            doc.link(linkX - 5, pageHeight - 15, doc.getTextWidth('Fcalculator.com') + 10, 10, 'https://fcalculator.com/heart-rate-calculator.html');
+            const remainingText = ' – Calculations are provided “as is” without warranty. Use at your own risk.';
+            doc.setTextColor(100);
+            doc.text(remainingText, linkX + doc.getTextWidth('Fcalculator.com'), pageHeight - 10);
             doc.save('heart-rate-zones.pdf');
         }
         function sharePage() {
