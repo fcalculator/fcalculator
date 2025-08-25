@@ -6,7 +6,7 @@
     <meta name="description" content="Calculate your carbon footprint with our detailed Carbon Footprint Calculator. Assess emissions from energy use, transportation, diet, and waste, and receive tailored recommendations to lower your environmental impact.">
     <meta name="keywords" content="carbon footprint calculator, greenhouse gas emissions, CO2e measurement, sustainable living, emission reduction tips, environmental assessment tool">
     <link rel="canonical" href="https://fcalculator.com/carbon-footprint-calculator.html">
-    <title>Carbon Footprint Calculator</title>
+    <title>Carbon Footprint Calculator - Assess Your Annual Emissions</title>
     <link rel="stylesheet" href="/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
@@ -118,6 +118,7 @@
             <p><strong>Note:</strong> Results are estimates based on average emission factors. Actual emissions may vary depending on specific conditions.</p>
         </div>
     </section>
+    <p>Explore more tools to support your sustainable lifestyle, such as our <a href="/energy-efficiency-calculator.html">Energy Efficiency Calculator</a> or <a href="/recycling-impact-calculator.html">Recycling Impact Calculator</a>.</p>
     <section>
         <h2>Understanding Your Carbon Footprint</h2>
         <p>Your carbon footprint measures the total greenhouse gas emissions from your daily activities, expressed in carbon dioxide equivalents (CO₂e). This encompasses direct sources like vehicle exhaust and indirect ones like food production supply chains. Our calculator categorizes emissions into home energy, transportation, and lifestyle for a comprehensive view.</p>
@@ -306,30 +307,27 @@
                     startY: yPos + 10,
                     headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
                     alternateRowStyles: { fillColor: [245, 245, 245] },
-                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
+                    styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                    didDrawPage: function (data) {
+                        doc.setFontSize(10);
+                        doc.setTextColor(100);
+                        const text1 = 'This document was generated using ';
+                        const linkText = 'Fcalculator.com';
+                        const text2 = ' – Calculations are provided “as is” without warranty. Use at your own risk.';
+                        const fullText = text1 + linkText + text2;
+                        const pageWidth = doc.internal.pageSize.width;
+                        const textWidth = doc.getTextWidth(fullText);
+                        const startX = (pageWidth - textWidth) / 2;
+                        const text1Width = doc.getTextWidth(text1);
+                        const linkWidth = doc.getTextWidth(linkText);
+                        const footerY = doc.internal.pageSize.height - 10;
+                        doc.text(text1, startX, footerY);
+                        doc.setTextColor(0, 0, 255);
+                        doc.textWithLink(linkText, startX + text1Width, footerY, { url: 'https://fcalculator.com/carbon-footprint-calculator.html' });
+                        doc.setTextColor(100);
+                        doc.text(text2, startX + text1Width + linkWidth, footerY);
+                    }
                 });
-                // Add footer to all pages
-                const pageCount = doc.internal.getNumberOfPages();
-                for (let i = 1; i <= pageCount; i++) {
-                    doc.setPage(i);
-                    doc.setFontSize(10);
-                    doc.setTextColor(100);
-                    const text1 = 'This document was generated using ';
-                    const linkText = 'Fcalculator.com';
-                    const text2 = ' – Calculations are provided “as is” without warranty. Use at your own risk.';
-                    const fullText = text1 + linkText + text2;
-                    const pageWidth = doc.internal.pageSize.width;
-                    const textWidth = doc.getTextWidth(fullText);
-                    const startX = (pageWidth - textWidth) / 2;
-                    const text1Width = doc.getTextWidth(text1);
-                    const linkWidth = doc.getTextWidth(linkText);
-                    const footerY = doc.internal.pageSize.height - 10;
-                    doc.text(text1, startX, footerY);
-                    doc.setTextColor(0, 0, 255);
-                    doc.textWithLink(linkText, startX + text1Width, footerY, { url: 'https://fcalculator.com/carbon-footprint-calculator.html' });
-                    doc.setTextColor(100);
-                    doc.text(text2, startX + text1Width + linkWidth, footerY);
-                }
                 doc.save('carbon-footprint-report.pdf');
             }
             function sharePage() {
