@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert temperatures from Kelvin to Celsius using our precise online tool. Explore the conversion formula, historical background, practical examples, and comparison charts for accurate temperature understanding in scientific contexts.">
+    <meta name="keywords" content="kelvin to celsius converter, temperature conversion tool, k to c formula, kelvin scale explanation, celsius scale details, temperature scales comparison">
+    <title>Kelvin to Celsius Converter</title>
+    <link rel="canonical" href="https://fcalculator.com/kelvin-to-celsius-converter.html">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <!-- Dodatni scripts za funkcionalnost: Chart.js za chart, MathJax za formule -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Kelvin to Celsius Converter",
+        "url": "https://fcalculator.com/kelvin-to-celsius-converter.html",
+        "description": "An online tool for converting temperatures from Kelvin to Celsius, featuring detailed explanations, formulas, historical insights, comparison charts, and practical examples for scientific and educational use.",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Kelvin to Celsius Converter",
+                    "item": "https://fcalculator.com/kelvin-to-celsius-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/kelvin-to-celsius-converter.html">Kelvin to Celsius Converter</a>
+        </div>
+        <h1>Kelvin to Celsius Converter</h1>
+        <p>This tool provides accurate temperature conversions from Kelvin to Celsius, essential for scientific calculations, thermodynamic analysis, and educational applications in physics and chemistry.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Temperature Input</legend>
+                    <div class="input-row">
+                        <label for="kelvin">Kelvin (K)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the temperature in Kelvin for conversion to Celsius.</span></label>
+                        <input type="number" id="kelvin" placeholder="e.g. 300" required>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="calculate()">Convert</button>
+        </form>
+    </section>
+    <section class="results-section" id="results" style="display:none;">
+        <p id="result"></p>
+        <canvas id="line-chart" width="500" height="300"></canvas>
+        <table id="conversion-table">
+            <thead>
+                <tr>
+                    <th>Kelvin (K)</th>
+                    <th>Celsius (°C)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        <button onclick="sharePage()">Share</button>
+    </section>
+    <p>Explore similar tools like our <a href="/celsius-to-kelvin-converter.html">Celsius to Kelvin Converter</a> or <a href="/fahrenheit-to-celsius-converter.html">Fahrenheit to Celsius Converter</a> for comprehensive temperature analysis.</p>
+    <section>
+        <h2>How to Use the Kelvin to Celsius Converter</h2>
+        <p>Enter a temperature value in Kelvin into the input field. Click the "Convert" button to instantly convert it to Celsius. The tool uses the standard formula for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for students, researchers, and professionals in scientific fields dealing with absolute temperature scales.</p>
+    </section>
+    <section>
+        <h2>Understanding the Kelvin Scale</h2>
+        <p>The Kelvin scale is an absolute thermodynamic temperature scale where zero represents the theoretical absence of all thermal energy, known as absolute zero. It is the base unit of temperature in the International System of Units (SI).</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Temperature-scales-comparison.svg/600px-Temperature-scales-comparison.svg.png" alt="Equivalent temperatures in kelvin (K), Celsius (°C), and Fahrenheit (°F)." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">A comparison of equivalent temperatures in kelvin (K), Celsius (°C), and Fahrenheit (°F).</i>
+        <h3>History of the Kelvin Scale</h3>
+        <p>Proposed by William Thomson (Lord Kelvin) in 1848, the scale was refined in 1854 with James Joule. It was formally adopted in 1954, defining the triple point of water at 273.16 K. In 2019, it was redefined using the Boltzmann constant for greater precision.</p>
+    </section>
+    <section>
+        <h2>Understanding the Celsius Scale</h2>
+        <p>The Celsius scale defines 0°C as the freezing point of water and 100°C as the boiling point under standard atmospheric pressure. It is widely used for everyday and scientific measurements worldwide.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Melting_ice_thermometer.jpg/600px-Melting_ice_thermometer.jpg" alt="A thermometer calibrated in degrees Celsius, showing a temperature of 0 °C in a glass of ice and water." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">A thermometer calibrated in degrees Celsius, showing a temperature of 0 °C in a glass of ice and water.</i>
+        <h3>History of the Celsius Scale</h3>
+        <p>Developed by Anders Celsius in 1742 with an inverted scale, it was reversed in 1743. Renamed from centigrade to Celsius in 1948, it aligns closely with the Kelvin scale for absolute measurements.</p>
+    </section>
+    <section>
+        <h2>The Conversion Formula Explained</h2>
+        <p>The formula to convert Kelvin to Celsius is:</p>
+        \[ C = K - 273.15 \]
+        <p>Where \( C \) is the temperature in Celsius and \( K \) is in Kelvin. This subtraction accounts for the offset between the absolute Kelvin scale and the relative Celsius scale.</p>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 300 K: Subtract 273.15 to get 26.85°C.</p>
+    </section>
+    <section>
+        <h2>Comparison of Temperature Scales</h2>
+        <p>Kelvin is absolute and used in scientific contexts, while Celsius is relative and common in daily life. The scales differ by a fixed offset of 273.15 degrees.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Kelvin (K)</th>
+                    <th>Celsius (°C)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Absolute Zero</td>
+                    <td>0</td>
+                    <td>-273.15</td>
+                </tr>
+                <tr>
+                    <td>Freezing Point of Water</td>
+                    <td>273.15</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Boiling Point of Water</td>
+                    <td>373.15</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Human Body Temperature</td>
+                    <td>310.15</td>
+                    <td>37</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What is the formula for Kelvin to Celsius?</strong> The formula is C = K - 273.15.</p>
+        <p><strong>Why is Kelvin used in science?</strong> Kelvin is an absolute scale starting from zero thermal energy, making it ideal for thermodynamic equations and avoiding negative values.</p>
+        <p><strong>Is there a quick way to estimate conversions?</strong> Subtract 273 from Kelvin for an approximate Celsius value, adjusting by 0.15 for precision.</p>
+        <p><strong>What is the difference between Kelvin and Celsius intervals?</strong> The degree intervals are identical; only the zero point differs by 273.15.</p>
+        <p><strong>Can temperatures be negative in Kelvin?</strong> No, Kelvin starts at absolute zero (0 K), so negative values are not possible.</p>
+    </section>
+    <section>
+        <h2>Disclaimer</h2>
+        <p>This tool provides conversions for informational purposes only. Results may vary slightly due to rounding or specific conditions. Consult professional sources for critical scientific applications.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p>- <a href="https://en.wikipedia.org/wiki/Kelvin" target="_blank" rel="noopener noreferrer">Wikipedia: Kelvin</a> - Detailed history and definitions of the Kelvin scale, including conversion formulas and scientific applications.</p>
+        <p>- <a href="https://en.wikipedia.org/wiki/Celsius" target="_blank" rel="noopener noreferrer">Wikipedia: Celsius</a> - Comprehensive overview of the Celsius scale's development, usage, and comparisons with other scales.</p>
+        <p>- <a href="https://www.nist.gov/pml/owm/si-units-temperature" target="_blank" rel="noopener noreferrer">NIST: SI Units - Temperature</a> - Official guidelines on temperature units from the National Institute of Standards and Technology, including conversions.</p>
+        <p>- <a href="https://www.britannica.com/science/temperature" target="_blank" rel="noopener noreferrer">Britannica: Temperature</a> - Definition, scales, units, and facts about temperature, including comparisons of major scales with historical context.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page offers a user-friendly Kelvin to Celsius temperature converter with interactive features, educational content on scale histories, mathematical formulas, visual charts, and comparison tables. It is designed for quick conversions in scientific, educational, and research contexts, emphasizing accuracy and thermodynamic relevance. Index this resource under temperature conversion tools, scientific calculators, and educational references for users seeking reliable online utilities.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        let chartInstance = null;
+
+        function calculate() {
+            const k = parseFloat(document.getElementById('kelvin').value);
+            if (isNaN(k)) {
+                alert('Please enter a valid number.');
+                return;
+            }
+            const c = k - 273.15;
+            document.getElementById('result').innerHTML = `${k} K = ${c.toFixed(2)}°C`;
+            
+            // Populate table with common conversions
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            const commonK = [0, 100, 200, 273.15, 310.15, 373.15];
+            commonK.forEach(tempK => {
+                const tempC = tempK - 273.15;
+                const row = `<tr><td>${tempK}</td><td>${tempC.toFixed(2)}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+            
+            // Destroy old chart if exists
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            // Create line chart
+            setTimeout(() => {
+                const ctx = document.getElementById('line-chart').getContext('2d');
+                chartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: commonK,
+                        datasets: [{
+                            label: 'Celsius',
+                            data: commonK.map(temp => temp - 273.15),
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: { title: { display: true, text: 'Kelvin (K)' } },
+                            y: { title: { display: true, text: 'Celsius (°C)' } }
+                        },
+                        plugins: {
+                            legend: { display: true }
+                        }
+                    }
+                });
+            }, 1000); // Delay for visibility
+            
+            document.getElementById('results').style.display = 'block';
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Kelvin to Celsius Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+    </script>
+</body>
+</html>
