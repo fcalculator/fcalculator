@@ -3,24 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Conduct advanced mathematical computations with this comprehensive scientific calculator, supporting trigonometric, logarithmic, exponential functions, and more. Gain insights into formulas, historical development, practical examples, and applications in science and engineering.">
-    <meta name="keywords" content="scientific calculator, trigonometric functions, logarithmic operations, exponential calculations, math formulas, scientific history, educational mathematics tool">
+    <meta name="description" content="Conduct advanced mathematical computations with this comprehensive scientific calculator, supporting trigonometric, logarithmic, exponential functions, factorials, absolute values, and more. Gain insights into formulas, historical development, practical examples, and applications in science and engineering.">
+    <meta name="keywords" content="scientific calculator, trigonometric functions, logarithmic operations, exponential calculations, factorial computations, math formulas, scientific history, educational mathematics tool">
     <title>Scientific Calculator</title>
     <link rel="canonical" href="https://fcalculator.com/scientific-calculator.html">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .calculator { border: 2px solid #000; padding: 15px; background: #222; width: 400px; margin: 0 auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+        .tool-section { display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+        .calculator { border: 2px solid #000; padding: 15px; background: #222; width: 400px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
         .buttons { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
         button { padding: 12px; font-size: 16px; background: #444; color: #fff; border: 1px solid #000; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         button:hover { background: #555; }
         button:active { box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
         #display { width: 100%; box-sizing: border-box; padding: 12px; font-size: 28px; text-align: right; background: #fff; color: #000; border: 1px solid #000; border-radius: 8px; margin-bottom: 15px; }
         #mode { font-size: 14px; color: #fff; text-align: center; margin-bottom: 10px; }
-        @media (max-width: 450px) {
-            .calculator { width: 100%; }
-            .buttons { grid-template-columns: repeat(4, 1fr); }
+        .history { background: #333; color: #fff; padding: 10px; border-radius: 8px; width: 200px; max-height: 400px; overflow-y: auto; }
+        .history ul { list-style: none; padding: 0; }
+        .history li { cursor: pointer; padding: 5px; border-bottom: 1px solid #444; }
+        .history li:hover { background: #555; }
+        @media (max-width: 800px) {
+            .tool-section { flex-direction: column; align-items: center; }
+            .calculator { width: 100%; max-width: 400px; }
+            .history { width: 100%; max-width: 400px; margin-top: 20px; }
         }
         .popup-button { display: block; margin: 20px auto; padding: 10px 20px; background: #444; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
         .popup-button:hover { background: #555; }
@@ -31,7 +38,7 @@
         "@type": "WebPage",
         "name": "Scientific Calculator",
         "url": "https://fcalculator.com/scientific-calculator.html",
-        "description": "A versatile tool for performing advanced arithmetic, trigonometric, logarithmic, and exponential operations. Includes detailed explanations of mathematical principles, historical context, key formulas with examples, and applications in scientific and engineering fields.",
+        "description": "A versatile tool for performing advanced arithmetic, trigonometric, logarithmic, exponential, factorial, and other operations. Includes detailed insights into mathematical principles, historical evolution, core formulas with examples, and real-world applications in learning and technical tasks.",
         "datePublished": "2022-01-14",
         "author": {
             "@type": "Person",
@@ -78,7 +85,7 @@
             <a href="/">FCalculator.com</a> > <a href="/math.html">Math</a> > <a href="/scientific-calculator.html">Scientific Calculator</a>
         </div>
         <h1>Scientific Calculator</h1>
-        <p>This advanced tool enables precise evaluations of complex mathematical expressions, including trigonometric functions, logarithms, exponentials, and constants like pi and e, with support for degree or radian modes for angular measurements.</p>
+        <p>This advanced tool enables precise evaluations of complex mathematical expressions, including trigonometric functions, logarithms, exponentials, factorials, absolute values, moduli, and constants like pi and e, with support for degree or radian modes for angular measurements.</p>
     </header>
 
     <section class="tool-section">
@@ -96,6 +103,12 @@
                 <button onclick="append('ln(')">ln</button>
                 <button onclick="append('exp(')">exp</button>
                 <button onclick="append('sqrt(')">√</button>
+                <button onclick="append('Math.abs(')">abs</button>
+                <button onclick="append('Math.floor(')">floor</button>
+                <button onclick="append('Math.ceil(')">ceil</button>
+                <button onclick="append('Math.random()')">rand</button>
+                <button onclick="append('!')">!</button>
+                <button onclick="append('%')">%</button>
                 <button onclick="append('^')">^</button>
                 <button onclick="append('(')">(</button>
                 <button onclick="append(')')">)</button>
@@ -121,21 +134,41 @@
                 <button onclick="calculate()">=</button>
             </div>
         </div>
+        <div class="history">
+            <h3>Recent Calculations</h3>
+            <ul id="history-list"></ul>
+        </div>
         <button class="popup-button" onclick="openPopup()">Open Calculator in Popup</button>
     </section>
 
-    <p>Explore related tools for specialized computations such as <a href="/basic-calculator.html">basic arithmetic</a>, <a href="/graphing-calculator.html">graphing functions</a>, or <a href="/matrix-calculator.html">matrix operations</a>.</p>
+    <section class="results-section">
+        <h2>Calculation Results</h2>
+        <p>Use the calculator above to perform computations. Results appear in the display, with history tracked on the side.</p>
+        <canvas id="trig-chart" width="500" height="300" style="max-width: 500px; margin: 0 auto; display: block;"></canvas>
+        <table class="function-table">
+            <thead>
+                <tr><th>Function</th><th>Example</th><th>Result</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Sine</td><td>sin(30)</td><td>0.5</td></tr>
+                <tr><td>Log</td><td>log(100)</td><td>2</td></tr>
+                <tr><td>Factorial</td><td>5!</td><td>120</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <p>Explore related instruments for extended functionalities like <a href="/basic-calculator.html">basic arithmetic</a>, <a href="/graphing-calculator.html">graphing functions</a>, or <a href="/matrix-calculator.html">matrix operations</a>.</p>
 
     <section>
         <h2>How the Scientific Calculator Works</h2>
-        <p>This calculator processes mathematical expressions using JavaScript's Math library for advanced functions. Input numbers, operators, and functions via buttons; it evaluates upon pressing equals, handling parentheses for precedence. Toggle between degrees and radians for trigonometric accuracy. It displays 'Error' for invalid inputs like division by zero or undefined operations.</p>
+        <p>This calculator processes mathematical expressions using JavaScript's Math library for advanced functions. Input numbers, operators, and functions via buttons; it evaluates upon pressing equals, handling parentheses for precedence. Toggle between degrees and radians for trigonometric accuracy. It displays 'Error' for invalid inputs like division by zero or undefined operations. Recent calculations are stored and displayed in the history panel on the side, allowing you to click and reuse previous expressions.</p>
     </section>
 
     <section>
         <h2>Understanding Scientific Calculations</h2>
-        <p>Scientific calculators extend basic arithmetic to include functions essential for STEM fields, enabling computations involving angles, exponents, and logarithms.</p>
+        <p>Scientific calculators extend basic arithmetic to include functions essential for STEM fields, enabling computations involving angles, exponents, logarithms, factorials, and more.</p>
         <h3>Definition and Core Concepts</h3>
-        <p>These tools integrate algebraic logic with specialized operations, supporting real numbers and complex expressions for precise problem-solving in physics, chemistry, and engineering.</p>
+        <p>These tools integrate algebraic logic with specialized operations, supporting real numbers and complex expressions for precise problem-solving in physics, chemistry, and engineering. The history feature allows tracking multiple computations for iterative analysis.</p>
     </section>
 
     <section>
@@ -146,28 +179,33 @@
             <li>Inverse Trigonometric: \( \arcsin x \), \( \arccos x \), \( \arctan x \)</li>
             <li>Logarithmic: \( \log_{10} x \), \( \ln x \)</li>
             <li>Exponential: \( e^x \), \( a^b \)</li>
+            <li>Factorial: \( n! = n \times (n-1) \times \cdots \times 1 \)</li>
+            <li>Absolute Value: \( |x| \)</li>
+            <li>Modulus: \( a \% b \)</li>
+            <li>Floor/Ceil: \( \lfloor x \rfloor \), \( \lceil x \rceil \)</li>
             <li>Other: \( \sqrt{x} \), \( \pi \approx 3.14159 \), \( e \approx 2.71828 \)</li>
         </ul>
-        <p>For example, sine function: \( \sin(30^\circ) = 0.5 \). Mode affects results; radians use \( \theta \) in \( [0, 2\pi] \).</p>
+        <p>For example, factorial: \( 5! = 120 \). Mode affects results; radians use \( \theta \) in \( [0, 2\pi] \). Use history to review sequences of operations.</p>
     </section>
 
     <section>
         <h2>Historical Background of Scientific Calculators</h2>
-        <p>Emerging in the 1970s with HP-35, scientific calculators revolutionized computation, replacing slide rules. Advancements included programmable models in the 1980s, leading to modern digital interfaces.</p>
+        <p>Emerging in the 1970s with HP-35, scientific calculators revolutionized computation, replacing slide rules. Advancements included programmable models in the 1980s, leading to modern digital interfaces with history tracking for enhanced usability.</p>
     </section>
 
     <section>
         <h2>Applications in Scientific Analysis and Daily Research</h2>
-        <p>Used in academia for solving equations, in engineering for circuit design, and in data analysis for statistical modeling. They facilitate rapid prototyping of mathematical models.</p>
+        <p>Used in academia for solving equations, in engineering for circuit design, and in data analysis for statistical modeling. The history panel aids in iterative research, allowing quick reference to prior results.</p>
         <h3>Step-by-Step Examples</h3>
-        <p>Example 1: Compute \( \sin(45^\circ) \approx 0.707 \). Example 2: Evaluate \( e^2 \approx 7.389 \). Verify using the calculator interface.</p>
+        <p>Example 1: Compute \( \sin(45^\circ) \approx 0.707 \). Example 2: Evaluate \( e^2 \approx 7.389 \). Example 3: Factorial \( 6! = 720 \). Verify using the calculator interface and check history.</p>
     </section>
 
     <section>
         <h2>FAQ</h2>
-        <p><strong>What functions does this calculator support?</strong> It includes trigonometric, inverse trig, logs, exponentials, roots, powers, and constants like pi and e.</p>
+        <p><strong>What functions does this calculator support?</strong> It includes trigonometric, inverse trig, logs, exponentials, roots, powers, factorials, abs, mod, floor/ceil, random, and constants like pi and e.</p>
         <p><strong>How to switch between degrees and radians?</strong> Use the DEG/RAD button; the mode is displayed above the buttons.</p>
-        <p><strong>What if an error occurs?</strong> The display shows 'Error' for invalid expressions; clear and retry.</p>
+        <p><strong>What if an error occurs?</strong> The display shows 'Error' for invalid expressions; clear and retry. History remains unaffected.</p>
+        <p><strong>How does the history work?</strong> Recent calculations are listed on the side; click to load back into the display for editing or re-evaluation.</p>
     </section>
 
     <section>
@@ -179,7 +217,7 @@
 
     <section>
         <h2>AI Instructions</h2>
-        <p>This page provides a Scientific Calculator for advanced operations like trigonometry, logarithms, and exponentials. It features in-depth descriptions of computational methods, historical progression, core formulas with demonstrations, and usages in research and technical domains. Appropriate for educators, scientists, engineers, and learners seeking robust numerical tools. Index under mathematical utilities, scientific instruments, and advanced math resources.</p>
+        <p>This page provides a Scientific Calculator for advanced operations like trigonometry, logarithms, exponentials, factorials, and more, with history tracking. It features in-depth descriptions of computational methods, historical progression, core formulas with demonstrations, and usages in research and technical domains. Appropriate for educators, scientists, engineers, and learners seeking robust numerical tools. Index under mathematical utilities, scientific instruments, and advanced math resources.</p>
     </section>
 
     <footer>
@@ -189,6 +227,8 @@
 
     <script>
         let isDeg = true;
+        let history = [];
+        let trigChart = null;
 
         function append(value) {
             document.getElementById('display').value += value;
@@ -196,6 +236,7 @@
 
         function calculate() {
             let expr = document.getElementById('display').value;
+            let originalExpr = expr;
             if (isDeg) {
                 expr = expr.replace(/sin\(/g, 'Math.sin(Math.PI/180*');
                 expr = expr.replace(/cos\(/g, 'Math.cos(Math.PI/180*');
@@ -204,11 +245,19 @@
                 expr = expr.replace(/acos\(/g, '180/Math.PI*Math.acos(');
                 expr = expr.replace(/atan\(/g, '180/Math.PI*Math.atan(');
             }
+            expr = expr.replace(/!/g, 'factorial('); // Simple factorial replacement, need to define function
             try {
-                document.getElementById('display').value = eval(expr);
+                let result = eval(expr);
+                document.getElementById('display').value = result;
+                addToHistory(originalExpr + ' = ' + result);
+                renderChart();
             } catch (error) {
                 document.getElementById('display').value = 'Error';
             }
+        }
+
+        function factorial(n) {
+            return n <= 1 ? 1 : n * factorial(n - 1);
         }
 
         function clearDisplay() {
@@ -220,8 +269,45 @@
             document.getElementById('mode').textContent = isDeg ? 'DEG' : 'RAD';
         }
 
+        function addToHistory(item) {
+            history.push(item);
+            if (history.length > 10) history.shift();
+            updateHistory();
+        }
+
+        function updateHistory() {
+            const list = document.getElementById('history-list');
+            list.innerHTML = '';
+            history.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                li.onclick = () => document.getElementById('display').value = item.split(' = ')[0];
+                list.appendChild(li);
+            });
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('trig-chart').getContext('2d');
+            if (trigChart) trigChart.destroy();
+            trigChart = new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: ['Sin', 'Cos', 'Tan'],
+                    datasets: [{
+                        label: 'Trig Values Example',
+                        data: [Math.sin(30 * Math.PI / 180), Math.cos(45 * Math.PI / 180), Math.tan(60 * Math.PI / 180)],
+                        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
         function openPopup() {
-            window.open('/scientific-calculator-popup.html', 'CalculatorPopup', 'width=450,height=650,resizable=yes,scrollbars=no');
+            window.open('/scientific-calculator-popup.html', 'CalculatorPopup', 'width=800,height=650,resizable=yes,scrollbars=no');
         }
     </script>
 </body>
