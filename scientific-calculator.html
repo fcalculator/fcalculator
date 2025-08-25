@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .tool-section { display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
         .calculator { border: 2px solid #000; padding: 15px; background: #222; width: 400px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
@@ -141,23 +140,7 @@
         <button class="popup-button" onclick="openPopup()">Open Calculator in Popup</button>
     </section>
 
-    <section class="results-section">
-        <h2>Calculation Results</h2>
-        <p>Use the calculator above to perform computations. Results appear in the display, with history tracked on the side.</p>
-        <canvas id="trig-chart" width="500" height="300" style="max-width: 500px; margin: 0 auto; display: block;"></canvas>
-        <table class="function-table">
-            <thead>
-                <tr><th>Function</th><th>Example</th><th>Result</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Sine</td><td>sin(30)</td><td>0.5</td></tr>
-                <tr><td>Log</td><td>log(100)</td><td>2</td></tr>
-                <tr><td>Factorial</td><td>5!</td><td>120</td></tr>
-            </tbody>
-        </table>
-    </section>
-
-    <p>Explore related instruments for extended functionalities like <a href="/basic-calculator.html">basic arithmetic</a>, <a href="/graphing-calculator.html">graphing functions</a>, or <a href="/matrix-calculator.html">matrix operations</a>.</p>
+    <p>Explore related tools for specialized computations such as <a href="/basic-calculator.html">basic arithmetic</a>, <a href="/graphing-calculator.html">graphing functions</a>, or <a href="/matrix-calculator.html">matrix operations</a>.</p>
 
     <section>
         <h2>How the Scientific Calculator Works</h2>
@@ -228,7 +211,6 @@
     <script>
         let isDeg = true;
         let history = [];
-        let trigChart = null;
 
         function append(value) {
             document.getElementById('display').value += value;
@@ -245,12 +227,11 @@
                 expr = expr.replace(/acos\(/g, '180/Math.PI*Math.acos(');
                 expr = expr.replace(/atan\(/g, '180/Math.PI*Math.atan(');
             }
-            expr = expr.replace(/!/g, 'factorial('); // Simple factorial replacement, need to define function
+            expr = expr.replace(/!/g, 'factorial(');
             try {
                 let result = eval(expr);
                 document.getElementById('display').value = result;
                 addToHistory(originalExpr + ' = ' + result);
-                renderChart();
             } catch (error) {
                 document.getElementById('display').value = 'Error';
             }
@@ -283,26 +264,6 @@
                 li.textContent = item;
                 li.onclick = () => document.getElementById('display').value = item.split(' = ')[0];
                 list.appendChild(li);
-            });
-        }
-
-        function renderChart() {
-            const ctx = document.getElementById('trig-chart').getContext('2d');
-            if (trigChart) trigChart.destroy();
-            trigChart = new Chart(ctx, {
-                type: 'polarArea',
-                data: {
-                    labels: ['Sin', 'Cos', 'Tan'],
-                    datasets: [{
-                        label: 'Trig Values Example',
-                        data: [Math.sin(30 * Math.PI / 180), Math.cos(45 * Math.PI / 180), Math.tan(60 * Math.PI / 180)],
-                        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
             });
         }
 
