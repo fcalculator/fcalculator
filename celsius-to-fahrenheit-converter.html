@@ -9,11 +9,9 @@
     <link rel="canonical" href="https://fcalculator.com/celsius-to-fahrenheit-converter.html">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
-    <!-- Dodatni scripts za funkcionalnost: Chart.js za chart, MathJax za formule, jsPDF i autotable za PDF -->
+    <!-- Dodatni scripts za funkcionalnost: Chart.js za chart, MathJax za formule -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf-autotable.min.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -76,11 +74,10 @@
                     </div>
                 </fieldset>
             </div>
-            <button type="button" onclick="calculate()">Calculate</button>
+            <button type="button" onclick="calculate()">Convert</button>
         </form>
     </section>
     <section class="results-section" id="results" style="display:none;">
-        <h2>Calculation Results</h2>
         <p id="result"></p>
         <canvas id="line-chart" width="500" height="300"></canvas>
         <table id="conversion-table">
@@ -94,13 +91,12 @@
                 <!-- Populated by JS -->
             </tbody>
         </table>
-        <button onclick="saveAsPDF()">Save as PDF</button>
         <button onclick="sharePage()">Share</button>
     </section>
     <p>Explore similar tools like our <a href="/fahrenheit-to-celsius-converter.html">Fahrenheit to Celsius Converter</a> or <a href="/kelvin-to-celsius-converter.html">Kelvin to Celsius Converter</a> for comprehensive temperature analysis.</p>
     <section>
         <h2>How to Use the Celsius to Fahrenheit Converter</h2>
-        <p>Enter a temperature value in degrees Celsius into the input field. Click the "Calculate" button to instantly convert it to Fahrenheit. The tool uses the standard formula for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for travelers, scientists, and anyone dealing with international temperature standards.</p>
+        <p>Enter a temperature value in degrees Celsius into the input field. Click the "Convert" button to instantly convert it to Fahrenheit. The tool uses the standard formula for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for travelers, scientists, and anyone dealing with international temperature standards.</p>
     </section>
     <section>
         <h2>Understanding the Celsius Scale</h2>
@@ -198,7 +194,7 @@
                 return;
             }
             const f = (c * 9/5) + 32;
-            document.getElementById('result').innerHTML = `Fahrenheit: ${f.toFixed(2)}°F`;
+            document.getElementById('result').innerHTML = `${c}°C = ${f.toFixed(2)}°F`;
             
             // Populate table with common conversions
             const tableBody = document.querySelector('#conversion-table tbody');
@@ -242,40 +238,6 @@
             }, 1000); // Delay for visibility
             
             document.getElementById('results').style.display = 'block';
-        }
-
-        function saveAsPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            doc.setFontSize(16);
-            doc.text('Celsius to Fahrenheit Conversion Results', doc.internal.pageSize.width / 2, 20, { align: 'center' });
-            
-            // Add input and result
-            const c = document.getElementById('celsius').value;
-            const f = document.getElementById('result').textContent;
-            doc.setFontSize(12);
-            doc.text(`Input Celsius: ${c}°C`, 20, 40);
-            doc.text(f, 20, 50);
-            
-            // Add table
-            doc.autoTable({
-                head: [['Celsius (°C)', 'Fahrenheit (°F)']],
-                body: Array.from(document.querySelectorAll('#conversion-table tbody tr')).map(row => [row.cells[0].textContent, row.cells[1].textContent]),
-                startY: 60,
-                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
-                alternateRowStyles: { fillColor: [245, 245, 245] },
-                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
-            });
-            
-            // Footer
-            doc.addPage(); // If needed, but for single page
-            doc.setFontSize(10);
-            doc.setTextColor(100);
-            doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
-            doc.setTextColor(0, 0, 255);
-            doc.textWithLink('https://fcalculator.com/celsius-to-fahrenheit-converter.html', doc.internal.pageSize.width / 2 - 50, doc.internal.pageSize.height - 20, { url: 'https://fcalculator.com/celsius-to-fahrenheit-converter.html' });
-            
-            doc.save('celsius-to-fahrenheit-conversion.pdf');
         }
 
         function sharePage() {
