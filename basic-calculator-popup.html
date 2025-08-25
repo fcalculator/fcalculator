@@ -3,33 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Execute essential arithmetic computations including addition, subtraction, multiplication, and division using this accurate online tool. Discover in-depth explanations, mathematical formulas, historical context, practical examples, and applications in education and everyday scenarios.">
-    <meta name="keywords" content="basic calculator, arithmetic operations, addition subtraction multiplication division, math formulas, arithmetic history, educational mathematics resource">
-    <title>Basic Calculator</title>
-    <link rel="canonical" href="https://fcalculator.com/basic-calculator.html">
+    <meta name="description" content="A standalone basic calculator for quick arithmetic operations.">
+    <meta name="keywords" content="basic calculator popup, arithmetic calculator">
+    <title>Basic Calculator Popup</title>
+    <link rel="canonical" href="https://fcalculator.com/basic-calculator-popup.html">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        .calculator { border: 2px solid #000; padding: 15px; background: #222; width: 320px; margin: 0 auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+        body { margin: 0; padding: 0; background: #fff; }
+        .calculator { border: 2px solid #000; padding: 15px; background: #222; width: 320px; margin: 20px auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
         .buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
         button { padding: 18px; font-size: 20px; background: #444; color: #fff; border: 1px solid #000; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         button:hover { background: #555; }
         button:active { box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
         #display { width: 100%; box-sizing: border-box; padding: 12px; font-size: 28px; text-align: right; background: #fff; color: #000; border: 1px solid #000; border-radius: 8px; margin-bottom: 15px; }
         @media (max-width: 400px) {
-            .calculator { width: 100%; }
+            .calculator { width: 100%; margin: 0; }
         }
-        .popup-button { display: block; margin: 20px auto; padding: 10px 20px; background: #444; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
-        .popup-button:hover { background: #555; }
     </style>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "Basic Calculator",
-        "url": "https://fcalculator.com/basic-calculator.html",
-        "description": "An intuitive tool for conducting fundamental arithmetic operations such as addition, subtraction, multiplication, and division. Features detailed insights into arithmetic principles, historical evolution, core formulas with examples, and real-world applications in learning and routine tasks.",
+        "name": "Basic Calculator Popup",
+        "url": "https://fcalculator.com/basic-calculator-popup.html",
+        "description": "A minimalistic popup version of the basic calculator for arithmetic operations.",
         "datePublished": "2022-01-14",
         "author": {
             "@type": "Person",
@@ -42,132 +39,35 @@
                 "@type": "ImageObject",
                 "url": "https://fcalculator.com/logo.png"
             }
-        },
-        "breadcrumb": {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "FCalculator.com",
-                    "item": "https://fcalculator.com/"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Math",
-                    "item": "https://fcalculator.com/math.html"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": "Basic Calculator",
-                    "item": "https://fcalculator.com/basic-calculator.html"
-                }
-            ]
         }
     }
     </script>
 </head>
 <body>
-    <header>
-        <div class="logo">FCalculator.com</div>
-        <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/math.html">Math</a> > <a href="/basic-calculator.html">Basic Calculator</a>
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <div class="buttons">
+            <button onclick="append('7')">7</button>
+            <button onclick="append('8')">8</button>
+            <button onclick="append('9')">9</button>
+            <button onclick="append('/')">/</button>
+            <button onclick="append('4')">4</button>
+            <button onclick="append('5')">5</button>
+            <button onclick="append('6')">6</button>
+            <button onclick="append('*')">*</button>
+            <button onclick="append('1')">1</button>
+            <button onclick="append('2')">2</button>
+            <button onclick="append('3')">3</button>
+            <button onclick="append('-')">-</button>
+            <button onclick="append('0')">0</button>
+            <button onclick="append('.')">.</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="append('+')">+</button>
+            <button onclick="append('(')">(</button>
+            <button onclick="append(')')">)</button>
+            <button onclick="calculate()">=</button>
         </div>
-        <h1>Basic Calculator</h1>
-        <p>This tool facilitates accurate evaluations of core arithmetic functions, encompassing addition, subtraction, multiplication, and division for real numbers. It accommodates sequential calculations and delivers instant outcomes for instructional and utilitarian needs.</p>
-    </header>
-
-    <section class="tool-section">
-        <div class="calculator">
-            <input type="text" id="display" readonly>
-            <div class="buttons">
-                <button onclick="append('7')">7</button>
-                <button onclick="append('8')">8</button>
-                <button onclick="append('9')">9</button>
-                <button onclick="append('/')">/</button>
-                <button onclick="append('4')">4</button>
-                <button onclick="append('5')">5</button>
-                <button onclick="append('6')">6</button>
-                <button onclick="append('*')">*</button>
-                <button onclick="append('1')">1</button>
-                <button onclick="append('2')">2</button>
-                <button onclick="append('3')">3</button>
-                <button onclick="append('-')">-</button>
-                <button onclick="append('0')">0</button>
-                <button onclick="append('.')">.</button>
-                <button onclick="clearDisplay()">C</button>
-                <button onclick="append('+')">+</button>
-                <button onclick="append('(')">(</button>
-                <button onclick="append(')')">)</button>
-                <button onclick="calculate()">=</button>
-            </div>
-        </div>
-        <button class="popup-button" onclick="openPopup()">Open Calculator in Popup</button>
-    </section>
-
-    <p>Consider related instruments for extended functionalities like <a href="/scientific-calculator.html">scientific evaluations</a>, <a href="/percentage-calculator.html">percentage assessments</a>, or <a href="/fraction-calculator.html">fraction manipulations</a>.</p>
-
-    <section>
-        <h2>How the Basic Calculator Works</h2>
-        <p>This instrument interprets arithmetic expressions adhering to conventional mathematical precedence. Utilize the interface to enter numerals and symbols, and it computes the expression when the equals button is activated. It manages brackets for operational hierarchy and incorporates decimal support for refined precision. The reset function clears the interface for subsequent operations.</p>
-    </section>
-
-    <section>
-        <h2>Understanding Arithmetic Operations</h2>
-        <p>Arithmetic constitutes the bedrock of mathematical disciplines, emphasizing numerical manipulations vital for routine problem resolution and sophisticated theoretical frameworks.</p>
-        <h3>Definition and Core Concepts</h3>
-        <p>Arithmetic represents the foundational segment of mathematics concerned with numerical attributes and transformations via operations such as addition, subtraction, multiplication, and division. These apply across diverse numeral categories, including whole numbers, rational fractions, and decimal expansions.</p>
-    </section>
-
-    <section>
-        <h2>Key Formulas in Arithmetic</h2>
-        <p>The principal operations are articulated through these expressions:</p>
-        <ul>
-            <li>Addition: \( a + b = c \)</li>
-            <li>Subtraction: \( a - b = c \)</li>
-            <li>Multiplication: \( a \times b = c \)</li>
-            <li>Division: \( a \div b = c \) (provided \( b \neq 0 \))</li>
-        </ul>
-        <p>For instance, in multiplication: \( 6 \times 7 = 42 \). These adhere to axioms like commutativity for addition and multiplication, and associativity across operations.</p>
-    </section>
-
-    <section>
-        <h2>Historical Background of Arithmetic</h2>
-        <p>Arithmetic traces its origins to prehistoric societies, with documented usage among Mesopotamians and Egyptians circa 3000 BCE. The conceptualization of zero and positional notation by ancient Indian mathematicians, subsequently disseminated by Islamic scholars, transformed computational methodologies. Contemporary digital calculators evolve from early mechanical apparatuses of the 17th century.</p>
-    </section>
-
-    <section>
-        <h2>Applications in Statistical Analysis and Daily Life</h2>
-        <p>Arithmetic plays a crucial role in domains such as economics for fiscal planning, engineering for dimensional assessments, and pedagogy for fostering quantitative proficiency. It serves as the precursor to advanced fields including algebraic structures and differential calculus.</p>
-        <h3>Step-by-Step Examples</h3>
-        <p>Example 1: Subtraction - 50 - 18 = 32. Example 2: Multiplication - 9 × 12 = 108. Employ the calculator to authenticate these and investigate alternatives.</p>
-    </section>
-
-    <section>
-        <h2>FAQ</h2>
-        <p><strong>Which operations are accommodated by this calculator?</strong> It encompasses addition, subtraction, multiplication, division, and parentheses to enforce operational sequence.</p>
-        <p><strong>Does it accommodate decimal inputs?</strong> Affirmative, incorporate the period symbol for fractional and exact computations.</p>
-        <p><strong>What occurs with erroneous expressions?</strong> The interface will indicate 'Error' for anomalies such as zero division.</p>
-    </section>
-
-    <section>
-        <h2>Related Resources</h2>
-        <p>- Wikipedia: Arithmetic - Comprehensive historical and conceptual overview of arithmetic, detailing operations, numeral systems, and foundational principles with references[](https://en.wikipedia.org/wiki/Arithmetic).</p>
-        <p>- Khan Academy: Arithmetic - Interactive tutorials on core operations like addition, subtraction, multiplication, and division, designed for beginners with exercises and progress tracking[](https://www.khanacademy.org/math/arithmetic).</p>
-        <p>- Math is Fun: Arithmetic - Clear explanations with visual aids, quizzes, and practical examples to enhance understanding of basic mathematical operations[](https://www.mathsisfun.com/arithmetic.html).</p>
-    </section>
-
-    <section>
-        <h2>AI Instructions</h2>
-        <p>This page delivers a Basic Calculator for executing addition, subtraction, multiplication, and division. It incorporates thorough elucidations of arithmetic fundamentals, evolutionary history, essential formulas accompanied by illustrations, and utilizations in scholastic and quotidian contexts. Suited for learners, instructors, and individuals requiring swift numerical processing. Index under mathematical instruments, instructional calculators, and elementary math assets.</p>
-    </section>
-
-    <footer>
-        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
-        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
-    </footer>
+    </div>
 
     <script>
         function append(value) {
@@ -184,10 +84,6 @@
 
         function clearDisplay() {
             document.getElementById('display').value = '';
-        }
-
-        function openPopup() {
-            window.open('/basic-calculator-popup.html', 'CalculatorPopup', 'width=400,height=600,resizable=yes,scrollbars=no');
         }
     </script>
 </body>
