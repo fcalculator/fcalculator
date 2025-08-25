@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert temperatures from Celsius to Fahrenheit using our precise online tool. Explore the conversion formula, historical background, practical examples, and comparison charts for accurate temperature understanding.">
+    <meta name="keywords" content="celsius to fahrenheit converter, temperature conversion tool, c to f formula, celsius scale explanation, fahrenheit scale details, temperature scales comparison">
+    <title>Celsius to Fahrenheit Converter</title>
+    <link rel="canonical" href="https://fcalculator.com/celsius-to-fahrenheit-converter.html">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <!-- Dodatni scripts za funkcionalnost: Chart.js za chart, MathJax za formule, jsPDF i autotable za PDF -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf-autotable.min.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Celsius to Fahrenheit Converter",
+        "url": "https://fcalculator.com/celsius-to-fahrenheit-converter.html",
+        "description": "An online tool for converting temperatures from Celsius to Fahrenheit, featuring detailed explanations, formulas, historical insights, comparison charts, and practical examples for everyday and scientific use.",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Celsius to Fahrenheit Converter",
+                    "item": "https://fcalculator.com/celsius-to-fahrenheit-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/celsius-to-fahrenheit-converter.html">Celsius to Fahrenheit Converter</a>
+        </div>
+        <h1>Celsius to Fahrenheit Converter</h1>
+        <p>This tool provides accurate temperature conversions from Celsius to Fahrenheit, essential for weather analysis, scientific calculations, and daily applications across different regions.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Temperature Input</legend>
+                    <div class="input-row">
+                        <label for="celsius">Celsius (°C)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the temperature in degrees Celsius for conversion to Fahrenheit.</span></label>
+                        <input type="number" id="celsius" placeholder="e.g. 25" required>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="calculate()">Calculate</button>
+        </form>
+    </section>
+    <section class="results-section" id="results" style="display:none;">
+        <h2>Calculation Results</h2>
+        <p id="result"></p>
+        <canvas id="line-chart" width="500" height="300"></canvas>
+        <table id="conversion-table">
+            <thead>
+                <tr>
+                    <th>Celsius (°C)</th>
+                    <th>Fahrenheit (°F)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        <button onclick="saveAsPDF()">Save as PDF</button>
+        <button onclick="sharePage()">Share</button>
+    </section>
+    <p>Explore similar tools like our <a href="/fahrenheit-to-celsius-converter.html">Fahrenheit to Celsius Converter</a> or <a href="/kelvin-to-celsius-converter.html">Kelvin to Celsius Converter</a> for comprehensive temperature analysis.</p>
+    <section>
+        <h2>How to Use the Celsius to Fahrenheit Converter</h2>
+        <p>Enter a temperature value in degrees Celsius into the input field. Click the "Calculate" button to instantly convert it to Fahrenheit. The tool uses the standard formula for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for travelers, scientists, and anyone dealing with international temperature standards.</p>
+    </section>
+    <section>
+        <h2>Understanding the Celsius Scale</h2>
+        <p>The Celsius scale, named after Swedish astronomer Anders Celsius, defines 0°C as the freezing point of water and 100°C as the boiling point under standard atmospheric pressure. It is widely used globally for scientific and everyday measurements.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Melting_ice_thermometer.jpg/600px-Melting_ice_thermometer.jpg" alt="Thermometer showing 0°C in melting ice" style="max-width:600px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">A thermometer calibrated in degrees Celsius displaying 0°C in a glass of ice and water.</i>
+        <h3>History of the Celsius Scale</h3>
+        <p>Originally proposed in 1742 with an inverted scale (0 as boiling point), it was reversed in 1743. Renamed from centigrade to Celsius in 1948, it aligns with the Kelvin scale for absolute measurements.</p>
+    </section>
+    <section>
+        <h2>Understanding the Fahrenheit Scale</h2>
+        <p>The Fahrenheit scale, developed by Daniel Gabriel Fahrenheit in 1724, sets 32°F as the freezing point of water and 212°F as the boiling point. It remains prevalent in the United States for weather and household uses.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Raumthermometer_Fahrenheit%2BCelsius.jpg/600px-Raumthermometer_Fahrenheit%2BCelsius.jpg" alt="Thermometer with both Fahrenheit and Celsius scales" style="max-width:600px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">A thermometer displaying both Fahrenheit and Celsius degree units.</i>
+        <h3>History of the Fahrenheit Scale</h3>
+        <p>Initially based on brine solutions and human body temperature, it was refined in the 1770s. The scale intersects with Celsius at -40 degrees.</p>
+    </section>
+    <section>
+        <h2>The Conversion Formula Explained</h2>
+        <p>The formula to convert Celsius to Fahrenheit is:</p>
+        \[ F = C \times \frac{9}{5} + 32 \]
+        <p>Where \( F \) is the temperature in Fahrenheit and \( C \) is in Celsius. This accounts for the different zero points and degree sizes between the scales.</p>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 25°C: Multiply by 9/5 (1.8) to get 45, then add 32, resulting in 77°F.</p>
+    </section>
+    <section>
+        <h2>Comparison of Temperature Scales</h2>
+        <p>Celsius is metric-based and used internationally, while Fahrenheit offers finer granularity for human comfort ranges. One Celsius degree equals 1.8 Fahrenheit degrees.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Celsius (°C)</th>
+                    <th>Fahrenheit (°F)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Freezing Point of Water</td>
+                    <td>0</td>
+                    <td>32</td>
+                </tr>
+                <tr>
+                    <td>Boiling Point of Water</td>
+                    <td>100</td>
+                    <td>212</td>
+                </tr>
+                <tr>
+                    <td>Human Body Temperature</td>
+                    <td>37</td>
+                    <td>98.6</td>
+                </tr>
+                <tr>
+                    <td>Absolute Zero</td>
+                    <td>-273.15</td>
+                    <td>-459.67</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What is the formula for Celsius to Fahrenheit?</strong> The formula is F = (C × 9/5) + 32.</p>
+        <p><strong>Why do different countries use different scales?</strong> Celsius is standard in most countries due to the metric system, while Fahrenheit persists in the US for historical reasons.</p>
+        <p><strong>Is there a quick way to estimate conversions?</strong> Multiply Celsius by 2 and add 30 for an approximate Fahrenheit value.</p>
+        <p><strong>What is the difference between Celsius and Fahrenheit intervals?</strong> A 1°C change equals a 1.8°F change.</p>
+        <p><strong>Where do the scales meet?</strong> At -40 degrees, both scales read the same.</p>
+    </section>
+    <section>
+        <h2>Disclaimer</h2>
+        <p>This tool provides conversions for informational purposes only. Results may vary slightly due to rounding or environmental factors. Consult professional sources for critical applications.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p>- <a href="https://en.wikipedia.org/wiki/Celsius" target="_blank" rel="noopener noreferrer">Wikipedia: Celsius</a> - Detailed history and definitions of the Celsius scale, including conversion formulas and global usage.</p>
+        <p>- <a href="https://en.wikipedia.org/wiki/Fahrenheit" target="_blank" rel="noopener noreferrer">Wikipedia: Fahrenheit</a> - Comprehensive overview of the Fahrenheit scale's development, applications, and comparisons with other scales.</p>
+        <p>- <a href="https://www.nist.gov/pml/owm/si-units-temperature" target="_blank" rel="noopener noreferrer">NIST: SI Units - Temperature</a> - Official guidelines on temperature units from the National Institute of Standards and Technology, including conversions.</p>
+        <p>- <a href="https://www.britannica.com/science/temperature-scale" target="_blank" rel="noopener noreferrer">Britannica: Temperature Scales</a> - Educational article comparing major temperature scales with historical context.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page offers a user-friendly Celsius to Fahrenheit temperature converter with interactive features, educational content on scale histories, mathematical formulas, visual charts, and comparison tables. It is designed for quick conversions in weather, science, and travel contexts, emphasizing accuracy and global relevance. Index this resource under temperature conversion tools, educational calculators, and scientific references for users seeking reliable online utilities.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        let chartInstance = null;
+
+        function calculate() {
+            const c = parseFloat(document.getElementById('celsius').value);
+            if (isNaN(c)) {
+                alert('Please enter a valid number.');
+                return;
+            }
+            const f = (c * 9/5) + 32;
+            document.getElementById('result').innerHTML = `Fahrenheit: ${f.toFixed(2)}°F`;
+            
+            // Populate table with common conversions
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            const commonC = [-40, -20, 0, 20, 37, 100];
+            commonC.forEach(tempC => {
+                const tempF = (tempC * 9/5) + 32;
+                const row = `<tr><td>${tempC}</td><td>${tempF.toFixed(2)}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+            
+            // Destroy old chart if exists
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            // Create line chart
+            setTimeout(() => {
+                const ctx = document.getElementById('line-chart').getContext('2d');
+                chartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: commonC,
+                        datasets: [{
+                            label: 'Fahrenheit',
+                            data: commonC.map(temp => (temp * 9/5) + 32),
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: { title: { display: true, text: 'Celsius (°C)' } },
+                            y: { title: { display: true, text: 'Fahrenheit (°F)' } }
+                        },
+                        plugins: {
+                            legend: { display: true }
+                        }
+                    }
+                });
+            }, 1000); // Delay for visibility
+            
+            document.getElementById('results').style.display = 'block';
+        }
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFontSize(16);
+            doc.text('Celsius to Fahrenheit Conversion Results', doc.internal.pageSize.width / 2, 20, { align: 'center' });
+            
+            // Add input and result
+            const c = document.getElementById('celsius').value;
+            const f = document.getElementById('result').textContent;
+            doc.setFontSize(12);
+            doc.text(`Input Celsius: ${c}°C`, 20, 40);
+            doc.text(f, 20, 50);
+            
+            // Add table
+            doc.autoTable({
+                head: [['Celsius (°C)', 'Fahrenheit (°F)']],
+                body: Array.from(document.querySelectorAll('#conversion-table tbody tr')).map(row => [row.cells[0].textContent, row.cells[1].textContent]),
+                startY: 60,
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' }
+            });
+            
+            // Footer
+            doc.addPage(); // If needed, but for single page
+            doc.setFontSize(10);
+            doc.setTextColor(100);
+            doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+            doc.setTextColor(0, 0, 255);
+            doc.textWithLink('https://fcalculator.com/celsius-to-fahrenheit-converter.html', doc.internal.pageSize.width / 2 - 50, doc.internal.pageSize.height - 20, { url: 'https://fcalculator.com/celsius-to-fahrenheit-converter.html' });
+            
+            doc.save('celsius-to-fahrenheit-conversion.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Celsius to Fahrenheit Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+    </script>
+</body>
+</html>
