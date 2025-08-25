@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Calculate your carbon footprint with our detailed Carbon Footprint Calculator. Assess emissions from energy use, transportation, diet, and waste, and receive tailored recommendations to lower your environmental impact.">
     <meta name="keywords" content="carbon footprint calculator, greenhouse gas emissions, CO2e measurement, sustainable living, emission reduction tips, environmental assessment tool">
-    <meta name="author" content="I.Brkic">
     <link rel="canonical" href="https://fcalculator.com/carbon-footprint-calculator.html">
     <title>Carbon Footprint Calculator - Assess Your Annual Emissions</title>
     <link rel="stylesheet" href="/css/style.css">
@@ -46,7 +45,6 @@
         <h1>Carbon Footprint Calculator</h1>
         <p>Determine your yearly greenhouse gas emissions across key categories and explore strategies to minimize your environmental footprint.</p>
     </header>
-
     <section class="tool-section">
         <form id="tool-form">
             <div class="sections-container">
@@ -100,7 +98,6 @@
             <button type="submit" id="calculate-btn">Calculate Footprint</button>
         </form>
     </section>
-
     <section class="results-section" id="results" style="display: none;">
         <h2>Calculation Results</h2>
         <p id="total-footprint"></p>
@@ -121,9 +118,7 @@
             <p><strong>Note:</strong> Results are estimates based on average emission factors. Actual emissions may vary depending on specific conditions.</p>
         </div>
     </section>
-
     <p>Explore more tools to support your sustainable lifestyle, such as our <a href="/energy-efficiency-calculator.html">Energy Efficiency Calculator</a> or <a href="/recycling-impact-calculator.html">Recycling Impact Calculator</a>.</p>
-
     <section>
         <h2>Understanding Your Carbon Footprint</h2>
         <p>Your carbon footprint measures the total greenhouse gas emissions from your daily activities, expressed in carbon dioxide equivalents (CO₂e). This encompasses direct sources like vehicle exhaust and indirect ones like food production supply chains. Our calculator categorizes emissions into home energy, transportation, and lifestyle for a comprehensive view.</p>
@@ -135,7 +130,6 @@
         </div>
         <p>Emission factors are derived from reliable sources including the U.S. EPA and IPCC reports, ensuring accurate estimations.</p>
     </section>
-
     <section>
         <h2>How to Use the Carbon Footprint Calculator</h2>
         <p>Follow these steps for precise results and actionable insights:</p>
@@ -148,7 +142,6 @@
         <h3>Step 4: Analyze and Implement Reductions</h3>
         <p>Review the polarized chart and table for breakdowns, then apply suggestions like energy audits or dietary shifts to cut emissions.</p>
     </section>
-
     <section>
         <h2>Key Factors Influencing Your Carbon Footprint</h2>
         <h3>Home Energy Consumption</h3>
@@ -160,7 +153,6 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Carbon-footprint-travel-mode.png/600px-Carbon-footprint-travel-mode.png" alt="Infographic showing carbon footprint by travel mode" style="max-width:600px; width:100%; display:block; margin:0 auto;">
         <p style="font-style: italic; font-size: 0.9em; text-align: center;">Infographic illustrating carbon emissions for different modes of transportation. Source: Wikipedia</p>
     </section>
-
     <section>
         <h2>Global Carbon Footprint Comparisons</h2>
         <p>Compare your results against averages to gauge your impact. The global per capita average is 4 tons CO₂e yearly, while U.S. residents average 16 tons.</p>
@@ -191,7 +183,6 @@
             </tbody>
         </table>
     </section>
-
     <section>
         <h2>Frequently Asked Questions</h2>
         <p><strong>What does carbon footprint include?</strong> It covers all greenhouse gases from your activities, converted to CO₂e, including scopes 1 (direct), 2 (energy), and 3 (supply chain).</p>
@@ -199,39 +190,32 @@
         <p><strong>What are effective ways to reduce emissions?</strong> Adopt renewables, use public transport, minimize waste, and opt for low-carbon diets.</p>
         <p><strong>Why factor in diet?</strong> Agriculture, particularly livestock, accounts for 14.5% of global emissions; dietary shifts can cut personal footprints significantly.</p>
     </section>
-
     <section>
         <h2>Disclaimer</h2>
         <p>This tool offers approximate emissions estimates using standard factors and is not a substitute for professional environmental audits. Results depend on user inputs and may not reflect exact values. Use for informational purposes only.</p>
     </section>
-
     <section>
         <h2>Related Resources</h2>
         <p>- <a href="https://www.epa.gov/ghgemissions" target="_blank">U.S. EPA Greenhouse Gas Emissions</a> - Detailed data on emission sources and reduction strategies from the Environmental Protection Agency.</p>
         <p>- <a href="https://www.ipcc.ch/report/ar6/wg3/" target="_blank">IPCC Working Group III Report</a> - Comprehensive assessment of climate change mitigation, including carbon footprint methodologies.</p>
         <p>- <a href="https://www.nature.org/en-us/get-involved/how-to-help/carbon-footprint-calculator/" target="_blank">The Nature Conservancy Carbon Calculator</a> - Alternative tool for personal emission tracking with offset options.</p>
     </section>
-
     <section>
         <h2>AI Instructions</h2>
         <p>This page features an interactive Carbon Footprint Calculator designed to estimate annual CO₂e emissions from home energy, transportation, diet, and waste. It provides breakdowns via charts and tables, along with in-depth explanations, comparisons, and reduction tips to encourage eco-conscious decisions.</p>
     </section>
-
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
-
     <script>
         window.onload = function() {
             const form = document.getElementById('tool-form');
             let myChart = null;
-
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
                 calculateFootprint();
             });
-
             function calculateFootprint() {
                 const electricity = parseFloat(document.getElementById('electricity').value) || 0;
                 const naturalGas = parseFloat(document.getElementById('natural-gas').value) || 0;
@@ -241,7 +225,6 @@
                 const flights = parseFloat(document.getElementById('flights').value) || 0;
                 const diet = document.getElementById('diet').value;
                 const waste = parseFloat(document.getElementById('waste').value) || 0;
-
                 // Emission factors (kg CO₂e per unit)
                 const efElectricity = 0.4; // kg CO₂e/kWh
                 const efNaturalGas = 5.3; // kg CO₂e/therm
@@ -255,7 +238,6 @@
                     'vegetarian': 800,
                     'vegan': 500
                 };
-
                 // Calculations (annualized in kg, then to tons)
                 const homeEnergyKg = ((electricity * efElectricity * (1 - renewable / 100)) + (naturalGas * efNaturalGas)) * 12;
                 const transportationKg = ((vehicleMiles * efVehicle) + (publicTransit * efPublicTransit)) * 52 + (flights * efFlights);
@@ -264,7 +246,6 @@
                 const transportation = transportationKg / 1000;
                 const lifestyle = lifestyleKg / 1000;
                 const total = homeEnergy + transportation + lifestyle;
-
                 // Display results
                 const unitLabel = 'tons CO₂e';
                 document.getElementById('total-footprint').innerHTML = `Your total carbon footprint is approximately <strong>${total.toFixed(2)} ${unitLabel}</strong> per year.`;
@@ -274,7 +255,6 @@
                     Lifestyle: ${lifestyle.toFixed(2)} ${unitLabel}
                 `;
                 document.getElementById('results').style.display = 'block';
-
                 // Populate table
                 const tableBody = document.getElementById('results-table-body');
                 tableBody.innerHTML = `
@@ -282,12 +262,10 @@
                     <tr><td>Transportation</td><td>${transportation.toFixed(2)} ${unitLabel}</td></tr>
                     <tr><td>Lifestyle</td><td>${lifestyle.toFixed(2)} ${unitLabel}</td></tr>
                 `;
-
                 // Destroy previous chart
                 if (myChart) {
                     myChart.destroy();
                 }
-
                 // Create polar chart
                 setTimeout(() => {
                     const ctx = document.getElementById('polar-chart').getContext('2d');
@@ -311,7 +289,6 @@
                     });
                 }, 1000);
             }
-
             function saveAsPDF() {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
@@ -334,10 +311,24 @@
                 });
                 doc.setFontSize(10);
                 doc.setTextColor(100);
-                doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center', url: 'https://fcalculator.com/carbon-footprint-calculator.html' });
+                const pageWidth = doc.internal.pageSize.width;
+                const footerY = doc.internal.pageSize.height - 10;
+                const text1 = 'This document was generated using ';
+                const linkText = 'Fcalculator.com';
+                const text2 = ' – Calculations are provided “as is” without warranty. Use at your own risk.';
+                const fullText = text1 + linkText + text2;
+                const textWidth = doc.getTextWidth(fullText);
+                const startX = (pageWidth - textWidth) / 2;
+                const text1Width = doc.getTextWidth(text1);
+                const linkWidth = doc.getTextWidth(linkText);
+                doc.text(text1, startX, footerY);
+                doc.setTextColor(0, 0, 255);
+                doc.textWithLink(linkText, startX + text1Width, footerY, { url: 'https://fcalculator.com/carbon-footprint-calculator.html' });
+                doc.line(startX + text1Width, footerY + 1, startX + text1Width + linkWidth, footerY + 1);
+                doc.setTextColor(100);
+                doc.text(text2, startX + text1Width + linkWidth, footerY);
                 doc.save('carbon-footprint-report.pdf');
             }
-
             function sharePage() {
                 if (navigator.share) {
                     navigator.share({
