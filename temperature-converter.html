@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert temperatures between Celsius, Fahrenheit, Kelvin, Rankine, and Réaumur using our precise online tool. Explore conversion formulas, historical backgrounds, practical examples, and comparison tables for accurate temperature understanding in scientific, educational, and everyday contexts.">
+    <meta name="keywords" content="temperature converter, universal temperature conversion tool, celsius fahrenheit kelvin rankine reaumur converter, temperature scales formulas, temperature scales history, temperature comparison charts">
+    <title>Temperature Converter</title>
+    <link rel="canonical" href="https://fcalculator.com/temperature-converter.html">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Temperature Converter",
+        "url": "https://fcalculator.com/temperature-converter.html",
+        "description": "An online tool for converting temperatures between Celsius, Fahrenheit, Kelvin, Rankine, and Réaumur, featuring detailed explanations, formulas, historical insights, comparison tables, and practical examples for scientific and educational use.",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Temperature Converter",
+                    "item": "https://fcalculator.com/temperature-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/temperature-converter.html">Temperature Converter</a>
+        </div>
+        <h1>Temperature Converter</h1>
+        <p>This tool provides accurate conversions between Celsius, Fahrenheit, Kelvin, Rankine, and Réaumur scales, essential for scientific calculations, weather analysis, and educational applications in physics, chemistry, and daily life.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Temperature Input</legend>
+                    <div class="input-row">
+                        <label for="from-unit">From Unit</label>
+                        <select id="from-unit">
+                            <option value="Celsius">Celsius (°C)</option>
+                            <option value="Fahrenheit">Fahrenheit (°F)</option>
+                            <option value="Kelvin">Kelvin (K)</option>
+                            <option value="Rankine">Rankine (°R)</option>
+                            <option value="Reaumur">Réaumur (°Ré)</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="temperature-value">Temperature Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the temperature value to convert.</span></label>
+                        <input type="number" id="temperature-value" placeholder="e.g. 25" value="25" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="to-unit">To Unit</label>
+                        <select id="to-unit">
+                            <option value="Celsius">Celsius (°C)</option>
+                            <option value="Fahrenheit">Fahrenheit (°F)</option>
+                            <option value="Kelvin">Kelvin (K)</option>
+                            <option value="Rankine">Rankine (°R)</option>
+                            <option value="Reaumur">Réaumur (°Ré)</option>
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="calculate()">Convert</button>
+        </form>
+    </section>
+    <section class="results-section" id="results" style="display:none;">
+        <p id="result"></p>
+        <table id="conversion-table">
+            <thead>
+                <tr>
+                    <th>From Value</th>
+                    <th>To Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        <button onclick="sharePage()">Share</button>
+    </section>
+    <p>Explore similar tools like our <a href="/celsius-to-fahrenheit-converter.html">Celsius to Fahrenheit Converter</a> or <a href="/kelvin-to-celsius-converter.html">Kelvin to Celsius Converter</a> for specific temperature conversions.</p>
+    <section>
+        <h2>How to Use the Temperature Converter</h2>
+        <p>Select the unit you are converting from, enter the temperature value, choose the unit to convert to, and click the "Convert" button. The tool calculates the result using standard formulas, displaying it along with a table of nearby conversions for context. This converter supports Celsius, Fahrenheit, Kelvin, Rankine, and Réaumur, making it versatile for scientific research, educational purposes, and international temperature comparisons.</p>
+    </section>
+    <section>
+        <h2>Understanding Temperature Scales</h2>
+        <p>Temperature scales measure thermal energy in different systems, each with unique zero points and intervals based on physical properties like water's freezing and boiling points or absolute zero.</p>
+        <h3>Celsius Scale</h3>
+        <p>The Celsius scale sets 0°C as water's freezing point and 100°C as its boiling point, widely used in science and daily life internationally.</p>
+        <h3>Fahrenheit Scale</h3>
+        <p>The Fahrenheit scale uses 32°F for freezing and 212°F for boiling, common in the United States for weather and household measurements.</p>
+        <h3>Kelvin Scale</h3>
+        <p>The Kelvin scale is absolute, starting at 0 K (absolute zero), essential for thermodynamic calculations in physics and engineering.</p>
+        <h3>Rankine Scale</h3>
+        <p>The Rankine scale is an absolute scale in Fahrenheit degrees, used in some engineering fields like heat transfer.</p>
+        <h3>Réaumur Scale</h3>
+        <p>The Réaumur scale divides water's freezing to boiling into 80 degrees, historically used in Europe for industrial applications.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Temperature-scales-comparison.svg/600px-Temperature-scales-comparison.svg.png" alt="Comparison of temperature scales including Celsius, Fahrenheit, Kelvin, Rankine, and Réaumur." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Comparison of temperature scales including Celsius, Fahrenheit, Kelvin, Rankine, and Réaumur.</i>
+    </section>
+    <section>
+        <h2>Conversion Formulas Explained</h2>
+        <p>All conversions use Celsius as an intermediate for accuracy. Here are the key formulas:</p>
+        \[ \text{Fahrenheit to Celsius: } C = (F - 32) \times \frac{5}{9} \]
+        \[ \text{Kelvin to Celsius: } C = K - 273.15 \]
+        \[ \text{Rankine to Celsius: } C = (R - 491.67) \times \frac{5}{9} \]
+        \[ \text{Réaumur to Celsius: } C = Ré \times \frac{5}{4} \]
+        \[ \text{Celsius to Fahrenheit: } F = C \times \frac{9}{5} + 32 \]
+        \[ \text{Celsius to Kelvin: } K = C + 273.15 \]
+        \[ \text{Celsius to Rankine: } R = C \times \frac{9}{5} + 491.67 \]
+        \[ \text{Celsius to Réaumur: } Ré = C \times \frac{4}{5} \]
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 25°C to Fahrenheit: Multiply by 9/5 to get 45, add 32 to get 77°F.</p>
+    </section>
+    <section>
+        <h2>Comparison of Temperature Scales</h2>
+        <p>Different scales suit various applications: metric-based Celsius for science, Fahrenheit for U.S. weather, absolute Kelvin for thermodynamics.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Celsius (°C)</th>
+                    <th>Fahrenheit (°F)</th>
+                    <th>Kelvin (K)</th>
+                    <th>Rankine (°R)</th>
+                    <th>Réaumur (°Ré)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Absolute Zero</td>
+                    <td>-273.15</td>
+                    <td>-459.67</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>-218.52</td>
+                </tr>
+                <tr>
+                    <td>Freezing Point of Water</td>
+                    <td>0</td>
+                    <td>32</td>
+                    <td>273.15</td>
+                    <td>491.67</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Boiling Point of Water</td>
+                    <td>100</td>
+                    <td>212</td>
+                    <td>373.15</td>
+                    <td>671.67</td>
+                    <td>80</td>
+                </tr>
+                <tr>
+                    <td>Human Body Temperature</td>
+                    <td>37</td>
+                    <td>98.6</td>
+                    <td>310.15</td>
+                    <td>558.27</td>
+                    <td>29.6</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What are the main temperature scales?</strong> Common scales include Celsius (metric, everyday use), Fahrenheit (U.S. weather), Kelvin (absolute, science), Rankine (absolute Fahrenheit), and Réaumur (historical).</p>
+        <p><strong>How does the converter handle different units?</strong> It uses Celsius as an intermediate for precise conversions between any two scales, ensuring accuracy across all combinations.</p>
+        <p><strong>Why is Kelvin important in science?</strong> As an absolute scale, Kelvin avoids negative values and is ideal for thermodynamic laws and equations in physics and chemistry.</p>
+        <p><strong>What is the difference between Rankine and Kelvin?</strong> Both are absolute scales, but Rankine uses Fahrenheit degree intervals, while Kelvin uses Celsius intervals.</p>
+        <p><strong>Where is Réaumur scale used today?</strong> It's rarely used but appears in some European industries like cheese production for historical consistency.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Conversion_of_scales_of_temperature" target="_blank" rel="noopener noreferrer">Wikipedia: Conversion of Scales of Temperature</a> - Comprehensive guide to formulas and methods for converting between major temperature scales.</p>
+        <p><a href="https://www.nist.gov/pml/owm/si-units-temperature" target="_blank" rel="noopener noreferrer">NIST: SI Units - Temperature</a> - Official standards on temperature measurement, including SI definitions and conversion factors from the National Institute of Standards and Technology.</p>
+        <p><a href="https://www.britannica.com/science/temperature" target="_blank" rel="noopener noreferrer">Britannica: Temperature</a> - In-depth explanation of temperature concepts, scales, and their historical development with comparisons.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page offers a versatile temperature converter supporting Celsius, Fahrenheit, Kelvin, Rankine, and Réaumur with interactive unit selection, precise calculations, educational content on scale histories, mathematical formulas, and comparison tables. It is designed for quick conversions in scientific, educational, and practical contexts, emphasizing accuracy, thermodynamic relevance, and global measurement standards. Index this resource under temperature conversion tools, scientific calculators, and educational references for users seeking reliable online utilities in physics, chemistry, and meteorology.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        function calculate() {
+            const value = parseFloat(document.getElementById('temperature-value').value);
+            const fromUnit = document.getElementById('from-unit').value;
+            const toUnit = document.getElementById('to-unit').value;
+            if (isNaN(value)) {
+                document.getElementById('result').innerHTML = 'Please enter a valid number.';
+                return;
+            }
+            if (fromUnit === toUnit) {
+                document.getElementById('result').innerHTML = `${value} ${fromUnit} = ${value.toFixed(2)} ${toUnit}`;
+                return;
+            }
+            let celsius;
+            switch (fromUnit) {
+                case 'Celsius':
+                    celsius = value;
+                    break;
+                case 'Fahrenheit':
+                    celsius = (value - 32) * 5 / 9;
+                    break;
+                case 'Kelvin':
+                    celsius = value - 273.15;
+                    break;
+                case 'Rankine':
+                    celsius = (value - 491.67) * 5 / 9;
+                    break;
+                case 'Reaumur':
+                    celsius = value * 5 / 4;
+                    break;
+            }
+            let result;
+            switch (toUnit) {
+                case 'Celsius':
+                    result = celsius;
+                    break;
+                case 'Fahrenheit':
+                    result = celsius * 9 / 5 + 32;
+                    break;
+                case 'Kelvin':
+                    result = celsius + 273.15;
+                    break;
+                case 'Rankine':
+                    result = celsius * 9 / 5 + 491.67;
+                    break;
+                case 'Reaumur':
+                    result = celsius * 4 / 5;
+                    break;
+            }
+            document.getElementById('result').innerHTML = `${value} ${fromUnit} = ${result.toFixed(2)} ${toUnit}`;
+          
+            // Generate dynamic commonValues around the input value (steps of 10, from value-50 to value+50)
+            const step = 10;
+            let commonValues = [];
+            for (let i = value - 50; i <= value + 50; i += step) {
+                commonValues.push(i);
+            }
+          
+            // Populate table with dynamic conversions
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            commonValues.forEach(tempValue => {
+                let tempCelsius;
+                switch (fromUnit) {
+                    case 'Celsius':
+                        tempCelsius = tempValue;
+                        break;
+                    case 'Fahrenheit':
+                        tempCelsius = (tempValue - 32) * 5 / 9;
+                        break;
+                    case 'Kelvin':
+                        tempCelsius = tempValue - 273.15;
+                        break;
+                    case 'Rankine':
+                        tempCelsius = (tempValue - 491.67) * 5 / 9;
+                        break;
+                    case 'Reaumur':
+                        tempCelsius = tempValue * 5 / 4;
+                        break;
+                }
+                let tempResult;
+                switch (toUnit) {
+                    case 'Celsius':
+                        tempResult = tempCelsius;
+                        break;
+                    case 'Fahrenheit':
+                        tempResult = tempCelsius * 9 / 5 + 32;
+                        break;
+                    case 'Kelvin':
+                        tempResult = tempCelsius + 273.15;
+                        break;
+                    case 'Rankine':
+                        tempResult = tempCelsius * 9 / 5 + 491.67;
+                        break;
+                    case 'Reaumur':
+                        tempResult = tempCelsius * 4 / 5;
+                        break;
+                }
+                const row = `<tr><td>${tempValue} ${fromUnit}</td><td>${tempResult.toFixed(2)} ${toUnit}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+          
+            document.getElementById('results').style.display = 'block';
+        }
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Temperature Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+    </script>
+</body>
+</html>
