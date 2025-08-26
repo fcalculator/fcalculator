@@ -164,10 +164,6 @@
         <p><strong>Can temperatures be negative in Kelvin?</strong> No, Kelvin starts at absolute zero (0 K), so negative values are not possible.</p>
     </section>
     <section>
-        <h2>Disclaimer</h2>
-        <p>This tool provides conversions for informational purposes only. Results may vary slightly due to rounding or specific conditions. Consult professional sources for critical scientific applications.</p>
-    </section>
-    <section>
         <h2>Related Resources</h2>
         <p><a href="https://en.wikipedia.org/wiki/Kelvin" target="_blank" rel="noopener noreferrer">Wikipedia: Kelvin</a> - Detailed history and definitions of the Kelvin scale, including conversion formulas and scientific applications.</p>
         <p><a href="https://en.wikipedia.org/wiki/Celsius" target="_blank" rel="noopener noreferrer">Wikipedia: Celsius</a> - Comprehensive overview of the Celsius scale's development, usage, and comparisons with other scales.</p>
@@ -192,23 +188,29 @@
             }
             const c = k - 273.15;
             document.getElementById('result').innerHTML = `${k} K = ${c.toFixed(2)}°C`;
-           
-            // Populate table with common conversions
+          
+            // Generate dynamic commonK around the input k (steps of 10, from k-50 to k+50, but >=0)
+            const step = 10;
+            let commonK = [];
+            for (let i = Math.max(0, k - 50); i <= k + 50; i += step) {
+                commonK.push(i);
+            }
+          
+            // Populate table with dynamic conversions
             const tableBody = document.querySelector('#conversion-table tbody');
             tableBody.innerHTML = '';
-            const commonK = [0, 100, 200, 273.15, 310.15, 373.15];
             commonK.forEach(tempK => {
                 const tempC = tempK - 273.15;
                 const row = `<tr><td>${tempK}</td><td>${tempC.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
             });
-           
+          
             // Destroy old chart if exists
             if (chartInstance) {
                 chartInstance.destroy();
             }
-           
-            // Create line chart
+          
+            // Create line chart with dynamic data
             setTimeout(() => {
                 const ctx = document.getElementById('line-chart').getContext('2d');
                 chartInstance = new Chart(ctx, {
@@ -233,7 +235,7 @@
                     }
                 });
             }, 1000); // Delay for visibility
-           
+          
             document.getElementById('results').style.display = 'block';
         }
         window.onload = function() {
