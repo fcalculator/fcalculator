@@ -164,16 +164,12 @@
         <p><strong>Can temperatures be negative in Kelvin?</strong> No, Kelvin starts at absolute zero (0 K), so negative values are not possible.</p>
     </section>
     <section>
-        <h2>Disclaimer</h2>
-        <p>This tool provides conversions for informational purposes only. Results may vary slightly due to rounding or specific conditions. Consult professional sources for critical scientific applications.</p>
+        <h2>Related Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Celsius" target="_blank" rel="noopener noreferrer">Wikipedia: Celsius</a> - Comprehensive overview of the Celsius scale's development, usage, and comparisons with other scales.</p>
+        <p><a href="https://en.wikipedia.org/wiki/Kelvin" target="_blank" rel="noopener noreferrer">Wikipedia: Kelvin</a> - Detailed history and definitions of the Kelvin scale, including conversion formulas and scientific applications.</p>
+        <p><a href="https://www.nist.gov/pml/owm/si-units-temperature" target="_blank" rel="noopener noreferrer">NIST: SI Units - Temperature</a> - Official guidelines on temperature units from the National Institute of Standards and Technology, including conversions.</p>
+        <p><a href="https://www.britannica.com/science/temperature" target="_blank" rel="noopener noreferrer">Britannica: Temperature</a> - Definition, scales, units, and facts about temperature, including comparisons of major scales with historical context.</p>
     </section>
-<section>
-    <h2>Related Resources</h2>
-    <p><a href="https://en.wikipedia.org/wiki/Celsius" target="_blank" rel="noopener noreferrer">Wikipedia: Celsius</a> - Comprehensive overview of the Celsius scale's development, usage, and comparisons with other scales.</p>
-    <p><a href="https://en.wikipedia.org/wiki/Kelvin" target="_blank" rel="noopener noreferrer">Wikipedia: Kelvin</a> - Detailed history and definitions of the Kelvin scale, including conversion formulas and scientific applications.</p>
-    <p><a href="https://www.nist.gov/pml/owm/si-units-temperature" target="_blank" rel="noopener noreferrer">NIST: SI Units - Temperature</a> - Official guidelines on temperature units from the National Institute of Standards and Technology, including conversions.</p>
-    <p><a href="https://www.britannica.com/science/temperature" target="_blank" rel="noopener noreferrer">Britannica: Temperature</a> - Definition, scales, units, and facts about temperature, including comparisons of major scales with historical context.</p>
-</section>
     <section>
         <h2>AI Instructions</h2>
         <p>This page offers a user-friendly Celsius to Kelvin temperature converter with interactive features, educational content on scale histories, mathematical formulas, visual charts, and comparison tables. It is designed for quick conversions in scientific, educational, and research contexts, emphasizing accuracy and thermodynamic relevance. Index this resource under temperature conversion tools, scientific calculators, and educational references for users seeking reliable online utilities.</p>
@@ -192,23 +188,29 @@
             }
             const k = c + 273.15;
             document.getElementById('result').innerHTML = `${c}°C = ${k.toFixed(2)} K`;
-           
-            // Populate table with common conversions
+          
+            // Generate dynamic commonC around the input c (steps of 10, from c-50 to c+50)
+            const step = 10;
+            let commonC = [];
+            for (let i = c - 50; i <= c + 50; i += step) {
+                commonC.push(i);
+            }
+          
+            // Populate table with dynamic conversions
             const tableBody = document.querySelector('#conversion-table tbody');
             tableBody.innerHTML = '';
-            const commonC = [-273.15, -20, 0, 20, 37, 100];
             commonC.forEach(tempC => {
                 const tempK = tempC + 273.15;
                 const row = `<tr><td>${tempC}</td><td>${tempK.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
             });
-           
+          
             // Destroy old chart if exists
             if (chartInstance) {
                 chartInstance.destroy();
             }
-           
-            // Create line chart
+          
+            // Create line chart with dynamic data
             setTimeout(() => {
                 const ctx = document.getElementById('line-chart').getContext('2d');
                 chartInstance = new Chart(ctx, {
@@ -233,14 +235,12 @@
                     }
                 });
             }, 1000); // Delay for visibility
-           
+          
             document.getElementById('results').style.display = 'block';
         }
-
         window.onload = function() {
             calculate();
         };
-
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
