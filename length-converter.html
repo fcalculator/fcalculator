@@ -229,6 +229,19 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
+        function toScientificLatex(num) {
+            if (num === 0) return '0';
+            const absNum = Math.abs(num);
+            let exp = Math.floor(Math.log10(absNum));
+            let mant = num / Math.pow(10, exp);
+            let mantStr = mant.toFixed(2);
+            if (exp === 0) {
+                return mantStr;
+            } else {
+                return mantStr + ' \\times 10^{' + exp + '}';
+            }
+        }
+
         function calculate() {
             const value = parseFloat(document.getElementById('length-value').value);
             const fromUnit = document.getElementById('from-unit').value;
@@ -259,9 +272,16 @@
             };
             const meterValue = value * toMeter[fromUnit];
             const result = meterValue / toMeter[toUnit];
-            let formattedResult = Math.abs(result) > 1e6 || Math.abs(result) < 1e-6 ? result.toExponential(2) : result.toFixed(2);
-            document.getElementById('result').innerHTML = `${value} ${fromUnit} = ${formattedResult} ${toUnit}`;
-          
+            let formattedResult;
+            let isScientific = Math.abs(result) > 1e6 || Math.abs(result) < 1e-6;
+            if (isScientific) {
+                formattedResult = toScientificLatex(result);
+                document.getElementById('result').innerHTML = `${value} ${fromUnit} = \\( ${formattedResult} \\) ${toUnit}`;
+            } else {
+                formattedResult = result.toFixed(2);
+                document.getElementById('result').innerHTML = `${value} ${fromUnit} = ${formattedResult} ${toUnit}`;
+            }
+         
             // Generate dynamic commonValues around the input value (steps of 10, from value-50 to value+50)
             const step = 10;
             let commonValues = [];
@@ -270,19 +290,28 @@
                     commonValues.push(i);
                 }
             }
-          
+         
             // Populate table with dynamic conversions
             const tableBody = document.querySelector('#conversion-table tbody');
             tableBody.innerHTML = '';
             commonValues.forEach(tempValue => {
                 const tempMeter = tempValue * toMeter[fromUnit];
                 const tempResult = tempMeter / toMeter[toUnit];
-                let formattedTempResult = Math.abs(tempResult) > 1e6 || Math.abs(tempResult) < 1e-6 ? tempResult.toExponential(2) : tempResult.toFixed(2);
+                let formattedTempResult;
+                let isTempScientific = Math.abs(tempResult) > 1e6 || Math.abs(tempResult) < 1e-6;
+                if (isTempScientific) {
+                    formattedTempResult = `\\( ${toScientificLatex(tempResult)} \\)`;
+                } else {
+                    formattedTempResult = tempResult.toFixed(2);
+                }
                 const row = `<tr><td>${tempValue} ${fromUnit}</td><td>${formattedTempResult} ${toUnit}</td></tr>`;
                 tableBody.innerHTML += row;
             });
-          
+         
             document.getElementById('results').style.display = 'block';
+            
+            // Rerender MathJax for the results section
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'results']);
         }
         function sharePage() {
             if (navigator.share) {
