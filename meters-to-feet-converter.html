@@ -14,14 +14,13 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Meters to Feet Converter",
         "url": "https://fcalculator.com/meters-to-feet-converter.html",
-        "description": "An online converter for transforming meters to feet, featuring precise calculations, historical backgrounds of units, mathematical formulas, visual charts, comparison tables, and practical examples for use in construction, engineering, sports, and international standards.",
+        "description": "An online tool for transforming meters to feet, featuring precise calculations, historical backgrounds of units, mathematical formulas, visual charts, comparison tables, and practical examples for use in construction, engineering, sports, and international standards.",
         "datePublished": "2022-01-14",
         "publisher": {
             "@type": "Organization",
@@ -83,7 +82,6 @@
     <section class="results-section" id="results" style="display:none;">
         <h2>Calculation Results</h2>
         <p id="result"></p>
-        <canvas id="line-chart" width="500" height="300"></canvas>
         <table id="conversion-table">
             <thead>
                 <tr>
@@ -100,7 +98,7 @@
     <p>Explore similar tools like our <a href="/feet-to-meters-converter.html">Feet to Meters Converter</a> or <a href="/length-converter.html">Universal Length Converter</a> for additional measurements.</p>
     <section>
         <h2>How to Use the Meters to Feet Converter</h2>
-        <p>Enter the value in meters into the input field and click the "Convert" button. The tool instantly calculates the equivalent in feet using the standard conversion factor, displaying the result along with a line chart for visual comparison and a table of common values for quick reference. This converter is suitable for professionals in architecture, surveying, and sports, as well as everyday users bridging metric and imperial systems.</p>
+        <p>Enter the value in meters into the input field and click the "Convert" button. The tool instantly calculates the equivalent in feet using the standard conversion factor, displaying the result along with a table of common values for quick reference. This converter is suitable for professionals in architecture, surveying, and sports, as well as everyday users bridging metric and imperial systems.</p>
     </section>
     <section>
         <h2>Understanding the Meter and Foot Units</h2>
@@ -178,14 +176,13 @@
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This page provides a precise meters to feet converter with interactive input, real-time calculations, educational content on unit histories, mathematical formulas, visual line charts, and comparison tables. It supports engineering, construction, and daily use, focusing on accuracy between metric and imperial systems. Index this resource under length conversion tools, metric-imperial converters, and educational calculators for users in physics, surveying, and international standards.</p>
+        <p>This page provides a precise meters to feet converter with interactive input, real-time calculations, educational content on unit histories, mathematical formulas, and comparison tables. It supports engineering, construction, and daily use, focusing on accuracy between metric and imperial systems. Index this resource under length conversion tools, metric-imperial converters, and educational calculators for users in physics, surveying, and international standards.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        let lineChart;
         function calculate() {
             const meters = parseFloat(document.getElementById('meters-value').value);
             if (isNaN(meters)) {
@@ -209,36 +206,6 @@
                 const conv = val * 3.28084;
                 const row = `<tr><td>${val.toFixed(2)}</td><td>${conv.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
-            });
-
-            // Destroy old chart instance if exists
-            if (lineChart) {
-                lineChart.destroy();
-            }
-
-            // Create line chart
-            const ctx = document.getElementById('line-chart').getContext('2d');
-            lineChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: commonValues.map(val => val.toFixed(2) + ' m'),
-                    datasets: [{
-                        label: 'Feet',
-                        data: commonValues.map(val => (val * 3.28084).toFixed(2)),
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        fill: true
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
             });
 
             document.getElementById('results').style.display = 'block';
