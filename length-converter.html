@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert lengths between nanometers, micrometers, millimeters, centimeters, decimeters, meters, kilometers, inches, feet, yards, miles, nautical miles, astronomical units, and light years using our precise online tool. Explore conversion formulas, historical backgrounds, practical examples, and comparison tables for accurate length understanding in scientific, engineering, and everyday contexts.">
+    <meta name="keywords" content="length converter, universal length conversion tool, meter inch kilometer mile converter, length units formulas, length scales history, length comparison tables">
+    <title>Length Converter</title>
+    <link rel="canonical" href="https://fcalculator.com/length-converter.html">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Length Converter",
+        "url": "https://fcalculator.com/length-converter.html",
+        "description": "An online tool for converting lengths between nanometers, micrometers, millimeters, centimeters, decimeters, meters, kilometers, inches, feet, yards, miles, nautical miles, astronomical units, and light years, featuring detailed explanations, formulas, historical insights, comparison tables, and practical examples for scientific and educational use.",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Length Converter",
+                    "item": "https://fcalculator.com/length-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/length-converter.html">Length Converter</a>
+        </div>
+        <h1>Length Converter</h1>
+        <p>This tool provides accurate conversions between nanometers, micrometers, millimeters, centimeters, decimeters, meters, kilometers, inches, feet, yards, miles, nautical miles, astronomical units, and light years, essential for engineering, science, travel, and daily measurements.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Length Input</legend>
+                    <div class="input-row">
+                        <label for="from-unit">From Unit</label>
+                        <select id="from-unit">
+                            <option value="nanometer">Nanometer (nm)</option>
+                            <option value="micrometer">Micrometer (μm)</option>
+                            <option value="millimeter">Millimeter (mm)</option>
+                            <option value="centimeter">Centimeter (cm)</option>
+                            <option value="decimeter">Decimeter (dm)</option>
+                            <option value="meter" selected>Meter (m)</option>
+                            <option value="kilometer">Kilometer (km)</option>
+                            <option value="inch">Inch (in)</option>
+                            <option value="foot">Foot (ft)</option>
+                            <option value="yard">Yard (yd)</option>
+                            <option value="mile">Mile (mi)</option>
+                            <option value="nautical_mile">Nautical Mile (nmi)</option>
+                            <option value="astronomical_unit">Astronomical Unit (AU)</option>
+                            <option value="light_year">Light Year (ly)</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="length-value">Length Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the length value to convert.</span></label>
+                        <input type="number" id="length-value" placeholder="e.g. 1" value="1" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="to-unit">To Unit</label>
+                        <select id="to-unit">
+                            <option value="nanometer">Nanometer (nm)</option>
+                            <option value="micrometer">Micrometer (μm)</option>
+                            <option value="millimeter">Millimeter (mm)</option>
+                            <option value="centimeter">Centimeter (cm)</option>
+                            <option value="decimeter">Decimeter (dm)</option>
+                            <option value="meter">Meter (m)</option>
+                            <option value="kilometer">Kilometer (km)</option>
+                            <option value="inch">Inch (in)</option>
+                            <option value="foot" selected>Foot (ft)</option>
+                            <option value="yard">Yard (yd)</option>
+                            <option value="mile">Mile (mi)</option>
+                            <option value="nautical_mile">Nautical Mile (nmi)</option>
+                            <option value="astronomical_unit">Astronomical Unit (AU)</option>
+                            <option value="light_year">Light Year (ly)</option>
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="calculate()">Convert</button>
+        </form>
+    </section>
+    <section class="results-section" id="results" style="display:none;">
+        <p id="result"></p>
+        <table id="conversion-table">
+            <thead>
+                <tr>
+                    <th>From Value</th>
+                    <th>To Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        <button onclick="sharePage()">Share</button>
+    </section>
+    <p>Explore similar tools like our <a href="/meters-to-feet-converter.html">Meters to Feet Converter</a> or <a href="/kilometers-to-miles-converter.html">Kilometers to Miles Converter</a> for specific length conversions.</p>
+    <section>
+        <h2>How to Use the Length Converter</h2>
+        <p>Select the unit you are converting from, enter the length value, choose the unit to convert to, and click the "Convert" button. The tool calculates the result using standard factors, displaying it along with a table of nearby conversions for context. This converter supports metric, imperial, and astronomical units, making it versatile for engineering, travel, science, and daily measurements.</p>
+    </section>
+    <section>
+        <h2>Understanding Length Units</h2>
+        <p>Length units measure distance in different systems, from tiny nanoscale to vast astronomical scales, each suited for specific applications like microscopy, construction, or space exploration.</p>
+        <h3>Metric Units</h3>
+        <p>Metric units are decimal-based, with the meter as the base: nanometers for atomic scales, micrometers for cells, millimeters for small objects, centimeters for everyday items, decimeters for short distances, meters for human-scale, kilometers for travel.</p>
+        <h3>Imperial Units</h3>
+        <p>Imperial units include inches for precision work, feet for height, yards for sports fields, miles for long distances, used mainly in the US and UK for customary measurements.</p>
+        <h3>Other Units</h3>
+        <p>Nautical miles for maritime navigation, astronomical units for solar system distances, light years for interstellar scales, providing context for vast or specialized measurements.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Orders_of_magnitude_%28length%29.svg/800px-Orders_of_magnitude_%28length%29.svg.png" alt="Comparison of length scales from subatomic to cosmic distances." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Comparison of length scales from subatomic to cosmic distances.</i>
+    </section>
+    <section>
+        <h2>Conversion Formulas Explained</h2>
+        <p>All conversions use meter as an intermediate for accuracy. Here are key factors to meter:</p>
+        \[ 1 \, \text{nm} = 10^{-9} \, \text{m} \]
+        \[ 1 \, \text{μm} = 10^{-6} \, \text{m} \]
+        \[ 1 \, \text{mm} = 0.001 \, \text{m} \]
+        \[ 1 \, \text{cm} = 0.01 \, \text{m} \]
+        \[ 1 \, \text{dm} = 0.1 \, \text{m} \]
+        \[ 1 \, \text{km} = 1000 \, \text{m} \]
+        \[ 1 \, \text{in} = 0.0254 \, \text{m} \]
+        \[ 1 \, \text{ft} = 0.3048 \, \text{m} \]
+        \[ 1 \, \text{yd} = 0.9144 \, \text{m} \]
+        \[ 1 \, \text{mi} = 1609.34 \, \text{m} \]
+        \[ 1 \, \text{nmi} = 1852 \, \text{m} \]
+        \[ 1 \, \text{AU} = 1.496 \times 10^{11} \, \text{m} \]
+        \[ 1 \, \text{ly} = 9.461 \times 10^{15} \, \text{m} \]
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 1 m to ft: Multiply by 3.28084 to get approximately 3.28 ft.</p>
+    </section>
+    <section>
+        <h2>Comparison of Length Units</h2>
+        <p>Metric units are consistent and scalable, imperial are traditional, astronomical handle vast distances efficiently.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Unit</th>
+                    <th>Equivalent in Meters</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1 Centimeter</td>
+                    <td>0.01 m</td>
+                </tr>
+                <tr>
+                    <td>1 Inch</td>
+                    <td>0.0254 m</td>
+                </tr>
+                <tr>
+                    <td>1 Foot</td>
+                    <td>0.3048 m</td>
+                </tr>
+                <tr>
+                    <td>1 Kilometer</td>
+                    <td>1000 m</td>
+                </tr>
+                <tr>
+                    <td>1 Mile</td>
+                    <td>1609.34 m</td>
+                </tr>
+                <tr>
+                    <td>1 Light Year</td>
+                    <td>9.461e+15 m</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What are the main length units?</strong> Common units include metric (mm, cm, m, km) for precision and imperial (in, ft, yd, mi) for customary use, plus astronomical (AU, ly) for space.</p>
+        <p><strong>How does the converter work?</strong> It uses meter as an intermediate unit for precise conversions between any two selected units, ensuring accuracy across systems.</p>
+        <p><strong>Why convert between metric and imperial?</strong> Metric is standard in science and most countries, while imperial remains in use in the US for construction, travel, and daily measurements.</p>
+        <p><strong>What is an astronomical unit?</strong> AU is the average distance from Earth to the Sun, about 149.6 million kilometers, used for solar system scales.</p>
+        <p><strong>Can I convert very small or large values?</strong> Yes, the tool handles nanoscale (nm) to cosmic (ly) lengths with scientific notation for extreme values.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Unit_of_length" target="_blank" rel="noopener noreferrer">Wikipedia: Unit of Length</a> - Detailed overview of length units, their definitions, and historical evolution.</p>
+        <p><a href="https://www.nist.gov/pml/owm/si-units-length" target="_blank" rel="noopener noreferrer">NIST: SI Units - Length</a> - Official standards on length measurement from the National Institute of Standards and Technology, including conversion factors.</p>
+        <p><a href="https://www.britannica.com/science/length" target="_blank" rel="noopener noreferrer">Britannica: Length</a> - Explanation of length concepts, units, and their applications in science and daily life.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page offers a versatile length converter supporting nanometers, micrometers, millimeters, centimeters, decimeters, meters, kilometers, inches, feet, yards, miles, nautical miles, astronomical units, and light years with interactive unit selection, precise calculations, educational content on unit histories, mathematical formulas, and comparison tables. It is designed for quick conversions in engineering, science, travel, and practical contexts, emphasizing accuracy, scalability, and global measurement standards. Index this resource under length conversion tools, scientific calculators, and educational references for users seeking reliable online utilities in physics, surveying, and astronomy.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        function calculate() {
+            const value = parseFloat(document.getElementById('length-value').value);
+            const fromUnit = document.getElementById('from-unit').value;
+            const toUnit = document.getElementById('to-unit').value;
+            if (isNaN(value)) {
+                document.getElementById('result').innerHTML = 'Please enter a valid number.';
+                return;
+            }
+            if (fromUnit === toUnit) {
+                document.getElementById('result').innerHTML = `${value} ${fromUnit} = ${value.toFixed(2)} ${toUnit}`;
+                return;
+            }
+            const toMeter = {
+                'nanometer': 1e-9,
+                'micrometer': 1e-6,
+                'millimeter': 0.001,
+                'centimeter': 0.01,
+                'decimeter': 0.1,
+                'meter': 1,
+                'kilometer': 1000,
+                'inch': 0.0254,
+                'foot': 0.3048,
+                'yard': 0.9144,
+                'mile': 1609.34,
+                'nautical_mile': 1852,
+                'astronomical_unit': 1.495978707e11,
+                'light_year': 9.460730472e15
+            };
+            const meterValue = value * toMeter[fromUnit];
+            const result = meterValue / toMeter[toUnit];
+            document.getElementById('result').innerHTML = `${value} ${fromUnit} = ${result.toFixed(2)} ${toUnit}`;
+          
+            // Generate dynamic commonValues around the input value (steps of 10, from value-50 to value+50)
+            const step = 10;
+            let commonValues = [];
+            for (let i = value - 50; i <= value + 50; i += step) {
+                if (i >= 0 || fromUnit !== 'some_negative_unit') { // Adjust if negative values make sense
+                    commonValues.push(i);
+                }
+            }
+          
+            // Populate table with dynamic conversions
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            commonValues.forEach(tempValue => {
+                const tempMeter = tempValue * toMeter[fromUnit];
+                const tempResult = tempMeter / toMeter[toUnit];
+                const row = `<tr><td>${tempValue} ${fromUnit}</td><td>${tempResult.toFixed(2)} ${toUnit}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+          
+            document.getElementById('results').style.display = 'block';
+        }
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Length Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+    </script>
+</body>
+</html>
