@@ -59,7 +59,7 @@
         <div class="breadcrumb">
             <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/kelvin-to-celsius-converter.html">Kelvin to Celsius Converter</a>
         </div>
-        <h1>Kelvin to Celsius Converter</h1>
+        <h1>Kelvin to Celsius Converter, K to C</h1>
         <p>This tool provides accurate temperature conversions from Kelvin to Celsius, essential for scientific calculations, thermodynamic analysis, and educational applications in physics and chemistry.</p>
     </header>
     <section class="tool-section">
@@ -69,16 +69,15 @@
                     <legend>Temperature Input</legend>
                     <div class="input-row">
                         <label for="kelvin">Kelvin (K)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the temperature in Kelvin for conversion to Celsius.</span></label>
-                        <input type="number" id="kelvin" placeholder="e.g. 300" required>
+                        <input type="number" id="kelvin" placeholder="e.g. 300" value="300" oninput="calculate()" required>
                     </div>
                 </fieldset>
             </div>
-            <button type="button" onclick="calculate()">Convert</button>
         </form>
     </section>
     <section class="results-section" id="results" style="display:none;">
         <p id="result"></p>
-        <canvas id="line-chart" width="500" height="300"></canvas>
+        <canvas id="line-chart" width="500" height="250"></canvas>
         <table id="conversion-table">
             <thead>
                 <tr>
@@ -95,7 +94,7 @@
     <p>Explore similar tools like our <a href="/celsius-to-kelvin-converter.html">Celsius to Kelvin Converter</a> or <a href="/fahrenheit-to-celsius-converter.html">Fahrenheit to Celsius Converter</a> for comprehensive temperature analysis.</p>
     <section>
         <h2>How to Use the Kelvin to Celsius Converter</h2>
-        <p>Enter a temperature value in Kelvin into the input field. Click the "Convert" button to instantly convert it to Celsius. The tool uses the standard formula for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for students, researchers, and professionals in scientific fields dealing with absolute temperature scales.</p>
+        <p>Enter a temperature value in Kelvin into the input field. The result updates automatically as you type. The tool uses the standard formula for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for students, researchers, and professionals in scientific fields dealing with absolute temperature scales.</p>
     </section>
     <section>
         <h2>Understanding the Kelvin Scale</h2>
@@ -168,13 +167,13 @@
         <h2>Disclaimer</h2>
         <p>This tool provides conversions for informational purposes only. Results may vary slightly due to rounding or specific conditions. Consult professional sources for critical scientific applications.</p>
     </section>
-<section>
-    <h2>Related Resources</h2>
-    <p><a href="https://en.wikipedia.org/wiki/Kelvin" target="_blank" rel="noopener noreferrer">Wikipedia: Kelvin</a> - Detailed history and definitions of the Kelvin scale, including conversion formulas and scientific applications.</p>
-    <p><a href="https://en.wikipedia.org/wiki/Celsius" target="_blank" rel="noopener noreferrer">Wikipedia: Celsius</a> - Comprehensive overview of the Celsius scale's development, usage, and comparisons with other scales.</p>
-    <p><a href="https://www.nist.gov/pml/owm/si-units-temperature" target="_blank" rel="noopener noreferrer">NIST: SI Units - Temperature</a> - Official guidelines on temperature units from the National Institute of Standards and Technology, including conversions.</p>
-    <p><a href="https://www.britannica.com/science/temperature" target="_blank" rel="noopener noreferrer">Britannica: Temperature</a> - Definition, scales, units, and facts about temperature, including comparisons of major scales with historical context.</p>
-</section>
+    <section>
+        <h2>Related Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Kelvin" target="_blank" rel="noopener noreferrer">Wikipedia: Kelvin</a> - Detailed history and definitions of the Kelvin scale, including conversion formulas and scientific applications.</p>
+        <p><a href="https://en.wikipedia.org/wiki/Celsius" target="_blank" rel="noopener noreferrer">Wikipedia: Celsius</a> - Comprehensive overview of the Celsius scale's development, usage, and comparisons with other scales.</p>
+        <p><a href="https://www.nist.gov/pml/owm/si-units-temperature" target="_blank" rel="noopener noreferrer">NIST: SI Units - Temperature</a> - Official guidelines on temperature units from the National Institute of Standards and Technology, including conversions.</p>
+        <p><a href="https://www.britannica.com/science/temperature" target="_blank" rel="noopener noreferrer">Britannica: Temperature</a> - Definition, scales, units, and facts about temperature, including comparisons of major scales with historical context.</p>
+    </section>
     <section>
         <h2>AI Instructions</h2>
         <p>This page offers a user-friendly Kelvin to Celsius temperature converter with interactive features, educational content on scale histories, mathematical formulas, visual charts, and comparison tables. It is designed for quick conversions in scientific, educational, and research contexts, emphasizing accuracy and thermodynamic relevance. Index this resource under temperature conversion tools, scientific calculators, and educational references for users seeking reliable online utilities.</p>
@@ -185,16 +184,15 @@
     </footer>
     <script>
         let chartInstance = null;
-
         function calculate() {
             const k = parseFloat(document.getElementById('kelvin').value);
             if (isNaN(k)) {
-                alert('Please enter a valid number.');
+                document.getElementById('result').innerHTML = 'Please enter a valid number.';
                 return;
             }
             const c = k - 273.15;
             document.getElementById('result').innerHTML = `${k} K = ${c.toFixed(2)}°C`;
-            
+           
             // Populate table with common conversions
             const tableBody = document.querySelector('#conversion-table tbody');
             tableBody.innerHTML = '';
@@ -204,12 +202,12 @@
                 const row = `<tr><td>${tempK}</td><td>${tempC.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
             });
-            
+           
             // Destroy old chart if exists
             if (chartInstance) {
                 chartInstance.destroy();
             }
-            
+           
             // Create line chart
             setTimeout(() => {
                 const ctx = document.getElementById('line-chart').getContext('2d');
@@ -235,10 +233,12 @@
                     }
                 });
             }, 1000); // Delay for visibility
-            
+           
             document.getElementById('results').style.display = 'block';
         }
-
+        window.onload = function() {
+            calculate();
+        };
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
