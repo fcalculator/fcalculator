@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -67,7 +68,7 @@
                 <fieldset>
                     <legend>Length Input</legend>
                     <div class="input-row">
-                        <label for="from-unit">From Unit</label>
+                        <label for="from-unit">From Unit<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Select the unit you are converting from.</span></label>
                         <select id="from-unit">
                             <option value="nanometer">Nanometer (nm)</option>
                             <option value="micrometer">Micrometer (μm)</option>
@@ -90,7 +91,7 @@
                         <input type="number" id="length-value" placeholder="e.g. 1" value="1" required>
                     </div>
                     <div class="input-row">
-                        <label for="to-unit">To Unit</label>
+                        <label for="to-unit">To Unit<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Select the unit you are converting to.</span></label>
                         <select id="to-unit">
                             <option value="nanometer">Nanometer (nm)</option>
                             <option value="micrometer">Micrometer (μm)</option>
@@ -126,6 +127,7 @@
                 <!-- Populated by JS -->
             </tbody>
         </table>
+        <button onclick="saveAsPDF()">Save as PDF</button>
         <button onclick="sharePage()">Share</button>
     </section>
     <p>Explore similar tools like our <a href="/meters-to-feet-converter.html">Meters to Feet Converter</a> or <a href="/kilometers-to-miles-converter.html">Kilometers to Miles Converter</a> for specific length conversions.</p>
@@ -255,7 +257,8 @@
             };
             const meterValue = value * toMeter[fromUnit];
             const result = meterValue / toMeter[toUnit];
-            document.getElementById('result').innerHTML = `${value} ${fromUnit} = ${result.toFixed(2)} ${toUnit}`;
+            let formattedResult = Math.abs(result) > 1e6 || Math.abs(result) < 1e-6 ? result.toExponential(2) : result.toFixed(2);
+            document.getElementById('result').innerHTML = `${value} ${fromUnit} = ${formattedResult} ${toUnit}`;
           
             // Generate dynamic commonValues around the input value (steps of 10, from value-50 to value+50)
             const step = 10;
@@ -272,11 +275,33 @@
             commonValues.forEach(tempValue => {
                 const tempMeter = tempValue * toMeter[fromUnit];
                 const tempResult = tempMeter / toMeter[toUnit];
-                const row = `<tr><td>${tempValue} ${fromUnit}</td><td>${tempResult.toFixed(2)} ${toUnit}</td></tr>`;
+                let formattedTempResult = Math.abs(tempResult) > 1e6 || Math.abs(tempResult) < 1e-6 ? tempResult.toExponential(2) : tempResult.toFixed(2);
+                const row = `<tr><td>${tempValue} ${fromUnit}</td><td>${formattedTempResult} ${toUnit}</td></tr>`;
                 tableBody.innerHTML += row;
             });
           
             document.getElementById('results').style.display = 'block';
+        }
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont("helvetica");
+            doc.setFontSize(12);
+            doc.text("Length Conversion Results", 105, 10, { align: 'center' });
+            doc.autoTable({
+                html: '#conversion-table',
+                startY: 20,
+                theme: 'grid',
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                }
+            });
+            doc.save('length-conversion-results.pdf');
         }
         function sharePage() {
             if (navigator.share) {
