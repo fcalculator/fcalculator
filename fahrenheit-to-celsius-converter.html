@@ -164,10 +164,6 @@
         <p><strong>Where do the scales meet?</strong> At -40 degrees, both scales read the same.</p>
     </section>
     <section>
-        <h2>Disclaimer</h2>
-        <p>This tool provides conversions for informational purposes only. Results may vary slightly due to rounding or environmental factors. Consult professional sources for critical applications.</p>
-    </section>
-    <section>
         <h2>Related Resources</h2>
         <p><a href="https://en.wikipedia.org/wiki/Fahrenheit" target="_blank" rel="noopener noreferrer">Wikipedia: Fahrenheit</a> - Comprehensive overview of the Fahrenheit scale's development, applications, and comparisons with other scales.</p>
         <p><a href="https://en.wikipedia.org/wiki/Celsius" target="_blank" rel="noopener noreferrer">Wikipedia: Celsius</a> - Detailed history and definitions of the Celsius scale, including conversion formulas and global usage.</p>
@@ -192,23 +188,29 @@
             }
             const c = (f - 32) * 5 / 9;
             document.getElementById('result').innerHTML = `${f}°F = ${c.toFixed(2)}°C`;
-           
-            // Populate table with common conversions
+          
+            // Generate dynamic commonF around the input f (steps of 10, from f-50 to f+50)
+            const step = 10;
+            let commonF = [];
+            for (let i = f - 50; i <= f + 50; i += step) {
+                commonF.push(i);
+            }
+          
+            // Populate table with dynamic conversions
             const tableBody = document.querySelector('#conversion-table tbody');
             tableBody.innerHTML = '';
-            const commonF = [-40, -4, 32, 68, 98.6, 212];
             commonF.forEach(tempF => {
                 const tempC = (tempF - 32) * 5 / 9;
                 const row = `<tr><td>${tempF}</td><td>${tempC.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
             });
-           
+          
             // Destroy old chart if exists
             if (chartInstance) {
                 chartInstance.destroy();
             }
-           
-            // Create line chart
+          
+            // Create line chart with dynamic data
             setTimeout(() => {
                 const ctx = document.getElementById('line-chart').getContext('2d');
                 chartInstance = new Chart(ctx, {
@@ -233,7 +235,7 @@
                     }
                 });
             }, 1000); // Delay for visibility
-           
+          
             document.getElementById('results').style.display = 'block';
         }
         window.onload = function() {
