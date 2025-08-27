@@ -106,7 +106,7 @@
         <p>The meter is the base unit of length in the International System of Units (SI), defined as the distance light travels in vacuum during 1/299,792,458 of a second. It is used globally for scientific, engineering, and most everyday measurements.</p>
         <h3>History of the Meter Scale</h3>
         <p>Originally defined in 1791 as one ten-millionth of the distance from the equator to the North Pole, the meter was redefined in 1799 with a prototype bar, in 1889 with platinum-iridium standards, in 1960 with krypton wavelengths, and in 1983 (refined in 2019) based on the speed of light for ultimate precision.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Metric_standards_Rijksmuseum.jpg/600px-Metric_standards_Rijksmuseum.jpg" alt="Historical replicas of metric standards, including an iron metre." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Metric_standards_Rijksmuseum.jpg/600px-Metric_standards_Rijksmuseum.jpg" alt="Historical replicas of metric standards, including an iron metre." style="max-width:300px; width:100%; display:block; margin:0 auto;">
         <i style="font-size: smaller; display: block; text-align: center;">Historical replicas of metric standards, including an iron metre.</i>
     </section>
     <section>
@@ -114,7 +114,7 @@
         <p>The foot is an imperial unit of length, standardized as exactly 0.3048 meters, comprising 12 inches. It remains prevalent in the United States, United Kingdom, and certain industries for height, construction, and aviation measurements.</p>
         <h3>History of the Foot Scale</h3>
         <p>Dating back to ancient civilizations like the Greeks and Romans, the foot varied regionally until standardized in 1959 under the international yard and pound agreement. It originated from human body measurements and was subdivided into digits or inches in various cultures.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Scale_ruler%2C_1_foot_and_300_mm.jpg/600px-Scale_ruler%2C_1_foot_and_300_mm.jpg" alt="A foot-long ruler showing both foot and millimeter scales." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Scale_ruler%2C_1_foot_and_300_mm.jpg/600px-Scale_ruler%2C_1_foot_and_300_mm.jpg" alt="A foot-long ruler showing both foot and millimeter scales." style="max-width:300px; width:100%; display:block; margin:0 auto;">
         <i style="font-size: smaller; display: block; text-align: center;">A foot-long ruler showing both foot and millimeter scales.</i>
     </section>
     <section>
@@ -198,14 +198,14 @@
             }
             const feet = meters * 3.28084;
             document.getElementById('result').innerHTML = `${meters.toFixed(2)} meters = ${feet.toFixed(2)} feet`;
-            
+           
             // Generate dynamic common values around input (steps of 5, from meters-25 to meters+25)
             const step = 5;
             let commonValues = [];
             for (let i = Math.max(0, meters - 25); i <= meters + 25; i += step) {
                 commonValues.push(i);
             }
-            
+           
             // Populate table
             const tableBody = document.querySelector('#conversion-table tbody');
             tableBody.innerHTML = '';
@@ -214,12 +214,12 @@
                 const row = `<tr><td>${val.toFixed(2)}</td><td>${conv.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
             });
-            
+           
             // Destroy existing chart if it exists
             if (lineChart) {
                 lineChart.destroy();
             }
-            
+           
             // Delay chart creation to ensure canvas is visible
             setTimeout(() => {
                 const ctx = document.getElementById('line-chart').getContext('2d');
@@ -245,14 +245,14 @@
                     }
                 });
             }, 1000);
-            
+           
             document.getElementById('results').style.display = 'block';
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
-        
+       
         // Initial calculation
         calculate();
-        
+       
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
