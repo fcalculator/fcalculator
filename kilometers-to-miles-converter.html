@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>Kilometers to Miles Converter, km to mi</title>
+    <title>Kilometers to Miles Converter</title>
     <link rel="canonical" href="https://fcalculator.com/kilometers-to-miles-converter.html">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
@@ -73,7 +73,7 @@
                     <legend>Length Input</legend>
                     <div class="input-row">
                         <label for="kilometers-value">Kilometers (km)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the distance in kilometers for conversion to miles.</span></label>
-                        <input type="number" id="kilometers-value" placeholder="e.g. 1" required>
+                        <input type="number" id="kilometers-value" placeholder="e.g. 1" oninput="calculate()" required>
                     </div>
                 </fieldset>
             </div>
@@ -189,14 +189,6 @@
     </footer>
     <script>
         let lineChart;
-
-        // Set random kilometer value on page load
-        function setRandomKilometers() {
-            const randomKm = Math.floor(Math.random() * 301); // Random number between 0 and 300
-            document.getElementById('kilometers-value').value = randomKm;
-            calculate();
-        }
-
         function calculate() {
             const kilometers = parseFloat(document.getElementById('kilometers-value').value);
             if (isNaN(kilometers)) {
@@ -205,14 +197,14 @@
             }
             const miles = kilometers * 0.621371;
             document.getElementById('result').innerHTML = `${kilometers.toFixed(2)} kilometers = ${miles.toFixed(2)} miles`;
-
+          
             // Generate dynamic common values around input (steps of 5, from kilometers-25 to kilometers+25)
             const step = 5;
             let commonValues = [];
             for (let i = Math.max(0, kilometers - 25); i <= kilometers + 25; i += step) {
                 commonValues.push(i);
             }
-
+          
             // Populate table
             const tableBody = document.querySelector('#conversion-table tbody');
             tableBody.innerHTML = '';
@@ -221,12 +213,12 @@
                 const row = `<tr><td>${val.toFixed(2)}</td><td>${conv.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
             });
-
+          
             // Destroy existing chart if it exists
             if (lineChart) {
                 lineChart.destroy();
             }
-
+          
             // Delay chart creation to ensure canvas is visible
             setTimeout(() => {
                 const ctx = document.getElementById('line-chart').getContext('2d');
@@ -252,10 +244,13 @@
                     }
                 });
             }, 1000);
-
+          
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
-
+      
+        // Initial calculation
+        calculate();
+      
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
@@ -266,11 +261,6 @@
                 alert('Share not supported on this browser.');
             }
         }
-
-        // Run on page load
-        window.onload = function() {
-            setRandomKilometers();
-        };
     </script>
 </body>
 </html>
