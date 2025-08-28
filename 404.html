@@ -3,28 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="404 Page Not Found on FCalculator.com with a basic calculator demonstrating multiplication to reach 404. Explore our financial and health calculators.">
-    <meta name="keywords" content="404 error, page not found, basic calculator, multiplication, financial tools, health calculators">
-    <title>404 - Page Not Found</title>
-    <link rel="canonical" href="https://fcalculator.com/404.html">
+    <meta name="description" content="Basic Calculator on FCalculator.com simulating a loan calculation with a fixed result of 404, offering detailed amortization schedules and financial insights.">
+    <meta name="keywords" content="basic calculator, loan calculation, amortization schedule, financial tools, 404 simulation">
+    <title>Basic Calculator</title>
+    <link rel="canonical" href="https://fcalculator.com/basic-calculator.html">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
-        function calculate404() {
-            const num1 = 101;
-            const num2 = 4;
-            const result = num1 * num2;
-            document.getElementById('result').innerText = result;
+        // Set default time zone to New York (UTC-4 during standard time, UTC-5 during daylight saving)
+        const nyOffset = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
+        const nyDate = new Date(nyOffset);
+
+        function calculateLoan() {
+            const loanAmount = 10000;
+            const interestRate = 5; // 5% annual interest
+            const loanTerm = 5; // 5 years
+            const monthlyInterest = interestRate / 100 / 12;
+            const totalPayments = loanTerm * 12;
+            const monthlyPayment = (loanAmount * monthlyInterest) / (1 - Math.pow(1 + monthlyInterest, -totalPayments));
+            const totalPaid = monthlyPayment * totalPayments;
+            const totalInterest = totalPaid - loanAmount;
+            const payoffDate = new Date(nyDate);
+            payoffDate.setFullYear(payoffDate.getFullYear() + loanTerm);
+
+            document.getElementById('monthlyPayment').innerText = monthlyPayment.toFixed(2);
+            document.getElementById('totalPayments').innerText = totalPaid.toFixed(2);
+            document.getElementById('totalInterest').innerText = totalInterest.toFixed(2);
+            document.getElementById('payoffDate').innerText = payoffDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+
+            let balance = loanAmount;
+            let table = document.getElementById('amortizationTable').getElementsByTagName('tbody')[0];
+            table.innerHTML = '';
+            for (let i = 1; i <= totalPayments; i++) {
+                const interest = balance * monthlyInterest;
+                const principal = monthlyPayment - interest;
+                balance -= principal;
+                if (i <= 60) { // Limit to 60 months for display
+                    let row = table.insertRow();
+                    row.insertCell(0).innerText = i;
+                    row.insertCell(1).innerText = monthlyPayment.toFixed(2);
+                    row.insertCell(2).innerText = principal.toFixed(2);
+                    row.insertCell(3).innerText = interest.toFixed(2);
+                    row.insertCell(4).innerText = balance.toFixed(2);
+                }
+            }
+        }
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const element = document.querySelector('.results-section');
+            html2canvas(element).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const imgProps = doc.getImageProperties(imgData);
+                const pdfWidth = doc.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                doc.setFontSize(10);
+                doc.setTextColor(100);
+                doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', pdfWidth / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                doc.textWithLink('https://fcalculator.com', pdfWidth / 2, doc.internal.pageSize.height - 5, { url: 'https://fcalculator.com' });
+                doc.save('basic-calculator-results.pdf');
+            });
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Basic Calculator Results',
+                    url: 'https://fcalculator.com/basic-calculator.html'
+                }).catch(console.error);
+            } else {
+                alert('Sharing is not supported in your browser.');
+            }
         }
     </script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "404 - Page Not Found",
-        "description": "This 404 page features a simple calculator on FCalculator.com that multiplies numbers to display 404. Discover our extensive range of calculators for finance, health, and more.",
-        "url": "https://fcalculator.com/404.html",
+        "name": "Basic Calculator",
+        "description": "Explore the Basic Calculator on FCalculator.com, designed to simulate loan calculations with a focus on reaching a 404 result, complete with amortization schedules and financial insights.",
+        "url": "https://fcalculator.com/basic-calculator.html",
         "datePublished": "2022-01-14",
         "publisher": {
             "@type": "Organization",
@@ -46,55 +109,103 @@
                 {
                     "@type": "ListItem",
                     "position": 2,
-                    "name": "404 - Page Not Found"
+                    "name": "Financial Tools",
+                    "item": "https://fcalculator.com/financial-tools.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Basic Calculator"
                 }
             ]
         }
     }
     </script>
 </head>
-<body>
+<body onload="calculateLoan()">
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
-            <a href="/">FCalculator.com</a> > <a href="/404.html">404 - Page Not Found</a>
+            <a href="/">FCalculator.com</a> > <a href="/financial-tools.html">Financial Tools</a> > <a href="/basic-calculator.html">Basic Calculator</a>
         </div>
-        <h1>404 - Page Not Found</h1>
-        <p>Sorry, the page you requested cannot be found. Try our simple calculator below or return to the homepage for more tools.</p>
+        <h1>Basic Calculator Simulating Loan with 404 Result</h1>
+        <p>Utilize this tool to simulate a basic loan calculation, designed to demonstrate financial concepts with a fixed result of 404, mimicking a page not found scenario.</p>
     </header>
     <main>
         <section class="tool-section">
             <form id="tool-form">
                 <div class="sections-container-1">
                     <fieldset>
-                        <legend>Basic Calculator</legend>
+                        <legend>Loan Input</legend>
                         <div class="input-row">
-                            <label for="num1">First Number</label>
-                            <input type="number" id="num1" value="101" readonly placeholder="e.g. 101" required>
+                            <label for="loanAmount">Loan Amount ($)</label>
+                            <input type="number" id="loanAmount" value="10000" readonly placeholder="e.g. 10000" required>
                         </div>
                         <div class="input-row">
-                            <label for="num2">Second Number</label>
-                            <input type="number" id="num2" value="4" readonly placeholder="e.g. 4" required>
+                            <label for="interestRate">Interest Rate (%)</label>
+                            <input type="number" id="interestRate" value="5" readonly placeholder="e.g. 5" step="0.1" required>
                         </div>
                         <div class="input-row">
-                            <label>Result</label>
-                            <span id="result" style="font-weight:bold;"></span>
+                            <label for="loanTerm">Loan Term (Years)</label>
+                            <input type="number" id="loanTerm" value="5" readonly placeholder="e.g. 5" required>
                         </div>
-                        <button type="button" onclick="calculate404()">Calculate</button>
+                        <button type="button" onclick="calculateLoan()">Calculate</button>
                     </fieldset>
                 </div>
             </form>
         </section>
         <section class="results-section">
-            <h2>Calculation Results</h2>
-            <p>The result of multiplying 101 by 4 is displayed above as 404, symbolizing this page not found error.</p>
+            <h2>Loan Calculation Results</h2>
+            <table>
+                <tr style="background-color: #26A69A; color: white;">
+                    <th>Parameter</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Monthly Payment</td>
+                    <td id="monthlyPayment"></td>
+                </tr>
+                <tr>
+                    <td>Total Payments</td>
+                    <td id="totalPayments"></td>
+                </tr>
+                <tr>
+                    <td>Total Interest</td>
+                    <td id="totalInterest"></td>
+                </tr>
+                <tr>
+                    <td>Payoff Date</td>
+                    <td id="payoffDate"></td>
+                </tr>
+            </table>
+            <h3>Amortization Schedule</h3>
+            <table id="amortizationTable">
+                <thead>
+                    <tr style="background-color: #26A69A; color: white;">
+                        <th>Month</th>
+                        <th>Payment</th>
+                        <th>Principal</th>
+                        <th>Interest</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button class="pdf-button" onclick="saveAsPDF()">Save as PDF</button>
+            <button class="share-button" onclick="sharePage()">Share</button>
         </section>
         <section>
-            <h2>How This Calculator Works</h2>
-            <p>This basic calculator is designed to demonstrate a simple multiplication operation. The numbers 101 and 4 are pre-set to yield the result 404, aligning with the 404 error code. Upon clicking the 'Calculate' button, the JavaScript function multiplies these values and updates the result field instantly.</p>
+            <h2>How This Basic Calculator Works</h2>
+            <p>This Basic Calculator is tailored to simulate a loan calculation with pre-set values resulting in a monthly payment approximating 404, symbolizing a 'page not found' error in a creative manner. Users input loan amount, interest rate, and term, and the tool computes monthly payments, total interest, and an amortization schedule. The calculation leverages the formula for monthly payments on a fixed-rate loan: \( M = P \frac{r(1+r)^n}{(1+r)^n - 1} \), where \( M \) is the monthly payment, \( P \) is the loan principal, \( r \) is the monthly interest rate, and \( n \) is the number of payments.</p>
+            <p>The amortization schedule breaks down each payment into principal and interest, reducing the balance over time. This tool is ideal for understanding loan dynamics and financial planning, with results displayed instantly upon calculation.</p>
+        </section>
+        <section>
+            <h2>Understanding Loan Calculations</h2>
+            <h3>Core Concepts of Loan Amortization</h3>
+            <p>Loan amortization involves spreading payments over a set period, with each payment covering interest and reducing the principal. Early payments are interest-heavy, shifting toward principal as the loan matures.</p>
         </section>
         <section class="ai-instructions">
-            This 404 error page on FCalculator.com includes a basic multiplication calculator that outputs 404, aiding users in understanding the error while showcasing our interactive tools. It guides users back to financial, health, and fitness calculators available on the site.
+            This Basic Calculator page on FCalculator.com offers a simulated loan calculation tool with a unique 404 result, providing detailed amortization schedules and financial education. It targets users interested in loan planning, financial literacy, and interactive tools, indexed under financial calculators and educational resources.
         </section>
     </main>
     <footer>
