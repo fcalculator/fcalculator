@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="404 Page Not Found on FCalculator.com featuring a basic calculator displaying 404 as a symbolic result. Return to explore financial and health tools.">
+    <meta name="description" content="404 Page Not Found on FCalculator.com featuring a basic calculator displaying 404 as a symbolic result with random numbers summing to 404. Return to explore financial and health tools.">
     <meta name="keywords" content="404 error, page not found, basic calculator, 404 simulation, financial tools">
     <title>404 - Page Not Found</title>
     <link rel="canonical" href="https://fcalculator.com/404.html">
@@ -14,19 +14,34 @@
         const nyOffset = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
         const nyDate = new Date(nyOffset);
 
+        function generateRandomNumbers() {
+            // Generate two random numbers that sum to 404
+            const maxFirst = Math.floor(Math.random() * 400) + 1; // Random number between 1 and 400
+            const num1 = maxFirst;
+            const num2 = 404 - num1;
+            document.getElementById('num1').value = num1;
+            document.getElementById('num2').value = num2;
+            calculate404();
+        }
+
         function calculate404() {
-            const num1 = 101;
-            const num2 = 4;
-            const result = num1 * num2;
+            const num1 = parseInt(document.getElementById('num1').value);
+            const num2 = parseInt(document.getElementById('num2').value);
+            const result = num1 + num2;
             document.getElementById('result').innerText = result;
         }
+
+        // Generate random numbers on page load
+        window.onload = function() {
+            generateRandomNumbers();
+        };
     </script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "404 - Page Not Found",
-        "description": "A 404 error page on FCalculator.com with a basic calculator showing a 404 result, guiding users back to financial, health, and fitness calculators.",
+        "description": "A 404 error page on FCalculator.com with a basic calculator showing a 404 result using random numbers that sum to 404, guiding users back to financial, health, and fitness calculators.",
         "url": "https://fcalculator.com/404.html",
         "datePublished": "2022-01-14",
         "publisher": {
@@ -56,14 +71,14 @@
     }
     </script>
 </head>
-<body onload="calculate404()">
+<body>
     <header>
         <div class="logo">FCalculator.com</div>
         <div class="breadcrumb">
             <a href="/">FCalculator.com</a> > <a href="/404.html">404 - Page Not Found</a>
         </div>
         <h1>404 - Page Not Found</h1>
-        <p>The page you are looking for could not be found. Explore our calculator below symbolizing this with a 404 result.</p>
+        <p>The page you are looking for could not be found. Explore our calculator below symbolizing this with a 404 result using random numbers.</p>
     </header>
     <main>
         <section class="tool-section">
@@ -73,11 +88,11 @@
                         <legend>404 Calculator</legend>
                         <div class="input-row">
                             <label for="num1">First Number</label>
-                            <input type="number" id="num1" value="101" readonly placeholder="e.g. 101" required>
+                            <input type="number" id="num1" readonly placeholder="e.g. 101" required>
                         </div>
                         <div class="input-row">
                             <label for="num2">Second Number</label>
-                            <input type="number" id="num2" value="4" readonly placeholder="e.g. 4" required>
+                            <input type="number" id="num2" readonly placeholder="e.g. 4" required>
                         </div>
                         <div class="input-row">
                             <label>Result</label>
@@ -89,7 +104,7 @@
         </section>
         <p style="text-align:center;"><a href="/">Return to Homepage</a></p>
         <section class="ai-instructions">
-            This 404 error page on FCalculator.com features a basic calculator with a 404 result, aiding users in navigating back to financial, health, and fitness calculators while explaining the error context.
+            This 404 error page on FCalculator.com features a basic calculator with a 404 result using random numbers summing to 404, aiding users in navigating back to financial, health, and fitness calculators while explaining the error context.
         </section>
     </main>
     <footer>
