@@ -72,7 +72,7 @@
                 <fieldset>
                     <legend>Length Input</legend>
                     <div class="input-row">
-                        <label for="kilometers-value">Kilometers (km)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the distance in kilometers for conversion to miles.</span></label>
+                        <label for="kilometers-value">Kilometers (km)<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Information_icon.svg/240px-Information_icon.svg.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the distance in kilometers for conversion to miles.</span></label>
                         <input type="number" id="kilometers-value" placeholder="e.g. 1" oninput="calculate()" required>
                     </div>
                 </fieldset>
@@ -105,8 +105,6 @@
         <p>The kilometer is a metric unit of length equal to 1,000 meters, widely used in most countries for road distances, mapping, and large-scale measurements in science and engineering.</p>
         <h3>History of the Kilometer Scale</h3>
         <p>Introduced during the French Revolution as part of the metric system, the kilometer was defined as one ten-thousandth of the distance from the equator to the North Pole along a meridian. It was formalized in 1799 and refined over time with advancements in geodesy and standards.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Division_of_the_meridien.PNG/600px-Division_of_the_meridien.PNG" alt="Historical divisions of the meridian in France." style="max-width:300px; width:100%; display:block; margin:0 auto;">
-        <i style="font-size: smaller; display: block; text-align: center;">Historical divisions of the meridian in France.</i>
     </section>
     <section>
         <h2>Understanding the Mile Scale</h2>
@@ -203,14 +201,14 @@
             }
             const miles = kilometers * 0.621371;
             document.getElementById('result').innerHTML = `${kilometers.toFixed(2)} kilometers = ${miles.toFixed(2)} miles`;
-          
+         
             // Generate dynamic common values around input (steps of 5, from kilometers-25 to kilometers+25)
             const step = 5;
             let commonValues = [];
             for (let i = Math.max(0, kilometers - 25); i <= kilometers + 25; i += step) {
                 commonValues.push(i);
             }
-          
+         
             // Populate table
             const tableBody = document.querySelector('#conversion-table tbody');
             tableBody.innerHTML = '';
@@ -219,12 +217,12 @@
                 const row = `<tr><td>${val.toFixed(2)}</td><td>${conv.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
             });
-          
+         
             // Destroy existing chart if it exists
             if (lineChart) {
                 lineChart.destroy();
             }
-          
+         
             // Delay chart creation to ensure canvas is visible
             setTimeout(() => {
                 const ctx = document.getElementById('line-chart').getContext('2d');
@@ -250,10 +248,10 @@
                     }
                 });
             }, 1000);
-          
+         
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
-      
+     
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
