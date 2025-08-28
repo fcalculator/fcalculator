@@ -189,6 +189,12 @@
     </footer>
     <script>
         let lineChart;
+        // Set random kilometer value on page load
+        function setRandomKilometers() {
+            const randomKm = Math.floor(Math.random() * 301); // Random number between 0 and 300
+            document.getElementById('kilometers-value').value = randomKm;
+            calculate();
+        }
         function calculate() {
             const kilometers = parseFloat(document.getElementById('kilometers-value').value);
             if (isNaN(kilometers)) {
@@ -248,9 +254,6 @@
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
       
-        // Initial calculation
-        calculate();
-      
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
@@ -261,6 +264,10 @@
                 alert('Share not supported on this browser.');
             }
         }
+        // Run on page load
+        window.onload = function() {
+            setRandomKilometers();
+        };
     </script>
 </body>
 </html>
