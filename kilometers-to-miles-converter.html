@@ -95,7 +95,7 @@
         </table>
         <button onclick="sharePage()">Share</button>
     </section>
-    <p>Explore similar tools like our Miles to Kilometers Converter or Length Converter for comprehensive distance analysis.</p>
+    <p>Explore similar tools like our <a href="/miles-to-kilometers-converter.html">Miles to Kilometers Converter</a> or <a href="/length-converter.html">Length Converter</a> for comprehensive distance analysis.</p>
     <section>
         <h2>How to Use the Kilometers to Miles Converter</h2>
         <p>Enter a distance value in kilometers into the input field. The result updates automatically as you type. The tool uses the standard conversion factor for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for travelers, engineers, geographers, and anyone navigating between metric and imperial systems.</p>
@@ -105,7 +105,7 @@
         <p>The kilometer is a metric unit of length equal to 1,000 meters, widely used in most countries for road distances, mapping, and large-scale measurements in science and engineering.</p>
         <h3>History of the Kilometer Scale</h3>
         <p>Introduced during the French Revolution as part of the metric system, the kilometer was defined as one ten-thousandth of the distance from the equator to the North Pole along a meridian. It was formalized in 1799 and refined over time with advancements in geodesy and standards.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Obs-Paris-meridienne.jpg/800px-Obs-Paris-meridienne.jpg" alt="Map of the Paris Meridian showing historical division." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/M%C3%A9ridienne_de_Paris.jpg/600px-M%C3%A9ridienne_de_Paris.jpg" alt="Map of the Paris Meridian showing historical division." style="max-width:300px; width:100%; display:block; margin:0 auto;">
         <i style="font-size: smaller; display: block; text-align: center;">Map of the Paris Meridian showing historical division.</i>
     </section>
     <section>
@@ -203,14 +203,14 @@
             }
             const miles = kilometers * 0.621371;
             document.getElementById('result').innerHTML = `${kilometers.toFixed(2)} kilometers = ${miles.toFixed(2)} miles`;
-         
+        
             // Generate dynamic common values around input (steps of 5, from kilometers-25 to kilometers+25)
             const step = 5;
             let commonValues = [];
             for (let i = Math.max(0, kilometers - 25); i <= kilometers + 25; i += step) {
                 commonValues.push(i);
             }
-         
+        
             // Populate table
             const tableBody = document.querySelector('#conversion-table tbody');
             tableBody.innerHTML = '';
@@ -219,12 +219,12 @@
                 const row = `<tr><td>${val.toFixed(2)}</td><td>${conv.toFixed(2)}</td></tr>`;
                 tableBody.innerHTML += row;
             });
-         
+        
             // Destroy existing chart if it exists
             if (lineChart) {
                 lineChart.destroy();
             }
-         
+        
             // Delay chart creation to ensure canvas is visible
             setTimeout(() => {
                 const ctx = document.getElementById('line-chart').getContext('2d');
@@ -250,10 +250,10 @@
                     }
                 });
             }, 1000);
-         
+        
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
-     
+    
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
