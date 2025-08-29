@@ -50,7 +50,7 @@
                     <legend>Mass Input</legend>
                     <div class="input-row">
                         <label for="kilograms-value">Kilograms (kg)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the mass in kilograms for conversion to pounds.</span></label>
-                        <input type="number" id="kilograms-value" placeholder="e.g. 1" value="1" oninput="calculate()" required>
+                        <input type="number" id="kilograms-value" placeholder="e.g. 1" oninput="calculate()" required>
                     </div>
                 </fieldset>
             </div>
@@ -204,9 +204,6 @@
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
 
-        // Initial calculation
-        calculate();
-
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
@@ -217,6 +214,12 @@
                 alert('Share not supported on this browser.');
             }
         }
+
+        window.onload = function() {
+            const randomValue = Math.floor(Math.random() * 100) + 1;
+            document.getElementById('kilograms-value').value = randomValue;
+            calculate(); // Auto calculate on load
+        };
     </script>
 </body>
 </html>
