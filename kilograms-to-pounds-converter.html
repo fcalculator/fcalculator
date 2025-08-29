@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -48,65 +49,33 @@
                 <fieldset>
                     <legend>Mass Input</legend>
                     <div class="input-row">
-                        <label for="from-unit">From Unit</label>
-                        <select id="from-unit">
-                            <option value="kg" selected>Kilogram (kg)</option>
-                            <option value="g">Gram (g)</option>
-                            <option value="mg">Milligram (mg)</option>
-                            <option value="ug">Microgram (μg)</option>
-                            <option value="t">Tonne (t)</option>
-                            <option value="ct">Carat (ct)</option>
-                            <option value="oz">Ounce (oz)</option>
-                            <option value="lb">Pound (lb)</option>
-                            <option value="st">Stone (st)</option>
-                            <option value="short-ton">Short Ton (short ton)</option>
-                            <option value="long-ton">Long Ton (long ton)</option>
-                        </select>
-                    </div>
-                    <div class="input-row">
-                        <label for="mass-value">Mass Value</label>
-                        <input type="number" id="mass-value" required>
-                    </div>
-                    <div class="input-row">
-                        <label for="to-unit">To Unit</label>
-                        <select id="to-unit">
-                            <option value="lb" selected>Pound (lb)</option>
-                            <option value="oz">Ounce (oz)</option>
-                            <option value="g">Gram (g)</option>
-                            <option value="kg">Kilogram (kg)</option>
-                            <option value="mg">Milligram (mg)</option>
-                            <option value="ug">Microgram (μg)</option>
-                            <option value="t">Tonne (t)</option>
-                            <option value="ct">Carat (ct)</option>
-                            <option value="st">Stone (st)</option>
-                            <option value="short-ton">Short Ton (short ton)</option>
-                            <option value="long-ton">Long Ton (long ton)</option>
-                        </select>
+                        <label for="kilograms-value">Kilograms (kg)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the mass in kilograms for conversion to pounds.</span></label>
+                        <input type="number" id="kilograms-value" placeholder="e.g. 1" value="1" oninput="calculate()" required>
                     </div>
                 </fieldset>
             </div>
-            <button type="button" onclick="convertMass()">Convert</button>
         </form>
     </section>
-    <section class="results-section">
-        <h2>Calculation Results</h2>
-        <table>
+    <section class="results-section" id="results" style="display:none;">
+        <p id="result"></p>
+        <canvas id="line-chart" width="500" height="240"></canvas>
+        <table id="conversion-table">
             <thead>
                 <tr>
-                    <th>From Value</th>
-                    <th>To Value</th>
+                    <th>Kilograms (kg)</th>
+                    <th>Pounds (lb)</th>
                 </tr>
             </thead>
-            <tbody id="results-table">
-                <!-- Results will be populated here -->
+            <tbody>
+                <!-- Populated by JS -->
             </tbody>
         </table>
-        <button onclick="shareResults()">Share</button>
+        <button onclick="sharePage()">Share</button>
     </section>
     <p>Explore similar tools like our <a href="/grams-to-ounces-converter.html">Grams to Ounces Converter</a> or <a href="/pounds-to-kilograms-converter.html">Pounds to Kilograms Converter</a> for specific mass conversions.</p>
     <section>
         <h2>How to Use the Kilograms to Pounds Converter</h2>
-        <p>Enter a mass value in kilograms into the input field. The result updates after clicking Convert, using the standard conversion factor for precision, displaying the result along with a table of common conversions for better understanding. This converter is ideal for nutritionists, engineers, athletes, and anyone dealing with metric and imperial systems.</p>
+        <p>Enter a mass value in kilograms into the input field. The result updates automatically as you type. The tool uses the standard conversion factor for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for nutritionists, engineers, athletes, and anyone navigating between metric and imperial systems.</p>
     </section>
     <section>
         <h2>Understanding the Kilogram Scale</h2>
@@ -167,48 +136,87 @@
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This page features an interactive kilograms to pounds converter with automatic updates, educational sections on unit histories, precise formulas, and comparison tables. It supports applications in nutrition, engineering, commerce, and international trade, focusing on metric-imperial accuracy. Index under mass conversion tools, metric-imperial utilities, and educational resources for physics, chemistry, and global standards.</p>
+        <p>This page features an interactive kilograms to pounds converter with automatic updates, educational sections on unit histories, precise formulas, visual line charts, and comparison tables. It supports applications in nutrition, engineering, commerce, and international trade, focusing on metric-imperial accuracy. Index under mass conversion tools, metric-imperial utilities, and educational resources for physics, chemistry, and global standards.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        function convertMass() {
-            const fromUnit = document.getElementById('from-unit').value;
-            const toUnit = document.getElementById('to-unit').value;
-            const value = parseFloat(document.getElementById('mass-value').value);
-            if (isNaN(value)) return;
+        let lineChart;
+        function calculate() {
+            const kg = parseFloat(document.getElementById('kilograms-value').value);
+            if (isNaN(kg)) {
+                document.getElementById('result').innerHTML = 'Please enter a valid number.';
+                return;
+            }
+            const pounds = kg * 2.20462262185;
+            document.getElementById('result').innerHTML = `${kg.toFixed(2)} kilograms = ${pounds.toFixed(2)} pounds`;
 
-            const toKg = {
-                ug: 1e-9, mg: 1e-6, g: 0.001, kg: 1, t: 1000, ct: 0.0002,
-                oz: 0.028349523125, lb: 0.45359237, st: 6.35029318,
-                'short-ton': 907.18474, 'long-ton': 1016.0469088
-            };
-
-            const tableBody = document.getElementById('results-table');
-            tableBody.innerHTML = '';
-
+            // Generate dynamic common values around input (steps of 10, from kg-50 to kg+50)
             const step = 10;
-            for (let i = -5; i <= 4; i++) {
-                const inputValue = value + (i * step);
-                if (inputValue >= 0) {
-                    const kgValue = inputValue * toKg[fromUnit];
-                    const result = kgValue / toKg[toUnit];
-                    tableBody.innerHTML += `<tr><td>${inputValue.toFixed(2)} ${fromUnit}</td><td>${result.toFixed(5)} ${toUnit}</td></tr>`;
-                }
+            let commonValues = [];
+            for (let i = Math.max(0, kg - 50); i <= kg + 50; i += step) {
+                commonValues.push(i);
+            }
+
+            // Populate table
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            commonValues.forEach(val => {
+                const conv = val * 2.20462262185;
+                const row = `<tr><td>${val.toFixed(2)}</td><td>${conv.toFixed(2)}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+
+            // Destroy existing chart if it exists
+            if (lineChart) {
+                lineChart.destroy();
+            }
+
+            // Delay chart creation to ensure canvas is visible
+            setTimeout(() => {
+                const ctx = document.getElementById('line-chart').getContext('2d');
+                lineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: commonValues.map(val => val.toFixed(2) + ' kg'),
+                        datasets: [{
+                            label: 'Pounds (lb)',
+                            data: commonValues.map(val => val * 2.20462262185),
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }, 1000);
+
+            document.getElementById('results').style.display = 'block';
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+
+        // Initial calculation
+        calculate();
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Kilograms to Pounds Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
             }
         }
-
-        function shareResults() {
-            alert('Share functionality placeholder');
-        }
-
-        window.onload = function() {
-            const randomValue = Math.floor(Math.random() * 100) + 1;
-            document.getElementById('mass-value').value = randomValue;
-            convertMass();
-        };
     </script>
 </body>
 </html>
