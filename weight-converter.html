@@ -188,9 +188,9 @@
             const tableBody = document.getElementById('results-table');
             tableBody.innerHTML = '';
 
-            // 21 results: value -100 to value +100 with step 10, only positive
+            // 10 results: value -5*10 to value +4*10 with step 10, only positive (adjusted for 10 total)
             const step = 10;
-            for (let i = -10; i <= 10; i++) {
+            for (let i = -5; i <= 4; i++) {  // -5 to 4 = 10 steps
                 const inputValue = value + (i * step);
                 if (inputValue >= 0) {
                     const kgValue = inputValue * toKg[fromUnit];
