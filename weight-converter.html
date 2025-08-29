@@ -18,7 +18,7 @@
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "name": "Weight Converter, kg to lb",
+      "name": "Weight Converter",
       "url": "https://fcalculator.com/weight-converter.html",
       "description": "This tool provides accurate conversions between micrograms, milligrams, grams, kilograms, tonnes, carats, ounces, pounds, stones, short tons, and long tons, essential for scientific calculations, commercial weighing, nutritional analysis, and educational applications in physics, chemistry, and daily life.",
       "datePublished": "2022-01-14",
@@ -39,7 +39,7 @@
         <div class="breadcrumb">
             <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/weight-converter.html">Weight Converter</a>
         </div>
-        <h1>Weight Converter, kg to lb</h1>
+        <h1>Weight Converter</h1>
         <p>This tool provides accurate conversions between micrograms, milligrams, grams, kilograms, tonnes, carats, ounces, pounds, stones, short tons, and long tons, essential for scientific calculations, commercial weighing, nutritional analysis, and educational applications in physics, chemistry, and daily life.</p>
     </header>
     <section class="tool-section">
@@ -101,12 +101,12 @@
                 <!-- Results will be populated here -->
             </tbody>
         </table>
-        Share
+        <button onclick="shareResults()">Share</button>
     </section>
-    <p>Explore similar tools like our Feet to Meters Converter or Length Converter for comprehensive length analysis.</p>
+    <p>Explore similar tools like our <a href="/grams-to-ounces-converter.html">Grams to Ounces Converter</a> or <a href="/pounds-to-kilograms-converter.html">Pounds to Kilograms Converter</a> for specific mass conversions.</p>
     <section>
         <h2>How to Use the Weight Converter</h2>
-        <p>Select the unit you are converting from, enter the weight value, choose the unit to convert to, and click the "Convert" button. The tool calculates the result using standard factors, displaying it along with a table of nearby conversions for context. This converter supports metric, imperial, and specialized units, making it versatile for scientific research, commercial applications, nutritional planning, and everyday measurements.</p>
+        <p>Select the unit you are converting from, enter the weight value, choose the unit to convert to, and click the "Convert" button. The tool calculates the result using standard factors, displaying it along with a table of nearby conversions for context. This converter is ideal for nutritionists, scientists, athletes, and anyone navigating between metric and imperial systems.</p>
     </section>
     <section>
         <h2>Understanding the Kilogram Scale</h2>
@@ -188,21 +188,28 @@
             const tableBody = document.getElementById('results-table');
             tableBody.innerHTML = '';
 
-            // Nearby conversions: value-2, value-1, value, value+1, value+2 (if positive)
-            const steps = [-2, -1, 0, 1, 2];
-            steps.forEach(step => {
-                const inputValue = value + step;
-                if (inputValue >= 0) {  // Skip negative if doesn't make sense
+            // 21 results: value -100 to value +100 with step 10, only positive
+            const step = 10;
+            for (let i = -10; i <= 10; i++) {
+                const inputValue = value + (i * step);
+                if (inputValue >= 0) {
                     const kgValue = inputValue * toKg[fromUnit];
                     const result = kgValue / toKg[toUnit];
                     tableBody.innerHTML += `<tr><td>${inputValue.toFixed(2)} ${fromUnit}</td><td>${result.toFixed(5)} ${toUnit}</td></tr>`;
                 }
-            });
+            }
         }
 
         function shareResults() {
             alert('Share functionality placeholder');
         }
+
+        window.onload = function() {
+            // Generate random value between 1 and 100
+            const randomValue = Math.floor(Math.random() * 100) + 1;
+            document.getElementById('weight-value').value = randomValue;
+            convertWeight(); // Auto convert on load
+        };
     </script>
 </body>
 </html>
