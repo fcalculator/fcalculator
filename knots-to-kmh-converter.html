@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This tool provides accurate conversions from knots to kilometers per hour, essential for maritime operations, aviation planning, meteorological assessments, and linking nautical units with metric speed systems in worldwide scenarios.">
+    <meta name="keywords" content="knots to kilometers per hour converter, kn to kmh, speed conversion, knots to km/h, unit converter, nautical velocity measurements, speed calculator">
+    <link rel="canonical" href="https://fcalculator.com/knots-to-kmh-converter.html">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Knots to Kilometers per Hour Converter, kn to km/h</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Knots to Kilometers per Hour Converter, kn to km/h",
+      "url": "https://fcalculator.com/knots-to-kmh-converter.html",
+      "description": "This tool provides accurate conversions from knots to kilometers per hour, essential for maritime operations, aviation planning, meteorological assessments, and linking nautical units with metric speed systems in worldwide scenarios.",
+      "datePublished": "2022-01-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "FCalculator.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://fcalculator.com/logo.png"
+        }
+      }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/knots-to-kmh-converter.html">Knots to Kilometers per Hour Converter</a>
+        </div>
+        <h1>Knots to Kilometers per Hour Converter, kn to km/h</h1>
+        <p>This tool provides accurate conversions from knots to kilometers per hour, essential for maritime operations, aviation planning, meteorological assessments, and linking nautical units with metric speed systems in worldwide scenarios.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Speed Input</legend>
+                    <div class="input-row">
+                        <label for="knots-value">Knots (kn)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the speed in knots for conversion to kilometers per hour.</span></label>
+                        <input type="number" id="knots-value" placeholder="e.g. 10" oninput="calculate()" required>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </section>
+    <section class="results-section" id="results" style="display:none;">
+        <p id="result"></p>
+        <canvas id="line-chart" width="500" height="240"></canvas>
+        <table id="conversion-table">
+            <thead>
+                <tr>
+                    <th>Knots (kn)</th>
+                    <th>Kilometers per Hour (km/h)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        <button onclick="sharePage()">Share</button>
+    </section>
+    <p>Explore similar tools like our <a href="/kmh-to-knots-converter.html">Kilometers per Hour to Knots Converter</a> or <a href="/speed-converter.html">Speed Converter</a> for comprehensive speed analysis.</p>
+    <section>
+        <h2>How to Use the Knots to Kilometers per Hour Converter</h2>
+        <p>Enter a speed value in knots into the input field. The result updates automatically as you type. The tool uses the standard conversion factor for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for navigators, pilots, weather experts, and professionals handling nautical speeds in metric environments.</p>
+    </section>
+    <section>
+        <h2>Understanding the Knot Scale</h2>
+        <p>The knot represents speed in nautical miles per hour, vital for sea and air travel due to its alignment with Earth's latitude.</p>
+        <h3>History of the Knot Scale</h3>
+        <p>Developed in the 17th century via log lines, standardized in 1929 with the nautical mile, knots remain standard for navigation accuracy.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Airspeed_Indicator.svg/1000px-Airspeed_Indicator.svg.png" alt="Airspeed indicator showing knots." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Airspeed indicator showing knots.</i>
+    </section>
+    <section>
+        <h2>Understanding the Kilometers per Hour Scale</h2>
+        <p>Kilometers per hour (km/h) is a metric speed unit for distance traveled in kilometers over one hour, prevalent in international transportation.</p>
+        <h3>History of the Kilometers per Hour Scale</h3>
+        <p>Introduced with the metric system in the 1790s, adopted globally via SI in 1960, km/h ensures consistency in engineering and regulations.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Metric_speedometer_from_a_1992_Euro-spec_Passat_B3.jpg/1000px-Metric_speedometer_from_a_1992_Euro-spec_Passat_B3.jpg" alt="Speedometer in kilometers per hour." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Speedometer in kilometers per hour.</i>
+    </section>
+    <section>
+        <h2>The Conversion Formula Explained</h2>
+        <p>The formula to convert knots to kilometers per hour is:</p>
+        \[ \text{km/h} = \text{kn} \times 1.852 \]
+        <p>Derived from the nautical mile equaling 1.852 kilometers.</p>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 10 knots: Multiply by 1.852 to get 18.52 km/h.</p>
+    </section>
+    <section>
+        <h2>Comparison of Speed Scales</h2>
+        <p>Knots suit nautical contexts; km/h for metric land use. One knot = 1.852 km/h, key for global coordination.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Object/Event</th>
+                    <th>Knots (kn)</th>
+                    <th>Kilometers per Hour (km/h)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Light Wind</td><td>5</td><td>9.26</td></tr>
+                <tr><td>Sailing Speed</td><td>10</td><td>18.52</td></tr>
+                <tr><td>Strong Gale</td><td>40</td><td>74.08</td></tr>
+                <tr><td>Jet Cruise</td><td>500</td><td>926</td></tr>
+                <tr><td>Hurricane Force</td><td>64</td><td>118.53</td></tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What is the precise conversion factor from knots to km/h?</strong> Exactly 1.852, from the nautical mile definition.</p>
+        <p><strong>Why convert between knots and km/h?</strong> Links nautical standards with metric systems for international use.</p>
+        <p><strong>Is there a simple estimation method?</strong> Multiply knots by 1.85 for approximate km/h.</p>
+        <p><strong>How do negative values function in conversions?</strong> Handle direction in vector speeds.</p>
+        <p><strong>Where are these units applied today?</strong> Knots in navigation; km/h in metric transport.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Knot_(unit)" target="_blank">Wikipedia: Knot (unit)</a> - History and nautical applications with conversions.</p>
+        <p><a href="https://en.wikipedia.org/wiki/Kilometres_per_hour" target="_blank">Wikipedia: Kilometres per hour</a> - Metric speed overview and global usage.</p>
+        <p><a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b9" target="_blank">NIST Guide to the SI, Appendix B.9</a> - Velocity conversion factors.</p>
+        <p><a href="https://www.britannica.com/science/speed-mechanics" target="_blank">Britannica: Speed in mechanics</a> - Measurement insights and contexts.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page includes an interactive knots to kilometers per hour converter with instant updates, unit histories, formulas, charts, and tables. Supports navigation, aviation, weather, and transport, focusing on nautical-metric precision. Index under speed tools, velocity resources for science and standards.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        let lineChart;
+        function calculate() {
+            const knots = parseFloat(document.getElementById('knots-value').value);
+            if (isNaN(knots)) {
+                document.getElementById('result').innerHTML = 'Please enter a valid number.';
+                return;
+            }
+            const kmh = knots * 1.852;
+            document.getElementById('result').innerHTML = `${knots.toFixed(2)} kn = ${kmh.toFixed(2)} km/h`;
+            // Generate dynamic common values around input (only 10 options)
+            const step = Math.max(1, Math.floor(knots / 10));
+            let start = Math.max(0, knots - 4.5 * step);
+            let commonValues = [];
+            for (let i = 0; i < 10; i++) {
+                let val = start + i * step;
+                commonValues.push(val);
+            }
+            // Populate table
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            commonValues.forEach(val => {
+                const conv = val * 1.852;
+                const row = `<tr><td>${val.toFixed(2)}</td><td>${conv.toFixed(2)}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+            // Destroy existing chart if it exists
+            if (lineChart) {
+                lineChart.destroy();
+            }
+            // Delay chart creation to ensure canvas is visible
+            setTimeout(() => {
+                const ctx = document.getElementById('line-chart').getContext('2d');
+                lineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: commonValues.map(val => val.toFixed(2) + ' kn'),
+                        datasets: [{
+                            label: 'Kilometers per Hour (km/h)',
+                            data: commonValues.map(val => val * 1.852),
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }, 1000);
+            document.getElementById('results').style.display = 'block';
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Knots to Kilometers per Hour Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+        window.onload = function() {
+            const randomValue = Math.random() * 50 + 5;
+            document.getElementById('knots-value').value = randomValue.toFixed(2);
+            calculate(); // Auto calculate on load
+        };
+    </script>
+</body>
+</html>
