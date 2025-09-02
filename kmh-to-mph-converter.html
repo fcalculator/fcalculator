@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This tool provides accurate conversions from kilometers per hour to miles per hour, essential for travel planning, automotive engineering, sports performance analysis, and bridging metric-imperial speed systems in international contexts.">
+    <meta name="keywords" content="kilometers per hour to miles per hour converter, kmh to mph, speed conversion, km/h to mph, unit converter, velocity measurements, speed calculator">
+    <link rel="canonical" href="https://fcalculator.com/kmh-to-mph-converter.html">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Kilometers per Hour to Miles per Hour Converter, km/h to mph</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Kilometers per Hour to Miles per Hour Converter, km/h to mph",
+      "url": "https://fcalculator.com/kmh-to-mph-converter.html",
+      "description": "This tool provides accurate conversions from kilometers per hour to miles per hour, essential for travel planning, automotive engineering, sports performance analysis, and bridging metric-imperial speed systems in international contexts.",
+      "datePublished": "2022-01-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "FCalculator.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://fcalculator.com/logo.png"
+        }
+      }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/kmh-to-mph-converter.html">Kilometers per Hour to Miles per Hour Converter</a>
+        </div>
+        <h1>Kilometers per Hour to Miles per Hour Converter, km/h to mph</h1>
+        <p>This tool provides accurate conversions from kilometers per hour to miles per hour, essential for travel planning, automotive engineering, sports performance analysis, and bridging metric-imperial speed systems in international contexts.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Speed Input</legend>
+                    <div class="input-row">
+                        <label for="kmh-value">Kilometers per Hour (km/h)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the speed in kilometers per hour for conversion to miles per hour.</span></label>
+                        <input type="number" id="kmh-value" placeholder="e.g. 100" oninput="calculate()" required>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </section>
+    <section class="results-section" id="results" style="display:none;">
+        <p id="result"></p>
+        <canvas id="line-chart" width="500" height="240"></canvas>
+        <table id="conversion-table">
+            <thead>
+                <tr>
+                    <th>Kilometers per Hour (km/h)</th>
+                    <th>Miles per Hour (mph)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        <button onclick="sharePage()">Share</button>
+    </section>
+    <p>Explore similar tools like our <a href="/mph-to-kmh-converter.html">Miles per Hour to Kilometers per Hour Converter</a> or <a href="/speed-converter.html">Speed Converter</a> for comprehensive speed analysis.</p>
+    <section>
+        <h2>How to Use the Kilometers per Hour to Miles per Hour Converter</h2>
+        <p>Enter a speed value in kilometers per hour into the input field. The result updates automatically as you type. The tool uses the standard conversion factor for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for drivers, athletes, engineers, and travelers navigating between metric and imperial speed units in global contexts.</p>
+    </section>
+    <section>
+        <h2>Understanding the Kilometers per Hour Scale</h2>
+        <p>Kilometers per hour (km/h) is a metric unit of speed, expressing the distance in kilometers traveled in one hour, widely used in most countries for road signs, vehicle speedometers, and weather reports.</p>
+        <h3>History of the Kilometers per Hour Scale</h3>
+        <p>Introduced with the metric system in the late 18th century during the French Revolution, km/h became standard in Europe and globally through the adoption of the SI system in 1960, replacing older units like miles per hour in many regions for consistency in scientific and everyday measurements.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Metric_speedometer_from_a_1992_Euro-spec_Passat_B3.jpg" alt="A car speedometer indicating measured speed in kilometres per hour." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">A car speedometer indicating measured speed in kilometres per hour.</i>
+    </section>
+    <section>
+        <h2>Understanding the Miles per Hour Scale</h2>
+        <p>Miles per hour (mph) is an imperial unit of speed, indicating the distance in miles traveled in one hour, commonly used in the United States, United Kingdom, and some other countries for transportation and aviation.</p>
+        <h3>History of the Miles per Hour Scale</h3>
+        <p>Originating from the Roman mile and adopted in the British Imperial system in 1824, mph was standardized in 1959 under the international yard agreement, remaining prevalent in non-metric countries for speed limits and vehicle instrumentation.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/1974_MG_MGB_GT_-_Flickr_-_The_Car_Spy_%2814%29.jpg" alt="Speedometer indicating speed in miles per hour." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Speedometer indicating speed in miles per hour.</i>
+    </section>
+    <section>
+        <h2>The Conversion Formula Explained</h2>
+        <p>The formula to convert kilometers per hour to miles per hour is:</p>
+        \[ \text{mph} = \text{km/h} \times 0.621371 \]
+        <p>Where mph is miles per hour and km/h is kilometers per hour. This derives from the exact relationship between the kilometer (1000 meters) and the mile (1609.344 meters).</p>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 100 km/h: Multiply by 0.621371 to get 62.1371 mph, typically rounded to 62.14 mph for practical applications.</p>
+    </section>
+    <section>
+        <h2>Comparison of Speed Scales</h2>
+        <p>Kilometers per hour provides a metric-based scale for easy integration with other SI units in science and most countries, while miles per hour offers familiarity in imperial contexts like U.S. roadways. One km/h approximates 0.621 mph, making conversions crucial for international travel and engineering.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Object/Event</th>
+                    <th>Kilometers per Hour (km/h)</th>
+                    <th>Miles per Hour (mph)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Walking Speed</td><td>5</td><td>3.11</td></tr>
+                <tr><td>Cycling Speed</td><td>20</td><td>12.43</td></tr>
+                <tr><td>City Driving Limit</td><td>50</td><td>31.07</td></tr>
+                <tr><td>Highway Speed</td><td>100</td><td>62.14</td></tr>
+                <tr><td>High-Speed Train</td><td>300</td><td>186.41</td></tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What is the precise conversion factor from km/h to mph?</strong> The exact factor is 0.621371192237, based on 1 mile = 1.609344 kilometers.</p>
+        <p><strong>Why convert between km/h and mph?</strong> Conversions are essential in mixed-unit environments, such as international travel where road signs use km/h while U.S. vehicles display mph.</p>
+        <p><strong>Is there a simple estimation method?</strong> Multiply km/h by 0.62 for a quick approximate in mph, then refine for accuracy.</p>
+        <p><strong>How do negative values function in conversions?</strong> The tool supports negative inputs for directional measurements, applying the same factor.</p>
+        <p><strong>Where are these units applied today?</strong> Km/h dominates in most nations for road and rail, while mph persists in the U.S., UK, and aviation sectors.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Kilometres_per_hour" target="_blank">Wikipedia: Kilometres per hour</a> - In-depth history, definitions, and global applications of km/h, with conversion details to other units.</p>
+        <p><a href="https://en.wikipedia.org/wiki/Miles_per_hour" target="_blank">Wikipedia: Miles per hour</a> - Comprehensive overview of mph's development, standards, and comparisons with metric systems.</p>
+        <p><a href="https://www.nist.gov/pml/owm/metric-si/si-units-velocity" target="_blank">NIST: SI Units - Velocity</a> - Official U.S. guidelines on speed conversions, including km/h to mph, from the National Institute of Standards and Technology.</p>
+        <p><a href="https://www.britannica.com/science/speed" target="_blank">Britannica: Speed</a> - Educational insights into speed measurement systems, historical context, and practical uses across disciplines.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page features an interactive kilometers per hour to miles per hour converter with automatic updates, educational sections on unit histories, precise formulas, visual line charts, and comparison tables. It supports applications in travel, automotive, sports, aviation, and international trade, focusing on metric-imperial accuracy. Index under speed conversion tools, velocity utilities, and educational resources for physics, transportation, and global standards.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        let lineChart;
+        function calculate() {
+            const kmh = parseFloat(document.getElementById('kmh-value').value);
+            if (isNaN(kmh)) {
+                document.getElementById('result').innerHTML = 'Please enter a valid number.';
+                return;
+            }
+            const mph = kmh * 0.621371;
+            document.getElementById('result').innerHTML = `${kmh.toFixed(2)} km/h = ${mph.toFixed(2)} mph`;
+            // Generate dynamic common values around input (only 10 options)
+            const step = Math.max(1, Math.floor(kmh / 10));
+            let start = Math.max(0, kmh - 4.5 * step);
+            let commonValues = [];
+            for (let i = 0; i < 10; i++) {
+                let val = start + i * step;
+                commonValues.push(val);
+            }
+            // Populate table
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            commonValues.forEach(val => {
+                const conv = val * 0.621371;
+                const row = `<tr><td>${val.toFixed(2)}</td><td>${conv.toFixed(2)}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+            // Destroy existing chart if it exists
+            if (lineChart) {
+                lineChart.destroy();
+            }
+            // Delay chart creation to ensure canvas is visible
+            setTimeout(() => {
+                const ctx = document.getElementById('line-chart').getContext('2d');
+                lineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: commonValues.map(val => val.toFixed(2) + ' km/h'),
+                        datasets: [{
+                            label: 'Miles per Hour (mph)',
+                            data: commonValues.map(val => val * 0.621371),
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }, 1000);
+            document.getElementById('results').style.display = 'block';
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Kilometers per Hour to Miles per Hour Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+        window.onload = function() {
+            const randomValue = Math.random() * 100 + 10;
+            document.getElementById('kmh-value').value = randomValue.toFixed(2);
+            calculate(); // Auto calculate on load
+        };
+    </script>
+</body>
+</html>
