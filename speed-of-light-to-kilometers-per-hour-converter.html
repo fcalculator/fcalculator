@@ -73,7 +73,7 @@
         </table>
         <button onclick="sharePage()">Share</button>
     </section>
-    <p>Explore similar tools like our Kilometers per Hour to Speed of Light Converter or Speed Converter for comprehensive speed analysis.</p>
+    <p>Explore similar tools like our <a href="https://fcalculator.com/knots-to-mph-converter.html">Knots to Miles per Hour Converter</a> or <a href="https://fcalculator.com/kmh-to-mph-converter.html">Kilometers per Hour to Miles per Hour Converter</a> for comprehensive speed analysis.</p>
     <section>
         <h2>How to Use the Speed of Light to Kilometers per Hour Converter</h2>
         <p>Enter a fraction of the speed of light value into the input field. The result updates automatically as you type. The tool uses the standard conversion factor for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for physicists, engineers, students, and anyone exploring relativistic speeds in scientific or educational contexts.</p>
@@ -147,6 +147,12 @@
     </footer>
     <script>
         let lineChart;
+        function toLatexScientific(num) {
+            const sci = num.toExponential(2).split('e');
+            const mantissa = parseFloat(sci[0]).toFixed(2);
+            const exponent = sci[1].replace('+', '');
+            return `${mantissa} \\times 10^{${exponent}}`;
+        }
         function calculate() {
             const c_frac = parseFloat(document.getElementById('c-value').value);
             if (isNaN(c_frac)) {
@@ -155,7 +161,7 @@
             }
             const c_kmh = 1079252848.8;
             const kmh = c_frac * c_kmh;
-            document.getElementById('result').innerHTML = `${c_frac.toFixed(2)} c = ${kmh.toExponential(2)} km/h`;
+            document.getElementById('result').innerHTML = `\\[ ${c_frac.toFixed(2)} \\text{ c} = ${toLatexScientific(kmh)} \\text{ km/h} \\]`;
             // Generate dynamic common values around input (only 10 options)
             const step = 0.1;
             let start = Math.max(0, c_frac - 0.45);
@@ -169,7 +175,7 @@
             tableBody.innerHTML = '';
             commonValues.forEach(val => {
                 const conv = val * c_kmh;
-                const row = `<tr><td>${val.toFixed(2)}</td><td>${conv.toExponential(2)}</td></tr>`;
+                const row = `<tr><td>${val.toFixed(2)}</td><td>\\[ ${toLatexScientific(conv)} \\]</td></tr>`;
                 tableBody.innerHTML += row;
             });
             // Destroy existing chart if it exists
