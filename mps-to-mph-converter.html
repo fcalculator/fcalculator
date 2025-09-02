@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This tool provides accurate conversions from meters per second to miles per hour, essential for physics experiments, engineering designs, athletic performance tracking, and integrating SI units with imperial speed measurements in global applications.">
+    <meta name="keywords" content="meters per second to miles per hour converter, mps to mph, speed conversion, m/s to mph, unit converter, velocity measurements, speed calculator">
+    <link rel="canonical" href="https://fcalculator.com/mps-to-mph-converter.html">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Meters per Second to Miles per Hour Converter, m/s to mph</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Meters per Second to Miles per Hour Converter, m/s to mph",
+      "url": "https://fcalculator.com/mps-to-mph-converter.html",
+      "description": "This tool provides accurate conversions from meters per second to miles per hour, essential for physics experiments, engineering designs, athletic performance tracking, and integrating SI units with imperial speed measurements in global applications.",
+      "datePublished": "2022-01-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "FCalculator.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://fcalculator.com/logo.png"
+        }
+      }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/mps-to-mph-converter.html">Meters per Second to Miles per Hour Converter</a>
+        </div>
+        <h1>Meters per Second to Miles per Hour Converter, m/s to mph</h1>
+        <p>This tool provides accurate conversions from meters per second to miles per hour, essential for physics experiments, engineering designs, athletic performance tracking, and integrating SI units with imperial speed measurements in global applications.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Speed Input</legend>
+                    <div class="input-row">
+                        <label for="mps-value">Meters per Second (m/s)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the speed in meters per second for conversion to miles per hour.</span></label>
+                        <input type="number" id="mps-value" placeholder="e.g. 10" oninput="calculate()" required>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </section>
+    <section class="results-section" id="results" style="display:none;">
+        <p id="result"></p>
+        <canvas id="line-chart" width="500" height="240"></canvas>
+        <table id="conversion-table">
+            <thead>
+                <tr>
+                    <th>Meters per Second (m/s)</th>
+                    <th>Miles per Hour (mph)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        <button onclick="sharePage()">Share</button>
+    </section>
+    <p>Explore similar tools like our <a href="/mph-to-mps-converter.html">Miles per Hour to Meters per Second Converter</a> or <a href="/speed-converter.html">Speed Converter</a> for comprehensive speed analysis.</p>
+    <section>
+        <h2>How to Use the Meters per Second to Miles per Hour Converter</h2>
+        <p>Enter a speed value in meters per second into the input field. The result updates automatically as you type. The tool uses the standard conversion factor for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for physicists, engineers, athletes, and students dealing with velocity in scientific research, vehicle testing, or sports metrics.</p>
+    </section>
+    <section>
+        <h2>Understanding the Meters per Second Scale</h2>
+        <p>Meters per second (m/s) is the fundamental SI unit of speed, defining the rate at which an object covers distance in meters over one second, crucial for kinematic equations and dynamic analysis in physics.</p>
+        <h3>History of the Meters per Second Scale</h3>
+        <p>Established in 1960 as part of the International System of Units, m/s builds on the meter (redefined in 1983 via the speed of light) and the second (based on atomic transitions since 1967), enabling precise velocity measurements in scientific and engineering fields worldwide.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Velocity_vs_Time_Graph.png" alt="Velocity vs Time Graph illustrating meters per second." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Velocity vs Time Graph illustrating meters per second.</i>
+    </section>
+    <section>
+        <h2>Understanding the Miles per Hour Scale</h2>
+        <p>Miles per hour (mph) is an imperial unit expressing speed as the number of miles traveled in one hour, commonly employed in transportation and aviation within imperial-system countries.</p>
+        <h3>History of the Miles per Hour Scale</h3>
+        <p>Rooted in the ancient Roman mile, mph was standardized in the 19th century British Imperial system and refined in 1959 through international agreements, maintaining relevance in speed regulations and performance evaluations.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/1974_MG_MGB_GT_-_Flickr_-_The_Car_Spy_%2814%29.jpg" alt="Speedometer indicating speed in miles per hour." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Speedometer indicating speed in miles per hour.</i>
+    </section>
+    <section>
+        <h2>The Conversion Formula Explained</h2>
+        <p>The formula to convert meters per second to miles per hour is:</p>
+        \[ \text{mph} = \text{m/s} \times 2.23694 \]
+        <p>Where mph is miles per hour and m/s is meters per second. This factor arises from the relationships: 1 mile = 1609.34 meters and 1 hour = 3600 seconds, yielding 3600 / 1609.34 ≈ 2.23694.</p>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 10 m/s: Multiply by 2.23694 to get 22.3694 mph, often rounded to 22.37 mph for utility.</p>
+    </section>
+    <section>
+        <h2>Comparison of Speed Scales</h2>
+        <p>Meters per second excels in precise scientific computations, while miles per hour suits everyday imperial applications. One m/s approximates 2.237 mph, aiding cross-system integrations in global projects.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Object/Event</th>
+                    <th>Meters per Second (m/s)</th>
+                    <th>Miles per Hour (mph)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Walking Speed</td><td>1.4</td><td>3.13</td></tr>
+                <tr><td>Sprinting Speed</td><td>10</td><td>22.37</td></tr>
+                <tr><td>Car Highway Speed</td><td>26.82</td><td>60</td></tr>
+                <tr><td>Sound Speed</td><td>343</td><td>767.27</td></tr>
+                <tr><td>Bullet Speed</td><td>900</td><td>2013.25</td></tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What is the precise conversion factor from m/s to mph?</strong> The factor is approximately 2.23693629, based on 1 mile = 1609.344 meters and 1 hour = 3600 seconds.</p>
+        <p><strong>Why convert between m/s and mph?</strong> Conversions bridge scientific SI units with imperial transportation standards, essential for international engineering and research.</p>
+        <p><strong>Is there a simple estimation method?</strong> Multiply m/s by 2.24 for a close approximate in mph.</p>
+        <p><strong>How do negative values function in conversions?</strong> Negative inputs represent opposite directions, with the factor applied accordingly.</p>
+        <p><strong>Where are these units applied today?</strong> M/s in physics labs and simulations; mph in U.S. road safety and sports.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Metre_per_second" target="_blank">Wikipedia: Metre per second</a> - Detailed exploration of m/s history and scientific applications with conversion guides.</p>
+        <p><a href="https://en.wikipedia.org/wiki/Miles_per_hour" target="_blank">Wikipedia: Miles per hour</a> - Overview of mph evolution and usage in imperial systems.</p>
+        <p><a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b9" target="_blank">NIST Guide to the SI, Appendix B.9</a> - Conversion factors for velocity units including m/s to mph.</p>
+        <p><a href="https://www.britannica.com/science/speed-mechanics" target="_blank">Britannica: Speed in mechanics</a> - Insights into speed concepts and measurement scales.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page offers an interactive meters per second to miles per hour converter with real-time updates, in-depth unit histories, exact formulas, visual charts, and comparative tables. It aids in physics, engineering, athletics, and education, emphasizing SI-imperial precision. Index under speed converters, velocity tools, and resources for science, mechanics, and international standards.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        let lineChart;
+        function calculate() {
+            const mps = parseFloat(document.getElementById('mps-value').value);
+            if (isNaN(mps)) {
+                document.getElementById('result').innerHTML = 'Please enter a valid number.';
+                return;
+            }
+            const mph = mps * 2.23694;
+            document.getElementById('result').innerHTML = `${mps.toFixed(2)} m/s = ${mph.toFixed(2)} mph`;
+            // Generate dynamic common values around input (only 10 options)
+            const step = Math.max(0.5, mps / 10);
+            let start = Math.max(0, mps - 4.5 * step);
+            let commonValues = [];
+            for (let i = 0; i < 10; i++) {
+                let val = start + i * step;
+                commonValues.push(val);
+            }
+            // Populate table
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            commonValues.forEach(val => {
+                const conv = val * 2.23694;
+                const row = `<tr><td>${val.toFixed(2)}</td><td>${conv.toFixed(2)}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+            // Destroy existing chart if it exists
+            if (lineChart) {
+                lineChart.destroy();
+            }
+            // Delay chart creation to ensure canvas is visible
+            setTimeout(() => {
+                const ctx = document.getElementById('line-chart').getContext('2d');
+                lineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: commonValues.map(val => val.toFixed(2) + ' m/s'),
+                        datasets: [{
+                            label: 'Miles per Hour (mph)',
+                            data: commonValues.map(val => val * 2.23694),
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }, 1000);
+            document.getElementById('results').style.display = 'block';
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Meters per Second to Miles per Hour Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+        window.onload = function() {
+            const randomValue = Math.random() * 10 + 1;
+            document.getElementById('mps-value').value = randomValue.toFixed(2);
+            calculate(); // Auto calculate on load
+        };
+    </script>
+</body>
+</html>
