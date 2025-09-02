@@ -146,6 +146,15 @@
     </footer>
     <script>
         let lineChart;
+        function formatTime(minutes) {
+            const wholeMinutes = Math.floor(minutes);
+            const seconds = Math.round((minutes - wholeMinutes) * 60);
+            let result = `${wholeMinutes} min`;
+            if (seconds > 0) {
+                result += ` ${seconds} seconds`;
+            }
+            return result;
+        }
         function calculate() {
             const hours = parseFloat(document.getElementById('hours-value').value);
             if (isNaN(hours)) {
@@ -153,7 +162,7 @@
                 return;
             }
             const minutes = hours * 60;
-            document.getElementById('result').innerHTML = `${hours.toFixed(2)} h = ${minutes.toFixed(2)} min`;
+            document.getElementById('result').innerHTML = `${hours.toFixed(2)} h = ${formatTime(minutes)}`;
             // Generate dynamic common values around input (only 10 options)
             const step = Math.max(1, Math.floor(hours / 10));
             let start = Math.max(0, hours - 4.5 * step);
@@ -167,7 +176,7 @@
             tableBody.innerHTML = '';
             commonValues.forEach(val => {
                 const conv = val * 60;
-                const row = `<tr><td>${val.toFixed(2)}</td><td>${conv.toFixed(2)}</td></tr>`;
+                const row = `<tr><td>${val.toFixed(2)}</td><td>${formatTime(conv)}</td></tr>`;
                 tableBody.innerHTML += row;
             });
             // Destroy existing chart if it exists
