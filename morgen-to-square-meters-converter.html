@@ -154,11 +154,13 @@
             }
             const squareMeters = morgen * 2500;
             document.getElementById('result').innerHTML = `${morgen.toFixed(2)} morgen = ${squareMeters.toFixed(2)} square meters`;
-            // Generate dynamic common values around input (steps of 0.5, from morgen-5 to morgen+5)
-            const step = 0.5;
+            // Generate dynamic common values around input (only 10 options)
+            const step = 1;
+            let start = Math.max(0, morgen - 4.5);
             let commonValues = [];
-            for (let i = Math.max(0, morgen - 5); i <= morgen + 5; i += step) {
-                commonValues.push(i);
+            for (let i = 0; i < 10; i++) {
+                let val = start + i * step;
+                commonValues.push(val);
             }
             // Populate table
             const tableBody = document.querySelector('#conversion-table tbody');
