@@ -187,7 +187,7 @@
         let lineChart;
         // Set random megabytes value on page load
         function setRandomMegabytes() {
-            const randomMB = Math.floor(Math.random() * 1000001); // Random number between 0 and 1,000,000
+            const randomMB = Math.floor(Math.random() * 10001); // Random number between 0 and 10000
             document.getElementById('megabytes-value').value = randomMB;
             calculate();
         }
