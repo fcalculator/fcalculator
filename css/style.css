@@ -100,12 +100,12 @@ section h2 {
     font-weight: bold;
 }
 
+
 section h3 {
-    font-size: calc(var(--font-size-base) * 1.1);
-    color: var(--secondary-color);
-    margin-bottom: calc(var(--spacing-unit) * 0.25);
-    font-weight: normal;
-    text-decoration: underline;
+    font-size: calc(var(--font-size-base) * 1.1); /* Adjusted for modern feel */
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: calc(var(--spacing-unit) * 0.25); /* Minimal bottom margin */
 }
 
 /* Forms: Compact grid, small elements */
