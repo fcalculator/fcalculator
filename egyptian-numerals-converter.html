@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert numbers to Egyptian numerals or vice versa with historical insights, formulas, examples, and tables for education and research.">
+    <meta name="keywords" content="egyptian numerals converter, number to egyptian conversion, egyptian to number calculator, historical numeral tool, ancient egyptian numbers, numeral system utility, education conversion, classical studies, numeral scaling, numeral examples">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Egyptian Numerals Converter</title>
+    <link rel="canonical" href="https://fcalculator.com/egyptian-numerals-converter.html">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <style>
+        .MathJax { max-width: 300px; overflow-x: auto; }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Egyptian Numerals Converter",
+        "url": "https://fcalculator.com/egyptian-numerals-converter.html",
+        "description": "An interactive tool for converting between numbers and Egyptian numerals with detailed historical backgrounds, mathematical principles, step-by-step examples, comparison tables, and practical applications in education, history, archaeology, and cultural studies. Supports values up to 999999 with accurate hieroglyphic notation and educational resources for ancient numeral systems.",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Egyptian Numerals Converter",
+                    "item": "https://fcalculator.com/egyptian-numerals-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/egyptian-numerals-converter.html">Egyptian Numerals Converter</a>
+        </div>
+        <h1>Egyptian Numerals Converter</h1>
+        <p>This tool provides accurate conversions between numbers and Egyptian numerals, essential for historical research, educational purposes, archaeological studies, and understanding ancient numeral systems in cultural contexts.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Numeral Input</legend>
+                    <div class="input-row">
+                        <label for="input-value">Enter Number or Egyptian Numeral<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter a number (1-999999) or Egyptian numeral for conversion.</span></label>
+                        <input type="text" id="input-value" placeholder="e.g. 2023 or 𓆐𓆐𓎆𓎆𓏺𓏺𓏺" oninput="calculate()" required>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </section>
+    <section class="results-section" id="results">
+        <h2>Calculation Results</h2>
+        <p id="result"></p>
+        <p id="current-date-egyptian"></p>
+        <p id="egyptian-clock"></p>
+        <table id="conversion-table">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Egyptian Numeral</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        <button onclick="saveAsPDF()">Save as PDF</button>
+        <button onclick="sharePage()">Share</button>
+    </section>
+    <p>Explore similar tools like our <a href="https://fcalculator.com/conversions.html">Conversions</a> for comprehensive unit analysis.</p>
+    <section>
+        <h2>How to Use the Egyptian Numerals Converter</h2>
+        <p>Enter a number (1-999999) or an Egyptian numeral into the input field. The result updates automatically as you type. The tool detects the input type and performs the conversion, displaying the result along with a table of common conversions for better understanding. This converter is ideal for students, historians, educators, and anyone dealing with ancient numeral systems in research or educational materials. For example, input 2023 to see 𓆐𓆐𓎆𓎆𓏺𓏺𓏺, or input 𓆐𓆐𓎆𓎆𓏺𓏺𓏺 to see 2023, facilitating easy verification and learning of Egyptian numeral structures.</p>
+    </section>
+    <section>
+        <h2>Understanding Egyptian Numerals</h2>
+        <p>Egyptian numerals employ a decimal system with distinct hieroglyphic symbols for powers of ten, using repetition to represent multiples. Symbols include a stroke for 1, arch for 10, coil for 100, lotus flower for 1000, finger for 10,000, frog for 100,000, and a god figure for 1,000,000, forming an additive notation ideal for inscriptions and records.</p>
+        <h3>History of Egyptian Numerals</h3>
+        <p>Originating in the predynastic period around 3000 BC, Egyptian numerals evolved from tally marks to a sophisticated hieroglyphic system used in monumental inscriptions, papyri, and administrative documents. The system facilitated recording of tributes, measurements in architecture like pyramid construction, and astronomical calculations. It persisted through the Old, Middle, and New Kingdoms, influencing later numeral systems in the Mediterranean, and adapted into hieratic script for everyday writing on papyrus, reflecting the civilization's emphasis on precision in engineering and bureaucracy.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Egyptian_numerals_Rhind_2.png" alt="Hieroglyphic representation of Egyptian numerals on the Rhind Papyrus." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Hieroglyphic representation of Egyptian numerals on the Rhind Papyrus.</i>
+    </section>
+    <section>
+        <h2>The Conversion Principles Explained</h2>
+        <p>Egyptian numerals are additive, repeating symbols for each power of ten: 1 (𓏺), 10 (𓎆), 100 (𓍢), 1000 (𓆼), 10000 (𓂭), 100000 (𓆐), 1000000 (𓁨). Symbols are grouped from largest to smallest without subtraction, limiting efficiency for large values.</p>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 1999 to Egyptian: 1000 (𓆼) + 900 (𓍢 x 9) + 90 (𓎆 x 9) + 9 (𓏺 x 9). To convert 𓆼𓆼𓎆𓎆𓏺𓏺𓏺 to number: 2000 (𓆼 x 2) + 20 (𓎆 x 2) + 3 (𓏺 x 3) = 2023. Another example: 476 as 𓍢𓍢𓍢𓍢𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓏺𓏺𓏺𓏺𓏺𓏺 represents historical counts, breaking down as 400 (𓍢 x 4) + 70 (𓎆 x 7) + 6 (𓏺 x 6).</p>
+    </section>
+    <section>
+        <h2>Variations and Limitations in Egyptian Numerals</h2>
+        <p>The hieroglyphic system coexisted with hieratic and demotic scripts, where symbols were cursive for faster writing on papyrus. Limitations include no zero or positional value, complicating multiplication and division, and reliance on repetition leading to lengthy representations for large numbers. Variations in symbol arrangement, such as vertical stacking for space efficiency in inscriptions, reflect practical adaptations, and for fractions, the system used unit fractions (e.g., 1/2 as a special symbol), essential in mathematical papyri like the Rhind Papyrus for solving division problems in inheritance and land measurement.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Egyptian_Fractions_1.png" alt="Egyptian numeral symbols and fraction examples from ancient texts." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Egyptian numeral symbols and fraction examples from ancient texts.</i>
+    </section>
+    <section>
+        <h2>Comparison of Numeral Systems</h2>
+        <p>Egyptian numerals are repetitive and additive, ideal for recording but inefficient for computations compared to positional systems with zero. They suit monumental contexts but lack versatility for advanced mathematics.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Egyptian Numeral</th>
+                    <th>Usage Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>𓏺</td>
+                    <td>Unit in tallies</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>𓏺𓏺𓏺𓏺</td>
+                    <td>Basic count</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>𓏺𓏺𓏺𓏺𓏺𓏺𓏺𓏺𓏺</td>
+                    <td>Mathematical notation</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>𓎆</td>
+                    <td>Decade marker</td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td>𓎆𓎆𓎆𓎆𓎆</td>
+                    <td>Measure in texts</td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>𓍢</td>
+                    <td>Century mark</td>
+                </tr>
+                <tr>
+                    <td>500</td>
+                    <td>𓍢𓍢𓍢𓍢𓍢</td>
+                    <td>Notation in papyri</td>
+                </tr>
+                <tr>
+                    <td>1000</td>
+                    <td>𓆼</td>
+                    <td>Lotus symbol</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>𓆼𓆼𓎆𓎆𓏺𓏺𓏺</td>
+                    <td>Year example</td>
+                </tr>
+                <tr>
+                    <td>476</td>
+                    <td>𓍢𓍢𓍢𓍢𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓏺𓏺𓏺𓏺𓏺𓏺</td>
+                    <td>Historical count</td>
+                </tr>
+                <tr>
+                    <td>1492</td>
+                    <td>𓆼𓍢𓍢𓍢𓍢𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓏺𓏺</td>
+                    <td>Discovery year</td>
+                </tr>
+                <tr>
+                    <td>1776</td>
+                    <td>𓆼𓆼𓍢𓍢𓍢𓍢𓍢𓍢𓍢𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓏺𓏺𓏺𓏺𓏺𓏺</td>
+                    <td>Independence year</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Practical Applications</h2>
+        <p>Egyptian numerals appear in hieroglyphic inscriptions, mathematical papyri, and archaeological artifacts. This converter aids in decoding ancient texts, teaching numeral systems in Egyptology, or analyzing economic records from antiquity. In academia, they help interpret temple walls and obelisks, while in cultural studies, they enhance understanding of pharaonic administration and engineering.</p>
+    </section>
+    <section>
+        <h2>Modern Uses of Egyptian Numerals</h2>
+        <p>Though replaced by decimal systems, Egyptian numerals feature in educational replicas, museum exhibits, and scholarly publications on ancient mathematics. They symbolize tradition in Egyptological research, denote periods in historical timelines, and inspire designs in modern art reflecting Nile Valley heritage. Their study bridges ancient innovation with contemporary analysis of early computational methods.</p>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What are the basic symbols in Egyptian numerals?</strong> Symbols like 𓏺 (1), 𓎆 (10), 𓍢 (100), with repetition for multiples.</p>
+        <p><strong>How does repetition work in Egyptian numerals?</strong> Symbols repeat up to nine times per power of ten, arranged from largest to smallest.</p>
+        <p><strong>Why are Egyptian numerals still studied?</strong> For interpreting ancient inscriptions in archaeology, mathematics, and history.</p>
+        <p><strong>What is the range for standard Egyptian numerals?</strong> Typically 1 to 999999, with symbols up to 1,000,000.</p>
+        <p><strong>Can negative values be converted?</strong> The tool supports positive integers only, as Egyptian numerals represent positive quantities.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Egyptian_numerals" target="_blank" rel="noopener noreferrer">Wikipedia: Egyptian numerals</a> - Comprehensive overview of the numeral's development, symbols, and comparisons with other ancient systems.</p>
+        <p><a href="https://www.britannica.com/topic/Egyptian-numerals" target="_blank" rel="noopener noreferrer">Britannica: Egyptian numerals</a> - Educational insights into the system's history, usage, and role in ancient mathematics.</p>
+        <p><a href="https://mathworld.wolfram.com/EgyptianNumerals.html" target="_blank" rel="noopener noreferrer">MathWorld: Egyptian Numerals</a> - Mathematical explanation of construction, conversion, and historical applications.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page features an interactive Egyptian numerals converter with automatic updates, educational sections on numeral histories, conversion principles, visual tables, and comparison examples. It supports applications in education, historical research, and cultural studies, focusing on numeral system accuracy. Index under numeral conversion tools, educational utilities, and resources for classical studies, history, and global standards.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        function calculate() {
+            const input = document.getElementById('input-value').value.trim();
+            if (!input) {
+                document.getElementById('result').innerHTML = 'Please enter a number or Egyptian numeral.';
+                return;
+            }
+            let result;
+            if (/^[0-9]+$/.test(input)) {
+                const num = parseInt(input, 10);
+                if (num < 1 || num > 999999) {
+                    document.getElementById('result').innerHTML = 'Please enter a number between 1 and 999999.';
+                    return;
+                }
+                result = `${num} = ${toEgyptian(num)}`;
+            } else {
+                const num = toNumber(input);
+                if (num > 0) {
+                    result = `${input} = ${num}`;
+                } else {
+                    document.getElementById('result').innerHTML = 'Invalid input. Enter a number (1-999999) or valid Egyptian numeral.';
+                    return;
+                }
+            }
+            document.getElementById('result').innerHTML = result;
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            const examples = [1, 4, 9, 10, 50, 100, 500, 1000, 2023, 476, 1492, 1776];
+            examples.forEach(val => {
+                const egyptian = toEgyptian(val);
+                const row = `<tr><td>${val}</td><td>${egyptian}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+        function toEgyptian(num) {
+            const symbols = {
+                1000000: '𓁨',
+                100000: '𓆐',
+                10000: '𓂭',
+                1000: '𓆼',
+                100: '𓍢',
+                10: '𓎆',
+                1: '𓏺'
+            };
+            let egyptian = '';
+            Object.keys(symbols).reverse().forEach(key => {
+                const val = parseInt(key);
+                const count = Math.floor(num / val);
+                egyptian += symbols[val].repeat(count);
+                num -= count * val;
+            });
+            return egyptian;
+        }
+        function toNumber(egyptian) {
+            const values = {
+                '𓁨': 1000000,
+                '𓆐': 100000,
+                '𓂭': 10000,
+                '𓆼': 1000,
+                '𓍢': 100,
+                '𓎆': 10,
+                '𓏺': 1
+            };
+            let num = 0;
+            for (let char of egyptian) {
+                num += values[char] || 0;
+            }
+            return num;
+        }
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Egyptian Numerals Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+        function saveAsPDF() {
+            const resultText = document.getElementById('result').innerText;
+            const dateText = document.getElementById('current-date-egyptian').innerText;
+            const clockText = document.getElementById('egyptian-clock').innerText;
+            const tableRows = Array.from(document.querySelectorAll('#conversion-table tr')).map(row => 
+                Array.from(row.cells).map(cell => cell.innerText)
+            );
+            const docDefinition = {
+                content: [
+                    { text: 'Egyptian Numerals Converter Results', style: 'header', alignment: 'center' },
+                    { text: resultText, margin: [0, 10] },
+                    { text: dateText, margin: [0, 5] },
+                    { text: clockText, margin: [0, 5] },
+                    {
+                        table: {
+                            headerRows: 1,
+                            widths: ['*', '*'],
+                            body: tableRows
+                        },
+                        layout: {
+                            hLineColor: [200, 200, 200],
+                            vLineColor: [200, 200, 200],
+                            hLineWidth: function () { return 0.1; },
+                            vLineWidth: function () { return 0.1; }
+                        },
+                        margin: [0, 10]
+                    }
+                ],
+                styles: {
+                    header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
+                    lineColor: [200, 200, 200],
+                    lineWidth: 0.1,
+                    font: 'helvetica',
+                    cellPadding: 3,
+                    fontSize: 10,
+                    halign: 'left'
+                },
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                pageMargins: [40, 60, 40, 60],
+                footer: function (currentPage, pageCount) {
+                    return {
+                        text: 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.',
+                        alignment: 'center',
+                        style: 'footer',
+                        link: 'https://fcalculator.com/egyptian-numerals-converter.html'
+                    };
+                }
+            };
+            pdfMake.createPdf(docDefinition).download('egyptian-numerals-results.pdf');
+        }
+        window.onload = function() {
+            document.getElementById('input-value').value = Math.floor(Math.random() * 999999) + 1;
+            calculate();
+            const currentDate = new Date();
+            const day = currentDate.getDate();
+            const month = currentDate.getMonth() + 1;
+            const year = currentDate.getFullYear();
+            const egyptianDate = toEgyptian(month) + '.' + toEgyptian(day) + '.' + toEgyptian(year);
+            document.getElementById('current-date-egyptian').innerHTML = 'Today\'s date in Egyptian numerals: ' + egyptianDate;
+            function updateClock() {
+                const now = new Date();
+                const hours = now.getHours() % 12 || 12;
+                const minutes = now.getMinutes();
+                const seconds = now.getSeconds();
+                document.getElementById('egyptian-clock').innerHTML = 'Current time in Egyptian numerals: ' + toEgyptian(hours) + ':' + toEgyptian(minutes) + ':' + toEgyptian(seconds);
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+        };
+    </script>
+</body>
+</html>
