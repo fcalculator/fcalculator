@@ -18,6 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
     <style>
         .MathJax { max-width: 300px; overflow-x: auto; }
+        .egyptian-numeral { font-size: 1.5em; }
     </style>
     <script type="application/ld+json">
     {
@@ -85,9 +86,9 @@
     </section>
     <section class="results-section" id="results">
         <h2>Calculation Results</h2>
-        <p id="result"></p>
-        <p id="current-date-egyptian"></p>
-        <p id="egyptian-clock"></p>
+        <p id="result" class="egyptian-numeral"></p>
+        <p id="current-date-egyptian" class="egyptian-numeral"></p>
+        <p id="egyptian-clock" class="egyptian-numeral"></p>
         <table id="conversion-table">
             <thead>
                 <tr>
@@ -141,62 +142,62 @@
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>𓏺</td>
+                    <td class="egyptian-numeral">𓏺</td>
                     <td>Unit in tallies</td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td>𓏺𓏺𓏺𓏺</td>
+                    <td class="egyptian-numeral">𓏺𓏺𓏺𓏺</td>
                     <td>Basic count</td>
                 </tr>
                 <tr>
                     <td>9</td>
-                    <td>𓏺𓏺𓏺𓏺𓏺𓏺𓏺𓏺𓏺</td>
+                    <td class="egyptian-numeral">𓏺𓏺𓏺𓏺𓏺𓏺𓏺𓏺𓏺</td>
                     <td>Mathematical notation</td>
                 </tr>
                 <tr>
                     <td>10</td>
-                    <td>𓎆</td>
+                    <td class="egyptian-numeral">𓎆</td>
                     <td>Decade marker</td>
                 </tr>
                 <tr>
                     <td>50</td>
-                    <td>𓎆𓎆𓎆𓎆𓎆</td>
+                    <td class="egyptian-numeral">𓎆𓎆𓎆𓎆𓎆</td>
                     <td>Measure in texts</td>
                 </tr>
                 <tr>
                     <td>100</td>
-                    <td>𓍢</td>
+                    <td class="egyptian-numeral">𓍢</td>
                     <td>Century mark</td>
                 </tr>
                 <tr>
                     <td>500</td>
-                    <td>𓍢𓍢𓍢𓍢𓍢</td>
+                    <td class="egyptian-numeral">𓍢𓍢𓍢𓍢𓍢</td>
                     <td>Notation in papyri</td>
                 </tr>
                 <tr>
                     <td>1000</td>
-                    <td>𓆼</td>
+                    <td class="egyptian-numeral">𓆼</td>
                     <td>Lotus symbol</td>
                 </tr>
                 <tr>
                     <td>2023</td>
-                    <td>𓆼𓆼𓎆𓎆𓏺𓏺𓏺</td>
+                    <td class="egyptian-numeral">𓆼𓆼𓎆𓎆𓏺𓏺𓏺</td>
                     <td>Year example</td>
                 </tr>
                 <tr>
                     <td>476</td>
-                    <td>𓍢𓍢𓍢𓍢𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓏺𓏺𓏺𓏺𓏺𓏺</td>
+                    <td class="egyptian-numeral">𓍢𓍢𓍢𓍢𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓏺𓏺𓏺𓏺𓏺𓏺</td>
                     <td>Historical count</td>
                 </tr>
                 <tr>
                     <td>1492</td>
-                    <td>𓆼𓍢𓍢𓍢𓍢𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓏺𓏺</td>
+                    <td class="egyptian-numeral">𓆼𓍢𓍢𓍢𓍢𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓏺𓏺</td>
                     <td>Discovery year</td>
                 </tr>
                 <tr>
                     <td>1776</td>
-                    <td>𓆼𓆼𓍢𓍢𓍢𓍢𓍢𓍢𓍢𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓏺𓏺𓏺𓏺𓏺𓏺</td>
+                    <td class="egyptian-numeral">𓆼𓆼𓍢𓍢𓍢𓍢𓍢𓍢𓍢𓎆𓎆𓎆𓎆𓎆𓎆𓎆𓏺𓏺𓏺𓏺𓏺𓏺</td>
                     <td>Independence year</td>
                 </tr>
             </tbody>
@@ -246,11 +247,11 @@
                     document.getElementById('result').innerHTML = 'Please enter a number between 1 and 999999.';
                     return;
                 }
-                result = `${num} = ${toEgyptian(num)}`;
+                result = `${num} = <span class="egyptian-numeral">${toEgyptian(num)}</span>`;
             } else {
                 const num = toNumber(input);
                 if (num > 0) {
-                    result = `${input} = ${num}`;
+                    result = `<span class="egyptian-numeral">${input}</span> = ${num}`;
                 } else {
                     document.getElementById('result').innerHTML = 'Invalid input. Enter a number (1-999999) or valid Egyptian numeral.';
                     return;
@@ -262,7 +263,7 @@
             const examples = [1, 4, 9, 10, 50, 100, 500, 1000, 2023, 476, 1492, 1776];
             examples.forEach(val => {
                 const egyptian = toEgyptian(val);
-                const row = `<tr><td>${val}</td><td>${egyptian}</td></tr>`;
+                const row = `<tr><td>${val}</td><td class="egyptian-numeral">${egyptian}</td></tr>`;
                 tableBody.innerHTML += row;
             });
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
@@ -371,13 +372,13 @@
             const month = currentDate.getMonth() + 1;
             const year = currentDate.getFullYear();
             const egyptianDate = toEgyptian(month) + '.' + toEgyptian(day) + '.' + toEgyptian(year);
-            document.getElementById('current-date-egyptian').innerHTML = 'Today\'s date in Egyptian numerals: ' + egyptianDate;
+            document.getElementById('current-date-egyptian').innerHTML = 'Today\'s date in Egyptian numerals: <span class="egyptian-numeral">' + egyptianDate + '</span>';
             function updateClock() {
                 const now = new Date();
                 const hours = now.getHours() % 12 || 12;
                 const minutes = now.getMinutes();
                 const seconds = now.getSeconds();
-                document.getElementById('egyptian-clock').innerHTML = 'Current time in Egyptian numerals: ' + toEgyptian(hours) + ':' + toEgyptian(minutes) + ':' + toEgyptian(seconds);
+                document.getElementById('egyptian-clock').innerHTML = 'Current time in Egyptian numerals: <span class="egyptian-numeral">' + toEgyptian(hours) + ':' + toEgyptian(minutes) + ':' + toEgyptian(seconds) + '</span>';
             }
             updateClock();
             setInterval(updateClock, 1000);
