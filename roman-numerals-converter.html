@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Convert numbers to Roman numerals or Roman numerals to numbers with detailed explanations, historical insights, examples, and comparison tables for educational and historical applications.">
-    <meta name="keywords" content="roman numerals converter, number to roman conversion, roman to number calculator, historical numeral tool, ancient roman numbers, numeral system utility, education conversion, classical studies, numeral scaling, numeral examples">
+    <meta name="description" content="Convert numbers to Roman numerals or vice versa with historical insights, formulas, examples, and tables for education and research.">
+    <meta name="keywords" content="roman numerals converter, arabic to roman, roman to arabic, historical numerals, ancient roman system, numeral conversion tool, classical education, numeral examples, subtractive notation, cultural numeral studies">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -14,13 +14,15 @@
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "Roman Numerals Converter",
         "url": "https://fcalculator.com/roman-numerals-converter.html",
-        "description": "An online tool for converting Arabic numbers to Roman numerals and Roman numerals to Arabic numbers with precision, including historical backgrounds of numeral systems, mathematical principles, comparison tables, and practical examples for educational, historical, and cultural applications in numeral studies and classical contexts.",
+        "description": "An interactive tool for converting between Arabic numbers and Roman numerals with detailed historical backgrounds, mathematical principles, step-by-step examples, comparison tables, and practical applications in education, history, architecture, and cultural studies. Supports values up to 3999 with accurate subtractive notation and educational resources for classical numeral systems.",
         "datePublished": "2022-01-14",
         "publisher": {
             "@type": "Organization",
@@ -63,7 +65,7 @@
             <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/roman-numerals-converter.html">Roman Numerals Converter</a>
         </div>
         <h1>Roman Numerals Converter</h1>
-        <p>This tool provides accurate conversions between Arabic numbers and Roman numerals, essential for historical research, educational purposes, architectural studies, and understanding classical numeral systems in cultural contexts.</p>
+        <p>This tool enables precise conversions between Arabic numbers and Roman numerals, crucial for analyzing historical documents, educational teaching, architectural inscriptions, and exploring ancient numeral systems in cultural and academic contexts.</p>
     </header>
     <section class="tool-section">
         <form id="tool-form">
@@ -71,7 +73,7 @@
                 <fieldset>
                     <legend>Numeral Input</legend>
                     <div class="input-row">
-                        <label for="input-value">Enter Number or Roman Numeral<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter an Arabic number (1-3999) or Roman numeral for conversion.</span></label>
+                        <label for="input-value">Enter Number or Roman Numeral<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Input an Arabic number (1-3999) or a valid Roman numeral for instant conversion.</span></label>
                         <input type="text" id="input-value" placeholder="e.g. 2023 or MMXXIII" oninput="calculate()" required>
                     </div>
                 </fieldset>
@@ -79,161 +81,96 @@
         </form>
     </section>
     <section class="results-section" id="results">
+        <h2>Calculation Results</h2>
         <p id="result"></p>
-        <p id="current-date-roman-result"></p>
+        <p id="current-date-roman"></p>
+        <p id="roman-clock"></p>
         <table id="conversion-table">
             <thead>
                 <tr>
                     <th>Arabic Number</th>
                     <th>Roman Numeral</th>
+                    <th>Historical Example</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Populated by JS -->
             </tbody>
         </table>
-        <p id="current-date-roman-table"></p>
-        <p id="roman-clock"></p>
+        <button onclick="saveAsPDF()">Save as PDF</button>
         <button onclick="sharePage()">Share</button>
     </section>
-    <p>Explore similar tools like our <a href="/cups-to-milliliters-converter.html">Cups to Milliliters Converter</a> or <a href="/cooking-converter.html">Cooking Converter</a> for comprehensive cooking analysis.</p>
+    <p>Explore similar tools like our Feet to Meters Converter or Temperature Converter for comprehensive unit analysis.</p>
     <section>
         <h2>How to Use the Roman Numerals Converter</h2>
-        <p>Enter an Arabic number (1-3999) or a Roman numeral into the input field. The result updates automatically as you type. The tool detects the input type and performs the conversion, displaying the result along with a table of common conversions for better understanding. This converter is ideal for students, historians, educators, and anyone dealing with classical numeral systems in research or educational materials. For example, input 2023 to see MMXXIII, or input MMXXIII to see 2023, facilitating easy verification and learning of Roman numeral structures.</p>
+        <p>Input an Arabic number between 1 and 3999 or a valid Roman numeral into the field. The conversion happens automatically as you type, detecting the input type for seamless results. The tool displays the converted value, a comparison table with historical examples, and current date/time in Roman numerals for practical demonstration. Ideal for historians decoding ancient texts, educators teaching numeral systems, or designers incorporating classical elements into modern works.</p>
     </section>
     <section>
         <h2>Understanding Roman Numerals</h2>
-        <p>Roman numerals are a numeral system originating in ancient Rome, using combinations of letters from the Latin alphabet (I, V, X, L, C, D, M) to represent values. They are subtractive and additive, allowing compact representation of numbers up to 3999 in standard form. Unlike the positional Arabic system, Roman numerals rely on symbol values and their arrangement, making them unique for historical and decorative purposes.</p>
+        <p>Roman numerals utilize seven symbols—I, V, X, L, C, D, M—to represent values through additive and subtractive combinations, forming a non-positional system that emphasizes order and context for interpretation.</p>
         <h3>History of Roman Numerals</h3>
-        <p>Developed in ancient Rome around the 8th century BC, Roman numerals evolved from Etruscan symbols and were used throughout the Roman Empire for commerce, engineering, and official records. They remained in use in Europe until the late Middle Ages, when Hindu-Arabic numerals replaced them for mathematical efficiency. Today, they appear in clock faces, book chapters, movie copyrights, and monumental inscriptions, preserving a link to classical heritage. The system's endurance highlights its role in documenting key events, from Senate decrees to gladiatorial games, providing a window into Roman administrative precision.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/BadSalzdetfurthBadenburgerStr060529.jpg/1000px-BadSalzdetfurthBadenburgerStr060529.jpg" alt="A clock face with Roman numerals in Bad Salzdetfurth, Germany." style="max-width:300px; width:100%; display:block; margin:0 auto;">
-        <i style="font-size: smaller; display: block; text-align: center;">A clock face with Roman numerals in Bad Salzdetfurth, Germany.</i>
+        <p>Evolving from Etruscan tally marks around 800 BC, Roman numerals standardized during the Republic era for trade, military records, and public inscriptions. They spread across the Empire, influencing medieval Europe until Arabic numerals supplanted them in the 14th century. Today, they symbolize tradition in contexts like papal names or Olympic editions, bridging ancient engineering feats with contemporary aesthetics.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/BadSalzdetfurthBadenburgerStr060529.jpg" alt="Clock face featuring Roman numerals in Bad Salzdetfurth, Germany." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Clock face featuring Roman numerals in Bad Salzdetfurth, Germany.</i>
     </section>
     <section>
         <h2>Understanding Arabic Numerals</h2>
-        <p>Arabic numerals, also known as Hindu-Arabic numerals, are the ten digits (0-9) used in positional decimal systems worldwide, offering efficient calculation and representation of large numbers compared to Roman systems. The inclusion of zero as a placeholder revolutionized mathematics, enabling advanced computations in science and commerce.</p>
+        <p>Arabic numerals form a decimal, positional system with digits 0-9, enabling efficient representation and computation of any magnitude through place value mechanics.</p>
         <h3>History of Arabic Numerals</h3>
-        <p>Originating in India around the 6th century AD, these numerals were transmitted to Europe via Arab scholars in the Middle Ages. They revolutionized mathematics and commerce with zero and positional value, gradually replacing Roman numerals by the 15th century for their superior utility in science and accounting. The adoption marked a shift from additive to positional systems, facilitating the Renaissance in mathematics and the age of exploration through accurate navigation calculations.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Epitaph_des_Marcus_Caelius.JPG/1000px-Epitaph_des_Marcus_Caelius.JPG" alt="Epitaph of centurion Marcus Caelius showing Roman numerals." style="max-width:300px; width:100%; display:block; margin:0 auto;">
-        <i style="font-size: smaller; display: block; text-align: center;">Epitaph of centurion Marcus Caelius showing Roman numerals.</i>
+        <p>Developed in India by the 5th century AD, transmitted via Persian and Arab mathematicians, and adopted in Europe by Fibonacci in 1202. Their zero placeholder revolutionized algebra and astronomy, facilitating the Scientific Revolution and global commerce.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Epitaph_des_Marcus_Caelius.JPG" alt="Epitaph of Roman centurion Marcus Caelius with numerals." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Epitaph of Roman centurion Marcus Caelius with numerals.</i>
     </section>
     <section>
-        <h2>The Conversion Principles Explained</h2>
-        <p>Roman numerals use additive and subtractive notation: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Subtraction occurs when a smaller numeral precedes a larger (e.g., IV=4). The system avoids four consecutive identical symbols, preferring subtractive forms for efficiency.</p>
-        <h3>Step-by-Step Conversion Examples</h3>
-        <p>To convert 1999 to Roman: 1000 (M) + 900 (CM) + 90 (XC) + 9 (IX) = MCMXCIX. To convert XLII to Arabic: 40 (XL) + 2 (II) = 42. Another example: 476 (CDLXXVI) represents the fall of the Western Roman Empire, breaking down as 400 (CD) + 70 (LXX) + 6 (VI).</p>
-    </section>
-    <section>
-        <h2>Rules of Roman Numerals</h2>
-        <p>Roman numerals follow specific rules for construction:
-- Symbols are placed from left to right in order of value, starting with the largest.
-- Subtract a symbol only from the next two larger larger values (e.g., IX = 9, but not IC = 99; use XCIX instead).
-- Do not subtract a symbol from one more than five times larger (e.g., no VL for 45; use XLV).
-- Repeat symbols no more than three times consecutively (e.g., III = 3, but not IIII = 4; use IV).</p>
-        <p>These rules ensure consistency and readability in numeral representation, preventing ambiguity in historical documents.</p>
+        <h2>The Conversion Formula Explained</h2>
+        <p>Conversion to Roman involves mapping values to symbols using subtractive rules: \[ \text{Roman} = \sum \text{symbols where value decreases left to right} \]. For Arabic: Parse symbols, adding if current ≥ next, subtracting otherwise.</p>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 1994: 1000 (M) + 900 (CM) + 90 (XC) + 4 (IV) = MCMXCIV. For MCMXCIV: M(1000) + CM(900) + XC(90) + IV(4) = 1994.</p>
     </section>
     <section>
         <h2>Comparison of Numeral Systems</h2>
-        <p>Roman numerals are non-positional and limited for large numbers, while Arabic numerals are positional with zero, enabling complex calculations. Roman systems excel in additive representation for inscriptions, but lack efficiency for arithmetic operations like multiplication or division.</p>
+        <p>Roman numerals suit enumeration and aesthetics but falter in arithmetic; Arabic excel in calculations due to positional zero.</p>
         <table>
             <thead>
                 <tr>
                     <th>Arabic Number</th>
                     <th>Roman Numeral</th>
-                    <th>Usage Example</th>
+                    <th>Historical Context</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>I</td>
-                    <td>Chapter I in books</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>IV</td>
-                    <td>Clock face for 4</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>IX</td>
-                    <td>Super Bowl IX</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>X</td>
-                    <td>Decade marker</td>
-                </tr>
-                <tr>
-                    <td>50</td>
-                    <td>L</td>
-                    <td>Super Bowl L</td>
-                </tr>
-                <tr>
-                    <td>100</td>
-                    <td>C</td>
-                    <td>Century mark</td>
-                </tr>
-                <tr>
-                    <td>500</td>
-                    <td>D</td>
-                    <td>Middle Ages notation</td>
-                </tr>
-                <tr>
-                    <td>1000</td>
-                    <td>M</td>
-                    <td>Millennium</td>
-                </tr>
-                <tr>
-                    <td>2023</td>
-                    <td>MMXXIII</td>
-                    <td>Year MMXXIII</td>
-                </tr>
-                <tr>
-                    <td>476</td>
-                    <td>CDLXXVI</td>
-                    <td>Fall of Western Roman Empire</td>
-                </tr>
-                <tr>
-                    <td>1492</td>
-                    <td>MCDXCII</td>
-                    <td>Columbus voyage</td>
-                </tr>
-                <tr>
-                    <td>1776</td>
-                    <td>MDCCLXXVI</td>
-                    <td>US Independence</td>
-                </tr>
+                <tr><td>1</td><td>I</td><td>First Roman legion</td></tr>
+                <tr><td>5</td><td>V</td><td>Quinquereme ships</td></tr>
+                <tr><td>10</td><td>X</td><td>Decimation punishment</td></tr>
+                <tr><td>50</td><td>L</td><td>Legionary pay in denarii</td></tr>
+                <tr><td>100</td><td>C</td><td>Centurion rank</td></tr>
+                <tr><td>500</td><td>D</td><td>Mid-Empire milestone</td></tr>
+                <tr><td>1000</td><td>M</td><td>Millennium marker</td></tr>
+                <tr><td>44</td><td>XLIV</td><td>Caesar's assassination year</td></tr>
+                <tr><td>476</td><td>CDLXXVI</td><td>Fall of Rome</td></tr>
+                <tr><td>1492</td><td>MCDXCII</td><td>Columbus discovery</td></tr>
+                <tr><td>1776</td><td>MDCCLXXVI</td><td>US Declaration</td></tr>
+                <tr><td>2025</td><td>MMXXV</td><td>Modern year example</td></tr>
             </tbody>
         </table>
     </section>
     <section>
-        <h2>Practical Applications</h2>
-        <p>Roman numerals are used in clock designs, book outlines, movie sequels, and architectural dates. This converter aids in decoding historical texts, creating formal documents, or teaching numeral systems in education. In academia, they help analyze ancient manuscripts, while in design, they add classical aesthetics to modern works like watches or building cornerstones.</p>
-    </section>
-    <section>
-        <h2>Modern Uses of Roman Numerals</h2>
-        <p>Despite the dominance of Arabic numerals, Roman numerals persist in specific contexts for their aesthetic and traditional value. They denote monarchs (e.g., Elizabeth II), Super Bowl events (e.g., Super Bowl LVIII), Olympic Games (e.g., XXXII Olympics), and copyright dates in media. In typography, they number prefaces or appendices in books, and in music, they label opus numbers or chord progressions. Their continued use underscores a cultural connection to antiquity, blending historical significance with contemporary symbolism.</p>
-    </section>
-    <section>
         <h2>FAQ</h2>
-        <p><strong>What are the basic symbols in Roman numerals?</strong> I (1), V (5), X (10), L (50), C (100), D (500), M (1000).</p>
-        <p><strong>How does subtractive notation work?</strong> A smaller numeral before a larger subtracts its value (e.g., IX = 9).</p>
-        <p><strong>Why are Roman numerals still used?</strong> For stylistic purposes in clocks, books, and monuments.</p>
-        <p><strong>What is the range for standard Roman numerals?</strong> Typically 1 to 3999 to avoid complex extensions.</p>
-        <p><strong>Can negative values be converted?</strong> The tool supports positive integers only, as Roman numerals represent positive values.</p>
-        <p><strong>How do Roman numerals handle large numbers?</strong> For numbers above 3999, extensions like vinculums are used, but standard form limits to MMMCMXCIX (3999).</p>
-        <p><strong>What's the difference between Roman and Arabic numerals?</strong> Roman are additive/subtractive without zero, Arabic are positional with zero for efficient math.</p>
+        <p><strong>What symbols represent Roman numerals?</strong> I=1, V=5, X=10, L=50, C=100, D=500, M=1000, combined additively or subtractively.</p>
+        <p><strong>How does subtraction work in Roman numerals?</strong> Smaller before larger subtracts, like IV (5-1=4) or CM (1000-100=900).</p>
+        <p><strong>Why limit to 3999?</strong> Standard form avoids ambiguity; larger use extensions like overlines.</p>
+        <p><strong>Are Roman numerals used in math today?</strong> Rarely, due to inefficiency; mainly decorative or enumerative.</p>
+        <p><strong>Can the tool handle invalid inputs?</strong> Yes, it validates and alerts for errors like invalid symbols or ranges.</p>
     </section>
     <section>
         <h2>Related Resources</h2>
-        <p><a href="https://en.wikipedia.org/wiki/Roman_numerals" target="_blank" rel="noopener noreferrer">Wikipedia: Roman numerals</a> - Comprehensive history, rules, and examples of Roman numeral system.</p>
-        <p><a href="https://www.britannica.com/topic/Roman-numeral" target="_blank" rel="noopener noreferrer">Britannica: Roman numeral</a> - Educational insights into the development and usage of Roman numerals.</p>
-        <p><a href="https://mathworld.wolfram.com/RomanNumerals.html" target="_blank" rel="noopener noreferrer">MathWorld: Roman Numerals</a> - Mathematical explanation of Roman numeral construction and conversion algorithms.</p>
+        <p><a href="https://en.wikipedia.org/wiki/Roman_numerals" target="_blank" rel="noopener noreferrer">Wikipedia: Roman numerals</a> - Detailed evolution, rules, and cultural significance of the Roman numeral system.</p>
+        <p><a href="https://www.britannica.com/topic/Roman-numeral" target="_blank" rel="noopener noreferrer">Britannica: Roman numeral</a> - Historical context and comparisons with modern numeral systems.</p>
+        <p><a href="https://mathworld.wolfram.com/RomanNumerals.html" target="_blank" rel="noopener noreferrer">MathWorld: Roman Numerals</a> - Mathematical algorithms for conversion and structural analysis.</p>
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This page features an interactive Roman numerals converter with automatic updates, educational sections on numeral histories, conversion principles, visual tables, and comparison examples. It supports applications in education, historical research, and cultural studies, focusing on numeral system accuracy. Index under numeral conversion tools, educational utilities, and resources for classical studies, history, and global standards.</p>
+        <p>This Roman Numerals Converter page includes interactive input detection, real-time conversions, historical explanations, mathematical formulas, comparison tables with examples, and dynamic date/time displays in Roman numerals. Optimized for educational use in history, classics, and numeral studies, with support for values 1-3999 and practical applications in research and design. Include in indexes for numeral tools, conversion utilities, and resources on ancient systems, education, and cultural heritage.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
@@ -262,32 +199,37 @@
                 return;
             }
             document.getElementById('result').innerHTML = result;
-
-            // Generate common values table
             const tableBody = document.querySelector('#conversion-table tbody');
             tableBody.innerHTML = '';
-            const examples = [1, 4, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000, 2023];
+            const examples = [1, 5, 10, 50, 100, 500, 1000, 44, 476, 1492, 1776, 2025];
             examples.forEach(val => {
                 const roman = toRoman(val);
-                const row = `<tr><td>${val}</td><td>${roman}</td></tr>`;
+                let context = '';
+                switch(val) {
+                    case 1: context = 'First Roman legion'; break;
+                    case 5: context = 'Quinquereme ships'; break;
+                    case 10: context = 'Decimation punishment'; break;
+                    case 50: context = 'Legionary pay in denarii'; break;
+                    case 100: context = 'Centurion rank'; break;
+                    case 500: context = 'Mid-Empire milestone'; break;
+                    case 1000: context = 'Millennium marker'; break;
+                    case 44: context = 'Caesar\'s assassination year'; break;
+                    case 476: context = 'Fall of Rome'; break;
+                    case 1492: context = 'Columbus discovery'; break;
+                    case 1776: context = 'US Declaration'; break;
+                    case 2025: context = 'Modern year example'; break;
+                }
+                const row = `<tr><td>${val}</td><td>${roman}</td><td>${context}</td></tr>`;
                 tableBody.innerHTML += row;
             });
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
         function toRoman(num) {
             const romanMap = [
-                { value: 1000, symbol: 'M' },
-                { value: 900, symbol: 'CM' },
-                { value: 500, symbol: 'D' },
-                { value: 400, symbol: 'CD' },
-                { value: 100, symbol: 'C' },
-                { value: 90, symbol: 'XC' },
-                { value: 50, symbol: 'L' },
-                { value: 40, symbol: 'XL' },
-                { value: 10, symbol: 'X' },
-                { value: 9, symbol: 'IX' },
-                { value: 5, symbol: 'V' },
-                { value: 4, symbol: 'IV' },
+                { value: 1000, symbol: 'M' }, { value: 900, symbol: 'CM' }, { value: 500, symbol: 'D' },
+                { value: 400, symbol: 'CD' }, { value: 100, symbol: 'C' }, { value: 90, symbol: 'XC' },
+                { value: 50, symbol: 'L' }, { value: 40, symbol: 'XL' }, { value: 10, symbol: 'X' },
+                { value: 9, symbol: 'IX' }, { value: 5, symbol: 'V' }, { value: 4, symbol: 'IV' },
                 { value: 1, symbol: 'I' }
             ];
             let roman = '';
@@ -300,15 +242,7 @@
             return roman;
         }
         function toArabic(roman) {
-            const romanMap = {
-                'I': 1,
-                'V': 5,
-                'X': 10,
-                'L': 50,
-                'C': 100,
-                'D': 500,
-                'M': 1000
-            };
+            const romanMap = { 'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000 };
             let num = 0;
             for (let i = 0; i < roman.length; i++) {
                 if (i + 1 < roman.length && romanMap[roman[i]] < romanMap[roman[i + 1]]) {
@@ -329,6 +263,57 @@
                 alert('Share not supported on this browser.');
             }
         }
+        function saveAsPDF() {
+            const resultText = document.getElementById('result').innerText;
+            const dateText = document.getElementById('current-date-roman').innerText;
+            const clockText = document.getElementById('roman-clock').innerText;
+            const tableRows = Array.from(document.querySelectorAll('#conversion-table tr')).map(row => 
+                Array.from(row.cells).map(cell => cell.innerText)
+            );
+            const docDefinition = {
+                content: [
+                    { text: 'Roman Numerals Converter Results', style: 'header', alignment: 'center' },
+                    { text: resultText, margin: [0, 10] },
+                    { text: dateText, margin: [0, 5] },
+                    { text: clockText, margin: [0, 5] },
+                    {
+                        table: {
+                            headerRows: 1,
+                            widths: ['*', '*', '*'],
+                            body: tableRows
+                        },
+                        layout: {
+                            hLineColor: [200, 200, 200],
+                            vLineColor: [200, 200, 200],
+                            hLineWidth: function () { return 0.1; },
+                            vLineWidth: function () { return 0.1; }
+                        },
+                        margin: [0, 10]
+                    }
+                ],
+                styles: {
+                    header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
+                    lineColor: [200, 200, 200],
+                    lineWidth: 0.1,
+                    font: 'helvetica',
+                    cellPadding: 3,
+                    fontSize: 10,
+                    halign: 'left'
+                },
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                pageMargins: [40, 60, 40, 60],
+                footer: function (currentPage, pageCount) {
+                    return {
+                        text: 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.',
+                        alignment: 'center',
+                        style: 'footer',
+                        link: 'https://fcalculator.com/roman-numerals-converter.html'
+                    };
+                }
+            };
+            pdfMake.createPdf(docDefinition).download('roman-numerals-results.pdf');
+        }
         window.onload = function() {
             document.getElementById('input-value').value = Math.floor(Math.random() * 3999) + 1;
             calculate();
@@ -336,18 +321,17 @@
             const day = currentDate.getDate();
             const month = currentDate.getMonth() + 1;
             const year = currentDate.getFullYear();
-            document.getElementById('current-date-roman-result').innerHTML = `Today's date in Roman numerals: ${toRoman(month)}.${toRoman(day)}.${toRoman(year)}`;
-            document.getElementById('current-date-roman-table').innerHTML = `Today's date in Roman numerals: ${toRoman(month)}.${toRoman(day)}.${toRoman(year)}`;
-
+            const romanDate = toRoman(month) + '.' + toRoman(day) + '.' + toRoman(year);
+            document.getElementById('current-date-roman').innerHTML = 'Today\'s date in Roman numerals: ' + romanDate;
             function updateClock() {
                 const now = new Date();
                 const hours = now.getHours() % 12 || 12;
                 const minutes = now.getMinutes();
                 const seconds = now.getSeconds();
-                document.getElementById('roman-clock').innerHTML = `Current time in Roman numerals: ${toRoman(hours)}:${toRoman(minutes)}:${toRoman(seconds)}`;
+                document.getElementById('roman-clock').innerHTML = 'Current time in Roman numerals: ' + toRoman(hours) + ':' + toRoman(minutes) + ':' + toRoman(seconds);
             }
-            setInterval(updateClock, 1000);
             updateClock();
+            setInterval(updateClock, 1000);
         };
     </script>
 </body>
