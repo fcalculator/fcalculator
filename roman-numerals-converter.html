@@ -80,6 +80,7 @@
     </section>
     <section class="results-section" id="results">
         <p id="result"></p>
+        <p id="current-date-roman-result"></p>
         <table id="conversion-table">
             <thead>
                 <tr>
@@ -91,7 +92,7 @@
                 <!-- Populated by JS -->
             </tbody>
         </table>
-        <p id="current-date-roman"></p>
+        <p id="current-date-roman-table"></p>
         <p id="roman-clock"></p>
         <button onclick="sharePage()">Share</button>
     </section>
@@ -105,15 +106,15 @@
         <p>Roman numerals are a numeral system originating in ancient Rome, using combinations of letters from the Latin alphabet (I, V, X, L, C, D, M) to represent values. They are subtractive and additive, allowing compact representation of numbers up to 3999 in standard form. Unlike the positional Arabic system, Roman numerals rely on symbol values and their arrangement, making them unique for historical and decorative purposes.</p>
         <h3>History of Roman Numerals</h3>
         <p>Developed in ancient Rome around the 8th century BC, Roman numerals evolved from Etruscan symbols and were used throughout the Roman Empire for commerce, engineering, and official records. They remained in use in Europe until the late Middle Ages, when Hindu-Arabic numerals replaced them for mathematical efficiency. Today, they appear in clock faces, book chapters, movie copyrights, and monumental inscriptions, preserving a link to classical heritage. The system's endurance highlights its role in documenting key events, from Senate decrees to gladiatorial games, providing a window into Roman administrative precision.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Clock_with_Roman_numerals.jpg" alt="A clock face with Roman numerals." style="max-width:300px; width:100%; display:block; margin:0 auto;">
-        <i style="font-size: smaller; display: block; text-align: center;">A clock face with Roman numerals.</i>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/BadSalzdetfurthBadenburgerStr060529.jpg" alt="A clock face with Roman numerals in Bad Salzdetfurth, Germany." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">A clock face with Roman numerals in Bad Salzdetfurth, Germany.</i>
     </section>
     <section>
         <h2>Understanding Arabic Numerals</h2>
         <p>Arabic numerals, also known as Hindu-Arabic numerals, are the ten digits (0-9) used in positional decimal systems worldwide, offering efficient calculation and representation of large numbers compared to Roman systems. The inclusion of zero as a placeholder revolutionized mathematics, enabling advanced computations in science and commerce.</p>
         <h3>History of Arabic Numerals</h3>
         <p>Originating in India around the 6th century AD, these numerals were transmitted to Europe via Arab scholars in the Middle Ages. They revolutionized mathematics and commerce with zero and positional value, gradually replacing Roman numerals by the 15th century for their superior utility in science and accounting. The adoption marked a shift from additive to positional systems, facilitating the Renaissance in mathematics and the age of exploration through accurate navigation calculations.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Epitaph_des_Marcus_Caelius.JPG" alt="Epitaph of centurion Marcus Caelius showing Roman numerals." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Epitaph_des_Marcus_Caelius.JPG" alt="Epitaph of centurion Marcus Caelius showing Roman numerals." style="max-width:300px; width:100%; display:block; margin:0 auto;">
         <i style="font-size: smaller; display: block; text-align: center;">Epitaph of centurion Marcus Caelius showing Roman numerals.</i>
     </section>
     <section>
@@ -331,21 +332,23 @@
         window.onload = function() {
             document.getElementById('input-value').value = Math.floor(Math.random() * 3999) + 1;
             calculate();
-            // Hardcoded date as per prompt: September 09, 2025
-            const day = 9;
-            const month = 9;
-            const year = 2025;
-            document.getElementById('current-date-roman').innerHTML = `Today's date in Roman numerals: ${toRoman(month)}.${toRoman(day)}.${toRoman(year)}`;
+            const currentDate = new Date();
+            const day = currentDate.getDate();
+            const month = currentDate.getMonth() + 1;
+            const year = currentDate.getFullYear();
+            const romanDate = toRoman(month) + '.' + toRoman(day) + '.' + toRoman(year);
+            document.getElementById('current-date-roman-result').innerHTML = 'Today\'s date in Roman numerals: ' + romanDate;
+            document.getElementById('current-date-roman-table').innerHTML = 'Today\'s date in Roman numerals: ' + romanDate;
 
             function updateClock() {
                 const now = new Date();
                 const hours = now.getHours() % 12 || 12;
                 const minutes = now.getMinutes();
                 const seconds = now.getSeconds();
-                document.getElementById('roman-clock').innerHTML = `Current time in Roman numerals: ${toRoman(hours)}:${toRoman(minutes)}:${toRoman(seconds)}`;
+                document.getElementById('roman-clock').innerHTML = 'Current time in Roman numerals: ' + toRoman(hours) + ':' + toRoman(minutes) + ':' + toRoman(seconds);
             }
-            setInterval(updateClock, 1000);
             updateClock();
+            setInterval(updateClock, 1000);
         };
     </script>
 </body>
