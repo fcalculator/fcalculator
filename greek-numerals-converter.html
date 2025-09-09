@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert numbers to Greek numerals or vice versa with historical insights, formulas, examples, and tables for education and research.">
+    <meta name="keywords" content="greek numerals converter, number to greek conversion, greek to number calculator, historical numeral tool, ancient greek numbers, numeral system utility, education conversion, classical studies, numeral scaling, numeral examples">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Greek Numerals Converter</title>
+    <link rel="canonical" href="https://fcalculator.com/greek-numerals-converter.html">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.wikimedia.org/polyfill/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <style>
+        .MathJax { max-width: 300px; overflow-x: auto; }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Greek Numerals Converter",
+        "url": "https://fcalculator.com/greek-numerals-converter.html",
+        "description": "An interactive tool for converting between numbers and Greek numerals with detailed historical backgrounds, mathematical principles, step-by-step examples, comparison tables, and practical applications in education, history, linguistics, and cultural studies. Supports values up to 9999 with accurate alphabetic notation and educational resources for classical numeral systems.",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Greek Numerals Converter",
+                    "item": "https://fcalculator.com/greek-numerals-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/greek-numerals-converter.html">Greek Numerals Converter</a>
+        </div>
+        <h1>Greek Numerals Converter</h1>
+        <p>This tool provides accurate conversions between numbers and Greek numerals, essential for historical research, educational purposes, linguistic studies, and understanding classical numeral systems in cultural contexts.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Numeral Input</legend>
+                    <div class="input-row">
+                        <label for="input-value">Enter Number or Greek Numeral<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter a number (1-9999) or Greek numeral for conversion.</span></label>
+                        <input type="text" id="input-value" placeholder="e.g. 2023 or βκγʹ" oninput="calculate()" required>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </section>
+    <section class="results-section" id="results">
+        <h2>Calculation Results</h2>
+        <p id="result"></p>
+        <p id="current-date-greek"></p>
+        <p id="greek-clock"></p>
+        <table id="conversion-table">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Greek Numeral</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        <button onclick="saveAsPDF()">Save as PDF</button>
+        <button onclick="sharePage()">Share</button>
+    </section>
+    <p>Explore similar tools like our <a href="https://fcalculator.com/conversions.html">Conversions</a> for comprehensive unit analysis.</p>
+    <section>
+        <h2>How to Use the Greek Numerals Converter</h2>
+        <p>Enter a number (1-9999) or a Greek numeral into the input field. The result updates automatically as you type. The tool detects the input type and performs the conversion, displaying the result along with a table of common conversions for better understanding. This converter is ideal for students, historians, educators, and anyone dealing with classical numeral systems in research or educational materials. For example, input 2023 to see ͵βκγʹ, or input βκγʹ to see 2023, facilitating easy verification and learning of Greek numeral structures.</p>
+    </section>
+    <section>
+        <h2>Understanding Greek Numerals</h2>
+        <p>Greek numerals are a decimal system using letters of the Greek alphabet to represent values, with an additive structure that allows representation of numbers through summation of symbol values. The system includes special markers like the keraia (ʹ) to distinguish numerals from letters and a lower keraia (͵) for thousands, making it suitable for ancient texts and inscriptions.</p>
+        <h3>History of Greek Numerals</h3>
+        <p>The Greek numeral system evolved from earlier Aegean numerals used by Minoan and Mycenaean civilizations, which employed symbols for powers of ten. By the 7th century BC, the acrophonic Attic system emerged, using initial letters of number names for values. The alphabetic (Ionian) system, the most widespread, likely originated in Miletus around the 5th century BC, incorporating 27 symbols including obsolete letters like digamma, koppa, and sampi. This system spread through the Hellenistic world, influencing Roman and Byzantine numeral practices, and was used in scientific texts by scholars like Archimedes and Ptolemy for expressing large numbers in astronomy and mathematics.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Greek_Numerals.svg/800px-Greek_Numerals.svg.png" alt="Illustration of Greek numeral symbols and their values." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Illustration of Greek numeral symbols and their values.</i>
+    </section>
+    <section>
+        <h2>The Conversion Principles Explained</h2>
+        <p>Greek numerals are formed by adding the values of letters, with units, tens, and hundreds each having dedicated symbols. For thousands, a lower keraia (͵) precedes the symbol, and the entire numeral ends with an upper keraia (ʹ). The formula for a number n is the sum of its decomposed parts: n = (thousands * 1000) + hundreds + tens + units, represented as symbols.</p>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 1999 to Greek: 1000 (͵α) + 900 (ϡ) + 90 (ϟ) + 9 (θ) = ͵αϡϟθʹ. To convert ͵βκγʹ to number: 2000 (͵β) + 20 (κ) + 3 (γ) = 2023. Another example: 476 (υοϛʹ) represents a historical year, breaking down as 400 (υ) + 70 (ο) + 6 (ϛ).</p>
+    </section>
+    <section>
+        <h2>Variations and Limitations in Greek Numerals</h2>
+        <p>The alphabetic system coexisted with the acrophonic Attic system, which used symbols like Π for 5 (from penta) and was preferred for currency and measures in Athens. Limitations include the absence of zero, making arithmetic challenging, and reliance on context to distinguish numerals from text. Variations in symbol usage, such as stigma (ϛ) for 6 instead of digamma, reflect regional preferences, and for very large numbers, myriad notation (M for 10,000) was employed in advanced calculations, as in Archimedes' Sand Reckoner for estimating the universe's size.</p>
+    </section>
+    <section>
+        <h2>Comparison of Numeral Systems</h2>
+        <p>Greek numerals are alphabetic and additive, suitable for inscriptions but less efficient for calculations compared to positional systems with zero. They excel in compact representation for texts but lack the flexibility for complex mathematics.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Greek Numeral</th>
+                    <th>Usage Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>αʹ</td>
+                    <td>Unit in ancient texts</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>δʹ</td>
+                    <td>Basic count</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>θʹ</td>
+                    <td>Mathematical notation</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>ιʹ</td>
+                    <td>Decade marker</td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td>νʹ</td>
+                    <td>Attic measure</td>
+                </tr>
+                <tr>
+                    <td>100</td>
+                    <td>ρʹ</td>
+                    <td>Century mark</td>
+                </tr>
+                <tr>
+                    <td>500</td>
+                    <td>φʹ</td>
+                    <td>Middle Ages notation</td>
+                </tr>
+                <tr>
+                    <td>1000</td>
+                    <td>͵α</td>
+                    <td>Millennium</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>͵βκγʹ</td>
+                    <td>Year example</td>
+                </tr>
+                <tr>
+                    <td>476</td>
+                    <td>υοϛʹ</td>
+                    <td>Fall of Empire</td>
+                </tr>
+                <tr>
+                    <td>1492</td>
+                    <td>͵αυϟβʹ</td>
+                    <td>Discovery year</td>
+                </tr>
+                <tr>
+                    <td>1776</td>
+                    <td>͵αψοϛʹ</td>
+                    <td>Independence year</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Practical Applications</h2>
+        <p>Greek numerals are used in classical texts, Byzantine manuscripts, and modern scholarly editions of ancient works. This converter aids in decoding historical documents, teaching numeral systems in linguistics, or analyzing mathematical treatises from antiquity. In academia, they help interpret papyri and inscriptions, while in cultural studies, they enhance understanding of Hellenistic science and administration.</p>
+    </section>
+    <section>
+        <h2>Modern Uses of Greek Numerals</h2>
+        <p>Though largely replaced by decimal numerals, Greek numerals appear in liturgical texts, astronomical tables, and educational materials for classical languages. They denote chapters in Greek editions of ancient authors, label theorems in historical mathematics, and symbolize tradition in Orthodox Church calendars. Their persistence highlights a link to ancient scholarship, blending linguistic heritage with contemporary academic symbolism.</p>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What are the basic symbols in Greek numerals?</strong> Letters like α (1), ι (10), ρ (100), with markers for distinction.</p>
+        <p><strong>How does notation for thousands work?</strong> A lower keraia (͵) precedes the symbol, e.g., ͵α for 1000.</p>
+        <p><strong>Why are Greek numerals still studied?</strong> For analyzing ancient texts in mathematics, astronomy, and history.</p>
+        <p><strong>What is the range for standard Greek numerals?</strong> Typically 1 to 9999, with extensions for larger values in myriad notation.</p>
+        <p><strong>Can negative values be converted?</strong> The tool supports positive integers only, as Greek numerals represent positive values.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Greek_numerals" target="_blank" rel="noopener noreferrer">Wikipedia: Greek numerals</a> - Comprehensive history, rules, and examples of the Greek numeral system.</p>
+        <p><a href="https://www.britannica.com/topic/numeral" target="_blank" rel="noopener noreferrer">Britannica: Numeral</a> - Educational insights into numeral systems, including Greek, with historical context.</p>
+        <p><a href="https://mathworld.wolfram.com/GreekNumerals.html" target="_blank" rel="noopener noreferrer">MathWorld: Greek Numerals</a> - Mathematical explanation of Greek numeral construction and conversion algorithms.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page features an interactive Greek numerals converter with automatic updates, educational sections on numeral histories, conversion principles, visual tables, and comparison examples. It supports applications in education, historical research, and cultural studies, focusing on numeral system accuracy. Index under numeral conversion tools, educational utilities, and resources for classical studies, history, and global standards.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        function calculate() {
+            const input = document.getElementById('input-value').value.trim();
+            if (!input) {
+                document.getElementById('result').innerHTML = 'Please enter a number or Greek numeral.';
+                return;
+            }
+            let result;
+            if (/^[0-9]+$/.test(input)) {
+                const num = parseInt(input, 10);
+                if (num < 1 || num > 9999) {
+                    document.getElementById('result').innerHTML = 'Please enter a number between 1 and 9999.';
+                    return;
+                }
+                result = `${num} = ${toGreek(num)}`;
+            } else {
+                const num = toNumber(input);
+                if (num > 0) {
+                    result = `${input} = ${num}`;
+                } else {
+                    document.getElementById('result').innerHTML = 'Invalid input. Enter a number (1-9999) or valid Greek numeral.';
+                    return;
+                }
+            }
+            document.getElementById('result').innerHTML = result;
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            const examples = [1, 4, 9, 10, 50, 100, 500, 1000, 2023, 476, 1492, 1776];
+            examples.forEach(val => {
+                const greek = toGreek(val);
+                const row = `<tr><td>${val}</td><td>${greek}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+        function toGreek(num) {
+            const units = ['', 'α', 'β', 'γ', 'δ', 'ε', 'ϛ', 'ζ', 'η', 'θ'];
+            const tens = ['', 'ι', 'κ', 'λ', 'μ', 'ν', 'ξ', 'ο', 'π', 'ϟ'];
+            const hundreds = ['', 'ρ', 'σ', 'τ', 'υ', 'φ', 'χ', 'ψ', 'ω', 'ϡ'];
+            function convertPart(n, isThousand = false) {
+                if (n === 0) return '';
+                const h = Math.floor(n / 100);
+                const t = Math.floor((n % 100) / 10);
+                const u = n % 10;
+                const prefix = isThousand ? '\u0375' : '';
+                return prefix + hundreds[h] + tens[t] + units[u];
+            }
+            const thousands = Math.floor(num / 1000);
+            const remainder = num % 1000;
+            let greek = convertPart(thousands, true) + convertPart(remainder);
+            if (greek) greek += '\u0374';
+            return greek;
+        }
+        function toNumber(greek) {
+            greek = greek.replace('\u0374', ''); // remove keraia
+            const values = {
+                'α': 1, 'β': 2, 'γ': 3, 'δ': 4, 'ε': 5, 'ϛ': 6, 'ζ': 7, 'η': 8, 'θ': 9,
+                'ι': 10, 'κ': 20, 'λ': 30, 'μ': 40, 'ν': 50, 'ξ': 60, 'ο': 70, 'π': 80, 'ϟ': 90,
+                'ρ': 100, 'σ': 200, 'τ': 300, 'υ': 400, 'φ': 500, 'χ': 600, 'ψ': 700, 'ω': 800, 'ϡ': 900
+            };
+            let num = 0;
+            for (let i = 0; i < greek.length; i++) {
+                if (greek[i] === '\u0375') {
+                    i++;
+                    if (i < greek.length) num += (values[greek[i]] || 0) * 1000;
+                } else {
+                    num += values[greek[i]] || 0;
+                }
+            }
+            return num;
+        }
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Greek Numerals Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+        function saveAsPDF() {
+            const resultText = document.getElementById('result').innerText;
+            const dateText = document.getElementById('current-date-greek').innerText;
+            const clockText = document.getElementById('greek-clock').innerText;
+            const tableRows = Array.from(document.querySelectorAll('#conversion-table tr')).map(row => 
+                Array.from(row.cells).map(cell => cell.innerText)
+            );
+            const docDefinition = {
+                content: [
+                    { text: 'Greek Numerals Converter Results', style: 'header', alignment: 'center' },
+                    { text: resultText, margin: [0, 10] },
+                    { text: dateText, margin: [0, 5] },
+                    { text: clockText, margin: [0, 5] },
+                    {
+                        table: {
+                            headerRows: 1,
+                            widths: ['*', '*'],
+                            body: tableRows
+                        },
+                        layout: {
+                            hLineColor: [200, 200, 200],
+                            vLineColor: [200, 200, 200],
+                            hLineWidth: function () { return 0.1; },
+                            vLineWidth: function () { return 0.1; }
+                        },
+                        margin: [0, 10]
+                    }
+                ],
+                styles: {
+                    header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
+                    lineColor: [200, 200, 200],
+                    lineWidth: 0.1,
+                    font: 'helvetica',
+                    cellPadding: 3,
+                    fontSize: 10,
+                    halign: 'left'
+                },
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                pageMargins: [40, 60, 40, 60],
+                footer: function (currentPage, pageCount) {
+                    return {
+                        text: 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.',
+                        alignment: 'center',
+                        style: 'footer',
+                        link: 'https://fcalculator.com/greek-numerals-converter.html'
+                    };
+                }
+            };
+            pdfMake.createPdf(docDefinition).download('greek-numerals-results.pdf');
+        }
+        window.onload = function() {
+            document.getElementById('input-value').value = Math.floor(Math.random() * 9999) + 1;
+            calculate();
+            const currentDate = new Date();
+            const day = currentDate.getDate();
+            const month = currentDate.getMonth() + 1;
+            const year = currentDate.getFullYear();
+            const greekDate = toGreek(month) + '.' + toGreek(day) + '.' + toGreek(year);
+            document.getElementById('current-date-greek').innerHTML = 'Today\'s date in Greek numerals: ' + greekDate;
+            function updateClock() {
+                const now = new Date();
+                const hours = now.getHours() % 12 || 12;
+                const minutes = now.getMinutes();
+                const seconds = now.getSeconds();
+                document.getElementById('greek-clock').innerHTML = 'Current time in Greek numerals: ' + toGreek(hours) + ':' + toGreek(minutes) + ':' + toGreek(seconds);
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+        };
+    </script>
+</body>
+</html>
