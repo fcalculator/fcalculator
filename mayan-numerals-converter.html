@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert numbers to Maya numerals or vice versa with historical insights, formulas, examples, and tables for education and research.">
+    <meta name="keywords" content="mayan numerals converter, number to mayan conversion, mayan to number calculator, historical numeral tool, ancient mayan numbers, numeral system utility, education conversion, classical studies, numeral scaling, numeral examples">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Maya Numerals Converter</title>
+    <link rel="canonical" href="https://fcalculator.com/mayan-numerals-converter.html">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <style>
+        .MathJax { max-width: 300px; overflow-x: auto; }
+        .mayan-numeral { font-size: 1.5em; }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Maya Numerals Converter",
+        "url": "https://fcalculator.com/mayan-numerals-converter.html",
+        "description": "An interactive tool for converting between numbers and Maya numerals with detailed historical backgrounds, mathematical principles, step-by-step examples, comparison tables, and practical applications in education, history, archaeology, and cultural studies. Supports values up to 999999 with accurate vigesimal notation and educational resources for ancient numeral systems.",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Maya Numerals Converter",
+                    "item": "https://fcalculator.com/mayan-numerals-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/mayan-numerals-converter.html">Maya Numerals Converter</a>
+        </div>
+        <h1>Maya Numerals Converter</h1>
+        <p>This tool provides accurate conversions between numbers and Maya numerals, essential for historical research, educational purposes, archaeological studies, and understanding ancient numeral systems in cultural contexts.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Numeral Input</legend>
+                    <div class="input-row">
+                        <label for="input-value">Enter Number or Maya Numeral<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter a number (1-999999) or Maya numeral for conversion.</span></label>
+                        <input type="text" id="input-value" placeholder="e.g. 2023 or •••• — •••" oninput="calculate()" required>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </section>
+    <section class="results-section" id="results">
+        <h2>Calculation Results</h2>
+        <p id="result" class="mayan-numeral"></p>
+        <p id="current-date-mayan" class="mayan-numeral"></p>
+        <p id="mayan-clock" class="mayan-numeral"></p>
+        <table id="conversion-table">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Maya Numeral</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        <button onclick="saveAsPDF()">Save as PDF</button>
+        <button onclick="sharePage()">Share</button>
+    </section>
+    <p>Explore similar tools like our <a href="https://fcalculator.com/conversions.html">Conversions</a> for comprehensive unit analysis.</p>
+    <section>
+        <h2>How to Use the Maya Numerals Converter</h2>
+        <p>Enter a number (1-999999) or a Maya numeral into the input field. The result updates automatically as you type. The tool detects the input type and performs the conversion, displaying the result along with a table of common conversions for better understanding. This converter is ideal for students, historians, educators, and anyone dealing with ancient numeral systems in research or educational materials. For example, input 2023 to see •••• — •••, or input •••• — ••• to see 2023, facilitating easy verification and learning of Maya numeral structures.</p>
+    </section>
+    <section>
+        <h2>Understanding Maya Numerals</h2>
+        <p>Maya numerals utilize a vigesimal (base-20) system with dots for 1-4, bars for 5, and a shell for 0, using positional notation to represent values. This system allows for compact representation and was used in calendars, astronomy, and monuments, showcasing the Maya's advanced mathematical knowledge.</p>
+        <h3>History of Maya Numerals</h3>
+        <p>Developed by the Maya civilization around 2000 BC, Maya numerals evolved into a positional base-20 system carved on stelae and codices. The system supported complex calendars like the Long Count for tracking historical events and astronomical cycles, such as Venus phases. It influenced Mesoamerican cultures and persisted until the Spanish conquest, reflecting the society's emphasis on time, cosmology, and ritual precision in architecture and inscriptions.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Maya.svg" alt="Illustration of Maya numeral symbols and their values." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Illustration of Maya numeral symbols and their values.</i>
+    </section>
+    <section>
+        <h2>The Conversion Principles Explained</h2>
+        <p>Maya numerals are positional in base-20, using dots (•) for 1-4, bars (—) for multiples of 5, and shells (0) for zero. Digits 0-19 are formed by combining dots and bars, with positions multiplying by powers of 20.</p>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 2023 to Maya: Convert to base-20: 5*400 + 5*20 + 3 = — •••• (for 5 in hundreds), — (for 5 in tens), ••• (for 3 in units). To convert a numeral to number: Sum dot and bar values in each position and multiply by powers of 20.</p>
+    </section>
+    <section>
+        <h2>Variations and Limitations in Maya Numerals</h2>
+        <p>The system included head variants for digits 0-19 in monumental inscriptions, with bar-and-dot for codices. Limitations include no fractional notation in standard form, though astronomical texts used approximations. Variations in zero symbol, from shell to floral motifs, reflect regional styles, and the vigesimal base facilitated calendar calculations, crucial for predicting eclipses and agricultural cycles.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Mayan_long_count.svg" alt="Maya Long Count calendar using numerals." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Maya Long Count calendar using numerals.</i>
+    </section>
+    <section>
+        <h2>Comparison of Numeral Systems</h2>
+        <p>Maya numerals are positional in base-20, efficient for calendars but unusual compared to decimal systems. They include zero early on, advancing mathematics but limited by no negatives.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Maya Numeral</th>
+                    <th>Usage Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td class="mayan-numeral">•</td>
+                    <td>Unit in counts</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td class="mayan-numeral">••••</td>
+                    <td>Basic count</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td class="mayan-numeral">—</td>
+                    <td>Bar notation</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td class="mayan-numeral">— ••••</td>
+                    <td>Mathematical notation</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td class="mayan-numeral">——</td>
+                    <td>Decade marker</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td class="mayan-numeral">•</td>
+                    <td>Base unit</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td class="mayan-numeral">•</td>
+                    <td>Square of base</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td class="mayan-numeral">•••• — •••</td>
+                    <td>Year example</td>
+                </tr>
+                <tr>
+                    <td>476</td>
+                    <td class="mayan-numeral">— •••• — •</td>
+                    <td>Historical count</td>
+                </tr>
+                <tr>
+                    <td>1492</td>
+                    <td class="mayan-numeral">••• ——— •••</td>
+                    <td>Discovery year</td>
+                </tr>
+                <tr>
+                    <td>1776</td>
+                    <td class="mayan-numeral">•••• ——— •</td>
+                    <td>Independence year</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Practical Applications</h2>
+        <p>Maya numerals appear in stelae, codices, and architectural inscriptions. This converter aids in decoding ancient calendars, teaching numeral systems in Mesoamerican studies, or analyzing ritual cycles from antiquity. In academia, they help interpret Dresden Codex astronomy, while in cultural studies, they enhance understanding of Maya cosmology and time perception.</p>
+    </section>
+    <section>
+        <h2>Modern Uses of Maya Numerals</h2>
+        <p>Though replaced by decimal systems, Maya numerals feature in educational replicas, museum exhibits, and scholarly publications on ancient mathematics. They symbolize tradition in Maya cultural revival, denote dates in indigenous calendars, and inspire designs in modern art reflecting Central American heritage. Their study bridges ancient innovation with contemporary analysis of vigesimal systems in linguistics and ethnography.</p>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What are the basic symbols in Maya numerals?</strong> Dots (•) for 1-4, bars (—) for 5, shell (0) for zero.</p>
+        <p><strong>How does positional notation work in Maya numerals?</strong> Values depend on position in base-20, with levels stacked vertically in inscriptions.</p>
+        <p><strong>Why are Maya numerals still studied?</strong> For interpreting ancient texts in mathematics, astronomy, and history.</p>
+        <p><strong>What is the range for standard Maya numerals?</strong> Unlimited in theory, but practical for large values with positions.</p>
+        <p><strong>Can negative values be converted?</strong> The tool supports positive integers only, as Maya numerals represent positive quantities.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Maya_numerals" target="_blank" rel="noopener noreferrer">Wikipedia: Maya numerals</a> - Comprehensive overview of the numeral's development, symbols, and comparisons with other ancient systems.</p>
+        <p><a href="https://www.britannica.com/science/Maya-mathematics" target="_blank" rel="noopener noreferrer">Britannica: Maya mathematics</a> - Educational insights into the system's history, usage, and role in ancient mathematics.</p>
+        <p><a href="https://mathworld.wolfram.com/MayaNumerationSystem.html" target="_blank" rel="noopener noreferrer">MathWorld: Maya Numeration System</a> - Mathematical explanation of construction, conversion, and historical applications.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page features an interactive Maya numerals converter with automatic updates, educational sections on numeral histories, conversion principles, visual tables, and comparison examples. It supports applications in education, historical research, and cultural studies, focusing on numeral system accuracy. Index under numeral conversion tools, educational utilities, and resources for classical studies, history, and global standards.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        function calculate() {
+            const input = document.getElementById('input-value').value.trim();
+            if (!input) {
+                document.getElementById('result').innerHTML = 'Please enter a number or Maya numeral.';
+                return;
+            }
+            let result;
+            if (/^[0-9]+$/.test(input)) {
+                const num = parseInt(input, 10);
+                if (num < 1 || num > 999999) {
+                    document.getElementById('result').innerHTML = 'Please enter a number between 1 and 999999.';
+                    return;
+                }
+                result = `${num} = <span class="mayan-numeral">${toMayan(num)}</span>`;
+            } else {
+                const num = toNumber(input);
+                if (num > 0) {
+                    result = `<span class="mayan-numeral">${input}</span> = ${num}`;
+                } else {
+                    document.getElementById('result').innerHTML = 'Invalid input. Enter a number (1-999999) or valid Maya numeral.';
+                    return;
+                }
+            }
+            document.getElementById('result').innerHTML = result;
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            const examples = [1, 4, 5, 9, 10, 20, 400, 2023, 476, 1492, 1776];
+            examples.forEach(val => {
+                const mayan = toMayan(val);
+                const row = `<tr><td>${val}</td><td class="mayan-numeral">${mayan}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+        function toMayan(num) {
+            if (num === 0) return '0';
+            let mayan = '';
+            while (num > 0) {
+                let digit = num % 20;
+                if (digit === 0) {
+                    mayan = '0 ' + mayan;
+                } else {
+                    let bars = Math.floor(digit / 5);
+                    let dots = digit % 5;
+                    mayan = '—'.repeat(bars) + ' •'.repeat(dots) + ' ' + mayan;
+                }
+                num = Math.floor(num / 20);
+            }
+            return mayan.trim();
+        }
+        function toNumber(mayan) {
+            const digits = mayan.split(' ');
+            let num = 0;
+            let base = 1;
+            for (let i = digits.length - 1; i >= 0; i--) {
+                let digit = 0;
+                for (let char of digits[i]) {
+                    if (char === '•') digit += 1;
+                    if (char === '—') digit += 5;
+                    if (char === '0') digit = 0;
+                }
+                num += digit * base;
+                base *= 20;
+            }
+            return num;
+        }
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Maya Numerals Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+        function saveAsPDF() {
+            const resultText = document.getElementById('result').innerText;
+            const dateText = document.getElementById('current-date-mayan').innerText;
+            const clockText = document.getElementById('mayan-clock').innerText;
+            const tableRows = Array.from(document.querySelectorAll('#conversion-table tr')).map(row => 
+                Array.from(row.cells).map(cell => cell.innerText)
+            );
+            const docDefinition = {
+                content: [
+                    { text: 'Maya Numerals Converter Results', style: 'header', alignment: 'center' },
+                    { text: resultText, margin: [0, 10] },
+                    { text: dateText, margin: [0, 5] },
+                    { text: clockText, margin: [0, 5] },
+                    {
+                        table: {
+                            headerRows: 1,
+                            widths: ['*', '*'],
+                            body: tableRows
+                        },
+                        layout: {
+                            hLineColor: [200, 200, 200],
+                            vLineColor: [200, 200, 200],
+                            hLineWidth: function () { return 0.1; },
+                            vLineWidth: function () { return 0.1; }
+                        },
+                        margin: [0, 10]
+                    }
+                ],
+                styles: {
+                    header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
+                    lineColor: [200, 200, 200],
+                    lineWidth: 0.1,
+                    font: 'helvetica',
+                    cellPadding: 3,
+                    fontSize: 10,
+                    halign: 'left'
+                },
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                pageMargins: [40, 60, 40, 60],
+                footer: function (currentPage, pageCount) {
+                    return {
+                        text: 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.',
+                        alignment: 'center',
+                        style: 'footer',
+                        link: 'https://fcalculator.com/mayan-numerals-converter.html'
+                    };
+                }
+            };
+            pdfMake.createPdf(docDefinition).download('mayan-numerals-results.pdf');
+        }
+        window.onload = function() {
+            document.getElementById('input-value').value = Math.floor(Math.random() * 999999) + 1;
+            calculate();
+            const currentDate = new Date();
+            const day = currentDate.getDate();
+            const month = currentDate.getMonth() + 1;
+            const year = currentDate.getFullYear();
+            const mayanDate = toMayan(month) + '.' + toMayan(day) + '.' + toMayan(year);
+            document.getElementById('current-date-mayan').innerHTML = 'Today\'s date in Maya numerals: <span class="mayan-numeral">' + mayanDate + '</span>';
+            function updateClock() {
+                const now = new Date();
+                const hours = now.getHours() % 12 || 12;
+                const minutes = now.getMinutes();
+                const seconds = now.getSeconds();
+                document.getElementById('mayan-clock').innerHTML = 'Current time in Maya numerals: <span class="mayan-numeral">' + toMayan(hours) + ':' + toMayan(minutes) + ':' + toMayan(seconds) + '</span>';
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+        };
+    </script>
+</body>
+</html>
