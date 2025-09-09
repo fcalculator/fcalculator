@@ -105,8 +105,8 @@
         <p>Roman numerals are a numeral system originating in ancient Rome, using combinations of letters from the Latin alphabet (I, V, X, L, C, D, M) to represent values. They are subtractive and additive, allowing compact representation of numbers up to 3999 in standard form. Unlike the positional Arabic system, Roman numerals rely on symbol values and their arrangement, making them unique for historical and decorative purposes.</p>
         <h3>History of Roman Numerals</h3>
         <p>Developed in ancient Rome around the 8th century BC, Roman numerals evolved from Etruscan symbols and were used throughout the Roman Empire for commerce, engineering, and official records. They remained in use in Europe until the late Middle Ages, when Hindu-Arabic numerals replaced them for mathematical efficiency. Today, they appear in clock faces, book chapters, movie copyrights, and monumental inscriptions, preserving a link to classical heritage. The system's endurance highlights its role in documenting key events, from Senate decrees to gladiatorial games, providing a window into Roman administrative precision.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/BadSalzdetfurthBadenburgerStr060529.jpg" alt="A clock face with Roman numerals in Bad Salzdetfurth, Germany." style="max-width:300px; width:100%; display:block; margin:0 auto;">
-        <i style="font-size: smaller; display: block; text-align: center;">A clock face with Roman numerals in Bad Salzdetfurth, Germany.</i>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Clock_with_Roman_numerals.jpg" alt="A clock face with Roman numerals." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">A clock face with Roman numerals.</i>
     </section>
     <section>
         <h2>Understanding Arabic Numerals</h2>
@@ -126,8 +126,8 @@
         <h2>Rules of Roman Numerals</h2>
         <p>Roman numerals follow specific rules for construction:
 - Symbols are placed from left to right in order of value, starting with the largest.
-- Subtract a symbol only from the next two larger values (e.g., IX = 9, but not IC = 99; use XCIX instead).
-- Do not subtract a symbol from one more than five times greater (e.g., no VL for 45; use XLV).
+- Subtract a symbol only from the next two larger larger values (e.g., IX = 9, but not IC = 99; use XCIX instead).
+- Do not subtract a symbol from one more than five times larger (e.g., no VL for 45; use XLV).
 - Repeat symbols no more than three times consecutively (e.g., III = 3, but not IIII = 4; use IV).</p>
         <p>These rules ensure consistency and readability in numeral representation, preventing ambiguity in historical documents.</p>
     </section>
@@ -331,10 +331,10 @@
         window.onload = function() {
             document.getElementById('input-value').value = Math.floor(Math.random() * 3999) + 1;
             calculate();
-            const currentDate = new Date();
-            const day = currentDate.getDate();
-            const month = currentDate.getMonth() + 1;
-            const year = currentDate.getFullYear();
+            // Hardcoded date as per prompt: September 09, 2025
+            const day = 9;
+            const month = 9;
+            const year = 2025;
             document.getElementById('current-date-roman').innerHTML = `Today's date in Roman numerals: ${toRoman(month)}.${toRoman(day)}.${toRoman(year)}`;
 
             function updateClock() {
