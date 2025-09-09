@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert cups to milliliters with precise formulas, historical context, examples, charts, and tables for cooking and volume measurements.">
+    <meta name="keywords" content="cups to milliliters converter, cup to ml conversion, volume unit calculator, cooking measurement tool, kitchen utility, recipe conversion, imperial to metric">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Cups to Milliliters Converter, cup to ml</title>
+    <link rel="canonical" href="https://fcalculator.com/cups-to-milliliters-converter.html">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Cups to Milliliters Converter",
+        "url": "https://fcalculator.com/cups-to-milliliters-converter.html",
+        "description": "An online tool for converting cups to milliliters with precision, including historical backgrounds of units, mathematical formulas, visual charts, comparison tables, and practical examples for volume measurements, cooking recipes, kitchen applications, and bridging imperial and metric systems in daily use.",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Cups to Milliliters Converter",
+                    "item": "https://fcalculator.com/cups-to-milliliters-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/cups-to-milliliters-converter.html">Cups to Milliliters Converter</a>
+        </div>
+        <h1>Cups to Milliliters Converter, cup to ml</h1>
+        <p>This tool provides accurate conversions from cups to milliliters, essential for cooking recipes, baking measurements, nutritional calculations, and bridging imperial and metric volume systems in kitchen and dietary contexts.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Volume Input</legend>
+                    <div class="input-row">
+                        <label for="cup-value">Cups (cup)<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the volume in cups for conversion to milliliters.</span></label>
+                        <input type="number" id="cup-value" placeholder="e.g. 1" oninput="calculate()" required>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </section>
+    <section class="results-section" id="results">
+        <p id="result"></p>
+        <canvas id="line-chart" width="500" height="240"></canvas>
+        <table id="conversion-table">
+            <thead>
+                <tr>
+                    <th>Cups (cup)</th>
+                    <th>Milliliters (ml)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        <button onclick="sharePage()">Share</button>
+    </section>
+    <p>Explore similar tools like our <a href="/milliliters-to-cups-converter.html">Milliliters to Cups Converter</a> or <a href="/volume-converter.html">Volume Converter</a> for comprehensive volume analysis.</p>
+    <section>
+        <h2>How to Use the Cups to Milliliters Converter</h2>
+        <p>Enter a volume value in cups into the input field. The result updates automatically as you type. The tool uses the standard conversion factor for precision, displaying the result along with a visual line chart and a table of common conversions for better understanding. This converter is ideal for chefs, bakers, nutritionists, and anyone navigating between imperial and metric volume units in recipes and measurements.</p>
+    </section>
+    <section>
+        <h2>Understanding the Cup Scale</h2>
+        <p>The cup is a unit of volume commonly used in cooking and baking, primarily in the United States and other countries following imperial measurements, defined as approximately 236.588 milliliters for the US customary cup.</p>
+        <h3>History of the Cup Scale</h3>
+        <p>The cup originated from traditional English units and was standardized in the 19th century for culinary purposes. In the US, it was defined in 1896 as half a US pint, while metric cups (250 ml) are used in countries like Australia and Canada. Variations exist, such as the Japanese cup (200 ml), but the US cup remains prevalent in recipes worldwide.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Simple_Measuring_Cup.jpg/1000px-Simple_Measuring_Cup.jpg" alt="A simple measuring cup with cup and ounce markings." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">A simple measuring cup with cup and ounce markings.</i>
+    </section>
+    <section>
+        <h2>Understanding the Milliliter Scale</h2>
+        <p>The milliliter is a metric unit of volume equal to one thousandth of a liter, widely used globally for precise measurements in cooking, science, and medicine.</p>
+        <h3>History of the Milliliter Scale</h3>
+        <p>Introduced during the French Revolution in 1795 as part of the metric system, the milliliter (or cubic centimeter) was defined based on the volume of one gram of water at 4°C. It was refined in 1964 to align with the liter's definition, becoming essential in international standards for accuracy in recipes and laboratory work.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Messbecher_%28fcm%29.jpg" alt="A plastic measuring jug with milliliter scale." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">A plastic measuring jug with milliliter scale.</i>
+    </section>
+    <section>
+        <h2>The Conversion Formula Explained</h2>
+        <p>The formula to convert cups to milliliters is:</p>
+        \[ \text{ml} = \text{cup} \times 236.588 \]
+        <p>Where ml is milliliters and cup is cups. This derives from the definition of 1 US cup equaling approximately 236.588 milliliters.</p>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 1 cup: Multiply by 236.588 to get 236.588 ml, often rounded to 237 ml for practical kitchen use.</p>
+    </section>
+    <section>
+        <h2>Comparison of Volume Scales</h2>
+        <p>The cup offers convenience in imperial-based recipes for approximate measurements, while the milliliter provides decimal precision in metric systems for exact quantities. One cup approximates 236.588 ml, making conversions vital for international cooking and baking accuracy.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Object/Event</th>
+                    <th>Cups (cup)</th>
+                    <th>Milliliters (ml)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Standard Coffee Mug</td>
+                    <td>1</td>
+                    <td>236.588</td>
+                </tr>
+                <tr>
+                    <td>Glass of Water</td>
+                    <td>0.845</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>Recipe Flour Measure</td>
+                    <td>2</td>
+                    <td>473.176</td>
+                </tr>
+                <tr>
+                    <td>Small Bottle</td>
+                    <td>2.113</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>Large Pitcher</td>
+                    <td>4.227</td>
+                    <td>1000</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What is the precise conversion factor from cups to milliliters?</strong> The exact factor is 236.5882365, based on 1 US cup = 236.588 ml.</p>
+        <p><strong>Why convert between cups and milliliters?</strong> Conversions are essential in international recipes, where US-based cookbooks use cups while metric countries employ milliliters for precision.</p>
+        <p><strong>Is there a simple estimation method?</strong> Multiply cups by 240 for a quick approximate in milliliters, then adjust for accuracy.</p>
+        <p><strong>How do negative values function in conversions?</strong> The tool supports negative inputs for directional or offset measurements, applying the same factor.</p>
+        <p><strong>Where are these units applied today?</strong> Cups persist in US and UK cooking, while milliliters dominate in science, medicine, and most global kitchens.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Cup_(unit)" target="_blank" rel="noopener noreferrer">Wikipedia: Cup (unit)</a> - Comprehensive overview of the cup's development, standards, and comparisons with metric systems.</p>
+        <p><a href="https://en.wikipedia.org/wiki/Litre" target="_blank" rel="noopener noreferrer">Wikipedia: Litre</a> - In-depth history, definitions, and global applications of the liter and milliliter, with conversion details to other units.</p>
+        <p><a href="https://www.nist.gov/pml/owm/metric-si/unit-conversion/volume-unit-conversions" target="_blank" rel="noopener noreferrer">NIST: Unit Conversion</a> - Official U.S. guidelines on volume conversions, including cups to milliliters, from the National Institute of Standards and Technology.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page features an interactive cups to milliliters converter with automatic updates, educational sections on unit histories, precise formulas, visual line charts, and comparison tables. It supports applications in cooking, baking, and nutritional analysis, focusing on imperial-metric accuracy. Index under volume conversion tools, kitchen utilities, and educational resources for recipes, dietetics, and global standards.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        let lineChart;
+        // Set random cup value on page load
+        function setRandomCup() {
+            const randomCup = (Math.random() * 5).toFixed(3); // Random number between 0 and 5
+            document.getElementById('cup-value').value = randomCup;
+            calculate();
+        }
+        function calculate() {
+            const cup = parseFloat(document.getElementById('cup-value').value);
+            if (isNaN(cup)) {
+                document.getElementById('result').innerHTML = 'Please enter a valid number.';
+                return;
+            }
+            const ml = cup * 236.588;
+            document.getElementById('result').innerHTML = `${cup.toFixed(6)} cup = ${ml.toFixed(2)} ml`;
+            // Generate dynamic common values around input (steps of 0.25, from cup-1 to cup+1)
+            const step = 0.25;
+            let commonValues = [];
+            for (let i = Math.max(0, cup - 1); i <= cup + 1; i += step) {
+                commonValues.push(i);
+            }
+            // Populate table
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            commonValues.forEach(val => {
+                const conv = val * 236.588;
+                const row = `<tr><td>${val.toFixed(6)}</td><td>${conv.toFixed(2)}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+            // Destroy existing chart if it exists
+            if (lineChart) {
+                lineChart.destroy();
+            }
+            // Delay chart creation to ensure canvas is visible
+            setTimeout(() => {
+                const ctx = document.getElementById('line-chart').getContext('2d');
+                lineChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: commonValues.map(val => val.toFixed(6) + ' cup'),
+                        datasets: [{
+                            label: 'Milliliters (ml)',
+                            data: commonValues.map(val => val * 236.588),
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }, 1000);
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Cups to Milliliters Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+        // Run on page load
+        window.onload = function() {
+            setRandomCup();
+        };
+    </script>
+</body>
+</html>
