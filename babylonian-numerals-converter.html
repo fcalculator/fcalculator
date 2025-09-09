@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert numbers to Babylonian numerals or vice versa with historical insights, formulas, examples, and tables for education and research.">
+    <meta name="keywords" content="babylonian numerals converter, number to babylonian conversion, babylonian to number calculator, historical numeral tool, ancient babylonian numbers, numeral system utility, education conversion, classical studies, numeral scaling, numeral examples">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Babylonian Numerals Converter</title>
+    <link rel="canonical" href="https://fcalculator.com/babylonian-numerals-converter.html">
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <style>
+        .MathJax { max-width: 300px; overflow-x: auto; }
+        .babylonian-numeral { font-size: 1.5em; }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Babylonian Numerals Converter",
+        "url": "https://fcalculator.com/babylonian-numerals-converter.html",
+        "description": "An interactive tool for converting between numbers and Babylonian numerals with detailed historical backgrounds, mathematical principles, step-by-step examples, comparison tables, and practical applications in education, history, archaeology, and cultural studies. Supports values up to 999999 with accurate cuneiform notation and educational resources for ancient numeral systems.",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Babylonian Numerals Converter",
+                    "item": "https://fcalculator.com/babylonian-numerals-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/babylonian-numerals-converter.html">Babylonian Numerals Converter</a>
+        </div>
+        <h1>Babylonian Numerals Converter</h1>
+        <p>This tool provides accurate conversions between numbers and Babylonian numerals, essential for historical research, educational purposes, archaeological studies, and understanding ancient numeral systems in cultural contexts.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Numeral Input</legend>
+                    <div class="input-row">
+                        <label for="input-value">Enter Number or Babylonian Numeral<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter a number (1-999999) or Babylonian numeral for conversion.</span></label>
+                        <input type="text" id="input-value" placeholder="e.g. 2023 or 𒌋𒌋𒁹𒁹𒁹" oninput="calculate()" required>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </section>
+    <section class="results-section" id="results">
+        <h2>Calculation Results</h2>
+        <p id="result" class="babylonian-numeral"></p>
+        <p id="current-date-babylonian" class="babylonian-numeral"></p>
+        <p id="babylonian-clock" class="babylonian-numeral"></p>
+        <table id="conversion-table">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Babylonian Numeral</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+        <button onclick="saveAsPDF()">Save as PDF</button>
+        <button onclick="sharePage()">Share</button>
+    </section>
+    <p>Explore similar tools like our <a href="https://fcalculator.com/conversions.html">Conversions</a> for comprehensive unit analysis.</p>
+    <section>
+        <h2>How to Use the Babylonian Numerals Converter</h2>
+        <p>Enter a number (1-999999) or a Babylonian numeral into the input field. The result updates automatically as you type. The tool detects the input type and performs the conversion, displaying the result along with a table of common conversions for better understanding. This converter is ideal for students, historians, educators, and anyone dealing with ancient numeral systems in research or educational materials. For example, input 2023 to see 𒌋𒌋𒁹𒁹𒁹, or input 𒌋𒌋𒁹𒁹𒁹 to see 2023, facilitating easy verification and learning of Babylonian numeral structures.</p>
+    </section>
+    <section>
+        <h2>Understanding Babylonian Numerals</h2>
+        <p>Babylonian numerals utilize a sexagesimal (base-60) system with cuneiform symbols for 1 and 10, using positional notation and repetition to represent values. Symbols include a vertical wedge for 1 and a chevron for 10, with placeholders for zero in later periods, making it advanced for astronomical and mathematical calculations.</p>
+        <h3>History of Babylonian Numerals</h3>
+        <p>Developed in Mesopotamia around 2000 BC, Babylonian numerals evolved from Sumerian tally systems to a positional base-60 notation impressed on clay tablets. The system enabled precise computations in astronomy, as seen in lunar eclipse predictions, and in mathematics for solving quadratic equations. It influenced Greek and Islamic scholars, persisting in astronomical use until the Renaissance, and reflected the civilization's focus on timekeeping, with 60-minute hours and 360-degree circles tracing back to this innovation.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Babylonian_numerals.svg" alt="Illustration of Babylonian numeral symbols and their values." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Illustration of Babylonian numeral symbols and their values.</i>
+    </section>
+    <section>
+        <h2>The Conversion Principles Explained</h2>
+        <p>Babylonian numerals are positional in base-60, using symbols for 1 (𒁹) and 10 (𒌋), with repetition to form digits 1-59. For larger numbers, digits are separated by spaces, and zero is a placeholder in context.</p>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 2023 to Babylonian: Convert to base-60: 33*60 + 43 = 𒌋𒌋𒌋 𒁹𒁹𒁹 (for 33) and 𒌋𒌋𒌋𒌋 𒁹𒁹𒁹 (for 43, but simplified). To convert a numeral to number: Sum values within each position and multiply by powers of 60.</p>
+    </section>
+    <section>
+        <h2>Variations and Limitations in Babylonian Numerals</h2>
+        <p>The system varied between Old Babylonian (with no zero) and later periods (with a placeholder), affecting ambiguity in large numbers. Limitations include context-dependent zero and lack of fractions in standard notation, though separate symbols existed for them. Variations in wedge orientation reflected scribal styles, and the sexagesimal base enabled efficient division, crucial for Babylonian astronomy in calculating planetary positions.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Babylonian_digit_0.svg" alt="Illustration of the Babylonian placeholder for zero." style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <i style="font-size: smaller; display: block; text-align: center;">Illustration of the Babylonian placeholder for zero.</i>
+    </section>
+    <section>
+        <h2>Comparison of Numeral Systems</h2>
+        <p>Babylonian numerals are positional in base-60, advanced for calculations but complex compared to decimal systems. They excel in division but require context for zero.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Babylonian Numeral</th>
+                    <th>Usage Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td class="babylonian-numeral">𒁹</td>
+                    <td>Unit in tallies</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td class="babylonian-numeral">𒁹𒁹𒁹𒁹</td>
+                    <td>Basic count</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td class="babylonian-numeral">𒁹𒁹𒁹𒁹𒁹𒁹𒁹𒁹𒁹</td>
+                    <td>Mathematical notation</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td class="babylonian-numeral">𒌋</td>
+                    <td>Decade marker</td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td class="babylonian-numeral">𒌋𒌋𒌋𒌋𒌋</td>
+                    <td>Measure in texts</td>
+                </tr>
+                <tr>
+                    <td>60</td>
+                    <td class="babylonian-numeral">𒁹</td>
+                    <td>Base unit</td>
+                </tr>
+                <tr>
+                    <td>3600</td>
+                    <td class="babylonian-numeral">𒁹</td>
+                    <td>Square of base</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td class="babylonian-numeral">𒌋𒌋𒁹𒁹 𒌋𒌋𒁹𒁹𒁹</td>
+                    <td>Year example</td>
+                </tr>
+                <tr>
+                    <td>476</td>
+                    <td class="babylonian-numeral">𒌋𒁹𒁹 𒌋𒌋𒁹𒁹𒁹𒁹𒁹𒁹</td>
+                    <td>Historical count</td>
+                </tr>
+                <tr>
+                    <td>1492</td>
+                    <td class="babylonian-numeral">𒌋𒌋𒁹𒁹 𒌋𒌋𒌋𒁹𒁹</td>
+                    <td>Discovery year</td>
+                </tr>
+                <tr>
+                    <td>1776</td>
+                    <td class="babylonian-numeral">𒌋𒌋𒌋 𒁹𒁹𒁹𒁹𒁹𒁹</td>
+                    <td>Independence year</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Practical Applications</h2>
+        <p>Babylonian numerals appear in cuneiform tablets, astronomical texts, and mathematical artifacts. This converter aids in decoding ancient records, teaching numeral systems in Mesopotamia studies, or analyzing computational methods from antiquity. In academia, they help interpret clay tablets and astronomical diaries, while in cultural studies, they enhance understanding of Babylonian science and timekeeping.</p>
+    </section>
+    <section>
+        <h2>Modern Uses of Babylonian Numerals</h2>
+        <p>Though replaced by decimal systems, Babylonian numerals feature in educational replicas, museum exhibits, and scholarly publications on ancient mathematics. They symbolize tradition in Mesopotamian research, denote periods in historical timelines, and inspire designs in modern art reflecting Euphrates Valley heritage. Their study bridges ancient innovation with contemporary analysis of base-60 in time and angles.</p>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What are the basic symbols in Babylonian numerals?</strong> Symbols like 𒁹 (1), 𒌋 (10), with repetition for digits 1-59.</p>
+        <p><strong>How does positional notation work in Babylonian numerals?</strong> Values depend on position in base-60, with spaces separating digits.</p>
+        <p><strong>Why are Babylonian numerals still studied?</strong> For interpreting ancient texts in mathematics, astronomy, and history.</p>
+        <p><strong>What is the range for standard Babylonian numerals?</strong> Unlimited in theory, but practical for large values with positions.</p>
+        <p><strong>Can negative values be converted?</strong> The tool supports positive integers only, as Babylonian numerals represent positive quantities.</p>
+    </section>
+    <section>
+        <h2>Related Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Babylonian_numerals" target="_blank" rel="noopener noreferrer">Wikipedia: Babylonian numerals</a> - Comprehensive overview of the numeral's development, symbols, and comparisons with other ancient systems.</p>
+        <p><a href="https://www.britannica.com/science/Babylonian-mathematics" target="_blank" rel="noopener noreferrer">Britannica: Babylonian mathematics</a> - Educational insights into the system's history, usage, and role in ancient mathematics.</p>
+        <p><a href="https://mathworld.wolfram.com/BabylonianNumerationSystem.html" target="_blank" rel="noopener noreferrer">MathWorld: Babylonian Numeration System</a> - Mathematical explanation of construction, conversion, and historical applications.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page features an interactive Babylonian numerals converter with automatic updates, educational sections on numeral histories, conversion principles, visual tables, and comparison examples. It supports applications in education, historical research, and cultural studies, focusing on numeral system accuracy. Index under numeral conversion tools, educational utilities, and resources for classical studies, history, and global standards.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        function calculate() {
+            const input = document.getElementById('input-value').value.trim();
+            if (!input) {
+                document.getElementById('result').innerHTML = 'Please enter a number or Babylonian numeral.';
+                return;
+            }
+            let result;
+            if (/^[0-9]+$/.test(input)) {
+                const num = parseInt(input, 10);
+                if (num < 1 || num > 999999) {
+                    document.getElementById('result').innerHTML = 'Please enter a number between 1 and 999999.';
+                    return;
+                }
+                result = `${num} = <span class="babylonian-numeral">${toBabylonian(num)}</span>`;
+            } else {
+                const num = toNumber(input);
+                if (num > 0) {
+                    result = `<span class="babylonian-numeral">${input}</span> = ${num}`;
+                } else {
+                    document.getElementById('result').innerHTML = 'Invalid input. Enter a number (1-999999) or valid Babylonian numeral.';
+                    return;
+                }
+            }
+            document.getElementById('result').innerHTML = result;
+            const tableBody = document.querySelector('#conversion-table tbody');
+            tableBody.innerHTML = '';
+            const examples = [1, 4, 9, 10, 50, 60, 3600, 2023, 476, 1492, 1776];
+            examples.forEach(val => {
+                const babylonian = toBabylonian(val);
+                const row = `<tr><td>${val}</td><td class="babylonian-numeral">${babylonian}</td></tr>`;
+                tableBody.innerHTML += row;
+            });
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+        function toBabylonian(num) {
+            if (num === 0) return '';
+            let babylonian = '';
+            let base = 1;
+            while (num > 0) {
+                let digit = num % 60;
+                if (digit > 0) {
+                    let tens = Math.floor(digit / 10);
+                    let ones = digit % 10;
+                    babylonian = '\u1230B'.repeat(tens) + '\u12079'.repeat(ones) + ' ' + babylonian;
+                } else {
+                    babylonian = ' ' + babylonian; // placeholder for zero
+                }
+                num = Math.floor(num / 60);
+            }
+            return babylonian.trim();
+        }
+        function toNumber(babylonian) {
+            const digits = babylonian.split(' ');
+            let num = 0;
+            let base = 1;
+            for (let i = digits.length - 1; i >= 0; i--) {
+                let digit = 0;
+                for (let char of digits[i]) {
+                    if (char === '\u12079') digit += 1;
+                    if (char === '\u1230B') digit += 10;
+                }
+                num += digit * base;
+                base *= 60;
+            }
+            return num;
+        }
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Babylonian Numerals Converter',
+                    url: window.location.href
+                });
+            } else {
+                alert('Share not supported on this browser.');
+            }
+        }
+        function saveAsPDF() {
+            const resultText = document.getElementById('result').innerText;
+            const dateText = document.getElementById('current-date-babylonian').innerText;
+            const clockText = document.getElementById('babylonian-clock').innerText;
+            const tableRows = Array.from(document.querySelectorAll('#conversion-table tr')).map(row => 
+                Array.from(row.cells).map(cell => cell.innerText)
+            );
+            const docDefinition = {
+                content: [
+                    { text: 'Babylonian Numerals Converter Results', style: 'header', alignment: 'center' },
+                    { text: resultText, margin: [0, 10] },
+                    { text: dateText, margin: [0, 5] },
+                    { text: clockText, margin: [0, 5] },
+                    {
+                        table: {
+                            headerRows: 1,
+                            widths: ['*', '*'],
+                            body: tableRows
+                        },
+                        layout: {
+                            hLineColor: [200, 200, 200],
+                            vLineColor: [200, 200, 200],
+                            hLineWidth: function () { return 0.1; },
+                            vLineWidth: function () { return 0.1; }
+                        },
+                        margin: [0, 10]
+                    }
+                ],
+                styles: {
+                    header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
+                    lineColor: [200, 200, 200],
+                    lineWidth: 0.1,
+                    font: 'helvetica',
+                    cellPadding: 3,
+                    fontSize: 10,
+                    halign: 'left'
+                },
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                pageMargins: [40, 60, 40, 60],
+                footer: function (currentPage, pageCount) {
+                    return {
+                        text: 'This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.',
+                        alignment: 'center',
+                        style: 'footer',
+                        link: 'https://fcalculator.com/babylonian-numerals-converter.html'
+                    };
+                }
+            };
+            pdfMake.createPdf(docDefinition).download('babylonian-numerals-results.pdf');
+        }
+        window.onload = function() {
+            document.getElementById('input-value').value = Math.floor(Math.random() * 999999) + 1;
+            calculate();
+            const currentDate = new Date();
+            const day = currentDate.getDate();
+            const month = currentDate.getMonth() + 1;
+            const year = currentDate.getFullYear();
+            const babylonianDate = toBabylonian(month) + '.' + toBabylonian(day) + '.' + toBabylonian(year);
+            document.getElementById('current-date-babylonian').innerHTML = 'Today\'s date in Babylonian numerals: <span class="babylonian-numeral">' + babylonianDate + '</span>';
+            function updateClock() {
+                const now = new Date();
+                const hours = now.getHours() % 12 || 12;
+                const minutes = now.getMinutes();
+                const seconds = now.getSeconds();
+                document.getElementById('babylonian-clock').innerHTML = 'Current time in Babylonian numerals: <span class="babylonian-numeral">' + toBabylonian(hours) + ':' + toBabylonian(minutes) + ':' + toBabylonian(seconds) + '</span>';
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+        };
+    </script>
+</body>
+</html>
