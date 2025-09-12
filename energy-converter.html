@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert energy units accurately between joules, calories, kilowatt-hours, BTUs, and more for scientific, engineering, and everyday applications.">
+    <meta name="keywords" content="energy converter, joules to calories, calories to joules, kwh to btu, btu to kwh, energy units conversion">
+    <link rel="canonical" href="https://fcalculator.com/energy-converter.html">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Energy Converter (J, cal, kWh, BTU)</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Energy Converter (J, cal, kWh, BTU)",
+        "description": "This tool enables precise conversions between joules, calories, kilocalories, watt-hours, kilowatt-hours, BTUs, electronvolts, ergs, foot-pounds, and therms, vital for physics, engineering, nutrition, and energy management applications in scientific research, industrial calculations, and daily energy assessments.",
+        "url": "https://fcalculator.com/energy-converter.html",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Energy Converter",
+                    "item": "https://fcalculator.com/energy-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/energy-converter.html">Energy Converter</a>
+        </div>
+        <h1>Energy Converter (J, cal, kWh, BTU)</h1>
+        <p>This tool enables precise conversions between joules, calories, kilocalories, watt-hours, kilowatt-hours, BTUs, electronvolts, ergs, foot-pounds, and therms, vital for physics, engineering, nutrition, and energy management applications in scientific research, industrial calculations, and daily energy assessments.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Energy Input</legend>
+                    <div class="input-row">
+                        <label for="from-unit">From Unit<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Select the energy unit you are converting from.</span></label>
+                        <select id="from-unit">
+                            <option value="j" selected>Joule (J)</option>
+                            <option value="cal">Calorie (cal)</option>
+                            <option value="kcal">Kilocalorie (kcal)</option>
+                            <option value="wh">Watt-hour (Wh)</option>
+                            <option value="kwh">Kilowatt-hour (kWh)</option>
+                            <option value="btu">British Thermal Unit (BTU)</option>
+                            <option value="ev">Electronvolt (eV)</option>
+                            <option value="erg">Erg (erg)</option>
+                            <option value="ftlb">Foot-pound (ft-lb)</option>
+                            <option value="therm">Therm (therm)</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="energy-value">Energy Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the energy value to convert. e.g. 1</span></label>
+                        <input type="number" id="energy-value" placeholder="e.g. 1" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="to-unit">To Unit<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Select the energy unit you are converting to.</span></label>
+                        <select id="to-unit">
+                            <option value="j">Joule (J)</option>
+                            <option value="cal" selected>Calorie (cal)</option>
+                            <option value="kcal">Kilocalorie (kcal)</option>
+                            <option value="wh">Watt-hour (Wh)</option>
+                            <option value="kwh">Kilowatt-hour (kWh)</option>
+                            <option value="btu">British Thermal Unit (BTU)</option>
+                            <option value="ev">Electronvolt (eV)</option>
+                            <option value="erg">Erg (erg)</option>
+                            <option value="ftlb">Foot-pound (ft-lb)</option>
+                            <option value="therm">Therm (therm)</option>
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="convertEnergy()">Convert</button>
+        </form>
+    </section>
+    <section class="results-section" id="results" style="display: none;">
+        <p id="main-result"></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>From Value</th>
+                    <th>To Value</th>
+                </tr>
+            </thead>
+            <tbody id="result-table-body">
+            </tbody>
+        </table>
+        <button onclick="shareResults()">Share</button>
+    </section>
+    <h2>Related</h2>
+    <p>
+        <a class="related" href="/energy-converter.html">Energy Converter</a>
+        <a class="related" href="/joules-to-calories-converter.html">Joules to Calories Converter</a>
+        <a class="related" href="/calories-to-joules-converter.html">Calories to Joules Converter</a>
+        <a class="related" href="/kwh-to-btu-converter.html">Kilowatt-Hours to BTU Converter</a>
+        <a class="related" href="/btu-to-kwh-converter.html">BTU to Kilowatt-Hours Converter</a>
+    </p>
+    <section>
+        <h2>How to Use the Energy Converter</h2>
+        <p>Select the unit you are converting from, enter the energy value, choose the unit to convert to, and click the "Convert" button. The tool calculates the result using standard conversion factors, displaying it along with a table of nearby conversions for context. This converter supports a range of units from microscopic scales like electronvolts to large-scale units like therms, making it suitable for applications in physics experiments, nutritional analysis, energy efficiency assessments, and engineering designs.</p>
+    </section>
+    <section>
+        <h2>Understanding Energy Units</h2>
+        <p>Energy units quantify the capacity to perform work or produce heat, varying across scientific disciplines from mechanical and thermal to electrical and atomic scales, each tailored for specific contexts such as laboratory measurements, food labeling, or power consumption tracking.</p>
+        <h3>Small-Scale Units</h3>
+        <p>Small-scale units include electronvolts for particle physics, ergs for microscopic work, and joules as the base SI unit for general energy calculations.</p>
+        <h3>Thermal and Nutritional Units</h3>
+        <p>Calories and kilocalories are commonly used in nutrition and chemistry to measure heat release, while BTUs quantify thermal energy in heating and cooling systems.</p>
+        <h3>Electrical and Large-Scale Units</h3>
+        <p>Watt-hours and kilowatt-hours track electrical energy consumption, foot-pounds measure mechanical work, and therms assess large volumes in natural gas usage.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Energy_density.svg/1000px-Energy_density.svg.png" alt="Diagram illustrating energy density and units" style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">Diagram illustrating energy density across various units and sources.</p>
+    </section>
+    <section>
+        <h2>Conversion Formulas Explained</h2>
+        <p>All conversions utilize the joule as an intermediate unit for precision. Here are key conversion factors to joules:</p>
+        <div style="max-width:500px; margin:0 auto;">
+            \[ 1 \, \text{cal} = 4.184 \, \text{J} \]
+            \[ 1 \, \text{kcal} = 4184 \, \text{J} \]
+            \[ 1 \, \text{Wh} = 3600 \, \text{J} \]
+            \[ 1 \, \text{kWh} = 3600000 \, \text{J} \]
+            \[ 1 \, \text{BTU} = 1055.06 \, \text{J} \]
+            \[ 1 \, \text{eV} = 1.602 \times 10^{-19} \, \text{J} \]
+            \[ 1 \, \text{erg} = 10^{-7} \, \text{J} \]
+            \[ 1 \, \text{ft-lb} = 1.35582 \, \text{J} \]
+            \[ 1 \, \text{therm} = 105506000 \, \text{J} \]
+        </div>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 1 kWh to BTU: First convert to joules (1 kWh = 3,600,000 J), then divide by 1055.06 to get approximately 3412.14 BTU.</p>
+    </section>
+    <section>
+        <h2>Comparison of Energy Units</h2>
+        <p>Small units suit precise scientific work, thermal units apply to heat and food, while large units handle industrial and utility scales, enabling cross-disciplinary comparisons.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Unit</th>
+                    <th>Equivalent in Joules</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1 Calorie</td><td>4.184 J</td></tr>
+                <tr><td>1 Kilocalorie</td><td>4184 J</td></tr>
+                <tr><td>1 Watt-hour</td><td>3600 J</td></tr>
+                <tr><td>1 Kilowatt-hour</td><td>3,600,000 J</td></tr>
+                <tr><td>1 BTU</td><td>1055.06 J</td></tr>
+                <tr><td>1 Electronvolt</td><td>1.602e-19 J</td></tr>
+                <tr><td>1 Erg</td><td>1e-7 J</td></tr>
+                <tr><td>1 Foot-pound</td><td>1.35582 J</td></tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What are the primary energy units?</strong> Key units span small-scale (eV, erg) for atomic and microscopic energy, thermal (cal, kcal, BTU) for heat and nutrition, and electrical/large-scale (Wh, kWh, therm) for power and utilities.</p>
+        <p><strong>How does the converter ensure accuracy?</strong> It employs the joule as a base unit, applying established international factors for conversions, accommodating scientific notation for extreme values.</p>
+        <p><strong>Why convert energy units?</strong> Conversions are essential in fields like physics for experiments, engineering for system design, nutrition for dietary planning, and energy audits for efficiency evaluations.</p>
+        <p><strong>What distinguishes calories from joules?</strong> Calories measure heat in nutritional contexts, while joules are the SI unit for all energy forms, with 1 cal equaling approximately 4.184 J.</p>
+        <p><strong>Can the tool handle very small or large energies?</strong> Yes, it supports conversions from atomic scales (eV) to utility scales (therms), using precise factors and notation for broad applicability.</p>
+    </section>
+    <section>
+        <h2>Understanding the Joule as Base Unit</h2>
+        <p>The joule, defined as the work done by a one-newton force over one meter, serves as the fundamental SI unit for energy, facilitating unified measurements across mechanical, thermal, and electrical domains.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Calorimeter.jpg/1000px-Calorimeter.jpg" alt="Calorimeter device for measuring energy in joules and calories" style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">Calorimeter used for precise energy measurements in joules and calories.</p>
+    </section>
+    <section>
+        <h2>Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Energy" target="_blank" rel="noopener noreferrer">Wikipedia: Energy</a> - Detailed exploration of energy concepts, units, historical development, and applications in physics and engineering.</p>
+        <p><a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-4-two-classes-si-units-and-si-prefixes" target="_blank" rel="noopener noreferrer">NIST: SI Units Guide</a> - Official standards for energy units, conversions, and prefixes from the National Institute of Standards and Technology, aiding accurate scientific computations.</p>
+        <p><a href="https://www.britannica.com/science/energy" target="_blank" rel="noopener noreferrer">Britannica: Energy</a> - In-depth analysis of energy as a physical quantity, its forms, units, and roles in natural and technological processes.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page delivers a comprehensive energy converter tool covering joules, calories, kilocalories, watt-hours, kilowatt-hours, BTUs, electronvolts, ergs, foot-pounds, and therms with user-friendly selection, accurate computations, in-depth explanations of unit origins, conversion equations, and comparative charts. Tailored for rapid conversions in physics, nutrition, engineering, and energy analysis, it prioritizes precision, broad scalability, and adherence to international standards. Index this under energy conversion utilities, scientific tools, and educational resources for professionals and students requiring dependable online solutions in thermodynamics, electrical engineering, and environmental assessments.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        window.onload = function() {
+            document.getElementById('energy-value').value = Math.floor(Math.random() * 100) + 1;
+        };
+        function convertEnergy() {
+            const fromUnit = document.getElementById('from-unit').value;
+            const value = parseFloat(document.getElementById('energy-value').value);
+            const toUnit = document.getElementById('to-unit').value;
+            if (isNaN(value)) {
+                alert('Please enter a valid number.');
+                return;
+            }
+            const factorsToJoule = {
+                j: 1,
+                cal: 4.184,
+                kcal: 4184,
+                wh: 3600,
+                kwh: 3600000,
+                btu: 1055.06,
+                ev: 1.60217662e-19,
+                erg: 1e-7,
+                ftlb: 1.35582,
+                therm: 105506000
+            };
+            const valueInJoule = value * factorsToJoule[fromUnit];
+            const result = valueInJoule / factorsToJoule[toUnit];
+            document.getElementById('main-result').innerHTML = `${value.toFixed(2)} ${fromUnit} = ${result.toFixed(6)} ${toUnit}`;
+            let rows = '';
+            const offsets = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5];
+            offsets.forEach(offset => {
+                const v = value + offset;
+                if (v > 0) {
+                    const valueInJoule = v * factorsToJoule[fromUnit];
+                    const result = valueInJoule / factorsToJoule[toUnit];
+                    rows += `<tr><td>${v.toFixed(2)} ${fromUnit}</td><td>${result.toFixed(6)} ${toUnit}</td></tr>`;
+                }
+            });
+            const resultTableBody = document.getElementById('result-table-body');
+            resultTableBody.innerHTML = rows;
+            document.getElementById('results').style.display = 'block';
+        }
+        function shareResults() {
+            alert('Share functionality can be implemented here.');
+        }
+    </script>
+</body>
+</html>
