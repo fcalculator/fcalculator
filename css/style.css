@@ -224,7 +224,7 @@ a:hover {
 
 .related-links {
     margin-top: 10px; /* Razmak od gornjeg sadržaja */
-    padding: 10px;
+    padding: 6px;
     border-top: 1px solid #ccc; /* Linija za odvajanje sekcije */
     display: flex; /* Omogućuje horizontalni raspored */
     flex-wrap: wrap; /* Ako ih ima više, prelaze u novi red ako nema mjesta */
