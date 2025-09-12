@@ -121,6 +121,7 @@
         </form>
     </section>
     <section class="results-section" id="results" style="display: none;">
+        <p id="main-result"></p>
         <table>
             <thead>
                 <tr>
@@ -259,8 +260,11 @@
                 gal: 3.78541,
                 bbl: 158.987
             };
+            const valueInLiter = value * factorsToLiter[fromUnit];
+            const result = valueInLiter / factorsToLiter[toUnit];
+            document.getElementById('main-result').innerHTML = `${value.toFixed(2)} ${fromUnit} = ${result.toFixed(6)} ${toUnit}`;
             let rows = '';
-            const offsets = [-2, -1, 0, 1, 2];
+            const offsets = [-2, -1, 1, 2];  // Exclude 0 since it's in main result
             offsets.forEach(offset => {
                 const v = value + offset;
                 if (v > 0) {
