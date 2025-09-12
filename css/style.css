@@ -223,7 +223,7 @@ a:hover {
 /* Stilovi za linkove unutar related sekcije - horizontalni raspored sa crnom pozadinom i bijelim tekstom */
 a.related {
     display: inline-block; /* Omogućuje da budu jedni do drugih */
-    padding: 3px 6px; /* Unutarnji razmak za bolji izgled */
+    padding: 3px 4px; /* Unutarnji razmak za bolji izgled */
     background-color: #333333; 
     color: #ffffff; /* Bijeli tekst */
     text-decoration: none; /* Ukloni podcrtavanje po defaultu, ali možeš ga vratiti ako želiš */
