@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>Volume Converter (L to gal)</title>
+    <title>Volume Converter</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -20,7 +20,7 @@
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "Volume Converter (L to gal)",
+        "name": "Volume Converter",
         "description": "This tool provides accurate conversions between milliliters, centiliters, deciliters, liters, cubic centimeters, cubic decimeters, cubic meters, teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, and barrels, essential for engineering, cooking, science, and industrial measurements.",
         "url": "https://fcalculator.com/volume-converter.html",
         "datePublished": "2022-01-14",
@@ -64,7 +64,7 @@
         <div class="breadcrumb">
             <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/volume-converter.html">Volume Converter</a>
         </div>
-        <h1>Volume Converter (L to gal)</h1>
+        <h1>Volume Converter</h1>
         <p>This tool provides accurate conversions between milliliters, centiliters, deciliters, liters, cubic centimeters, cubic decimeters, cubic meters, teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, and barrels, essential for scientific calculations, culinary recipes, industrial measurements, and educational applications in physics, chemistry, and daily life.</p>
     </header>
     <section class="tool-section">
@@ -263,10 +263,18 @@
                 gal: 3.78541,
                 bbl: 158.987
             };
-            const valueInLiter = value * factorsToLiter[fromUnit];
-            const result = valueInLiter / factorsToLiter[toUnit];
+            let rows = '';
+            const offsets = [-2, -1, 0, 1, 2];
+            offsets.forEach(offset => {
+                const v = value + offset;
+                if (v > 0) {
+                    const valueInLiter = v * factorsToLiter[fromUnit];
+                    const result = valueInLiter / factorsToLiter[toUnit];
+                    rows += `<tr><td>${v.toFixed(2)} ${fromUnit}</td><td>${result.toFixed(6)} ${toUnit}</td></tr>`;
+                }
+            });
             const resultTableBody = document.getElementById('result-table-body');
-            resultTableBody.innerHTML = `<tr><td>${value} ${fromUnit}</td><td>${result.toFixed(6)} ${toUnit}</td></tr>`;
+            resultTableBody.innerHTML = rows;
             document.getElementById('results').style.display = 'block';
             renderChart();
         }
