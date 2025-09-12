@@ -223,8 +223,8 @@ a:hover {
 /* Osnovni stilovi za related sekciju (kontejner sa linkovima) */
 
 .related-links {
-    margin-top: 10px; /* Razmak od gornjeg sadržaja */
-    padding: 5px;
+    margin-top: 15px; /* Razmak od gornjeg sadržaja */
+    padding: 4px;
     border-top: 1px solid #ccc; /* Linija za odvajanje sekcije */
     display: flex; /* Omogućuje horizontalni raspored */
     flex-wrap: wrap; /* Ako ih ima više, prelaze u novi red ako nema mjesta */
@@ -235,7 +235,7 @@ a:hover {
 /* Stilovi za linkove unutar related sekcije - horizontalni raspored sa crnom pozadinom i bijelim tekstom */
 .related-links a {
     display: inline-block; /* Omogućuje da budu jedni do drugih */
-    padding: 3px 7px; /* Unutarnji razmak za bolji izgled */
+    padding: 3px 6px; /* Unutarnji razmak za bolji izgled */
     background-color: #333333; 
     color: #ffffff; /* Bijeli tekst */
     text-decoration: none; /* Ukloni podcrtavanje po defaultu, ali možeš ga vratiti ako želiš */
