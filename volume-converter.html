@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>Volume Converter</title>
+    <title>Volume Converter (L to gal)</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -20,7 +20,7 @@
     {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "name": "Volume Converter",
+        "name": "Volume Converter (L to gal)",
         "description": "This tool provides accurate conversions between milliliters, centiliters, deciliters, liters, cubic centimeters, cubic decimeters, cubic meters, teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, and barrels, essential for engineering, cooking, science, and industrial measurements.",
         "url": "https://fcalculator.com/volume-converter.html",
         "datePublished": "2022-01-14",
@@ -75,7 +75,7 @@
                     <div class="input-row">
                         <label for="from-unit">From Unit<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Select the unit you are converting from.</span></label>
                         <select id="from-unit">
-                            <option value="ml">Milliliter (ml)</option>
+                            <option value="ml" selected>Milliliter (ml)</option>
                             <option value="cl">Centiliter (cl)</option>
                             <option value="dl">Deciliter (dl)</option>
                             <option value="l">Liter (L)</option>
@@ -102,7 +102,7 @@
                             <option value="ml">Milliliter (ml)</option>
                             <option value="cl">Centiliter (cl)</option>
                             <option value="dl">Deciliter (dl)</option>
-                            <option value="l">Liter (L)</option>
+                            <option value="l" selected>Liter (L)</option>
                             <option value="cm3">Cubic centimeter (cm³)</option>
                             <option value="dm3">Cubic decimeter (dm³)</option>
                             <option value="m3">Cubic meter (m³)</option>
@@ -158,8 +158,8 @@
         <p>Imperial units include teaspoons and tablespoons for recipes, fluid ounces for drinks, cups for baking, pints for beer, quarts for milk, gallons for fuel, barrels for oil, used mainly in the US and UK for customary measurements.</p>
         <h3>Other Units</h3>
         <p>Barrels for petroleum trade, providing context for specialized measurements in industry and commerce.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Volume_units_comparison.svg/1000px-Volume_units_comparison.svg.png" alt="Diagram showing volume units comparison" style="max-width:500px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style:italic; font-size:0.9em; text-align:center;">Diagram showing volume units comparison from small to large scales with everyday examples.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/MetricImperialUSCustomaryUnits.jpg" alt="Diagram showing comparison of metric, imperial, and US customary volume units" style="max-width:500px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">Diagram showing comparison of metric, imperial, and US customary volume units with examples.</p>
     </section>
     <section>
         <h2>Conversion Formulas Explained</h2>
@@ -216,8 +216,8 @@
     <section>
         <h2>Understanding the Liter Scale</h2>
         <p>The liter is a metric unit of volume, equivalent to one cubic decimeter, commonly used for liquids in everyday and scientific contexts.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Litre_bottle_of_milk.jpg/1000px-Litre_bottle_of_milk.jpg" alt="A one-liter bottle of milk" style="max-width:500px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style:italic; font-size:0.9em; text-align:center;">A one-liter bottle of milk, illustrating the common use of the liter in daily life.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/CubeLitre.svg/1000px-CubeLitre.svg.png" alt="A cubic decimeter representing one liter" style="max-width:500px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">A cubic decimeter representing one liter, illustrating the base metric volume unit.</p>
     </section>
     <section>
         <h2>Resources</h2>
@@ -235,6 +235,9 @@
     </footer>
     <script>
         let polarChart;
+        window.onload = function() {
+            document.getElementById('volume-value').value = Math.floor(Math.random() * 100) + 1;
+        };
         function convertVolume() {
             const fromUnit = document.getElementById('from-unit').value;
             const value = parseFloat(document.getElementById('volume-value').value);
