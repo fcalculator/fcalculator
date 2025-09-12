@@ -13,7 +13,6 @@
     <title>Volume Converter</title>
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="application/ld+json">
@@ -203,7 +202,6 @@
                 <tr><td>1 Barrel</td><td>158.987 L</td></tr>
             </tbody>
         </table>
-        <canvas id="polar-chart" width="500" height="300"></canvas>
     </section>
     <section>
         <h2>FAQ</h2>
@@ -227,14 +225,13 @@
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This page offers a versatile volume converter supporting milliliters, centiliters, deciliters, liters, cubic centimeters, cubic decimeters, cubic meters, teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, and barrels with interactive unit selection, precise calculations, educational content on unit histories, mathematical formulas, comparison tables, and charts. It is designed for quick conversions in engineering, cooking, science, and practical contexts, emphasizing accuracy, scalability, and global measurement standards. Index this resource under volume conversion tools, scientific calculators, and educational references for users seeking reliable online utilities in physics, chemistry, and trade.</p>
+        <p>This page offers a versatile volume converter supporting milliliters, centiliters, deciliters, liters, cubic centimeters, cubic decimeters, cubic meters, teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, and barrels with interactive unit selection, precise calculations, educational content on unit histories, mathematical formulas, and comparison tables. It is designed for quick conversions in engineering, cooking, science, and practical contexts, emphasizing accuracy, scalability, and global measurement standards. Index this resource under volume conversion tools, scientific calculators, and educational references for users seeking reliable online utilities in physics, chemistry, and trade.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        let polarChart;
         window.onload = function() {
             document.getElementById('volume-value').value = Math.floor(Math.random() * 100) + 1;
         };
@@ -276,41 +273,6 @@
             const resultTableBody = document.getElementById('result-table-body');
             resultTableBody.innerHTML = rows;
             document.getElementById('results').style.display = 'block';
-            renderChart();
-        }
-        function renderChart() {
-            const ctx = document.getElementById('polar-chart').getContext('2d');
-            if (polarChart) {
-                polarChart.destroy();
-            }
-            setTimeout(() => {
-                polarChart = new Chart(ctx, {
-                    type: 'polarArea',
-                    data: {
-                        labels: ['ml', 'tsp', 'floz', 'cup', 'gal', 'm3', 'bbl'],
-                        datasets: [{
-                            label: 'Equivalent in Liters',
-                            data: [0.001, 0.00493, 0.02957, 0.23659, 3.78541, 1000, 158.987],
-                            backgroundColor: ['rgba(255,99,132,0.2)', 'rgba(54,162,235,0.2)', 'rgba(255,206,86,0.2)', 'rgba(75,192,192,0.2)', 'rgba(153,102,255,0.2)', 'rgba(255,159,64,0.2)', 'rgba(201,203,207,0.2)'],
-                            borderColor: ['rgb(255,99,132)', 'rgb(54,162,235)', 'rgb(255,206,86)', 'rgb(75,192,192)', 'rgb(153,102,255)', 'rgb(255,159,64)', 'rgb(201,203,207)'],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            r: {
-                                angleLines: { display: false },
-                                suggestedMin: 0,
-                                suggestedMax: 1000
-                            }
-                        },
-                        plugins: {
-                            legend: { position: 'top' },
-                            title: { display: true, text: 'Volume Units Comparison (in Liters)' }
-                        }
-                    }
-                });
-            }, 1000);
         }
         function shareResults() {
             alert('Share functionality can be implemented here.');
