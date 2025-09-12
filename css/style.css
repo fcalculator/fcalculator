@@ -220,6 +220,35 @@ a:hover {
     text-decoration-color: currentColor;
 }
 
+/* Osnovni stilovi za related sekciju (kontejner sa linkovima) */
+.related-links {
+    margin-top: 20px; /* Razmak od gornjeg sadržaja */
+    padding: 10px;
+    border-top: 1px solid #ccc; /* Linija za odvajanje sekcije */
+    display: flex; /* Omogućuje horizontalni raspored */
+    flex-wrap: wrap; /* Ako ih ima više, prelaze u novi red ako nema mjesta */
+    gap: 10px; /* Razmak između linkova */
+    list-style: none; /* Ukloni bullet points ako je lista */
+}
+
+/* Stilovi za linkove unutar related sekcije - horizontalni raspored sa crnom pozadinom i bijelim tekstom */
+.related-links a {
+    display: inline-block; /* Omogućuje da budu jedni do drugih */
+    padding: 10px 15px; /* Unutarnji razmak za bolji izgled */
+    background-color: #000000; /* Crna pozadina */
+    color: #ffffff; /* Bijeli tekst */
+    text-decoration: none; /* Ukloni podcrtavanje po defaultu, ali možeš ga vratiti ako želiš */
+    border: 1px solid #000000; /* Crni obrub (border) za definiciju */
+    border-radius: 4px; /* Zaobljeni uglovi za ljepši izgled */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Glatki transition za hover */
+}
+
+/* Hover efekat za linkove u related sekciji - obrnuti boje za interakciju */
+.related-links a:hover {
+    background-color: #ffffff; /* Bijela pozadina na hover */
+    color: #000000; /* Crni tekst na hover */
+    text-decoration: underline; /* Dodaj podcrtavanje na hover za bolju vidljivost */
+}
 /* Footer: Compact at bottom */
 footer {
     text-align: center;
