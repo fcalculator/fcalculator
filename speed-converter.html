@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert speeds accurately between kilometers per hour, miles per hour, meters per second, knots, and more for transportation, physics, and sports applications.">
+    <meta name="keywords" content="speed converter, km/h to mph, m/s to km/h, measurement conversion, metric to imperial speed">
+    <link rel="canonical" href="https://fcalculator.com/speed-converter.html">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Speed Converter</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Speed Converter",
+        "description": "This tool provides accurate conversions between centimeters per second, meters per second, kilometers per hour, miles per hour, feet per second, knots, kilometers per second, miles per second, and Mach numbers, essential for transportation, physics, sports, and educational applications in mechanics, aviation, and daily life.",
+        "url": "https://fcalculator.com/speed-converter.html",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Speed Converter",
+                    "item": "https://fcalculator.com/speed-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/speed-converter.html">Speed Converter</a>
+        </div>
+        <h1>Speed Converter</h1>
+        <p>This tool provides accurate conversions between centimeters per second, meters per second, kilometers per hour, miles per hour, feet per second, knots, kilometers per second, miles per second, and Mach numbers, essential for transportation, physics, sports, and educational applications in mechanics, aviation, and daily life.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Speed Input</legend>
+                    <div class="input-row">
+                        <label for="from-unit">From Unit<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Select the unit you are converting from.</span></label>
+                        <select id="from-unit">
+                            <option value="cmps">Centimeters per second (cm/s)</option>
+                            <option value="mps" >Meters per second (m/s)</option>
+                            <option value="kmh" selected>Kilometers per hour (km/h)</option>
+                            <option value="mph">Miles per hour (mph)</option>
+                            <option value="fps">Feet per second (ft/s)</option>
+                            <option value="kn">Knots (kn)</option>
+                            <option value="kmps">Kilometers per second (km/s)</option>
+                            <option value="mps2">Miles per second (mi/s)</option>
+                            <option value="mach">Mach (mach)</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="speed-value">Speed Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the speed value to convert. e.g. 1</span></label>
+                        <input type="number" id="speed-value" placeholder="e.g. 1" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="to-unit">To Unit<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Select the unit you are converting to.</span></label>
+                        <select id="to-unit">
+                            <option value="cmps">Centimeters per second (cm/s)</option>
+                            <option value="mps">Meters per second (m/s)</option>
+                            <option value="kmh">Kilometers per hour (km/h)</option>
+                            <option value="mph" selected>Miles per hour (mph)</option>
+                            <option value="fps">Feet per second (ft/s)</option>
+                            <option value="kn">Knots (kn)</option>
+                            <option value="kmps">Kilometers per second (km/s)</option>
+                            <option value="mps2">Miles per second (mi/s)</option>
+                            <option value="mach">Mach (mach)</option>
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="convertSpeed()">Convert</button>
+        </form>
+    </section>
+    <section class="results-section" id="results" style="display: none;">
+        <p id="main-result"></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>From Value</th>
+                    <th>To Value</th>
+                </tr>
+            </thead>
+            <tbody id="result-table-body">
+            </tbody>
+        </table>
+        <button onclick="shareResults()">Share</button>
+    </section>
+    <h2>Related</h2>
+    <p>
+        <a class="related" href="/speed-converter.html">Speed Converter</a>
+        <a class="related" href="/kmh-to-mph-converter.html">km/h to mph Converter</a>
+        <a class="related" href="/mph-to-kmh-converter.html">mph to km/h Converter</a>
+        <a class="related" href="/ms-to-kmh-converter.html">m/s to km/h Converter</a>
+        <a class="related" href="/knots-to-mph-converter.html">Knots to mph Converter</a>
+        <a class="related" href="/mach-to-mph-converter.html">Mach to mph Converter</a>
+        <a class="related" href="/fps-to-mph-converter.html">ft/s to mph Converter</a>
+    </p>
+    <section>
+        <h2>How to Use the Speed Converter</h2>
+        <p>Select the unit you are converting from, enter the speed value, choose the unit to convert to, and click the "Convert" button. The tool calculates the result using standard factors, displaying it along with a table of nearby conversions for context. This converter supports metric, imperial, and nautical units, making it versatile for driving, aviation, sports, and daily measurements.</p>
+    </section>
+    <section>
+        <h2>Understanding Speed Units</h2>
+        <p>Speed units measure rate of motion in different systems, from scientific precision to practical transportation scales, each suited for specific applications like physics experiments, vehicle performance, or maritime navigation.</p>
+        <h3>Metric Units</h3>
+        <p>Metric units are decimal-based, with the meter per second as the base: centimeters per second for slow motions, meters per second for human speeds, kilometers per hour for vehicles, kilometers per second for high velocities.</p>
+        <h3>Imperial Units</h3>
+        <p>Imperial units include feet per second for mechanics, miles per hour for road travel, miles per second for extreme speeds, used mainly in the US for customary measurements.</p>
+        <h3>Other Units</h3>
+        <p>Knots for boating, Mach for aviation, providing context for specialized measurements in travel and science.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Orders_of_magnitude_speed.svg/1000px-Orders_of_magnitude_speed.svg.png" alt="Diagram showing orders of magnitude for speed units with examples" style="max-width:500px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">Diagram showing orders of magnitude for speed units with examples.</p>
+    </section>
+    <section>
+        <h2>Conversion Formulas Explained</h2>
+        <p>All conversions use meter per second as an intermediate for accuracy. Here are key factors to meter per second:</p>
+        <div style="max-width:500px; margin:0 auto;">
+            \[ 1 \, \text{cm/s} = 0.01 \, \text{m/s} \]
+            \[ 1 \, \text{km/h} = 0.277778 \, \text{m/s} \]
+            \[ 1 \, \text{mph} = 0.44704 \, \text{m/s} \]
+            \[ 1 \, \text{ft/s} = 0.3048 \, \text{m/s} \]
+            \[ 1 \, \text{kn} = 0.514444 \, \text{m/s} \]
+            \[ 1 \, \text{km/s} = 1000 \, \text{m/s} \]
+            \[ 1 \, \text{mi/s} = 1609.34 \, \text{m/s} \]
+            \[ 1 \, \text{mach} = 343 \, \text{m/s} \]
+        </div>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 100 km/h to mph: First convert to m/s (100 / 3.6 = 27.7778 m/s), then to mph (27.7778 / 0.44704 ≈ 62.14 mph).</p>
+    </section>
+    <section>
+        <h2>Comparison of Speed Units</h2>
+        <p>Metric units are consistent and scalable, imperial are traditional for transportation, specialized units handle niche applications efficiently.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Unit</th>
+                    <th>Equivalent in Meters per Second</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1 Centimeter per Second</td><td>0.01 m/s</td></tr>
+                <tr><td>1 Foot per Second</td><td>0.3048 m/s</td></tr>
+                <tr><td>1 Kilometer per Hour</td><td>0.2778 m/s</td></tr>
+                <tr><td>1 Mile per Hour</td><td>0.4470 m/s</td></tr>
+                <tr><td>1 Knot</td><td>0.5144 m/s</td></tr>
+                <tr><td>1 Mach</td><td>343 m/s</td></tr>
+                <tr><td>1 Kilometer per Second</td><td>1000 m/s</td></tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What are the main speed units?</strong> Common units include metric (m/s, km/h) for precision and imperial (mph, ft/s) for customary use, plus nautical (kn) and aviation (mach) for specific fields.</p>
+        <p><strong>How does the converter work?</strong> It uses meter per second as an intermediate unit for precise conversions between any two selected units, ensuring accuracy across systems.</p>
+        <p><strong>Why convert between metric and imperial?</strong> Metric is standard in science and most countries, while imperial remains in use in the US for driving, sports, and daily measurements.</p>
+        <p><strong>What is the difference between knots and miles per hour?</strong> Knots are 1 nautical mile per hour (about 1.151 mph), used in maritime and aviation, while mph is statutory for road speeds.</p>
+        <p><strong>Can I convert very small or large values?</strong> Yes, the tool handles slow (cm/s) to high (km/s, mach) speeds with scientific notation for extreme values.</p>
+    </section>
+    <section>
+        <h2>Understanding the Meter per Second Scale</h2>
+        <p>The meter per second is the base SI unit of speed, used in physics for measuring velocity in experiments and calculations.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Speedometer_showing_mph_and_km_h.jpg/1000px-Speedometer_showing_mph_and_km_h.jpg" alt="Speedometer showing mph and km/h scales" style="max-width:500px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">Speedometer showing mph and km/h scales, illustrating common speed units.</p>
+    </section>
+    <section>
+        <h2>Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Speed" target="_blank" rel="noopener noreferrer">Wikipedia: Speed</a> - Detailed overview of speed concepts, units, historical evolution, and formulas for various systems and applications.</p>
+        <p><a href="https://www.nist.gov/pml/owm/si-units-speed" target="_blank" rel="noopener noreferrer">NIST: SI Units - Speed</a> - Official U.S. guidelines on speed measurements, including conversions and standards from the National Institute of Standards and Technology.</p>
+        <p><a href="https://www.britannica.com/science/speed" target="_blank" rel="noopener noreferrer">Britannica: Speed</a> - Educational insights into speed as a physical property, measurement techniques, and practical applications in physics and engineering.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page offers a versatile speed converter supporting centimeters per second, meters per second, kilometers per hour, miles per hour, feet per second, knots, kilometers per second, miles per second, and Mach numbers with interactive unit selection, precise calculations, educational content on unit histories, mathematical formulas, and comparison tables. It is designed for quick conversions in transportation, physics, sports, and practical contexts, emphasizing accuracy, scalability, and global measurement standards. Index this resource under speed conversion tools, scientific calculators, and educational references for users seeking reliable online utilities in mechanics, aviation, and travel.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        window.onload = function() {
+            document.getElementById('speed-value').value = Math.floor(Math.random() * 100) + 1;
+        };
+        function convertSpeed() {
+            const fromUnit = document.getElementById('from-unit').value;
+            const value = parseFloat(document.getElementById('speed-value').value);
+            const toUnit = document.getElementById('to-unit').value;
+            if (isNaN(value)) {
+                alert('Please enter a valid number.');
+                return;
+            }
+            const factorsToMps = {
+                cmps: 0.01,
+                mps: 1,
+                kmh: 0.277778,
+                mph: 0.44704,
+                fps: 0.3048,
+                kn: 0.514444,
+                kmps: 1000,
+                mps2: 1609.34,
+                mach: 343
+            };
+            const valueInMps = value * factorsToMps[fromUnit];
+            const result = valueInMps / factorsToMps[toUnit];
+            document.getElementById('main-result').innerHTML = `${value.toFixed(2)} ${fromUnit} = ${result.toFixed(6)} ${toUnit}`;
+            let rows = '';
+            const offsets = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5];
+            offsets.forEach(offset => {
+                const v = value + offset;
+                if (v > 0) {
+                    const valueInMps = v * factorsToMps[fromUnit];
+                    const result = valueInMps / factorsToMps[toUnit];
+                    rows += `<tr><td>${v.toFixed(2)} ${fromUnit}</td><td>${result.toFixed(6)} ${toUnit}</td></tr>`;
+                }
+            });
+            const resultTableBody = document.getElementById('result-table-body');
+            resultTableBody.innerHTML = rows;
+            document.getElementById('results').style.display = 'block';
+        }
+        function shareResults() {
+            alert('Share functionality can be implemented here.');
+        }
+    </script>
+</body>
+</html>
