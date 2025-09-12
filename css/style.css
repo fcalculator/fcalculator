@@ -104,7 +104,7 @@ section h2 {
 section h3 {
     font-size: calc(var(--font-size-base) * 1.1); /* Adjusted for modern feel */
     color: var(--primary-color);
-    margin-bottom: calc(var(--spacing-unit) * 0.25); /* Minimal bottom margin */
+    margin-top: calc(var(--spacing-unit) * 0.25); /* Minimal bottom margin */
 }
 
 /* Forms: Compact grid, small elements */
