@@ -264,7 +264,7 @@
             const result = valueInLiter / factorsToLiter[toUnit];
             document.getElementById('main-result').innerHTML = `${value.toFixed(2)} ${fromUnit} = ${result.toFixed(6)} ${toUnit}`;
             let rows = '';
-            const offsets = [-2, -1, 1, 2];  // Exclude 0 since it's in main result
+            const offsets = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5];
             offsets.forEach(offset => {
                 const v = value + offset;
                 if (v > 0) {
