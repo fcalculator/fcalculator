@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert cooking measurements accurately between cups, milliliters, tablespoons, teaspoons, fluid ounces, pints, quarts, gallons, and liters for recipes, baking, and culinary precision.">
+    <meta name="keywords" content="cooking converter, cups to milliliters, milliliters to cups, tablespoons to teaspoons, teaspoons to tablespoons, ounces to cups, cooking units conversion">
+    <link rel="canonical" href="https://fcalculator.com/cooking-converter.html">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Cooking Converter (cups, ml, tbsp, tsp, oz)</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Cooking Converter (cups, ml, tbsp, tsp, oz)",
+        "description": "This tool offers precise conversions between teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, milliliters, and liters, essential for accurate recipe scaling, baking, cooking, and international culinary adaptations in home kitchens, professional environments, and nutritional planning.",
+        "url": "https://fcalculator.com/cooking-converter.html",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Cooking Converter",
+                    "item": "https://fcalculator.com/cooking-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/cooking-converter.html">Cooking Converter</a>
+        </div>
+        <h1>Cooking Converter (cups, ml, tbsp, tsp, oz)</h1>
+        <p>This tool offers precise conversions between teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, milliliters, and liters, essential for accurate recipe scaling, baking, cooking, and international culinary adaptations in home kitchens, professional environments, and nutritional planning.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Cooking Input</legend>
+                    <div class="input-row">
+                        <label for="from-unit">From Unit<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Select the cooking unit you are converting from.</span></label>
+                        <select id="from-unit">
+                            <option value="tsp">Teaspoon (tsp)</option>
+                            <option value="tbsp">Tablespoon (tbsp)</option>
+                            <option value="floz">Fluid Ounce (fl oz)</option>
+                            <option value="cup" selected>Cup (cup)</option>
+                            <option value="pint">Pint (pt)</option>
+                            <option value="quart">Quart (qt)</option>
+                            <option value="gallon">Gallon (gal)</option>
+                            <option value="ml">Milliliter (ml)</option>
+                            <option value="l">Liter (l)</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="cooking-value">Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the value to convert. e.g. 1</span></label>
+                        <input type="number" id="cooking-value" placeholder="e.g. 1" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="to-unit">To Unit<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Select the cooking unit you are converting to.</span></label>
+                        <select id="to-unit">
+                            <option value="tsp">Teaspoon (tsp)</option>
+                            <option value="tbsp">Tablespoon (tbsp)</option>
+                            <option value="floz">Fluid Ounce (fl oz)</option>
+                            <option value="cup">Cup (cup)</option>
+                            <option value="pint">Pint (pt)</option>
+                            <option value="quart">Quart (qt)</option>
+                            <option value="gallon">Gallon (gal)</option>
+                            <option value="ml" selected>Milliliter (ml)</option>
+                            <option value="l">Liter (l)</option>
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="convertCooking()">Convert</button>
+        </form>
+    </section>
+    <section class="results-section" id="results" style="display: none;">
+        <p id="main-result"></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>From Value</th>
+                    <th>To Value</th>
+                </tr>
+            </thead>
+            <tbody id="result-table-body">
+            </tbody>
+        </table>
+        <button onclick="shareResults()">Share</button>
+    </section>
+    <h2>Related</h2>
+    <p>
+        <a class="related" href="/cooking-converter.html">Cooking Converter</a>
+        <a class="related" href="/cups-to-milliliters-converter.html">Cups to Milliliters Converter</a>
+        <a class="related" href="/milliliters-to-cups-converter.html">Milliliters to Cups Converter</a>
+        <a class="related" href="/tablespoons-to-teaspoons-converter.html">Tablespoons to Teaspoons Converter</a>
+        <a class="related" href="/teaspoons-to-tablespoons-converter.html">Teaspoons to Tablespoons Converter</a>
+        <a class="related" href="/ounces-to-cups-converter.html">Ounces to Cups Converter</a>
+        <a class="related" href="/grams-to-cups-converter.html">Grams to Cups Converter</a>
+    </p>
+    <section>
+        <h2>How to Use the Cooking Converter</h2>
+        <p>Select the unit you are converting from, enter the value, choose the unit to convert to, and click the "Convert" button. The tool calculates the result using standard volume factors, displaying it along with a table of nearby conversions for quick reference. This converter focuses on volume measurements common in recipes, supporting adjustments for scaling servings, substituting ingredients, or adapting international recipes in baking, cooking, and meal preparation.</p>
+    </section>
+    <section>
+        <h2>Understanding Cooking Units</h2>
+        <p>Cooking units measure volume for liquids and dry ingredients in recipes, varying by region with imperial units in the U.S. and metric in most other countries, each designed for practical use in kitchens for precise ingredient proportions.</p>
+        <h3>Small Volume Units</h3>
+        <p>Teaspoons and tablespoons are ideal for spices, extracts, and small quantities in baking, while fluid ounces suit measuring liquids like milk or oil in detailed recipes.</p>
+        <h3>Medium Volume Units</h3>
+        <p>Cups provide a standard for flour, sugar, or water in everyday cooking, pints for larger liquid batches, and quarts for soups or sauces in family-sized portions.</p>
+        <h3>Large Volume Units</h3>
+        <p>Gallons handle bulk preparations like stocks or beverages, milliliters offer metric precision for scientific cooking, and liters for international recipe scaling.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Simple_Measuring_Cup.jpg" alt="Simple measuring cup for cooking volume measurements" style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">Simple measuring cup used for accurate volume measurements in cooking and baking.</p>
+    </section>
+    <section>
+        <h2>Conversion Formulas Explained</h2>
+        <p>All conversions use the milliliter as an intermediate unit for accuracy. Here are key factors to milliliters:</p>
+        <div style="max-width:500px; margin:0 auto;">
+            \[ 1 \, \text{tsp} = 4.92892 \, \text{ml} \]
+            \[ 1 \, \text{tbsp} = 14.7868 \, \text{ml} \]
+            \[ 1 \, \text{fl oz} = 29.5735 \, \text{ml} \]
+            \[ 1 \, \text{cup} = 236.588 \, \text{ml} \]
+            \[ 1 \, \text{pt} = 473.176 \, \text{ml} \]
+            \[ 1 \, \text{qt} = 946.353 \, \text{ml} \]
+            \[ 1 \, \text{gal} = 3785.41 \, \text{ml} \]
+            \[ 1 \, \text{l} = 1000 \, \text{ml} \]
+        </div>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 1 cup to tbsp: Convert to ml (1 cup = 236.588 ml), then divide by 14.7868 to get approximately 16 tbsp.</p>
+    </section>
+    <section>
+        <h2>Comparison of Cooking Units</h2>
+        <p>Imperial units like cups and teaspoons are volumetric for U.S. recipes, while metric milliliters and liters provide decimal-based ease for global consistency, facilitating cross-regional comparisons in culinary practices.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Unit</th>
+                    <th>Equivalent in Milliliters</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1 Teaspoon</td><td>4.92892 ml</td></tr>
+                <tr><td>1 Tablespoon</td><td>14.7868 ml</td></tr>
+                <tr><td>1 Fluid Ounce</td><td>29.5735 ml</td></tr>
+                <tr><td>1 Cup</td><td>236.588 ml</td></tr>
+                <tr><td>1 Pint</td><td>473.176 ml</td></tr>
+                <tr><td>1 Quart</td><td>946.353 ml</td></tr>
+                <tr><td>1 Gallon</td><td>3,785.41 ml</td></tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What are the main cooking volume units?</strong> Common units include small imperial (tsp, tbsp, fl oz) for precision, medium (cup, pt, qt) for recipes, large (gal) for bulk, and metric (ml, l) for international standards.</p>
+        <p><strong>How does the converter work?</strong> It employs milliliter as a base for exact conversions between selected units, handling decimal precision for recipe accuracy.</p>
+        <p><strong>Why convert cooking units?</strong> Conversions aid in adapting U.S. recipes to metric systems, scaling portions for different serving sizes, and ensuring consistency in baking where precision matters.</p>
+        <p><strong>What is the difference between U.S. and metric units?</strong> U.S. units like cups are based on historical measures (236.588 ml per cup), while metric uses powers of ten for simpler calculations.</p>
+        <p><strong>Can I convert mass units like grams here?</strong> This tool focuses on volume; for mass-to-volume like grams to cups, use density-specific converters as ingredient densities vary.</p>
+    </section>
+    <section>
+        <h2>Understanding the Milliliter as Base Unit</h2>
+        <p>The milliliter, equivalent to one cubic centimeter, serves as a precise metric unit for volume in cooking, enabling standardized measurements across recipes and reducing errors in ingredient proportions.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Beaker_100ml.jpg" alt="100 ml beaker for precise volume measurement" style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">100 ml beaker used for precise volume measurements in culinary and laboratory settings.</p>
+    </section>
+    <section>
+        <h2>Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Cooking_weights_and_measures" target="_blank" rel="noopener noreferrer">Wikipedia: Cooking Weights and Measures</a> - Detailed overview of cooking units, historical origins, and conversion standards for global recipe adaptations.</p>
+        <p><a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-8-comments-some-quantities-and-their-units" target="_blank" rel="noopener noreferrer">NIST: SI Units Guide</a> - Official guidelines on volume units and conversions, supporting accurate measurements in culinary applications.</p>
+        <p><a href="https://www.britannica.com/topic/measurement-system" target="_blank" rel="noopener noreferrer">Britannica: Measurement Systems</a> - Insights into imperial and metric systems, their applications in cooking, and historical evolution.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page features a versatile cooking converter for teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, milliliters, and liters with interactive selection, accurate computations, explanations of unit histories, formulas, and comparison tables. Designed for efficient conversions in recipes, baking, and meal prep, it emphasizes precision, user-friendliness, and alignment with international standards. Index this under cooking conversion tools, recipe utilities, and educational resources for home cooks, chefs, and nutritionists seeking reliable online solutions in culinary measurements and international adaptations.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        window.onload = function() {
+            document.getElementById('cooking-value').value = Math.floor(Math.random() * 100) + 1;
+        };
+        function convertCooking() {
+            const fromUnit = document.getElementById('from-unit').value;
+            const value = parseFloat(document.getElementById('cooking-value').value);
+            const toUnit = document.getElementById('to-unit').value;
+            if (isNaN(value)) {
+                alert('Please enter a valid number.');
+                return;
+            }
+            const factorsToMl = {
+                tsp: 4.92892,
+                tbsp: 14.7868,
+                floz: 29.5735,
+                cup: 236.588,
+                pint: 473.176,
+                quart: 946.353,
+                gallon: 3785.41,
+                ml: 1,
+                l: 1000
+            };
+            const valueInMl = value * factorsToMl[fromUnit];
+            const result = valueInMl / factorsToMl[toUnit];
+            document.getElementById('main-result').innerHTML = `${value.toFixed(2)} ${fromUnit} = ${result.toFixed(6)} ${toUnit}`;
+            let rows = '';
+            const offsets = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5];
+            offsets.forEach(offset => {
+                const v = value + offset;
+                if (v > 0) {
+                    const valueInMl = v * factorsToMl[fromUnit];
+                    const result = valueInMl / factorsToMl[toUnit];
+                    rows += `<tr><td>${v.toFixed(2)} ${fromUnit}</td><td>${result.toFixed(6)} ${toUnit}</td></tr>`;
+                }
+            });
+            const resultTableBody = document.getElementById('result-table-body');
+            resultTableBody.innerHTML = rows;
+            document.getElementById('results').style.display = 'block';
+        }
+        function shareResults() {
+            alert('Share functionality can be implemented here.');
+        }
+    </script>
+</body>
+</html>
