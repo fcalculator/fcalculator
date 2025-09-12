@@ -230,6 +230,7 @@ a.related {
     border: 1px solid #000000; /* Crni obrub (border) za definiciju */
     border-radius: 4px; /* Zaobljeni uglovi za ljepši izgled */
     transition: background-color 0.3s ease, color 0.3s ease; /* Glatki transition za hover */
+    margin-top: 2px;
 }
 /* Footer: Compact at bottom */
 footer {
