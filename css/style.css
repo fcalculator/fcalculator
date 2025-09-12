@@ -222,19 +222,19 @@ a:hover {
 
 /* Osnovni stilovi za related sekciju (kontejner sa linkovima) */
 .related-links {
-    margin-top: 20px; /* Razmak od gornjeg sadržaja */
+    margin-top: 10px; /* Razmak od gornjeg sadržaja */
     padding: 10px;
     border-top: 1px solid #ccc; /* Linija za odvajanje sekcije */
     display: flex; /* Omogućuje horizontalni raspored */
     flex-wrap: wrap; /* Ako ih ima više, prelaze u novi red ako nema mjesta */
-    gap: 10px; /* Razmak između linkova */
+    gap: 5px; /* Razmak između linkova */
     list-style: none; /* Ukloni bullet points ako je lista */
 }
 
 /* Stilovi za linkove unutar related sekcije - horizontalni raspored sa crnom pozadinom i bijelim tekstom */
 .related-links a {
     display: inline-block; /* Omogućuje da budu jedni do drugih */
-    padding: 10px 15px; /* Unutarnji razmak za bolji izgled */
+    padding: 5px 10px; /* Unutarnji razmak za bolji izgled */
     background-color: #000000; /* Crna pozadina */
     color: #ffffff; /* Bijeli tekst */
     text-decoration: none; /* Ukloni podcrtavanje po defaultu, ali možeš ga vratiti ako želiš */
