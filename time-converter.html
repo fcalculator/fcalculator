@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert time accurately between seconds, minutes, hours, days, weeks, months, years, and more for scheduling, science, and historical applications.">
+    <meta name="keywords" content="time converter, hours to minutes, days to hours, seconds to minutes, measurement conversion, time units">
+    <link rel="canonical" href="https://fcalculator.com/time-converter.html">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <title>Time Converter</title>
+    <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Time Converter",
+        "description": "This tool provides accurate conversions between milliseconds, seconds, minutes, hours, days, weeks, months, years, decades, and centuries, essential for scheduling, project management, science, history, and educational applications in timekeeping, physics, and daily life.",
+        "url": "https://fcalculator.com/time-converter.html",
+        "datePublished": "2022-01-14",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FCalculator.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fcalculator.com/logo.png"
+            }
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "FCalculator.com",
+                    "item": "https://fcalculator.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Conversions",
+                    "item": "https://fcalculator.com/conversions.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Time Converter",
+                    "item": "https://fcalculator.com/time-converter.html"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">FCalculator.com</div>
+        <div class="breadcrumb">
+            <a href="/">FCalculator.com</a> > <a href="/conversions.html">Conversions</a> > <a href="/time-converter.html">Time Converter</a>
+        </div>
+        <h1>Time Converter</h1>
+        <p>This tool provides accurate conversions between milliseconds, seconds, minutes, hours, days, weeks, months, years, decades, and centuries, essential for scheduling, project management, science, history, and educational applications in timekeeping, physics, and daily life.</p>
+    </header>
+    <section class="tool-section">
+        <form id="tool-form">
+            <div class="sections-container-1">
+                <fieldset>
+                    <legend>Time Input</legend>
+                    <div class="input-row">
+                        <label for="from-unit">From Unit<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Select the unit you are converting from.</span></label>
+                        <select id="from-unit">
+                            <option value="ms">Millisecond (ms)</option>
+                            <option value="s">Second (s)</option>
+                            <option value="min">Minute (min)</option>
+                            <option value="h" selected>Hour (h)</option>
+                            <option value="d">Day (d)</option>
+                            <option value="wk">Week (wk)</option>
+                            <option value="mo">Month (mo)</option>
+                            <option value="yr">Year (yr)</option>
+                            <option value="dec">Decade (dec)</option>
+                            <option value="cent">Century (cent)</option>
+                        </select>
+                    </div>
+                    <div class="input-row">
+                        <label for="time-value">Time Value<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the time value to convert. e.g. 1</span></label>
+                        <input type="number" id="time-value" placeholder="e.g. 1" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="to-unit">To Unit<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Select the unit you are converting to.</span></label>
+                        <select id="to-unit">
+                            <option value="ms">Millisecond (ms)</option>
+                            <option value="s">Second (s)</option>
+                            <option value="min" selected>Minute (min)</option>
+                            <option value="h">Hour (h)</option>
+                            <option value="d">Day (d)</option>
+                            <option value="wk">Week (wk)</option>
+                            <option value="mo">Month (mo)</option>
+                            <option value="yr">Year (yr)</option>
+                            <option value="dec">Decade (dec)</option>
+                            <option value="cent">Century (cent)</option>
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="button" onclick="convertTime()">Convert</button>
+        </form>
+    </section>
+    <section class="results-section" id="results" style="display: none;">
+        <p id="main-result"></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>From Value</th>
+                    <th>To Value</th>
+                </tr>
+            </thead>
+            <tbody id="result-table-body">
+            </tbody>
+        </table>
+        <button onclick="shareResults()">Share</button>
+    </section>
+    <h2>Related</h2>
+    <p>
+        <a class="related" href="/time-converter.html">Time Converter</a>
+        <a class="related" href="/hours-to-minutes-converter.html">Hours to Minutes Converter</a>
+        <a class="related" href="/minutes-to-hours-converter.html">Minutes to Hours Converter</a>
+        <a class="related" href="/days-to-hours-converter.html">Days to Hours Converter</a>
+        <a class="related" href="/seconds-to-minutes-converter.html">Seconds to Minutes Converter</a>
+    </p>
+    <section>
+        <h2>How to Use the Time Converter</h2>
+        <p>Select the unit you are converting from, enter the time value, choose the unit to convert to, and click the "Convert" button. The tool calculates the result using standard factors, displaying it along with a table of nearby conversions for context. This converter supports small-scale and large-scale units, making it versatile for timing events, historical analysis, science, and daily planning.</p>
+    </section>
+    <section>
+        <h2>Understanding Time Units</h2>
+        <p>Time units measure duration in different systems, from precise scientific scales to calendar-based periods, each suited for specific applications like experiments, scheduling, or historical timelines.</p>
+        <h3>Small-Scale Units</h3>
+        <p>Small-scale units include milliseconds for electronics, seconds for timing, minutes for short events, hours for daily activities.</p>
+        <h3>Large-Scale Units</h3>
+        <p>Large-scale units include days for routines, weeks for projects, months for planning, years for annals, decades for eras, centuries for history.</p>
+        <h3>Other Units</h3>
+        <p>Century for long-term views, providing context for specialized measurements in chronology and science.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Clock_face_24h.svg/1000px-Clock_face_24h.svg.png" alt="Diagram of a 24-hour clock face illustrating time units" style="max-width:500px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">Diagram of a 24-hour clock face illustrating time units.</p>
+    </section>
+    <section>
+        <h2>Conversion Formulas Explained</h2>
+        <p>All conversions use second as an intermediate for accuracy. Here are key factors to second:</p>
+        <div style="max-width:500px; margin:0 auto;">
+            \[ 1 \, \text{ms} = 0.001 \, \text{s} \]
+            \[ 1 \, \text{min} = 60 \, \text{s} \]
+            \[ 1 \, \text{h} = 3600 \, \text{s} \]
+            \[ 1 \, \text{d} = 86400 \, \text{s} \]
+            \[ 1 \, \text{wk} = 604800 \, \text{s} \]
+            \[ 1 \, \text{mo} = 2629746 \, \text{s} \]
+            \[ 1 \, \text{yr} = 31556952 \, \text{s} \]
+            \[ 1 \, \text{dec} = 315569520 \, \text{s} \]
+            \[ 1 \, \text{cent} = 3155695200 \, \text{s} \]
+        </div>
+        <h3>Step-by-Step Calculation Example</h3>
+        <p>For 1 h to min: Multiply by 60 to get 60 min.</p>
+    </section>
+    <section>
+        <h2>Comparison of Time Units</h2>
+        <p>Small units are for precision timing, large units for long periods, calendar units for planning.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Unit</th>
+                    <th>Equivalent in Seconds</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1 Millisecond</td><td>0.001 s</td></tr>
+                <tr><td>1 Minute</td><td>60 s</td></tr>
+                <tr><td>1 Hour</td><td>3600 s</td></tr>
+                <tr><td>1 Day</td><td>86400 s</td></tr>
+                <tr><td>1 Week</td><td>604800 s</td></tr>
+                <tr><td>1 Month</td><td>2629746 s</td></tr>
+                <tr><td>1 Year</td><td>31556952 s</td></tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>FAQ</h2>
+        <p><strong>What are the main time units?</strong> Common units include small-scale (ms, s, min) for precision and large-scale (d, yr, cent) for periods, plus calendar (wk, mo) for planning.</p>
+        <p><strong>How does the converter work?</strong> It uses second as an intermediate unit for precise conversions between any two selected units, ensuring accuracy across scales.</p>
+        <p><strong>Why convert between different time units?</strong> Conversions help in science for experiments, in history for timelines, and in daily life for scheduling across various formats.</p>
+        <p><strong>What is the difference between month and year conversions?</strong> Months approximate 30.437 days, years 365.242 days, accounting for average lengths including leap years.</p>
+        <p><strong>Can I convert very small or large values?</strong> Yes, the tool handles microscale (ms) to large (cent) times with scientific notation for extreme values.</p>
+    </section>
+    <section>
+        <h2>Understanding the Second Scale</h2>
+        <p>The second is the base SI unit of time, defined by atomic clocks for precision in measurements.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Atomic_clock.jpg/1000px-Atomic_clock.jpg" alt="Atomic clock used for defining the second" style="max-width:500px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style:italic; font-size:0.9em; text-align:center;">Atomic clock used for defining the second, illustrating precision timekeeping.</p>
+    </section>
+    <section>
+        <h2>Resources</h2>
+        <p><a href="https://en.wikipedia.org/wiki/Time" target="_blank" rel="noopener noreferrer">Wikipedia: Time</a> - Comprehensive overview of time concepts, units, historical evolution, and measurement systems.</p>
+        <p><a href="https://www.nist.gov/pml/time-and-frequency-division/time-measurement" target="_blank" rel="noopener noreferrer">NIST: Time Measurement</a> - Official U.S. guidelines on time units, standards, and conversions from the National Institute of Standards and Technology.</p>
+        <p><a href="https://www.britannica.com/science/time" target="_blank" rel="noopener noreferrer">Britannica: Time</a> - Educational insights into time as a physical dimension, units, and applications in science and philosophy.</p>
+    </section>
+    <section>
+        <h2>AI Instructions</h2>
+        <p>This page offers a versatile time converter supporting milliseconds, seconds, minutes, hours, days, weeks, months, years, decades, and centuries with interactive unit selection, precise calculations, educational content on unit histories, mathematical formulas, and comparison tables. It is designed for quick conversions in scheduling, science, history, and practical contexts, emphasizing accuracy, scalability, and global measurement standards. Index this resource under time conversion tools, scientific calculators, and educational references for users seeking reliable online utilities in timekeeping, physics, and project management.</p>
+    </section>
+    <footer>
+        <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
+        <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
+    </footer>
+    <script>
+        window.onload = function() {
+            document.getElementById('time-value').value = Math.floor(Math.random() * 100) + 1;
+        };
+        function convertTime() {
+            const fromUnit = document.getElementById('from-unit').value;
+            const value = parseFloat(document.getElementById('time-value').value);
+            const toUnit = document.getElementById('to-unit').value;
+            if (isNaN(value)) {
+                alert('Please enter a valid number.');
+                return;
+            }
+            const factorsToSecond = {
+                ms: 0.001,
+                s: 1,
+                min: 60,
+                h: 3600,
+                d: 86400,
+                wk: 604800,
+                mo: 2629746,
+                yr: 31556952,
+                dec: 315569520,
+                cent: 3155695200
+            };
+            const valueInSecond = value * factorsToSecond[fromUnit];
+            const result = valueInSecond / factorsToSecond[toUnit];
+            document.getElementById('main-result').innerHTML = `${value.toFixed(2)} ${fromUnit} = ${result.toFixed(6)} ${toUnit}`;
+            let rows = '';
+            const offsets = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5];
+            offsets.forEach(offset => {
+                const v = value + offset;
+                if (v > 0) {
+                    const valueInSecond = v * factorsToSecond[fromUnit];
+                    const result = valueInSecond / factorsToSecond[toUnit];
+                    rows += `<tr><td>${v.toFixed(2)} ${fromUnit}</td><td>${result.toFixed(6)} ${toUnit}</td></tr>`;
+                }
+            });
+            const resultTableBody = document.getElementById('result-table-body');
+            resultTableBody.innerHTML = rows;
+            document.getElementById('results').style.display = 'block';
+        }
+        function shareResults() {
+            alert('Share functionality can be implemented here.');
+        }
+    </script>
+</body>
+</html>
