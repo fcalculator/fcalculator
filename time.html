@@ -7,8 +7,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="description" content="Comprehensive time calculators for age, countdowns, zones, durations, work hours, and current times worldwide, with precise computations, date comparisons, and planning visualizations.">
-    <meta name="keywords" content="time calculators, age calculator, countdown timer, time zone converter, work hours calculator, current time, date duration, event planner">
+    <meta name="description" content="Comprehensive time calculators for age, dates, durations, zones, business days, timestamps, countdowns, work hours, and global current times, with precise computations and planning tools.">
+    <meta name="keywords" content="time calculators, date calculator, age calculator, countdown timer, time zone converter, business days calculator, unix timestamp, work hours, duration calculator, event planner">
     <title>Time Calculators</title>
     <link rel="canonical" href="https://fcalculator.com/time.html">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
@@ -19,7 +19,7 @@
         "@type": "CollectionPage",
         "name": "Time Calculators",
         "url": "https://fcalculator.com/time.html",
-        "description": "A curated collection of time management tools including age estimation, event countdowns, time zone conversions, duration calculations, work hour tracking, and real-time clocks for global locations. Features include interactive date manipulations, timezone offsets from sources like IANA and NIST, visual timelines, detailed breakdowns, and export options for scheduling and productivity planning.",
+        "description": "A curated collection of time management tools including age estimation, date additions/subtractions, duration calculations, time zone conversions, business day computations, timestamp conversions, event countdowns, work hour tracking, sunrise/sunset predictions, moon phases, zodiac signs, and real-time clocks for global locations. Features include interactive date manipulations, timezone offsets from sources like IANA and NIST, visual timelines, detailed breakdowns, comparative tables, and export options for scheduling, productivity, astronomical planning, and deadline management.",
         "datePublished": "2022-01-14",
         "publisher": {
             "@type": "Organization",
@@ -31,15 +31,72 @@
         },
         "hasPart": [
             {"@type": "WebPage", "name": "Age Calculator", "url": "https://fcalculator.com/age-calculator.html", "description": "Determine exact age in years, months, and days from birthdate."},
-            {"@type": "WebPage", "name": "Custom Event Countdown Timer", "url": "https://fcalculator.com/custom-event-countdown-timer.html", "description": "Set and track countdowns to personal events with alerts."},
+            {"@type": "WebPage", "name": "Age in Days Calculator", "url": "https://fcalculator.com/age-in-days-calculator.html", "description": "Calculate age expressed in total days or weeks."},
+            {"@type": "WebPage", "name": "Age in Seconds Calculator", "url": "https://fcalculator.com/age-in-seconds-calculator.html", "description": "Convert age to seconds for precise lifespan tracking."},
+            {"@type": "WebPage", "name": "How Old Am I Calculator", "url": "https://fcalculator.com/how-old-am-i-calculator.html", "description": "Live age calculation in years, days, hours, minutes, and seconds."},
+            {"@type": "WebPage", "name": "Age Checker", "url": "https://fcalculator.com/age-checker.html", "description": "Verify if a date meets minimum age requirements like 18 or 21."},
+            {"@type": "WebPage", "name": "Birthday Countdown Calculator", "url": "https://fcalculator.com/birthday-countdown-calculator.html", "description": "Track days until your next birthday or anniversary."},
+            {"@type": "WebPage", "name": "Zodiac Sign Calculator", "url": "https://fcalculator.com/zodiac-sign-calculator.html", "description": "Determine zodiac sign based on birthdate."},
+            {"@type": "WebPage", "name": "Chinese Zodiac Calculator", "url": "https://fcalculator.com/chinese-zodiac-calculator.html", "description": "Find Chinese zodiac animal for a given year."},
+            {"@type": "WebPage", "name": "Leap Year Calculator", "url": "https://fcalculator.com/leap-year-calculator.html", "description": "Check if a year is a leap year."},
+            {"@type": "WebPage", "name": "Life Expectancy Calculator", "url": "https://fcalculator.com/life-expectancy-calculator.html", "description": "Estimate remaining lifespan based on birthdate and averages."},
+            {"@type": "WebPage", "name": "Date Calculator", "url": "https://fcalculator.com/date-calculator.html", "description": "Add or subtract days, weeks, months, or years from a date."},
+            {"@type": "WebPage", "name": "Date Difference Calculator", "url": "https://fcalculator.com/date-difference-calculator.html", "description": "Find the exact difference between two dates in days or years."},
+            {"@type": "WebPage", "name": "Weekday Calculator", "url": "https://fcalculator.com/weekday-calculator.html", "description": "Determine the day of the week for any historical or future date."},
+            {"@type": "WebPage", "name": "Days Between Dates Calculator", "url": "https://fcalculator.com/days-between-dates-calculator.html", "description": "Calculate total days between two dates."},
+            {"@type": "WebPage", "name": "Business Days Between Dates", "url": "https://fcalculator.com/business-days-between-dates.html", "description": "Count business days excluding weekends and holidays."},
+            {"@type": "WebPage", "name": "Date to Julian Day Converter", "url": "https://fcalculator.com/date-to-julian-day-converter.html", "description": "Convert Gregorian date to Julian day number."},
+            {"@type": "WebPage", "name": "Julian to Gregorian Date Converter", "url": "https://fcalculator.com/julian-to-gregorian-date-converter.html", "description": "Convert Julian day to standard Gregorian date."},
+            {"@type": "WebPage", "name": "Calendar Date Calculator", "url": "https://fcalculator.com/calendar-date-calculator.html", "description": "Add calendar units like quarters or fiscal years to dates."},
+            {"@type": "WebPage", "name": "Holiday Date Finder", "url": "https://fcalculator.com/holiday-date-finder.html", "description": "Find dates of holidays in a given year."},
+            {"@type": "WebPage", "name": "Easter Date Calculator", "url": "https://fcalculator.com/easter-date-calculator.html", "description": "Calculate the date of Easter for any year."},
             {"@type": "WebPage", "name": "Time Calculator", "url": "https://fcalculator.com/time-calculator.html", "description": "Add or subtract hours, minutes, and seconds for scheduling."},
+            {"@type": "WebPage", "name": "Duration Calculator", "url": "https://fcalculator.com/duration-calculator.html", "description": "Calculate time spans between two specific times."},
+            {"@type": "WebPage", "name": "Hours and Minutes Calculator", "url": "https://fcalculator.com/hours-and-minutes-calculator.html", "description": "Add up hours and minutes for time tracking."},
+            {"@type": "WebPage", "name": "Time Addition Calculator", "url": "https://fcalculator.com/time-addition-calculator.html", "description": "Add multiple time intervals together."},
+            {"@type": "WebPage", "name": "Time Subtraction Calculator", "url": "https://fcalculator.com/time-subtraction-calculator.html", "description": "Subtract time durations from a start time."},
+            {"@type": "WebPage", "name": "Time Multiplication Calculator", "url": "https://fcalculator.com/time-multiplication-calculator.html", "description": "Multiply time by a factor for scaled durations."},
+            {"@type": "WebPage", "name": "Time Division Calculator", "url": "https://fcalculator.com/time-division-calculator.html", "description": "Divide time spans by numbers for rates."},
+            {"@type": "WebPage", "name": "Stopwatch Lap Time Calculator", "url": "https://fcalculator.com/stopwatch-lap-time-calculator.html", "description": "Calculate lap times for racing or workouts."},
+            {"@type": "WebPage", "name": "Time to Decimal Converter", "url": "https://fcalculator.com/time-to-decimal-converter.html", "description": "Convert hh:mm:ss to decimal hours."},
+            {"@type": "WebPage", "name": "Decimal to Time Converter", "url": "https://fcalculator.com/decimal-to-time-converter.html", "description": "Convert decimal hours back to time format."},
             {"@type": "WebPage", "name": "Time Zone Calculator", "url": "https://fcalculator.com/time-zone-calculator.html", "description": "Convert times across international time zones accurately."},
-            {"@type": "WebPage", "name": "Timer Countdown", "url": "https://fcalculator.com/time/timer-countdown.html", "description": "Simple countdown timer for tasks and intervals."},
             {"@type": "WebPage", "name": "Current Time in India", "url": "https://fcalculator.com/time/current-time-in-india.html", "description": "Real-time clock for Indian Standard Time (IST)."},
             {"@type": "WebPage", "name": "Current Time in Australia", "url": "https://fcalculator.com/time/current-time-in-australia.html", "description": "Current time across Australian time zones."},
             {"@type": "WebPage", "name": "Current Time in USA", "url": "https://fcalculator.com/time/current-time-in-usa.html", "description": "Live times for major US time zones like EST, PST."},
             {"@type": "WebPage", "name": "Current Time in Singapore", "url": "https://fcalculator.com/time/current-time-in-singapore.html", "description": "Singapore Standard Time (SGT) clock."},
-            {"@type": "WebPage", "name": "Work Hours Calculator", "url": "https://fcalculator.com/time/work-hours-calculator.html", "description": "Track and total work hours with overtime calculations."}
+            {"@type": "WebPage", "name": "Current Time in London", "url": "https://fcalculator.com/time/current-time-in-london.html", "description": "Real-time for Greenwich Mean Time (GMT/BST)."},
+            {"@type": "WebPage", "name": "Current Time in Tokyo", "url": "https://fcalculator.com/time/current-time-in-tokyo.html", "description": "Japan Standard Time (JST) clock."},
+            {"@type": "WebPage", "name": "Current Time in Berlin", "url": "https://fcalculator.com/time/current-time-in-berlin.html", "description": "Central European Time (CET/CEST) clock."},
+            {"@type": "WebPage", "name": "Current Time in Dubai", "url": "https://fcalculator.com/time/current-time-in-dubai.html", "description": "Gulf Standard Time (GST) clock."},
+            {"@type": "WebPage", "name": "Current Time in New York", "url": "https://fcalculator.com/time/current-time-in-new-york.html", "description": "Eastern Standard Time (EST/EDT) clock."},
+            {"@type": "WebPage", "name": "Current Time in Los Angeles", "url": "https://fcalculator.com/time/current-time-in-los-angeles.html", "description": "Pacific Standard Time (PST/PDT) clock."},
+            {"@type": "WebPage", "name": "Work Hours Calculator", "url": "https://fcalculator.com/time/work-hours-calculator.html", "description": "Track and total work hours with overtime calculations."},
+            {"@type": "WebPage", "name": "Business Days Calculator", "url": "https://fcalculator.com/business-days-calculator.html", "description": "Calculate working days between dates, excluding weekends."},
+            {"@type": "WebPage", "name": "Time Card Calculator", "url": "https://fcalculator.com/time-card-calculator.html", "description": "Compute payroll hours from punch-in/out times."},
+            {"@type": "WebPage", "name": "Overtime Calculator", "url": "https://fcalculator.com/overtime-calculator.html", "description": "Calculate overtime pay based on hours worked."},
+            {"@type": "WebPage", "name": "Gross Pay Calculator", "url": "https://fcalculator.com/gross-pay-calculator.html", "description": "Calculate total pay before taxes from hours worked."},
+            {"@type": "WebPage", "name": "Payroll Hours Calculator", "url": "https://fcalculator.com/payroll-hours-calculator.html", "description": "Convert time to decimal for payroll processing."},
+            {"@type": "WebPage", "name": "Shift Schedule Calculator", "url": "https://fcalculator.com/shift-schedule-calculator.html", "description": "Plan employee shifts and calculate total hours."},
+            {"@type": "WebPage", "name": "Break Time Calculator", "url": "https://fcalculator.com/break-time-calculator.html", "description": "Account for breaks in work hour totals."},
+            {"@type": "WebPage", "name": "Custom Event Countdown Timer", "url": "https://fcalculator.com/custom-event-countdown-timer.html", "description": "Set and track countdowns to personal events with alerts."},
+            {"@type": "WebPage", "name": "Timer Countdown", "url": "https://fcalculator.com/time/timer-countdown.html", "description": "Simple countdown timer for tasks and intervals."},
+            {"@type": "WebPage", "name": "Holiday Countdown Calculator", "url": "https://fcalculator.com/holiday-countdown-calculator.html", "description": "Countdown to major holidays like Christmas or New Year."},
+            {"@type": "WebPage", "name": "Wedding Countdown Calculator", "url": "https://fcalculator.com/wedding-countdown-calculator.html", "description": "Track time until your wedding day."},
+            {"@type": "WebPage", "name": "Retirement Countdown Calculator", "url": "https://fcalculator.com/retirement-countdown-calculator.html", "description": "Countdown to retirement date."},
+            {"@type": "WebPage", "name": "Project Deadline Countdown", "url": "https://fcalculator.com/project-deadline-countdown.html", "description": "Monitor time left for project deadlines."},
+            {"@type": "WebPage", "name": "Fitness Goal Timer", "url": "https://fcalculator.com/fitness-goal-timer.html", "description": "Countdown for workout or fitness milestones."},
+            {"@type": "WebPage", "name": "Unix Timestamp Converter", "url": "https://fcalculator.com/unix-timestamp-converter.html", "description": "Convert between Unix timestamps and readable dates."},
+            {"@type": "WebPage", "name": "Julian Date Converter", "url": "https://fcalculator.com/julian-date-converter.html", "description": "Convert Gregorian dates to Julian day numbers."},
+            {"@type": "WebPage", "name": "ISO Week Date Calculator", "url": "https://fcalculator.com/iso-week-date-calculator.html", "description": "Calculate ISO week numbers and dates."},
+            {"@type": "WebPage", "name": "Epoch Time Converter", "url": "https://fcalculator.com/epoch-time-converter.html", "description": "Convert epoch time to human-readable format."},
+            {"@type": "WebPage", "name": "RFC 2822 Date Parser", "url": "https://fcalculator.com/rfc-2822-date-parser.html", "description": "Parse email date formats to standard time."},
+            {"@type": "WebPage", "name": "Sunrise Sunset Calculator", "url": "https://fcalculator.com/sunrise-sunset-calculator.html", "description": "Find sunrise and sunset times for any location."},
+            {"@type": "WebPage", "name": "Moon Phase Calculator", "url": "https://fcalculator.com/moon-phase-calculator.html", "description": "Determine moon phases for a specific date."},
+            {"@type": "WebPage", "name": "Solar Noon Calculator", "url": "https://fcalculator.com/solar-noon-calculator.html", "description": "Calculate the time of solar noon for a location."},
+            {"@type": "WebPage", "name": "Twilight Times Calculator", "url": "https://fcalculator.com/twilight-times-calculator.html", "description": "Compute civil, nautical, and astronomical twilight."},
+            {"@type": "WebPage", "name": "Day Length Calculator", "url": "https://fcalculator.com/day-length-calculator.html", "description": "Calculate the length of daylight for a date and location."},
+            {"@type": "WebPage", "name": "Equinox Solstice Dates", "url": "https://fcalculator.com/equinox-solstice-dates.html", "description": "Find dates of equinoxes and solstices."}
         ]
     }
     </script>
@@ -51,58 +108,120 @@
             <a href="/">FCalculator.com</a> > <a href="/time.html">Time</a>
         </div>
         <h1>Time Calculators</h1>
-        <p>Access specialized time calculators for age determination, event countdowns, timezone conversions, duration tracking, work scheduling, and global current times, delivering accurate results, visual timelines, and integration with productivity tools for effective daily planning.</p>
+        <p>Access specialized time calculators for age determination, date manipulations, duration tracking, timezone conversions, business scheduling, timestamp handling, event countdowns, work tracking, astronomical timings, and global current times, delivering accurate results, visual timelines, and integration with productivity tools for effective daily planning.</p>
     </header>
     <section class="tool-section">
         <div class="sections-container">
             <fieldset>
-                <legend>Age Calculators</legend>
+                <legend>Age and Birthday Calculators</legend>
                 <table>
                     <tr><td><a href="/age-calculator.html">Age Calculator</a></td></tr>
+                    <tr><td><a href="/age-in-days-calculator.html">Age in Days Calculator</a></td></tr>
+                    <tr><td><a href="/age-in-seconds-calculator.html">Age in Seconds Calculator</a></td></tr>
+                    <tr><td><a href="/how-old-am-i-calculator.html">How Old Am I Calculator</a></td></tr>
+                    <tr><td><a href="/age-checker.html">Age Checker</a></td></tr>
+                    <tr><td><a href="/birthday-countdown-calculator.html">Birthday Countdown Calculator</a></td></tr>
+                    <tr><td><a href="/zodiac-sign-calculator.html">Zodiac Sign Calculator</a></td></tr>
+                    <tr><td><a href="/chinese-zodiac-calculator.html">Chinese Zodiac Calculator</a></td></tr>
+                    <tr><td><a href="/leap-year-calculator.html">Leap Year Calculator</a></td></tr>
+                    <tr><td><a href="/life-expectancy-calculator.html">Life Expectancy Calculator</a></td></tr>
                 </table>
             </fieldset>
             <fieldset>
-                <legend>Time Calculators</legend>
+                <legend>Date Calculators</legend>
+                <table>
+                    <tr><td><a href="/date-calculator.html">Date Calculator</a></td></tr>
+                    <tr><td><a href="/date-difference-calculator.html">Date Difference Calculator</a></td></tr>
+                    <tr><td><a href="/weekday-calculator.html">Weekday Calculator</a></td></tr>
+                    <tr><td><a href="/days-between-dates-calculator.html">Days Between Dates Calculator</a></td></tr>
+                    <tr><td><a href="/business-days-between-dates.html">Business Days Between Dates</a></td></tr>
+                    <tr><td><a href="/date-to-julian-day-converter.html">Date to Julian Day Converter</a></td></tr>
+                    <tr><td><a href="/julian-to-gregorian-date-converter.html">Julian to Gregorian Date Converter</a></td></tr>
+                    <tr><td><a href="/calendar-date-calculator.html">Calendar Date Calculator</a></td></tr>
+                    <tr><td><a href="/holiday-date-finder.html">Holiday Date Finder</a></td></tr>
+                    <tr><td><a href="/easter-date-calculator.html">Easter Date Calculator</a></td></tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Time Duration and Arithmetic Calculators</legend>
                 <table>
                     <tr><td><a href="/time-calculator.html">Time Calculator</a></td></tr>
+                    <tr><td><a href="/duration-calculator.html">Duration Calculator</a></td></tr>
+                    <tr><td><a href="/hours-and-minutes-calculator.html">Hours and Minutes Calculator</a></td></tr>
+                    <tr><td><a href="/time-addition-calculator.html">Time Addition Calculator</a></td></tr>
+                    <tr><td><a href="/time-subtraction-calculator.html">Time Subtraction Calculator</a></td></tr>
+                    <tr><td><a href="/time-multiplication-calculator.html">Time Multiplication Calculator</a></td></tr>
+                    <tr><td><a href="/time-division-calculator.html">Time Division Calculator</a></td></tr>
+                    <tr><td><a href="/stopwatch-lap-time-calculator.html">Stopwatch Lap Time Calculator</a></td></tr>
+                    <tr><td><a href="/time-to-decimal-converter.html">Time to Decimal Converter</a></td></tr>
+                    <tr><td><a href="/decimal-to-time-converter.html">Decimal to Time Converter</a></td></tr>
                 </table>
             </fieldset>
             <fieldset>
-                <legend>Time Zone Calculators</legend>
+                <legend>Time Zone and Current Time Calculators</legend>
                 <table>
                     <tr><td><a href="/time-zone-calculator.html">Time Zone Calculator</a></td></tr>
-                </table>
-            </fieldset>
-            <fieldset>
-                <legend>Countdown Timers</legend>
-                <table>
-                    <tr><td><a href="/custom-event-countdown-timer.html">Custom Event Countdown Timer</a></td></tr>
-                    <tr><td><a href="/time/timer-countdown.html">Timer Countdown</a></td></tr>
-                </table>
-            </fieldset>
-            <fieldset>
-                <legend>Current Time Calculators</legend>
-                <table>
                     <tr><td><a href="/time/current-time-in-india.html">Current Time in India</a></td></tr>
                     <tr><td><a href="/time/current-time-in-australia.html">Current Time in Australia</a></td></tr>
                     <tr><td><a href="/time/current-time-in-usa.html">Current Time in USA</a></td></tr>
                     <tr><td><a href="/time/current-time-in-singapore.html">Current Time in Singapore</a></td></tr>
+                    <tr><td><a href="/time/current-time-in-london.html">Current Time in London</a></td></tr>
+                    <tr><td><a href="/time/current-time-in-tokyo.html">Current Time in Tokyo</a></td></tr>
+                    <tr><td><a href="/time/current-time-in-berlin.html">Current Time in Berlin</a></td></tr>
+                    <tr><td><a href="/time/current-time-in-dubai.html">Current Time in Dubai</a></td></tr>
+                    <tr><td><a href="/time/current-time-in-new-york.html">Current Time in New York</a></td></tr>
+                    <tr><td><a href="/time/current-time-in-los-angeles.html">Current Time in Los Angeles</a></td></tr>
                 </table>
             </fieldset>
             <fieldset>
-                <legend>Work Hours Calculators</legend>
+                <legend>Work and Business Time Calculators</legend>
                 <table>
                     <tr><td><a href="/time/work-hours-calculator.html">Work Hours Calculator</a></td></tr>
+                    <tr><td><a href="/business-days-calculator.html">Business Days Calculator</a></td></tr>
+                    <tr><td><a href="/time-card-calculator.html">Time Card Calculator</a></td></tr>
+                    <tr><td><a href="/overtime-calculator.html">Overtime Calculator</a></td></tr>
+                    <tr><td><a href="/gross-pay-calculator.html">Gross Pay Calculator</a></td></tr>
+                    <tr><td><a href="/payroll-hours-calculator.html">Payroll Hours Calculator</a></td></tr>
+                    <tr><td><a href="/shift-schedule-calculator.html">Shift Schedule Calculator</a></td></tr>
+                    <tr><td><a href="/break-time-calculator.html">Break Time Calculator</a></td></tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Countdown and Timer Calculators</legend>
+                <table>
+                    <tr><td><a href="/custom-event-countdown-timer.html">Custom Event Countdown Timer</a></td></tr>
+                    <tr><td><a href="/time/timer-countdown.html">Timer Countdown</a></td></tr>
+                    <tr><td><a href="/holiday-countdown-calculator.html">Holiday Countdown Calculator</a></td></tr>
+                    <tr><td><a href="/wedding-countdown-calculator.html">Wedding Countdown Calculator</a></td></tr>
+                    <tr><td><a href="/retirement-countdown-calculator.html">Retirement Countdown Calculator</a></td></tr>
+                    <tr><td><a href="/project-deadline-countdown.html">Project Deadline Countdown</a></td></tr>
+                    <tr><td><a href="/fitness-goal-timer.html">Fitness Goal Timer</a></td></tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Advanced Time Converters and Astronomical Calculators</legend>
+                <table>
+                    <tr><td><a href="/unix-timestamp-converter.html">Unix Timestamp Converter</a></td></tr>
+                    <tr><td><a href="/julian-date-converter.html">Julian Date Converter</a></td></tr>
+                    <tr><td><a href="/iso-week-date-calculator.html">ISO Week Date Calculator</a></td></tr>
+                    <tr><td><a href="/epoch-time-converter.html">Epoch Time Converter</a></td></tr>
+                    <tr><td><a href="/rfc-2822-date-parser.html">RFC 2822 Date Parser</a></td></tr>
+                    <tr><td><a href="/sunrise-sunset-calculator.html">Sunrise Sunset Calculator</a></td></tr>
+                    <tr><td><a href="/moon-phase-calculator.html">Moon Phase Calculator</a></td></tr>
+                    <tr><td><a href="/solar-noon-calculator.html">Solar Noon Calculator</a></td></tr>
+                    <tr><td><a href="/twilight-times-calculator.html">Twilight Times Calculator</a></td></tr>
+                    <tr><td><a href="/day-length-calculator.html">Day Length Calculator</a></td></tr>
+                    <tr><td><a href="/equinox-solstice-dates.html">Equinox Solstice Dates</a></td></tr>
                 </table>
             </fieldset>
         </div>
     </section>
     <section>
-        <p>Utilize an extensive suite of time calculators to manage schedules efficiently, from calculating precise age in various units and subtracting durations for project timelines to converting across time zones for international coordination and monitoring work hours for payroll accuracy, all enhanced with real-time updates and comparative tables for optimal time utilization.</p>
+        <p>Utilize an extensive suite of time calculators to manage schedules efficiently, from calculating precise age in various units and subtracting durations for project timelines to converting across time zones for international coordination, computing business days for deadlines, handling Unix timestamps for developers, and monitoring work hours for payroll accuracy, all enhanced with real-time updates, comparative tables, and astronomical insights for optimal time utilization.</p>
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This page organizes time calculators into intuitive subcategories for seamless access, spanning age computations, basic time arithmetic, timezone adjustments, countdown mechanisms, location-specific clocks, and labor tracking tools. Drawing from standards like IANA timezones and NIST atomic clocks, each links to dedicated pages with formulas, interactive sliders, timeline charts, tabular summaries, and export features. Designed for professionals, travelers, and planners needing reliable time insights for scheduling, productivity enhancement, and global synchronization, prioritizing precision and user-centric navigation.</p>
+        <p>This page organizes time calculators into intuitive subcategories for seamless access, spanning age computations, date arithmetic, duration measurements, timezone adjustments, countdown mechanisms, location-specific clocks, labor tracking, business exclusions, timestamp conversions, and celestial timings. Drawing from standards like IANA timezones, NIST atomic clocks, and astronomical data from NOAA, each links to dedicated pages with formulas, interactive sliders, timeline charts, tabular summaries, and export features. Designed for professionals, travelers, developers, HR managers, and planners needing reliable time insights for scheduling, productivity enhancement, global synchronization, and deadline management, prioritizing precision and user-centric navigation.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
