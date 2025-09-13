@@ -190,6 +190,24 @@
         window.onload = function() {
             setTodayDate('current-date');
             document.getElementById('birth-date').focus();
+            lineChart = new Chart(document.getElementById('line-chart'), {
+                type: 'line',
+                data: {
+                    labels: ['1900', '1950', '2000', '2020', '2023'],
+                    datasets: [{
+                        label: 'Global Life Expectancy (Years)',
+                        data: [32, 48, 67, 72, 73],
+                        borderColor: 'rgb(75,192,192)',
+                        tension: 0.1,
+                        backgroundColor: 'rgba(75,192,192,0.2)',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
         };
         function calculateAge(useCurrentTime = false) {
             const birthDateStr = document.getElementById('birth-date').value;
@@ -233,25 +251,6 @@
                 <tr><td>Minutes</td><td style="color: black;">${diffMinutes}</td></tr>
                 <tr><td>Seconds</td><td style="color: black;">${diffSeconds}</td></tr>
             `;
-            if (lineChart) lineChart.destroy();
-            lineChart = new Chart(document.getElementById('line-chart'), {
-                type: 'line',
-                data: {
-                    labels: ['1900', '1950', '2000', '2020', '2023'],
-                    datasets: [{
-                        label: 'Global Life Expectancy (Years)',
-                        data: [32, 48, 67, 72, 73],
-                        borderColor: 'rgb(75,192,192)',
-                        tension: 0.1,
-                        backgroundColor: 'rgba(75,192,192,0.2)',
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: { y: { beginAtZero: true } }
-                }
-            });
             document.getElementById('results').style.display = 'block';
         }
         function updateAge() {
