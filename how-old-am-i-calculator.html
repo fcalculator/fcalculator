@@ -25,7 +25,7 @@
             <a href="/">FCalculator.com</a> > <a href="/time.html">Time</a> > <a href="/how-old-am-i-calculator.html">How Old Am I Calculator</a>
         </div>
         <h1>How Old Am I Calculator</h1>
-        <p>Enter your birthdate to compute your precise age in years, months, days, hours, and seconds, with breakdowns for better understanding of time passed.</p>
+        <p>Enter your birthdate to compute your precise age in years, months, days, hours, minutes, and seconds, with breakdowns for better understanding of time passed.</p>
     </header>
     <section class="tool-section">
         <form id="tool-form">
@@ -65,7 +65,7 @@
     <section>
         <h2>How the How Old Am I Calculator Works</h2>
         <p>This tool calculates your age by subtracting your birthdate from the current date or a specified date. It accounts for leap years, varying month lengths, and precise time differences to provide accurate results in multiple units.</p>
-        <p>To use it: Enter your birthdate, optionally set a current date, and click Calculate. The results display your age in years, months, days, hours, and seconds, along with a visual polar chart breaking down the proportions of time lived in different units.</p>
+        <p>To use it: Enter your birthdate, optionally set a current date, and click Calculate. The results display your age in years, months, days, hours, minutes, and seconds, along with a visual polar chart breaking down the proportions of time lived in different units. If no current date is entered, the display updates live every second to show time flowing forward.</p>
         <div class="math-formula" style="max-width: 500px; margin: 0 auto;">
             \[ \text{Age in years} = \floor{\frac{\text{Total days passed}}{365.25}} \]
         </div>
@@ -76,8 +76,8 @@
         <p>Age isn't just years; it's a continuum. This calculator breaks it down into finer units, helping you grasp milestones like total days lived or seconds elapsed since birth.</p>
         <h3>Accounting for Leap Years</h3>
         <p>Leap years add an extra day every four years (with exceptions for century years). The tool automatically handles this using date libraries.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Gregorian_calendar_leap_year.svg/1000px-Gregorian_calendar_leap_year.svg.png" alt="Illustration of Gregorian calendar leap year rules" style="max-width:300px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style: italic; font-size: 0.9em; text-align: center;">Gregorian calendar leap year structure, showing rules for adding February 29.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Gregoriancalendarleap.png" alt="Diagram of Gregorian calendar leap year effects on seasons" style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style: italic; font-size: 0.9em; text-align: center;">Graph illustrating the shift in calendar dates relative to winter solstices due to leap year rules in the Gregorian calendar.</p>
         <h3>Breakdown of Time Units</h3>
         <table>
             <thead>
@@ -92,6 +92,7 @@
                 <tr><td>Months</td><td>30.44 days</td><td>Developmental stages</td></tr>
                 <tr><td>Days</td><td>24 hours</td><td>Daily life tracking</td></tr>
                 <tr><td>Hours</td><td>60 minutes</td><td>Work or sleep cycles</td></tr>
+                <tr><td>Minutes</td><td>60 seconds</td><td>Short-term activities</td></tr>
                 <tr><td>Seconds</td><td>Basic unit</td><td>Precise timing</td></tr>
             </tbody>
         </table>
@@ -103,8 +104,8 @@
         <p>This line chart illustrates average life expectancy trends over decades, sourced from reliable data.</p>
         <h3>Cultural Perspectives on Age</h3>
         <p>In some cultures, age is counted from conception, adding about 9 months. This tool sticks to standard Gregorian birthdate calculations but can inspire comparisons.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Age_calculation_in_different_cultures.jpg/1000px-Age_calculation_in_different_cultures.jpg" alt="Comparison of age reckoning in various cultures" style="max-width:300px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style: italic; font-size: 0.9em; text-align: center;">Visual comparison of age systems across cultures, highlighting differences in starting points.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/East_Asian_age_vs_International_age_chart-v2.jpg/1000px-East_Asian_age_vs_International_age_chart-v2.jpg" alt="Chart comparing East Asian age and international age" style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style: italic; font-size: 0.9em; text-align: center;">Chart showing how age is calculated in East Asian traditions versus international standards for a specific birthday.</p>
     </section>
     <section>
         <h2>FAQ</h2>
@@ -112,7 +113,7 @@
         <p><strong>What if my birthdate is in the future?</strong> The tool will return a negative age, useful for hypothetical scenarios.</p>
         <p><strong>Is leap year February 29 birth handled correctly?</strong> Yes, it adjusts for "leaplings" by considering the nearest valid date in non-leap years.</p>
         <p><strong>Can I calculate age for historical figures?</strong> Absolutely, enter any past date for accurate computations.</p>
-        <p><strong>How accurate are the seconds?</strong> Down to the millisecond, based on system clock.</p>
+        <p><strong>How accurate are the seconds?</strong> Down to the millisecond, based on system clock, with live updates if applicable.</p>
     </section>
     <section>
         <h2>Resources</h2>
@@ -123,7 +124,7 @@
         </ul>
     </section>
     <section class="ai-instructions">
-        <p>This page provides a precise age calculation tool based on birthdate inputs, outputting results in multiple time units with visualizations. It includes educational content on calendar systems, leap years, and cultural age perspectives. For indexing: Focus on keywords like exact age calculator, birthdate to age conversion, life timeline breakdown. Structured data includes schema for WebPage with calculator functionality. Date published: 2022-01-14. Author: I.Brkic. Ensure mobile rendering prioritizes tool visibility.</p>
+        <p>This page provides a precise age calculation tool based on birthdate inputs, outputting results in multiple time units with visualizations and live updates. It includes educational content on calendar systems, leap years, and cultural age perspectives. For indexing: Focus on keywords like exact age calculator, birthdate to age conversion, life timeline breakdown. Structured data includes schema for WebPage with calculator functionality. Date published: 2022-01-14. Author: I.Brkic. Ensure mobile rendering prioritizes tool visibility.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
@@ -135,7 +136,7 @@
         "@type": "WebPage",
         "name": "How Old Am I Calculator",
         "url": "https://fcalculator.com/how-old-am-i-calculator.html",
-        "description": "A tool to calculate exact age from birthdate, providing breakdowns in years, months, days, hours, and seconds, with charts and educational content on time reckoning.",
+        "description": "A tool to calculate exact age from birthdate, providing breakdowns in years, months, days, hours, minutes, and seconds, with charts and educational content on time reckoning.",
         "datePublished": "2022-01-14",
         "author": {
             "@type": "Person",
@@ -176,14 +177,23 @@
             const today = new Date().toISOString().split('T')[0];
             document.getElementById(inputId).value = today;
         }
-        window.onload = function() {
-            setTodayDate('current-date');
-        };
+        let intervalId;
         let polarChart = null;
         let lineChart = null;
-        document.getElementById('calculate-btn').addEventListener('click', function() {
-            const birthDate = new Date(document.getElementById('birth-date').value);
-            let currentDate = document.getElementById('current-date').value ? new Date(document.getElementById('current-date').value) : new Date();
+        let birthDateGlobal;
+        window.onload = function() {
+            setTodayDate('current-date');
+            document.getElementById('birth-date').focus();
+        };
+        function calculateAge(useCurrentTime = false) {
+            const birthDate = birthDateGlobal || new Date(document.getElementById('birth-date').value);
+            birthDateGlobal = birthDate;
+            let currentDate;
+            if (useCurrentTime) {
+                currentDate = new Date();
+            } else {
+                currentDate = document.getElementById('current-date').value ? new Date(document.getElementById('current-date').value) : new Date();
+            }
             if (birthDate > currentDate) {
                 alert('Birth date cannot be in the future.');
                 return;
@@ -196,24 +206,28 @@
             const diffYears = Math.floor(diffDays / 365.25);
             const diffMonths = Math.floor((diffDays % 365.25) / 30.44);
             const remainingDays = Math.floor(diffDays % 30.44);
-            document.getElementById('age-result').innerText = `You are ${diffYears} years, ${diffMonths} months, and ${remainingDays} days old.`;
+            const remainingHours = diffHours % 24;
+            const remainingMinutes = diffMinutes % 60;
+            const remainingSeconds = diffSeconds % 60;
+            document.getElementById('age-result').innerText = `You are ${diffYears} years, ${diffMonths} months, ${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes, and ${remainingSeconds} seconds old.`;
             const tableBody = document.querySelector('#age-table tbody');
             tableBody.innerHTML = `
                 <tr><td>Years</td><td style="color: black;">${diffYears}</td></tr>
                 <tr><td>Months</td><td style="color: black;">${diffMonths}</td></tr>
                 <tr><td>Days</td><td style="color: black;">${diffDays}</td></tr>
                 <tr><td>Hours</td><td style="color: black;">${diffHours}</td></tr>
+                <tr><td>Minutes</td><td style="color: black;">${diffMinutes}</td></tr>
                 <tr><td>Seconds</td><td style="color: black;">${diffSeconds}</td></tr>
             `;
             if (polarChart) polarChart.destroy();
             polarChart = new Chart(document.getElementById('polar-chart'), {
                 type: 'polarArea',
                 data: {
-                    labels: ['Years', 'Months', 'Days', 'Hours', 'Seconds'],
+                    labels: ['Years', 'Months', 'Days', 'Hours', 'Minutes', 'Seconds'],
                     datasets: [{
                         label: 'Time Breakdown',
-                        data: [diffYears, diffMonths, remainingDays, diffHours % 24, diffSeconds % 3600],
-                        backgroundColor: ['rgba(255,99,132,0.2)', 'rgba(54,162,235,0.2)', 'rgba(255,206,86,0.2)', 'rgba(75,192,192,0.2)', 'rgba(153,102,255,0.2)']
+                        data: [diffYears, diffMonths, remainingDays, remainingHours, remainingMinutes, remainingSeconds],
+                        backgroundColor: ['rgba(255,99,132,0.2)', 'rgba(54,162,235,0.2)', 'rgba(255,206,86,0.2)', 'rgba(75,192,192,0.2)', 'rgba(255,159,64,0.2)', 'rgba(153,102,255,0.2)']
                     }]
                 },
                 options: {
@@ -240,7 +254,17 @@
                     scales: { y: { beginAtZero: true } }
                 }
             });
-            setTimeout(() => { document.getElementById('results').style.display = 'block'; }, 1000);
+            document.getElementById('results').style.display = 'block';
+        }
+        function updateAge() {
+            calculateAge(true);
+        }
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            if (intervalId) clearInterval(intervalId);
+            calculateAge();
+            if (!document.getElementById('current-date').value) {
+                intervalId = setInterval(updateAge, 1000);
+            }
         });
         document.getElementById('save-pdf-btn').addEventListener('click', function() {
             const { jsPDF } = window.jspdf;
