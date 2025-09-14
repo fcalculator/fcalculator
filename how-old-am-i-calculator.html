@@ -73,7 +73,7 @@
         <form id="tool-form">
             <div class="sections-container-1">
                 <fieldset>
-                    <legend>Date & Time Inputs</legend>
+                    <legend>Date Inputs</legend>
                     <div class="input-row">
                         <label for="birth-date">Birth Date<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter your date of birth in YYYY-MM-DD format.</span></label>
                         <input type="date" id="birth-date" value="1990-01-01" required>
@@ -81,14 +81,6 @@
                     <div class="input-row">
                         <label for="birth-time">Birth Time<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the time of birth in HH:MM format.</span></label>
                         <input type="time" id="birth-time" value="12:00" required>
-                    </div>
-                    <div class="input-row">
-                        <label for="current-date">Current Date<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Leave blank for today's date or enter a specific date.</span></label>
-                        <input type="date" id="current-date">
-                    </div>
-                    <div class="input-row">
-                        <label for="current-time">Current Time<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Leave blank for current time or enter a specific time.</span></label>
-                        <input type="time" id="current-time">
                     </div>
                 </fieldset>
             </div>
@@ -113,8 +105,8 @@
     <p><a class="related" href="/age-calculator.html">Age Calculator</a> <a class="related" href="/age-in-days-calculator.html">Age in Days Calculator</a> <a class="related" href="/age-in-seconds-calculator.html">Age in Seconds Calculator</a> <a class="related" href="/how-old-am-i-calculator.html">How Old Am I Calculator</a> <a class="related" href="/age-checker.html">Age Checker</a> <a class="related" href="/birthday-countdown-calculator.html">Birthday Countdown Calculator</a> <a class="related" href="/zodiac-sign-calculator.html">Zodiac Sign Calculator</a> <a class="related" href="/chinese-zodiac-calculator.html">Chinese Zodiac Calculator</a> <a class="related" href="/leap-year-calculator.html">Leap Year Calculator</a> <a class="related" href="/life-expectancy-calculator.html">Life Expectancy Calculator</a></p>
     <section>
         <h2>How the How Old Am I Calculator Works</h2>
-        <p>This tool calculates your age by subtracting your birthdate and time from the current date or a specified date and time. It accounts for leap years, varying month lengths, and precise time differences to provide accurate results in multiple units. If no current date or time is specified, the display updates live every second to reflect time passing forward.</p>
-        <p>To use it: Enter your birthdate and time, optionally set a current date and time, and click Calculate. The results display your age in years, months, days, hours, minutes, and seconds, along with a breakdown table.</p>
+        <p>This tool calculates your age by subtracting your birthdate and time from the current date and time. It accounts for leap years, varying month lengths, and precise time differences to provide accurate results in multiple units. The display updates live every second to reflect time passing forward.</p>
+        <p>To use it: Enter your birthdate and time, and click Calculate. The results display your age in years, months, days, hours, minutes, and seconds, along with a breakdown table.</p>
         <div class="math-formula" style="max-width: 500px; margin: 0 auto;">
             \[ \text{Age in years} = \left\lfloor \frac{\text{Total days passed}}{365.25} \right\rfloor \]
         </div>
@@ -181,15 +173,10 @@
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script>
-        function setTodayDate(inputId) {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById(inputId).value = today;
-        }
         let intervalId;
         let lineChart = null;
         let birthDateGlobal;
         window.onload = function() {
-            setTodayDate('current-date');
             document.getElementById('birth-date').focus();
             lineChart = new Chart(document.getElementById('line-chart'), {
                 type: 'line',
@@ -210,23 +197,12 @@
                 }
             });
         };
-        function calculateAge(useCurrentTime = false) {
+        function calculateAge() {
             const birthDateStr = document.getElementById('birth-date').value;
             const birthTimeStr = document.getElementById('birth-time').value || '12:00';
             const birthDate = new Date(`${birthDateStr}T${birthTimeStr}:00`);
             birthDateGlobal = birthDate;
-            let currentDate;
-            if (useCurrentTime) {
-                currentDate = new Date();
-            } else {
-                const currentDateStr = document.getElementById('current-date').value;
-                const currentTimeStr = document.getElementById('current-time').value;
-                if (currentDateStr) {
-                    currentDate = new Date(`${currentDateStr}T${currentTimeStr || '00:00'}:00`);
-                } else {
-                    currentDate = new Date();
-                }
-            }
+            const currentDate = new Date();
             if (birthDate > currentDate) {
                 alert('Birth date cannot be in the future.');
                 return;
@@ -256,16 +232,12 @@
             document.getElementById('results').style.display = 'block';
         }
         function updateAge() {
-            calculateAge(true);
+            calculateAge();
         }
         document.getElementById('calculate-btn').addEventListener('click', function() {
             if (intervalId) clearInterval(intervalId);
             calculateAge();
-            const currentDateStr = document.getElementById('current-date').value;
-            const currentTimeStr = document.getElementById('current-time').value;
-            if (!currentDateStr || !currentTimeStr) {
-                intervalId = setInterval(updateAge, 1000);
-            }
+            intervalId = setInterval(updateAge, 1000);
         });
         document.getElementById('save-pdf-btn').addEventListener('click', function() {
             const { jsPDF } = window.jspdf;
