@@ -116,7 +116,7 @@
         <p>This tool calculates your age by subtracting your birthdate and time from the current date or a specified date and time. It accounts for leap years, varying month lengths, and precise time differences to provide accurate results in multiple units. If no current date or time is specified, the display updates live every second to reflect time passing forward.</p>
         <p>To use it: Enter your birthdate and time, optionally set a current date and time, and click Calculate. The results display your age in years, months, days, hours, minutes, and seconds, along with a breakdown table.</p>
         <div class="math-formula" style="max-width: 500px; margin: 0 auto;">
-            \[ \text{Age in years} = \floor{\frac{\text{Total days passed}}{365.25}} \]
+            \[ \text{Age in years} = \left\lfloor \frac{\text{Total days passed}}{365.25} \right\rfloor \]
         </div>
         <p>The formula above approximates years, but the tool uses precise date diffing for accuracy.</p>
     </section>
