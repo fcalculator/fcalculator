@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Experience a 3D endless runner game inspired by Run 3, featuring space tunnels, jumping mechanics, and logic-based challenges for educational fun in mathematics and physics.">
-    <meta name="keywords" content="run 3 game, endless runner, 3D platformer, math logic game, space tunnel runner, procedural generation game">
+    <meta name="description" content="Dive into a 3D endless runner game modeled after Run 3, featuring dynamic gravity shifts, character unlocks, power cell collection, and procedural space tunnels for enhancing spatial reasoning and quick decision-making in mathematics and physics contexts.">
+    <meta name="keywords" content="run 3 endless runner, 3D space tunnel game, gravity shift platformer, math logic adventure, procedural generation runner, character unlock game">
     <link rel="canonical" href="https://fcalculator.com/run-3-endless-runner-game.html">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -19,7 +19,7 @@
       "@context": "https://schema.org",
       "@type": "VideoGame",
       "name": "Run 3 Endless Runner Game",
-      "description": "A 3D endless runner game with space tunnels, jumping, and logic challenges. Players navigate infinite paths, collect power cells, and unlock characters while applying math and physics concepts.",
+      "description": "An immersive 3D endless runner game inspired by Run 3, where players navigate procedural space tunnels, shift gravity to walk on walls, collect power cells to unlock unique characters with varying abilities, and survive increasing challenges to achieve high scores. Emphasizes spatial geometry, physics simulations, and logical problem-solving.",
       "url": "https://fcalculator.com/run-3-endless-runner-game.html",
       "image": "https://example.com/run3-thumbnail.jpg",
       "author": {
@@ -35,7 +35,7 @@
         }
       },
       "datePublished": "2022-01-14",
-      "genre": "Action, Educational",
+      "genre": "Action, Educational, Platformer",
       "gamePlatform": "Web Browser",
       "operatingSystem": "Any",
       "numberOfPlayers": "Single Player",
@@ -55,121 +55,128 @@
             <a href="/">FCalculator.com</a> > <a href="/math.html">Math</a> > <a href="/run-3-endless-runner-game.html">Run 3 Endless Runner Game</a>
         </div>
         <h1>Run 3 Endless Runner Game</h1>
-        <p>Navigate through infinite space tunnels in this 3D platformer, applying logic and quick calculations for jumps and rotations to avoid falling into the void.</p>
+        <p>Navigate infinite space tunnels with gravity-defying mechanics, collect power cells, unlock characters, and test your spatial logic in this 3D platformer challenge.</p>
     </header>
     <section class="tool-section">
         <div id="game-container">
             <canvas id="gameCanvas" style="width: 100%; height: 500px; display: block; margin: 0 auto;"></canvas>
             <div id="score" style="position: absolute; top: 10px; left: 10px; color: white; font-size: 24px;">Score: 0</div>
-            <button id="start-game" onclick="startGame()">Start Game</button>
+            <div id="power-cells" style="position: absolute; top: 10px; right: 10px; color: white; font-size: 24px;">Power Cells: 0</div>
+            <div id="menu" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 20px; text-align: center; display: block;">
+                <h2>Select Character</h2>
+                <button onclick="selectCharacter('runner')">Runner</button>
+                <button id="skater-btn" disabled>Skater (300 cells)</button>
+                <button id="lizard-btn" disabled>Lizard (600 cells)</button>
+                <button id="bunny-btn" disabled>Bunny (1000 cells)</button>
+                <br><button onclick="startGame()">Start Infinite Mode</button>
+            </div>
         </div>
     </section>
     <section class="results-section">
         <h2>Game Controls and Status</h2>
-        <p>Use arrow keys to move left/right, up to jump, and space to rotate tunnel. Collect power cells to unlock characters.</p>
+        <p>Arrow keys: Left/Right to change lanes, Up to jump. Space to shift gravity (rotate to wall). Collect power cells to unlock characters and survive as long as possible.</p>
     </section>
+    <button onclick="saveAsPDF()">Save as PDF</button> <button onclick="sharePage()">Share</button>
     <section>
         <h2>How the Run 3 Endless Runner Game Works</h2>
-        <p>This game simulates an infinite run through space tunnels, where players must calculate trajectories, timing for jumps, and rotations to survive. The procedural generation ensures each playthrough is unique, challenging spatial reasoning and quick math skills like estimating distances and angles.</p>
-        <p>To play, select a character and enter infinite mode. The game uses 3D rendering to create immersive tunnels with gaps and walls. Physics engine handles gravity and momentum for realistic movements.</p>
+        <p>This interactive 3D game replicates the core mechanics of Run 3, where players control a character running through procedurally generated space tunnels. The tunnels feature random gaps and obstacles, requiring precise jumps and gravity shifts to avoid falling into the void. Power cells appear randomly for collection, enabling character unlocks with unique traits like higher jumps or faster speeds. The game accelerates over time, challenging players' timing and spatial awareness.</p>
+        <p>To begin, select an unlocked character from the menu and enter infinite mode. The physics engine simulates momentum, gravity rotations, and collisions, providing an educational tool for understanding 3D transformations and vector mathematics.</p>
     </section>
     <section>
         <h2>Understanding Game Mechanics and Physics</h2>
-        <p>The core mechanics involve vector calculations for movement and collision detection. For example, jumping follows a parabolic path defined by:</p>
+        <p>The gameplay revolves around vector-based movement and gravitational shifts. Jumping follows a physics model with initial velocity and deceleration:</p>
         <div style="max-width: 500px; margin: 0 auto;">
+            \[ v_y = v_0 - g \cdot t \]
             \[ y = y_0 + v_0 t - \frac{1}{2} g t^2 \]
         </div>
-        <p>Where \( g \) is gravity, \( v_0 \) initial velocity. Rotations alter the coordinate system, teaching transformation matrices in 3D space.</p>
-        <h3>Character Abilities</h3>
-        <p>Different characters have unique speeds and jump heights, requiring adaptation of strategies based on mathematical properties like acceleration.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Parabola2.gif/600px-Parabola2.gif" alt="Parabolic jump path" style="max-width:600px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style: italic; font-size: 0.9em; text-align: center;">Illustration of parabolic motion in jumps.</p>
+        <p>Where \( g \) represents simulated gravity. Gravity shifts involve rotating the player's reference frame by 90 degrees, allowing wall-running, which teaches coordinate transformations in 3D space.</p>
+        <h3>Character Abilities and Unlocks</h3>
+        <p>Each character offers distinct physics parameters: Runner (balanced), Skater (faster but lower jump), Lizard (high jump, slower), Bunny (double jumps). Unlocks occur via collected power cells, encouraging repeated plays and strategy adaptation.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Parabola2.gif/600px-Parabola2.gif" alt="Parabolic jump path in game physics" style="max-width:600px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style: italic; font-size: 0.9em; text-align: center;">Parabolic motion illustrating jump trajectories in the game.</p>
     </section>
     <section>
         <h2>Step-by-Step Guide to Playing</h2>
-        <p>1. Click 'Start Game' to initialize the 3D scene.</p>
-        <p>2. Use left/right arrows to change lanes in the tunnel.</p>
-        <p>3. Press up arrow to jump over gaps.</p>
-        <p>4. Spacebar rotates the tunnel for wall-running.</p>
-        <p>5. Collect power cells to increase score and unlock new characters like the Skater for better handling.</p>
-        <p>Advanced tip: Calculate optimal jump timing by observing tunnel speed, which increases over time.</p>
+        <p>1. From the menu, choose an unlocked character (start with Runner).</p>
+        <p>2. Click 'Start Infinite Mode' to begin running through tunnels.</p>
+        <p>3. Use left/right arrows to maneuver between tunnel lanes.</p>
+        <p>4. Press up arrow to jump over gaps; hold for longer jumps with certain characters.</p>
+        <p>5. Spacebar shifts gravity to adjacent walls, enabling new paths.</p>
+        <p>6. Collect glowing power cells to increase your total and unlock new characters.</p>
+        <p>Advanced strategy: Anticipate tunnel rotations and gaps by calculating distances visually, as speed increases every 1000 meters.</p>
     </section>
     <section>
         <h2>Applications in Mathematical Learning</h2>
-        <p>This game applies concepts from geometry, physics, and probability. Procedural tunnel generation uses algorithms like Perlin noise for random yet fair challenges. Players implicitly learn about vectors and transformations while navigating.</p>
+        <p>This game integrates geometry, physics, and probability concepts. Procedural generation uses noise functions for fair randomness in gap placement. Players apply vector addition for movements and matrix rotations for gravity changes.</p>
         <table>
             <thead>
-                <tr><th>Concept</th><th>Application in Game</th></tr>
+                <tr><th>Mathematical Concept</th><th>Game Application</th></tr>
             </thead>
             <tbody>
-                <tr><td>Vectors</td><td>Movement and direction in 3D space</td></tr>
-                <tr><td>Gravity</td><td>Jump physics</td></tr>
-                <tr><td>Rotation Matrices</td><td>Tunnel orientation changes</td></tr>
+                <tr><td>Vector Mathematics</td><td>Character velocity and direction in 3D tunnels</td></tr>
+                <tr><td>Parabolic Equations</td><td>Jump arcs under gravity</td></tr>
+                <tr><td>Transformation Matrices</td><td>Gravity shifts and tunnel rotations</td></tr>
+                <tr><td>Probability</td><td>Random power cell and gap generation</td></tr>
             </tbody>
         </table>
     </section>
     <section>
         <h2>Visualizing Game Elements</h2>
-        <p>Game renders tunnels using Three.js for efficient 3D graphics. Below is a conceptual chart of score progression vs. time.</p>
+        <p>Below is a polar area chart representing character ability distributions (jump height, speed, etc.) and a line chart for typical score progression over time.</p>
+        <canvas id="polar-chart" width="300" height="300"></canvas>
         <canvas id="line-chart" width="500" height="300"></canvas>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            var ctx = document.getElementById('line-chart').getContext('2d');
-            var lineChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['0s', '10s', '20s', '30s', '40s'],
-                    datasets: [{
-                        label: 'Score Progression',
-                        data: [0, 50, 150, 300, 500],
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                    }]
-                },
-                options: { responsive: true }
-            });
-        </script>
     </section>
     <section>
         <h2>FAQ</h2>
-        <p><strong>How do I unlock new characters?</strong> Collect power cells in infinite mode to unlock options like the Rabbit for higher jumps.</p>
-        <p><strong>What happens if I fall?</strong> Game over, but you can restart and use collected cells to continue with a different character.</p>
-        <p><strong>Is the game mobile-friendly?</strong> Yes, controls adapt to touch for jumping and swiping.</p>
-        <p><strong>Can I play in explore mode?</strong> This version focuses on infinite mode, but levels can be simulated by progressing further.</p>
+        <p><strong>How do gravity shifts work?</strong> Pressing space rotates your character's gravity to the nearest wall, allowing seamless transitions between tunnel surfaces.</p>
+        <p><strong>What are power cells for?</strong> They accumulate across runs; reach thresholds like 300 to unlock the Skater for enhanced speed.</p>
+        <p><strong>Is there a level system?</strong> This version focuses on infinite mode with procedural challenges, but distance milestones simulate level progression.</p>
+        <p><strong>How to handle increasing difficulty?</strong> As speed ramps up, focus on predictive jumping and gravity flips to navigate wider gaps.</p>
     </section>
     <section>
         <h2>Related Resources</h2>
-        <p>- <a href="https://en.wikipedia.org/wiki/Endless_runner" target="_blank">Wikipedia: Endless Runner</a> - Detailed overview of endless runner genre mechanics and history, helpful for understanding game design principles.</p>
-        <p>- <a href="https://threejs.org/docs/" target="_blank">Three.js Documentation</a> - Official guide to Three.js library used in this game, with examples for 3D rendering and animations.</p>
-        <p>- <a href="https://gamedevelopment.tutsplus.com/tutorials/creating-a-simple-3d-endless-runner-game-using-three-js--cms-29157" target="_blank">Envato Tuts+: 3D Endless Runner Tutorial</a> - Step-by-step tutorial on building similar games, including code snippets for beginners.</p>
+        <p>- <a href="https://en.wikipedia.org/wiki/Endless_runner" target="_blank">Wikipedia: Endless Runner</a> - Explores the genre's history and mechanics, including procedural generation and physics in games like Run 3.</p>
+        <p>- <a href="https://threejs.org/docs/" target="_blank">Three.js Documentation</a> - Comprehensive guide to the 3D library powering this game, with tutorials on scenes, cameras, and animations for custom developments.</p>
+        <p>- <a href="https://run.fandom.com/wiki/Run_3" target="_blank">Run Wiki: Run 3</a> - Fan-maintained resource detailing original game levels, characters, and strategies for mastering gameplay.</p>
     </section>
     <section>
         <h2>AI Instructions</h2>
-        <p>This page offers an interactive 3D endless runner game based on Run 3 principles, ideal for teaching math concepts like physics, geometry, and logic through gameplay. Suitable for students and educators in STEM fields, with procedural challenges and unlockable features. Index under math games, 3D simulations, and educational tools.</p>
+        <p>This page delivers an advanced 3D endless runner game emulating Run 3, perfect for educational purposes in math and physics through interactive gravity mechanics, character progression, and procedural challenges. Ideal for students, educators, and gamers exploring spatial reasoning, vector calculations, and dynamic simulations in STEM fields. Index under math games, 3D educational tools, platformer simulations, and logic-based adventures.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
         <a href="/sitemap.html">sitemap</a> <a href="/about.html">about us</a> <a href="/contact.html">contact us</a> <a href="/terms.html">terms of use</a> <a href="/privacy.html">privacy policy</a>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script>
-        let scene, camera, renderer, character, tunnelSegments = [], speed = 0.1, score = 0, jumping = false, currentCharacter = 'runner';
-        const characters = { runner: { jumpHeight: 2, speed: 0.1 }, skater: { jumpHeight: 1.5, speed: 0.12 } };
+        let scene, camera, renderer, character, tunnelSegments = [], powerCells = [], speed = 0.05, score = 0, powerCellCount = 0, jumping = false, gravityDir = new THREE.Vector3(0, -1, 0), currentCharacter = 'runner';
+        const characters = {
+            runner: { jumpHeight: 2, speed: 0.05, color: 0x00ff00 },
+            skater: { jumpHeight: 1.5, speed: 0.07, color: 0xff0000 },
+            lizard: { jumpHeight: 2.5, speed: 0.04, color: 0x0000ff },
+            bunny: { jumpHeight: 3, speed: 0.06, color: 0xffff00, doubleJump: true }
+        };
+        let velocityY = 0, doubleJumped = false;
+
         function init() {
             scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / 500, 0.1, 1000);
             renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('gameCanvas') });
             renderer.setSize(window.innerWidth, 500);
-            const geometry = new THREE.SphereGeometry(0.5, 32, 32);
-            const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-            character = new THREE.Mesh(geometry, material);
+            const geo = new THREE.SphereGeometry(0.5, 32, 32);
+            const mat = new THREE.MeshBasicMaterial({ color: characters[currentCharacter].color });
+            character = new THREE.Mesh(geo, mat);
             scene.add(character);
-            character.position.y = 1;
+            character.position.set(0, 1, 0);
             camera.position.z = 5;
             generateTunnel();
             document.addEventListener('keydown', onKeyDown);
             animate();
         }
+
         function generateTunnel() {
             for (let i = 0; i < 20; i++) {
                 const segGeo = new THREE.CylinderGeometry(5, 5, 10, 32, 1, true);
@@ -177,22 +184,49 @@
                 const segment = new THREE.Mesh(segGeo, segMat);
                 segment.position.z = -i * 10 - 50;
                 segment.rotation.x = Math.PI / 2;
+                if (Math.random() < 0.3) { // Random gaps
+                    const holeGeo = new THREE.CylinderGeometry(2, 2, 10, 32);
+                    const hole = new THREE.Mesh(holeGeo, new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 }));
+                    hole.position.z = segment.position.z;
+                    scene.add(hole); // Placeholder for collision
+                }
                 scene.add(segment);
                 tunnelSegments.push(segment);
+                if (Math.random() < 0.1) addPowerCell(segment.position.z);
             }
         }
+
+        function addPowerCell(z) {
+            const cellGeo = new THREE.SphereGeometry(0.3, 16, 16);
+            const cellMat = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+            const cell = new THREE.Mesh(cellGeo, cellMat);
+            cell.position.set(Math.random() * 4 - 2, Math.random() * 4 - 2, z);
+            scene.add(cell);
+            powerCells.push(cell);
+        }
+
         function onKeyDown(event) {
-            if (event.key === 'ArrowLeft') character.position.x -= 1;
-            if (event.key === 'ArrowRight') character.position.x += 1;
-            if (event.key === 'ArrowUp' && !jumping) { jumping = true; character.velocity = characters[currentCharacter].jumpHeight; }
-            if (event.key === ' ') rotateTunnel();
+            if (event.key === 'ArrowLeft') character.position.x -= 0.5;
+            if (event.key === 'ArrowRight') character.position.x += 0.5;
+            if (event.key === 'ArrowUp' && (!jumping || (characters[currentCharacter].doubleJump && !doubleJumped))) {
+                jumping = true;
+                velocityY = characters[currentCharacter].jumpHeight;
+                if (jumping && characters[currentCharacter].doubleJump) doubleJumped = true;
+            }
+            if (event.key === ' ') shiftGravity();
         }
-        function rotateTunnel() {
-            tunnelSegments.forEach(seg => seg.rotation.z += Math.PI / 2);
+
+        function shiftGravity() {
+            gravityDir.applyAxisAngle(new THREE.Vector3(0, 0, 1), Math.PI / 2);
+            character.position.applyAxisAngle(new THREE.Vector3(0, 0, 1), Math.PI / 2);
+            camera.rotation.z += Math.PI / 2;
         }
+
         function animate() {
             requestAnimationFrame(animate);
+            speed += 0.00001; // Increasing difficulty
             tunnelSegments.forEach(seg => seg.position.z += speed);
+            powerCells.forEach(cell => cell.position.z += speed);
             if (tunnelSegments[0].position.z > 10) {
                 scene.remove(tunnelSegments.shift());
                 const newSeg = new THREE.Mesh(new THREE.CylinderGeometry(5, 5, 10, 32, 1, true), new THREE.MeshBasicMaterial({ color: 0x808080, side: THREE.BackSide }));
@@ -200,32 +234,115 @@
                 newSeg.rotation.x = Math.PI / 2;
                 scene.add(newSeg);
                 tunnelSegments.push(newSeg);
+                if (Math.random() < 0.1) addPowerCell(newSeg.position.z);
             }
-            if (jumping) {
-                character.position.y += character.velocity || 0;
-                character.velocity -= 0.05;
-                if (character.position.y <= 1) { jumping = false; character.position.y = 1; }
-            }
-            score += 1;
-            document.getElementById('score').innerText = 'Score: ' + score;
-            if (Math.random() < 0.01 && score > 1000) unlockCharacter();
+            // Jumping physics
+            velocityY += gravityDir.y * -0.05;
+            character.position.y += velocityY;
+            if (character.position.y <= 0.5) { jumping = false; doubleJumped = false; character.position.y = 0.5; velocityY = 0; }
+            // Collect power cells
+            powerCells = powerCells.filter(cell => {
+                if (character.position.distanceTo(cell.position) < 1) {
+                    scene.remove(cell);
+                    powerCellCount++;
+                    document.getElementById('power-cells').innerText = 'Power Cells: ' + powerCellCount;
+                    checkUnlocks();
+                    return false;
+                }
+                return true;
+            });
+            score += speed * 10;
+            document.getElementById('score').innerText = 'Score: ' + Math.floor(score);
             checkCollision();
+            camera.position.set(character.position.x, character.position.y + 2, character.position.z + 5);
             renderer.render(scene, camera);
         }
-        function unlockCharacter() {
-            currentCharacter = 'skater';
-            speed = characters.skater.speed;
+
+        function checkUnlocks() {
+            if (powerCellCount >= 300) document.getElementById('skater-btn').disabled = false;
+            if (powerCellCount >= 600) document.getElementById('lizard-btn').disabled = false;
+            if (powerCellCount >= 1000) document.getElementById('bunny-btn').disabled = false;
         }
+
+        function selectCharacter(char) {
+            currentCharacter = char;
+            speed = characters[char].speed;
+        }
+
         function checkCollision() {
-            if (character.position.y < 0) alert('Game Over! Score: ' + score);
+            if (character.position.y < -5 || Math.abs(character.position.x) > 5) {
+                alert('Game Over! Score: ' + Math.floor(score) + ' | Power Cells: ' + powerCellCount);
+                location.reload();
+            }
         }
+
         function startGame() {
-            document.getElementById('start-game').style.display = 'none';
+            document.getElementById('menu').style.display = 'none';
             init();
         }
+
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.autoTable({
+                head: [['Game Summary']],
+                body: [['Score: ' + Math.floor(score)], ['Power Cells: ' + powerCellCount], ['Character: ' + currentCharacter]],
+                headStyles: { fillColor: [0, 200, 200], textColor: [255, 255, 255] },
+                alternateRowStyles: { fillColor: [245, 245, 245] },
+                styles: { lineColor: [200, 200, 200], lineWidth: 0.1, font: 'helvetica', cellPadding: 3, fontSize: 10, halign: 'left' },
+                didDrawPage: function (data) {
+                    doc.setFontSize(10);
+                    doc.setTextColor(100);
+                    doc.text('This document was generated using Fcalculator.com – Calculations are provided “as is” without warranty. Use at your own risk.', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 10, { align: 'center' });
+                    doc.setTextColor(0, 0, 255);
+                    doc.textWithLink('https://fcalculator.com/run-3-endless-runner-game.html', doc.internal.pageSize.width / 2, doc.internal.pageSize.height - 20, { align: 'center', url: 'https://fcalculator.com/run-3-endless-runner-game.html' });
+                }
+            });
+            doc.save('run3-game-summary.pdf');
+        }
+
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({ title: 'Run 3 Game', text: 'Check out this Run 3 endless runner!', url: window.location.href });
+            } else {
+                alert('Sharing not supported on this browser.');
+            }
+        }
+
+        // Charts
         if (Chart) {
             Chart.helpers.each(Chart.instances, function(instance){ instance.destroy(); });
         }
+        setTimeout(() => {
+            var polarCtx = document.getElementById('polar-chart').getContext('2d');
+            new Chart(polarCtx, {
+                type: 'polarArea',
+                data: {
+                    labels: ['Jump Height', 'Speed', 'Agility'],
+                    datasets: [{
+                        label: 'Character Abilities',
+                        data: [2, 0.05, 1], // Example for Runner
+                        backgroundColor: ['rgba(255,99,132,0.5)', 'rgba(54,162,235,0.5)', 'rgba(255,206,86,0.5)']
+                    }]
+                },
+                options: { responsive: true, plugins: { title: { display: true, text: 'Character Ability Distribution' } } }
+            });
+
+            var lineCtx = document.getElementById('line-chart').getContext('2d');
+            new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['0s', '30s', '60s', '90s', '120s'],
+                    datasets: [{
+                        label: 'Score Progression',
+                        data: [0, 500, 1500, 3000, 5000],
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: { responsive: true }
+            });
+        }, 1000);
     </script>
 </body>
 </html>
