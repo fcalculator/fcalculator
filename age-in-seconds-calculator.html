@@ -9,8 +9,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <title>Age in Seconds Calculator</title>
-    <meta name="description" content="Compute exact seconds between dates, with live updates and breakdowns in minutes, hours, days for precise time measurement.">
-    <meta name="keywords" content="age in seconds calculator, seconds between dates, leap year second count, total seconds lived, date difference in seconds, time elapsed in seconds">
+    <meta name="description" content="Calculate seconds between two dates accurately with this seconds calculator, including leap years, live updates, and breakdowns in minutes, hours, days for total seconds from birth or any period.">
+    <meta name="keywords" content="age in seconds calculator, seconds calculator, calculate seconds between two dates, total seconds from birth, elapsed time in seconds, leap year second count, date difference in seconds, total seconds lived, seconds between dates">
     <link rel="stylesheet" href="https://fcalculator.com/css/style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2412867647812190" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -19,7 +19,7 @@
         "@type": "WebPage",
         "name": "Age in Seconds Calculator",
         "url": "https://fcalculator.com/age-in-seconds-calculator.html",
-        "description": "A precise tool for calculating seconds between any two dates, with live updates and breakdowns in minutes, hours, days. Accounts for leap years, month variations, and provides insights into time precision and calendar systems.",
+        "description": "A precise seconds calculator tool to calculate seconds between two dates, with live updates, breakdowns in minutes, hours, days, and leap year adjustments. Ideal for total seconds from birth, elapsed time in seconds, and detailed time analysis.",
         "datePublished": "2022-01-14",
         "author": {
             "@type": "Person",
@@ -74,6 +74,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
@@ -82,7 +83,7 @@
             <a href="/">FCalculator.com</a> > <a href="/time.html">Time</a> > <a href="/age-in-seconds-calculator.html">Age in Seconds Calculator</a>
         </div>
         <h1>Age in Seconds Calculator</h1>
-        <p>Enter start and end dates to calculate total seconds between them, with live updates and breakdowns in minutes, hours, days, accounting for leap years.</p>
+        <p>Use this seconds calculator to accurately calculate seconds between two dates, including leap year adjustments, live updates for real-time tracking, and detailed breakdowns in minutes, hours, and days. Perfect for determining total seconds from birth or any elapsed time in seconds.</p>
     </header>
     <section class="tool-section">
         <form id="tool-form">
@@ -90,12 +91,12 @@
                 <fieldset>
                     <legend>Date Inputs</legend>
                     <div class="input-row">
-                        <label for="start-date">Start Date<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the starting date in YYYY-MM-DD format.</span></label>
-                        <input type="date" id="start-date" value="1990-01-01" required>
+                        <label for="start-date">Start Date<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the starting date in YYYY-MM-DD format for precise seconds calculation.</span></label>
+                        <input type="date" id="start-date" value="1990-01-01" required placeholder="e.g. 1990-01-01">
                     </div>
                     <div class="input-row">
-                        <label for="calc-date">Calculate Seconds To<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the end date or leave blank for today.</span></label>
-                        <input type="date" id="calc-date">
+                        <label for="calc-date">Calculate Seconds To<img src="/info.png" alt="Info" class="info-icon"><span class="tooltiptext">Enter the end date or leave blank for current time to calculate elapsed time in seconds.</span></label>
+                        <input type="date" id="calc-date" placeholder="e.g. 2025-09-30">
                     </div>
                 </fieldset>
             </div>
@@ -114,28 +115,29 @@
             </thead>
             <tbody></tbody>
         </table>
+        <canvas id="polar-chart" style="max-width: 500px; height: 240px; margin: 0 auto; display: block;"></canvas>
         <button id="save-pdf-btn">Save as PDF</button>
     </section>
     <h2>Related</h2>
-    <p><a class="related" href="/age-calculator.html">Age Calculator</a> <a class="related" href="/age-in-days-calculator.html">Age in Days Calculator</a> <a class="related" href="/age-in-seconds-calculator.html">Age in Seconds Calculator</a> <a class="related" href="/how-old-am-i-calculator.html">How Old Am I Calculator</a> <a class="related" href="/age-checker.html">Age Checker</a> <a class="related" href="/birthday-countdown-calculator.html">Birthday Countdown Calculator</a> <a class="related" href="/zodiac-sign-calculator.html">Zodiac Sign Calculator</a> <a class="related" href="/chinese-zodiac-calculator.html">Chinese Zodiac Calculator</a> <a class="related" href="/leap-year-calculator.html">Leap Year Calculator</a> <a class="related" href="/life-expectancy-calculator.html">Life Expectancy Calculator</a></p>
+    <p><a class="related" href="/age-calculator.html">Age Calculator</a> <a class="related" href="/age-in-days-calculator.html">Age in Days Calculator</a> <a class="related" href="/how-old-am-i-calculator.html">How Old Am I Calculator</a> <a class="related" href="/age-checker.html">Age Checker</a> <a class="related" href="/birthday-countdown-calculator.html">Birthday Countdown Calculator</a> <a class="related" href="/zodiac-sign-calculator.html">Zodiac Sign Calculator</a> <a class="related" href="/chinese-zodiac-calculator.html">Chinese Zodiac Calculator</a> <a class="related" href="/leap-year-calculator.html">Leap Year Calculator</a> <a class="related" href="/life-expectancy-calculator.html">Life Expectancy Calculator</a></p>
     <section>
         <h2>How the Age in Seconds Calculator Works</h2>
-        <p>This age in seconds calculator is designed for users seeking the most granular time measurement, calculating the total seconds elapsed between two dates with high precision. It incorporates leap year adjustments to ensure accuracy over extended periods, providing breakdowns in minutes, hours, and days for comprehensive analysis. When no end date is specified, it defaults to the current UTC time and enables live updates, allowing the second count to increment dynamically every second for real-time tracking of time elapsed in seconds.</p>
-        <p>To utilize this seconds between dates tool effectively: Enter the start date in YYYY-MM-DD format, optionally specify an end date, and click Calculate. The calculator employs JavaScript's Date object to handle millisecond-level differences, converting them into seconds while accounting for calendar irregularities like varying month lengths and leap days. This makes it ideal for applications requiring exact time elapsed in seconds, such as scientific experiments or personal milestone tracking.</p>
+        <p>This advanced seconds calculator enables users to precisely calculate seconds between two dates, making it an essential tool for determining elapsed time in seconds with high accuracy. It accounts for leap years, varying month lengths, and provides breakdowns into minutes, hours, and days. If no end date is provided, the calculator uses the current UTC time and supports live updates, where the total seconds from birth or any start date increment every second for dynamic real-time tracking.</p>
+        <p>To use this tool for calculating total seconds lived or date difference in seconds: Input the start date in YYYY-MM-DD format, optionally add an end date, and press Calculate. The system leverages JavaScript's Date object to compute millisecond differences, converting them to whole seconds while handling calendar complexities. This ensures reliability for applications like tracking total seconds from birth, scientific timing, or milestone analysis in elapsed time in seconds.</p>
         <div class="math-formula" style="max-width: 500px; margin: 0 auto;">
             \[ \text{Seconds} = \left\lfloor \frac{\text{Milliseconds difference}}{1000} \right\rfloor \]
         </div>
-        <p>The core formula divides the millisecond difference by 1,000 and applies the floor function to obtain whole seconds, ensuring no fractional errors in the total seconds lived calculation. For enhanced usability, live updates recalculate the value from the current system time, making it a powerful real-time elapsed seconds tool for ongoing monitoring.</p>
+        <p>The primary formula for this seconds calculator divides the millisecond gap by 1,000 and floors the result to yield exact whole seconds, eliminating any fractional inaccuracies. For ongoing monitoring, the live update feature recalculates based on system time, positioning this as a top choice for real-time elapsed time in seconds tools.</p>
         <h3>Step-by-Step Calculation Process</h3>
-        <p>The process starts with obtaining the millisecond difference between dates using UTC to avoid timezone discrepancies. It then derives seconds through division, applying modular arithmetic to break down into minutes (seconds / 60), hours (minutes / 60), and days (hours / 24). Leap year validation is integrated to prevent inaccuracies in February spans, ensuring reliable date difference in seconds results even for multi-year periods.</p>
+        <p>The calculation begins by deriving the millisecond difference using UTC to eliminate timezone issues. It then converts to seconds via division, using modular operations to derive minutes (seconds / 60), hours (minutes / 60), and days (hours / 24). Built-in leap year checks ensure no errors in long spans, delivering accurate results for queries like calculate seconds between two dates or total seconds lived over decades.</p>
     </section>
     <section>
         <h2>Understanding Second Count Precision and Calendar Influences</h2>
-        <p>Achieving precision in second count calculations requires addressing the Gregorian calendar's nuances, where leap years and month variations can significantly impact long-term time elapsed in seconds. This tool excels in providing total seconds lived with millisecond accuracy, making it invaluable for users interested in detailed chronological tracking or converting life events into quantifiable second-based metrics.</p>
+        <p>Precision in a seconds calculator demands careful handling of Gregorian calendar intricacies, where leap years and monthly variations can greatly affect elapsed time in seconds over extended periods. This tool provides millisecond-level accuracy for total seconds from birth, offering valuable insights for chronological tracking and converting life spans into detailed second-based metrics.</p>
         <h3>Impact of Leap Years on Second Counts</h3>
-        <p>Leap years introduce an additional 86,400 seconds to the calendar, which can alter total second counts over extended date ranges. The calculator automatically detects and includes these extra seconds if February 29 falls within the period, preventing underestimation in leap year second count scenarios and ensuring accurate results for queries like "total seconds lived since birth".</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Gregoriancalendarleap.png" alt="Graph showing leap year effects on seasonal alignment in the Gregorian calendar" style="max-width:300px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style: italic; font-size: 0.9em; text-align: center;">Graph illustrating leap year effects on seasonal alignment in the Gregorian calendar.</p>
+        <p>Leap years add 86,400 extra seconds, which can skew calculations if not accounted for. This seconds calculator automatically incorporates these additions when February 29 is within the range, ensuring precise leap year second count and avoiding undercounts in total seconds lived or date difference in seconds across multiple years.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Clock-pendulum.gif" alt="Animated pendulum clock illustrating the measurement of seconds" style="max-width:300px; width:100%; display:block; margin:0 auto;">
+        <p style="font-style: italic; font-size: 0.9em; text-align: center;">Animated illustration of a pendulum clock mechanism demonstrating how seconds are measured mechanically.</p>
         <table>
             <thead>
                 <tr>
@@ -150,85 +152,88 @@
                 <tr><td>1900</td><td>No</td><td>Century not divisible by 400</td><td>No extra seconds</td></tr>
                 <tr><td>2024</td><td>Yes</td><td>Divisible by 4</td><td>Adds seconds for extended February</td></tr>
                 <tr><td>2025</td><td>No</td><td>Not divisible by 4</td><td>Standard year seconds</td></tr>
+                <tr><td>2100</td><td>No</td><td>Century not divisible by 400</td><td>No leap day seconds</td></tr>
             </tbody>
         </table>
         <h3>Breakdown of Time Units from Seconds</h3>
-        <p>Breaking down total seconds into higher units allows for better comprehension of time scales, facilitating applications in fields requiring precise date difference in seconds or real-time elapsed seconds monitoring.</p>
+        <p>Decomposing total seconds into larger units enhances understanding of time scales, supporting uses in fields needing exact calculate seconds between two dates or real-time monitoring of elapsed time in seconds.</p>
         <table>
             <thead>
                 <tr>
                     <th>Unit</th>
                     <th>Conversion from Seconds</th>
                     <th>Practical Application</th>
-                    <th>Example</th>
+                    <th>Example Value</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Seconds</td><td>Base</td><td>Precise timing</td><td>Reaction time measurement</td></tr>
-                <tr><td>Minutes</td><td>60 per minute</td><td>Meeting duration</td><td>Call length tracking</td></tr>
-                <tr><td>Hours</td><td>3600 per hour</td><td>Work hours</td><td>Billing calculations</td></tr>
-                <tr><td>Days</td><td>86400 per day</td><td>Lifespan tracking</td><td>Days alive milestone</td></tr>
+                <tr><td>Seconds</td><td>Base unit</td><td>Precise event timing</td><td>Reaction time in sports</td></tr>
+                <tr><td>Minutes</td><td>Divide by 60</td><td>Meeting or call durations</td><td>Phone bill calculations</td></tr>
+                <tr><td>Hours</td><td>Divide by 3,600</td><td>Workday tracking</td><td>Freelance billing</td></tr>
+                <tr><td>Days</td><td>Divide by 86,400</td><td>Lifespan milestones</td><td>Days since birth</td></tr>
+                <tr><td>Weeks</td><td>Divide by 604,800</td><td>Project timelines</td><td>Weekly progress</td></tr>
             </tbody>
         </table>
         <h3>Handling Edge Cases in Second Counts</h3>
-        <p>Edge cases like leap seconds (added occasionally for atomic time synchronization) are not directly included, as the tool focuses on civil calendar time. For historical ranges, UTC handles discrepancies, ensuring reliable total seconds lived calculations even across century boundaries.</p>
+        <p>Edge scenarios, such as leap seconds for atomic synchronization, are excluded as the focus is on civil time. UTC ensures consistency for historical date difference in seconds, even over centuries, making it reliable for total seconds from birth calculations.</p>
     </section>
     <section>
         <h2>Applications of Age in Seconds Calculators in Various Fields</h2>
-        <p>Age in seconds calculators provide the ultimate precision for time measurement, finding use in scenarios where every second counts, from technical computations to personal reflections on time elapsed in seconds.</p>
+        <p>Seconds calculators like this one deliver ultimate precision for time measurement, applicable where every second matters, from technical fields to personal insights on elapsed time in seconds and total seconds lived.</p>
         <h3>Scientific and Technical Uses</h3>
-        <p>In scientific research, these tools measure experiment durations or astronomical events in seconds, incorporating leap year second count adjustments for accuracy in long-term data analysis and simulations.</p>
+        <p>In research, use this to measure experiment durations or celestial events, with leap year second count for accurate long-term data in simulations requiring calculate seconds between two dates.</p>
         <h3>Historical and Event Analysis</h3>
-        <p>For historical analysis, calculating seconds between key events offers granular insights, such as the exact date difference in seconds from significant moments, enhancing timeline visualizations and educational narratives.</p>
+        <p>Historians calculate seconds between pivotal events for granular timelines, enhancing educational content with exact date difference in seconds from historical milestones.</p>
         <h3>Personal and Entertainment Applications</h3>
-        <p>Personally, users track total seconds lived with live updates for motivational purposes or apps, while in entertainment, they create real-time countdowns for events, leveraging the dynamic ticking feature for engaging experiences.</p>
+        <p>Track total seconds from birth with live updates for motivation, or create event countdowns in entertainment, using the ticking feature for immersive experiences in elapsed time in seconds.</p>
     </section>
     <section>
         <h2>Cultural and Historical Variations in Second Reckoning</h2>
-        <p>While seconds are a modern SI unit, cultural calendars influence how total seconds are accumulated over time, affecting interpretations of age in seconds across societies.</p>
+        <p>Although seconds are standardized in SI, cultural calendars influence accumulation of total seconds lived, affecting interpretations of elapsed time in seconds across global societies.</p>
         <h3>East Asian Second Systems</h3>
-        <p>East Asian traditions may start age counting differently, leading to variations in total seconds lived when compared to Western standards, impacting cross-cultural time elapsed calculations.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/East_Asian_age_vs_International_age_chart-v2.jpg/800px-East_Asian_age_vs_International_age_chart-v2.jpg" alt="Chart comparing East Asian and international age reckoning methods" style="max-width:300px; width:100%; display:block; margin:0 auto;">
-        <p style="font-style: italic; font-size: 0.9em; text-align: center;">Chart illustrating age differences in East Asian and international systems.</p>
+        <p>East Asian age reckoning starts at conception or New Year, potentially adding seconds compared to Western methods, impacting cross-cultural calculate seconds between two dates.</p>
         <h3>Religious and Lunar Influences</h3>
-        <p>Lunar-based calendars like Hijri have shorter years, resulting in fewer total seconds per cycle compared to Gregorian, which can alter long-term age in seconds perceptions in religious contexts.</p>
+        <p>Lunar calendars like Hijri feature shorter years with fewer seconds per cycle than Gregorian, altering perceptions of total seconds from birth in religious contexts.</p>
         <table>
             <thead>
                 <tr>
-                    <th>System</th>
-                    <th>Second Basis</th>
+                    <th>Calendar System</th>
+                    <th>Basis</th>
                     <th>Leap Adjustment</th>
-                    <th>Difference</th>
+                    <th>Second Count Difference</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Gregorian</td><td>Solar</td><td>Leap years</td><td>Baseline</td></tr>
-                <tr><td>Hijri</td><td>Lunar</td><td>Leap months</td><td>Fewer seconds per year</td></tr>
-                <tr><td>Hebrew</td><td>Luni-Solar</td><td>Leap months</td><td>Variable second counts</td></tr>
+                <tr><td>Gregorian</td><td>Solar</td><td>Leap years every 4/100/400</td><td>Baseline for modern calculations</td></tr>
+                <tr><td>Hijri</td><td>Lunar</td><td>Leap months in cycle</td><td>Approximately 10-12 fewer days/seconds per year</td></tr>
+                <tr><td>Hebrew</td><td>Luni-solar</td><td>7 leap months in 19 years</td><td>Variable seconds aligning solar/lunar</td></tr>
+                <tr><td>Julian</td><td>Solar</td><td>Leap every 4 years</td><td>Overestimates seconds long-term</td></tr>
             </tbody>
         </table>
         <h3>Implications for Second Standardization</h3>
-        <p>Standardization through tools like this enables consistent seconds between dates calculations, bridging cultural gaps for global applications in research and personal use.</p>
+        <p>Tools like this seconds calculator standardize measurements, bridging cultural divides for global use in research, personal tracking, and precise date difference in seconds.</p>
     </section>
     <section>
         <h2>FAQ</h2>
-        <p><strong>How does live update work?</strong> Recalculates seconds every second from current time if no end date specified.</p>
-        <p><strong>Does it include leap seconds?</strong> Calendar-focused, leap seconds are atomic time adjustments not directly included.</p>
-        <p><strong>Time zone handling?</strong> Uses UTC for precision.</p>
-        <p><strong>Historical accuracy?</strong> Good for post-1582; earlier may vary.</p>
-        <p><strong>Why live ticking?</strong> For real-time age in seconds display.</p>
+        <p><strong>How does the live update feature work in this seconds calculator?</strong> It recalculates the elapsed time in seconds every second based on the current system time if no end date is set.</p>
+        <p><strong>Does this tool account for leap seconds when calculating total seconds lived?</strong> No, it focuses on calendar time; leap seconds are atomic adjustments not included.</p>
+        <p><strong>How are time zones handled in calculate seconds between two dates?</strong> All calculations use UTC to ensure global precision and avoid discrepancies.</p>
+        <p><strong>Is this seconds calculator accurate for historical dates?</strong> Highly accurate post-1582 Gregorian reform; pre-reform dates may have minor variations.</p>
+        <p><strong>Why include live ticking for total seconds from birth?</strong> It provides a dynamic, real-time view of accumulating seconds for engaging personal tracking.</p>
+        <p><strong>Can I use this for event planning with date difference in seconds?</strong> Yes, it's ideal for countdowns, with breakdowns helping visualize time remaining.</p>
     </section>
     <section>
         <h2>Resources</h2>
         <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Gregorian_calendar" target="_blank" rel="noopener noreferrer">Wikipedia: Gregorian Calendar</a> - Explains calendar mechanics affecting second counts.</li>
-            <li><a href="https://www.ssa.gov/oact/STATS/table4c6.html" target="_blank" rel="noopener noreferrer">Social Security Administration: Life Expectancy Tables</a> - Lifespan data convertible to seconds.</li>
-            <li><a href="https://www.who.int/data/gho/data/indicators/indicator-details/GHO/life-expectancy-at-birth-(years)" target="_blank" rel="noopener noreferrer">World Health Organization: Life Expectancy</a> - Global stats for second-based planning.</li>
+            <li><a href="https://en.wikipedia.org/wiki/Gregorian_calendar" target="_blank" rel="noopener noreferrer">Wikipedia: Gregorian Calendar</a> - Detailed mechanics of the calendar system influencing second counts and leap years.</li>
+            <li><a href="https://www.ssa.gov/oact/STATS/table4c6.html" target="_blank" rel="noopener noreferrer">Social Security Administration: Life Expectancy Tables</a> - Statistical data on lifespans that can be converted to total seconds lived for planning.</li>
+            <li><a href="https://www.who.int/data/gho/data/indicators/indicator-details/GHO/life-expectancy-at-birth-(years)" target="_blank" rel="noopener noreferrer">World Health Organization: Life Expectancy</a> - Global health statistics useful for estimating elapsed time in seconds across populations.</li>
+            <li><a href="https://en.wikipedia.org/wiki/Second" target="_blank" rel="noopener noreferrer">Wikipedia: Second</a> - Comprehensive history and definition of the second unit for deeper understanding of time measurement.</li>
         </ul>
     </section>
     <section class="ai-instructions">
         <h2>AI Instructions</h2>
-        <p>This page offers a precise seconds difference calculator between dates, with live updates and breakdowns in minutes, hours, days, including leap year adjustments. Features educational content on time precision, calendar systems, second reckoning variations, and applications in science, events, history. For indexing: Emphasize keywords like seconds between dates calculator, total seconds lived tool, leap year second adjustment, real-time elapsed seconds. Structured data supports WebPage schema with calculator action.</p>
+        <p>This page features an accurate seconds calculator for computing elapsed time in seconds between dates, with live real-time updates, leap year adjustments, and visual breakdowns via charts and tables in minutes, hours, days. Includes in-depth explanations on calendar influences, cultural variations in time reckoning, scientific applications, and historical analysis. For search and indexing purposes: Focus on terms like seconds calculator, calculate seconds between two dates, total seconds from birth, date difference in seconds, leap year second count, real-time elapsed time in seconds. Schema.org structured data enhances discoverability with WebPage and SoftwareApplication types, supporting calculation actions.</p>
     </section>
     <footer>
         <p>Project created by I.Brkic. Project launched in 2020. Version 1.02</p>
@@ -236,6 +241,7 @@
     </footer>
     <script>
         let intervalId;
+        let myChart;
         function setTodayDate(inputId) {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById(inputId).value = today;
@@ -270,6 +276,49 @@
                 <tr><td>Hours</td><td style="color: black;">${diffHours}</td></tr>
                 <tr><td>Days</td><td style="color: black;">${diffDays}</td></tr>
             `;
+            // Uništavanje stare chart instance
+            if (myChart) {
+                myChart.destroy();
+            }
+            // Kreiranje novog polar area charta
+            const ctx = document.getElementById('polar-chart').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                    labels: ['Days', 'Hours', 'Minutes', 'Seconds'],
+                    datasets: [{
+                        label: 'Time Breakdown',
+                        data: [diffDays, diffHours % 24, diffMinutes % 60, diffSeconds % 60],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top' },
+                        title: { display: true, text: 'Time Units Breakdown' }
+                    },
+                    scales: {
+                        r: { ticks: { beginAtZero: true } }
+                    }
+                }
+            });
+            // Odgodi prikaz charta za 1 sekundu ako treba
+            setTimeout(() => {
+                document.getElementById('polar-chart').style.display = 'block';
+            }, 1000);
             document.getElementById('results').style.display = 'block';
         }
         function updateAge() {
